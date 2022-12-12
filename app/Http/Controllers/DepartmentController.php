@@ -79,9 +79,6 @@ class DepartmentController extends Controller
     }
      public function updateDepartment (Request $request){
 
-
-   
-
         $submit = DB::update("EXEC DepartmentUpdate
 
             @Dpt_ID         = '$request->id',

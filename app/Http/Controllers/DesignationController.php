@@ -13,8 +13,7 @@ class DesignationController extends Controller
 
         $button = "Add Designation";
         $title  = 'Add Designation';
-        $route  = '/storeDesignation';
-        
+        $route  = '/storeDesignation';  
         return 
         view('Designation.addDesignation', 
             compact(

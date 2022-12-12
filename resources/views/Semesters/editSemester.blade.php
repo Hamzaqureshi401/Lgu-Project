@@ -50,7 +50,8 @@
                       <label>I final EndDate</label>
                       <input type="Date" value="{{ $semester->I_final_EndDate }}" name="I_final_EndDate" class="form-control"required>
                     </div>
-                <a id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</a>
+                 <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
+               </form>
                 
 
 

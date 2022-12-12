@@ -10,5 +10,7 @@
                       <label>Dpt_ID</label>
                       <input type="number" name="Dpt_ID" class="form-control" value="{{ $designation->Dpt_ID }}" required>
                     </div>
-                <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
+                <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
+              </div>
+            </form>
                 

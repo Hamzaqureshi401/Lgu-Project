@@ -33,8 +33,7 @@
   <script src="assets/js/scripts.js"></script>
   <!-- Custom JS File -->
   <script src="assets/js/custom.js"></script>
-  <script src="assets/js/page/gmaps-draggable-marker.js"></script>
-
+ 
   <script type="text/javascript">
   $("#exampleModal").prependTo("body");  
    $('.gt-data').click(function(){
@@ -43,8 +42,8 @@
       $("#exampleModal .modal-body").show();
       $('#exampleModal .modal-body').html(success);
       $(document).ready( function () {
-      $('.submit-form').click(function(e){
-       e.preventDefault();
+       document.querySelector("#myForm").addEventListener("submit", function (evt) {
+          evt.preventDefault();
         $('#exampleModal .close').click();
        var route = @json($route);
           $.ajax({

@@ -29,5 +29,6 @@
                       <input type="number" name="Status" class="form-control" value="{{ $degree['Status'] }}"required>
                     </div>
                    
-               <a id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</a>
-                </form>
+                <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
+              </div>
+            </form>

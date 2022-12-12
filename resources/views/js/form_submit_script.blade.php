@@ -6,8 +6,6 @@
    $(function () {
        document.querySelector("#myForm").addEventListener("submit", function (evt) {
           evt.preventDefault();
-          console.log(@json($route));
-          evt.preventDefault();
           var btn = document.getElementById('button');
           btn.innerText = 'Saving Wait..';
           var route = @json($route);

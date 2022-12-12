@@ -19,7 +19,9 @@
                       <label>Lecture Type</label>
                       <input type="text" name="LectureType" class="form-control" value="{{ $courses->LectureType }}" required>
                     </div>
-                <a id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</a>
+                 <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
+               </div>
+             </form>
                 
 
 

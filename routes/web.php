@@ -84,3 +84,11 @@ Route::get('/allSemesters', [App\Http\Controllers\SemesterController::class, 'al
 Route::post('/storeSemester', [App\Http\Controllers\SemesterController::class, 'storeSemester'])->name('store.Semester');
 Route::get('editSemester/{id}', [App\Http\Controllers\SemesterController::class, 'editSemester'])->name('edit.Semester');
 Route::post('/updateSemester', [App\Http\Controllers\SemesterController::class, 'updateSemester'])->name('update.Semester');
+
+// Employee Route Start
+
+Route::get('/addEmployee', [App\Http\Controllers\EmployeeController::class, 'addEmployee'])->name('add.Employee');
+Route::get('/allEmployees', [App\Http\Controllers\EmployeeController::class, 'allEmployees'])->name('all.Employees');
+Route::post('/storeEmployee', [App\Http\Controllers\EmployeeController::class, 'storeEmployee'])->name('store.Employee');
+Route::get('editEmployee/{id}', [App\Http\Controllers\EmployeeController::class, 'editEmployee'])->name('edit.Employee');
+Route::post('/updateEmployee', [App\Http\Controllers\EmployeeController::class, 'updateEmployee'])->name('update.Employee');
