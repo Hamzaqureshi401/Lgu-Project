@@ -59,6 +59,14 @@
                 <li><a class="nav-link" href="email-read.html">read</a></li>
               </ul>
             </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Employees</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.Employee') }}">Add  Employee</a></li>
+                <li><a class="nav-link" href="{{ route('all.Employees') }}">All Emplyees</a></li>
+                <li><a class="nav-link" href="email-read.html">read</a></li>
+              </ul>
+            </li>
             <li class="menu-header">UI Elements</li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Basic
