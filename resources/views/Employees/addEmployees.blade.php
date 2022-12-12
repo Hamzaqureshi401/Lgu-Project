@@ -66,7 +66,16 @@
                   
                 <div class="form-group">
                       <label>Dpt ID</label>
+                      <option>
                       <input type="number" name="Dpt_ID" class="form-control"required>
+                    </div>
+                 <div class="form-group">
+                      <label>Department</label>
+                      <select class="form-control" name="Dpt_ID"  required>
+                        @foreach($departments as $department)
+                        <option value="{{ department->Dpt_ID }}">{{ $department->Dpt_Name }}</option>
+                        @endforeach
+                      </select>
                     </div>
                   
                 <div class="form-group">

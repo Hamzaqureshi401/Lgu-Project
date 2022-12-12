@@ -51,6 +51,14 @@
                 <li><a class="nav-link" href="email-read.html">read</a></li>
               </ul>
             </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Degree Courses</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.DegreeCourse') }}">Add Degree Courses</a></li>
+                <li><a class="nav-link" href="{{ route('all.DegreeCourses') }}">All Degree Courses</a></li>
+                <li><a class="nav-link" href="email-read.html">read</a></li>
+              </ul>
+            </li>
             <li class="menu-header">UI Elements</li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Basic

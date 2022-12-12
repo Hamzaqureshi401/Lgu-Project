@@ -92,3 +92,13 @@ Route::get('/allEmployees', [App\Http\Controllers\EmployeeController::class, 'al
 Route::post('/storeEmployee', [App\Http\Controllers\EmployeeController::class, 'storeEmployee'])->name('store.Employee');
 Route::get('editEmployee/{id}', [App\Http\Controllers\EmployeeController::class, 'editEmployee'])->name('edit.Employee');
 Route::post('/updateEmployee', [App\Http\Controllers\EmployeeController::class, 'updateEmployee'])->name('update.Employee');
+
+// DegreeCourse Route Start
+
+Route::get('/addDegreeCourses', [App\Http\Controllers\DegreeCoursesController::class, 'addDegreeCourse'])->name('add.DegreeCourse');
+Route::get('/allDegreeCourses', [App\Http\Controllers\DegreeCoursesController::class, 'allDegreeCourses'])->name('all.DegreeCourses');
+Route::post('/storeDegreeCourse', [App\Http\Controllers\DegreeCoursesController::class, 'storeDegreeCourse'])->name('store.DegreeCourse');
+Route::get('editDegreeCourse/{id}', [App\Http\Controllers\DegreeCoursesController::class, 'editDegreeCourse'])->name('edit.DegreeCourse');
+Route::post('/updateDegreeCourse', [App\Http\Controllers\DegreeCoursesController::class, 'updateDegreeCourse'])->name('update.DegreeCourse');
+
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Employee;
+use App\Models\Department;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
@@ -14,12 +15,14 @@ class EmployeeController extends Controller
         $button = "Add Employee";
         $title  = 'Add Employee';
         $route  = '/storeEmployee';
+        $departments = Department::get();
         return 
         view('Employees.addEmployees', 
             compact(
                 'button' , 
                 'title' , 
-                'route')
+                'route',
+                'departments')
         );
     }
 
@@ -59,13 +62,15 @@ class EmployeeController extends Controller
         $title  = 'Edit Employee';
         $route  = '/updateEmployee';
         $employee = Employee::where('Emp_ID' , $id)->first();
+        $departments = Department::get();
          return 
          view('Employees.editEmployee', 
             compact(
                 'employee', 
                 'button' , 
                 'title' , 
-                'route'
+                'route',
+                'departments'
             ));
     }
     public function allEmployees(){
