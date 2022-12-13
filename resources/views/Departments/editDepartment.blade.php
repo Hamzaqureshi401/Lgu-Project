@@ -4,7 +4,7 @@
                     <input type="hidden" name="id" value="{{ $department->Dpt_ID }}">
                     <div class="form-group">
                       <label>Dpt Name</label>
-                      <input type="text" name="Dpt_Name" class="form-control" value="{{ $department->Dpt_Name }} "required>
+                      <input type="text" name="Dpt_Name" class="form-control" value="{{ $department->Dpt_Name }} ">
                     </div>
                     <div class="form-group">
                       <label>Dpt Full Name</label>

@@ -44,7 +44,6 @@
       $(document).ready( function () {
        document.querySelector("#myForm").addEventListener("submit", function (evt) {
           evt.preventDefault();
-        $('#exampleModal .close').click();
        var route = @json($route);
           $.ajax({
             type: 'post',
@@ -52,7 +51,11 @@
             data: $('form').serialize(),
             success: function (data) {
                swal(data.title, data.message, data.type);
-                $('#exampleModal .close').click();
+                if (data.type == 'success')
+                {
+                  $('#exampleModal .close').click();
+                }
+                
               }
           });
         });

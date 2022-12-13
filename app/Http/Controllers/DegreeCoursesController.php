@@ -49,11 +49,16 @@ class DegreeCoursesController extends Controller
 
       public function allDegreeCourses(){
 
-        $degreeCourses = DegreeCourse::get();
-        $title  = 'Degree Course';
-        $route = 'updateDegreeCourse';
-        $getEditRoute = 'editDegreeCourse';
-        $modalTitle = 'Edit Degree Course';
+        $degreeCourses = DegreeCourse::paginate(10);
+        $title         = 'Degree Course';
+        $route         = 'updateDegreeCourse';
+        $getEditRoute  = 'editDegreeCourse';
+        $modalTitle    = 'Edit Degree Course';
+
+        $names = DegreeCourse::select('DegreeName' , 'CourseName')
+        ->join('Degrees' , 'Degrees.Degree_ID' , 'DegreeCourses.Degree_ID')
+        ->join('Courses' , 'Courses.Course_ID' , 'DegreeCourses.Course_ID')
+        ->paginate(10);
        
         return 
         view('DegreeCourses.allDegreeCourses' , 
@@ -62,7 +67,8 @@ class DegreeCoursesController extends Controller
                 'title' , 
                 'modalTitle' , 
                 'route',
-                'getEditRoute'
+                'getEditRoute',
+                'names'
             ));
     }
 

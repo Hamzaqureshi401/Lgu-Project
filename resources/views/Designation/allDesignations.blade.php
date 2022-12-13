@@ -10,8 +10,8 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>CourseCode</th>
-                            <th>CourseName</th>
+                            <th>Designation</th>
+                            <th>Department Name</th>
                            
                             <th>Action</th>
                           </tr>
@@ -25,7 +25,7 @@
                               </div>
                             </td>
                             <td>{{ $designation->Designation }}</td>
-                            <td>{{ $designation->Dpt_ID }}</td>
+                            <td>{{ $designation->Dpt_Name }}</td>
                            
                             <td> <div class="card-body">
                                 <!-- only change id -->
@@ -37,6 +37,8 @@
                         </tbody>
                       </table>
                     </div>
-
+                    <div class="d-flex justify-content-center">
+                        {!! $designations->links() !!}
+                    </div>
 @include('Table.table_footer')    
 @endsection   

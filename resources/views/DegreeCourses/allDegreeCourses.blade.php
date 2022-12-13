@@ -17,15 +17,15 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($degreeCourses as $degreeCourse)
+                          @foreach($degreeCourses as $key => $degreeCourse)
                           <tr>
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $degreeCourse->degree($degreeCourse->DegCourses_ID)->DegreeName ?? '--' }}</td>
-                            <td>{{ $degreeCourse->course($degreeCourse->DegCourses_ID)->CourseName ?? '--' }}</td>
+                            <td>{{ $names[$key]->DegreeName }}</td>
+                            <td>{{ $names[$key]->CourseName }}</td>
                           
                             <td>
                               <div class="card-body">
@@ -39,5 +39,6 @@
                         </tbody>
                       </table>
                     </div>
+                    {{ $degreeCourses->links() }}
 @include('Table.table_footer') 
 @endsection   

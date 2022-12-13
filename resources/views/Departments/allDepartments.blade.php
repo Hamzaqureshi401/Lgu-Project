@@ -41,6 +41,8 @@
                         </tbody>
                       </table>
                     </div>
-
+                    <div class="d-flex justify-content-center">
+                        {!! $departments->links() !!}
+                    </div>
 @include('Table.table_footer')    
 @endsection   

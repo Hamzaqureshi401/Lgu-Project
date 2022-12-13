@@ -14,13 +14,18 @@
             url: route,
             data: $('form').serialize(),
             success: function (data) {
-             
               swal(data.title, data.message, data.type);
-              $('#myForm')[0].reset();
                var btn = document.getElementById('button');
                 btn.disabled = false;
-                total = total + 1;
-                btn.innerText = 'Again Save New Customer (Totoal Saved '+total+')';
+                 if (data.type == 'success')
+                {
+                  $('#myForm')[0].reset();
+                   total = total + 1;
+                  btn.innerText = 'Again Save New Customer (Totoal Saved '+total+')';
+                }else{
+                  btn.innerText = 'Try Again';
+                }
+               
               }
           });
         });

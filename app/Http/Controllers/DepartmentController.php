@@ -5,9 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Department;
 use Illuminate\Support\Facades\DB;
+use Validator;
+
 
 class DepartmentController extends Controller
 {
+   public function validation($request){
+
+        $validator = Validator::make($request->all(),[
+            'Dpt_Name'      => 'required|max:10',
+            'Dpt_FullName'  => 'required|max:50',
+            'HODUID'        => 'required|numeric',
+            'DeanUID'       => 'required|numeric',
+            'Status'        => 'required|numeric',
+            
+        ]);
+        $validation['validation'] = $validator->errors()->first();
+        if ($validator->fails()) {
+            $validation['error'] = true;
+        }else{
+            $validation['error'] = false;
+        }
+        return $validation;
+    }
+
      public function addDepartment(){
 
         $button = "Add Department";
@@ -24,9 +45,16 @@ class DepartmentController extends Controller
 
     public function storeDepartment(Request $request){
 
-      
-
-         $submit = DB::update("EXEC InsertDepartment 
+      $validator = $this->validation($request);
+        if ($validator['error'] == true) {
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }else {
+            $submit = DB::update("EXEC InsertDepartment 
             @Dpt_Name       = '$request->Dpt_Name', 
             @Dpt_FullName   = '$request->Dpt_FullName', 
             @HODUID         = '$request->HODUID' , 
@@ -38,6 +66,7 @@ class DepartmentController extends Controller
             'type'=> 'success', 
             'message'=> 'Department Added!
             ']);
+        }
 
     }
 
@@ -60,7 +89,7 @@ class DepartmentController extends Controller
 
      public function allDepartments(){
 
-        $departments = Department::get();
+        $departments = Department::paginate(10);
         $title  = 'All Departments';
         $route = 'updateDepartment';
         $getEditRoute = 'editDepartment';
@@ -79,7 +108,16 @@ class DepartmentController extends Controller
     }
      public function updateDepartment (Request $request){
 
-        $submit = DB::update("EXEC DepartmentUpdate
+       $validator = $this->validation($request);
+        if ($validator['error'] == true) {
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }else {
+             $submit = DB::update("EXEC DepartmentUpdate
 
             @Dpt_ID         = '$request->id',
             @Dpt_Name       = '$request->Dpt_Name', 
@@ -94,5 +132,6 @@ class DepartmentController extends Controller
             'type'   => 'success', 
             'message'=> 'Department Updated!
             ']);
+        }
     }
 }

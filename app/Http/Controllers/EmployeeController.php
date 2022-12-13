@@ -7,9 +7,73 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Department;
 use Illuminate\Support\Facades\DB;
+use Validator;
+
 
 class EmployeeController extends Controller
 {
+    public function validation($request){
+
+        $validator = Validator::make($request->all(),[
+            'Emp_FirstName'      => 'required|max:30',
+            'Emp_LastName'       => 'required|max:30',
+            'DOB'                => 'required|date',
+            'CNIC'               => 'required|numeric|min:16|unique:employee',
+            'DateOfJoining'      => 'required|date',
+            'DateOfAppointment'  => 'required|date',
+            'Specialization'     => 'required|max:50',
+            'Designation'        => 'required|max:50',
+            'Status'             => 'required|max:50',
+            'UserName'           => 'required|max:50|unique:employee',
+            'Password'           => 'required|min:6|max:255',
+            'Gender'             => 'required|max:10',
+            'Email'              => 'required|max:50|unique:employee',
+            'Address'            => 'required|max:50',
+            'Dpt_ID'             => 'required|numeric',
+            'Grade'              => 'required|numeric',
+            'Contact_Number'     => 'required|max:10',
+            
+        ]);
+        $validation['validation'] = $validator->errors()->first();
+        if ($validator->fails()) {
+            $validation['error'] = true;
+        }else{
+            $validation['error'] = false;
+        }
+        return $validation;
+    }
+
+    public function validationUpdate($request){
+
+        $validator = Validator::make($request->all(),[
+            'Emp_FirstName'      => 'required|max:30',
+            'Emp_LastName'       => 'required|max:30',
+            'DOB'                => 'required|date',
+            'CNIC'               => 'required|numeric|min:16',
+            'DateOfJoining'      => 'required|date',
+            'DateOfAppointment'  => 'required|date',
+            'Specialization'     => 'required|max:50',
+            'Designation'        => 'required|max:50',
+            'Status'             => 'required|max:50',
+            'UserName'           => 'required|max:50',
+            'Password'           => 'required|min:6|max:255',
+            'Gender'             => 'required|max:10',
+            'Email'              => 'required|max:50',
+            'Address'            => 'required|max:50',
+            'Dpt_ID'             => 'required|numeric',
+            'Grade'              => 'required|numeric',
+            'Contact_Number'     => 'required|max:10',
+            
+        ]);
+        $validation['validation'] = $validator->errors()->first();
+        if ($validator->fails()) {
+            $validation['error'] = true;
+        }else{
+            $validation['error'] = false;
+        }
+        return $validation;
+    }
+
      public function addEmployee(){
 
         $button = "Add Employee";
@@ -28,7 +92,17 @@ class EmployeeController extends Controller
 
     public function storeEmployee(Request $request){
 
-         $submit = DB::update("EXEC InsertEmployee 
+        $validator = $this->validation($request);
+        if ($validator['error'] == true) {
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }else {
+            $password = bcrypt($request->Password);
+           $submit = DB::update("EXEC InsertEmployee 
             @Emp_FirstName      = '$request->Emp_FirstName', 
             @Emp_LastName       = '$request->Emp_LastName', 
             @DOB                = '$request->DOB' , 
@@ -39,7 +113,7 @@ class EmployeeController extends Controller
             @Designation        = '$request->Designation' , 
             @Status             = '$request->Status' , 
             @UserName           = '$request->UserName' , 
-            @Password           = '$request->Password' , 
+            @Password           = '$password' , 
             @Gender             = '$request->Gender' , 
             @Email              = '$request->Email' , 
             @Address            = '$request->Address' , 
@@ -53,6 +127,9 @@ class EmployeeController extends Controller
             'type'=> 'success', 
             'message'=> 'Employee Added!
             ']);
+        }
+
+         
 
     }
 
@@ -75,7 +152,7 @@ class EmployeeController extends Controller
     }
     public function allEmployees(){
 
-        $employees      = Employee::get();
+        $employees      = Employee::join('departments' , 'departments.Dpt_ID' , 'employee.Dpt_ID')->paginate(10);
         $title          = 'All Employees';
         $route          = 'updateEmployee';
         $getEditRoute   = 'editEmployee';
@@ -94,6 +171,16 @@ class EmployeeController extends Controller
 
     public function updateEmployee(Request $request){
 
+         $validator = $this->validationUpdate($request);
+        if ($validator['error'] == true) {
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }else {
+           
         $submit = DB::update("EXEC UpdateEmployee
             @Emp_ID             = '$request->id',
             @Emp_FirstName      = '$request->Emp_FirstName',
@@ -120,5 +207,6 @@ class EmployeeController extends Controller
             'type'=> 'success', 
             'message'=> 'Employee Updated!
             ']);
+        }
     }
 }

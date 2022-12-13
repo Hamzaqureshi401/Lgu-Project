@@ -57,5 +57,6 @@
                         </tbody>
                       </table>
                     </div>
+                    {{ $semesters->links() }}
 @include('Table.table_footer') 
 @endsection   

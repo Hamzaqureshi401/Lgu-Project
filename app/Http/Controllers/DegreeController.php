@@ -5,10 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Degree;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class DegreeController extends Controller
 {
-     public function addDegree(){
+
+    public function validation($request){
+
+        $validator = Validator::make($request->all(),[
+            'DegreeName'        => 'required|max:50',
+            'DegreeLevel'       => 'required|max:30',
+            'DegreeFullName'    => 'required|max:70',
+            'Dpt_ID'            => 'required|numeric',
+            'Total_Credit_Hours' => 'required|numeric',
+            'status'            => 'required|numeric',
+        ]);
+        $validation['validation'] = $validator->errors()->first();
+        if ($validator->fails()) {
+            $validation['error'] = true;
+        }else{
+            $validation['error'] = false;
+        }
+        return $validation;
+    }
+
+    public function addDegree(){
         $button = "Add Degree";
         $title  = 'Add Degree';
         $route  = '/storeDegree';
@@ -22,8 +43,17 @@ class DegreeController extends Controller
     }
 
     public function storeDegree(Request $request){
-        
-         $submit = DB::update("EXEC InsertDegree 
+
+        $validator = $this->validation($request);
+        if ($validator['error'] == true) {
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }else {
+           $submit = DB::update("EXEC InsertDegree 
             @DegreeName         = '$request->DegreeName',
             @DegreeLevel        = '$request->DegreeLevel', 
             @DegreeFullName     = '$request->DegreeFullName', 
@@ -36,6 +66,7 @@ class DegreeController extends Controller
             'type'=> 'success', 
             'message'=> 'Degree Added!
             ']);
+      }
          
     }
     public function editDegree($id){
@@ -75,7 +106,16 @@ class DegreeController extends Controller
 
     public function updateDegree(Request $request){
 
-        $submit = DB::update("EXEC degreeUpdate
+         $validator = $this->validation($request);
+        if ($validator['error'] == true) {
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }else {
+           $submit = DB::update("EXEC degreeUpdate
 
             @Degree_ID           = '$request->id', 
             @DegreeName          = '$request->DegreeName', 
@@ -90,5 +130,6 @@ class DegreeController extends Controller
             'type'=> 'success', 
             'message'=> 'Degree Updated!
             ']);
+      }
     }
 }
