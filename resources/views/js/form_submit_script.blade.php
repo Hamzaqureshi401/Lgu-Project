@@ -9,10 +9,12 @@
           var btn = document.getElementById('button');
           btn.innerText = 'Saving Wait..';
           var route = @json($route);
+          var formData = new FormData(this);
+          console.log(formData);
           $.ajax({
             type: 'post',
             url: route,
-            data: $('form').serialize(),
+            data: formData,
             success: function (data) {
               swal(data.title, data.message, data.type);
                var btn = document.getElementById('button');
@@ -26,7 +28,10 @@
                   btn.innerText = 'Try Again';
                 }
                
-              }
+              },
+              cache: false,
+              contentType: false,
+              processData: false
           });
         });
       });

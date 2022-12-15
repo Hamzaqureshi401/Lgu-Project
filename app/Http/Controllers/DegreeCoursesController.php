@@ -6,12 +6,26 @@ use Illuminate\Http\Request;
 use App\Models\Degree;
 use App\Models\Course;
 use App\Models\DegreeCourse;
+use App\Models\SemesterCourse;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class DegreeCoursesController extends Controller
 {
-    public function getDegreeCourses(){
+    public function validation($request){
 
+        $validator = Validator::make($request->all(),[
+            'Degree_ID'        => 'required|numeric',
+            'Course_ID'        => 'required|numeric',
+            
+        ]);
+        $validation['validation'] = $validator->errors()->first();
+        if ($validator->fails()) {
+            $validation['error'] = true;
+        }else{
+            $validation['error'] = false;
+        }
+        return $validation;
     }
 
      public function addDegreeCourse(){
@@ -34,7 +48,24 @@ class DegreeCoursesController extends Controller
 
      public function storeDegreeCourse(Request $request){
 
-         $submit = DB::update("EXEC InsertDegreeCourses 
+        $unique = $this->uniqueDigreeCourse($request);
+        $validator = $this->validation($request);
+        if ($validator['error'] == true) {
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }elseif($unique == true){
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> 'These are Already Enrolled!'
+            ]);
+        }else {
+            $submit = DB::update("EXEC InsertDegreeCourses 
             @Degree_ID  = '$request->Degree_ID', 
             @Course_ID  = '$request->Course_ID'
            ;");
@@ -44,6 +75,7 @@ class DegreeCoursesController extends Controller
             'type'=> 'success', 
             'message'=> 'DegreeCourse Added!
             ']);
+        }
 
     }
 
@@ -95,21 +127,31 @@ class DegreeCoursesController extends Controller
     }
      public function updateDegreeCourse (Request $request){
 
-
-
-        $submit = DB::update("EXEC DegreeCoursesUpdate
+        $validator = $this->validation($request);
+        if ($validator['error'] == true) {
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }else {
+           $submit = DB::update("EXEC DegreeCoursesUpdate
             @DegCourses_ID         = '$request->id',
             @Degree_ID             = '$request->Degree_ID', 
             @Course_ID             = '$request->Course_ID'
             ;");
-        dd($request->all());
          return response()->json([
             'title'  => 'Done' , 
             'type'   => 'success', 
             'message'=> 'Degree Course Updated!
             ']);
+        }
     }
 
+    public function uniqueDigreeCourse($request){
 
+        return DegreeCourse::where(['Degree_ID' => $request->Degree_ID , 'Course_ID' => $request->Course_ID])->exists();
+    }
 
 }

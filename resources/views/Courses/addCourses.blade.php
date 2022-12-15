@@ -7,11 +7,11 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Course Code</label>
-                      <input type="text" name="CourseCode" class="form-control" required>
+                      <input type="text" name="CourseCode" class="form-control" >
                     </div>
                     <div class="form-group">
                       <label>Course Name</label>
-                      <input type="text" name="CourseName" class="form-control"required>
+                      <input type="text" name="CourseName" class="form-control">
                     </div>
                     <div class="form-group">
                       <label>Credit Hours</label>

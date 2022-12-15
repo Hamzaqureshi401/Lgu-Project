@@ -32,8 +32,11 @@ Route::post('/Std_login', [ControllersLogin::class, 'Std_login']);
 
 
 
-
-Route::get('/Addmision_student_info', [addmision::class, 'student_info_view']);
+Route::get('/addStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'addStudentAdmission'])->name('add.StudentAdmissions');
+Route::get('/allStudentAdmissions', [App\Http\Controllers\AdmissionController::class, 'allStudentAdmissions'])->name('all.StudentAdmissions');
+Route::post('/storeStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'storeStudentAdmission'])->name('store.StudentAdmission');
+Route::get('/editStudentAdmission/{id?}', [App\Http\Controllers\AdmissionController::class, 'editStudentAdmission'])->name('edit.StudentAdmission');
+Route::post('/updateStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'updateStudentAdmission'])->name('update.StudentAdmission');
 
 
 Auth::routes();
@@ -100,5 +103,22 @@ Route::get('/allDegreeCourses', [App\Http\Controllers\DegreeCoursesController::c
 Route::post('/storeDegreeCourse', [App\Http\Controllers\DegreeCoursesController::class, 'storeDegreeCourse'])->name('store.DegreeCourse');
 Route::get('editDegreeCourse/{id}', [App\Http\Controllers\DegreeCoursesController::class, 'editDegreeCourse'])->name('edit.DegreeCourse');
 Route::post('/updateDegreeCourse', [App\Http\Controllers\DegreeCoursesController::class, 'updateDegreeCourse'])->name('update.DegreeCourse');
+
+// SemesterDetails Routes start
+
+Route::get('/addSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'addSemesterDetails'])->name('add.SemesterDetails');
+Route::get('/allSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'allSemesterDetails'])->name('all.SemesterDetails');
+Route::post('/storeSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'storeSemesterDetails'])->name('store.SemesterDetails');
+Route::get('/editSemesterDetail/{id?}', [App\Http\Controllers\SemesterDetailsController::class, 'editSemesterDetail'])->name('edit.SemesterDetail');
+Route::post('/updateSemesterDetail', [App\Http\Controllers\SemesterDetailsController::class, 'updateSemesterDetail'])->name('update.SemesterDetail');
+
+// SemesterCourses Routes start
+
+Route::get('/addSemesterCourses', [App\Http\Controllers\SemesterCoursesController::class, 'addSemesterCourses'])->name('add.SemesterCourses');
+Route::get('/allSemesterCourses', [App\Http\Controllers\SemesterCoursesController::class, 'allSemesterCourses'])->name('all.SemesterCourses');
+Route::post('/storeSemesterCourses', [App\Http\Controllers\SemesterCoursesController::class, 'storeSemesterCourses'])->name('store.SemesterCourses');
+Route::get('/editSemesterCourse/{id?}', [App\Http\Controllers\SemesterCoursesController::class, 'editSemesterCourse'])->name('edit.SemesterCourse');
+Route::post('/updateSemesterCourse', [App\Http\Controllers\SemesterCoursesController::class, 'updateSemesterCourse'])->name('update.SemesterCourse');
+
 
 

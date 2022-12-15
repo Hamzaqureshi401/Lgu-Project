@@ -16,4 +16,12 @@ class DegreeCourse extends Model
     public function course($id){
         return Course::where('Course_ID' , $id)->first();
     }
+
+     public function getDegree(){
+        return $this->belongsTo('App\Models\degree','Degree_ID' , 'Degree_ID');
+    }
+
+     public function getCourse(){
+        return $this->belongsTo('App\Models\course','Course_ID' , 'Course_ID');
+    }
 }
