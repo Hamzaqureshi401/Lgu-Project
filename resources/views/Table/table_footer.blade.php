@@ -33,7 +33,7 @@
   <script src="assets/js/scripts.js"></script>
   <!-- Custom JS File -->
   <script src="assets/js/custom.js"></script>
- 
+ @include('Admissions.student_js')
   <script type="text/javascript">
   $("#exampleModal").prependTo("body");  
    $('.gt-data').click(function(){
@@ -55,7 +55,6 @@
                 {
                   $('#exampleModal .close').click();
                 }
-                
               }
           });
         });

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use App\Models\Student;
+use App\Models\Degree;
+use App\Models\StudentEducation;
 
 
 class AdmissionController extends Controller
@@ -57,7 +60,7 @@ class AdmissionController extends Controller
 
     public function addStudentAdmission(){
 
-        $degree = DB::table('Degrees')->select('Degree_ID', 'DegreeName')->distinct()->get();
+        $degree = Degree::select('Degree_ID', 'DegreeName')->distinct()->get();
         $button = "Add Studen Admission";
         $title  = 'Add Studen Admissions';
         $route  = '/storeStudentAdmission';
@@ -70,32 +73,56 @@ class AdmissionController extends Controller
                     'route'
                 ));
     }
-    
 
+    protected function createStudentDetail($request){
 
-    public function storeStudentAdmission(Request $request){
-
-        //dd($request->all());
-
-        $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return 
-            response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
-        $stdfilename = time() . "_studentfile." . $request->file('stdfile')->getClientOriginalExtension();
+         $stdfilename = time() . "_studentfile." . $request->file('stdfile')->getClientOriginalExtension();
         $request->file('stdfile')->storeAs('studentsFiles', $stdfilename);
 
 
         $stdImagename = time() . "_studentImage." . $request->file('Image')->getClientOriginalExtension();
         $request->file('Image')->storeAs('studentsImages', $stdImagename);
 
+        $submit = DB::select("EXECUTE personaldetailupdate 
+         @Std_FName          =      '$request->Std_FName',
+         @Std_LName          =      '$request->Std_LName',
+         @Password           =      '$request->Password',
+         @ClassSection       =      '$request->ClassSection',
+         @CNIC               =      '$request->CNIC',
+         @Nationality        =      '$request->Nationality',
+         @DOB                =      '$request->DOB',
+         @Gender             =      '$request->Gender',
+         @Email              =      '$request->Email',
+         @FatherName         =      '$request->FatherName',
+         @FatherCNIC         =      '$request->FatherCNIC',
+         @GuardianName       =      '$request->GuardianName',
+         @GuardianCNIC       =      '$request->GuardianCNIC',
+         @StdPhone           =      '$request->StdPhone',
+         @FatherPhone        =      '$request->FatherPhone',
+         @GuardianPhone      =      '$request->GuardianPhone',
+         @ParentOccupation   =      '$request->ParentOccupation',
+         @Address            =      '$request->Address',
+         @Tehsil             =      '$request->Tehsil',
+         @City               =      '$request->City',
+         @Province           =      '$request->Province',
+         @Country            =      '$request->Country',
+         @Degree_ID          =      '$request->Degree_ID',
+         @CurrentSemester    =      '$request->CurrentSemester',
+         @Status             =      '$request->Status',
+         @AddmissionSession  =      '$request->AdmissionSession',
+         @BloodGroup         =      '$request->BloodGroup',
+         @FatherEmail        =      '$request->FatherEmail',
+         @Files              =      '$stdfilename',
+         @Image              =      '$stdImagename';");
+    }
 
+    protected function createStudentQualification($request){
 
-        //-----------------QUALIFICATION------------
+        $student = Student::where(['CNIC' => $request->CNIC , 'FatherCNIC' => $request->FatherCNIC])->first();
+
+        $std_id = $student->Std_ID;
+
+         //-----------------QUALIFICATION------------
         $matric_examination     = $request->matric_examination;
         $matric_board           = $request->matric_board;
         $matric_passing_year    = $request->matric_passing_year;
@@ -145,43 +172,7 @@ class AdmissionController extends Controller
         $masters_appeared       = $request->masters_appeared;
 
 
-
-
-
-     $submit = DB::statement("EXECUTE personaldetailupdate 
-         @Std_FName          =      '$request->Std_FName',
-         @Std_LName          =      '$request->Std_LName',
-         @Password           =      '$request->Password',
-         @ClassSection       =      '$request->ClassSection',
-         @CNIC               =      '$request->CNIC',
-         @Nationality        =      '$request->Nationality',
-         @DOB                =      '$request->DOB',
-         @Gender             =      '$request->Gender',
-         @Email              =      '$request->Email',
-         @FatherName         =      '$request->FatherName',
-         @FatherCNIC         =      '$request->FatherCNIC',
-         @GuardianName       =      '$request->GuardianName',
-         @GuardianCNIC       =      '$request->GuardianCNIC',
-         @StdPhone           =      '$request->StdPhone',
-         @FatherPhone        =      '$request->FatherPhone',
-         @GuardianPhone      =      '$request->GuardianPhone',
-         @ParentOccupation   =      '$request->ParentOccupation',
-         @Address            =      '$request->Address',
-         @Tehsil             =      '$request->Tehsil',
-         @City               =      '$request->City',
-         @Province           =      '$request->Province',
-         @Country            =      '$request->Country',
-         @Degree_ID          =      '$request->Degree_ID',
-         @CurrentSemester    =      '$request->CurrentSemester',
-         @Status             =      '$request->Status',
-         @AddmissionSession  =      '$request->AdmissionSession',
-         @BloodGroup         =      '$request->BloodGroup',
-         @FatherEmail        =      '$request->FatherEmail',
-         @Files              =      '$stdfilename',
-         @Image              =      '$stdImagename';");
-
-
-        if ($matric_examination = !null and $matric_board != null) {
+        if (!empty($matric_examination) && !empty($matric_board)) {
 
             $this->addStudentExamination(
             $std_id,
@@ -192,12 +183,11 @@ class AdmissionController extends Controller
             $matric_marks_obtained,
             $matric_total_marks,
             $matric_rollno
-        );
-            
+        );            
         }
 
 
-        if ($fsc_examination = !null and $fsc_board != null) {
+        if (!empty($fsc_examination) && !empty($fsc_board)) {
 
             $this->addStudentExamination(
             $std_id,
@@ -213,94 +203,56 @@ class AdmissionController extends Controller
            
         }
 
-        if ($becholars_examination = !null and $becholars_board != null) {
+        if (!empty($becholars_examination) && !empty($becholars_board)) {
 
-            $becholars = DB::statement("EXECUTE update_qualification 
-                @Std_ID             ='',
-                @Degree             ='',
-                @InstitutionName    ='',
-                @DateStarted        ='',
-                @DateEnd            ='',
-                @ObtainedMarks      ='',
-                @TotalMarks         ='',
-                @RollNo             =''
-        ");
+            $this->addStudentExamination(
+            $std_id,
+            $becholars_examination,
+            $becholars_appeared,
+            $becholars_board,
+            $becholars_passing_year,
+            $becholars_marks_obtained,
+            $becholars_total_marks,
+            $becholars_rollno
+        );
         }
 
 
-        if ($master_examination = !null and $master_examination != null) {
+        if (!empty($master_examination) && !empty($master_examination)) {
 
-            $master = DB::statement("EXECUTE update_qualification 
-                @Std_ID             ='',
-                @Degree             ='',
-                @InstitutionName    ='',
-                @DateStarted        ='',
-                @DateEnd            ='',
-                @ObtainedMarks      ='',
-                @TotalMarks         ='',
-                @RollNo             =''
-        ");
+            $this->addStudentExamination(
+            $std_id,
+            $master_examination,
+            $master_appeared,
+            $master_board,
+            $master_passing_year,
+            $master_marks_obtained,
+            $master_total_marks,
+            $master_rollno
+        );
         }
+    }
 
-        if ($masters_examination = !null and $masters_board != null) {
 
-            $masters = DB::statement("EXECUTE update_qualification 
-                @Std_ID             ='',
-                @Degree             ='',
-                @InstitutionName    ='',
-                @DateStarted        ='',
-                @DateEnd            ='',
-                @ObtainedMarks      ='',
-                @TotalMarks         ='',
-                @RollNo             =''
-        ");
-        }
+    public function storeStudentAdmission(Request $request){
 
-        if ($submit != null) {
-            $notify         = 1;
-            $alerttype      = 'success';
-            $alertmessage   = 'Student Added Successfully !';
-            $degree         = DB::table('Degrees')
-            ->select('Degree_ID', 'DegreeName')
-            ->distinct()->get();
-
+        $validator = $this->validation($request);
+        if ($validator['error'] == true) {
             return 
-                view('Pages.Addmission_student_info', 
-                compact(
-                    'notify', 
-                    'alerttype', 
-                    'alertmessage', 
-                    'degree'
-                ));
-        }else{
-            $notify       = 1;
-            $alerttype    = 'danger';
-            $alertmessage = 'Student not Added Try again !';
-            $degree       = DB::table('Degrees')
-            ->select('Degree_ID', 'DegreeName')
-            ->distinct()
-            ->get();
-
-            return 
-                view('Pages.Addmission_student_info', 
-                    compact(
-                        'notify', 
-                        'alerttype', 
-                        'alertmessage', 
-                        'degree'
-                    ));
-        }
-
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }else {
+            $this->createStudentDetail($request);
+            $this->createStudentQualification($request);
           return response()->json([
             'title' => 'Done' , 
             'type'=> 'success', 
             'message'=> 'Course Added!
             ']);
         }
-
-       
-
-       
     }
 
     public function addStudentExamination(
@@ -326,4 +278,48 @@ class AdmissionController extends Controller
              @RollNo            ='$RollNo'
             ");
     }
+
+     public function allStudentAdmissions(){
+
+        $students = Student::paginate(10);
+        $title  = 'All Student Admissions';
+        $route = 'updateStudentAdmission';
+        $getEditRoute = 'editStudentAdmission';
+        $modalTitle = 'Edit Student Admission';
+       
+        return 
+        view('Admissions.allStudentAdmissions' , 
+            compact(
+                'students' , 
+                'title' , 
+                'modalTitle' , 
+                'route',
+                'getEditRoute'
+            ));
+    }
+
+    public function editStudentAdmission($id){
+
+        $degree = Degree::select('Degree_ID', 'DegreeName')->distinct()->get();
+        $button = 'Update Student Info';
+        $title  = 'Edit Student Info';
+        $route  = '/editStudentAdmission';
+        $courses = Student::where('Std_ID' , $id)->first();
+         return 
+         view('Admissions.editStudentAdmission', 
+            compact(
+                'courses', 
+                'button' , 
+                'title' , 
+                'route',
+                'degree'
+            ));
+    }
+
+    public function updateStudentAdmission (Request $request){
+
+
+    }
+
+
 }
