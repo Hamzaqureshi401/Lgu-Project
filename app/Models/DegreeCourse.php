@@ -10,18 +10,18 @@ class DegreeCourse extends Model
     protected $table = 'DegreeCourses';
 
     public function degree($id){
-        return Degree::where('Degree_ID' , $id)->first();
+        return Degree::where('ID' , $id)->first();
 
     }
     public function course($id){
-        return Course::where('Course_ID' , $id)->first();
+        return Course::where('ID' , $id)->first();
     }
 
      public function getDegree(){
-        return $this->belongsTo('App\Models\degree','Degree_ID' , 'Degree_ID');
+        return $this->belongsTo('App\Models\degree','ID' , 'ID');
     }
 
      public function getCourse(){
-        return $this->belongsTo('App\Models\course','Course_ID' , 'Course_ID');
+        return $this->belongsTo('App\Models\course','ID' , 'ID');
     }
 }

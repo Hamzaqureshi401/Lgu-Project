@@ -52,7 +52,7 @@ class login extends Controller
         $username = $Employee_data->input('Username');
         $password = $Employee_data->input('password');
 
-        $submit = DB::select("EXEC Employeelogin @username = '$username',@password='$password';");
+        $submit = DB::select("EXEC sp_EmployeesLogin @username = '$username',@password='$password';");
 
         if ($submit != NUll) {
 
