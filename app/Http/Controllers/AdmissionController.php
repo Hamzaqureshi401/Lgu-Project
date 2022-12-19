@@ -83,7 +83,7 @@ class AdmissionController extends Controller
         $stdImagename = time() . "_studentImage." . $request->file('Image')->getClientOriginalExtension();
         $request->file('Image')->storeAs('studentsImages', $stdImagename);
 
-        $submit = DB::select("EXECUTE personaldetailupdate 
+        $submit = DB::select("EXECUTE Studentdetail 
          @Std_FName          =      '$request->Std_FName',
          @Std_LName          =      '$request->Std_LName',
          @Password           =      '$request->Password',
@@ -250,7 +250,7 @@ class AdmissionController extends Controller
           return response()->json([
             'title' => 'Done' , 
             'type'=> 'success', 
-            'message'=> 'Course Added!
+            'message'=> 'Admission Added!
             ']);
         }
     }
@@ -300,15 +300,15 @@ class AdmissionController extends Controller
 
     public function editStudentAdmission($id){
 
-        $degree = Degree::select('Degree_ID', 'DegreeName')->distinct()->get();
+        $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
         $button = 'Update Student Info';
         $title  = 'Edit Student Info';
         $route  = '/editStudentAdmission';
-        $courses = Student::where('Std_ID' , $id)->first();
+        $studentAdmission = Student::where('ID' , $id)->first();
          return 
          view('Admissions.editStudentAdmission', 
             compact(
-                'courses', 
+                'studentAdmission', 
                 'button' , 
                 'title' , 
                 'route',
@@ -316,9 +316,26 @@ class AdmissionController extends Controller
             ));
     }
 
-    public function updateStudentAdmission (Request $request){
+    
+     public function updateStudentAdmission(Request $request){
 
-
+        $validator = $this->validation($request);
+        if ($validator['error'] == true) {
+            return 
+            response()->json([
+            'title' => 'Failed' , 
+            'type'=> 'error', 
+            'message'=> ''.$validator['validation']
+            ]);
+        }else {
+            $this->createStudentDetail($request);
+            $this->createStudentQualification($request);
+          return response()->json([
+            'title' => 'Done' , 
+            'type'=> 'success', 
+            'message'=> 'Student Admission Updated!
+            ']);
+        }
     }
 
 

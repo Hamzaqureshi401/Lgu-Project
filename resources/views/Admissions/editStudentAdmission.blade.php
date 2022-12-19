@@ -5,7 +5,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Student Password <span
                                             style="color: red">*</span></label>
-                                    <input type="text" name="Password" id="Password" value="{{ old('Password') }}"
+                                    <input type="text" name="Password" id="Password" value="{{ $studentAdmission->Password }}"
                                         class="form-control" maxlength=12>
 
                                     <br>
@@ -17,7 +17,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Student First Name <span
                                             style="color: red">*</span></label>
-                                    <input type="text" name="Std_FName" id="Std_FName" value="{{ old('Std_FName') }}"
+                                    <input type="text" name="Std_FName" id="Std_FName" value="{{ $studentAdmission->Std_FName }}"
                                         class="form-control"  maxlength=20>
 
                                     <br>
