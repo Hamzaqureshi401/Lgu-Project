@@ -67,6 +67,14 @@
                 <li><a class="nav-link" href="email-read.html">read</a></li>
               </ul>
             </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Student Admission</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.StudentAdmissions') }}">Add  Student Admission</a></li>
+                <li><a class="nav-link" href="{{ route('all.StudentAdmissions') }}">All Student Admission</a></li>
+                <li><a class="nav-link" href="email-read.html">read</a></li>
+              </ul>
+            </li>
             <li class="menu-header">UI Elements</li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Basic

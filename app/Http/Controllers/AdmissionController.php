@@ -60,7 +60,7 @@ class AdmissionController extends Controller
 
     public function addStudentAdmission(){
 
-        $degree = Degree::select('Degree_ID', 'DegreeName')->distinct()->get();
+        $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
         $button = "Add Studen Admission";
         $title  = 'Add Studen Admissions';
         $route  = '/storeStudentAdmission';
@@ -83,7 +83,7 @@ class AdmissionController extends Controller
         $stdImagename = time() . "_studentImage." . $request->file('Image')->getClientOriginalExtension();
         $request->file('Image')->storeAs('studentsImages', $stdImagename);
 
-        $submit = DB::select("EXECUTE Studentdetail 
+        $submit = DB::select("EXECUTE sp_InsertStudentDetails
          @Std_FName          =      '$request->Std_FName',
          @Std_LName          =      '$request->Std_LName',
          @Password           =      '$request->Password',
@@ -114,6 +114,7 @@ class AdmissionController extends Controller
          @FatherEmail        =      '$request->FatherEmail',
          @Files              =      '$stdfilename',
          @Image              =      '$stdImagename';");
+        return $submit;
     }
 
     protected function createStudentQualification($request){

@@ -294,19 +294,19 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label style="font-size: 13px">Degree<span style="color: red">*</span></label>
-                                        <select name="Degree_ID" value="{{ old('Degree_ID') }}"
+                                        <select name="Degree_ID" value="{{ old('ID') }}"
                                             class="custom-select">
-                                            <option value="{{ old('Degree_ID') }}" selected>{{ old('Degree_ID') }}
+                                            <option value="{{ old('ID') }}" selected>{{ old('ID') }}
                                             </option>
                                             @foreach ($degree as $degreeid)
-                                                <option value="{{ $degreeid->Degree_ID }}">
+                                                <option value="{{ $degreeid->ID }}">
                                                     {{ $degreeid->DegreeName }}</option>
                                             @endforeach
 
                                         </select>
                                     </div>
                                     <br>
-                                    @error('Degree_ID')
+                                    @error('ID')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
