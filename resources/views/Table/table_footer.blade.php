@@ -2,7 +2,7 @@
                 </div>
               </div>
             </div>
-          </div>
+       
         </section>
 
  <!-- Modal with form -->
@@ -33,8 +33,22 @@
   <script src="assets/js/scripts.js"></script>
   <!-- Custom JS File -->
   <script src="assets/js/custom.js"></script>
- @include('Admissions.student_js')
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
+
+
   <script type="text/javascript">
+
+  $(document).ready(function(){    
+   var table= $('.table-datatable').DataTable({
+        paging:false,
+        sDom:"ltipr",
+        ordering:false,
+    });
+    $('.search-inp').on('keyup',function(){
+      table.search($(this).val()).draw() ;
+});
+});
+
   $("#exampleModal").prependTo("body");  
    $('.gt-data').click(function(){
     var getEditRoute = @json($getEditRoute);
@@ -42,7 +56,7 @@
       $("#exampleModal .modal-body").show();
       $('#exampleModal .modal-body').html(success);
       $(document).ready( function () {
-       document.querySelector("#myForm").addEventListener("submit", function (evt) {
+       $("#myForm").bind("submit", function (evt) {
           evt.preventDefault();
        var route = @json($route);
           $.ajax({
@@ -55,7 +69,26 @@
                 {
                   $('#exampleModal .close').click();
                 }
-              }
+              },error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error Please Ask for Administration';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                var er = "Error Occured!";
+                swal(er, msg, "error");
+            },
           });
         });
       });

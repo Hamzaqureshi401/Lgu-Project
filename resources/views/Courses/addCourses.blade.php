@@ -23,9 +23,10 @@
                     </div>
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
                 </form>
-@include('Forms.formFooter')                
+@include('Forms.formFooter')   
+@include('js.form_submit_script')             
 @endsection
-@include('js.form_submit_script')
+
 
 
 
