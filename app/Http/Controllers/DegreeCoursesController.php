@@ -17,7 +17,7 @@ class DegreeCoursesController extends Controller
         $validator = Validator::make($request->all(),[
             'Degree_ID'        => 'required|numeric',
             'Course_ID'        => 'required|numeric',
-            
+
         ]);
         $validation['validation'] = $validator->errors()->first();
         if ($validator->fails()) {
@@ -35,11 +35,11 @@ class DegreeCoursesController extends Controller
         $route  = '/storeDegreeCourse';
         $degrees = Degree::get();
         $courses = Course::get();
-        return 
-        view('DegreeCourses.addDegreeCourses', 
+        return
+        view('DegreeCourses.addDegreeCourses',
             compact(
-                'button' , 
-                'title' , 
+                'button' ,
+                'title' ,
                 'route',
                 'degrees',
                 'courses')
@@ -51,28 +51,28 @@ class DegreeCoursesController extends Controller
         $unique = $this->uniqueDigreeCourse($request);
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return 
+            return
             response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
+            'title' => 'Failed' ,
+            'type'=> 'error',
             'message'=> ''.$validator['validation']
             ]);
         }elseif($unique == true){
-            return 
+            return
             response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
+            'title' => 'Failed' ,
+            'type'=> 'error',
             'message'=> 'These are Already Enrolled!'
             ]);
         }else {
-            $submit = DB::update("EXEC InsertDegreeCourses 
-            @Degree_ID  = '$request->Degree_ID', 
+            $submit = DB::update("EXEC sp_InsertDegreeCourses
+            @Degree_ID  = '$request->Degree_ID',
             @Course_ID  = '$request->Course_ID'
            ;");
 
           return response()->json([
-            'title' => 'Done' , 
-            'type'=> 'success', 
+            'title' => 'Done' ,
+            'type'=> 'success',
             'message'=> 'DegreeCourse Added!
             ']);
         }
@@ -88,16 +88,16 @@ class DegreeCoursesController extends Controller
         $modalTitle    = 'Edit Degree Course';
 
         $names = DegreeCourse::select('DegreeName' , 'CourseName')
-        ->join('Degrees' , 'Degrees.Degree_ID' , 'DegreeCourses.Degree_ID')
-        ->join('Courses' , 'Courses.Course_ID' , 'DegreeCourses.Course_ID')
+        ->join('Degrees' , 'Degrees.ID' , 'DegreeCourses.ID')
+        ->join('Courses' , 'Courses.ID' , 'DegreeCourses.ID')
         ->paginate(10);
-       
-        return 
-        view('DegreeCourses.allDegreeCourses' , 
+
+        return
+        view('DegreeCourses.allDegreeCourses' ,
             compact(
-                'degreeCourses' , 
-                'title' , 
-                'modalTitle' , 
+                'degreeCourses' ,
+                'title' ,
+                'modalTitle' ,
                 'route',
                 'getEditRoute',
                 'names'
@@ -113,12 +113,12 @@ class DegreeCoursesController extends Controller
         $courses = Course::get();
         $designation = DegreeCourse::where('DegCourses_ID' , $id)->first();
 
-        return 
-        view('DegreeCourses.editDegreeCourse', 
+        return
+        view('DegreeCourses.editDegreeCourse',
             compact(
-                'designation', 
-                'button' , 
-                'title' , 
+                'designation',
+                'button' ,
+                'title' ,
                 'route',
                 'degrees',
                 'courses'
@@ -129,21 +129,21 @@ class DegreeCoursesController extends Controller
 
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return 
+            return
             response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
+            'title' => 'Failed' ,
+            'type'=> 'error',
             'message'=> ''.$validator['validation']
             ]);
         }else {
            $submit = DB::update("EXEC DegreeCoursesUpdate
             @DegCourses_ID         = '$request->id',
-            @Degree_ID             = '$request->Degree_ID', 
+            @Degree_ID             = '$request->Degree_ID',
             @Course_ID             = '$request->Course_ID'
             ;");
          return response()->json([
-            'title'  => 'Done' , 
-            'type'   => 'success', 
+            'title'  => 'Done' ,
+            'type'   => 'success',
             'message'=> 'Degree Course Updated!
             ']);
         }

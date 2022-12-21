@@ -30,11 +30,11 @@ class CoursesController extends Controller
         $button = "Add Course";
         $title  = 'Add Course';
         $route  = '/storeCourses';
-        return 
-        view('Courses.addCourses', 
+        return
+        view('Courses.addCourses',
             compact(
-                'button' , 
-                'title' , 
+                'button' ,
+                'title' ,
                 'route')
         );
     }
@@ -43,22 +43,22 @@ class CoursesController extends Controller
 
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return 
+            return
             response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
+            'title' => 'Failed' ,
+            'type'=> 'error',
             'message'=> ''.$validator['validation']
             ]);
         }else {
-             $submit = DB::update("EXEC InsertCourse 
-            @CourseCode  = '$request->CourseCode', 
-            @CourseName  = '$request->CourseName', 
-            @CreditHours = '$request->CreditHours' , 
+             $submit = DB::update("EXEC sp_InsertCourses
+            @CourseCode  = '$request->CourseCode',
+            @CourseName  = '$request->CourseName',
+            @CreditHours = '$request->CreditHours' ,
             @LectureType = '$request->LectureType';");
 
           return response()->json([
-            'title' => 'Done' , 
-            'type'=> 'success', 
+            'title' => 'Done' ,
+            'type'=> 'success',
             'message'=> 'Course Added!
             ']);
         }
@@ -71,12 +71,12 @@ class CoursesController extends Controller
         $title  = 'Edit Course';
         $route  = '/updateCourse';
         $courses = Course::where('Course_id' , $id)->first();
-         return 
-         view('Courses.editCourse', 
+         return
+         view('Courses.editCourse',
             compact(
-                'courses', 
-                'button' , 
-                'title' , 
+                'courses',
+                'button' ,
+                'title' ,
                 'route'
             ));
     }
@@ -87,13 +87,13 @@ class CoursesController extends Controller
         $route = 'updateCourse';
         $getEditRoute = 'editCourse';
         $modalTitle = 'Edit Course';
-       
-        return 
-        view('Courses.allCourses' , 
+
+        return
+        view('Courses.allCourses' ,
             compact(
-                'courses' , 
-                'title' , 
-                'modalTitle' , 
+                'courses' ,
+                'title' ,
+                'modalTitle' ,
                 'route',
                 'getEditRoute'
             ));
@@ -103,29 +103,29 @@ class CoursesController extends Controller
 
          $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return 
+            return
             response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
+            'title' => 'Failed' ,
+            'type'=> 'error',
             'message'=> ''.$validator['validation']
             ]);
         }else {
               $submit = DB::update("EXEC CoursesUpdate
 
-            @Course_ID   = '$request->id', 
-            @CourseCode  = '$request->CourseCode', 
-            @CourseName  = '$request->CourseName', 
-            @CreditHours = '$request->CreditHours' , 
+            @Course_ID   = '$request->id',
+            @CourseCode  = '$request->CourseCode',
+            @CourseName  = '$request->CourseName',
+            @CreditHours = '$request->CreditHours' ,
             @LectureType = '$request->LectureType';");
 
         return response()->json([
-            'title' => 'Done' , 
-            'type'=> 'success', 
+            'title' => 'Done' ,
+            'type'=> 'success',
             'message'=> 'Course Updated!
             ']);
         }
 
-       
+
     }
 
 }
