@@ -40,11 +40,11 @@ class SemesterController extends Controller
         $button = "Add Semester";
         $title  = 'Add Semester';
         $route  = '/storeSemester';
-        return
-        view('Semesters.addSemesters',
+        return 
+        view('Semesters.addSemesters', 
             compact(
-                'button' ,
-                'title' ,
+                'button' , 
+                'title' , 
                 'route')
         );
     }
@@ -53,31 +53,31 @@ class SemesterController extends Controller
 
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return
+            return 
             response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
+            'title' => 'Failed' , 
+            'type'=> 'error', 
             'message'=> ''.$validator['validation']
             ]);
         }else {
-            $submit = DB::update("EXEC sp_InsertSemesters
-            @SemSession             = '$request->SemSession',
-            @Year                   = '$request->Year',
-            @SemStartDate           = '$request->SemStartDate' ,
-            @SemEndDate             = '$request->SemEndDate' ,
-            @EnrollmentStartDate    = '$request->EnrollmentStartDate' ,
-            @EnrollmentEndDate      = '$request->EnrollmentEndDate' ,
-            @ExamStartDate          = '$request->ExamStartDate' ,
-            @ExamEndDate            = '$request->ExamEndDate' ,
-            @I_mid_StartDate        = '$request->I_mid_StartDate' ,
-            @I_mid_EndDate          = '$request->I_mid_EndDate' ,
-            @I_final_StartDate      = '$request->I_final_StartDate' ,
+            $submit = DB::update("EXEC InsertSemesters 
+            @SemSession             = '$request->SemSession', 
+            @Year                   = '$request->Year', 
+            @SemStartDate           = '$request->SemStartDate' , 
+            @SemEndDate             = '$request->SemEndDate' , 
+            @EnrollmentStartDate    = '$request->EnrollmentStartDate' , 
+            @EnrollmentEndDate      = '$request->EnrollmentEndDate' , 
+            @ExamStartDate          = '$request->ExamStartDate' , 
+            @ExamEndDate            = '$request->ExamEndDate' , 
+            @I_mid_StartDate        = '$request->I_mid_StartDate' , 
+            @I_mid_EndDate          = '$request->I_mid_EndDate' , 
+            @I_final_StartDate      = '$request->I_final_StartDate' , 
             @I_final_EndDate        = '$request->I_final_EndDate'
             ;");
 
           return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
+            'title' => 'Done' , 
+            'type'=> 'success', 
             'message'=> 'Semester Added!
             ']);
         }
@@ -90,12 +90,12 @@ class SemesterController extends Controller
         $title  = 'Edit Semester';
         $route  = '/updateSemester';
         $semester = Semester::where('Sem_ID' , $id)->first();
-         return
-         view('Semesters.editSemester',
+         return 
+         view('Semesters.editSemester', 
             compact(
-                'semester',
-                'button' ,
-                'title' ,
+                'semester', 
+                'button' , 
+                'title' , 
                 'route'
             ));
     }
@@ -106,13 +106,13 @@ class SemesterController extends Controller
         $route = 'updateSemester';
         $getEditRoute = 'editSemester';
         $modalTitle = 'Edit Semester';
-
-        return
-        view('Semesters.allSemesters' ,
+       
+        return 
+        view('Semesters.allSemesters' , 
             compact(
-                'semesters' ,
-                'title' ,
-                'modalTitle' ,
+                'semesters' , 
+                'title' , 
+                'modalTitle' , 
                 'route',
                 'getEditRoute'
             ));
@@ -122,32 +122,32 @@ class SemesterController extends Controller
 
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return
+            return 
             response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
+            'title' => 'Failed' , 
+            'type'=> 'error', 
             'message'=> ''.$validator['validation']
             ]);
         }else {
             $submit = DB::update("EXEC UpdateSemesters
             @Sem_ID                 = '$request->id',
-            @SemSession             = '$request->SemSession',
-            @Year                   = '$request->Year',
-            @SemStartDate           = '$request->SemStartDate' ,
-            @SemEndDate             = '$request->SemEndDate' ,
-            @EnrollmentStartDate    = '$request->EnrollmentStartDate' ,
-            @EnrollmentEndDate      = '$request->EnrollmentEndDate' ,
-            @ExamStartDate          = '$request->ExamStartDate' ,
-            @ExamEndDate            = '$request->ExamEndDate' ,
-            @I_mid_StartDate        = '$request->I_mid_StartDate' ,
-            @I_mid_EndDate          = '$request->I_mid_EndDate' ,
-            @I_final_StartDate      = '$request->I_final_StartDate' ,
+            @SemSession             = '$request->SemSession', 
+            @Year                   = '$request->Year', 
+            @SemStartDate           = '$request->SemStartDate' , 
+            @SemEndDate             = '$request->SemEndDate' , 
+            @EnrollmentStartDate    = '$request->EnrollmentStartDate' , 
+            @EnrollmentEndDate      = '$request->EnrollmentEndDate' , 
+            @ExamStartDate          = '$request->ExamStartDate' , 
+            @ExamEndDate            = '$request->ExamEndDate' , 
+            @I_mid_StartDate        = '$request->I_mid_StartDate' , 
+            @I_mid_EndDate          = '$request->I_mid_EndDate' , 
+            @I_final_StartDate      = '$request->I_final_StartDate' , 
             @I_final_EndDate        = '$request->I_final_EndDate'
             ;");
 
         return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
+            'title' => 'Done' , 
+            'type'=> 'success', 
             'message'=> 'Semester Updated!
             ']);
         }

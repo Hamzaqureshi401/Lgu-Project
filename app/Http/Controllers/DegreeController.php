@@ -18,7 +18,7 @@ class DegreeController extends Controller
             'DegreeFullName'    => 'required|max:70',
             'Dpt_ID'            => 'required|numeric',
             'Total_Credit_Hours' => 'required|numeric',
-            'Status'            => 'required|numeric',
+            'status'            => 'required|numeric',
         ]);
         $validation['validation'] = $validator->errors()->first();
         if ($validator->fails()) {
@@ -33,43 +33,41 @@ class DegreeController extends Controller
         $button = "Add Degree";
         $title  = 'Add Degree';
         $route  = '/storeDegree';
-        return
-        view('Degrees.AddDegree',
+        return 
+        view('Degrees.AddDegree', 
          compact(
-            'button',
-            'title',
+            'button', 
+            'title', 
             'route'
          ));
     }
 
     public function storeDegree(Request $request){
 
-      //  dd($request->all());
-
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return
+            return 
             response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
+            'title' => 'Failed' , 
+            'type'=> 'error', 
             'message'=> ''.$validator['validation']
             ]);
         }else {
-           $submit = DB::update("EXEC sp_InsertDegrees
+           $submit = DB::update("EXEC InsertDegree 
             @DegreeName         = '$request->DegreeName',
-            @DegreeLevel        = '$request->DegreeLevel',
-            @DegreeFullName     = '$request->DegreeFullName',
+            @DegreeLevel        = '$request->DegreeLevel', 
+            @DegreeFullName     = '$request->DegreeFullName', 
             @Dpt_ID             = '$request->Dpt_ID',
-            @Total_Credit_Hours = '$request->Total_Credit_Hours',
+            @Total_Credit_Hours = '$request->Total_Credit_Hours', 
             @Status             = '$request->status';
             ");
           return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
+            'title' => 'Done' , 
+            'type'=> 'success', 
             'message'=> 'Degree Added!
             ']);
       }
-
+         
     }
     public function editDegree($id){
 
@@ -78,12 +76,12 @@ class DegreeController extends Controller
         $route  = '/updateDegree';
         $degree = Degree::where('Degree_ID' , $id)->first();
 
-        return
-        view('Degrees.editDegree',
+        return 
+        view('Degrees.editDegree', 
          compact(
-            'degree',
-            'button',
-            'title' ,
+            'degree', 
+            'button', 
+            'title' , 
             'route'
          ));
     }
@@ -95,10 +93,10 @@ class DegreeController extends Controller
         $route = 'updateDegree';
         $getEditRoute = 'editDegree';
         $modalTitle = 'Edit Degree';
-        return
-        view('Degrees.allDegrees' ,
+        return 
+        view('Degrees.allDegrees' , 
          compact(
-            'degrees' ,
+            'degrees' , 
             'title',
             'route',
             'modalTitle',
@@ -110,26 +108,26 @@ class DegreeController extends Controller
 
          $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return
+            return 
             response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
+            'title' => 'Failed' , 
+            'type'=> 'error', 
             'message'=> ''.$validator['validation']
             ]);
         }else {
            $submit = DB::update("EXEC degreeUpdate
 
-            @Degree_ID           = '$request->id',
-            @DegreeName          = '$request->DegreeName',
-            @DegreeLevel         = '$request->DegreeLevel',
-            @DegreeFullName      = '$request->DegreeFullName' ,
-            @Dpt_ID              = '$request->Dpt_ID',
-            @Total_Credit_Hours  = '$request->Total_Credit_Hours' ,
+            @Degree_ID           = '$request->id', 
+            @DegreeName          = '$request->DegreeName', 
+            @DegreeLevel         = '$request->DegreeLevel', 
+            @DegreeFullName      = '$request->DegreeFullName' , 
+            @Dpt_ID              = '$request->Dpt_ID', 
+            @Total_Credit_Hours  = '$request->Total_Credit_Hours' , 
             @Status              = '$request->Status';");
 
         return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
+            'title' => 'Done' , 
+            'type'=> 'success', 
             'message'=> 'Degree Updated!
             ']);
       }

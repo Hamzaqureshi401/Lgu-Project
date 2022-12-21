@@ -18,21 +18,21 @@ class EmployeeController extends Controller
             'Emp_FirstName'      => 'required|max:30',
             'Emp_LastName'       => 'required|max:30',
             'DOB'                => 'required|date',
-            'CNIC'               => 'required|numeric|min:16|unique:employees',
+            'CNIC'               => 'required|numeric|min:16|unique:employee',
             'DateOfJoining'      => 'required|date',
             'DateOfAppointment'  => 'required|date',
             'Specialization'     => 'required|max:50',
             'Designation'        => 'required|max:50',
             'Status'             => 'required|max:50',
-            'UserName'           => 'required|max:50|unique:employees',
+            'UserName'           => 'required|max:50|unique:employee',
             'Password'           => 'required|min:6|max:255',
             'Gender'             => 'required|max:10',
-            'Email'              => 'required|max:50|unique:employees',
+            'Email'              => 'required|max:50|unique:employee',
             'Address'            => 'required|max:50',
             'Dpt_ID'             => 'required|numeric',
             'Grade'              => 'required|numeric',
             'Contact_Number'     => 'required|max:10',
-
+            
         ]);
         $validation['validation'] = $validator->errors()->first();
         if ($validator->fails()) {
@@ -63,7 +63,7 @@ class EmployeeController extends Controller
             'Dpt_ID'             => 'required|numeric',
             'Grade'              => 'required|numeric',
             'Contact_Number'     => 'required|max:10',
-
+            
         ]);
         $validation['validation'] = $validator->errors()->first();
         if ($validator->fails()) {
@@ -80,11 +80,11 @@ class EmployeeController extends Controller
         $title  = 'Add Employee';
         $route  = '/storeEmployee';
         $departments = Department::get();
-        return
-        view('Employees.addEmployees',
+        return 
+        view('Employees.addEmployees', 
             compact(
-                'button' ,
-                'title' ,
+                'button' , 
+                'title' , 
                 'route',
                 'departments')
         );
@@ -94,42 +94,42 @@ class EmployeeController extends Controller
 
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return
+            return 
             response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
+            'title' => 'Failed' , 
+            'type'=> 'error', 
             'message'=> ''.$validator['validation']
             ]);
         }else {
             $password = bcrypt($request->Password);
-           $submit = DB::update("EXEC InsertEmployee
-            @Emp_FirstName      = '$request->Emp_FirstName',
-            @Emp_LastName       = '$request->Emp_LastName',
-            @DOB                = '$request->DOB' ,
-            @CNIC               = '$request->CNIC' ,
-            @DateOfJoining      = '$request->DateOfJoining' ,
-            @DateOfAppointment  = '$request->DateOfAppointment',
-            @Specialization     = '$request->Specialization',
-            @Designation        = '$request->Designation' ,
-            @Status             = '$request->Status' ,
-            @UserName           = '$request->UserName' ,
-            @Password           = '$password' ,
-            @Gender             = '$request->Gender' ,
-            @Email              = '$request->Email' ,
-            @Address            = '$request->Address' ,
-            @Dpt_ID             = '$request->Dpt_ID' ,
-            @Grade              = '$request->Grade' ,
+           $submit = DB::update("EXEC InsertEmployee 
+            @Emp_FirstName      = '$request->Emp_FirstName', 
+            @Emp_LastName       = '$request->Emp_LastName', 
+            @DOB                = '$request->DOB' , 
+            @CNIC               = '$request->CNIC' , 
+            @DateOfJoining      = '$request->DateOfJoining' , 
+            @DateOfAppointment  = '$request->DateOfAppointment', 
+            @Specialization     = '$request->Specialization', 
+            @Designation        = '$request->Designation' , 
+            @Status             = '$request->Status' , 
+            @UserName           = '$request->UserName' , 
+            @Password           = '$password' , 
+            @Gender             = '$request->Gender' , 
+            @Email              = '$request->Email' , 
+            @Address            = '$request->Address' , 
+            @Dpt_ID             = '$request->Dpt_ID' , 
+            @Grade              = '$request->Grade' , 
             @Contact_Number     = '$request->Contact_Number'
             ;");
 
           return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
+            'title' => 'Done' , 
+            'type'=> 'success', 
             'message'=> 'Employee Added!
             ']);
         }
 
-
+         
 
     }
 
@@ -140,30 +140,30 @@ class EmployeeController extends Controller
         $route  = '/updateEmployee';
         $employee = Employee::where('Emp_ID' , $id)->first();
         $departments = Department::get();
-         return
-         view('Employees.editEmployee',
+         return 
+         view('Employees.editEmployee', 
             compact(
-                'employee',
-                'button' ,
-                'title' ,
+                'employee', 
+                'button' , 
+                'title' , 
                 'route',
                 'departments'
             ));
     }
     public function allEmployees(){
 
-        $employees      = Employee::join('departments' , 'departments.ID' , 'employees.ID')->paginate(10);
+        $employees      = Employee::join('departments' , 'departments.Dpt_ID' , 'employee.Dpt_ID')->paginate(10);
         $title          = 'All Employees';
         $route          = 'updateEmployee';
         $getEditRoute   = 'editEmployee';
         $modalTitle     = 'Edit Employee';
-
-        return
-        view('Employees.allEmployees' ,
+       
+        return 
+        view('Employees.allEmployees' , 
             compact(
-                'employees' ,
-                'title' ,
-                'modalTitle' ,
+                'employees' , 
+                'title' , 
+                'modalTitle' , 
                 'route',
                 'getEditRoute'
             ));
@@ -173,38 +173,38 @@ class EmployeeController extends Controller
 
          $validator = $this->validationUpdate($request);
         if ($validator['error'] == true) {
-            return
+            return 
             response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
+            'title' => 'Failed' , 
+            'type'=> 'error', 
             'message'=> ''.$validator['validation']
             ]);
         }else {
-
+           
         $submit = DB::update("EXEC UpdateEmployee
             @Emp_ID             = '$request->id',
             @Emp_FirstName      = '$request->Emp_FirstName',
-            @Emp_LastName       = '$request->Emp_LastName',
-            @DOB                = '$request->DOB' ,
-            @CNIC               = '$request->CNIC' ,
-            @DateOfJoining      = '$request->DateOfJoining' ,
-            @DateOfAppointment  = '$request->DateOfAppointment',
-            @Specialization     = '$request->Specialization',
-            @Designation        = '$request->Designation' ,
-            @Status             = '$request->Status' ,
-            @UserName           = '$request->UserName' ,
-            @Password           = '$request->Password' ,
-            @Gender             = '$request->Gender' ,
-            @Email              = '$request->Email' ,
-            @Address            = '$request->Address' ,
-            @Dpt_ID             = '$request->Dpt_ID' ,
-            @Grade              = '$request->Grade' ,
+            @Emp_LastName       = '$request->Emp_LastName', 
+            @DOB                = '$request->DOB' , 
+            @CNIC               = '$request->CNIC' , 
+            @DateOfJoining      = '$request->DateOfJoining' , 
+            @DateOfAppointment  = '$request->DateOfAppointment', 
+            @Specialization     = '$request->Specialization', 
+            @Designation        = '$request->Designation' , 
+            @Status             = '$request->Status' , 
+            @UserName           = '$request->UserName' , 
+            @Password           = '$request->Password' , 
+            @Gender             = '$request->Gender' , 
+            @Email              = '$request->Email' , 
+            @Address            = '$request->Address' , 
+            @Dpt_ID             = '$request->Dpt_ID' , 
+            @Grade              = '$request->Grade' , 
             @Contact_Number     = '$request->Contact_Number'
             ;");
 
         return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
+            'title' => 'Done' , 
+            'type'=> 'success', 
             'message'=> 'Employee Updated!
             ']);
         }
