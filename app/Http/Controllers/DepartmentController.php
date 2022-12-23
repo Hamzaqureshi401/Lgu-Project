@@ -18,7 +18,7 @@ class DepartmentController extends Controller
             'HODUID'        => 'required|numeric',
             'DeanUID'       => 'required|numeric',
             'Status'        => 'required|numeric',
-
+            
         ]);
         $validation['validation'] = $validator->errors()->first();
         if ($validator->fails()) {
@@ -34,11 +34,11 @@ class DepartmentController extends Controller
         $button = "Add Department";
         $title  = 'Add Department';
         $route  = '/storeDepartment';
-        return
-            view('Departments.addDepartment',
+        return 
+            view('Departments.addDepartment', 
                compact(
-                  'button' ,
-                  'title' ,
+                  'button' , 
+                  'title' , 
                   'route'
                ));
     }
@@ -47,23 +47,23 @@ class DepartmentController extends Controller
 
       $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return
+            return 
             response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
+            'title' => 'Failed' , 
+            'type'=> 'error', 
             'message'=> ''.$validator['validation']
             ]);
         }else {
-            $submit = DB::update("EXEC sp_InsertDepartments
-            @Dpt_Name       = '$request->Dpt_Name',
-            @Dpt_FullName   = '$request->Dpt_FullName',
-            @HODUID         = '$request->HODUID' ,
+            $submit = DB::update("EXEC InsertDepartment 
+            @Dpt_Name       = '$request->Dpt_Name', 
+            @Dpt_FullName   = '$request->Dpt_FullName', 
+            @HODUID         = '$request->HODUID' , 
             @DeanUID        = '$request->DeanUID',
             @Status         = '$request->Status'
             ;");
           return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
+            'title' => 'Done' , 
+            'type'=> 'success', 
             'message'=> 'Department Added!
             ']);
         }
@@ -77,12 +77,12 @@ class DepartmentController extends Controller
         $route  = '/updateDepartment';
         $department = Department::where('Dpt_id' , $id)->first();
 
-        return
-            view('Departments.editDepartment',
+        return 
+            view('Departments.editDepartment', 
                compact(
-                  'department',
-                  'button' ,
-                  'title' ,
+                  'department', 
+                  'button' , 
+                  'title' , 
                   'route'
                ));
     }
@@ -96,10 +96,10 @@ class DepartmentController extends Controller
         $modalTitle = 'Edit Departments';
 
 
-        return
-            view('Departments.allDepartments' ,
+        return 
+            view('Departments.allDepartments' , 
                compact(
-                  'departments' ,
+                  'departments' , 
                   'title',
                   'route',
                   'modalTitle',
@@ -110,26 +110,26 @@ class DepartmentController extends Controller
 
        $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return
+            return 
             response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
+            'title' => 'Failed' , 
+            'type'=> 'error', 
             'message'=> ''.$validator['validation']
             ]);
         }else {
              $submit = DB::update("EXEC DepartmentUpdate
 
             @Dpt_ID         = '$request->id',
-            @Dpt_Name       = '$request->Dpt_Name',
-            @Dpt_FullName   = '$request->Dpt_FullName',
-            @HODUID         = '$request->HODUID' ,
+            @Dpt_Name       = '$request->Dpt_Name', 
+            @Dpt_FullName   = '$request->Dpt_FullName', 
+            @HODUID         = '$request->HODUID' , 
             @DeanUID        = '$request->DeanUID',
             @Status         = '$request->Status'
             ;");
 
         return response()->json([
-            'title'  => 'Done' ,
-            'type'   => 'success',
+            'title'  => 'Done' , 
+            'type'   => 'success', 
             'message'=> 'Department Updated!
             ']);
         }
