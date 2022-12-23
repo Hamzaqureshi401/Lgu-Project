@@ -120,32 +120,5 @@ Route::post('/storeSemesterCourses', [App\Http\Controllers\SemesterCoursesContro
 Route::get('/editSemesterCourse/{id?}', [App\Http\Controllers\SemesterCoursesController::class, 'editSemesterCourse'])->name('edit.SemesterCourse');
 Route::post('/updateSemesterCourse', [App\Http\Controllers\SemesterCoursesController::class, 'updateSemesterCourse'])->name('update.SemesterCourse');
 
-//Dean Route Start
 
-Route::get('/deanDashboard', [App\Http\Controllers\DeanController::class, 'deanDashboard'])->name('dean.Dashboard');
-
-//Attandence Route Start
-
-Route::get('/deanAttandence', [App\Http\Controllers\AttendanceController::class, 'deanAttandence'])->name('attandence.Dashboard');
-
-Route::get('/deanAllStuAttandence', [App\Http\Controllers\AttendanceController::class, 'deanAllStuAttandence'])->name('dean.All.Stu.Attandence');
-
-//View Route Start
-
-Route::get('/vcView', [App\Http\Controllers\ViewController::class, 'vcView'])->name('vc.View');
-Route::get('/igradeStudentView', [App\Http\Controllers\ViewController::class, 'igradeStudentView'])->name('igrade.StudentView');
-
-Route::get('/examDashboardView', [App\Http\Controllers\ViewController::class, 'examDashboardView'])->name('exam.dasshboardView');
-
-Route::get('/igradeStdhodView', [App\Http\Controllers\ViewController::class, 'igradeStdhodView'])->name('igrade.StdhodView');
-
-Route::get('/student365View', [App\Http\Controllers\ViewController::class, 'student365View'])->name('student.365View');
-
-Route::get('/reportingPanel', [App\Http\Controllers\ViewController::class, 'reportingPanel'])->name('reporting.Panel');
-
-Route::get('/sectionWIseReport', [App\Http\Controllers\ViewController::class, 'sectionWIseReport'])->name('section.WIse.Report');
-
-Route::get('/examMainDashboardView', [App\Http\Controllers\ViewController::class, 'examMainDashboardView'])->name('exam.Main.Dashboard.View');
-
-Route::get('/ceoDashboard', [App\Http\Controllers\ViewController::class, 'ceoDashboard'])->name('ceo.Dashboard');
 

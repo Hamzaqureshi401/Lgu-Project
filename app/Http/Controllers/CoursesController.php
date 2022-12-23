@@ -70,8 +70,7 @@ class CoursesController extends Controller
         $button = 'Update Course';
         $title  = 'Edit Course';
         $route  = '/updateCourse';
-
-        $courses = Course::where('id' , $id)->first();
+        $courses = Course::where('Course_id' , $id)->first();
          return 
          view('Courses.editCourse', 
             compact(

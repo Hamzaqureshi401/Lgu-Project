@@ -32,7 +32,7 @@
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
-                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $course->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $course->Course_ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
                                 
                               </div>
                             </td>
@@ -42,7 +42,7 @@
                       </table>
                     </div>
                     <div class="d-flex justify-content-center">
-                        
+                        {!! $courses->links() !!}
                     </div>
 @include('Table.table_footer') 
 @endsection   

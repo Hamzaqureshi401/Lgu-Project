@@ -2,7 +2,7 @@
               <form id="myForm" enctype="multipart/form-data">
                     {{ csrf_field() }}
                   <div class="card-body">
-                    <input type="hidden" name="id" value="{{ $courses->ID }}">
+                    <input type="hidden" name="id" value="{{ $courses->Course_ID }}">
                     <div class="form-group">
                       <label>Course Code</label>
                       <input type="text" name="CourseCode" class="form-control" value="{{ $courses->CourseCode }} "required>

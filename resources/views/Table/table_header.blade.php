@@ -9,7 +9,7 @@
                     <div class="card-header-action">
                       <form>
                         <div class="input-group">
-                          <input type="text" class="search-inp form-control" id="myInputTextField" placeholder="Search">
+                          <input type="text" class="form-control" id="myInputTextField" placeholder="Search">
                           <div class="input-group-btn">
                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                           </div>
