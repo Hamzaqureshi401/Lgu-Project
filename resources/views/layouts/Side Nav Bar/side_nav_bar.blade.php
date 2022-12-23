@@ -1,4 +1,4 @@
-    
+<div class="main-sidebar sidebar-style-2">    
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
             <a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
@@ -70,10 +70,37 @@
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Student Admission</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="{{ route('add.StudentAdmissions') }}">Add  Student Admission</a></li>
+                <li><a class="nav-link" href="{{ route('add.StudentAdmissions') }}">Add Student Admission</a></li>
                 <li><a class="nav-link" href="{{ route('all.StudentAdmissions') }}">All Student Admission</a></li>
                 <li><a class="nav-link" href="email-read.html">read</a></li>
               </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Dean</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('dean.Dashboard') }}">Dashboard</a></li>
+                <li><a class="nav-link" href="{{ route('attandence.Dashboard') }}">All Student Attandence</a></li>
+                 <li><a class="nav-link" href="{{ route('dean.All.Stu.Attandence') }}">Attandence</a></li>
+                <li><a class="nav-link" href="email-read.html">read</a></li>
+              </ul>
+            </li>
+            
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Views</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('vc.View') }}">Vc View</a></li>
+                <li><a class="nav-link" href="{{ route('igrade.StudentView') }}">Igrade Student View</a></li>
+                 <li><a class="nav-link" href="{{ route('dean.All.Stu.Attandence') }}">Attandence</a></li>
+                <li><a class="nav-link" href="{{ route('exam.dasshboardView')}}">Exam Dasshboard View</a></li>
+                 <li><a class="nav-link" href="{{ route('igrade.StdhodView')}}">Igrade Std hod View</a></li>
+                 <li><a class="nav-link" href="{{ route('student.365View')}}">Student 365 View</a></li>
+                 <li><a class="nav-link" href="{{ route('reporting.Panel')}}">Reporting Panel View</a></li>
+                  <li><a class="nav-link" href="{{ route('section.WIse.Report')}}">Section Wise Report View</a></li>
+                  <li><a class="nav-link" href="{{ route('exam.Main.Dashboard.View')}}">Exam Main Dashboard View</a></li>
+                  <li><a class="nav-link" href="{{ route('ceo.Dashboard')}}">CEO Dashboard</a></li>
+                  
+              </ul>
+              
             </li>
             <li class="menu-header">UI Elements</li>
             <li class="dropdown">
@@ -246,3 +273,4 @@
             </li>
           </ul>
         </aside>
+         </div>

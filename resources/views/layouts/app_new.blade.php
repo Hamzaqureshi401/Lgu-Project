@@ -8,10 +8,11 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>Otika - Admin Dashboard Template</title>
   <!-- General CSS Files -->
-  <link rel="stylesheet" href="{{ asset('assets/css/app.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
   <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
-  <link rel="stylesheet" href="{{ asset('assets/css/components.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+  
   <!-- Custom style CSS -->
   
  
@@ -173,13 +174,13 @@
           </li>
         </ul>
       </nav>
-      <div class="main-sidebar sidebar-style-2">
+      
 
 <!-- include side nav bar -->
       @include('layouts.Side Nav Bar.side_nav_bar')
 <!-- end side nav bar -->
 
-          </div>
+         
 
       <!-- Main Content -->
       <div class="main-content">
@@ -283,6 +284,7 @@
       
     </div>
   </div>
+  
   <!-- General JS Scripts -->
   <script src="{{ asset('assets/js/app.min.js') }}"></script>
  

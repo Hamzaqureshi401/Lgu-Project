@@ -4,7 +4,7 @@
   
   var total = 0;
    $(function () {
-       document.querySelector("#myForm").addEventListener("submit", function (evt) {
+       $("#myForm").bind("submit", function (evt) {
           evt.preventDefault();
           var btn = document.getElementById('button');
           btn.innerText = 'Saving Wait..';
@@ -29,6 +29,27 @@
                 }
                
               },
+               error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error Please Ask for Administration';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                console.log(msg);
+                var er = "Error Occured!";
+                swal(er, msg, "error");
+            },
               cache: false,
               contentType: false,
               processData: false
