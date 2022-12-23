@@ -110,9 +110,9 @@ class CoursesController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-              $submit = DB::update("EXEC CoursesUpdate
+              $submit = DB::update("EXEC sp_UpdateCourses
 
-            @ID   = '$request->id',
+            @Course_ID   = '$request->id',
             @CourseCode  = '$request->CourseCode',
             @CourseName  = '$request->CourseName',
             @CreditHours = '$request->CreditHours' ,

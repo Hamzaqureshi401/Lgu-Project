@@ -117,9 +117,9 @@ class DegreeController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-           $submit = DB::update("EXEC degreeUpdate
+           $submit = DB::update("EXEC sp_UpdateDegree
 
-            @ID                  = '$request->id',
+            @Degree_ID                  = '$request->id',
             @DegreeName          = '$request->DegreeName',
             @DegreeLevel         = '$request->DegreeLevel',
             @DegreeFullName      = '$request->DegreeFullName' ,
