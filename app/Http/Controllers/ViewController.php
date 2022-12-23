@@ -71,4 +71,22 @@ class ViewController extends Controller
             
                );
     }
+     public function studentResult(){
+
+        return view('View.studentResult', 
+            
+               );
+    }
+     public function stdWiseAward(){
+
+        return view('View.stdWiseAward', 
+            
+               );
+    }
+     public function stdAffairs(){
+
+        return view('View.stdAffairs', 
+            
+               );
+    }
 }

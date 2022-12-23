@@ -18,8 +18,12 @@
                       <input type="text" name="DegreeFullName" class="form-control"required>
                     </div>
                     <div class="form-group">
-                      <label>Dpt ID</label>
-                      <input type="number" name="Dpt_ID" class="form-control"required>
+                      <label>Dpt Name</label>
+                      <select class="form-control" name="Dpt_ID"  required>
+                        @foreach($departments as $department)
+                        <option value="{{ $department->ID }}">{{ $department->Dpt_Name }}</option>
+                        @endforeach
+                      </select>
                     </div>
                     <div class="form-group">
                       <label>Total Credit Hours</label>

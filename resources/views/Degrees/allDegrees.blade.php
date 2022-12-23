@@ -35,7 +35,7 @@
                             <td>{{ $degree->status ?? '--' }}</td>
                             <td><div class="card-body">
                                 <!-- only change id -->
-                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $degree->Degree_ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $degree->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
                                 
                               </div></td>
                           </tr>
@@ -43,6 +43,8 @@
                         </tbody>
                       </table>
                     </div>
-
+                    <div class="d-flex justify-content-center">
+                        {{ $degrees->links() }}
+                    </div>
 @include('Table.table_footer')    
 @endsection   

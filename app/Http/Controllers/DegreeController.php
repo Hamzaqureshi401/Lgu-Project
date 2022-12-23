@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Degree;
+use App\Models\Department;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
@@ -33,12 +34,14 @@ class DegreeController extends Controller
         $button = "Add Degree";
         $title  = 'Add Degree';
         $route  = '/storeDegree';
+        $departments = Department::get();
         return
         view('Degrees.AddDegree',
          compact(
             'button',
             'title',
-            'route'
+            'route',
+            'departments'
          ));
     }
 
@@ -76,6 +79,7 @@ class DegreeController extends Controller
         $button = "Update Degree";
         $title  = 'Edit Degree';
         $route  = '/updateDegree';
+        $departments = Department::get();
         $degree = Degree::where('ID' , $id)->first();
 
         return
@@ -84,7 +88,8 @@ class DegreeController extends Controller
             'degree',
             'button',
             'title' ,
-            'route'
+            'route',
+            'departments'
          ));
     }
 
@@ -117,9 +122,9 @@ class DegreeController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-           $submit = DB::update("EXEC sp_UpdateDegree
+           $submit = DB::update("EXEC sp_UpdateDegrees
 
-            @Degree_ID                  = '$request->id',
+            @Degree_ID           = '$request->id',
             @DegreeName          = '$request->DegreeName',
             @DegreeLevel         = '$request->DegreeLevel',
             @DegreeFullName      = '$request->DegreeFullName' ,

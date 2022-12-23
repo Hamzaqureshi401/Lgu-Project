@@ -96,13 +96,13 @@ Route::post('/storeEmployee', [App\Http\Controllers\EmployeeController::class, '
 Route::get('editEmployee/{id}', [App\Http\Controllers\EmployeeController::class, 'editEmployee'])->name('edit.Employee');
 Route::post('/updateEmployee', [App\Http\Controllers\EmployeeController::class, 'updateEmployee'])->name('update.Employee');
 
-// DegreeCourse Route Start
+// DegreeBatch Route Start
 
-Route::get('/addDegreeCourses', [App\Http\Controllers\DegreeCoursesController::class, 'addDegreeCourse'])->name('add.DegreeCourse');
-Route::get('/allDegreeCourses', [App\Http\Controllers\DegreeCoursesController::class, 'allDegreeCourses'])->name('all.DegreeCourses');
-Route::post('/storeDegreeCourse', [App\Http\Controllers\DegreeCoursesController::class, 'storeDegreeCourse'])->name('store.DegreeCourse');
-Route::get('editDegreeCourse/{id}', [App\Http\Controllers\DegreeCoursesController::class, 'editDegreeCourse'])->name('edit.DegreeCourse');
-Route::post('/updateDegreeCourse', [App\Http\Controllers\DegreeCoursesController::class, 'updateDegreeCourse'])->name('update.DegreeCourse');
+Route::get('/addDegreeBatchs', [App\Http\Controllers\DegreeBatchsController::class, 'addDegreeBatch'])->name('add.DegreeBatch');
+Route::get('/allDegreeBatchs', [App\Http\Controllers\DegreeBatchsController::class, 'allDegreeBatchs'])->name('all.DegreeBatchs');
+Route::post('/storeDegreeBatch', [App\Http\Controllers\DegreeBatchsController::class, 'storeDegreeBatch'])->name('store.DegreeBatch');
+Route::get('editDegreeBatch/{id}', [App\Http\Controllers\DegreeBatchsController::class, 'editDegreeBatch'])->name('edit.DegreeBatch');
+Route::post('/updateDegreeBatch', [App\Http\Controllers\DegreeBatchsController::class, 'updateDegreeBatch'])->name('update.DegreeBatch');
 
 // SemesterDetails Routes start
 
@@ -119,6 +119,15 @@ Route::get('/allSemesterCourses', [App\Http\Controllers\SemesterCoursesControlle
 Route::post('/storeSemesterCourses', [App\Http\Controllers\SemesterCoursesController::class, 'storeSemesterCourses'])->name('store.SemesterCourses');
 Route::get('/editSemesterCourse/{id?}', [App\Http\Controllers\SemesterCoursesController::class, 'editSemesterCourse'])->name('edit.SemesterCourse');
 Route::post('/updateSemesterCourse', [App\Http\Controllers\SemesterCoursesController::class, 'updateSemesterCourse'])->name('update.SemesterCourse');
+
+// Enrollments Routes start
+
+Route::get('/addEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollments'])->name('add.Enrollments');
+Route::get('/allEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'allEnrollments'])->name('all.Enrollments');
+Route::post('/storeEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'storeEnrollments'])->name('store.Enrollments');
+Route::get('/editEnrollment/{id?}', [App\Http\Controllers\EnrollmentsController::class, 'editEnrollment'])->name('edit.Enrollment');
+Route::post('/updateEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'updateEnrollment'])->name('update.Enrollment');
+
 
 //Dean Route Start
 
@@ -148,4 +157,10 @@ Route::get('/sectionWIseReport', [App\Http\Controllers\ViewController::class, 's
 Route::get('/examMainDashboardView', [App\Http\Controllers\ViewController::class, 'examMainDashboardView'])->name('exam.Main.Dashboard.View');
 
 Route::get('/ceoDashboard', [App\Http\Controllers\ViewController::class, 'ceoDashboard'])->name('ceo.Dashboard');
+
+Route::get('/studentResult', [App\Http\Controllers\ViewController::class, 'studentResult'])->name('student.Result');
+
+Route::get('/stdWiseAward', [App\Http\Controllers\ViewController::class, 'stdWiseAward'])->name('std.Wise.Award');
+
+Route::get('/stdAffairs', [App\Http\Controllers\ViewController::class, 'stdAffairs'])->name('std.Affairs');
 

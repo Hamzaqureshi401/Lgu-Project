@@ -2,7 +2,7 @@
               <form id="myForm" enctype="multipart/form-data">
                     {{ csrf_field() }}    
                   <div class="card-body">
-                    <input type="hidden" name="id" value="{{ $degree->Degree_ID }}">
+                    <input type="hidden" name="id" value="{{ $degree->ID }}">
                     <div class="form-group">
                       <label>Degree Name</label>
                       <input type="text" name="DegreeName" class="form-control"
@@ -10,7 +10,7 @@
                     </div>
                     <div class="form-group">
                       <label>Degree Level</label>
-                      <input type="number" name="DegreeLevel" class="form-control" value="{{ $degree['DegreeLevel'] }}"required>
+                      <input type="number" name="DegreeLevel" class="form-control" value="{{ $degree->DegreeLevel }}"required>
                     </div>
                     <div class="form-group">
                       <label>Degree Full Name</label>

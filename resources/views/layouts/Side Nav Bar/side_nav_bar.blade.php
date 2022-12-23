@@ -52,10 +52,10 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Degree Courses</span></a>
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Degree Batches</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="{{ route('add.DegreeCourse') }}">Add Degree Courses</a></li>
-                <li><a class="nav-link" href="{{ route('all.DegreeCourses') }}">All Degree Courses</a></li>
+                <li><a class="nav-link" href="{{ route('add.DegreeBatch') }}">Add Degree Courses</a></li>
+                <li><a class="nav-link" href="{{ route('all.DegreeBatchs') }}">All Degree Courses</a></li>
                 <li><a class="nav-link" href="email-read.html">read</a></li>
               </ul>
             </li>
@@ -76,6 +76,14 @@
               </ul>
             </li>
             <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Enrollmenta</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.Enrollments') }}">Add Enrollment</a></li>
+                <li><a class="nav-link" href="{{ route('all.Enrollments') }}">All Enrollment </a></li>
+                
+              </ul>
+            </li>
+            <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Dean</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('dean.Dashboard') }}">Dashboard</a></li>
@@ -84,6 +92,7 @@
                 <li><a class="nav-link" href="email-read.html">read</a></li>
               </ul>
             </li>
+
             
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Views</span></a>
@@ -98,6 +107,9 @@
                   <li><a class="nav-link" href="{{ route('section.WIse.Report')}}">Section Wise Report View</a></li>
                   <li><a class="nav-link" href="{{ route('exam.Main.Dashboard.View')}}">Exam Main Dashboard View</a></li>
                   <li><a class="nav-link" href="{{ route('ceo.Dashboard')}}">CEO Dashboard</a></li>
+                  <li><a class="nav-link" href="{{ route('student.Result')}}">Student Result</a></li>
+                  <li><a class="nav-link" href="{{ route('std.Wise.Award')}}">Student Wise Award</a></li> 
+                  <li><a class="nav-link" href="{{ route('std.Affairs')}}">Std Affairs</a></li>
                   
               </ul>
               
