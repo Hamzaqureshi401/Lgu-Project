@@ -83,7 +83,7 @@ class SemesterDetailsController extends Controller
         $button = 'Update Semester Detail';
         $title  = 'Edit Semester Detail';
         $route  = '/updateSemesterDetail';
-        $semesterDetail = SemesterDetail::where('SemDetail_ID' , $id)->first();
+        $semesterDetail = SemesterDetail::where('ID' , $id)->first();
         $degrees = Degree::get();
         $semesters = Semester::get();
          return 
@@ -131,7 +131,7 @@ class SemesterDetailsController extends Controller
         }else {
               $submit = DB::statement("EXEC SemesterDetailsUpdate
 
-            @SemDetail_ID   = '$request->id', 
+            @ID                  = '$request->id', 
             @Degree_ID           = '$request->Degree_ID', 
             @Sem_ID              = '$request->Sem_ID', 
             @SemesterNo          = '$request->SemesterNo' , 

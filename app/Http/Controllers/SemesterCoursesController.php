@@ -98,7 +98,7 @@ class SemesterCoursesController extends Controller
         $title  = 'Edit Semester Course';
         $route  = '/updateSemesterCourse';
         
-        $semesterCourse = SemesterCourse::join('degreeCourses' , 'DegCourses_ID' , 'SemesterCourses.DegCourse_ID')->where('SemCourse_ID' , $id)->first();
+        $semesterCourse = SemesterCourse::join('degreeCourses' , 'DegCourses_ID' , 'SemesterCourses.DegCourse_ID')->where('ID' , $id)->first();
         $semesters      = Semester::get();
         $degrees        = Degree::get();
         $degreeCourses  = DegreeCourse::get();
@@ -156,7 +156,7 @@ class SemesterCoursesController extends Controller
         }else {
               $submit = DB::statement("EXEC SemesterCoursesUpdate
 
-            @SemCourse_ID           = '$request->id', 
+            @ID                     = '$request->id', 
             @Sem_ID                 = '$request->Sem_ID', 
             @Emp_ID                 = '$request->Emp_ID', 
             @CampusLimit            = '$request->CampusLimit' , 

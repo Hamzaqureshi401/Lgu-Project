@@ -13,10 +13,11 @@ class DesignationController extends Controller
 {
     public function validation($request){
 
+
         $validator = Validator::make($request->all(),[
             'Designation' => 'required',
             'Dpt_ID'      => 'required|max:255',
-            
+
         ]);
         $validation['validation'] = $validator->errors()->first();
         if ($validator->fails()) {
@@ -26,42 +27,42 @@ class DesignationController extends Controller
         }
         return $validation;
     }
-    
+
     public function addDesignation(){
 
         $button = "Add Designation";
         $title  = 'Add Designation';
-        $route  = '/storeDesignation';  
+        $route  = '/storeDesignation';
         $departments = Department::get();
-        return 
-        view('Designation.addDesignation', 
+        return
+        view('Designation.addDesignation',
             compact(
-                'button' , 
-                'title' , 
+                'button' ,
+                'title' ,
                 'route',
                 'departments'
             ));
     }
 
     public function storeDesignation(Request $request){
-        
+
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return 
+            return
             response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
+            'title' => 'Failed' ,
+            'type'=> 'error',
             'message'=> ''.$validator['validation']
             ]);
         }else {
-            $submit             = DB::Update("EXEC InsertDesignation 
-            @Designation       = '$request->Designation', 
+            $submit             = DB::Update("EXEC sp_InsertDesignations
+            @Designation       = '$request->Designation',
             @Dpt_ID            = '$request->Dpt_ID'
             ;
         ");
             return response()->json([
-            'title' => 'Done' , 
-            'type'=> 'success', 
+            'title' => 'Done' ,
+            'type'=> 'success',
             'message'=> 'Designation Added!
             ']);
         }
@@ -72,15 +73,15 @@ class DesignationController extends Controller
         $button = "Update Designation";
         $title  = 'Edit Designation';
         $route  = '/updateDesignation';
-        $designation = Designation::where('Des_id' , $id)->first();
+        $designation = Designation::where('ID' , $id)->first();
         $departments = Department::get();
 
-        return 
-        view('Designation.editDesignation', 
+        return
+        view('Designation.editDesignation',
             compact(
-                'designation', 
-                'button' , 
-                'title' , 
+                'designation',
+                'button' ,
+                'title' ,
                 'route',
                 'departments'
             ));
@@ -88,48 +89,48 @@ class DesignationController extends Controller
     }
     public function allDesignations(){
 
-        $designations = Designation::join('departments' , 'departments.Dpt_ID' , 'Designation.Dpt_ID')->paginate(10);
+        $designations = Designation::join('departments' , 'departments.ID' , 'Designations.ID')->paginate(10);
         $title  = 'All Designations';
         $route = 'updateDesignation';
         $getEditRoute = 'editDesignation';
         $modalTitle = 'Edit Designations';
-        return 
-        view('Designation.allDesignations' , 
+        return
+        view('Designation.allDesignations' ,
             compact(
-                'designations' , 
+                'designations' ,
                 'title',
                 'route',
                 'getEditRoute',
                 'modalTitle'
             ));
         return response()->json([
-            'title'  => 'Done' , 
-            'type'   => 'success', 
+            'title'  => 'Done' ,
+            'type'   => 'success',
             'message'=> 'Designation Updated!
             ']);
     }
 
      public function updateDesignation (Request $request){
 
-        
+
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
-            return 
+            return
             response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
+            'title' => 'Failed' ,
+            'type'=> 'error',
             'message'=> ''.$validator['validation']
             ]);
         }else {
              $submit = DB::update("EXEC DesignationUpdate
-            @Des_ID         = '$request->id',
-            @Designation    = '$request->Designation', 
-            @Dpt_ID         = '$request->Dpt_ID' 
+            @ID             = '$request->id',
+            @Designation    = '$request->Designation',
+            @Dpt_ID         = '$request->Dpt_ID'
             ;");
 
         return response()->json([
-            'title'  => 'Done' , 
-            'type'   => 'success', 
+            'title'  => 'Done' ,
+            'type'   => 'success',
             'message'=> 'Designation Updated!
             ']);
         }

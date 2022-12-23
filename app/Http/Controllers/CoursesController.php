@@ -113,7 +113,7 @@ class CoursesController extends Controller
         }else {
               $submit = DB::update("EXEC CoursesUpdate
 
-            @Course_ID   = '$request->id', 
+            @ID          = '$request->id', 
             @CourseCode  = '$request->CourseCode', 
             @CourseName  = '$request->CourseName', 
             @CreditHours = '$request->CreditHours' , 
