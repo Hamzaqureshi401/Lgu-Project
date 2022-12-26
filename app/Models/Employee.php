@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    protected $table = 'Employee';
+    use HasFactory;
+    //protected $table = 'Employee';
+    public function department(){
+
+          return $this->belongsTo('App\Models\Department' , 'Dpt_ID');
+   }
 }

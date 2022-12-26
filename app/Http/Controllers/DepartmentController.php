@@ -117,9 +117,9 @@ class DepartmentController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-             $submit = DB::update("EXEC DepartmentUpdate
+             $submit = DB::update("EXEC sp_UpdateDepartments
 
-            @ID             = '$request->id',
+            @Dpt_ID         = '$request->id',
             @Dpt_Name       = '$request->Dpt_Name',
             @Dpt_FullName   = '$request->Dpt_FullName',
             @HODUID         = '$request->HODUID' ,

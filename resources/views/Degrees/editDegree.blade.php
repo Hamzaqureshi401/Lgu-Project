@@ -10,7 +10,7 @@
                     </div>
                     <div class="form-group">
                       <label>Degree Level</label>
-                      <input type="number" name="DegreeLevel" class="form-control" value="{{ $degree->DegreeLevel }}"required>
+                      <input type="text" name="DegreeLevel" class="form-control" value="{{ $degree->DegreeLevel }}"required>
                     </div>
                     <div class="form-group">
                       <label>Degree Full Name</label>

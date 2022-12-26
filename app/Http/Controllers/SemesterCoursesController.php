@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Degree;
+use App\Models\Course;
 use App\Models\Semester;
 use App\Models\Employee;
 use App\Models\SemesterCourse;
-use App\Models\DegreeCourse;
+use App\Models\DegreeBatche;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Validator;
@@ -24,6 +25,7 @@ class SemesterCoursesController extends Controller
             'MidWeightage'          => 'required|max:10',
             'FinalWeightage'        => 'required|max:10',
             'Section'               => 'required|max:10',
+            'Course_ID'             => 'required|numeric',
             
         ]);
         $validation['validation'] = $validator->errors()->first();
@@ -39,9 +41,10 @@ class SemesterCoursesController extends Controller
 
         $employees   = Employee::get();
         $semesters   = Semester::get();
-        $degreeCourses=  DegreeCourse::select('DegreeName' , 'CourseName' , 'DegCourses_ID')
-        ->join('Degrees' , 'Degrees.Degree_ID' , 'DegreeCourses.Degree_ID')
-        ->join('Courses' , 'Courses.Course_ID' , 'DegreeCourses.Course_ID')
+        $courses     = Course::get();
+        $degreeCourses=  DegreeBatche::select('DegreeName' , 'SemSession' , 'DegreeBatches.ID')
+        ->join('Degrees' , 'Degrees.ID' , 'DegreeBatches.Degree_ID')
+        ->join('Semesters' , 'Semesters.ID' , 'DegreeBatches.Batch_ID')
         ->get();
         $button = "Add Semester Course";
         $title  = 'Add Semester Course';
@@ -54,7 +57,8 @@ class SemesterCoursesController extends Controller
                 'route',
                 'employees',
                 'semesters',
-                'degreeCourses'
+                'degreeCourses',
+                'courses'
             )
         );
     }
@@ -70,17 +74,18 @@ class SemesterCoursesController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-             $submit = DB::update("EXEC InsertSemesterCourse 
+             $submit = DB::update("EXEC sp_InsertSemesterCourses 
             @Sem_ID                = '$request->Sem_ID', 
             @Emp_ID                = '$request->Emp_ID', 
             @CampusLimit           = '$request->CampusLimit' , 
-            @DegCourse_ID          = '$request->DegCourse_ID',
+            @DegBatches_ID         = '$request->DegCourse_ID',
             @QuizWeightage         = '$request->QuizWeightage' , 
             @AssignmentWeightage   = '$request->AssignmentWeightage',
             @PresentationWeightage = '$request->PresentationWeightage' , 
             @MidWeightage          = '$request->MidWeightage',
             @FinalWeightage        = '$request->FinalWeightage' , 
-            @Section               = '$request->Section'
+            @Section               = '$request->Section',
+            @Course_ID             = '$request->Course_ID'
             ;");
 
           return response()->json([
@@ -98,10 +103,11 @@ class SemesterCoursesController extends Controller
         $title  = 'Edit Semester Course';
         $route  = '/updateSemesterCourse';
         
-        $semesterCourse = SemesterCourse::join('degreeCourses' , 'DegCourses_ID' , 'SemesterCourses.DegCourse_ID')->where('ID' , $id)->first();
+        $semesterCourse = SemesterCourse::where('ID' , $id)->first();
         $semesters      = Semester::get();
         $degrees        = Degree::get();
-        $degreeCourses  = DegreeCourse::get();
+        $courses        = Course::get();
+        $degreeCourses  = DegreeBatche::whereNotNull('Batch_ID')->get();
        
          return 
          view('SemesterCourses.editSemesterCourse', 
@@ -113,18 +119,13 @@ class SemesterCoursesController extends Controller
                 'id',
                 'semesters',
                 'degrees',
-                'degreeCourses'
+                'degreeCourses',
+                'courses'
             ));
     }
     public function allSemesterCourses(){
 
-        $semesterCourses = 
-        DB::table('SemesterCourses')->join('semesters' , 'semesters.Sem_ID' , 'SemesterCourses.Sem_ID')
-        ->join('employee' , 'employee.Emp_ID' , 'SemesterCourses.Emp_ID')
-        ->join('degreeCourses' , 'DegCourses_ID' , 'SemesterCourses.DegCourse_ID')
-        ->join('Degrees' , 'Degrees.Degree_ID' , 'DegreeCourses.Degree_ID')
-        ->join('Courses' , 'Courses.Course_ID' , 'DegreeCourses.Course_ID')
-        ->paginate(10);
+        $semesterCourses = SemesterCourse::paginate(10);
 
         $title  = 'All Semester Courses';
         $route = 'updateSemesterCourse';
@@ -154,19 +155,20 @@ class SemesterCoursesController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-              $submit = DB::statement("EXEC SemesterCoursesUpdate
+              $submit = DB::statement("EXEC sp_UpdateSemesterCourses
 
-            @ID                     = '$request->id', 
+            @SemCourse_ID           = '$request->SemCourse_ID', 
             @Sem_ID                 = '$request->Sem_ID', 
             @Emp_ID                 = '$request->Emp_ID', 
             @CampusLimit            = '$request->CampusLimit' , 
-            @DegCourse_ID           = '$request->DegCourse_ID',
+            @DegBatches_ID          = '$request->DegCourse_ID',
             @QuizWeightage          = '$request->QuizWeightage' , 
             @AssignmentWeightage    = '$request->AssignmentWeightage',
             @PresentationWeightage  = '$request->PresentationWeightage', 
             @MidWeightage           = '$request->MidWeightage' , 
             @FinalWeightage         = '$request->FinalWeightage',
-            @Section                = '$request->Section' 
+            @Section                = '$request->Section',
+            @Course_ID              = '$request->Course_ID' 
             ;");
 
 

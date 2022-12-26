@@ -1,7 +1,7 @@
 
               <form id="myForm" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{ $employee->Emp_ID }}">
+                    <input type="hidden" name="id" value="{{ $employee->ID }}">
                  <div class="form-group">
                       <label>Emp First Name</label>
                       <input type="text" name="Emp_FirstName" class="form-control"  value="{{ $employee->Emp_FirstName}}" >
@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                       <label>CNIC</label>
-                      <input type="number" name="CNIC" class="form-control" value="{{ $employee->CNIC}}" >
+                      <input type="text" name="CNIC" class="form-control" value="{{ $employee->CNIC }}" >
                     </div>
                 <div class="form-group">
                       <label>Date Of Joining</label>
@@ -65,7 +65,7 @@
                       <label>Department</label>
                       <select class="form-control" name="Dpt_ID"  >
                         @foreach($departments as $department)
-                        <option value="{{ $department->Dpt_ID }}"{{ $department->Dpt_ID == $employee->Dpt_ID ? 'selected' : '' }} >{{ $department->Dpt_Name }}</option>
+                        <option value="{{ $department->ID }}"{{ $department->ID == $employee->Dpt_ID ? 'selected' : '' }} >{{ $department->Dpt_Name }}</option>
                         @endforeach
                       </select>
                     </div>

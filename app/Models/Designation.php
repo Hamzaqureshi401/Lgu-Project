@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Designation extends Model
 {
-    // protected $table = 'Designation';
+     public function department(){
+
+          return $this->belongsTo('App\Models\Department' , 'Dpt_ID');
+   }
 }

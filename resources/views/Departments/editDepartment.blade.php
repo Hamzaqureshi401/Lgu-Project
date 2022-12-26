@@ -1,7 +1,7 @@
               <form id="myForm" enctype="multipart/form-data">
                     {{ csrf_field() }}
                   <div class="card-body">
-                    <input type="hidden" name="id" value="{{ $department->Dpt_ID }}">
+                    <input type="hidden" name="id" value="{{ $department->ID }}">
                     <div class="form-group">
                       <label>Dpt Name</label>
                       <input type="text" name="Dpt_Name" class="form-control" value="{{ $department->Dpt_Name }} ">

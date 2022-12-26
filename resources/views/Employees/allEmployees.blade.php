@@ -52,13 +52,13 @@
                             <td>{{ $employee->Gender  ?? '--'}}</td>
                             <td>{{ $employee->Email  ?? '--'}}</td>
                             <td>{{ $employee->Address ?? '--' }}</td>
-                            <td>{{ $employee->Dpt_Name ?? '--' }}</td>
+                            <td>{{ $employee->department->Dpt_Name ?? '--' }}</td>
                             <td>{{ $employee->Grade  ?? '--'}}</td>
                             <td>{{ $employee->Contact_Number  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
-                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $employee->Emp_ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $employee->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
                                 
                               </div>
                             </td>

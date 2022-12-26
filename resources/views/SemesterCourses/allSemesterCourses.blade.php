@@ -12,13 +12,14 @@
                             <th>Sem</th>
                             <th>Emp</th>
                             <th>Campus Limit</th>
-                            <th>DegCourse ID</th>
+                            <th>Degree Batch</th>
                             <th>Quiz Weightage</th>
                             <th>Assignment Weightage</th>
                             <th>Presentation Weightage</th>
                             <th>Mid Weightage</th>
                             <th>Final Weightage</th>
                             <th>Section</th>
+                            <th>Course</th>
                             
                             <!-- <th>Status</th> -->
                             <th>Action</th>
@@ -32,20 +33,21 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $semesterCourse->SemSession ?? '--' }}</td>
-                            <td>{{ $semesterCourse->Emp_FirstName ?? '--' }} {{ $semesterCourse->Emp_LastName ?? '--' }}</td>
+                            <td>{{ $semesterCourse->semester->SemSession ?? '--' }}</td>
+                            <td>{{ $semesterCourse->employee->Emp_FirstName ?? '--' }} {{ $semesterCourse->Emp_LastName ?? '--' }}</td>
                             <td>{{ $semesterCourse->CampusLimit  ?? '--'}}</td>
-                            <td>{{ $semesterCourse->DegreeName }} / {{ $semesterCourse->CourseName }}</td>
+                            <td>{{ $semesterCourse->degreeBatches->degree->DegreeName ?? '--'}} / {{ $semesterCourse->degreeBatches->batch->SemSession ?? '--'}}</td>
                             <td>{{ $semesterCourse->QuizWeightage  ?? '--'}}</td>
                             <td>{{ $semesterCourse->AssignmentWeightage  ?? '--'}}</td>
                             <td>{{ $semesterCourse->PresentationWeightage  ?? '--'}}</td>
                             <td>{{ $semesterCourse->MidWeightage  ?? '--'}}</td>
                             <td>{{ $semesterCourse->FinalWeightage  ?? '--'}}</td>
                             <td>{{ $semesterCourse->Section  ?? '--'}}</td>
+                            <td>{{ $semesterCourse->course->CourseName  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
-                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $semesterCourse->SemCourse_ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $semesterCourse->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
                                 
                               </div>
                             </td>

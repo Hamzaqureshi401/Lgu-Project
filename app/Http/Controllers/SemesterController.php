@@ -129,8 +129,8 @@ class SemesterController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-            $submit = DB::update("EXEC UpdateSemesters
-            @ID                     = '$request->id',
+            $submit = DB::update("EXEC sp_UpdateSemesters
+            @Sem_ID                     = '$request->id',
             @SemSession             = '$request->SemSession',
             @Year                   = '$request->Year',
             @SemStartDate           = '$request->SemStartDate' ,

@@ -95,7 +95,7 @@ class DegreeController extends Controller
 
      public function allDegrees(){
 
-        $degrees = Degree::get();
+        $degrees = Degree::paginate(10);
         $title  = 'All Degrees';
         $route = 'updateDegree';
         $getEditRoute = 'editDegree';

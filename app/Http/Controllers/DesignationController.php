@@ -89,7 +89,7 @@ class DesignationController extends Controller
     }
     public function allDesignations(){
 
-        $designations = Designation::join('departments' , 'departments.ID' , 'Designations.ID')->paginate(10);
+        $designations = Designation::paginate(10);
         $title  = 'All Designations';
         $route = 'updateDesignation';
         $getEditRoute = 'editDesignation';
@@ -122,8 +122,8 @@ class DesignationController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-             $submit = DB::update("EXEC DesignationUpdate
-            @ID             = '$request->id',
+             $submit = DB::update("EXEC sp_UpdateDesignations
+            @Des_ID             = '$request->id',
             @Designation    = '$request->Designation',
             @Dpt_ID         = '$request->Dpt_ID'
             ;");

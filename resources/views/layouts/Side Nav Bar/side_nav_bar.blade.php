@@ -52,6 +52,22 @@
               </ul>
             </li>
             <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Semester Courses</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.SemesterCourses') }}">Add Semester Courses</a></li>
+                <li><a class="nav-link" href="{{ route('all.SemesterCourses') }}">All Semester Courses</a></li>
+                <li><a class="nav-link" href="email-read.html">read</a></li>
+              </ul>
+            </li>
+             <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Semester Details</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.SemesterDetails') }}">Add Semester Detail</a></li>
+                <li><a class="nav-link" href="{{ route('all.SemesterDetails') }}">All Semester Detail</a></li>
+                <li><a class="nav-link" href="email-read.html">read</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Degree Batches</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('add.DegreeBatch') }}">Add Degree Courses</a></li>

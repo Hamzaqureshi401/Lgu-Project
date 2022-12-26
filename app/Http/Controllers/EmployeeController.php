@@ -102,7 +102,7 @@ class EmployeeController extends Controller
             ]);
         }else {
             $password = bcrypt($request->Password);
-           $submit = DB::update("EXEC InsertEmployee
+           $submit = DB::update("EXEC sp_InsertEmployees
             @Emp_FirstName      = '$request->Emp_FirstName',
             @Emp_LastName       = '$request->Emp_LastName',
             @DOB                = '$request->DOB' ,
@@ -152,7 +152,7 @@ class EmployeeController extends Controller
     }
     public function allEmployees(){
 
-        $employees      = Employee::join('departments' , 'departments.ID' , 'employees.ID')->paginate(10);
+        $employees      = Employee::paginate(10);
         $title          = 'All Employees';
         $route          = 'updateEmployee';
         $getEditRoute   = 'editEmployee';
@@ -181,8 +181,8 @@ class EmployeeController extends Controller
             ]);
         }else {
 
-        $submit = DB::update("EXEC UpdateEmployee
-            @ID                 = '$request->id',
+        $submit = DB::update("EXEC sp_UpdateEmployees
+            @Emp_ID                 = '$request->id',
             @Emp_FirstName      = '$request->Emp_FirstName',
             @Emp_LastName       = '$request->Emp_LastName',
             @DOB                = '$request->DOB' ,

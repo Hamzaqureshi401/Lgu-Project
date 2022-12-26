@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SemesterCourse;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,8 @@ class EnrollmentsController extends Controller
 
     public function addEnrollments(){
 
+        $semesterCourses = SemesterCourse::get();
+
         $button = "Add Enrollment";
         $title  = 'Add Enrollment';
         $route  = '/storeEnrollments';
@@ -37,11 +40,29 @@ class EnrollmentsController extends Controller
             compact(
                 'button' ,
                 'title' ,
-                'route')
+                'route',
+                'semesterCourses'
+            )
         );
     }
 
     public function storeEnrollments(Request $request){
+
+        if(!empty($request->listvalues)){
+            $ids = explode(',' , $request->listvalues);
+        }
+
+        $SemesterCourse = SemesterCourse::whereIn('ID' , $ids)->pluck('id')->toArray();
+        foreach ($ids as $id){
+            $request['SemCourses_ID'] = $id;
+    
+        }
+        
+        return
+        view('Enrollments.submitedEnrollment'
+           
+        );
+
 
         $validator = $this->validation($request);
         if ($validator['error'] == true) {
@@ -52,21 +73,25 @@ class EnrollmentsController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-             $submit = DB::update("EXEC sp_InsertEnrollment
-            @Std_ID         = '$request->Std_ID',
-            @SemCourses_ID  = '$request->SemCourses_ID',
-            @Is_i_mid       = '$request->Is_i_mid' ,
-            @Is_i_final     = '$request->Is_i_final',
-            @Reg_ID         = '$request->Reg_ID'
-
-            ;");
-
+            
           return response()->json([
             'title' => 'Done' ,
             'type'=> 'success',
             'message'=> 'Enrollment Added!
             ']);
         }
+
+    }
+    public function storeEnrollmentsInDb($request){
+
+        $submit = DB::statement("EXEC sp_InsertEnrollment
+            @Std_ID         = '$request['Std_ID']',
+            @SemCourses_ID  = '$request['SemCourses_ID']',
+            @Is_i_mid       = '$request['Is_i_mid']' ,
+            @Is_i_final     = '$request['Is_i_final']',
+            @Reg_ID         = '$request['Reg_ID']'
+
+            ;");
 
     }
 

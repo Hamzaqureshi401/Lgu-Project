@@ -25,11 +25,11 @@
                               </div>
                             </td>
                             <td>{{ $designation->Designation }}</td>
-                            <td>{{ $designation->Dpt_Name }}</td>
+                            <td>{{ $designation->department->Dpt_Name }}</td>
                            
                             <td> <div class="card-body">
                                 <!-- only change id -->
-                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $designation->Des_ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $designation->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
                                 
                               </div></td>
                           </tr>

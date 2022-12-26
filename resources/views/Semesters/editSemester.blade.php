@@ -1,7 +1,7 @@
 
               <form id="myForm" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{ $semester->Sem_ID }}">
+                    <input type="hidden" name="id" value="{{ $semester->ID }}">
                   <div class="form-group">
                       <label>Sem Session</label>
                       <input type="text" value="{{ $semester->SemSession }}" name="SemSession" class="form-control" required>
