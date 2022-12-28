@@ -3,7 +3,7 @@
                         <div class="col-12 col-md-12 col-lg-12">
                           <div class="card">
                             <div class="card-header bg-success d-flex justify-content-center">
-                              <h4 style="color: white;">Add Drop Courses</h4>
+                              <h4 style="color: white;">Course Enrolled Successfully</h4>
                                
                             </div>
                           </div>
@@ -31,18 +31,25 @@
                               <div class="card-body p-0">
                                 <div class="table-responsive">
                                   <table class="table table-striped">
+                                    <thead>
                                     <tr>
+                                      <th>Courses Code</th>
                                       <th>Courses Name</th>
-                                      <th>Degree</th>
-                                      <th>Batch</th>
-                                      <th>Students</th>
+                                      <th>CRDHR</th>
                                     </tr>
+                                     <thead>
+                                    <tbody>
+                                    @foreach($enrollments as $enrollment)
                                     <tr>
-                                      <td >{{ "Status" }}  <div class="badge badge-success">Active</div></td>
-                                      <td>{{ "Status" }}</td>
-                                      <td>{{ "Status" }}</td>
-                                      <td>{{ "Status" }}</td>
-                                    </tr>                     
+                                     <!--  <td >{{ "Status" }}  
+                                        <div class="badge badge-success">Active</div>
+                                      </td> -->
+                                      <td>{{ $enrollment->semesterCourse->course->CourseCode ?? '--' }}</td>
+                                      <td>{{ $enrollment->semesterCourse->course->CourseName ?? '--' }}</td>
+                                      <td>{{ $enrollment->semesterCourse->course->CreditHours ?? '--' }}</td>
+                                    </tr>
+                                     @endforeach
+                                     </tbody>                     
                                   </table>
                                 </div>
                               </div>

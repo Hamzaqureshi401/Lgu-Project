@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ControllersLogin::class, 'index']);
 
-Route::get('/Std_login_view', [ControllersLogin::class, 'Std_login_view']);
+Route::get('/Std_login_view', [ControllersLogin::class, 'Std_login_view'])->name('std.login');
 Route::get('/Emp_login_view', [ControllersLogin::class, 'Emp_login_view']);
 
 Route::get('/Std_login', [ControllersLogin::class, 'Std_login']);
@@ -121,6 +121,11 @@ Route::get('/editSemesterCourse/{id?}', [App\Http\Controllers\SemesterCoursesCon
 Route::post('/updateSemesterCourse', [App\Http\Controllers\SemesterCoursesController::class, 'updateSemesterCourse'])->name('update.SemesterCourse');
 
 // Enrollments Routes start
+
+Route::get('/addEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollment'])->name('add.Enrollment');
+Route::get('/storeEnrollment/{id}', [App\Http\Controllers\EnrollmentsController::class, 'executeEnrollment'])->name('store.Enrollment');
+Route::get('/confirmEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'confirmEnrollment'])->name('confirm.Enrollment');
+
 
 Route::get('/addEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollments'])->name('add.Enrollments');
 Route::get('/allEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'allEnrollments'])->name('all.Enrollments');

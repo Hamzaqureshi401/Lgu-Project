@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Cache\RedisTaggedCache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Session;
 class login extends Controller
 {
     public function index()
@@ -92,24 +92,26 @@ class login extends Controller
             'batch' => 'required',
             'department' => 'required',
         ]);
-        $batch = $Student_data->input('batch');
+        $batch      = $Student_data->input('batch');
         $department = $Student_data->input('department');
-        $rollno = $Student_data->input('rollno');
-        $password = $Student_data->input('password');
-        $roll = $batch . "/" . $department . "/" . $rollno;
-        $submit = DB::select("EXEC StudentLogin @StdRollNo = '$roll',@Password='$password';");
-        if ($submit != NUll) {
+        $rollno     = $Student_data->input('rollno');
+        $password   = $Student_data->input('password');
+        $roll       = 'fa-' . $batch . "/" . $department . "/" . $rollno;
+        
+        $submit     = DB::table('Students')->where(['StdRollNo' => $roll , 'password' => $password])->first();
+        //DB::select("EXEC sp_StudentsLogin @StdRollNo = '$roll',@Password='$password';");
+       // dd($roll , $password , $submit);
+        if (!empty($submit)) {
 
-            foreach ($submit as $Student_data) {
+            
+            session([
+                'std_session' => 'session created', 
+                'Std_FName'   => $submit->Std_FName, 
+                'user'        => $roll,
+                'id'          => $submit->ID
+            ]);
 
-                $Std_FName = $Student_data->Std_FName;
-                $Std_LName = $Student_data->Std_LName;
-                $StdRollNo = $Student_data->StdRollNo;
-                $DegreeName = $Student_data->DegreeName;
-                $AdmissionSession = $Student_data->AdmissionSession;
-            }
-            $user = $StdRollNo;
-            session(['std_session' => 'session created', 'Std_FName' => $Std_FName, 'user' => $user]);
+           
             return view('Dashboard.Student_dashboard');
         } else {
             $error = "No Student found!";

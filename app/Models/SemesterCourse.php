@@ -28,6 +28,9 @@ class SemesterCourse extends Model
     public function course(){
         return $this->belongsTo('App\Models\Course' , 'Course_ID');
     }
+    public function SemesterDetail(){
+        return $this->belongsTo('App\Models\SemesterDetail' , 'Sem_ID');
+    }
     
 
 

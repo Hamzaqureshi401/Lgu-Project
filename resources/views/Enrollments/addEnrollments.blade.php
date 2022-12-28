@@ -196,6 +196,7 @@
                                           class="check custom-control-input"
                                           id="checkbox-{{ $semesterCourse->ID }}"
                                           value ="{{ $semesterCourse->ID }}"
+                                          {{  in_array($semesterCourse->ID, $enrollments) ? 'checked' : '' }}
                                           >
                                           <label for="checkbox-{{ $semesterCourse->ID }}" class="custom-control-label">&nbsp;</label>
                                         </div>
@@ -243,25 +244,52 @@
 <script type="text/javascript">
   var listvalues = []
 $('.check').on('change', function() {
-  listvalues = $('.check:checked').toArray().map(x => x.value).join(', ');
+  //listvalues = $('.check:checked').toArray().map(x => x.value).join(', ');
+  console.log($(this).val());
   if(listvalues != ""){
     $('.sbmt-form').removeClass('d-none');
   }else{
     $('.sbmt-form').addClass('d-none');
   }
+  var id = $(this).val();
+  var connection = pinginternet();
+   if (connection == true){
+    enrollment(id);
+   }else{
+    swal("Internet Required", "It Seems You have Lost Internet Connection", "error");
+   }
+  
+});
+
+function enrollment(id){
+
+  $('.submited-enrollment').addClass('d-none');
 
   $.ajax({
    type: "POST",
    data: {
     "_token": "{{ csrf_token() }}",
-     listvalues:listvalues
+     listvalues:id
   },
    url: "{{ route('store.Enrollments') }}",
    success: function(success){
-      $(".submited-enrollment").show();
-      $('.submited-enrollment').html(success);
+      if(success.db != "empty"){
+        $('.submited-enrollment').removeClass('d-none');
+        $(".submited-enrollment").show();
+        $('.submited-enrollment').html(success);
+      }
    }
 });
-});
+}
+function pinginternet(){
+  return window.navigator.onLine;
+}
+var connection = pinginternet();
+   if (connection == true){
+     enrollment(false);
+   }else{
+    swal("Internet Required", "It Seems You have Lost Internet Connection", "error");
+   }
+
 </script>
 @endsection   
