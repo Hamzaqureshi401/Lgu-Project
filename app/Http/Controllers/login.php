@@ -39,7 +39,7 @@ class login extends Controller
     {
         session()->flush();
         $error = "";
-        return redirect('/');
+        return redirect('/Std_login_view');
     }
 
     ###################Start Employee Login #####################
@@ -96,7 +96,7 @@ class login extends Controller
         $department = $Student_data->input('department');
         $rollno     = $Student_data->input('rollno');
         $password   = $Student_data->input('password');
-        $roll       = 'fa-' . $batch . "/" . $department . "/" . $rollno;
+        $roll       = $batch . "/" . $department . "/" . $rollno;
         
         $submit     = DB::table('Students')->where(['StdRollNo' => $roll , 'password' => $password])->first();
         //DB::select("EXEC sp_StudentsLogin @StdRollNo = '$roll',@Password='$password';");
@@ -112,7 +112,8 @@ class login extends Controller
             ]);
 
            
-            return view('Dashboard.Student_dashboard');
+         return redirect()->route('add.Enrollment')
+                        ->withSuccess('Signed in');
         } else {
             $error = "No Student found!";
             $batch = DB::table('Students')->select('AdmissionSession')->distinct()->get();

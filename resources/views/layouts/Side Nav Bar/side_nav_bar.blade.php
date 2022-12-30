@@ -1,15 +1,4 @@
-<div class="main-sidebar sidebar-style-2">    
-        <aside id="sidebar-wrapper">
-          <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
-                class="logo-name">Otika</span>
-            </a>
-          </div>
-          <ul class="sidebar-menu">
-            <li class="menu-header">Main</li>
-            <li class="dropdown">
-              <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
-            </li>
+
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
                   data-feather="briefcase"></i><span>Courses</span></a>
@@ -95,7 +84,7 @@
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Enrollmenta</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('add.Enrollments') }}">Add Enrollment</a></li>
-                <li><a class="nav-link" href="{{ route('all.Enrollments') }}">All Enrollment </a></li>
+                
                 
               </ul>
             </li>
@@ -106,6 +95,14 @@
                 <li><a class="nav-link" href="{{ route('attandence.Dashboard') }}">All Student Attandence</a></li>
                  <li><a class="nav-link" href="{{ route('dean.All.Stu.Attandence') }}">Attandence</a></li>
                 <li><a class="nav-link" href="email-read.html">read</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Challans</span></a>
+              <ul class="dropdown-menu">
+                
+                <li><a class="nav-link" href="{{ route('all.Challans') }}">All Challans</a></li>
+                 
               </ul>
             </li>
 
@@ -300,5 +297,4 @@
               </ul>
             </li>
           </ul>
-        </aside>
-         </div>
+       

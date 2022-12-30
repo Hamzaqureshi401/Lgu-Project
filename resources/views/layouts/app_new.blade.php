@@ -176,11 +176,32 @@
       </nav>
       
 
+
+
 <!-- include side nav bar -->
-      @include('layouts.Side Nav Bar.side_nav_bar')
+<div class="main-sidebar sidebar-style-2">    
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="index.html"> <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.webp') }}" alt="Order Header Image" width="470px" height="200px"/> <span
+                class="logo-name">LGU</span>
+            </a>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Main</li>
+            <li class="dropdown">
+              <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+            </li>
+        @if (session()->has('std_session')) 
+            @include('layouts.Side Nav Bar.student_side_nav_bar')
+        @else
+          @include('layouts.Side Nav Bar.side_nav_bar')
+        
+        @endif
+      
 <!-- end side nav bar -->
 
-         
+          </aside>
+         </div>
 
       <!-- Main Content -->
       <div class="main-content">

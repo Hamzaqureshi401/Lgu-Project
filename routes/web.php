@@ -30,7 +30,9 @@ Route::get('/logout', [ControllersLogin::class, 'logoutsessions']);
 Route::post('/Emp_login', [ControllersLogin::class, 'Emp_login'])->name('emp.login');
 Route::post('/Std_login', [ControllersLogin::class, 'Std_login']);
 
+Auth::routes();
 
+Route::group(['middleware' => 'StudentAuth'], function () {
 
 Route::get('/addStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'addStudentAdmission'])->name('add.StudentAdmissions');
 Route::get('/allStudentAdmissions', [App\Http\Controllers\AdmissionController::class, 'allStudentAdmissions'])->name('all.StudentAdmissions');
@@ -39,7 +41,6 @@ Route::get('/editStudentAdmission/{id?}', [App\Http\Controllers\AdmissionControl
 Route::post('/updateStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'updateStudentAdmission'])->name('update.StudentAdmission');
 
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -168,4 +169,13 @@ Route::get('/studentResult', [App\Http\Controllers\ViewController::class, 'stude
 Route::get('/stdWiseAward', [App\Http\Controllers\ViewController::class, 'stdWiseAward'])->name('std.Wise.Award');
 
 Route::get('/stdAffairs', [App\Http\Controllers\ViewController::class, 'stdAffairs'])->name('std.Affairs');
+
+
+// Challans Routes start
+
+Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
+Route::get('/printChallan', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
+
+});
+
 
