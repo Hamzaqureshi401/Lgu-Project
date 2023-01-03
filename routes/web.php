@@ -34,6 +34,37 @@ Auth::routes();
 
 Route::group(['middleware' => 'StudentAuth'], function () {
 
+// SemesterDetails Routes start
+
+// Route::get('/addSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'addSemesterDetails'])->name('add.SemesterDetails');
+// Route::get('/allSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'allSemesterDetails'])->name('all.SemesterDetails');
+// Route::post('/storeSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'storeSemesterDetails'])->name('store.SemesterDetails');
+// Route::get('/editSemesterDetail/{id?}', [App\Http\Controllers\SemesterDetailsController::class, 'editSemesterDetail'])->name('edit.SemesterDetail');
+// Route::post('/updateSemesterDetail', [App\Http\Controllers\SemesterDetailsController::class, 'updateSemesterDetail'])->name('update.SemesterDetail');
+// Enrollments Routes start
+
+Route::get('/addEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollment'])->name('add.Enrollment');
+Route::get('/storeEnrollment/{id}', [App\Http\Controllers\EnrollmentsController::class, 'executeEnrollment'])->name('store.Enrollment');
+Route::get('/confirmEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'confirmEnrollment'])->name('confirm.Enrollment');
+
+
+Route::get('/addEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollments'])->name('add.Enrollments');
+Route::get('/allEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'allEnrollments'])->name('all.Enrollments');
+Route::post('/storeEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'storeEnrollments'])->name('store.Enrollments');
+Route::get('/editEnrollment/{id?}', [App\Http\Controllers\EnrollmentsController::class, 'editEnrollment'])->name('edit.Enrollment');
+Route::post('/updateEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'updateEnrollment'])->name('update.Enrollment');
+
+// Challans Routes start
+
+Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
+Route::get('/printChallan', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
+});
+
+
+Route::group(['middleware' => 'EmpAuth'], function () {
+
+
+
 Route::get('/addStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'addStudentAdmission'])->name('add.StudentAdmissions');
 Route::get('/allStudentAdmissions', [App\Http\Controllers\AdmissionController::class, 'allStudentAdmissions'])->name('all.StudentAdmissions');
 Route::post('/storeStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'storeStudentAdmission'])->name('store.StudentAdmission');
@@ -121,18 +152,6 @@ Route::post('/storeSemesterCourses', [App\Http\Controllers\SemesterCoursesContro
 Route::get('/editSemesterCourse/{id?}', [App\Http\Controllers\SemesterCoursesController::class, 'editSemesterCourse'])->name('edit.SemesterCourse');
 Route::post('/updateSemesterCourse', [App\Http\Controllers\SemesterCoursesController::class, 'updateSemesterCourse'])->name('update.SemesterCourse');
 
-// Enrollments Routes start
-
-Route::get('/addEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollment'])->name('add.Enrollment');
-Route::get('/storeEnrollment/{id}', [App\Http\Controllers\EnrollmentsController::class, 'executeEnrollment'])->name('store.Enrollment');
-Route::get('/confirmEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'confirmEnrollment'])->name('confirm.Enrollment');
-
-
-Route::get('/addEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollments'])->name('add.Enrollments');
-Route::get('/allEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'allEnrollments'])->name('all.Enrollments');
-Route::post('/storeEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'storeEnrollments'])->name('store.Enrollments');
-Route::get('/editEnrollment/{id?}', [App\Http\Controllers\EnrollmentsController::class, 'editEnrollment'])->name('edit.Enrollment');
-Route::post('/updateEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'updateEnrollment'])->name('update.Enrollment');
 
 
 //Dean Route Start
@@ -170,12 +189,4 @@ Route::get('/stdWiseAward', [App\Http\Controllers\ViewController::class, 'stdWis
 
 Route::get('/stdAffairs', [App\Http\Controllers\ViewController::class, 'stdAffairs'])->name('std.Affairs');
 
-
-// Challans Routes start
-
-Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
-Route::get('/printChallan', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
-
 });
-
-

@@ -1,12 +1,13 @@
 
               <form id="myForm" enctype="multipart/form-data">
                     {{ csrf_field() }}
+                    <input type="hidden" name="id" value="{{ $semesterDetail->ID }}">
                  <div class="card-body">
                    <div class="form-group">
                       <label>Degree</label>
                       <select class="form-control" name="Degree_ID"  >
                         @foreach($degrees as $degree)
-                        <option value="{{ $degree->Degree_ID }}" {{ $degree->Degree_ID == $semesterDetail->Degree_ID ? 'selected' : '' }}>
+                        <option value="{{ $degree->ID }}" {{ $degree->ID == $semesterDetail->Degree_ID ? 'selected' : '' }}>
                           {{ $degree->DegreeName }}
                         </option>
                         @endforeach
@@ -17,7 +18,7 @@
                       <label>Semester</label>
                       <select class="form-control" name="Sem_ID"  >
                         @foreach($semesters as $semester)
-                        <option value="{{ $semester->Sem_ID }}"{{ $semester->Sem_ID == $semesterDetail->Sem_ID ? 'selected' : '' }}>{{ $semester->SemSession }} </option>
+                        <option value="{{ $semester->ID }}"{{ $semester->ID == $semesterDetail->Sem_ID ? 'selected' : '' }}>{{ $semester->SemSession }} </option>
                         @endforeach
                       </select>
                     </div>

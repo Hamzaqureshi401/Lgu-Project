@@ -52,25 +52,26 @@ class login extends Controller
         $username = $Employee_data->input('Username');
         $password = $Employee_data->input('password');
 
-        $submit = DB::select("EXEC sp_EmployeesLogin @username = '$username',@password='$password';");
-
+        $submit = 
+        DB::table('Employees')->where(['UserName' => $username  , 'Password' => $password])->first();
+         //  dd($submit);
         if ($submit != NUll) {
 
-            foreach ($submit as $Employeedata) {
-                $Emp_FirstName = $Employeedata->Emp_FirstName;
-                $Emp_LastName = $Employeedata->Emp_LastName;
-                $Designation = $Employeedata->Designation;
-            }
-            $user = $Emp_FirstName . '' . $Emp_LastName;
-            session(['Emp_session' => 'session created', 'Designation' => $Designation, 'user' => $user]);
+            
+                $Emp_FirstName = $submit->Emp_FirstName;
+                $Emp_LastName = $submit->Emp_LastName;
+                $Designation = $submit->Designation;
+            
+            $user = $Emp_FirstName ?? '--'. '' . $Emp_LastName ?? '--';
+            session(['Emp_session' => 'session created', 'Designation' => $Designation ?? '--', 'user' => $user]);
+             return  redirect()->route('dean.Dashboard');
             switch ($Designation) {
                 case 'Assistant Lecturer/TA':
-                     return redirect()->route('main')
-                        ->withSuccess('Signed in');
+                     return  redirect()->route('Dean.deanDashboard');
                     break;
 
                 case 'Addmission':
-                    return view('Dashboard.Admission_dashboard');
+                    return  redirect()->route('Dean.deanDashboard');
                     break;
             }
         } else {

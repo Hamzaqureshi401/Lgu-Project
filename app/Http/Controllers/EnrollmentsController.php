@@ -130,16 +130,38 @@ class EnrollmentsController extends Controller
 
     public function executeEnrollment($id){
 
+        $drop  = explode('-' , $id);
+        if(empty($drop[1])){
+            $type = false;
+        }else{
+            $type = true;
+            $id =  $drop[0];
+        }
+        $course = explode('-' , SemesterCourse::where('ID' , $id)->first()->course->CreditHours
+         );
+
+        $courseCrediHr = end($course);
+        //dd($courseCrediHr);
         $request['Std_ID'] = session::get('id');
         $acdRule            = $this->getAcdRule($request['Std_ID']);
-        $getTotalCreditHours= $this->getTotalCreditHours($request);
+        $getTotalCreditHoursInDb= $this->getTotalCreditHours($request);
+        $getTotalCreditHours = $getTotalCreditHoursInDb + $courseCrediHr;
+       // dd($acdRule['enrollmentAllowed'] , $getTotalCreditHours , $acdRule['creditHoursAllowed']);
         if($acdRule['enrollmentAllowed'] == true 
                                     &&
+        $getTotalCreditHoursInDb <= $acdRule['creditHoursAllowed'] 
+                                    && 
         $getTotalCreditHours <= $acdRule['creditHoursAllowed']
+                                    &&
+        $type == false
         ){
             $this->storeEnrollment($id);
             return redirect()->route('add.Enrollment');
-        }else{
+        }elseif($type != false){
+            $this->storeEnrollment($id);
+            return redirect()->route('add.Enrollment');
+        }
+        else{
             return redirect()->route('add.Enrollment');
         }
    

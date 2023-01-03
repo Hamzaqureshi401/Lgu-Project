@@ -27,8 +27,8 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $semesterDetail->DegreeName ?? '--' }}</td>
-                            <td>{{ $semesterDetail->SemSession ?? '--' }}</td>
+                            <td>{{ $semesterDetail->degree->DegreeName ?? '--' }}</td>
+                            <td>{{ $semesterDetail->semester->SemSession ?? '--' }}</td>
                             <td>{{ $semesterDetail->SemesterNo  ?? '--'}}</td>
                             <td>{{ $semesterDetail->SemesterFee  ?? '--'}}</td>
                             <td>{{ $semesterDetail->PerSemester  ?? '--'}}</td>
@@ -36,7 +36,7 @@
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
-                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $semesterDetail->SemDetail_ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $semesterDetail->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
                                 
                               </div>
                             </td>

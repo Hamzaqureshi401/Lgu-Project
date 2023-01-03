@@ -27,7 +27,7 @@
         <div class="form-inline mr-auto">
           <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
-									collapse-btn"> <i data-feather="align-justify"></i></a></li>
+                  collapse-btn"> <i data-feather="align-justify"></i></a></li>
             <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
                 <i data-feather="maximize"></i>
               </a></li>
@@ -57,7 +57,7 @@
               </div>
               <div class="dropdown-list-content dropdown-list-message">
                 <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar
-											text-white"> <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle">
+                      text-white"> <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle">
                   </span> <span class="dropdown-item-desc"> <span class="message-user">John
                       Deo</span>
                     <span class="time messege-text">Please check your mail !!</span>
@@ -118,20 +118,20 @@
               <div class="dropdown-list-content dropdown-list-icons">
                 <a href="#" class="dropdown-item dropdown-item-unread"> <span
                     class="dropdown-item-icon bg-primary text-white"> <i class="fas
-												fa-code"></i>
+                        fa-code"></i>
                   </span> <span class="dropdown-item-desc"> Template update is
                     available now! <span class="time">2 Min
                       Ago</span>
                   </span>
                 </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="far
-												fa-user"></i>
+                        fa-user"></i>
                   </span> <span class="dropdown-item-desc"> <b>You</b> and <b>Dedik
                       Sugiharto</b> are now friends <span class="time">10 Hours
                       Ago</span>
                   </span>
                 </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-success text-white"> <i
                       class="fas
-												fa-check"></i>
+                        fa-check"></i>
                   </span> <span class="dropdown-item-desc"> <b>Kusnaedi</b> has
                     moved task <b>Fix bug header</b> to <b>Done</b> <span class="time">12
                       Hours
@@ -143,7 +143,7 @@
                     clean it! <span class="time">17 Hours Ago</span>
                   </span>
                 </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="fas
-												fa-bell"></i>
+                        fa-bell"></i>
                   </span> <span class="dropdown-item-desc"> Welcome to Otika
                     template! <span class="time">Yesterday</span>
                   </span>
@@ -160,7 +160,7 @@
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">Hello Sarah Smith</div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
-										fa-user"></i> Profile
+                    fa-user"></i> Profile
               </a> <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
                 Activities
               </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
@@ -182,7 +182,7 @@
 <div class="main-sidebar sidebar-style-2">    
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.webp') }}" alt="Order Header Image" width="470px" height="200px"/> <span
+            <a href="index.html"> <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.png') }}" alt="Order Header Image" width="470px" height="200px"/> <span
                 class="logo-name">LGU</span>
             </a>
           </div>

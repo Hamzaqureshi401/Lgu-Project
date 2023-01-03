@@ -8,10 +8,10 @@
 
                       
                     </div>
-                     <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.webp') }}" alt="Order Header Image" width="470px" height="200px"/>
+                    
                     <br>
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="">
                         <address>
                           <strong>Challan To:
                           </strong><br>
@@ -24,36 +24,41 @@
                           {{ session::get('Std_FName') }} {{ session::get('Std_LName') }}<br>
                           Roll#:{{ $programe[2] }}<br>
                           Semester: {{ $programe[0] }}<br>
-                          Category: {{ $challan->Type }}<br>
+                          Category: {{ $challan->Type ?? '--' }}<br>
                           Degree:{{ $programe[1]}}<br>
                            <br>
                         </address>
                       </div>
                       <div class="col-md-6 text-md-right">
                         <address>
-                          <strong>Challan # {{ $challan->ID }}</strong><br>
+                          <strong>Challan # {{ $challan->ID ?? '--' }}</strong><br>
                           
                         </address>
                         <address>
                           <strong>{{ "Issue date" }}:</strong><br>
-                         {{ $challan->IssueDate }}
+                         {{ $challan->IssueDate ?? '--' }}
                           
                         </address>
                         <address>
                           <strong>Due Date:</strong><br>
-                         {{ $challan->DueDate }}<br><br>
+                         {{ $challan->DueDate ?? '--' }}<br><br>
                         </address>
                       </div>
-                    </div>
-                    <div>
-                     <img class="img-fluid" src="{{ asset('images/IMG548hbl.jpg') }}" alt="Order Header Image" width="40px" height="30px"/ style="float:left; max-width: 20%;"/>
-                    
-                        <h1 style="float:right; font-size: 9px;">
+                       <div class="col-md-6 text-md-center">
+                     <address>
+                       <img class="img-fluid" src="{{ public_path('images/IMG548hbl.jpg') }}" alt="Order Header Image" width="40px" height="30px"/ style="float:left; max-width: 20%;"/>
+                        <p style=" line-height: 1.5em;
+                          height: 3em;
+                          overflow: hidden;">
                           <!-- <strong></strong><br> -->
-                          To be Paid Under Account No 2310-70000910-03 Lhr <br>
+                          
+                          To be Paid Under Account No 2310-70000910-03 Lhr
                           Garrison University HBL Bank, Phase VI,DHA Lhr
-                        </h1>
+                        </p>
+                        </address>
                     </div>
+                    </div>
+                   
                     <!-- <div class="section-title">Challan Summary</div> -->
                     <div class="table-responsive">
                       <table class="table table-striped table-hover table-md"  style="border-top-style: dotted;
@@ -69,66 +74,66 @@
                         <tr>
                           <td>1</td>
                           <td>Tution Fee</td>
-                          <td class="text-right">{{ $challan->Amount }}</td>
+                          <td class="text-right">{{ $challan->Amount ?? '--' }}</td>
                           
                         </tr>
                         <tr>
                           <td>2</td>
                           <td>Magazine Fee</td>
-                          <td class="text-right">$20.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr>
                         <tr>
                           <td>3</td>
                           <td>Exam Fee</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr>
                         <tr>
                           <td>3</td>
                           <td>Society Fund</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr><tr>
                           <td>3</td>
                           <td>Misc. Fee</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr><tr>
                           <td>3</td>
                           <td>Registration Fee</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr><tr>
                           <td>3</td>
                           <td>Partical Charges</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr><tr>
                           <td>3</td>
                           <td>Sports Fund</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr><tr>
                           <td>3</td>
                           <td>Security</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr><tr>
                           <td>3</td>
                           <td>AAdmission Office</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr><tr>
                           <td>3</td>
                           <td>ID CARD FEE</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr>
                         </tr><tr>
                           <td>3</td>
                           <td>Migration Fee</td>
-                          <td class="text-right">$600.00</td>
+                          <td class="text-right">0.00</td>
                           
                         </tr>
                       </table>
@@ -147,21 +152,21 @@
                        <div class="col-md-6 text-md-left">
                        <div class="invoice-detail-item">
                           <div class="invoice-detail-name">Pre.outStandings</div>
-                          <div class="invoice-detail-value">$15</div>
+                          <div class="invoice-detail-value">0.00</div>
                         </div>
                         <div class="invoice-detail-item">
                           <div class="invoice-detail-name">Total Pyable</div>
-                          <div class="invoice-detail-value invoice-detail-value-lg">$1510</div>
+                          <div class="invoice-detail-value invoice-detail-value-lg">{{ $challan->Amount ?? '--' }}</div>
                         </div>
                       </div>
                       <div class="col-md-6 text-md-right">
                        <div class="invoice-detail-item">
                           <div class="invoice-detail-name">Pre.outStandings</div>
-                          <div class="invoice-detail-value">$15</div>
+                          <div class="invoice-detail-value">0.00</div>
                         </div>
                         <div class="invoice-detail-item">
                           <div class="invoice-detail-name">Scholarship</div>
-                          <div class="invoice-detail-value">$15</div>
+                          <div class="invoice-detail-value">0.00</div>
                         </div>
                       </div>
                     </div>

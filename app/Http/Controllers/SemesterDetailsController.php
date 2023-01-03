@@ -84,6 +84,7 @@ class SemesterDetailsController extends Controller
         $title  = 'Edit Semester Detail';
         $route  = '/updateSemesterDetail';
         $semesterDetail = SemesterDetail::where('ID' , $id)->first();
+        //dd($semesterDetail , $id);
         $degrees = Degree::get();
         $semesters = Semester::get();
          return 
@@ -100,7 +101,7 @@ class SemesterDetailsController extends Controller
     public function allSemesterDetails(){
 
         $semesterDetails = 
-        SemesterDetail::join('degrees' , 'degrees.Degree_ID' , 'semesterDetail.Degree_ID')->join('semesters' , 'semesters.Sem_ID' , 'semesterDetail.Sem_ID')->paginate(10);
+        SemesterDetail::paginate(10);
         $title  = 'All Semester Details';
         $route = 'updateSemesterDetail';
         $getEditRoute = 'editSemesterDetail';
@@ -129,9 +130,9 @@ class SemesterDetailsController extends Controller
             'message'=> ''.$validator['validation']
             ]);
         }else {
-              $submit = DB::statement("EXEC SemesterDetailsUpdate
+              $submit = DB::statement("EXEC sp_UpdateSemesterDetails
 
-            @ID                  = '$request->id', 
+            @SemDetail_ID                 = '$request->id', 
             @Degree_ID           = '$request->Degree_ID', 
             @Sem_ID              = '$request->Sem_ID', 
             @SemesterNo          = '$request->SemesterNo' , 

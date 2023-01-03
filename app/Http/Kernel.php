@@ -45,7 +45,11 @@ class Kernel extends HttpKernel
         ],
         'StudentAuth' => [
             \App\Http\Middleware\StudentAuth::class,
-        ]
+
+        ],
+        'EmpAuth' => [
+         \App\Http\Middleware\EmpAuth::class,
+     ]
     ];
 
     /**

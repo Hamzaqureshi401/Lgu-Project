@@ -59,10 +59,6 @@
                       <input type="text" name="Section" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label>Section</label>
-                      <input type="text" name="Section" class="form-control">
-                    </div>
-                    <div class="form-group">
                       <label>Course</label>
                       <select class="form-control" name="Course_ID"  >
                         @foreach($courses as $course)

@@ -197,7 +197,7 @@
                                       <td>
                                         @if( $enrollments->sum('Status') == 0
                                          )
-                                           <a href="{{ route('store.Enrollment' , $enrollment->SemCourses_ID) }}" class="btn btn-sm btn-danger">Drop Course</a>
+                                           <a href="{{ route('store.Enrollment' , $enrollment->SemCourses_ID . '-true') }}" class="btn btn-sm btn-danger">Drop Course</a>
                                           @else
                                           <button class="btn btn-sm btn-danger" disabled>
                                             Drop Course

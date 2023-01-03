@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class SemesterDetail extends Model
 {
    protected $table = 'SemesterDetails';
+
+    public function degree(){
+        return $this->belongsTo('App\Models\Degree' , 'Degree_ID');
+    }
+      public function semester(){
+        return $this->belongsTo('App\Models\Semester', 'Sem_ID');
+    }
 }
