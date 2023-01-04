@@ -2,6 +2,7 @@
               <form id="myForm" enctype="multipart/form-data">
                     {{ csrf_field() }}
                 <div class="card-body">
+                    {{-- {{dd($studentAdmission);}} --}}
                                 <div class="form-group">
                                     <label style="font-size: 13px">Student Password <span
                                             style="color: red">*</span></label>
@@ -29,7 +30,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Student Last Name <span
                                             style="color: red">*</span></label>
-                                    <input type="text" name="Std_LName" id="Std_LName" value="{{ old('Std_LName') }}"
+                                    <input type="text" name="Std_LName" id="Std_LName" value="{{ $studentAdmission->Std_LName }}"
                                         class="form-control"  maxlength=15>
 
                                     <br>
@@ -41,7 +42,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Class Section <span
                                             style="color: red">*</span></label>
-                                    <input type="text" name="ClassSection" value="{{ old('ClassSection') }}"
+                                    <input type="text" name="ClassSection" value="{{ $studentAdmission->ClassSection }}"
                                         id="ClassSection" class="form-control"  maxlength=1>
 
                                     <br>
@@ -52,7 +53,7 @@
 
                                 <div class="form-group">
                                     <label style="font-size: 13px">CNIC <span style="color: red">*</span></label>
-                                    <input type="text" value="{{ old('CNIC') }}"
+                                    <input type="text" value="{{ $studentAdmission->CNIC }}"
                                         data-inputmask="'mask': '99999-9999999-9'" name="CNIC" id="CNIC"
                                         class="form-control"  maxlength=15>
 
@@ -64,7 +65,7 @@
 
                                 <div class="form-group">
                                     <label style="font-size: 13px">Nationality <span style="color: red">*</span></label>
-                                    <input type="text" name="Nationality" value="{{ old('Nationality') }}"
+                                    <input type="text" name="Nationality" value="{{ $studentAdmission->Nationality }}"
                                         id="Nationality" class="form-control"  maxlength=12>
 
                                     <br>
@@ -76,7 +77,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Date Of Birth <span
                                             style="color: red">*</span></label>
-                                    <input type="date" name="DOB" id="DOB" value="{{ old('DOB') }}"
+                                    <input type="date" name="DOB" id="DOB" value="{{ $studentAdmission->DOB }}"
                                         class="form-control" >
 
                                     <br>
@@ -89,8 +90,8 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label style="font-size: 13px">Gender <span style="color: red">*</span></label>
-                                        <select name="Gender" value="{{ old('Gender') }}" class="custom-select">
-                                            <option value="{{ old('Gender') }}" selected>{{ old('Gender') }}</option>
+                                        <select name="Gender"value="{{ $studentAdmission->Gender }}" class="custom-select">
+                                            <option value="{{ $studentAdmission->Gender }}" selected>{{ $studentAdmission->Gender }}</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                             <option value="Other">Other</option>
@@ -105,7 +106,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Student Email <span
                                             style="color: red">*</span></label>
-                                    <input type="email" value="{{ old('Email') }}" name="Email" id="Email"
+                                    <input type="email" value="{{$studentAdmission->Email}}" name="Email" id="Email"
                                         class="form-control"  maxlength=25>
 
                                     <br>
@@ -117,7 +118,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Father Name <span
                                             style="color: red">*</span></label>
-                                    <input type="text" name="FatherName" value="{{ old('FatherName') }}"
+                                    <input type="text" name="FatherName" value="{{ $studentAdmission->FatherName }}"
                                         id="FatherName" class="form-control"  maxlength=25>
 
                                     <br>
@@ -130,7 +131,7 @@
                                     <label style="font-size: 13px">Father Cnic <span
                                             style="color: red">*</span></label>
                                     <input type="text" data-inputmask="'mask': '99999-9999999-9'"
-                                        name="FatherCNIC" value="{{ old('FatherCNIC') }}" id="FatherCNIC"
+                                        name="FatherCNIC" value="{{ $studentAdmission->FatherCNIC }}" id="FatherCNIC"
                                         class="form-control"  maxlength=15>
 
                                     <br>
@@ -141,7 +142,7 @@
 
                                 <div class="form-group">
                                     <label style="font-size: 13px">Guardian Name</label>
-                                    <input type="text" value="{{ old('GuardianName') }}" name="GuardianName"
+                                    <input type="text" value="{{ $studentAdmission->GuardianName }}" name="GuardianName"
                                         id="GuardianName" class="form-control" maxlength=25>
 
                                     <br>
@@ -153,7 +154,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Guardian Cnic</label>
                                     <input type="text" data-inputmask="'mask': '99999-9999999-9'"
-                                        name="GuardianCNIC" value="{{ old('GuardianCNIC') }}" id="GuardianCNIC"
+                                        name="GuardianCNIC" value="{{ $studentAdmission->GuardianCNIC }}" id="GuardianCNIC"
                                         class="form-control" maxlength=15>
 
                                     <br>
@@ -166,7 +167,7 @@
                                     <label style="font-size: 13px">Student Phone <span
                                             style="color: red">*</span></label>
                                     <input type="text" data-inputmask="'mask': '0999-9999999'" name="StdPhone"
-                                        id="StdPhone" value="{{ old('StdPhone') }}" class="form-control" 
+                                        id="StdPhone" value="{{ $studentAdmission->StdPhone }}" class="form-control"
                                         maxlength=12>
 
                                     <br>
@@ -178,7 +179,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Father Phone <span
                                             style="color: red">*</span></label>
-                                    <input type="text" value="{{ old('FatherPhone') }}"
+                                    <input type="text" value="{{ $studentAdmission->FatherPhone }}"
                                         data-inputmask="'mask': '0999-9999999'" name="FatherPhone" id="FatherPhone"
                                         class="form-control"  maxlength=13>
 
@@ -190,7 +191,7 @@
 
                                 <div class="form-group">
                                     <label style="font-size: 13px">Guardian Phone </label>
-                                    <input type="text" value="{{ old('GuardianPhone') }}"
+                                    <input type="text" value="{{ $studentAdmission->GuardianPhone }}"
                                         data-inputmask="'mask': '0999-9999999'" name="GuardianPhone"
                                         id="GuardianPhone" class="form-control" maxlength=13>
 
@@ -204,7 +205,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Parent Occupation <span style="color: red">*</span>
                                     </label>
-                                    <input type="text" value="{{ old('ParentOccupation') }}"
+                                    <input type="text" value="{{ $studentAdmission->ParentOccupation }}"
                                         name="ParentOccupation" id="ParentOccupation" class="form-control"
                                         maxlength=30>
 
@@ -216,7 +217,7 @@
 
                                 <div class="form-group">
                                     <label style="font-size: 13px">Address <span style="color: red">*</span> </label>
-                                    <input type="text" value="{{ old('Address') }}" name="Address"
+                                    <input type="text" value="{{ $studentAdmission->Address }}" name="Address"
                                         id="Address" class="form-control">
 
                                     <br>
@@ -227,7 +228,7 @@
 
                                 <div class="form-group">
                                     <label style="font-size: 13px">Tehsil <span style="color: red">*</span> </label>
-                                    <input type="text" value="{{ old('Tehsil') }}" name="Tehsil" id="Tehsil"
+                                    <input type="text" value="{{ $studentAdmission->Tehsil }}" name="Tehsil" id="Tehsil"
                                         class="form-control">
 
                                     <br>
@@ -238,7 +239,7 @@
 
                                 <div class="form-group">
                                     <label style="font-size: 13px">City <span style="color: red">*</span> </label>
-                                    <input type="text" value="{{ old('City') }}" name="City" id="City"
+                                    <input type="text" value="{{ $studentAdmission->City }}" name="City" id="City"
                                         class="form-control" maxlength=20>
 
                                     <br>
@@ -256,9 +257,9 @@
                                     <div class="form-group">
                                         <label style="font-size: 13px">Country <span
                                                 style="color: red">*</span></label>
-                                        <select name="country" id="country" value="{{ old('country') }}"
+                                        <select name="country" id="country" value="{{ $studentAdmission->country }}"
                                             onchange="print_state('state',this.selectedIndex);" class="custom-select">
-                                            <option value="{{ old('country') }}" selected>{{ old('country') }}
+                                            <option value="{{ $studentAdmission->country }}" selected>{{ $studentAdmission->country}}
                                             </option>
                                         </select>
                                     </div>
@@ -273,9 +274,9 @@
                                     <div class="form-group">
                                         <label style="font-size: 13px">Province <span
                                                 style="color: red">*</span></label>
-                                        <select name="state" id="state" value="{{ old('state') }}"
+                                        <select name="state" id="state" value="{{ $studentAdmission->state }}"
                                             class="custom-select">
-                                            <option value="{{ old('state') }}" selected>{{ old('state') }}
+                                            <option value="{{ $studentAdmission->state }}" selected>{{$studentAdmission->state}}
                                             </option>
                                         </select>
                                     </div>
@@ -291,9 +292,9 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label style="font-size: 13px">Degree<span style="color: red">*</span></label>
-                                        <select name="Degree_ID" value="{{ old('Degree_ID') }}"
+                                        <select name="Degree_ID" value="{{ $studentAdmission->Degree_ID }}"
                                             class="custom-select">
-                                            <option value="{{ old('Degree_ID') }}" selected>{{ old('Degree_ID') }}
+                                            <option value="{{ $studentAdmission->Degree_ID }}" selected>{{$studentAdmission->Degree_ID}}
                                             </option>
                                             @foreach ($degree as $degreeid)
                                                 <option value="{{ $degreeid->Degree_ID }}">
@@ -311,7 +312,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Current Semester <span style="color: red">*</span>
                                     </label>
-                                    <input type="number" value="{{ old('CurrentSemester') }}"
+                                    <input type="number" value="{{ $studentAdmission->CurrentSemester }}"
                                         name="CurrentSemester" id="CurrentSemester" class="form-control" maxlength=1>
 
                                     <br>
@@ -327,7 +328,7 @@
                                         <label style="font-size: 13px">Status <span
                                                 style="color: red">*</span></label>
                                         <select name="Status" class="custom-select">
-                                            <option value="{{ old('Status') }}" selected>{{ old('Status') }}</option>
+                                            <option value="{{ $studentAdmission->Status }}" selected>{{$studentAdmission->Status}}</option>
                                             <option value="In Progress">In Progress</option>
 
                                         </select>
@@ -341,7 +342,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Admission Session <span style="color: red">*</span>
                                     </label>
-                                    <input type="text" value="{{ old('AdmissionSession') }}"
+                                    <input type="text" value="{{ $studentAdmission->AdmissionSession }}"
                                         name="AdmissionSession" id="AdmissionSession" class="form-control"
                                         maxlength=15>
 
@@ -356,7 +357,7 @@
                                     <label style="font-size: 13px">Blood Group <span style="color: red">*</span>
                                     </label>
                                     <select name="BloodGroup" class="custom-select">
-                                        <option value="{{ old('BloodGroup') }}" selected>{{ old('BloodGroup') }}
+                                        <option value="{{ $studentAdmission->BloodGroup }}" selected>{{$studentAdmission->BloodGroup}}
                                         </option>
                                         <option value="A+">A Positive</option>
                                         <option value="A-">A Negative</option>
@@ -377,7 +378,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 13px">Father Email <span style="color: red">*</span>
                                     </label>
-                                    <input type="email" value="{{ old('FatherEmail') }}" name="FatherEmail"
+                                    <input type="email" value="{{ $studentAdmission->FatherEmail }}" name="FatherEmail"
                                         id="FatherEmail" class="form-control" maxlength=25>
 
                                     <br>
@@ -393,7 +394,7 @@
                                     <label style="font-size: 13px">Student Files <span style="color: red">*
                                             jpeg,png,jpg,pdf</span>
                                     </label>
-                                    <input type="file" value="{{ old('stdfile') }}" name="stdfile"
+                                    <input type="file" value="{{ $studentAdmission->stdfile }}" name="stdfile"
                                         id="stdfile" class="form-control">
 
                                     <br>
@@ -406,7 +407,7 @@
                                     <label style="font-size: 13px">Image <span style="color: red">*
                                             jpeg,png,jpg</span>
                                     </label>
-                                    <input type="file" value="{{ old('Image') }}" name="Image" id="Image"
+                                    <input type="file" value="{{ $studentAdmission->Image }}" name="Image" id="Image"
                                         class="form-control">
 
                                     <br>
@@ -567,4 +568,3 @@
 
 
 
-      
