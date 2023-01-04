@@ -1,7 +1,18 @@
 @extends('layouts.app_new')
 @section('title')  @endsection 
 @section('content')
-      
+   @push('styles')
+<style type="text/css">
+    .bank{
+        text-align:center; 
+        border:2px solid #000; 
+        padding-top:5px; 
+        padding-bottom:5px; 
+        background-color:#ccc; 
+        font-weight:bold;
+    }
+</style>
+@endpush   
             <div class="row  html-content">
                 <table id="vertical" style="width:100%; background-color:white;">
                     <tr>

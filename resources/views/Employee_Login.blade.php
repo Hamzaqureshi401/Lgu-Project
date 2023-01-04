@@ -23,7 +23,7 @@
                         </div>
                         <div class="card-body">
                             <p style="font-weight: bold;color:red;">{{ $error }}</p>
-                            <form method="POST" action="{{ url('/') }}/employeeLogin" class="needs-validation"
+                            <form method="POST" action="{{ route('emp.login') }}" class="needs-validation"
                                 novalidate="">
                                 @csrf
                                 <div class="form-group">

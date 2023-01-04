@@ -19,7 +19,7 @@ class StudentAuth
          if (session()->has('std_session')) {
             return $next($request);
         }else{
-            return redirect('Std_login_view');
+            return redirect('studentLogin');
         }
         
     }
