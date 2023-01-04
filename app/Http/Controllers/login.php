@@ -45,7 +45,7 @@ class login extends Controller
     ###################Start Employee Login #####################
     public function Emp_login(Request $Employee_data)
     {
-        dd(1);
+
         $Employee_data->validate([
             'Username' => 'required',
             'password' => 'required',
