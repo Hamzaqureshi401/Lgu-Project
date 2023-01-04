@@ -1,18 +1,24 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
 
     <script type= "text/javascript" src = "{{ URL::asset('assets/js/countries.js') }}"></script>
 <script language="javascript">
-    print_country("country");
+   print_country("country");
 </script>
 
 
 
 <script>
-    $(":input").inputmask();
+    
 </script>
 
 
 <script>
+
+  $('#CNIC').click(function(){
+ $(":input").inputmask();
+})
   function fillAddress(){
   if ($("#homepostalcheck").is(":checked")) {
     $('#permanent_address').val($('#present_address').val());

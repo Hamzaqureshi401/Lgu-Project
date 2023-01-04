@@ -562,6 +562,7 @@
                         </div>
              </form>
 
+@include('Admissions.student_js')
 
 
 

@@ -10,13 +10,16 @@
     }
 </style>
 @endpush
+ @php
+ $programe = explode('/' , Session::get('user'))
+ @endphp
     <td>
         <table >
             <tr>
                    <div class="d-flex justify-content-center bg-dark">
                       <h6>INSTALLMENT-l-FA-2022</h6><br>
                     </div>
-                     <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.png') }}" alt="Order Header Image" width="470px" height="200px"/>
+                     <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.png') }}" alt="Order Header Image"  height="200px"/>
                     <div>
                      <img class="img-fluid" src="{{ asset('images/IMG548hbl.jpg') }}" alt="Order Header Image" width="40px" height="30px"/ style="float:left; max-width: 20%;"/>
                     
@@ -28,42 +31,64 @@
                           Garrison University HBL Bank, Phase VI,DHA Lhr
                         </p>
                     </div>
-                 <div class="row">
+                 <!-- <div class="row">
                       <div class="col-md-6 text-left">
                         <address>
                           <strong>Challan To:
                           </strong><br>
                           
-                            @php
-                          $programe = explode('/' , Session::get('user'))
-                          @endphp
+                           
                           
 
-                          {{ session::get('Std_FName') }} {{ session::get('Std_LName') }}<br>
-                          Roll#:{{ $programe[2] }}<br>
-                          Semester: {{ $programe[0] }}<br>
-                          Category: {{ $challan->Type ?? '--' }}<br>
-                          Degree:{{ $programe[1]}}<br>
+                         
                            <br>
                         </address>
                       </div>
                       <div class="col-md-6 text-md-right">
                         <address>
-                          <strong>Challan # {{ $challan->ID ?? '--' }}</strong><br>
+                         
                           
                         </address>
                         <address>
-                          <strong>{{ "Issue date" }}:</strong><br>
-                         {{ $challan->IssueDate ?? '--' }}
+                         
                           
                         </address>
                         <address>
-                          <strong>Due Date:</strong><br>
-                         {{ $challan->DueDate ?? '--' }}<br><br>
+                         <br><br>
                         </address>
                       </div>
-                    </div>
-                    <div>
+                    </div> -->
+                    <td>
+                    <div class="row">
+                      <div class="col-md-6 text-left">
+                       <div class="invoice-detail-item">
+                          <strong>Challan To</strong>
+                          <div class="invoice-detail-value">
+                            {{ session::get('Std_FName') }} {{ session::get('Std_LName') }}
+                             <br>
+                          Roll#:{{ $programe[2] }}<br>
+                          <p style="font-size: 13px;">
+                            Semester: {{ $programe[0] }}
+                          </p>
+                          Category: {{ $challan->Type ?? '--' }}<br>
+                          Degree:{{ $programe[1]}}<br>
+                          </div>
+                        </div>
+                      
+                      </div>
+                      <div class="col-md-6 text-right">
+                       <div class="invoice-detail-item">
+                          <div class="invoice-detail-name"> <strong>Challan # {{ $challan->ID ?? '--' }}</strong><br></div>
+                          <div class="invoice-detail-value"> <strong>{{ "Issue date" }}:</strong><br>
+                         {{ $challan->IssueDate ?? '--' }}<br>
+                          <strong>Due Date:</strong><br>
+                         {{ $challan->DueDate ?? '--' }}
+                     </div>
+                        </div>
+                        
+                      </div>
+                </td>
+                   
             </tr>
             <tr>
                 <td colspan="3" style="text-align:center; border:2px solid #000; padding-top:5px; padding-bottom:5px; background-color:#ccc; font-weight:bold;">Bank Copy</td>
@@ -159,13 +184,35 @@
             </tr>
 
             <tr>
-                <td colspan="3" style="width:100%; height:30px;"></td>
+                <td colspan="3" style="width:100%; height:10px;"></td>
             </tr>
 
             <tr>
-                <td style="width:45%;  border-top:2px solid #000; text-align:center; font-size:14px;">Depositor Signature</td>
-                <td style="width:5%; "></td>
-                <td style="width:45%;  border-top:2px solid #000; text-align:center; font-size:14px;">Bank Signature</td>
+                <td>
+                    <div class="row">
+                      <div class="col-md-6 text-left">
+                       <div class="invoice-detail-item">
+                          <div class="invoice-detail-name">Already Paid</div>
+                          <div class="invoice-detail-value">0.00</div>
+                        </div>
+                        <div class="invoice-detail-item">
+                          <div class="invoice-detail-name">Pre.OutStandings</div>
+                          <div class="invoice-detail-value invoice-detail-value-lg">{{ $challan->Amount ?? '--' }}</div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 text-right">
+                       <div class="invoice-detail-item">
+                          <div class="invoice-detail-name">Scholarship</div>
+                          <div class="invoice-detail-value">0.00</div>
+                        </div>
+                        <div class="invoice-detail-item">
+                          <div class="invoice-detail-name">Grand Total</div>
+                          <div class="invoice-detail-value">0.00</div>
+                        </div>
+                      </div>
+                </td>
+            </div>
+               
             </tr>
 
             <tr>
@@ -173,9 +220,12 @@
             </tr>
 
             <tr>
-                <td colspan="3" style="border-top:2px solid #000;">
-                    <strong style="font-size:14px;">TERMS</strong>
-                    <p style="font-size:12px;"> Amount deposit is non-refundable. Deposit can be made in any Branch of MCB. </p>
+                <td>
+                    <div class="invoice-detail-item">
+                         
+                          <p>Rs.20/- per day to charged after due date</p>
+                          <p class="text-center" style="border-style : solid;">Bank Copy</p>
+                        </div>
                 </td> 
             </tr>
             
