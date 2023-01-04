@@ -39,7 +39,7 @@ class login extends Controller
     {
         session()->flush();
         $error = "";
-        return redirect('/Std_login_view');
+        return redirect('/studentLogin');
     }
 
     ###################Start Employee Login #####################

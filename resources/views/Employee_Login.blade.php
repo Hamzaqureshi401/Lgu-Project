@@ -11,7 +11,7 @@
                         <div class="card-header">
                             <h4>Employee Login</h4>
 
-                            <a style="text-decoration: none" href="{{url('/')}}/Std_login_view">
+                            <a style="text-decoration: none" href="{{url('/')}}/studentLogin">
                             <div style="margin-top: 25px;margin-left:40px;" class="form-group">
                                     <button type="submit" class="btn btn-success btn-lg btn-block" tabindex="4">
                                         Student Login
@@ -23,7 +23,7 @@
                         </div>
                         <div class="card-body">
                             <p style="font-weight: bold;color:red;">{{ $error }}</p>
-                            <form method="POST" action="{{ url('/') }}/Emp_login" class="needs-validation"
+                            <form method="POST" action="{{ url('/') }}/employeeLogin" class="needs-validation"
                                 novalidate="">
                                 @csrf
                                 <div class="form-group">

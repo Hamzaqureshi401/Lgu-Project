@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ControllersLogin::class, 'index']);
 
-Route::get('/Std_login_view', [ControllersLogin::class, 'Std_login_view'])->name('std.login');
-Route::get('/Emp_login_view', [ControllersLogin::class, 'Emp_login_view']);
+Route::get('/studentLogin', [ControllersLogin::class, 'Std_login_view'])->name('std.login');
+Route::get('/employeeLogin', [ControllersLogin::class, 'Emp_login_view']);
 
 Route::get('/Std_login', [ControllersLogin::class, 'Std_login']);
 Route::get('/Emp_login', [ControllersLogin::class, 'Emp_login_1']);
