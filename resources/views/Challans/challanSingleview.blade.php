@@ -8,10 +8,10 @@
 
                       
                     </div>
-                    
+                     <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.webp') }}" alt="Order Header Image" width="470px" height="200px"/>
                     <br>
                     <div class="row">
-                      <div class="">
+                      <div class="col-md-6">
                         <address>
                           <strong>Challan To:
                           </strong><br>
@@ -44,21 +44,16 @@
                          {{ $challan->DueDate ?? '--' }}<br><br>
                         </address>
                       </div>
-                       <div class="col-md-6 text-md-center">
-                     <address>
-                       <img class="img-fluid" src="{{ public_path('images/IMG548hbl.jpg') }}" alt="Order Header Image" width="40px" height="30px"/ style="float:left; max-width: 20%;"/>
-                        <p style=" line-height: 1.5em;
-                          height: 3em;
-                          overflow: hidden;">
+                    </div>
+                    <div>
+                     <img class="img-fluid" src="{{ asset('images/IMG548hbl.jpg') }}" alt="Order Header Image" width="40px" height="30px"/ style="float:left; max-width: 20%;"/>
+                    
+                        <h1 style="float:right; font-size: 9px;">
                           <!-- <strong></strong><br> -->
-                          
-                          To be Paid Under Account No 2310-70000910-03 Lhr
+                          To be Paid Under Account No 2310-70000910-03 Lhr <br>
                           Garrison University HBL Bank, Phase VI,DHA Lhr
-                        </p>
-                        </address>
+                        </h1>
                     </div>
-                    </div>
-                   
                     <!-- <div class="section-title">Challan Summary</div> -->
                     <div class="table-responsive">
                       <table class="table table-striped table-hover table-md"  style="border-top-style: dotted;
@@ -121,7 +116,7 @@
                           
                         </tr><tr>
                           <td>3</td>
-                          <td>AAdmission Office</td>
+                          <td>Admission Office</td>
                           <td class="text-right">0.00</td>
                           
                         </tr><tr>
