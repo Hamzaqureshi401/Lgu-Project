@@ -31,7 +31,7 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $challan->student->Std_FName ?? '--' }} {{ $challan->Std_LName ?? '--' }}</td>
+                            <td>{{ $challan->registration->student->Std_FName ?? '--' }} {{ $challan->registration->student->Std_LName ?? '--' }}</td>
                             <td>{{ $challan->IssueDate ?? '--' }}</td>
                             <td>{{ $challan->DueDate  ?? '--'}}</td>
                             <td>{{ $challan->PaidDate  ?? '--'}}</td>
