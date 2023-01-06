@@ -39,7 +39,7 @@ class ChallanController extends Controller
     public function printChallan(){
 
        $Std_ID = session::get('id');
-       $challan = Challan::where('Std_ID' , $Std_ID)->latest('ID')->first();
+       $challan = Challan::first();
 
 
 

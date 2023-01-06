@@ -3,46 +3,15 @@
 @section('content')
       <!-- style="transform: rotate(90deg) scale(.7);" -->
 
-      @push('styles')
-        <style type="text/css"  media="print">
-            h3 {
-              text-align: center;
-            }
-            .receipt {
-              height: 8.5in;
-              width: 33%;
-              float: left;
-              border: 1px solid black;
-            }
-            /*.output {
-              height;
-              8.5in;
-              width: 11in;
-              border: 1px solid red;
-              position: absolute;
-              
-            }*/
-            .output
-    {
-     -webkit-transform: rotate(-90deg); 
-     -moz-transform:rotate(-90deg);
-     filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-    }
-            @media print {
-              .output {
-                -ms-transform: rotate(270deg);
-                /* IE 9 */
-                -webkit-transform: rotate(270deg);
-                /* Chrome, Safari, Opera */
-                transform: rotate(270deg);
-                top: 1.5in;
-                left: -1in;
-              }
-            }
-  </style>
-      @endpush
-            <div class="row  html-content output" id="printableArea">
-                <table id="vertical" style="width:100%; background-color:white;">
+<body class="A4 landscape">
+
+  <!-- Each sheet element should have the class "sheet" -->
+  <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
+  <section class="sheet padding-10mm">
+
+    <!-- Write HTML just like a web page -->
+    <div class="html-content" id="printableArea">
+     <table id="vertical" style="width:100%; background-color:white;  ">
                     <tr>
 
                     @include('Challans.pr_Challan_Single_View')
@@ -51,12 +20,17 @@
 
                     </tr>
                     </table>
-            </div>
-         
-        
+                </div>
+
+  </section>
+
+</body>
+           
+         <hr>
+        <div>
        <a class="btn btn-warning btn-icon icon-left" style="color: white;" onClick="CreatePDFfromHTML()"><i class="fas fa-print"></i> Pdf Download</a>
        <input type="button" onclick="printDiv('printableArea')" value="print a div!" />
-      
+      </div>
   
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
