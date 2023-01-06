@@ -328,7 +328,7 @@ class AdmissionController extends Controller
         $studentAdmission = Student::where('ID' , $id)->first();
         $degrees = Degree::get();
 
-        dd($id);
+        // dd($id);
         $studentEducations = StudentEducation::where('Std_ID' , $id);
 
 
@@ -336,7 +336,7 @@ class AdmissionController extends Controller
          view('Admissions.editStudentAdmission',
             compact(
                 'studentAdmission',
-                'studentEducation',
+                'studentEducations',
                 'degrees',
                 'button' ,
                 'title' ,
