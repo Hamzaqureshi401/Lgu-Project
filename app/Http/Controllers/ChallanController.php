@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Challan;
 use Illuminate\Http\Request;
 use Session;
+use App\Models\Registration;
 
 use PDF;
 use Dompdf\Dompdf;
@@ -13,7 +14,8 @@ class ChallanController extends Controller
 
      if (session()->has('std_session')) {
         $Std_ID = session::get('id');
-        $challans = Challan::where('Std_ID' , $Std_ID)->paginate(10);
+        $registration = Registration::where('Std_ID' , $Std_ID)->first();
+        $challans = Challan::where('Reg_ID' , $registration->ID)->paginate(10);
         $title  = 'My Challan';
         $route = '';
         $getEditRoute = '';
@@ -58,7 +60,7 @@ class ChallanController extends Controller
        // view()->share('challan',$challan);
        //  $pdf = PDF::loadView('Challans.printChallan');
        //  $pdf->setPaper('A4', 'portrait');
-       // // $pdf = PDF::loadView('Challans.printChallan' , compact('challan') );
+        // $pdf = PDF::loadView('Challans.printChallan' , compact('challan') );
        //   return $pdf->download('invoice.pdf');
 
        //  PDF::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);

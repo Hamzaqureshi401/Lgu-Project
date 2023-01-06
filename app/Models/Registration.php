@@ -11,4 +11,8 @@ class Registration extends Model
     public function acdRule(){
           return $this->belongsTo('App\Models\Exam_AcademicStandingRule' , 'AcaStdID');
    }
+    public function student(){
+
+    return $this->belongsTo('App\Models\Student','Std_ID');
+   }
 }
