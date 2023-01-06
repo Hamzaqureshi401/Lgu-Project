@@ -1,7 +1,7 @@
 @extends('layouts.app_new')
 @section('title')  @endsection <!--add title here -->
 @section('content')
-@include('Table.table_header')                   
+@include('Table.table_header')
                     <div class="table-responsive">
                       <table class="table table-striped table-datatable" id="sortable-table">
                         <thead>
@@ -40,7 +40,7 @@
                             <th>stdfilename</th>
                             <th>stdImagename</th>
                             <th>Action</th>
-                            
+
                           </tr>
                         </thead>
                         <tbody>
@@ -51,6 +51,8 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
+
+
                             <td>{{ $student->Std_FName ?? '--' }}</td>
                             <td>{{ $student->Std_LName ?? '--' }}</td>
                             <td>{{ $student->Password ?? '--' }}</td>
@@ -73,20 +75,20 @@
                             <td>{{ $student->City ?? '--' }}</td>
                             <td>{{ $student->Province ?? '--' }}</td>
                             <td>{{ $student->Country ?? '--' }}</td>
-                            <td>{{ $student->degree->DegreeName ?? '--' }}</td>
+                            <td>{{ $student->Degrees_ID ?? '--' }}</td>
                             <td>{{ $student->CurrentSemester ?? '--' }}</td>
                             <td>{{ $student->Status ?? '--' }}</td>
                             <td>{{ $student->AdmissionSession ?? '--' }}</td>
                             <td>{{ $student->BloodGroup ?? '--' }}</td>
                             <td>{{ $student->FatherEmail ?? '--' }}</td>
-                            <td>{{ $student->stdfilename ?? '--' }}</td>
-                            <td>{{ $student->stdImagename ?? '--' }}</td>
+                            <td>{{ $student->Files ?? '--' }}</td>
+                            <td>{{ $student->Image ?? '--' }}</td>
 
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
                                 <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $student->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
-                                
+
                               </div>
                             </td>
                           </tr>
@@ -97,5 +99,5 @@
                     <div class="d-flex justify-content-center">
                         {!! $students->links() !!}
                     </div>
-@include('Table.table_footer') 
-@endsection   
+@include('Table.table_footer')
+@endsection

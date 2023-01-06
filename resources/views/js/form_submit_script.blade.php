@@ -1,7 +1,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
-  
+
   var total = 0;
    $(function () {
        $("#myForm").bind("submit", function (evt) {
@@ -21,13 +21,13 @@
                 btn.disabled = false;
                  if (data.type == 'success')
                 {
-                  $('#myForm')[0].reset();
+                //   $('#myForm')[0].reset();
                    total = total + 1;
                   btn.innerText = 'Again Save New Customer (Totoal Saved '+total+')';
                 }else{
                   btn.innerText = 'Try Again';
                 }
-               
+
               },
                error: function (jqXHR, exception) {
                 var msg = '';

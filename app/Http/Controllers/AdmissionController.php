@@ -21,7 +21,7 @@ class AdmissionController extends Controller
             'Std_FName'         => 'required|string|max:20',
             'Std_LName'         => 'required|string|max:15',
             'ClassSection'      => 'required|string||max:1',
-            'CNIC'              => 'required|max:15',
+            'CNIC'              => 'required|max:15|unique:Students',
             'Nationality'       => 'required|string',
             'DOB'               => 'required|Date',
             'Gender'            => 'required|string',
@@ -76,6 +76,7 @@ class AdmissionController extends Controller
 
     protected function createStudentDetail($request){
 
+
          $stdfilename = time() . "_studentfile." . $request->file('stdfile')->getClientOriginalExtension();
         $request->file('stdfile')->storeAs('studentsFiles', $stdfilename);
 
@@ -104,8 +105,8 @@ class AdmissionController extends Controller
          @Address            =      '$request->Address',
          @Tehsil             =      '$request->Tehsil',
          @City               =      '$request->City',
-         @Province           =      '$request->Province',
-         @Country            =      '$request->Country',
+         @Province           =      '$request->state',
+         @Country            =      '$request->country',
          @Degree_ID          =      '$request->Degree_ID',
          @CurrentSemester    =      '$request->CurrentSemester',
          @Status             =      '$request->Status',
@@ -121,7 +122,9 @@ class AdmissionController extends Controller
 
         $student = Student::where(['CNIC' => $request->CNIC , 'FatherCNIC' => $request->FatherCNIC])->first();
 
-        $std_id = $student->Std_ID;
+        $std_id = $student->ID;
+
+        // dd($std_id,$request->all(),$student);
 
          //-----------------QUALIFICATION------------
         $matric_examination     = $request->matric_examination;
@@ -232,6 +235,22 @@ class AdmissionController extends Controller
             $master_rollno
         );
         }
+
+
+
+        if (!empty($masters_examination) && !empty($masters_examination)) {
+
+            $this->addStudentExamination(
+            $std_id,
+            $masters_examination,
+            $masters_appeared,
+            $masters_board,
+            $masters_passing_year,
+            $masters_marks_obtained,
+            $masters_total_marks,
+            $masters_rollno
+        );
+        }
     }
 
 
@@ -268,7 +287,8 @@ class AdmissionController extends Controller
         $RollNo)
     {
 
-        $matric = DB::statement("EXECUTE sp_UpdateStudentEducations
+
+        $matric = DB::statement("EXECUTE sp_InsertStudentEducations
              @Std_ID            ='$Std_ID',
              @Degree            ='$Degree',
              @InstitutionName   ='$InstitutionName',
@@ -306,10 +326,18 @@ class AdmissionController extends Controller
         $title  = 'Edit Student Info';
         $route  = '/editStudentAdmission';
         $studentAdmission = Student::where('ID' , $id)->first();
+        $degrees = Degree::get();
+
+        dd($id);
+        $studentEducations = StudentEducation::where('Std_ID' , $id);
+
+
          return
          view('Admissions.editStudentAdmission',
             compact(
                 'studentAdmission',
+                'studentEducation',
+                'degrees',
                 'button' ,
                 'title' ,
                 'route',
