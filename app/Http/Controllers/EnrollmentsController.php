@@ -66,7 +66,7 @@ class EnrollmentsController extends Controller
         $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $degree->ID , 'Batch_ID' => $semesters->ID])->first();
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
-        $semesterCourses    = SemesterCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Sem_ID' => $semesters->ID])->get();
+        $semesterCourses    = SemesterCourse::where('DegBatches_ID' , $DegreeBatche->ID)->get();
         $getEnrollment      = Enrollment::where(['Std_ID' => $request['Std_ID'] ]);
         $enrollmentsArray   = SemesterCourse::whereNotIn('ID' ,  $getEnrollment->pluck('SemCourses_ID')->toArray())->pluck('ID')->toArray();
          $enrollments       = $getEnrollment->get();
@@ -212,8 +212,6 @@ class EnrollmentsController extends Controller
              
          $Sem_ID = $registration->first()->Sem_ID;
          $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'Degree_ID' => $degree->ID])->first() ?? '';
-         dd($degreeName[1] ,$degree);
-         $registrationId = $registration->ID;
        
         $totalCreditHours = $this->getTotalCreditHours($request);
         if(empty($sem_details)){
@@ -231,18 +229,18 @@ class EnrollmentsController extends Controller
         
         
 
-         // $submit = DB::statement("EXEC sp_InsertChallans
+         $submit = DB::statement("EXEC sp_InsertChallans
             
-         //    @IssueDate             = '$IssueDate',
-         //    @DueDate               = '$DueDate',
-         //    @PaidDate              = '$PaidDate',
-         //    @Status                = '$Status',
-         //    @Fine                  = '$Fine',
-         //    @Amount                = '$Amount',
-         //    @Type                  = '$Type',
-         //    @Reg_ID                = '$registrationId',
-         //    @Sem_ID                = '$Sem_ID'
-         //    ;");
+            @IssueDate             = '$IssueDate',
+            @DueDate               = '$DueDate',
+            @PaidDate              = '$PaidDate',
+            @Status                = '$Status',
+            @Fine                  = '$Fine',
+            @Amount                = '$Amount',
+            @Type                  = '$Type',
+            @Std_ID                = '$Std_ID',
+            @Sem_ID                = '$Sem_ID'
+            ;");
     }
 
 

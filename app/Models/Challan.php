@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Challan extends Model
 {
     use HasFactory;
-     public function registration(){
+     public function student(){
 
-    return $this->belongsTo('App\Models\Registration','Reg_ID');
+    return $this->belongsTo('App\Models\Student','Std_ID');
    }
 }
