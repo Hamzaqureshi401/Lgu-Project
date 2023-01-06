@@ -212,7 +212,7 @@ class EnrollmentsController extends Controller
              
          $Sem_ID = $registration->first()->Sem_ID;
          $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'Degree_ID' => $degree->ID])->first() ?? '';
-         dd($degreeName[1] ,$degree);
+         //dd($degreeName[1] ,$degree);
          $registrationId = $registration->ID;
        
         $totalCreditHours = $this->getTotalCreditHours($request);
