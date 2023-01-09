@@ -10,7 +10,11 @@ class CoursesController extends Controller
 {
     public function validation($request){
 
+<<<<<<< Updated upstream
         $validator = Validator::make($request->all(),[
+=======
+        $this->validate($request, [
+>>>>>>> Stashed changes
             'CourseCode'        => 'required|max:30|unique:Courses',
             'CourseName'        => 'required|max:60',
             'CreditHours'       => 'required|max:10',
@@ -84,7 +88,7 @@ class CoursesController extends Controller
 
         $courses = Course::paginate(10);
         $title  = 'All Courses';
-        $route = 'updateCourse';
+        $route = 'editCourse/';
         $getEditRoute = 'editCourse';
         $modalTitle = 'Edit Course';
 

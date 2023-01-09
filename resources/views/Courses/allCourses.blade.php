@@ -32,8 +32,13 @@
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
+<<<<<<< Updated upstream
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $course->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
                                 <a href="{{ $editCourse }}{{ $course->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+=======
+                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $course->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <a href="{{ $route }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+>>>>>>> Stashed changes
                                 
                               </div>
                             </td>

@@ -15,7 +15,7 @@ class AdmissionController extends Controller
 
      public function validation($request){
 
-         $validator = Validator::make($request->all(),[
+        $this->validate($request, [
 
             'Password'          => 'required|max:12',
             'Std_FName'         => 'required|string|max:20',

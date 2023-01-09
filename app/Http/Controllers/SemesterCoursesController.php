@@ -14,7 +14,7 @@ class SemesterCoursesController extends Controller
 {
       public function validation($request){
 
-        $validator = Validator::make($request->all(),[
+        $this->validate($request, [
             'Sem_ID'                => 'required|numeric',
             'Emp_ID'                => 'required|numeric',
             'CampusLimit'           => 'required|numeric',

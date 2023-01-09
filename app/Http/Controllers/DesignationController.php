@@ -14,7 +14,7 @@ class DesignationController extends Controller
     public function validation($request){
 
 
-        $validator = Validator::make($request->all(),[
+       $this->validate($request, [
             'Designation' => 'required',
             'Dpt_ID'      => 'required|max:255',
 
