@@ -122,7 +122,7 @@ class SemesterController extends Controller
 
     public function updateSemester(Request $request){
 
-        // $validator = $this->validation($request);
+         $validator = $this->validation($request);
         // if ($validator['error'] == true) {
         //     return
         //     response()->json([

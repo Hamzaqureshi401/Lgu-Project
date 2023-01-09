@@ -114,7 +114,7 @@ class DesignationController extends Controller
      public function updateDesignation (Request $request){
 
 
-        // $validator = $this->validation($request);
+         $validator = $this->validation($request);
         // if ($validator['error'] == true) {
         //     return
         //     response()->json([

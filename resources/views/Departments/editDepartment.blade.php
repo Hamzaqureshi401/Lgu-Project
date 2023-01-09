@@ -1,6 +1,7 @@
-              <form id="myForm" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                  <div class="card-body">
+ @extends('layouts.app_new')
+@section('title')  @endsection <!--add title here -->
+@section('content')
+@include('Forms.formHeader')                  <div class="card-body">
                     <input type="hidden" name="id" value="{{ $department->ID }}">
                     <div class="form-group">
                       <label>Dpt Name</label>
@@ -24,8 +25,9 @@
                     </div>
                   <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
                 </div>
-              </form>
-                
+@include('Forms.formFooter')                
+@endsection
+@include('js.form_submit_script')
 
 
       

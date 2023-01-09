@@ -1,7 +1,8 @@
 @extends('layouts.app_new')
 @section('title')  @endsection <!--add title here -->
 @section('content')
-@include('Forms.formHeader')                 
+@include('Forms.formHeader')          
+ <div class="card-body">       
                 <input type="hidden" name="SemCourse_ID" value="{{ $semesterCourse->ID }}">
                  <div class="form-group">
                       <label>Semester</label>
@@ -63,7 +64,7 @@
                     </div>
                  <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
                </div>
-             </form>
+            
                 
 @include('Forms.formFooter')                
 @endsection

@@ -13,6 +13,25 @@ class SemesterDetailsController extends Controller
     public function validation($request){
 
         $this->validate($request, [
+            'Degree_ID'         => 'required|numeric|unique:SemesterDetails',
+            'Sem_ID'            => 'required|numeric|unique:SemesterDetails',
+            'SemesterNo'        => 'required|numeric',
+            'SemesterFee'       => 'required|numeric',
+            'PerSemester'       => 'required|numeric',
+            'PerCourse'         => 'required|numeric',
+            
+        ]);
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
+    }
+     public function validationUpdate($request){
+
+        $this->validate($request, [
             'Degree_ID'         => 'required|numeric',
             'Sem_ID'            => 'required|numeric',
             'SemesterNo'        => 'required|numeric',
@@ -122,6 +141,7 @@ class SemesterDetailsController extends Controller
 
     public function updateSemesterDetail(Request $request){
 
+         $validator = $this->validationUpdate($request);
         //  $validator = $this->validation($request);
         // if ($validator['error'] == true) {
         //     return 

@@ -29,6 +29,25 @@ class DegreeController extends Controller
         // }
         // return $validation;
     }
+     public function validationUpdate($request){
+
+
+         $this->validate($request, [
+            'DegreeName'        => 'required|max:50',
+            'DegreeLevel'       => 'required|max:30',
+            'DegreeFullName'    => 'required|max:70',
+            'Dpt_ID'            => 'required|numeric',
+            'Total_Credit_Hours' => 'required|numeric',
+            'Status'            => 'required|numeric',
+        ]);
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
+    }
 
     public function addDegree(){
         $button = "Add Degree";
@@ -113,7 +132,7 @@ class DegreeController extends Controller
     }
 
     public function updateDegree(Request $request){
-
+         $validator = $this->validationUpdate($request);
         //  $validator = $this->validation($request);
         // if ($validator['error'] == true) {
         //     return

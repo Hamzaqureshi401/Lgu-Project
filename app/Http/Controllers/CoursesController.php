@@ -26,6 +26,24 @@ class CoursesController extends Controller
         // return $validation;
     }
 
+      public function validationUpdate($request){
+
+
+        $this->validate($request, [
+            'CourseCode'        => 'required|max:30',
+            'CourseName'        => 'required|max:60',
+            'CreditHours'       => 'required|max:10',
+            'LectureType'       => 'required|max:10',
+        ]);
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
+    }
+
     public function addCourses(){
 
         $button = "Add Course";
@@ -103,6 +121,7 @@ class CoursesController extends Controller
 
     public function updateCourse(Request $request){
 
+        $validator = $this->validationUpdate($request);
         //  $validator = $this->validation($request);
         // if ($validator['error'] == true) {
         //     return

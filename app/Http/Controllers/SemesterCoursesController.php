@@ -15,6 +15,30 @@ class SemesterCoursesController extends Controller
       public function validation($request){
 
         $this->validate($request, [
+            'Sem_ID'                => 'required|numeric|unique:SemesterCourses',
+            'Emp_ID'                => 'required|numeric',
+            'CampusLimit'           => 'required|numeric',
+            'DegCourse_ID'          => 'required|numeric|unique:SemesterCourses',
+            'QuizWeightage'         => 'required|max:10',
+            'AssignmentWeightage'   => 'required|max:10',
+            'PresentationWeightage' => 'required|max:10',
+            'MidWeightage'          => 'required|max:10',
+            'FinalWeightage'        => 'required|max:10',
+            'Section'               => 'required|max:10|unique:SemesterCourses',
+            'Course_ID'             => 'required|numeric|unique:SemesterCourses',
+            
+        ]);
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
+    }
+     public function validationUpdate($request){
+
+        $this->validate($request, [
             'Sem_ID'                => 'required|numeric',
             'Emp_ID'                => 'required|numeric',
             'CampusLimit'           => 'required|numeric',
@@ -28,13 +52,13 @@ class SemesterCoursesController extends Controller
             'Course_ID'             => 'required|numeric',
             
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
     }
 
     public function addSemesterCourses(){
@@ -65,15 +89,15 @@ class SemesterCoursesController extends Controller
 
     public function storeSemesterCourses(Request $request){
 
-        $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return 
-            response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // $validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return 
+        //     response()->json([
+        //     'title' => 'Failed' , 
+        //     'type'=> 'error', 
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
              $submit = DB::update("EXEC sp_InsertSemesterCourses 
             @Sem_ID                = '$request->Sem_ID', 
             @Emp_ID                = '$request->Emp_ID', 
@@ -88,12 +112,13 @@ class SemesterCoursesController extends Controller
             @Course_ID             = '$request->Course_ID'
             ;");
 
-          return response()->json([
-            'title' => 'Done' , 
-            'type'=> 'success', 
-            'message'=> 'SemesterCourse Added!
-            ']);
-        }
+        //   return response()->json([
+        //     'title' => 'Done' , 
+        //     'type'=> 'success', 
+        //     'message'=> 'SemesterCourse Added!
+        //     ']);
+        // }
+        return redirect()->back()->with(['successToaster' => 'Semester Course Added' , 'title' => 'Success']);
 
     }
 
@@ -146,15 +171,16 @@ class SemesterCoursesController extends Controller
 
     public function updateSemesterCourse(Request $request){
 
-         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return 
-            response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+         $validator = $this->validationUpdate($request);
+         //$validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return 
+        //     response()->json([
+        //     'title' => 'Failed' , 
+        //     'type'=> 'error', 
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
               $submit = DB::statement("EXEC sp_UpdateSemesterCourses
 
             @SemCourse_ID           = '$request->SemCourse_ID', 
@@ -173,12 +199,14 @@ class SemesterCoursesController extends Controller
 
 
 
-        return response()->json([
-            'title' => 'Done' , 
-            'type'=> 'success', 
-            'message'=> 'SemesterCourse Updated!
-            ']);
-        }
+        // return response()->json([
+        //     'title' => 'Done' , 
+        //     'type'=> 'success', 
+        //     'message'=> 'SemesterCourse Updated!
+        //     ']);
+        // }
+        return redirect()->back()->with(['successToaster' => 'Semester Course Updated' , 'title' => 'Success']);
+
 
        
     }
