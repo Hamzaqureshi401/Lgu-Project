@@ -28,10 +28,10 @@
                                 novalidate="">
                                 @csrf
 
-                                <select name="batch" class="form-control form-control-sm">
+                                <select name="batch" class="form-control form-control-sm ">
                                     <option selected disabled>Batch</option>
                                     @foreach ( $batch as $batchdata)
-                                    <option value="{{$batchdata->AdmissionSession}}">{{$batchdata->AdmissionSession}}</option>
+                                    <option value="{{$batchdata->SemSession}}">{{$batchdata->SemSession}}</option>
 
                                     @endforeach
 

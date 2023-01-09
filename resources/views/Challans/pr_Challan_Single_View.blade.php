@@ -205,7 +205,7 @@ $programe = explode('/' , Session::get('user'))
                <div class="col-6 text-left">Already Paid:0.0000000 </div>
                <div class="col-6 text-right">Pre.OutStandings:0.0000000 </div>
                <div class="col-6 text-left">Scholarship:0.0000000 </div>
-               <div class="col-6 text-right font-weight-bold" ><span style="font-size:12px; border-style : solid;">Grand Total:0.0000000</span></div>
+               <div class="col-6 text-right font-weight-bold" ><span style="font-size:12px; border-style : solid;">Grand Total:{{ $challan->Amount ?? '--' }}</span></div>
                <div class="col-12 text-center">Rs.20/- per day to charged after due date</div>
                <!--  <div class="col-3 font-weight-bold text-left" style="font-size:10px;">
                   </div>

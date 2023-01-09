@@ -13,7 +13,7 @@ class SemesterController extends Controller
     public function validation($request){
 
         $validator = Validator::make($request->all(),[
-            'SemSession'         => 'required|max:30',
+            'SemSession'         => 'required|max:30|unique:Semesters',
             'Year'               => 'required|numeric',
             'SemStartDate'       => 'required|date',
             'SemEndDate'         => 'required|date',

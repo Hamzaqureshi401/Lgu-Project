@@ -13,8 +13,11 @@ class ChallanController extends Controller
      public function allChallans(){
 
      if (session()->has('std_session')) {
-        $Std_ID = session::get('id');
-        $registration = Registration::where('Std_ID' , $Std_ID)->first();
+
+        $session           = $this->getSessionData();
+        $request['Std_ID'] = $session['std_ID'];
+        
+        $registration = Registration::where('Std_ID' , $request['Std_ID'])->first();
         $challans = Challan::where('Reg_ID' , $registration->ID)->paginate(10);
         $title  = 'My Challan';
         $route = '';
@@ -47,7 +50,6 @@ class ChallanController extends Controller
 
 
 
-
 // $dompdf = new Dompdf($options);
 // $table = ;
 // $dompdf->load_html($table);
@@ -74,5 +76,10 @@ class ChallanController extends Controller
         //dd($challan);
        return
         view('Challans.printChallan' , compact('challan'));
+    }
+
+    public function getSessionData(){
+
+        return session::all();
     }
 }

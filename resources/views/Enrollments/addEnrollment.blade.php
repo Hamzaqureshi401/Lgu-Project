@@ -37,13 +37,21 @@
                         <li>
                           Term:{{ $programe[0] }}
                         </li>
-                        <li>
-                          Allowed Credit Hours: {{ $acdRule['creditHoursAllowed']}}
+                        <li class="pb-8">
+                          <p class="badge badge-success badge-shadow">Allowed Credit Hours: {{ $acdRule['creditHoursAllowed']}}</p> 
                         </li>
-                         <li>
-                          Remaining Credit Hours: {{  $acdRule['creditHoursAllowed'] - $getTotalCreditHours}}
-                        </li>
+                          @if($getTotalCreditHours > 0)
+                          <li>
+                            <p class="badge badge-success badge-shadow"> Remaining Credit Hours: {{  $acdRule['creditHoursAllowed'] - $getTotalCreditHours}}</p>
+                          </li>
+                          @else
+                            <li>
+                              <p class="badge badge-danger badge-shadow">Remaining Credit Hours: {{  $acdRule['creditHoursAllowed'] - $getTotalCreditHours}}</p>
+                            </li>
+                          @endif
                         </ul>
+                        
+                          </ul>
                  
                 </div>
               </div>
@@ -220,7 +228,7 @@
                     </div>
                    @if($enrollments->sum('ID') && $enrollments->sum('Status') == 0)
                     <div class="card sbmt-form">
-                     <div class="card-header justify-content-center">
+                     <div class="card-header justify-content-center alert alert-danger">
                         <a  data-toggle="modal" data-target="#exampleModal" style="color: white;" class="btn btn-primary">Confirm Enrollment</a>
                         </div>
                      
@@ -231,6 +239,7 @@
                 </div>
               </div>
             </div>
+          
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -304,6 +313,8 @@ var connection = pinginternet();
    }else{
     swal("Internet Required", "It Seems You have Lost Internet Connection", "error");
    }
+
+
 
 </script>
 @endsection   

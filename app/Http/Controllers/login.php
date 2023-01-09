@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Cache\RedisTaggedCache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Semester;
+use App\Models\Department;
+use App\Models\Degree;
+
 use Session;
 class login extends Controller
 {
@@ -29,9 +33,9 @@ class login extends Controller
             return view('Dashboard.Student_dashboard');
         } else {
 
-            $batch = DB::table('Students')->select('AdmissionSession')->distinct()->get();
-            $department = DB::table('Departments')->select('Dpt_Name')->distinct()->get();
-            $error = "";
+            $batch      = Semester::get();
+            $department = DB::table('Departments')->select('Dpt_Name')->get();
+            $error      = "";
             return view('Student_Login', compact('error', 'batch', 'department'));
         }
     }
@@ -101,6 +105,10 @@ class login extends Controller
         $roll       = $batch . "/" . $department . "/" . $rollno;
         
         $submit     = DB::table('Students')->where(['StdRollNo' => $roll , 'password' => $password])->first();
+        $sem_ID =  Semester::where('SemSession' , $batch)->first()->ID;
+        $dpt_ID  = Department::where('Dpt_Name' , $department)->first()->ID;
+        $degreeID  = Degree::where('DegreeName'   , $department)->first()->ID;
+        
         //DB::select("EXEC sp_StudentsLogin @StdRollNo = '$roll',@Password='$password';");
        // dd($roll , $password , $submit);
         if (!empty($submit)) {
@@ -110,7 +118,10 @@ class login extends Controller
                 'std_session' => 'session created', 
                 'Std_FName'   => $submit->Std_FName, 
                 'user'        => $roll,
-                'id'          => $submit->ID
+                'std_ID'      => $submit->ID,
+                'sem_ID'      => $sem_ID,
+                'dpt_ID'      => $dpt_ID,
+                'degree_ID'   => $degreeID
             ]);
 
            

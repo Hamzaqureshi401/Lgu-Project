@@ -9,7 +9,7 @@ class Registration extends Model
 {
     use HasFactory;
     public function acdRule(){
-          return $this->belongsTo('App\Models\Exam_AcademicStandingRule' , 'AcaStdID');
+          return $this->belongsTo('App\Models\Exam_AcademicStandingRule' , 'AcaStd_ID');
    }
     public function student(){
 
