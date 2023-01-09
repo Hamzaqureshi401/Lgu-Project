@@ -18,9 +18,9 @@
                             <th>Amount</th>
                             <th>Type</th>
                             <!-- <th>Status</th> -->
-                            @if(session()->has('Emp_session'))
+                           
                             <th>Action</th>
-                            @endif
+                            
                           </tr>
                         </thead>
                         <tbody>
@@ -39,6 +39,7 @@
                             <td>{{ $challan->Fine  ?? '--'}}</td>
                             <td>{{ $challan->Amount  ?? '--'}}</td>
                             <td>{{ $challan->Type  ?? '--'}}</td>
+                            <td> <a class = "btn btn-primary" href="{{ route('print.Challan') }}">Challan</a> </td>
                             @if(session()->has('Emp_session'))
                             <td>
                               <div class="card-body">

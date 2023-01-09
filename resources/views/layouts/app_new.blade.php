@@ -9,9 +9,13 @@
   <title>Otika - Admin Dashboard Template</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/izitoast/css/iziToast.min.css') }}">
+  
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+
+  <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
     <!-- Normalize or reset CSS with your favorite library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
@@ -319,15 +323,56 @@
   <!-- General JS Scripts -->
   <script src="{{ asset('assets/js/app.min.js') }}"></script>
  
-  <!-- JS Libraies -->
+ <script src="{{ asset('assets/bundles/izitoast/js/iziToast.min.js') }}"></script>
   <!-- Page Specific JS File -->
-  <!-- Template JS File -->
+  <script src="{{ asset('assets/js/page/toastr.js') }}"></script>
+  
+
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <!-- Custom JS File -->
   <script src="{{ asset('assets/js/custom.js') }}"></script>
    <script src="{{ asset('assets/bundles/sweetalert/sweetalert.min.js') }}"></script>
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/sweetalert.js') }}"></script>
+
+  <script type="text/javascript">
+      
+      @if(session('successToaster'))
+       
+        var msg = "{{session('successToaster')}}";
+        var title = "{{session('title')}}";
+        
+         iziToast.success({
+          title: title,
+          message: msg,
+          position: 'topRight'
+        });
+        @elseif(session('errorToaster'))
+        var msg = "{{session('errorToaster')}}";
+        var title = "{{session('title')}}";
+         iziToast.error({
+          title: title,
+          message: msg,
+          position: 'topRight'
+        });
+        @elseif(session('infoToaster'))
+         var msg = "{{session('infoToaster')}}";
+         var title = "{{session('title')}}";
+         iziToast.info({
+          title: title,
+          message: msg,
+          position: 'topRight'
+        });
+         @elseif(session('warningToaster'))
+         var msg = "{{session('infoToaster')}}";
+         var title = "{{session('title')}}";
+         iziToast.warning({
+          title: title,
+          message: msg,
+          position: 'topRight'
+        });
+        @endif
+  </script>
 
 </body>
 
