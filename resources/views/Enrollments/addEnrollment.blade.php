@@ -37,12 +37,18 @@
                         <li>
                           Term:{{ $programe[0] }}
                         </li>
-                        <li>
-                          Allowed Credit Hours: {{ $acdRule['creditHoursAllowed']}}
+                        <li class="pb-8">
+                          <p class="badge badge-success badge-shadow">Allowed Credit Hours: {{ $acdRule['creditHoursAllowed']}}</p> 
                         </li>
-                         <li>
-                          Remaining Credit Hours: {{  $acdRule['creditHoursAllowed'] - $getTotalCreditHours}}
-                        </li>
+                          @if($acdRule['creditHoursAllowed'] - $getTotalCreditHours > 0)
+                          <li>
+                            <p class="badge badge-success badge-shadow"> Remaining Credit Hours: {{  $acdRule['creditHoursAllowed'] - $getTotalCreditHours}}</p>
+                          </li>
+                          @else
+                            <li>
+                              <p class="badge badge-danger badge-shadow">Remaining Credit Hours: {{  $acdRule['creditHoursAllowed'] - $getTotalCreditHours}}</p>
+                            </li>
+                          @endif
                         </ul>
                  
                 </div>
