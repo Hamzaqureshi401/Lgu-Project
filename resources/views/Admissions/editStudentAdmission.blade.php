@@ -444,7 +444,7 @@
                                     </table>
                                 </div> --}}
 
-
+{{dd($studentEducations);}}
     <div class="row">
         <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Examination <br>
