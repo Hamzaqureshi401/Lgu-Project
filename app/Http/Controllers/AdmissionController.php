@@ -329,7 +329,9 @@ class AdmissionController extends Controller
         $degrees = Degree::get();
 
         // dd($id);
-        $studentEducations = StudentEducation::where('Std_ID' , $id)->get();
+        $studentEducations = StudentEducation::where('Std_ID' , $id);
+
+
 
 
          return
