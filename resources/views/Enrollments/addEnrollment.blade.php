@@ -40,8 +40,7 @@
                         <li class="pb-8">
                           <p class="badge badge-success badge-shadow">Allowed Credit Hours: {{ $acdRule['creditHoursAllowed']}}</p> 
                         </li>
-<<<<<<< Updated upstream
-                          @if($acdRule['creditHoursAllowed'] - $getTotalCreditHours > 0)
+                          @if($getTotalCreditHours > 0)
                           <li>
                             <p class="badge badge-success badge-shadow"> Remaining Credit Hours: {{  $acdRule['creditHoursAllowed'] - $getTotalCreditHours}}</p>
                           </li>
@@ -51,23 +50,8 @@
                             </li>
                           @endif
                         </ul>
-=======
-                         @if(session()->has('success'))
-                        <li>
-                         
-                          <div class="card-header d-flex justify-content-center bg-success" style="color:white;">
-                              {{ session()->get('success') }}
-                          </div>
-                      
-                       @elseif(session()->has('success1'))
-                          <div class="card-header d-flex justify-content-center bg-danger" style="color:white;">
-                              {{ session()->get('success1') }}
-                          </div>
-                     
-                        </li>
-                         @endif
+                        
                           </ul>
->>>>>>> Stashed changes
                  
                 </div>
               </div>
