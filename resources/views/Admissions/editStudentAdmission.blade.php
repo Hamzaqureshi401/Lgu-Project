@@ -287,7 +287,7 @@
         @error('Degree_ID')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-    </div>
+    
     <div class="form-group">
 
         <div class="form-group">

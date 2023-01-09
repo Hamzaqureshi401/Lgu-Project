@@ -16,11 +16,11 @@
                   <div class="card-header">
                     <h4>{{ $title }}</h4>
                   </div>
-<<<<<<< Updated upstream
+
                   <form id="myForm" action="{{ $route }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                   
-=======
+
                   @if (count($errors) > 0)
                       <div class="alert alert-danger">
                           <ul>
@@ -30,6 +30,3 @@
                           </ul>
                       </div>
                   @endif
-                  <form id="myForm" method="post" action="{{ $route }}" enctype="multipart/form-data">
-                    {{ csrf_field() }}
->>>>>>> Stashed changes

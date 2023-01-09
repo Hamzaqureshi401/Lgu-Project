@@ -19,13 +19,13 @@ class DesignationController extends Controller
             'Dpt_ID'      => 'required|max:255',
 
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
     }
 
     public function addDesignation(){
@@ -47,25 +47,26 @@ class DesignationController extends Controller
     public function storeDesignation(Request $request){
 
         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
             $submit             = DB::Update("EXEC sp_InsertDesignations
             @Designation       = '$request->Designation',
             @Dpt_ID            = '$request->Dpt_ID'
             ;
         ");
-            return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Designation Added!
-            ']);
-        }
+        //     return response()->json([
+        //     'title' => 'Done' ,
+        //     'type'=> 'success',
+        //     'message'=> 'Designation Added!
+        //     ']);
+        // }
+             return redirect()->back()->with(['successToaster' => 'Dasignation Added' , 'title' => 'Success']);
     }
 
     public function editDesignation($id){
@@ -113,27 +114,28 @@ class DesignationController extends Controller
      public function updateDesignation (Request $request){
 
 
-        $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // $validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
              $submit = DB::update("EXEC sp_UpdateDesignations
             @Des_ID             = '$request->id',
             @Designation    = '$request->Designation',
             @Dpt_ID         = '$request->Dpt_ID'
             ;");
 
-        return response()->json([
-            'title'  => 'Done' ,
-            'type'   => 'success',
-            'message'=> 'Designation Updated!
-            ']);
-        }
+        // return response()->json([
+        //     'title'  => 'Done' ,
+        //     'type'   => 'success',
+        //     'message'=> 'Designation Updated!
+        //     ']);
+        // }
+              return redirect()->back()->with(['successToaster' => 'Designation Updated' , 'title' => 'Success']);
 
     }
 }

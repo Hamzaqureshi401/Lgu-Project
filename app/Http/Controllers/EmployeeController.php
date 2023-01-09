@@ -34,13 +34,13 @@ class EmployeeController extends Controller
             'Contact_Number'     => 'required|max:10',
 
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
     }
 
     public function validationUpdate($request){
@@ -65,13 +65,13 @@ class EmployeeController extends Controller
             'Contact_Number'     => 'required|max:10',
 
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
     }
 
      public function addEmployee(){
@@ -92,15 +92,15 @@ class EmployeeController extends Controller
 
     public function storeEmployee(Request $request){
 
-        $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // $validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
             $password = bcrypt($request->Password);
            $submit = DB::update("EXEC sp_InsertEmployees
             @Emp_FirstName      = '$request->Emp_FirstName',
@@ -122,12 +122,13 @@ class EmployeeController extends Controller
             @Contact_Number     = '$request->Contact_Number'
             ;");
 
-          return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Employee Added!
-            ']);
-        }
+          // return response()->json([
+          //   'title' => 'Done' ,
+          //   'type'=> 'success',
+          //   'message'=> 'Employee Added!
+          //   ']);
+        //}
+            return redirect()->back()->with(['successToaster' => 'Employee Added' , 'title' => 'Success']);
 
 
 
@@ -172,14 +173,14 @@ class EmployeeController extends Controller
     public function updateEmployee(Request $request){
 
          $validator = $this->validationUpdate($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
 
         $submit = DB::update("EXEC sp_UpdateEmployees
             @Emp_ID                 = '$request->id',
@@ -202,11 +203,13 @@ class EmployeeController extends Controller
             @Contact_Number     = '$request->Contact_Number'
             ;");
 
-        return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Employee Updated!
-            ']);
-        }
+        // return response()->json([
+        //     'title' => 'Done' ,
+        //     'type'=> 'success',
+        //     'message'=> 'Employee Updated!
+        //     ']);
+        // }
+         return redirect()->back()->with(['successToaster' => 'Employee Updated' , 'title' => 'Success']);
+
     }
 }

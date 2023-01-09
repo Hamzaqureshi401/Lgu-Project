@@ -10,23 +10,20 @@ class CoursesController extends Controller
 {
     public function validation($request){
 
-<<<<<<< Updated upstream
-        $validator = Validator::make($request->all(),[
-=======
+
         $this->validate($request, [
->>>>>>> Stashed changes
             'CourseCode'        => 'required|max:30|unique:Courses',
             'CourseName'        => 'required|max:60',
             'CreditHours'       => 'required|max:10',
             'LectureType'       => 'required|max:10',
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
     }
 
     public function addCourses(){
@@ -46,26 +43,27 @@ class CoursesController extends Controller
     public function storeCourses(Request $request){
 
         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
              $submit = DB::update("EXEC sp_InsertCourses
             @CourseCode  = '$request->CourseCode',
             @CourseName  = '$request->CourseName',
             @CreditHours = '$request->CreditHours' ,
             @LectureType = '$request->LectureType';");
 
-          return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Course Added!
-            ']);
-        }
+          // return response()->json([
+          //   'title' => 'Done' ,
+          //   'type'=> 'success',
+          //   'message'=> 'Course Added!
+          //   ']);
+        //}
+             return redirect()->back()->with(['successToaster' => 'Course Added' , 'title' => 'Success']);
 
     }
 
@@ -105,15 +103,15 @@ class CoursesController extends Controller
 
     public function updateCourse(Request $request){
 
-         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        //  $validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
               $submit = DB::update("EXEC sp_UpdateCourses
 
             @Course_ID   = '$request->id',
@@ -122,12 +120,13 @@ class CoursesController extends Controller
             @CreditHours = '$request->CreditHours' ,
             @LectureType = '$request->LectureType';");
 
-        return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Course Updated!
-            ']);
-        }
+        // return response()->json([
+        //     'title' => 'Done' ,
+        //     'type'=> 'success',
+        //     'message'=> 'Course Updated!
+        //     ']);
+              return redirect()->back()->with(['successToaster' => 'Course Updated' , 'title' => 'Success']);
+        
 
 
     }

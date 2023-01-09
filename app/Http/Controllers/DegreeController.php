@@ -21,13 +21,13 @@ class DegreeController extends Controller
             'Total_Credit_Hours' => 'required|numeric',
             'Status'            => 'required|numeric',
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
     }
 
     public function addDegree(){
@@ -50,14 +50,14 @@ class DegreeController extends Controller
       //  dd($request->all());
 
         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
            $submit = DB::update("EXEC sp_InsertDegrees
             @DegreeName         = '$request->DegreeName',
             @DegreeLevel        = '$request->DegreeLevel',
@@ -66,12 +66,13 @@ class DegreeController extends Controller
             @Total_Credit_Hours = '$request->Total_Credit_Hours',
             @Status             = '$request->status';
             ");
-          return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Degree Added!
-            ']);
-      }
+      //     return response()->json([
+      //       'title' => 'Done' ,
+      //       'type'=> 'success',
+      //       'message'=> 'Degree Added!
+      //       ']);
+      // }
+            return redirect()->back()->with(['successToaster' => 'Degree Added' , 'title' => 'Success']);
 
     }
     public function editDegree($id){
@@ -113,15 +114,15 @@ class DegreeController extends Controller
 
     public function updateDegree(Request $request){
 
-         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        //  $validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
            $submit = DB::update("EXEC sp_UpdateDegrees
 
             @Degree_ID           = '$request->id',
@@ -132,11 +133,12 @@ class DegreeController extends Controller
             @Total_Credit_Hours  = '$request->Total_Credit_Hours' ,
             @Status              = '$request->Status';");
 
-        return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Degree Updated!
-            ']);
-      }
+      //   return response()->json([
+      //       'title' => 'Done' ,
+      //       'type'=> 'success',
+      //       'message'=> 'Degree Updated!
+      //       ']);
+      // }
+            return redirect()->back()->with(['successToaster' => 'Degree Updated' , 'title' => 'Success']);
     }
 }

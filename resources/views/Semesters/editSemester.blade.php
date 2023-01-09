@@ -1,7 +1,8 @@
-extends('layouts.app_new')
+@extends('layouts.app_new')
 @section('title')  @endsection <!--add title here -->
 @section('content')
 @include('Forms.formHeader')  
+<div class="card-body">
                     <input type="hidden" name="id" value="{{ $semester->ID }}">
                   <div class="form-group">
                       <label>Sem Session</label>
@@ -52,8 +53,8 @@ extends('layouts.app_new')
                       <input type="Date" value="{{ $semester->I_final_EndDate }}" name="I_final_EndDate" class="form-control"required>
                     </div>
                  <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
-               </form>
-                
+              
+          </div>      
 @include('Forms.formFooter')                
 @endsection
 @include('js.form_submit_script')

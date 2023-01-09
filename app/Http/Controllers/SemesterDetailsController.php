@@ -21,13 +21,13 @@ class SemesterDetailsController extends Controller
             'PerCourse'         => 'required|numeric',
             
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
     }
 
     public function addSemesterDetails(){
@@ -52,14 +52,14 @@ class SemesterDetailsController extends Controller
     public function storeSemesterDetails(Request $request){
 
         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return 
-            response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // if ($validator['error'] == true) {
+        //     return 
+        //     response()->json([
+        //     'title' => 'Failed' , 
+        //     'type'=> 'error', 
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
              $submit = DB::update("EXEC InsertSemesterDetails 
             @Degree_ID          = '$request->Degree_ID', 
             @Sem_ID             = '$request->Sem_ID', 
@@ -69,12 +69,13 @@ class SemesterDetailsController extends Controller
             @PerCourse          = '$request->PerCourse'
             ;");
 
-          return response()->json([
-            'title' => 'Done' , 
-            'type'=> 'success', 
-            'message'=> 'SemesterDetail Added!
-            ']);
-        }
+        //   return response()->json([
+        //     'title' => 'Done' , 
+        //     'type'=> 'success', 
+        //     'message'=> 'SemesterDetail Added!
+        //     ']);
+        // }
+              return redirect()->back()->with(['successToaster' => 'Semester Details Added' , 'title' => 'Success']);
 
     }
 
@@ -121,15 +122,15 @@ class SemesterDetailsController extends Controller
 
     public function updateSemesterDetail(Request $request){
 
-         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return 
-            response()->json([
-            'title' => 'Failed' , 
-            'type'=> 'error', 
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        //  $validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return 
+        //     response()->json([
+        //     'title' => 'Failed' , 
+        //     'type'=> 'error', 
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
               $submit = DB::statement("EXEC sp_UpdateSemesterDetails
 
             @SemDetail_ID                 = '$request->id', 
@@ -143,12 +144,13 @@ class SemesterDetailsController extends Controller
 
 
 
-        return response()->json([
-            'title' => 'Done' , 
-            'type'=> 'success', 
-            'message'=> 'SemesterDetail Updated!
-            ']);
-        }
+        // return response()->json([
+        //     'title' => 'Done' , 
+        //     'type'=> 'success', 
+        //     'message'=> 'SemesterDetail Updated!
+        //     ']);
+        // }
+              return redirect()->back()->with(['successToaster' => 'Semester Details Updated' , 'title' => 'Success']);
 
        
     }

@@ -26,13 +26,14 @@ class SemesterController extends Controller
             'I_final_StartDate'  => 'required|date',
             'I_final_EndDate'    => 'required|date',
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
+
     }
 
     public function addSemester(){
@@ -51,15 +52,15 @@ class SemesterController extends Controller
 
     public function storeSemester(Request $request){
 
-        $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // $validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
             $submit = DB::update("EXEC sp_InsertSemesters
             @SemSession             = '$request->SemSession',
             @Year                   = '$request->Year',
@@ -75,12 +76,13 @@ class SemesterController extends Controller
             @I_final_EndDate        = '$request->I_final_EndDate'
             ;");
 
-          return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Semester Added!
-            ']);
-        }
+        //   return response()->json([
+        //     'title' => 'Done' ,
+        //     'type'=> 'success',
+        //     'message'=> 'Semester Added!
+        //     ']);
+        // }
+             return redirect()->back()->with(['successToaster' => 'Semester Added' , 'title' => 'Success']);
 
     }
 
@@ -120,15 +122,15 @@ class SemesterController extends Controller
 
     public function updateSemester(Request $request){
 
-        $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // $validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
             $submit = DB::update("EXEC sp_UpdateSemesters
             @Sem_ID                     = '$request->id',
             @SemSession             = '$request->SemSession',
@@ -145,12 +147,13 @@ class SemesterController extends Controller
             @I_final_EndDate        = '$request->I_final_EndDate'
             ;");
 
-        return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Semester Updated!
-            ']);
-        }
+        // return response()->json([
+        //     'title' => 'Done' ,
+        //     'type'=> 'success',
+        //     'message'=> 'Semester Updated!
+        //     ']);
+        // }
+             return redirect()->back()->with(['successToaster' => 'Semester Updated' , 'title' => 'Success']);
 
     }
 

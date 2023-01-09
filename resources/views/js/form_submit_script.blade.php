@@ -1,10 +1,4 @@
-<<<<<<< Updated upstream
 <!-- 
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-=======
-
-<!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
->>>>>>> Stashed changes
 <script type="text/javascript">
 
   var total = 0;
@@ -62,5 +56,3 @@
         });
       });
 </script> -->
-
- -->

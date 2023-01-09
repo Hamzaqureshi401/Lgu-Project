@@ -3,12 +3,7 @@
 @section('content')
 @include('Forms.formHeader')  
  
-<<<<<<< Updated upstream
-              
-=======
-              <form id="myForm" enctype="multipart/form-data">
-                    {{ csrf_field() }}
->>>>>>> Stashed changes
+
                   <div class="card-body">
                     <input type="hidden" name="id" value="{{ $courses->ID }}">
                     <div class="form-group">

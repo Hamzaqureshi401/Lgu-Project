@@ -2,7 +2,7 @@
 @section('title')  @endsection <!--add title here -->
 @section('content')
 @include('Forms.formHeader')  
-              
+          <div class="card-body">    
                     <input type="hidden" name="id" value="{{ $employee->ID }}">
                  <div class="form-group">
                       <label>Emp First Name</label>
@@ -81,7 +81,7 @@
                       <input type="number" name="Contact_Number" class="form-control" value="{{ $employee->Contact_Number}}" >
                     </div>
                 <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
-             
+            </div> 
                 
 @include('Forms.formFooter')                
 @endsection

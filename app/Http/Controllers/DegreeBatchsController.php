@@ -22,13 +22,13 @@ class DegreeBatchsController extends Controller
             'Batch_ID'        => 'required|numeric',
 
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
     }
 
      public function addDegreeBatch(){
@@ -53,32 +53,42 @@ class DegreeBatchsController extends Controller
 
         $unique = $this->uniqueDigreeBatch($request);
         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }elseif($unique == true){
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> 'These are Already Enrolled!'
-            ]);
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }elseif($unique == true){
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> 'These are Already Enrolled!'
+        //     ]);
+        // }else {
+        //     $submit = DB::update("EXEC sp_InsertDegreeBatches
+        //     @Degree_ID  = '$request->Degree_ID',
+        //     @Batch_ID  = '$request->Batch_ID'
+        //    ;");
+
+            if($unique == true){
+             return redirect()->back()->with(['errorToaster' => 'Degree Batches Must Be Uniqle' , 'title' => 'Warning']);
         }else {
             $submit = DB::update("EXEC sp_InsertDegreeBatches
             @Degree_ID  = '$request->Degree_ID',
             @Batch_ID  = '$request->Batch_ID'
            ;");
-
-          return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'DegreeBatch Added!
-            ']);
+            return redirect()->back()->with(['successToaster' => 'Degree Batches Added' , 'title' => 'Success']);
         }
+
+        //   return response()->json([
+        //     'title' => 'Done' ,
+        //     'type'=> 'success',
+        //     'message'=> 'DegreeBatch Added!
+        //     ']);
+        // }
 
     }
 
@@ -127,26 +137,27 @@ class DegreeBatchsController extends Controller
     }
      public function updateDegreeBatch (Request $request){
 
-        $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
+        // $validator = $this->validation($request);
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
            $submit = DB::update("EXEC sp_UpdateDegreeBatches
             @ID                    = '$request->id',
             @Degree_ID             = '$request->Degree_ID',
             @Batch_ID             = '$request->Batch_ID'
             ;");
-         return response()->json([
-            'title'  => 'Done' ,
-            'type'   => 'success',
-            'message'=> 'Degree Batch Updated!
-            ']);
-        }
+        //  return response()->json([
+        //     'title'  => 'Done' ,
+        //     'type'   => 'success',
+        //     'message'=> 'Degree Batch Updated!
+        //     ']);
+        // }
+           return redirect()->back()->with(['successToaster' => 'Degree Batches Updated' , 'title' => 'Success']);
     }
 
     public function uniqueDigreeBatch($request){
