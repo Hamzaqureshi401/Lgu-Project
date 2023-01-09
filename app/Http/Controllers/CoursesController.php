@@ -11,7 +11,7 @@ class CoursesController extends Controller
     public function validation($request){
 
         $validator = Validator::make($request->all(),[
-            'CourseCode'        => 'required|max:30|unique:Course',
+            'CourseCode'        => 'required|max:30|unique:Courses',
             'CourseName'        => 'required|max:60',
             'CreditHours'       => 'required|max:10',
             'LectureType'       => 'required|max:10',

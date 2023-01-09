@@ -1,7 +1,8 @@
-
-              <form id="myForm" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="SemCourse_ID" value="{{ $semesterCourse->ID }}">
+@extends('layouts.app_new')
+@section('title')  @endsection <!--add title here -->
+@section('content')
+@include('Forms.formHeader')                 
+                <input type="hidden" name="SemCourse_ID" value="{{ $semesterCourse->ID }}">
                  <div class="form-group">
                       <label>Semester</label>
                       <select class="form-control" name="Sem_ID"  >
@@ -64,7 +65,9 @@
                </div>
              </form>
                 
-
+@include('Forms.formFooter')                
+@endsection
+@include('js.form_submit_script')
 
 
       

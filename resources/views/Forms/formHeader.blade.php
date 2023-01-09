@@ -16,4 +16,6 @@
                   <div class="card-header">
                     <h4>{{ $title }}</h4>
                   </div>
+                  <form id="myForm" action="{{ $route }}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                   

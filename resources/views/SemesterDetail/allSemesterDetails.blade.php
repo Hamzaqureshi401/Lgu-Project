@@ -36,7 +36,8 @@
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
-                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $semesterDetail->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $semesterDetail->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
+                                 <a href="{{ $getEditRoute }}/{{ $semesterDetail->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                                 
                               </div>
                             </td>

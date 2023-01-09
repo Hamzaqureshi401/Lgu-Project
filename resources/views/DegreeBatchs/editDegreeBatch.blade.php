@@ -1,4 +1,7 @@
-
+@extends('layouts.app_new')
+@section('title')  @endsection <!--add title here -->
+@section('content')
+@include('Forms.formHeader')  
               <form id="myForm" enctype="multipart/form-data">
                     {{ csrf_field() }}
                  <div class="card-body">
@@ -28,7 +31,9 @@
                </div>
              </form>
                 
-
+@include('Forms.formFooter')                
+@endsection
+@include('js.form_submit_script')
 
 
       
