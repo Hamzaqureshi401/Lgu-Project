@@ -14,7 +14,7 @@ class EmployeeController extends Controller
 {
     public function validation($request){
 
-        $validator = Validator::make($request->all(),[
+        $this->validate($request, [
             'Emp_FirstName'      => 'required|max:30',
             'Emp_LastName'       => 'required|max:30',
             'DOB'                => 'required|date',
@@ -45,7 +45,7 @@ class EmployeeController extends Controller
 
     public function validationUpdate($request){
 
-        $validator = Validator::make($request->all(),[
+        $this->validate($request, [
             'Emp_FirstName'      => 'required|max:30',
             'Emp_LastName'       => 'required|max:30',
             'DOB'                => 'required|date',

@@ -2,51 +2,52 @@
 @section('title')  @endsection <!--add title here -->
 @section('content')
 @include('Forms.formHeader')  
-
+              <form id="myForm" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                   <div class="card-body">
                     <div class="form-group">
                       <label>Emp First Name</label>
-                      <input type="text" name="Emp_FirstName" class="form-control" value="{{old('Emp_FirstName')}}" >
+                      <input type="text" name="Emp_FirstName" class="form-control" >
                     </div>
                     <div class="form-group">
                       <label>Emp Last Name</label>
-                      <input type="text" name="Emp_LastName" class="form-control" value="{{old('Emp_LastName')}}">
+                      <input type="text" name="Emp_LastName" class="form-control">
                     </div>
                     <div class="form-group">
                       <label>DOB</label>
-                      <input type="Date" name="DOB" class="form-control" value="{{old('DOB')}}">
+                      <input type="Date" name="DOB" class="form-control">
                     </div>
                     <div class="form-group">
                       <label>CNIC</label>
-                      <input type="number" name="CNIC" class="form-control" value="{{old('CNIC')}}">
+                      <input type="number" name="CNIC" class="form-control">
                     </div>
                 <div class="form-group">
                       <label>Date Of Joining</label>
-                      <input type="Date" name="DateOfJoining" class="form-control" value="{{old('DateOfJoining')}}">
+                      <input type="Date" name="DateOfJoining" class="form-control">
                     </div>
                 <div class="form-group">
                       <label>Date Of Appointment</label>
-                      <input type="Date" name="DateOfAppointment" class="form-control" value="{{old('DateOfAppointment')}}">
+                      <input type="Date" name="DateOfAppointment" class="form-control">
                     </div>
                 <div class="form-group">
                       <label>Specialization</label>
-                      <input type="text" name="Specialization" class="form-control" value="{{old('Specialization')}}">
+                      <input type="text" name="Specialization" class="form-control">
                     </div>
                 <div class="form-group">
                       <label>Designation</label>
-                      <input type="text" name="Designation" class="form-control" value="{{old('Designation')}}">
+                      <input type="text" name="Designation" class="form-control">
                     </div>
                 <div class="form-group">
                       <label>Status</label>
-                      <input type="number" name="Status" class="form-control" value="{{old('Status')}}">
+                      <input type="number" name="Status" class="form-control">
                     </div>
                 <div class="form-group">
                       <label>UserName</label>
-                      <input type="text" name="UserName" class="form-control" value="{{old('UserName')}}">
+                      <input type="text" name="UserName" class="form-control">
                     </div>
                 <div class="form-group">
                       <label>Password</label>
-                      <input type="password" name="Password" class="form-control" value="{{old('Password')}}">
+                      <input type="password" name="Password" class="form-control">
                     </div>
                  <div class="form-group">
                       <label for="gender">Gender</label>
@@ -62,12 +63,12 @@
                   
                 <div class="form-group">
                       <label>Email</label>
-                      <input type="email" name="Email" class="form-control" value="{{old('Email')}}">
+                      <input type="email" name="Email" class="form-control">
                     </div>
                   
                 <div class="form-group">
                       <label>Address</label>
-                      <input type="text" name="Address" class="form-control" value="{{old('Address')}}">
+                      <input type="text" name="Address" class="form-control">
                     </div>
                   
                  <div class="form-group">
@@ -81,15 +82,15 @@
                   
                 <div class="form-group">
                       <label>Grade</label>
-                      <input type="number" name="Grade" class="form-control" value="{{old('Grade')}}">
+                      <input type="number" name="Grade" class="form-control">
                     </div>
                  <div class="form-group">
                       <label>Contact Number</label>
-                      <input type="number" name="Contact_Number" class="form-control" value="{{old('Contact_Number')}}">
+                      <input type="number" name="Contact_Number" class="form-control">
                     </div>
                   
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
-
+                </form>
 @include('Forms.formFooter')                
 @endsection
 @include('js.form_submit_script')

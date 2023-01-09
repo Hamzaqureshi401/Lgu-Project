@@ -17,7 +17,7 @@ class DegreeBatchsController extends Controller
 {
     public function validation($request){
 
-        $validator = Validator::make($request->all(),[
+        $this->validate($request, [
             'Degree_ID'        => 'required|numeric',
             'Batch_ID'        => 'required|numeric',
 

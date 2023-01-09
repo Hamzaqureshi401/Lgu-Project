@@ -30,7 +30,8 @@
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
-                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $degreeBatch->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $degreeBatch->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
+                                 <a href="{{ $editCourse }}{{ $degreeBatch->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                                 
                               </div>
                             </td>

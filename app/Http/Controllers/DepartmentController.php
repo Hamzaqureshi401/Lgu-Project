@@ -12,7 +12,7 @@ class DepartmentController extends Controller
 {
    public function validation($request){
 
-        $validator = Validator::make($request->all(),[
+        $this->validate($request, [
             'Dpt_Name'      => 'required|max:10',
             'Dpt_FullName'  => 'required|max:50',
             'HODUID'        => 'required|numeric',

@@ -1,6 +1,8 @@
-
-              <form id="myForm" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+@extends('layouts.app_new')
+@section('title')  @endsection <!--add title here -->
+@section('content')
+@include('Forms.formHeader')  
+              
                     <input type="hidden" name="id" value="{{ $employee->ID }}">
                  <div class="form-group">
                       <label>Emp First Name</label>
@@ -79,8 +81,11 @@
                       <input type="number" name="Contact_Number" class="form-control" value="{{ $employee->Contact_Number}}" >
                     </div>
                 <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
-              </form>
+             
                 
+@include('Forms.formFooter')                
+@endsection
+@include('js.form_submit_script')
 
 
 

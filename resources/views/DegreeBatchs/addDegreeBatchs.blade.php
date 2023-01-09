@@ -2,7 +2,8 @@
 @section('title')  @endsection <!--add title here -->
 @section('content')
 @include('Forms.formHeader')  
-
+              <form id="myForm" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                   <div class="card-body">
                     <div class="form-group">
                       <label>Degree</label>
@@ -24,6 +25,7 @@
                     
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
               </div>
+                </form>
 @include('Forms.formFooter')                
 @endsection
 @include('js.form_submit_script')

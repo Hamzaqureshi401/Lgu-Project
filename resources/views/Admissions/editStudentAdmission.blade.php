@@ -1,5 +1,7 @@
-<form id="myForm" enctype="multipart/form-data">
-    {{ csrf_field() }}
+@extends('layouts.app_new')
+@section('title')  @endsection <!--add title here -->
+@section('content')
+@include('Forms.formHeader')  
     <div class="card-body">
         <div class="form-group">
             <label style="font-size: 13px">Student Password <span style="color: red">*</span></label>
@@ -584,6 +586,9 @@
     </div>
 
     </div>
-</form>
 
 @include('Admissions.student_js')
+                
+@include('Forms.formFooter')                
+@endsection
+@include('js.form_submit_script')

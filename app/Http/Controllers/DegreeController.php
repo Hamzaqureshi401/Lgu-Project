@@ -13,7 +13,7 @@ class DegreeController extends Controller
 
     public function validation($request){
 
-        $validator = Validator::make($request->all(),[
+        $this->validate($request, [
             'DegreeName'        => 'required|max:50|unique:Degrees',
             'DegreeLevel'       => 'required|max:30',
             'DegreeFullName'    => 'required|max:70',
