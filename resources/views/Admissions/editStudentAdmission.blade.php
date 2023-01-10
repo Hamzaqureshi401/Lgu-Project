@@ -1,7 +1,7 @@
 @extends('layouts.app_new')
 @section('title')  @endsection <!--add title here -->
 @section('content')
-@include('Forms.formHeader')  
+@include('Forms.formHeader')
     <div class="card-body">
         <div class="form-group">
             <label style="font-size: 13px">Student Password <span style="color: red">*</span></label>
@@ -287,7 +287,7 @@
         @error('Degree_ID')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-    
+
     <div class="form-group">
 
         <div class="form-group">
@@ -446,16 +446,23 @@
                                     </table>
                                 </div> --}}
 
-{{dd($studentEducations);}}
+<<<<<<< Updated upstream
+=======
+{{-- {{dd($studentEducations);}} --}}
+>>>>>>> Stashed changes
     <div class="row">
         <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Examination <br>
                 Passed</label>
 
             <select name="matric_examination" id="matric_examination" class="form-control my-2  ">
-                <option value="Matric"></option>
-                <option value="Matric">Matric</option>
+<<<<<<< Updated upstream
+                <option {{$matric != 'null'?'selected':''}} value="Matric">Matric</option>
                 <option value="O-Level">O-Level</option>
+=======
+                <option {{$matric!=null?'selected':''}} value="Matric">Matric</option>
+                <option {{$olevel!=null?'selected':''}} value="O-Level">O-Level</option>
+>>>>>>> Stashed changes
             </select>
 
             <select name="fsc_examination" id="fsc_examination" class="form-control  my-2  ">
@@ -477,37 +484,37 @@
         <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Date Started <br> i.e
                 (2019) </label>
-            <input type="number" class="form-control my-2  " value="" name="matric_board" id="matric_board"
+            <input type="text" class="form-control my-2  "  value="{{$matric[0]['DateStarted']}}" name="matric_board" id="matric_board"
                 placeholder="">
-            <input type="number" class="form-control my-2  " value="" name="fsc_board" id="fsc_board"
+            <input type="text" class="form-control my-2  " value="" name="fsc_board" id="fsc_board"
                 placeholder="">
-            <input type="number" class="form-control mt-2  " value="" name="becholars_board"
+            <input type="text" class="form-control mt-2  " value="" name="becholars_board"
                 id="becholars_board" placeholder="">
-            <input type="number" class="form-control mt-2  " value="" name="master_board" id="master_board"
+            <input type="text" class="form-control mt-2  " value="" name="master_board" id="master_board"
                 placeholder="">
-            <input type="number" class="form-control mt-2  " value="" name="masters_board"
+            <input type="text" class="form-control mt-2  " value="" name="masters_board"
                 id="masters_board" placeholder="">
         </div>
         <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Date Ended</label>
             <br>
             <br>
-            <input type="number" class="form-control my-2" value="" min="1971" max="2021"
+            <input type="text" class="form-control my-2" value="{{$matric[0]['DateEnd']}}" min="1971" max="2021"
                 name="matric_passing_year" id="matric_passing_year" placeholder="2019">
-            <input type="number" class="form-control my-2  " value="" min="1971" max="2021"
+            <input type="text" class="form-control my-2  " value="" min="1971" max="2021"
                 name="fsc_passing_year" id="fsc_passing_year" placeholder="2021">
-            <input type="number" class="form-control mt-2  " value="" name="becholars_passing_year"
+            <input type="text" class="form-control mt-2  " value="" name="becholars_passing_year"
                 id="becholars_passing_year" placeholder="2021">
-            <input type="number" class="form-control mt-2  " value="" name="master_passing_year"
+            <input type="text" class="form-control mt-2  " value="" name="master_passing_year"
                 id="master_passing_year" placeholder="2021">
-            <input type="number" class="form-control mt-2  " value="" name="masters_passing_year"
+            <input type="text" class="form-control mt-2  " value="" name="masters_passing_year"
                 id="masters_passing_year" placeholder="2021">
         </div>
         <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Roll No.</label>
             <br>
             <br>
-            <input type="number" class="form-control my-2" value="" name="matric_rollno" id="matric_rollno"
+            <input type="number" class="form-control my-2" value="{{$matric[0]['Rollno']}}" name="matric_rollno" id="matric_rollno"
                 placeholder="123456">
             <input type="number" class="form-control my-2" value="" name="fsc_rollno" id="fsc_rollno"
                 placeholder="123456">
@@ -522,7 +529,7 @@
             <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Total Marks</label>
             <br>
             <br>
-            <input type="number" class="form-control my-2" value="" min="1" max="1100"
+            <input type="number" class="form-control my-2" value="{{$matric[0]['TotalMarks']}}" min="1" max="1100"
                 name="matric_total_marks" id="matric_total_marks" placeholder="1100">
             <input type="number" class="form-control my-2  " value="" min="1" max="1100"
                 name="fsc_total_marks" id="fsc_total_marks" placeholder="1100">
@@ -537,7 +544,7 @@
             <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Marks Obtained</label>
             <br>
             <br>
-            <input type="number" class="form-control  my-2" value="" name="matric_marks_obtained"
+            <input type="number" class="form-control  my-2" value="{{$matric[0]['ObtainedMarks']}}" name="matric_marks_obtained"
                 id="matric_marks_obtained" placeholder="700">
             <input type="number" class="form-control my-2  " value="" name="fsc_marks_obtained"
                 id="fsc_marks_obtained" placeholder="700">
@@ -548,26 +555,11 @@
             <input type="number" class="form-control mt-2  " value="" name="masters_marks_obtained"
                 id="masters_marks_obtained" placeholder="700">
         </div>
-        <div class="pl-3 pt-3" style="width: 12.5%;">
-            <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Marks
-                Percentage</label>
-            <br>
-            <br>
-            <input type="number" class="form-control  my-2" value="" name="matric_percentage"
-                id="matric_percentage" READONLY placeholder="90%">
-            <input type="number" class="form-control my-2  " value="" name="fsc_percentage"
-                id="fsc_percentage" READONLY placeholder="90%">
-            <input type="number" class="form-control mt-2  " value="" name="becholars_percentage"
-                id="becholars_percentage" READONLY placeholder="90%">
-            <input type="number" class="form-control mt-2  " value="" name="master_percentage"
-                id="master_percentage" READONLY placeholder="90%">
-            <input type="number" class="form-control mt-2  " value="" name="masters_percentage"
-                id="masters_percentage" READONLY placeholder="90%">
-        </div>
+
         <div class="pl-3 pb-4" style="width: 12%;">
             <label for="Institution" style="font-size: 0.8rem; font-weight: bold;">Institution Appeared</label>
             <br><br>
-            <input type="text" class="form-control my-2  " value="" name="matric_appeared"
+            <input type="text" class="form-control my-2  " value="{{$matric[0]['InstitutionName']}}" name="matric_appeared"
                 id="matric_appeared" placeholder="Bise Lahore">
             <input type="text" class="form-control my-2  " value="" name="fsc_appeared" id="fsc_appeared"
                 placeholder="Bise Lahore">
@@ -588,7 +580,7 @@
     </div>
 
 @include('Admissions.student_js')
-                
-@include('Forms.formFooter')                
+
+@include('Forms.formFooter')
 @endsection
 @include('js.form_submit_script')

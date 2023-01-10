@@ -291,7 +291,7 @@
                 <label style="font-size: 13px">Current Semester <span style="color: red">*</span>
                 </label>
                 <input type="number" value="{{ old('CurrentSemester') }}" name="CurrentSemester" id="CurrentSemester"
-                    class="form-control" maxlength=1>
+                    class="form-control" min="1" max="8">
 
                 <br>
                 @error('CurrentSemester')
@@ -469,30 +469,30 @@
                     <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Date Started <br> i.e
                         (2019) </label>
                     <input type="number" class="form-control my-2  " value="" name="matric_board"
-                        id="matric_board" placeholder="">
+                        id="matric_board" placeholder="" max="{{date("Y")}}">
                     <input type="number" class="form-control my-2  " value="" name="fsc_board" id="fsc_board"
-                        placeholder="">
+                        placeholder="" max="{{date("Y")}}">
                     <input type="number" class="form-control mt-2  " value="" name="becholars_board"
-                        id="becholars_board" placeholder="">
+                        id="becholars_board" placeholder="" max="{{date("Y")}}">
                     <input type="number" class="form-control mt-2  " value="" name="master_board"
-                        id="master_board" placeholder="">
+                        id="master_board" placeholder="" max="{{date("Y")}}">
                     <input type="number" class="form-control mt-2  " value="" name="masters_board"
-                        id="masters_board" placeholder="">
+                        id="masters_board" placeholder="" max="{{date("Y")}}">
                 </div>
                 <div class="pl-3 pt-3" style="width: 12.5%;">
                     <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Date Ended</label>
                     <br>
                     <br>
-                    <input type="number" class="form-control my-2" value="" min="1971" max="2021"
-                        name="matric_passing_year" id="matric_passing_year" placeholder="2019">
-                    <input type="number" class="form-control my-2  " value="" min="1971" max="2021"
-                        name="fsc_passing_year" id="fsc_passing_year" placeholder="2021">
+                    <input type="number" class="form-control my-2" value="" min="1971" max="{{date("Y")}}"
+                        name="matric_passing_year" id="matric_passing_year" placeholder="{{date("Y")}}">
+                    <input type="number" class="form-control my-2  " value="" min="1971" max="{{date("Y")}}"
+                        name="fsc_passing_year" id="fsc_passing_year" placeholder="{{date("Y")}}">
                     <input type="number" class="form-control mt-2  " value="" name="becholars_passing_year"
-                        id="becholars_passing_year" placeholder="2021">
+                        id="becholars_passing_year" placeholder="{{date("Y")}}" min="1971" max="{{date("Y")}}">
                     <input type="number" class="form-control mt-2  " value="" name="master_passing_year"
-                        id="master_passing_year" placeholder="2021">
+                        id="master_passing_year" placeholder="{{date("Y")}}" min="1971" max="{{date("Y")}}">
                     <input type="number" class="form-control mt-2  " value="" name="masters_passing_year"
-                        id="masters_passing_year" placeholder="2021">
+                        id="masters_passing_year" placeholder="{{date("Y")}}" min="1971" max="{{date("Y")}}">
                 </div>
                 <div class="pl-3 pt-3" style="width: 12.5%;">
                     <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Roll No.</label>

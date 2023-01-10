@@ -15,9 +15,8 @@ class AdmissionController extends Controller
 
      public function validation($request){
 
-        $this->validate($request, [
-
-            'Password'          => 'required|max:12',
+         $validat        $this->validate($request, [
+       => 'required|max:12',
             'Std_FName'         => 'required|string|max:20',
             'Std_LName'         => 'required|string|max:15',
             'ClassSection'      => 'required|string||max:1',
@@ -61,8 +60,8 @@ class AdmissionController extends Controller
     public function addStudentAdmission(){
 
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
-        $button = "Add Studen Admission";
-        $title  = 'Add Studen Admissions';
+        $button = "Add Student Admission";
+        $title  = 'Add Student Admissions';
         $route  = '/storeStudentAdmission';
         return
             view('Admissions.addStudentAdmission',
@@ -328,14 +327,27 @@ class AdmissionController extends Controller
         $studentAdmission = Student::where('ID' , $id)->first();
         $degrees = Degree::get();
 
+<<<<<<< Updated upstream
         // dd($id);
-        $studentEducations = StudentEducation::where('Std_ID' , $id);
+        $studentEducations = StudentEducation::where('Std_ID' , $id)->get();
+=======
+        //// ($id);
+        $studentEducations = StStudentEducationwhere('Std_ID' , $id)->get();
+>>>>>>> Stashed changes
+
+        $matric=$studentEducations->where('Degree','Matric');
+        // $matric=$studentEducations->where('Degree','Matric');
+
+<<<<<<< Updated upstream
 
 
-        // dd($studentEducations);
+
+        // dd($matric[0]['ID'],$matric[0]['Degree'],$matric[0]['InstitutionName']);
+=======
+>>>>>>> Stashed changes
 
 
-         return
+  return
          view('Admissions.editStudentAdmission',
             compact(
                 'studentAdmission',
@@ -344,8 +356,14 @@ class AdmissionController extends Controller
                 'button' ,
                 'title' ,
                 'route',
-                'degree'
+<<<<<<< Updated upstream
+                'degree',
+                'matric'
             ));
+=======
+                'degree'
+   ));
+>>>>>>> Stashed changes
     }
 
 
