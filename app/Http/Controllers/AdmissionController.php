@@ -15,8 +15,9 @@ class AdmissionController extends Controller
 
      public function validation($request){
 
-         $validat        $this->validate($request, [
-       => 'required|max:12',
+        $this->validate($request, [
+
+            'Password'          => 'required|max:12',
             'Std_FName'         => 'required|string|max:20',
             'Std_LName'         => 'required|string|max:15',
             'ClassSection'      => 'required|string||max:1',
@@ -48,13 +49,13 @@ class AdmissionController extends Controller
             'stdfile'           => 'required|mimes:jpeg,png,jpg,pdf|max:3072'
 
         ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
     }
 
     public function addStudentAdmission(){
@@ -256,22 +257,24 @@ class AdmissionController extends Controller
     public function storeStudentAdmission(Request $request){
 
         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
-            $this->createStudentDetail($request);
-            $this->createStudentQualification($request);
-          return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Admission Added!
-            ']);
-        }
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
+        //     $this->createStudentDetail($request);
+        //     $this->createStudentQualification($request);
+        //   return response()->json([
+        //     'title' => 'Done' ,
+        //     'type'=> 'success',
+        //     'message'=> 'Admission Added!
+        //     ']);
+            return redirect()->back()->with(['successToaster' => 'Admission Added!' , 'title' => 'Success']);
+
+        //}
     }
 
     public function addStudentExamination(
@@ -327,27 +330,19 @@ class AdmissionController extends Controller
         $studentAdmission = Student::where('ID' , $id)->first();
         $degrees = Degree::get();
 
-<<<<<<< Updated upstream
         // dd($id);
         $studentEducations = StudentEducation::where('Std_ID' , $id)->get();
-=======
-        //// ($id);
-        $studentEducations = StStudentEducationwhere('Std_ID' , $id)->get();
->>>>>>> Stashed changes
 
         $matric=$studentEducations->where('Degree','Matric');
         // $matric=$studentEducations->where('Degree','Matric');
 
-<<<<<<< Updated upstream
 
 
 
         // dd($matric[0]['ID'],$matric[0]['Degree'],$matric[0]['InstitutionName']);
-=======
->>>>>>> Stashed changes
 
 
-  return
+         return
          view('Admissions.editStudentAdmission',
             compact(
                 'studentAdmission',
@@ -356,14 +351,9 @@ class AdmissionController extends Controller
                 'button' ,
                 'title' ,
                 'route',
-<<<<<<< Updated upstream
                 'degree',
                 'matric'
             ));
-=======
-                'degree'
-   ));
->>>>>>> Stashed changes
     }
 
 
