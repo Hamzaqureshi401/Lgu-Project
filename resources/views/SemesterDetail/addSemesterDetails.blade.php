@@ -25,17 +25,38 @@
                     </div>
                     
                     <div class="form-group">
-                      <label>Semester Fee</label>
-                      <input type="number" name="SemesterFee" class="form-control">
+                      <label>Magazine Fee</label>
+                      <input type="number" name="Magazine_Fee" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label>Per Semester</label>
-                      <input type="number" name="PerSemester" class="form-control">
+                      <label>Exam Fee</label>
+                      <input type="number" name="Exam_Fee" class="form-control">
+                    </div>
+                     <div class="form-group">
+                      <label>Society Fee</label>
+                      <input type="number" name="Society_Fee" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label>Per Course</label>
-                      <input type="number" name="PerCourse" class="form-control">
+                      <label>Misc Fee</label>
+                      <input type="number" name="Misc_Fee" class="form-control">
                     </div>
+                     <div class="form-group">
+                      <label>Registration Fee</label>
+                      <input type="number" name="Registration_Fee" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Practical charges</label>
+                      <input type="number" name="Practical_charges" class="form-control">
+                    </div>
+                     <div class="form-group">
+                      <label>SSports Fund</label>
+                      <input type="number" name="Sports_Fund" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Fee Type</label>
+                      <input type="number" name="FeeType" class="form-control">
+                    </div>
+                   
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
                 </form>
 @include('Forms.formFooter')                

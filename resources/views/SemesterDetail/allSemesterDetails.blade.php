@@ -13,8 +13,14 @@
                             <th>Semester</th>
                             
                             <th>Semester Fee</th>
-                            <th>Per Semester</th>
-                            <th>Per Course</th>
+                            <th>Magazine Fee</th>
+                            <th>Exam Fee</th>
+                            <th>Society Fee</th>
+                            <th>Misc Fee</th>
+                            <th>Registration Fee</th>
+                            <th>Practical charges</th>
+                            <th>Sports Fund</th>
+                            <th>Fee Type</th>
                             <!-- <th>Status</th> -->
                             <th>Action</th>
                           </tr>
@@ -30,8 +36,14 @@
                             <td>{{ $semesterDetail->degree->DegreeName ?? '--' }}</td>
                             <td>{{ $semesterDetail->semester->SemSession ?? '--' }}</td>
                             <td>{{ $semesterDetail->SemesterFee  ?? '--'}}</td>
-                            <td>{{ $semesterDetail->PerSemester  ?? '--'}}</td>
-                            <td>{{ $semesterDetail->PerCourse  ?? '--'}}</td>
+                            <td>{{ $semesterDetail->Magazine_Fee  ?? '--'}}</td>
+                            <td>{{ $semesterDetail->Exam_Fee  ?? '--'}}</td>
+                            <td>{{ $semesterDetail->Society_Fee  ?? '--'}}</td>
+                            <td>{{ $semesterDetail->Misc_Fee  ?? '--'}}</td>
+                            <td>{{ $semesterDetail->Registration_Fee  ?? '--'}}</td>
+                            <td>{{ $semesterDetail->Practical_charges  ?? '--'}}</td>
+                            <td>{{ $semesterDetail->Sports_Fund  ?? '--'}}</td>
+                            <td>{{ $semesterDetail->FeeType  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
