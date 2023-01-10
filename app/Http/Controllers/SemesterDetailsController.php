@@ -16,8 +16,14 @@ class SemesterDetailsController extends Controller
             'Degree_ID'         => 'required|numeric|unique:SemesterDetails',
             'Sem_ID'            => 'required|numeric|unique:SemesterDetails',
             'SemesterFee'       => 'required|numeric',
-            'PerSemester'       => 'required|numeric',
-            'PerCourse'         => 'required|numeric',
+            'Magazine_Fee'      => 'required|numeric',
+            'Exam_Fee'          => 'required|numeric',
+            'Society_Fee'       => 'required|numeric',
+            'Misc_Fee'          => 'required|numeric',
+            'Registration_Fee'  => 'required|numeric',
+            'Practical_charges' => 'required|numeric',
+            'Sports_Fund'       => 'required|numeric',
+            'FeeType'           => 'required|numeric',
             
         ]);
         // $validation['validation'] = $validator->errors()->first();
@@ -34,8 +40,14 @@ class SemesterDetailsController extends Controller
             'Degree_ID'         => 'required|numeric',
             'Sem_ID'            => 'required|numeric',
             'SemesterFee'       => 'required|numeric',
-            'PerSemester'       => 'required|numeric',
-            'PerCourse'         => 'required|numeric',
+            'Magazine_Fee'      => 'required|numeric',
+            'Exam_Fee'          => 'required|numeric',
+            'Society_Fee'       => 'required|numeric',
+            'Misc_Fee'          => 'required|numeric',
+            'Registration_Fee'  => 'required|numeric',
+            'Practical_charges' => 'required|numeric',
+            'Sports_Fund'       => 'required|numeric',
+            'FeeType'           => 'required|numeric',
             
         ]);
         // $validation['validation'] = $validator->errors()->first();
@@ -81,8 +93,14 @@ class SemesterDetailsController extends Controller
             @Degree_ID          = '$request->Degree_ID', 
             @Sem_ID             = '$request->Sem_ID', 
             @SemesterFee        = '$request->SemesterFee',
-            @PerSemester        = '$request->PerSemester' , 
-            @PerCourse          = '$request->PerCourse'
+            @Magazine_Fee       = '$request->Magazine_Fee' , 
+            @Exam_Fee           = '$request->Exam_Fee',
+            @Society_Fee        = '$request->Society_Fee' , 
+            @Misc_Fee           = '$request->Misc_Fee',
+            @Registration_Fee   = '$request->Registration_Fee' , 
+            @Practical_charges  = '$request->Practical_charges',
+            @Sports_Fund        = '$request->Sports_Fund' , 
+            @FeeType            = '$request->FeeType'
             ;");
 
         //   return response()->json([
@@ -150,12 +168,18 @@ class SemesterDetailsController extends Controller
         // }else {
               $submit = DB::statement("EXEC sp_UpdateSemesterDetails
 
-            @SemDetail_ID                 = '$request->id', 
-            @Degree_ID           = '$request->Degree_ID', 
-            @Sem_ID              = '$request->Sem_ID', 
-            @SemesterFee         = '$request->SemesterFee',
-            @PerSemester         = '$request->PerSemester' , 
-            @PerCourse   = '$request->PerCourse'
+            @SemDetail_ID       = '$request->id', 
+            @Degree_ID          = '$request->Degree_ID', 
+            @Sem_ID             = '$request->Sem_ID', 
+            @SemesterFee        = '$request->SemesterFee',
+            @Magazine_Fee       = '$request->Magazine_Fee' , 
+            @Exam_Fee           = '$request->Exam_Fee',
+            @Society_Fee        = '$request->Society_Fee' , 
+            @Misc_Fee           = '$request->Misc_Fee',
+            @Registration_Fee   = '$request->Registration_Fee' , 
+            @Practical_charges  = '$request->Practical_charges',
+            @Sports_Fund        = '$request->Sports_Fund' , 
+            @FeeType            = '$request->FeeType'
             ;");
 
 
