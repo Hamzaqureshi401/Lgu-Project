@@ -11,8 +11,15 @@
                     </div>
                     <div class="form-group">
                       <label>Degree Level</label>
-                      <input type="number" name="DegreeLevel" class="form-control"required>
+                      <select class="form-control" name="DegreeLevel"  required>
+                        
+                        <option value="{{ 'UG' }}" selected>{{ 'UG' }}</option>
+                       <option value="{{ 'PG' }}">{{ 'PG' }}</option>
+                       <option value="{{ 'G' }}">{{ 'G' }}</option>
+                       
+                      </select>
                     </div>
+                    
                     <div class="form-group">
                       <label>Degree Full Name</label>
                       <input type="text" name="DegreeFullName" class="form-control"required>

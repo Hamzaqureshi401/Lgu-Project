@@ -43,8 +43,12 @@ class ChallanController extends Controller
 
     public function printChallan(){
 
-       $Std_ID = session::get('id');
-       $challan = Challan::first();
+        $session           = $this->getSessionData();
+        $request['Std_ID'] = $session['std_ID'];
+        
+        $registration = Registration::where('Std_ID' , $request['Std_ID'])->first();
+       
+        $challan = Challan::where('Reg_ID' , $registration->ID)->first();
 
 
 

@@ -11,7 +11,7 @@
                             </th>
                             <th>Degree</th>
                             <th>Semester</th>
-                            <th>Semester No</th>
+                            
                             <th>Semester Fee</th>
                             <th>Per Semester</th>
                             <th>Per Course</th>
@@ -29,7 +29,6 @@
                             </td>
                             <td>{{ $semesterDetail->degree->DegreeName ?? '--' }}</td>
                             <td>{{ $semesterDetail->semester->SemSession ?? '--' }}</td>
-                            <td>{{ $semesterDetail->SemesterNo  ?? '--'}}</td>
                             <td>{{ $semesterDetail->SemesterFee  ?? '--'}}</td>
                             <td>{{ $semesterDetail->PerSemester  ?? '--'}}</td>
                             <td>{{ $semesterDetail->PerCourse  ?? '--'}}</td>

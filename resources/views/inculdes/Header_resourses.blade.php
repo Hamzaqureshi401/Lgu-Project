@@ -10,6 +10,8 @@
     <title>LAHORE GARRISON UNIVERSITY</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/app.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bundles/izitoast/css/iziToast.min.css') }}">
+  
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/components.css') }}">

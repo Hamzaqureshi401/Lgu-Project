@@ -10,8 +10,8 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Dpt_Name</th>
-                            <th>Dpt_FullName</th>
+                            <th>Dpt Name</th>
+                            <th>Dpt Full Name</th>
                             <th>HODUID</th>
                             <th>DeanUID</th>
                             <th>Status</th>

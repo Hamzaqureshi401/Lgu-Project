@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Otika - Admin Dashboard Template</title>
+  <title>Lahore Garrison University</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bundles/izitoast/css/iziToast.min.css') }}">
@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 
   <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+   <link rel='shortcut icon'  width="5px" height="2px" type='image/x-icon' href='{{ asset('images/LOGO-Final-V2.png') }}' />
 
     <!-- Normalize or reset CSS with your favorite library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">

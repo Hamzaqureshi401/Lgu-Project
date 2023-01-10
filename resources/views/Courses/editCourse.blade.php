@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                       <label>Credit Hours</label>
-                      <input type="number" name="CreditHours" class="form-control" value="{{ $courses->CreditHours }}" required>
+                      <input type="tel" id="CreditHours" data-inputmask="'mask': '9-9-99'" placeholder="Example 9-9-09" maxlength=6 name="CreditHours" class="form-control" value="{{ $courses->CreditHours }}" required>
                     </div>
                     <div class="form-group">
                       <label>Lecture Type</label>
@@ -27,7 +27,17 @@
     
                 
 @include('Forms.formFooter')   
-@include('js.form_submit_script')             
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function($){
+  $('#CreditHours').click(function(){
+ $(":input").inputmask();
+});
+});
+</script>
 @endsection
 
 

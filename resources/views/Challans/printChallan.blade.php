@@ -22,7 +22,7 @@
 </body>
 <body>
     <section>
-        <div class="bg-white text-center" style="margin-bottom: 90px;">
+        <div class="bg-white text-center" style=" margin-left: 50px; margin-bottom: 90px; width:93%;">
    <a class="btn btn-warning btn-icon icon-left" style="color: white; margin: 10px;" onclick="printDiv('printableArea')"><i class="fas fa-print"></i> Print Challan</a>
    
 </div>

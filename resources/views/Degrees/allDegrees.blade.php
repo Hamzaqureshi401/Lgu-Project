@@ -10,12 +10,12 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>DegreeName</th>
-                            <th>DegreeLevel</th>
-                            <th>DegreeFullName</th>
-                            <th>Dpt_ID</th>
-                            <th>Total_Credit_Hours</th>
-                            <th>status</th>
+                            <th>Degree Name</th>
+                            <th>Degree Level</th>
+                            <th>Degree Full Name</th>
+                            <th>Department</th>
+                            <th>Total Credit Hours</th>
+                            <th>Status</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -30,7 +30,7 @@
                             <td>{{ $degree->DegreeName ?? '--' }}</td>
                             <td>{{ $degree->DegreeLevel ?? '--' }}</td>
                             <td>{{ $degree->DegreeFullName ?? '--' }}</td>
-                            <td>{{ $degree->Dpt_ID ?? '--' }}</td>
+                            <td>{{ $degree->department->Dpt_Name ?? '--' }}</td>
                             <td>{{ $degree->Total_Credit_Hours ?? '--' }}</td>
                             <td>{{ $degree->status ?? '--' }}</td>
                             <td><div class="card-body">

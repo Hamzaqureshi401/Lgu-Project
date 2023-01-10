@@ -14,19 +14,19 @@
                     </div>
                     <div class="form-group">
                       <label>DOB</label>
-                      <input type="Date" name="DOB" class="form-control" value="{{ $employee->DOB}}" >
+                      <input type="Date" name="DOB" class="form-control" value="{{ date('Y-m-d', strtotime($employee->DOB)) }}" >
                     </div>
                     <div class="form-group">
                       <label>CNIC</label>
-                      <input type="text" name="CNIC" class="form-control" value="{{ $employee->CNIC }}" >
+                      <input type="tel" name="CNIC" class="form-control cnic"   data-inputmask="'mask': '99999-9999999-9'" value="{{ $employee->CNIC }}" >
                     </div>
                 <div class="form-group">
                       <label>Date Of Joining</label>
-                      <input type="Date" name="DateOfJoining" class="form-control" value="{{ $employee->DateOfJoining}}" >
+                      <input type="Date" name="DateOfJoining" class="form-control" value="{{ date('Y-m-d', strtotime($employee->DateOfJoining)) }}" >
                     </div>
                 <div class="form-group">
                       <label>Date Of Appointment</label>
-                      <input type="Date" name="DateOfAppointment" class="form-control" value="{{ $employee->DateOfAppointment}}" >
+                      <input type="Date" name="DateOfAppointment" class="form-control" value="{{ date('Y-m-d', strtotime($employee->DateOfAppointment)) }}" >
                     </div>
                 <div class="form-group">
                       <label>Specialization</label>
@@ -78,15 +78,24 @@
                     </div>
                  <div class="form-group">
                       <label>Contact Number</label>
-                      <input type="number" name="Contact_Number" class="form-control" value="{{ $employee->Contact_Number}}" >
+                      <input type="tel" name="Contact_Number" class="form-control cnic"  data-inputmask="'mask': '9999-9999999'" value="{{ $employee->Contact_Number}}" >
                     </div>
                 <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
             </div> 
                 
 @include('Forms.formFooter')                
 @endsection
-@include('js.form_submit_script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function($){
+  $('.cnic').click(function(){
+ $(":input").inputmask();
+});
+});       
+</script>  
 
 
       

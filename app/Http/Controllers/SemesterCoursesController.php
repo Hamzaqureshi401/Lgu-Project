@@ -24,7 +24,7 @@ class SemesterCoursesController extends Controller
             'PresentationWeightage' => 'required|max:10',
             'MidWeightage'          => 'required|max:10',
             'FinalWeightage'        => 'required|max:10',
-            'Section'               => 'required|max:10|unique:SemesterCourses',
+            'Section'               => 'required|max:1|unique:SemesterCourses',
             'Course_ID'             => 'required|numeric|unique:SemesterCourses',
             
         ]);
@@ -181,6 +181,7 @@ class SemesterCoursesController extends Controller
         //     'message'=> ''.$validator['validation']
         //     ]);
         // }else {
+         //dd($request->all());
               $submit = DB::statement("EXEC sp_UpdateSemesterCourses
 
             @SemCourse_ID           = '$request->SemCourse_ID', 

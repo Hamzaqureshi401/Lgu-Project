@@ -30,7 +30,7 @@ class CoursesController extends Controller
 
 
         $this->validate($request, [
-            'CourseCode'        => 'required|max:30',
+            'CourseCode'        => 'required|max:6',
             'CourseName'        => 'required|max:60',
             'CreditHours'       => 'required|max:10',
             'LectureType'       => 'required|max:10',
@@ -58,9 +58,35 @@ class CoursesController extends Controller
         );
     }
 
+    protected function validteCreditHours($request){
+
+
+            $CourseCode = explode('-', $request->CreditHours);
+            $CourseCode = end($CourseCode);
+            
+            if ($CourseCode[0] == 0){
+                 $CourseCode = $CourseCode[1];    
+            }elseif($CourseCode[1] == '_'){
+
+                $CourseCode = $CourseCode[0];
+               
+            }
+            else{
+                 $CourseCode = $CourseCode;
+            }
+            // dd($CourseCode);
+            
+            $Course = explode('-', $request->CreditHours);
+            $Course[2] = $CourseCode;
+            return implode('-', $Course);
+    }
+
     public function storeCourses(Request $request){
 
+       // dd($request->all());
+
         $validator = $this->validation($request);
+        $CreditHours = $this->validteCreditHours($request);
         // if ($validator['error'] == true) {
         //     return
         //     response()->json([
@@ -69,10 +95,11 @@ class CoursesController extends Controller
         //     'message'=> ''.$validator['validation']
         //     ]);
         // }else {
+        
              $submit = DB::update("EXEC sp_InsertCourses
             @CourseCode  = '$request->CourseCode',
             @CourseName  = '$request->CourseName',
-            @CreditHours = '$request->CreditHours' ,
+            @CreditHours = '$CreditHours' ,
             @LectureType = '$request->LectureType';");
 
           // return response()->json([
@@ -122,6 +149,9 @@ class CoursesController extends Controller
     public function updateCourse(Request $request){
 
         $validator = $this->validationUpdate($request);
+        $CreditHours = $this->validteCreditHours($request);
+
+        
         //  $validator = $this->validation($request);
         // if ($validator['error'] == true) {
         //     return
@@ -136,7 +166,7 @@ class CoursesController extends Controller
             @Course_ID   = '$request->id',
             @CourseCode  = '$request->CourseCode',
             @CourseName  = '$request->CourseName',
-            @CreditHours = '$request->CreditHours' ,
+            @CreditHours = '$CreditHours' ,
             @LectureType = '$request->LectureType';");
 
         // return response()->json([

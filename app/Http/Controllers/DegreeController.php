@@ -132,7 +132,10 @@ class DegreeController extends Controller
     }
 
     public function updateDegree(Request $request){
+
+       // dd($request->all());
          $validator = $this->validationUpdate($request);
+         //dd(strlen($request->DegreeFullName));
         //  $validator = $this->validation($request);
         // if ($validator['error'] == true) {
         //     return
@@ -150,7 +153,8 @@ class DegreeController extends Controller
             @DegreeFullName      = '$request->DegreeFullName' ,
             @Dpt_ID              = '$request->Dpt_ID',
             @Total_Credit_Hours  = '$request->Total_Credit_Hours' ,
-            @Status              = '$request->Status';");
+            @Status              = '$request->Status';
+            ");
 
       //   return response()->json([
       //       'title' => 'Done' ,

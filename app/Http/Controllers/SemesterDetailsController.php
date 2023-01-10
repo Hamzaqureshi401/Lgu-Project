@@ -15,7 +15,6 @@ class SemesterDetailsController extends Controller
         $this->validate($request, [
             'Degree_ID'         => 'required|numeric|unique:SemesterDetails',
             'Sem_ID'            => 'required|numeric|unique:SemesterDetails',
-            'SemesterNo'        => 'required|numeric',
             'SemesterFee'       => 'required|numeric',
             'PerSemester'       => 'required|numeric',
             'PerCourse'         => 'required|numeric',
@@ -34,7 +33,6 @@ class SemesterDetailsController extends Controller
         $this->validate($request, [
             'Degree_ID'         => 'required|numeric',
             'Sem_ID'            => 'required|numeric',
-            'SemesterNo'        => 'required|numeric',
             'SemesterFee'       => 'required|numeric',
             'PerSemester'       => 'required|numeric',
             'PerCourse'         => 'required|numeric',
@@ -82,7 +80,6 @@ class SemesterDetailsController extends Controller
              $submit = DB::update("EXEC InsertSemesterDetails 
             @Degree_ID          = '$request->Degree_ID', 
             @Sem_ID             = '$request->Sem_ID', 
-            @SemesterNo         = '$request->SemesterNo' , 
             @SemesterFee        = '$request->SemesterFee',
             @PerSemester        = '$request->PerSemester' , 
             @PerCourse          = '$request->PerCourse'
@@ -156,7 +153,6 @@ class SemesterDetailsController extends Controller
             @SemDetail_ID                 = '$request->id', 
             @Degree_ID           = '$request->Degree_ID', 
             @Sem_ID              = '$request->Sem_ID', 
-            @SemesterNo          = '$request->SemesterNo' , 
             @SemesterFee         = '$request->SemesterFee',
             @PerSemester         = '$request->PerSemester' , 
             @PerCourse   = '$request->PerCourse'

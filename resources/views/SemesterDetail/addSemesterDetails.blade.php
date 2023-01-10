@@ -23,10 +23,7 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
-                      <label>Semester No</label>
-                      <input type="number" name="SemesterNo" class="form-control">
-                    </div>
+                    
                     <div class="form-group">
                       <label>Semester Fee</label>
                       <input type="number" name="SemesterFee" class="form-control">

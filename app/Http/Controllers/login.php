@@ -80,9 +80,7 @@ class login extends Controller
                     break;
             }
         } else {
-            $error = "No Employee found!";
-             return redirect()->route('main')
-                        ->withSuccess('Signed in');
+            return  redirect()->route('emp.login')->with(['errorToaster'   => 'Employee Not Found' , 'title' => 'No Record']);
         }
     }
 
@@ -92,7 +90,7 @@ class login extends Controller
 
     public function Std_login(Request $Student_data)
     {
-        $Student_data->validate([
+        $this->validate($Student_data, [
             'rollno' => 'required',
             'password' => 'required',
             'batch' => 'required',
@@ -105,15 +103,26 @@ class login extends Controller
         $roll       = $batch . "/" . $department . "/" . $rollno;
         
         $submit     = DB::table('Students')->where(['StdRollNo' => $roll , 'password' => $password])->first();
-        $sem_ID =  Semester::where('SemSession' , $batch)->first()->ID;
-        $dpt_ID  = Department::where('Dpt_Name' , $department)->first()->ID;
-        $degreeID  = Degree::where('DegreeName'   , $department)->first()->ID;
-        
-        //DB::select("EXEC sp_StudentsLogin @StdRollNo = '$roll',@Password='$password';");
-       // dd($roll , $password , $submit);
-        if (!empty($submit)) {
+    
+         $sem_ID     =  Semester::where('SemSession' , $batch)->first()->ID ?? false;
 
-            
+            $dpt_ID     = Department::where('Dpt_Name' , $department)->first()->ID ?? false;
+           
+            $degreeID   = Degree::where('Dpt_ID'   , $dpt_ID)->first()->ID  ?? false;
+
+             if (empty($sem_ID)){
+                 return  redirect()->route('std.login')->with(['errorToaster'   => 'Please Ask Admin to Add Semester' , 'title' => 'Your Semester Not found']);
+            }
+             if (empty($dpt_ID)){
+                 return  redirect()->route('std.login')->with(['errorToaster'   => 'Please Ask Admin to Add Department' , 'title' => 'Your Department Not found']);
+            }
+             if (empty($degreeID)){
+                 return  redirect()->route('std.login')->with(['errorToaster'   => 'Please Ask Admin to Add Degree' , 'title' => 'Your Degree Not found']);
+            }
+      
+        if ((!empty($submit))) {
+
+           
             session([
                 'std_session' => 'session created', 
                 'Std_FName'   => $submit->Std_FName, 
@@ -124,14 +133,13 @@ class login extends Controller
                 'degree_ID'   => $degreeID
             ]);
 
+    
+
            
          return redirect()->route('add.Enrollment')
                         ->withSuccess('Signed in');
         } else {
-            $error = "No Student found!";
-            $batch = DB::table('Students')->select('AdmissionSession')->distinct()->get();
-            $department = DB::table('Departments')->select('Dpt_Name')->distinct()->get();
-            return view('Student_Login', compact('error', 'batch', 'department'));
+            return  redirect()->route('std.login')->with(['errorToaster'   => 'Student Not Found' , 'title' => 'No Record']);
         }
     }
     ###################End Student Login #####################

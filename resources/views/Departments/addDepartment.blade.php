@@ -6,11 +6,11 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Dpt Name</label>
-                      <input type="text" name="Dpt_Name" class="form-control" required>
+                      <input type="text" name="Dpt_Name" class="form-control" required onkeydown="return /[a-z]/i.test(event.key)">
                     </div>
                     <div class="form-group">
                       <label>Dpt Full Name</label>
-                      <input type="text" name="Dpt_FullName" class="form-control"required>
+                      <input type="text" name="Dpt_FullName" class="form-control"required onkeydown="return /[a-z]/i.test(event.key)">
                     </div>
                     <div class="form-group">
                       <label>HOD U ID</label>

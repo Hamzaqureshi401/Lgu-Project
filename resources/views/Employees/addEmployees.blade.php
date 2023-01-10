@@ -7,11 +7,11 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Emp First Name</label>
-                      <input type="text" name="Emp_FirstName" class="form-control" >
+                      <input type="text" name="Emp_FirstName" class="form-control" onkeydown="return /[a-z]/i.test(event.key)">
                     </div>
                     <div class="form-group">
                       <label>Emp Last Name</label>
-                      <input type="text" name="Emp_LastName" class="form-control">
+                      <input type="text" name="Emp_LastName" class="form-control"onkeydown="return /[a-z]/i.test(event.key)">
                     </div>
                     <div class="form-group">
                       <label>DOB</label>
@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                       <label>CNIC</label>
-                      <input type="number" name="CNIC" class="form-control">
+                      <input type="tel" name="CNIC" class="form-control cnic"   data-inputmask="'mask': '99999-9999999-9'" maxlength="15">
                     </div>
                 <div class="form-group">
                       <label>Date Of Joining</label>
@@ -86,14 +86,24 @@
                     </div>
                  <div class="form-group">
                       <label>Contact Number</label>
-                      <input type="number" name="Contact_Number" class="form-control">
+                      <input type="tel" name="Contact_Number" class="form-control cnic"  data-inputmask="'mask': '9999-9999999'">
                     </div>
                   
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
                 </form>
-@include('Forms.formFooter')                
+@include('Forms.formFooter')     
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function($){
+  $('.cnic').click(function(){
+ $(":input").inputmask();
+});
+});       
+</script>    
 @endsection
-@include('js.form_submit_script')
 
 
 

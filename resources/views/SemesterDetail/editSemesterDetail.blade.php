@@ -24,10 +24,7 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
-                      <label>Semester No</label>
-                      <input type="number" name="SemesterNo" class="form-control" value="{{ $semesterDetail->SemesterNo }}"required>
-                    </div>
+                   
                     <div class="form-group">
                       <label>Semester Fee</label>
                       <input type="text" name="SemesterFee" class="form-control" value="{{ $semesterDetail->SemesterFee }}"required>

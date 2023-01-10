@@ -5,11 +5,11 @@
                     <input type="hidden" name="id" value="{{ $department->ID }}">
                     <div class="form-group">
                       <label>Dpt Name</label>
-                      <input type="text" name="Dpt_Name" class="form-control" value="{{ $department->Dpt_Name }} ">
+                      <input type="text" name="Dpt_Name" class="form-control" value="{{ $department->Dpt_Name }} " onkeydown="return /[a-z]/i.test(event.key)">
                     </div>
                     <div class="form-group">
                       <label>Dpt Full Name</label>
-                      <input type="text" name="Dpt_FullName" class="form-control" value="{{ $department->Dpt_FullName }}" required>
+                      <input type="text" name="Dpt_FullName" class="form-control" value="{{ $department->Dpt_FullName }}" required onkeydown="return /[a-z]/i.test(event.key)">
                     </div>
                     <div class="form-group">
                       <label>HODUID</label>
