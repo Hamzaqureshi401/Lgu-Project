@@ -203,9 +203,9 @@
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
-            <li class="dropdown">
+            <!-- <li class="dropdown">
               <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
-            </li>
+            </li> -->
         @if (session()->has('std_session')) 
             @include('layouts.Side Nav Bar.student_side_nav_bar')
         @else
