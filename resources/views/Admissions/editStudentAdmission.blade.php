@@ -404,56 +404,56 @@
     <br>
 
     {{--
-                                <div class="card-body">
-                                    <table class="table">
-                                        <thead style="font-size: 12px">
-                                            <tr>
-                                                <th scope="col">Examination
-                                                    Passed</th>
-                                                <th scope="col">Name of Board
-                                                    i.e (BISE Lahore)</th>
-                                                <th scope="col">Passing Year
-                                                </th>
-                                                <th scope="col">Roll No.
-                                                </th>
-                                                <th scope="col">Total Marks
-                                                </th>
-                                                <th scope="col">Marks Obtained</th>
-                                                <th scope="col">Marks Percentage</th>
-                                                <th scope="col">Institution Appeared</th>
+        <div class="card-body">
+            <table class="table">
+                <thead style="font-size: 12px">
+                    <tr>
+                        <th scope="col">Examination
+                            Passed</th>
+                        <th scope="col">Name of Board
+                            i.e (BISE Lahore)</th>
+                        <th scope="col">Passing Year
+                        </th>
+                        <th scope="col">Roll No.
+                        </th>
+                        <th scope="col">Total Marks
+                        </th>
+                        <th scope="col">Marks Obtained</th>
+                        <th scope="col">Marks Percentage</th>
+                        <th scope="col">Institution Appeared</th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody >
-                                            <tr >
-                                                <th scope="row">
-                                                    <input style="margin-top: 10px;" type="email" value="{{ old('FatherEmail') }}"
-                                                        name="FatherEmail" id="FatherEmail" class="form-control"
-                                                        maxlength=25>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr >
+                        <th scope="row">
+                            <input style="margin-top: 10px;" type="email" value="{{ old('FatherEmail') }}"
+                                name="FatherEmail" id="FatherEmail" class="form-control"
+                                maxlength=25>
 
-                                                    <br>
-                                                    @error('FatherEmail')
-                                                        <div class="alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </th>
+                            <br>
+                            @error('FatherEmail')
+                                <div class="alert-danger">{{ $message }}</div>
+                            @enderror
+                        </th>
 
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
 
-                                        </tbody>
-                                    </table>
-                                </div> --}}
+                </tbody>
+            </table>
+        </div> --}}
 
-{{dd($studentEducations);}}
-    <div class="row">
+
+    <div class="row d-flex">
         <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Examination <br>
-                Passed</label>
+                Passed
+            </label>
 
             <select name="matric_examination" id="matric_examination" class="form-control my-2  ">
-                <option value="Matric"></option>
                 <option value="Matric">Matric</option>
                 <option value="O-Level">O-Level</option>
             </select>
