@@ -326,16 +326,10 @@ class AdmissionController extends Controller
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
         $button = 'Update Student Info';
         $title  = 'Edit Student Info';
-        $route  = '/editStudentAdmission';
+        $route  = '/updateStudentAdmission';
         $studentAdmission = Student::where('ID' , $id)->first();
         $degrees = Degree::get();
-
-        // dd($id);
         $studentEducations = StudentEducation::where('Std_ID' , $id)->get();
-
-        $matric=$studentEducations->where('Degree','Matric');
-        // $matric=$studentEducations->where('Degree','Matric');
-
 
 
 
@@ -351,13 +345,15 @@ class AdmissionController extends Controller
                 'button' ,
                 'title' ,
                 'route',
-                'degree',
-                'matric'
+                'degree'
+               
             ));
     }
 
 
      public function updateStudentAdmission(Request $request){
+
+        dd($request->all());
 
         $validator = $this->validation($request);
         if ($validator['error'] == true) {

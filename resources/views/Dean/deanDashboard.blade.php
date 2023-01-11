@@ -1,10 +1,8 @@
 @extends('layouts.app_new')
 @section('title')  @endsection <!--add title here -->
 @section('content')
-@push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-@endpush                      <!-- Main Content -->
-      <div class="">
+       <!-- Main Content -->
+      
         <section class="section">
           <div class="row ">
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -259,16 +257,8 @@
 
         </section>
     
-      </div>
-      <footer class="main-footer">
-        <div class="footer-left">
-          <a href="templateshub.net"></a></a>
-        </div>
-        <div class="footer-right">
-        </div>
-      </footer>
-    </div>
-  </div>
+      
+   
 <script src="{{ asset('assets/js/app.min.js') }}"></script>
 <script src="{{ asset('assets/js/page/index.js') }}"></script>
 <script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script>

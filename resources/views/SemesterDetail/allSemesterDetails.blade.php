@@ -21,6 +21,7 @@
                             <th>Practical charges</th>
                             <th>Sports Fund</th>
                             <th>Fee Type</th>
+                            <th>Tution Fee</th>
                             <!-- <th>Status</th> -->
                             <th>Action</th>
                           </tr>
@@ -33,7 +34,7 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $semesterDetail->degree->DegreeName ?? '--' }}</td>
+                            <td>{{ $semesterDetail->degreeBatches->degree->DegreeName ?? '--'}} / {{ $semesterDetail->degreeBatches->batch->SemSession ?? '--'}}</td>
                             <td>{{ $semesterDetail->semester->SemSession ?? '--' }}</td>
                             <td>{{ $semesterDetail->SemesterFee  ?? '--'}}</td>
                             <td>{{ $semesterDetail->Magazine_Fee  ?? '--'}}</td>
@@ -44,6 +45,7 @@
                             <td>{{ $semesterDetail->Practical_charges  ?? '--'}}</td>
                             <td>{{ $semesterDetail->Sports_Fund  ?? '--'}}</td>
                             <td>{{ $semesterDetail->FeeType  ?? '--'}}</td>
+                            <td>{{ $semesterDetail->Tuition_Fee  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->

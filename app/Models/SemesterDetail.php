@@ -12,7 +12,10 @@ class SemesterDetail extends Model
     public function degree(){
         return $this->belongsTo('App\Models\Degree' , 'Degree_ID');
     }
-      public function semester(){
+    public function semester(){
         return $this->belongsTo('App\Models\Semester', 'Sem_ID');
-    }
+    } 
+    public function degreeBatches(){
+        return $this->belongsTo('App\Models\DegreeBatche', 'DegBatches_ID');
+    } 
 }

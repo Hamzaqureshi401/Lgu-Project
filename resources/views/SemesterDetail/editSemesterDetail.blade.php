@@ -6,12 +6,10 @@
                     <input type="hidden" name="id" value="{{ $semesterDetail->ID }}">
                  <div class="card-body">
                    <div class="form-group">
-                      <label>Degree</label>
-                      <select class="form-control" name="Degree_ID"  >
-                        @foreach($degrees as $degree)
-                        <option value="{{ $degree->ID }}" {{ $degree->ID == $semesterDetail->Degree_ID ? 'selected' : '' }}>
-                          {{ $degree->DegreeName }}
-                        </option>
+                      <label>Degree / Course</label>
+                      <select class="form-control" name="DegBatches_ID"  >
+                        @foreach($degreeCourses as $degreeCourse)
+                        <option value="{{ $degreeCourse->ID }}" {{ $semesterDetail->DegBatches_ID == $degreeCourse->ID ? 'selected' : '' }}>{{ $degreeCourse->degree->DegreeName }} / {{ $degreeCourse->batch->SemSession }} </option>
                         @endforeach
                       </select>
                     </div>
@@ -28,6 +26,11 @@
                     <div class="form-group">
                       <label>Semester Fee</label>
                       <input type="text" name="SemesterFee" class="form-control" value="{{ $semesterDetail->SemesterFee }}"required>
+                    </div>
+
+                     <div class="form-group">
+                      <label>Tution Fee</label>
+                      <input type="text" name="Tuition_Fee" class="form-control" value="{{ $semesterDetail->Tuition_Fee }}"required>
                     </div>
                      
                     <div class="form-group">

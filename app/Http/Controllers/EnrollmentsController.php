@@ -216,7 +216,9 @@ class EnrollmentsController extends Controller
          $registration      = Registration::where('Std_ID' , $request['Std_ID'])->first();
              
          $Sem_ID = $registration->first()->Sem_ID;
-         $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'Degree_ID' => $session['degree_ID']])->first() ?? '';
+          $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
+         $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'DegBatches_ID' => $DegreeBatche->ID])->first() ?? '';
+        // dd($Sem_ID  , $sem_details , $DegreeBatche , $DegreeBatche->ID);
          //dd($degreeName[1] ,$degree);
          $registrationId = $registration->ID;
 
@@ -228,6 +230,7 @@ class EnrollmentsController extends Controller
         }else{
             $fee = $sem_details->SemesterFee;
         }
+        
         $IssueDate  = date('m/d/Y h:i:s a', time());
         $DueDate    = Date('m/d/Y', strtotime('+10 days'));
         $PaidDate   = "";

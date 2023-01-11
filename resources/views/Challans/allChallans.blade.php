@@ -24,6 +24,7 @@
                           </tr>
                         </thead>
                         <tbody>
+                          @if(!empty($challans))
                           @foreach($challans as $challan)
                           <tr>
                             <td>
@@ -52,11 +53,14 @@
                             @endif
                           </tr>
                            @endforeach
+                           @endif
                         </tbody>
                       </table>
                     </div>
                     <div class="d-flex justify-content-center">
+                      @if(!empty($challans))
                         {{ $challans->links() }}
+                        @endif
                     </div>
 @include('Table.table_footer') 
 @endsection   

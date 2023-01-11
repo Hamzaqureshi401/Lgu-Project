@@ -5,6 +5,7 @@ use App\Models\Degree;
 use App\Models\Semester;
 use App\Models\SemesterDetail;
 use Illuminate\Support\Facades\DB;
+use App\Models\DegreeBatche;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -13,7 +14,7 @@ class SemesterDetailsController extends Controller
     public function validation($request){
 
         $this->validate($request, [
-            'Degree_ID'         => 'required|numeric|unique:SemesterDetails',
+            'DegBatches_ID'         => 'required|numeric|unique:SemesterDetails',
             'Sem_ID'            => 'required|numeric|unique:SemesterDetails',
             'SemesterFee'       => 'required|numeric',
             'Magazine_Fee'      => 'required|numeric',
@@ -24,6 +25,7 @@ class SemesterDetailsController extends Controller
             'Practical_charges' => 'required|numeric',
             'Sports_Fund'       => 'required|numeric',
             'FeeType'           => 'required|numeric',
+            'Tuition_Fee'       => 'required|numeric',
             
         ]);
         // $validation['validation'] = $validator->errors()->first();
@@ -37,9 +39,9 @@ class SemesterDetailsController extends Controller
      public function validationUpdate($request){
 
         $this->validate($request, [
-            'Degree_ID'         => 'required|numeric',
+            'DegBatches_ID'         => 'required|numeric',
             'Sem_ID'            => 'required|numeric',
-            'SemesterFee'       => 'required|numeric',
+             'SemesterFee'       => 'required|numeric',
             'Magazine_Fee'      => 'required|numeric',
             'Exam_Fee'          => 'required|numeric',
             'Society_Fee'       => 'required|numeric',
@@ -48,6 +50,7 @@ class SemesterDetailsController extends Controller
             'Practical_charges' => 'required|numeric',
             'Sports_Fund'       => 'required|numeric',
             'FeeType'           => 'required|numeric',
+            'Tuition_Fee'       => 'required|numeric',
             
         ]);
         // $validation['validation'] = $validator->errors()->first();
@@ -59,6 +62,11 @@ class SemesterDetailsController extends Controller
         // return $validation;
     }
 
+    public function uniqueSemesterdetails($request){
+
+        return SemesterDetail::where(['DegBatches_ID' => $request->DegBatches_ID , 'Sem_ID' => $request->Sem_ID])->exists();
+    }
+
     public function addSemesterDetails(){
 
         $degrees = Degree::get();
@@ -66,6 +74,10 @@ class SemesterDetailsController extends Controller
         $button = "Add Semester Detail";
         $title  = 'Add Semester Detail';
         $route  = '/storeSemesterDetails';
+         $degreeCourses=  DegreeBatche::select('DegreeName' , 'SemSession' , 'DegreeBatches.ID')
+        ->join('Degrees' , 'Degrees.ID' , 'DegreeBatches.Degree_ID')
+        ->join('Semesters' , 'Semesters.ID' , 'DegreeBatches.Batch_ID')
+        ->get();
         return 
         view('SemesterDetail.addSemesterDetails', 
             compact(
@@ -73,14 +85,19 @@ class SemesterDetailsController extends Controller
                 'title' , 
                 'route',
                 'degrees',
-                'semesters'
+                'semesters',
+                'degreeCourses'
             )
         );
     }
 
     public function storeSemesterDetails(Request $request){
-
+        //dd($request->all());
         $validator = $this->validation($request);
+         $unique    = $this->uniqueSemesterdetails($request);
+         if ($unique == true){
+             return redirect()->back()->with(['errorToaster' => 'Semester And Degree Batch must be Unique!' , 'title' => 'Duplicate record']);
+         }
         // if ($validator['error'] == true) {
         //     return 
         //     response()->json([
@@ -89,8 +106,9 @@ class SemesterDetailsController extends Controller
         //     'message'=> ''.$validator['validation']
         //     ]);
         // }else {
-             $submit = DB::update("EXEC InsertSemesterDetails 
-            @Degree_ID          = '$request->Degree_ID', 
+
+             $submit = DB::update("EXEC sp_InsertSemesterDetails 
+            @DegBatches_ID          = '$request->DegBatches_ID', 
             @Sem_ID             = '$request->Sem_ID', 
             @SemesterFee        = '$request->SemesterFee',
             @Magazine_Fee       = '$request->Magazine_Fee' , 
@@ -100,7 +118,8 @@ class SemesterDetailsController extends Controller
             @Registration_Fee   = '$request->Registration_Fee' , 
             @Practical_charges  = '$request->Practical_charges',
             @Sports_Fund        = '$request->Sports_Fund' , 
-            @FeeType            = '$request->FeeType'
+            @FeeType            = '$request->FeeType',
+            @Tuition_Fee            = '$request->Tuition_Fee'
             ;");
 
         //   return response()->json([
@@ -122,6 +141,8 @@ class SemesterDetailsController extends Controller
         //dd($semesterDetail , $id);
         $degrees = Degree::get();
         $semesters = Semester::get();
+        $degreeCourses  = DegreeBatche::whereNotNull('Batch_ID')->get();
+       
          return 
          view('SemesterDetail.editSemesterDetail', 
             compact(
@@ -130,7 +151,8 @@ class SemesterDetailsController extends Controller
                 'title' , 
                 'route',
                 'degrees',
-                'semesters'
+                'semesters',
+                'degreeCourses'
             ));
     }
     public function allSemesterDetails(){
@@ -157,6 +179,7 @@ class SemesterDetailsController extends Controller
     public function updateSemesterDetail(Request $request){
 
          $validator = $this->validationUpdate($request);
+
         //  $validator = $this->validation($request);
         // if ($validator['error'] == true) {
         //     return 
@@ -166,10 +189,11 @@ class SemesterDetailsController extends Controller
         //     'message'=> ''.$validator['validation']
         //     ]);
         // }else {
+       //  dd($request->all());
               $submit = DB::statement("EXEC sp_UpdateSemesterDetails
 
             @SemDetail_ID       = '$request->id', 
-            @Degree_ID          = '$request->Degree_ID', 
+            @DegBatches_ID          = '$request->DegBatches_ID', 
             @Sem_ID             = '$request->Sem_ID', 
             @SemesterFee        = '$request->SemesterFee',
             @Magazine_Fee       = '$request->Magazine_Fee' , 
@@ -179,8 +203,9 @@ class SemesterDetailsController extends Controller
             @Registration_Fee   = '$request->Registration_Fee' , 
             @Practical_charges  = '$request->Practical_charges',
             @Sports_Fund        = '$request->Sports_Fund' , 
-            @FeeType            = '$request->FeeType'
-            ;");
+            @FeeType            = '$request->FeeType',
+            @Tuition_Fee            = '$request->Tuition_Fee'
+             ;");
 
 
 

@@ -6,11 +6,12 @@
                     {{ csrf_field() }}
                   <div class="card-body">
                     
-                    <div class="form-group">
-                      <label>Degree</label>
-                      <select class="form-control" name="Degree_ID"  >
-                        @foreach($degrees as $degree)
-                        <option value="{{ $degree->Degree_ID }}">{{ $degree->DegreeName }}</option>
+
+                     <div class="form-group">
+                      <label>Degree / Batch</label>
+                      <select class="form-control" name="DegBatches_ID"  >
+                        @foreach($degreeCourses as $degreeCourse)
+                        <option value="{{ $degreeCourse->ID }}">{{ $degreeCourse->DegreeName }} / {{ $degreeCourse->SemSession }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -19,15 +20,28 @@
                       <label>Semester</label>
                       <select class="form-control" name="Sem_ID"  >
                         @foreach($semesters as $semester)
-                        <option value="{{ $semester->Sem_ID }}">{{ $semester->SemSession }}</option>
+                        <option value="{{ $semester->ID }}">{{ $semester->SemSession }}</option>
                         @endforeach
                       </select>
                     </div>
                     
+                     <div class="form-group">
+                      <label>Semester Fee</label>
+                      <input type="number" name="SemesterFee" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Tutuion Fee</label>
+                      <input type="number" name="Tuition_Fee" class="form-control">
+                    </div>
+                    <!--  <div class="form-group">
+                      <label>Semester Fee</label>
+                      <input type="number" name="SemesterFee" class="form-control">
+                    </div> -->
                     <div class="form-group">
                       <label>Magazine Fee</label>
                       <input type="number" name="Magazine_Fee" class="form-control">
                     </div>
+
                     <div class="form-group">
                       <label>Exam Fee</label>
                       <input type="number" name="Exam_Fee" class="form-control">

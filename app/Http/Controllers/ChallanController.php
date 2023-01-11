@@ -18,7 +18,11 @@ class ChallanController extends Controller
         $request['Std_ID'] = $session['std_ID'];
         
         $registration = Registration::where('Std_ID' , $request['Std_ID'])->first();
-        $challans = Challan::where('Reg_ID' , $registration->ID)->paginate(10);
+        if (!empty($registration)){
+            $challans = Challan::where('Reg_ID' , $registration->ID)->paginate(10);    
+        }else{
+            $challans = '';
+        }
         $title  = 'My Challan';
         $route = '';
         $getEditRoute = '';
@@ -46,9 +50,9 @@ class ChallanController extends Controller
         $session           = $this->getSessionData();
         $request['Std_ID'] = $session['std_ID'];
         
-        $registration = Registration::where('Std_ID' , $request['Std_ID'])->first();
+        //$registration = Registration::where('Std_ID' , $request['Std_ID'])->first();
        
-        $challan = Challan::where('Reg_ID' , $registration->ID)->first();
+        $challan = Challan::first();
 
 
 
