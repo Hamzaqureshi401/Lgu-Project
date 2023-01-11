@@ -380,4 +380,3 @@
 @include('Admissions.student_js')
 @include('Forms.formFooter')
 @endsection
-@include('js.form_submit_script')

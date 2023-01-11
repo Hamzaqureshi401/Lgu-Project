@@ -18,14 +18,14 @@
                         </thead>
                         <tbody>
                           @foreach($studentEducations as $education)
-                          <tr class="form-group">
+                          <tr class="form-group" id="tr_clone">
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
                             <td>
-                          <select name="matric_examination[]" class="form-control my-2">
+                          <select name="examination[]" class="form-control my-2">
                             @php
                              $examinations = [
                              0 => 'Matric',
@@ -60,12 +60,27 @@
                                    <td>{{ $education->Std_ID ?? '' }}</td>
                            
                             <td> <div class="card-body">
-                                <!-- only change id -->
-                                
+                               
                               </div>
                               </td>
                           </tr>
+                          
                            @endforeach
                         </tbody>
                       </table>
+                     <div class="form-group">
+                            <a class="btn btn-warning btn-block tr_clone_add" style="color:white;">Add New Row </a>
+                          
                     </div>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+                  <script type="text/javascript">
+                    $(".tr_clone_add").live('click', function() {
+                    var $tr    = $('#tr_clone').closest('#tr_clone');
+                    var $clone = $tr.clone();
+                    $clone.find(':text').val('');
+                    $tr.after($clone);
+                    $clone.addClass('bg-warning');
+                });
+
+                  </script>

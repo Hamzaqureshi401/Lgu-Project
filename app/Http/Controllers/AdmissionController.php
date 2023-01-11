@@ -350,27 +350,40 @@ class AdmissionController extends Controller
             ));
     }
 
+    public function updateEducation($request){
 
-     public function updateStudentAdmission(Request $request){
-
-        dd($request->all());
-
-        $validator = $this->validation($request);
 
         $submit = DB::update("EXEC sp_UpdateStudentEducations
 
-        @Std_ID 			='$request->$id',
-        @Degree 			='$request->$matric_examination',
-        @InstitutionName 	='$request->$InstitutionName',
-        @DateStarted 		='$request->$DateStarted',
-        @DateEnd 			='$request->$DateEnd',
-        @ObtainedMarks 		='$request->$ObtainedMarks',
-        @TotalMarks 		='$request->$TotalMarks',
-        @RollNo 			='$request->$Rollno'
+        @Std_ID             ='$request->$id',
+        @Degree             ='$request->$matric_examination',
+        @InstitutionName    ='$request->$InstitutionName',
+        @DateStarted        ='$request->$DateStarted',
+        @DateEnd            ='$request->$DateEnd',
+        @ObtainedMarks      ='$request->$ObtainedMarks',
+        @TotalMarks         ='$request->$TotalMarks',
+        @RollNo             ='$request->$Rollno'
         
         ;
         
         ");
+
+    }
+
+
+     public function updateStudentAdmission(Request $request){
+
+        
+
+        foreach($request->examination as $key => $data){
+           $request['matric_examination'] = $request->InstitutionName[$key];
+
+           $this->updateEducation($request);
+
+        }
+
+        $validator = $this->validation($request);
+
 
         // if ($validator['error'] == true) {
         //     return
