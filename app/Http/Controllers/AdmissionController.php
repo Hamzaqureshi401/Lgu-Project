@@ -356,22 +356,40 @@ class AdmissionController extends Controller
         dd($request->all());
 
         $validator = $this->validation($request);
-        if ($validator['error'] == true) {
-            return
-            response()->json([
-            'title' => 'Failed' ,
-            'type'=> 'error',
-            'message'=> ''.$validator['validation']
-            ]);
-        }else {
-            $this->createStudentDetail($request);
-            $this->createStudentQualification($request);
-          return response()->json([
-            'title' => 'Done' ,
-            'type'=> 'success',
-            'message'=> 'Student Admission Updated!
-            ']);
-        }
+
+        $submit = DB::update("EXEC sp_UpdateStudentEducations
+
+        @Std_ID 			='$request->$id',
+        @Degree 			='$request->$matric_examination',
+        @InstitutionName 	='$request->$InstitutionName',
+        @DateStarted 		='$request->$DateStarted',
+        @DateEnd 			='$request->$DateEnd',
+        @ObtainedMarks 		='$request->$ObtainedMarks',
+        @TotalMarks 		='$request->$TotalMarks',
+        @RollNo 			='$request->$Rollno'
+        
+        ;
+        
+        ");
+
+        // if ($validator['error'] == true) {
+        //     return
+        //     response()->json([
+        //     'title' => 'Failed' ,
+        //     'type'=> 'error',
+        //     'message'=> ''.$validator['validation']
+        //     ]);
+        // }else {
+            // $this->createStudentDetail($request);
+            // $this->createStudentQualification($request);
+        //   return response()->json([
+        //     'title' => 'Done' ,
+        //     'type'=> 'success',
+        //     'message'=> 'Student Admission Updated!
+        //     ']);
+        // }
+        return redirect()->back()->with(['successToaster' => 'Student Admission Added!' , 'title' => 'Success']);
+
     }
 
 
