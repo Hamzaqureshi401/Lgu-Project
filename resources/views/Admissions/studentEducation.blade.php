@@ -58,6 +58,8 @@
                                 <td><input type="text" name="TotalMarks[]" class="form-control" value="{{ $education->TotalMarks ?? '' }}"></td>
                                 
                                    <td>{{ $education->Std_ID ?? '' }}</td>
+                                   <td style="display: none"><input type="text" name="educationID[]" class="form-control" value="{{ $education->ID ?? '' }}"></td>
+
                            
                             <td> <div class="card-body">
                                

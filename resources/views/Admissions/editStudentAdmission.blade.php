@@ -4,6 +4,8 @@
 @include('Forms.formHeader')
 <div class="card-body">
    <div class="form-group">
+      <input type="text" hidden name="Student_ID"  value="{{ $studentAdmission->ID }}">
+
       <label style="font-size: 13px">Student Password <span style="color: red">*</span></label>
       <input type="text" name="Password" id="Password" value="{{ $studentAdmission->Password }}"
          class="form-control" maxlength=12>
@@ -60,6 +62,9 @@
    <div class="form-group">
       <label style="font-size: 13px">Date Of Birth <span style="color: red">*</span></label>
       <input type="date" name="DOB" id="DOB" value="{{ $studentAdmission->DOB }}"
+         class="form-control">
+
+         <input type="text" hidden value="{{ $studentAdmission->DOB }}" name="DOB_pre" 
          class="form-control">
       <br>
       @error('DOB')
@@ -195,12 +200,14 @@
    <div class="form-group">
       <div class="form-group">
          <label style="font-size: 13px">Country <span style="color: red">*</span></label>
-         <select name="country" id="country" value="{{ $studentAdmission->country }}"
+         <select name="country" id="country"
             onchange="print_state('state',this.selectedIndex);" class="custom-select">
-            <option value="{{ $studentAdmission->country }}" selected>{{ $studentAdmission->country }}
-            </option>
+
          </select>
       </div>
+
+      <input type="text" hidden value="{{ $studentAdmission->Country }}" name="country_pre" 
+      class="form-control">
       <br>
       @error('country')
       <div class="alert alert-danger">{{ $message }}</div>
@@ -210,10 +217,11 @@
       <div class="form-group">
          <label style="font-size: 13px">Province <span style="color: red">*</span></label>
          <select name="state" id="state" value="{{ $studentAdmission->state }}" class="custom-select">
-            <option value="{{ $studentAdmission->state }}" selected>{{ $studentAdmission->state }}
-            </option>
+
          </select>
       </div>
+      <input type="text" hidden value="{{ $studentAdmission->Province }}" name="Province_pre" 
+      class="form-control">
       <br>
       @error('state')
       <div class="alert alert-danger">{{ $message }}</div>
@@ -305,7 +313,9 @@
       <label style="font-size: 13px">Student Files <span style="color: red">*
       jpeg,png,jpg,pdf</span>
       </label>
-      <input type="file" value="{{ $studentAdmission->Files }}" name="stdfile" id="stdfile"
+      <input type="file" name="stdfile" id="stdfile"
+         class="form-control">
+         <input type="text" hidden value="{{ $studentAdmission->Files }}" name="stdfile_pre" id="stdfile_pre"
          class="form-control">
       <br>
       @error('stdfile')
@@ -316,7 +326,9 @@
       <label style="font-size: 13px">Image <span style="color: red">*
       jpeg,png,jpg</span>
       </label>
-      <input type="file" value="{{ $studentAdmission->Image }}" name="Image" id="Image"
+      <input type="file"  name="Image" id="Image"
+         class="form-control">
+         <input type="text" hidden value="{{ $studentAdmission->Image }}" name="image_pre" id="image_pre"
          class="form-control">
       <br>
       @error('Image')

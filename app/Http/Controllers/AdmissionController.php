@@ -353,36 +353,150 @@ class AdmissionController extends Controller
     public function updateEducation($request){
 
 
+    //     dd(
+    //     $request->examination,
+    //     $request->InstitutionName,
+    //     $request->DateStarted,
+    //     $request->DateEnd,
+    //     $request->ObtainedMarks,
+    //     $request->TotalMarks,
+    //     $request->Rollno,
+    //     $request->educationID
+
+    
+    
+    // );
         $submit = DB::update("EXEC sp_UpdateStudentEducations
 
-        @Std_ID             ='$request->$id',
-        @Degree             ='$request->$matric_examination',
-        @InstitutionName    ='$request->$InstitutionName',
-        @DateStarted        ='$request->$DateStarted',
-        @DateEnd            ='$request->$DateEnd',
-        @ObtainedMarks      ='$request->$ObtainedMarks',
-        @TotalMarks         ='$request->$TotalMarks',
-        @RollNo             ='$request->$Rollno'
-        
-        ;
-        
-        ");
+        @ID 			    ='$request->educationID',
+        @Degree 			='$request->examination',
+        @InstitutionName 	='$request->InstitutionName',
+        @DateStarted 		='$request->DateStarted',
+        @DateEnd 			='$request->DateEnd',
+        @ObtainedMarks 		='$request->ObtainedMarks',
+        @TotalMarks 		='$request->TotalMarks',
+        @RollNo 			='$request->Rollno'
+        ;");
 
     }
 
 
      public function updateStudentAdmission(Request $request){
 
+        // dd($request->all());
+
+        if($request->stdfile)
+        {
+            $file = time() . "_studentfileupdate." . $request->file('stdfile')->getClientOriginalExtension();
+            $request->file('stdfile')->storeAs('studentsFiles', $file);
+
+
+        }
+        else{
+            $file=$request->stdfile_pre;
+
+        }
+
+        if($request->Image)
+        {
+            $stdImage = time() . "_studentImageupdate." . $request->file('Image')->getClientOriginalExtension();
+            $request->file('Image')->storeAs('studentsImages', $stdImage);
+
+
+        }
+        else{
+            $stdImage=$request->image_pre;
+
+        }
+
+        if($request->country)
+        {
+            $Country =$request->country;
+
+
+        }
+        else{
+            $Country=$request->country_pre;
+
+        }
+
+
+        if($request->state)
+        {
+            $state =$request->state;
+
+
+        }
+        else{
+            $state=$request->Province_pre;
+
+        }
+
         
+        if($request->DOB)
+        {
+            $Date_of_birth =$request->DOB;
+
+
+        }
+        else{
+            $Date_of_birth=$request->DOB_pre;
+
+        }
+        // dd($Date_of_birth);
+
+        $submit = DB::update("EXEC sp_UpdateStudentDetails
+        @Std_ID             ='$request->Student_ID',
+        @Std_FName          ='$request->Std_FName',
+        @Std_LName          ='$request->Std_LName',
+        @Password           ='$request->Password',
+        @ClassSection       ='$request->ClassSection',
+        @CNIC               ='$request->CNIC',
+        @Nationality        ='$request->Nationality',
+        @DOB                ='$Date_of_birth',
+        @Gender             ='$request->Gender',
+        @Email              ='$request->Email',
+        @FatherName         ='$request->FatherName',
+        @FatherCNIC         ='$request->FatherCNIC',
+        @GuardianName       ='$request->GuardianName',
+        @GuardianCNIC       ='$request->GuardianCNIC',
+        @StdPhone           ='$request->StdPhone',
+        @FatherPhone        ='$request->FatherPhone',
+        @GuardianPhone      ='$request->GuardianPhone',
+        @ParentOccupation   ='$request->ParentOccupation',
+        @Address            ='$request->Address',
+        @Tehsil             ='$request->Tehsil',
+        @City               ='$request->City',
+        @Province           ='$state',
+        @Country            ='$Country',
+        @Degree_ID          ='$request->Degree_ID',
+        @CurrentSemester    ='$request->CurrentSemester',
+        @Status             ='$request->Status',
+        @AddmissionSession  ='$request->AdmissionSession',
+        @BloodGroup         ='$request->BloodGroup',
+        @FatherEmail        ='$request->FatherEmail',
+        @Files              ='$file',
+        @Image              ='$stdImage'
+        ;");
+
 
         foreach($request->examination as $key => $data){
-           $request['matric_examination'] = $request->InstitutionName[$key];
+           $request['examination'] = $request->examination[$key];
+           $request['InstitutionName'] = $request->InstitutionName[$key];
+           $request['DateStarted'] = $request->DateStarted[$key];
+           $request['DateEnd'] = $request->DateEnd[$key];
+           $request['ObtainedMarks'] = $request->ObtainedMarks[$key];
+           $request['TotalMarks'] = $request->TotalMarks[$key];
+           $request['Rollno'] = $request->Rollno[$key];
+           $request['educationID'] = $request->educationID[$key];
+
+
 
            $this->updateEducation($request);
 
         }
 
-        $validator = $this->validation($request);
+        // $validator = $this->validation($request);
 
 
         // if ($validator['error'] == true) {
