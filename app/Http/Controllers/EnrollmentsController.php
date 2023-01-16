@@ -19,23 +19,7 @@ use Session;
 
 class EnrollmentsController extends Controller
 {
-    public function validation($request){
-
-        $validator = Validator::make($request->all(),[
-            'Std_ID'               => 'required|numeric',
-            'SemCourses_ID'        => 'required|numeric',
-            'Is_i_mid'             => 'required|numeric',
-            'Is_i_final'           => 'required|numeric',
-            'Reg_ID'               => 'required|numeric',
-        ]);
-        $validation['validation'] = $validator->errors()->first();
-        if ($validator->fails()) {
-            $validation['error'] = true;
-        }else{
-            $validation['error'] = false;
-        }
-        return $validation;
-    }
+   
 
     public function getSessionData(){
 
@@ -63,9 +47,8 @@ class EnrollmentsController extends Controller
         // dd(1);
       
         //dd(session::all());
-        $session = $this->getSessionData();    
+        $session            = $this->getSessionData();    
         $request['Std_ID']  = $session['std_ID'];
-        $user               = explode('/' , session::get('user'));
         $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
@@ -97,7 +80,7 @@ class EnrollmentsController extends Controller
         
         $registration       = Registration::where('Std_ID' , $Std_ID);
         if($registration->exists()){
-            $registration = $registration->first();
+            $registration   = $registration->first();
              $data['enrollmentAllowed']     = $registration->acdRule->EnrollmentAllowed;
              $data['creditHoursAllowed']    = $registration->acdRule->CrHrsAllowed;
              $data['academic_Standing']     = $registration->acdRule->AcademicStanding;
@@ -119,9 +102,9 @@ class EnrollmentsController extends Controller
 
     public function getTotalCreditHours($request){
         
-        $enrollments = Enrollment::where('Std_ID' , $request['Std_ID'])->get();
+        $enrollments            = Enrollment::where('Std_ID' , $request['Std_ID'])->get();
         foreach($enrollments as $enrollment){
-            $crHrsAllowed = explode("-", $enrollment->semesterCourse->course->CreditHours ?? 0);
+            $crHrsAllowed       = explode("-", $enrollment->semesterCourse->course->CreditHours ?? 0);
             $totalCreditHours[] = end($crHrsAllowed);
         }
         if(!empty($totalCreditHours)){
@@ -134,28 +117,26 @@ class EnrollmentsController extends Controller
 
     public function executeEnrollment($id){
         $session           = $this->getSessionData();
-        $drop  = explode('-' , $id);
+        $drop              = explode('-' , $id);
         if(empty($drop[1])){
             $type = false;
         }else{
             $type = true;
-            $id =  $drop[0];
+            $id   =  $drop[0];
         }
         $course = explode('-' , SemesterCourse::where('ID' , $id)->first()->course->CreditHours
          );
 
-        $courseCrediHr = end($course);
-        //dd($courseCrediHr);
-        $request['Std_ID'] = $session['std_ID'];
-        $acdRule            = $this->getAcdRule($request['Std_ID']);
-        $getTotalCreditHoursInDb= $this->getTotalCreditHours($request);
-        $getTotalCreditHours = $getTotalCreditHoursInDb + $courseCrediHr;
-       // dd($acdRule['enrollmentAllowed'] , $getTotalCreditHours , $acdRule['creditHoursAllowed']);
+        $courseCrediHr              = end($course);
+        $request['Std_ID']          = $session['std_ID'];
+        $acdRule                    = $this->getAcdRule($request['Std_ID']);
+        $getTotalCreditHoursInDb    = $this->getTotalCreditHours($request);
+        $getTotalCreditHours        = $getTotalCreditHoursInDb + $courseCrediHr;
         if($acdRule['enrollmentAllowed'] == true 
                                     &&
-        $getTotalCreditHoursInDb <= $acdRule['creditHoursAllowed'] 
+        $getTotalCreditHoursInDb    <= $acdRule['creditHoursAllowed'] 
                                     && 
-        $getTotalCreditHours <= $acdRule['creditHoursAllowed']
+        $getTotalCreditHours        <= $acdRule['creditHoursAllowed']
                                     &&
         $type == false
         ){
@@ -166,7 +147,6 @@ class EnrollmentsController extends Controller
             return redirect()->back()->with(['errorToaster'   => 'Course Dropped' , 'title' => 'Warning']);
         }
         else{
-            //return redirect()->route('add.Enrollment');
             return redirect()->back()->with('success1', 'Course Dropped');
         }
    
@@ -176,8 +156,8 @@ class EnrollmentsController extends Controller
         $session           = $this->getSessionData();   
         $request['Std_ID'] = $session['std_ID'];
 
-        $SemesterCourse = SemesterCourse::where('ID' , $id)->first();
-        $Sem_ID = $SemesterCourse->Sem_ID;
+        $SemesterCourse     = SemesterCourse::where('ID' , $id)->first();
+        $Sem_ID             = $SemesterCourse->Sem_ID;
         
 
         $request['AcaStdID']        = 6;// if first time enrollment defualt is 6 
@@ -290,7 +270,7 @@ class EnrollmentsController extends Controller
 
         $session           = $this->getSessionData();
         $request['Std_ID'] = $session['std_ID'];
-        $enrollments = Enrollment::where('Std_ID' , $request['Std_ID'])->pluck('ID')->toArray();
+        $enrollments       = Enrollment::where('Std_ID' , $request['Std_ID'])->pluck('ID')->toArray();
         foreach($enrollments as $id){
         $submit = DB::statement("EXEC sp_UpdateEnrollment
              @ID         = '$id'

@@ -68,7 +68,13 @@ class login extends Controller
                 $Designation = $submit->Designation;
             
             $user = $Emp_FirstName ?? '--'. '' . $Emp_LastName ?? '--';
-            session(['Emp_session' => 'session created', 'Designation' => $Designation ?? '--', 'user' => $user]);
+            session([
+                'Emp_session' => 'session created', 
+                'Designation' => $Designation ?? '--', 
+                'user'        => $submit,
+                'ID'          => $submit->ID,
+
+            ]);
              return  redirect()->route('dean.Dashboard');
             switch ($Designation) {
                 case 'Assistant Lecturer/TA':

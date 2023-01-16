@@ -85,12 +85,12 @@ class TimeTableController extends Controller
             $submit = DB::update("EXEC sp_InsertTimeTable
             @SemCourse_ID       = '$request->SemCourse_ID',
             @Day                =  '$request->Day',
-            @StartTime         = '$request->StartTime' ,
-            @EndTime        = '$request->EndTime',
-            @Building         = '$request->Building',
-            @Room         = '$request->Room',
-            @Type         = '$request->Type',
-            @Emp_ID         = '$request->Emp_ID'
+            @StartTime          = '$request->StartTime' ,
+            @EndTime            = '$request->EndTime',
+            @Building           = '$request->Building',
+            @Room               = '$request->Room',
+            @Type               = '$request->Type',
+            @Emp_ID             = '$request->Emp_ID'
             ;");
 
         //   return response()->json([
@@ -156,14 +156,17 @@ class TimeTableController extends Controller
         //     'message'=> ''.$validator['validation']
         //     ]);
         // }else {
-             $submit = DB::update("EXEC sp_UpdateTimeTables
+             $submit = DB::update("EXEC sp_UpdateTimeTable
 
-            @Dpt_ID         = '$request->id',
-            @Dpt_Name       = '$request->Dpt_Name',
-            @Dpt_FullName   = '$request->Dpt_FullName',
-            @HODUID         = '$request->HODUID' ,
-            @DeanUID        = '$request->DeanUID',
-            @Status         = '$request->Status'
+            @ID                 = '$request->id',
+            @SemCourse_ID       = '$request->SemCourse_ID',
+            @Day                =  '$request->Day',
+            @StartTime          = '$request->StartTime' ,
+            @EndTime            = '$request->EndTime',
+            @Building           = '$request->Building',
+            @Room               = '$request->Room',
+            @Type               = '$request->Type',
+            @Emp_ID             = '$request->Emp_ID'
             ;");
 
         // return response()->json([

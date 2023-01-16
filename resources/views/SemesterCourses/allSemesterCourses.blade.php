@@ -34,7 +34,7 @@
                               </div>
                             </td>
                             <td>{{ $semesterCourse->semester->SemSession ?? '--' }}</td>
-                            <td>{{ $semesterCourse->employee->Emp_FirstName ?? '--' }} {{ $semesterCourse->Emp_LastName ?? '--' }}</td>
+                            <td>{{ $semesterCourse->employee->Emp_FirstName ?? '--' }} {{ $semesterCourse->employee->Emp_LastName ?? '--' }}</td>
                             <td>{{ $semesterCourse->CampusLimit  ?? '--'}}</td>
                             <td>{{ $semesterCourse->degreeBatches->degree->DegreeName ?? '--'}} / {{ $semesterCourse->degreeBatches->batch->SemSession ?? '--'}}</td>
                             <td>{{ $semesterCourse->QuizWeightage  ?? '--'}}</td>
@@ -49,6 +49,7 @@
                                 <!-- only change id -->
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $semesterCourse->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
                                  <a href="{{ $getEditRoute }}/{{ $semesterCourse->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                 
                                 
                               </div>
                             </td>

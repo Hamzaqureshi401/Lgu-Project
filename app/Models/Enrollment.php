@@ -14,4 +14,7 @@ class Enrollment extends Model
      public function semesterCourse(){
         return $this->belongsTo('App\Models\SemesterCourse' , 'SemCourses_ID');
     }
+    public function student(){
+        return $this->belongsTo('App\Models\Student' , 'Std_ID');
+    }
 }

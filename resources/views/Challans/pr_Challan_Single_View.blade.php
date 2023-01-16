@@ -192,15 +192,7 @@ $programe = explode('/' , Session::get('user'))
                <tr>
                   <td width="80%" style="text-align:center; font-size:14px; border:1px solid #000;">Total Amount</td>
                   <td width="20%" style="text-align:center; border:1px solid #000;">
-{{ 
-$challan->Tuition_Fee + 
-$challan->Magazine_Fee +
-$challan->Exam_Fee +
-$challan->Society_Fee +
-$challan->Misc_Fee +
- $challan->Registration_Fee +
-$challan->Practical_charges +
-$challan->Sports_Fund}}</td>
+</td>
                </tr>
             </table>
          </td>
@@ -214,18 +206,7 @@ $challan->Sports_Fund}}</td>
                <div class="col-6 text-left">Already Paid:0.0000000 </div>
                <div class="col-6 text-right">Pre.OutStandings:0.0000000 </div>
                <div class="col-6 text-left">Scholarship:0.0000000 </div>
-               <div class="col-6 text-right font-weight-bold" ><span style="font-size:12px; border-style : solid;">Grand Total:{{ 
-$challan->Tuition_Fee + 
-$challan->Magazine_Fee +
-$challan->Exam_Fee +
-$challan->Society_Fee +
-$challan->Misc_Fee +
- $challan->Registration_Fee +
-$challan->Practical_charges +
-$challan->Sports_Fund +
-$challan->Amount
-
-}}
+               <div class="col-6 text-right font-weight-bold" ><span style="font-size:12px; border-style : solid;">Grand Total:
 
 </span></div>
                <div class="col-12 text-center">Rs.20/- per day to charged after due date</div>

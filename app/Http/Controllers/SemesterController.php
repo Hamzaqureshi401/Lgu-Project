@@ -35,6 +35,31 @@ class SemesterController extends Controller
         // return $validation;
 
     }
+ public function updateValidation($request){
+
+        $this->validate($request, [
+            'SemSession'         => 'required|max:30',
+            'Year'               => 'required|numeric',
+            'SemStartDate'       => 'required|date',
+            'SemEndDate'         => 'required|date',
+            'EnrollmentStartDate'=> 'required|date',
+            'EnrollmentEndDate'  => 'required|date',
+            'ExamStartDate'      => 'required|date',
+            'ExamEndDate'        => 'required|date',
+            'I_mid_StartDate'    => 'required|date',
+            'I_mid_EndDate'      => 'required|date',
+            'I_final_StartDate'  => 'required|date',
+            'I_final_EndDate'    => 'required|date',
+        ]);
+        // $validation['validation'] = $validator->errors()->first();
+        // if ($validator->fails()) {
+        //     $validation['error'] = true;
+        // }else{
+        //     $validation['error'] = false;
+        // }
+        // return $validation;
+
+    }
 
     public function addSemester(){
 
@@ -122,7 +147,7 @@ class SemesterController extends Controller
 
     public function updateSemester(Request $request){
 
-         $validator = $this->validation($request);
+         $validator = $this->updateValidation($request);
         // if ($validator['error'] == true) {
         //     return
         //     response()->json([

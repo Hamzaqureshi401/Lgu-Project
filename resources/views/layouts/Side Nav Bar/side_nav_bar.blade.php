@@ -79,6 +79,14 @@
                 
               </ul>
             </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Time Table</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.TimeTable') }}">Add Time Table</a></li>
+                <li><a class="nav-link" href="{{ route('all.TimeTables') }}">All Time Table</a></li>
+                
+              </ul>
+            </li>
            <!--  <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Enrollments</span></a>
               <ul class="dropdown-menu">

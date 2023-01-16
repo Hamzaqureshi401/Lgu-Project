@@ -6,18 +6,39 @@
 
                   <div class="card-body">
                   <input type="hidden" name="id" value="{{ $timeTable->ID }}">
-                    <div class="form-group">
+                   
+
+
+                      <div class="form-group">
                       <label>Semester / Courses</label>
-                      <select class="form-control" name="SemCourse_ID"  >
-                        @foreach($semesterCourses as $semestercourse)
-                        <option value="{{ $semestercourse->ID }}">{{ $semestercourse->semester->SemSession }} / {{ $semestercourse->course->CourseName }}</option>
+                      <select class="form-control" name="SemCourse_ID"  required>
+                        @foreach($semesterCourses as $semesterCourse)
+                        <option value="{{ $semesterCourse->ID }}" {{ $semesterCourse->ID == $timeTable->SemCourse_ID ? 'selected' : '' }}>{{ $semesterCourse->semester->SemSession }} / {{ $semesterCourse->course->CourseName }}</option>
                         @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
+
+                   
+                      @php 
+                      $days = [
+                      'Monday' , 
+                      'Tuesday' , 
+                      'Wednesday' , 
+                      'Thursday' , 
+                      'Friday' , 
+                      'Saturday' , 
+                      'Sunday'
+                      ];
+                      @endphp
+                     <div class="form-group">
                       <label>Day</label>
-                      <input type="number" name="Day" class="form-control" value="{{$timeTable->Day}}">
+                      <select class="form-control" name="Day"  value="{{$timeTable->Day}}">
+                        @foreach($days as $day)
+                        <option value="{{ $day }}" {{ $day == $timeTable->Day ? 'selected' : '' }}>{{ $day}}</option>
+                        @endforeach
+                      </select>
                     </div>
+
                     <div class="form-group">
                       <label>Start Time</label>
                       <input type="time" name="StartTime" class="form-control" value="{{$timeTable->StartTime}}">
@@ -42,7 +63,7 @@
                       <label>Employee</label>
                       <select class="form-control" name="Emp_ID"  >
                         @foreach($employees as $employee)
-                        <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
+                        <option value="{{ $employee->ID }}"  {{ $employee->ID == $timeTable->Emp_ID ? 'selected' : '' }}>{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
                         @endforeach
                       </select>
                     </div>

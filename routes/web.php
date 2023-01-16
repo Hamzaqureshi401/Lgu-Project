@@ -168,6 +168,15 @@ Route::get('/deanDashboard', [App\Http\Controllers\DeanController::class, 'deanD
 
 //Attandence Route Start
 
+Route::get('/empSemesterCourses', [App\Http\Controllers\AttendanceController::class, 'empSemesterCourses'])->name('emp.SemesterCourses');
+
+Route::get('/empSemesterCoursesAttandence/{id}', [App\Http\Controllers\AttendanceController::class, 'semetserCourseAttandences'])->name('semetser.Course.Attandences');
+
+Route::get('/claseesShedule/{id}', [App\Http\Controllers\AttendanceController::class, 'claseesShedule'])->name('clasees.Shedule');
+
+
+Route::get('/studentAttandenceView/{day}/{id}', [App\Http\Controllers\AttendanceController::class, 'studentAttandenceView'])->name('student.Attandence.View');
+
 Route::get('/deanAttandence', [App\Http\Controllers\AttendanceController::class, 'deanAttandence'])->name('attandence.Dashboard');
 
 Route::get('/deanAllStuAttandence', [App\Http\Controllers\AttendanceController::class, 'deanAllStuAttandence'])->name('dean.All.Stu.Attandence');

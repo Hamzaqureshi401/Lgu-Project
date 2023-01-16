@@ -13,10 +13,26 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
+                      @php 
+                      $days = [
+                      'Monday' , 
+                      'Tuesday' , 
+                      'Wednesday' , 
+                      'Thursday' , 
+                      'Friday' , 
+                      'Saturday' , 
+                      'Sunday'
+                      ];
+                      @endphp
+                     <div class="form-group">
                       <label>Day</label>
-                      <input type="number" name="Day" class="form-control">
+                      <select class="form-control" name="Day"  >
+                        @foreach($days as $day)
+                        <option value="{{ $day }}">{{ $day}}</option>
+                        @endforeach
+                      </select>
                     </div>
+
                     <div class="form-group">
                       <label>Start Time</label>
                       <input type="time" name="StartTime" class="form-control">
