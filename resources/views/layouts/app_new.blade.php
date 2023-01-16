@@ -9,10 +9,19 @@
   <title>Lahore Garrison University</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/fullcalendar/fullcalendar.min.css') }}">
+ 
+  <link rel="stylesheet" href="{{ asset('assets/bundles/summernote/summernote-bs4.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/codemirror/lib/codemirror.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/codemirror/theme/duotone-dark.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/jquery-selectric/selectric.css') }}">
+  
+  
   <link rel="stylesheet" href="{{ asset('assets/bundles/izitoast/css/iziToast.min.css') }}">
   
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/pretty-checkbox/pretty-checkbox.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 
   <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">

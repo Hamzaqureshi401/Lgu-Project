@@ -112,6 +112,14 @@ Route::post('/storeDesignation', [App\Http\Controllers\DesignationController::cl
 Route::get('editDesignation/{id}', [App\Http\Controllers\DesignationController::class, 'editDesignation'])->name('edit.Designation');
 Route::post('/updateDesignation', [App\Http\Controllers\DesignationController::class, 'updateDesignation'])->name('update.Designation');
 
+// StudentMark Routes start
+
+Route::get('/addStudentMark', [App\Http\Controllers\StudentMarksCotroller::class, 'addStudentMark'])->name('add.StudentMark');
+Route::get('/allStudentMarks', [App\Http\Controllers\StudentMarksCotroller::class, 'allStudentMarks'])->name('all.StudentMarks');
+Route::post('/storeStudentMark', [App\Http\Controllers\StudentMarksCotroller::class, 'storeStudentMark'])->name('store.StudentMark');
+Route::get('editStudentMark/{id}', [App\Http\Controllers\StudentMarksCotroller::class, 'editStudentMark'])->name('edit.StudentMark');
+Route::post('/updateStudentMark', [App\Http\Controllers\StudentMarksCotroller::class, 'updateStudentMark'])->name('update.StudentMark');
+
 // Semester Routes start
 
 Route::get('/addSemester', [App\Http\Controllers\SemesterController::class, 'addSemester'])->name('add.Semester');
@@ -172,10 +180,16 @@ Route::get('/empSemesterCourses', [App\Http\Controllers\AttendanceController::cl
 
 Route::get('/empSemesterCoursesAttandence/{id}', [App\Http\Controllers\AttendanceController::class, 'semetserCourseAttandences'])->name('semetser.Course.Attandences');
 
+Route::get('/viewEmpAttendence', [App\Http\Controllers\AttendanceController::class, 'viewEmpAttendence'])->name('view.Emp.Attendence');
+
 Route::get('/claseesShedule/{id}', [App\Http\Controllers\AttendanceController::class, 'claseesShedule'])->name('clasees.Shedule');
 
 
 Route::get('/studentAttandenceView/{day}/{id}', [App\Http\Controllers\AttendanceController::class, 'studentAttandenceView'])->name('student.Attandence.View');
+
+Route::post('/storeAttandences', [App\Http\Controllers\AttendanceController::class, 'storeAttandences'])->name('store.Attandences');
+
+
 
 Route::get('/deanAttandence', [App\Http\Controllers\AttendanceController::class, 'deanAttandence'])->name('attandence.Dashboard');
 

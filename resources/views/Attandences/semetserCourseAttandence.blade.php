@@ -38,16 +38,7 @@
               <div class="col-12 col-md-12 col-lg-8">
                 <div class="card">
                   <div class="padding-20">
-                    <ul class="nav nav-tabs" id="myTab2" role="tablist">
-                      <li class="nav-item">
-                        <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#about" role="tab"
-                          aria-selected="true">About</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#settings" role="tab"
-                          aria-selected="false">Setting</a>
-                      </li>
-                    </ul>
+                   
                     <div class="tab-content tab-bordered" id="myTab3Content">
                      
                      <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="home-tab2">
@@ -56,7 +47,7 @@
                                <a href="{{ route('clasees.Shedule' , $semetserCourse->ID)}}" class="btn btn-success btn-block " style="color:white;">Mark Attandence</a>
                               </div>
                               <div class="form-group col-md-6 col-12">
-                               <a class="btn btn-info btn-block" style="color:white;">View Attandence</a>
+                               <a href="{{ route('view.Emp.Attendence' )}}" class="btn btn-info btn-block" style="color:white;">View Attandence</a>
                               </div>
                             </div>
                       </div>
@@ -68,31 +59,7 @@
 
 
 
-                      <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
-                        
-                         <div class="card-body">
-                        <div class="row">
-                              <div class="form-group col-md-6 col-12">
-                                <label>First Name</label>
-                                <input type="text" class="form-control" value="John">
-                                <div class="invalid-feedback">
-                                  Please fill in the first name
-                                </div>
-                              </div>
-                              <div class="form-group col-md-6 col-12">
-                                <label>Last Name</label>
-                                <input type="text" class="form-control" value="Deo">
-                                <div class="invalid-feedback">
-                                  Please fill in the last name
-                                </div>
-                              </div>
-                            </div>
-                      </div>
-
-
-
-
-                      </div>
+                   
                     </div>
                   </div>
                 </div>
