@@ -111,7 +111,81 @@
 
 
 
+        <div class="card">
+                              
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    
+                     <th>Grades :</th>
+                     <th>A </th>
+                     <th>A-</th>
+                     <th>B+ </th>
+                     <th>B </th>
+                     <th>B-</th>
+                     <th>C+ </th>
+                     <th>C </th>
+                     <th>C-</th>
+                     <th>D </th>
+                     <th>F </th>
+                     <th>Mean </th>
+                     <th>Adj. Mean </th>
+                    
+                    
+                  </tr>
+                  <tr>
+                    <th>
+                      Ranges
+                    </th>
+                    <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  </tr>
 
+                  
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                        <tr>
+                    
+                            <th>Frequency :</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                           
+                           
+                         </tr>
+                       
+                    </tr>
+                 
+                  </tbody>                   
+                </table>
+               
+              </div>
+            </div>
+           
+          </div>
 
 
 
