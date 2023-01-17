@@ -70,7 +70,10 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Course Code</th>
+                                                                <th> {{ $SemesterCourse->course->CourseCode ?? '--' }}</th>
+                                                            </tr><tr>
                                                                 <th>Courses Name</th>
+                                                                </tr>
                                                                 <th>Credit Hours</th>
                                                                 <th>Asessment</th>
                                                             </tr>
@@ -80,12 +83,16 @@
                                                                 <td>
                                                                     {{ $SemesterCourse->course->CourseCode ?? '--' }}
                                                                 </td>
+                                                            </tr><tr>
                                                                 <td>
                                                                     {{ $SemesterCourse->course->CourseName ?? '--' }}
+
                                                                 </td>
+                                                            </tr><tr>
                                                                 <td>
                                                                     {{ $SemesterCourse->course->CreditHours ?? '--' }}
                                                                 </td>
+                                                            </tr><tr>
                                                                 <td>
                                                                     {{ $type ?? '--' }}
                                                                 </td>
