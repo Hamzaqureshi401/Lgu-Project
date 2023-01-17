@@ -77,7 +77,7 @@
                                <a href="{{ route('grade.Configration' , $semetserCourse->ID)}}" class="btn btn-success btn-block " style="color:white;">Grade Configration</a>
                               </div>
                               <div class="form-group col-md-6 col-12">
-                               <a href="{{ route('view.Emp.Attendence' )}}" class="btn btn-info btn-block" style="color:white;">Print Grade Sheet</a>
+                               <a href="{{ route('print.Grade.Sheet' ,  $semetserCourse->ID)}}" class="btn btn-info btn-block" style="color:white;">Print Grade Sheet</a>
                               </div>
                               <div class="form-group col-md-6 col-12">
                                <a href="{{ route('igrade.Marks.Entry' , $semetserCourse->ID)}}" class="btn btn-info btn-block" style="color:white;">Igrade Marks Entry</a>

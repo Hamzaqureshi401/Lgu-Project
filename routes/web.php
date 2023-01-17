@@ -200,6 +200,8 @@ Route::get('/gradeConfigration/{id}', [App\Http\Controllers\AttendanceController
 
 Route::get('/igradeMarksEntry/{id}', [App\Http\Controllers\AttendanceController::class, 'igradeMarksEntry'])->name('igrade.Marks.Entry');
 
+Route::get('/printGradeSheet/{id}', [App\Http\Controllers\AttendanceController::class, 'printGradeSheet'])->name('print.Grade.Sheet');
+
 
 
 

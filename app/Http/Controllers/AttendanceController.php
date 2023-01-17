@@ -226,6 +226,15 @@ class AttendanceController extends Controller
 
     }
 
+    public function printGradeSheet($id){
+
+        $SemesterCourse = SemesterCourse::where('ID' , $id)->first();
+        $enrollments = Enrollment::where('SemCourses_ID' , $id)->get();
+
+        return view('Attandences.printGradeSheet', compact('SemesterCourse'  , 'enrollments'));
+
+    }
+   
 
 
 
