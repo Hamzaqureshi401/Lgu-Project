@@ -70,34 +70,24 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Course Code</th>
-                                                                <th> {{ $SemesterCourse->course->CourseCode ?? '--' }}</th>
-                                                            </tr><tr>
+                                                                <td> {{ $SemesterCourse->course->CourseCode ?? '--' }}</td>
+                                                            </tr>
+                                                            <tr>
                                                                 <th>Courses Name</th>
-                                                                </tr>
+                                                                <td>{{ $SemesterCourse->course->CourseName ?? '--' }}</td>
+                                                                
+                                                            </tr>
+
+                                                            <tr>
                                                                 <th>Credit Hours</th>
+                                                                <td>{{ $SemesterCourse->course->CreditHours ?? '--' }}</td>
+
+                                                            </tr>
                                                                 <th>Asessment</th>
+                                                                <td>{{ $type ?? '--' }}</td>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    {{ $SemesterCourse->course->CourseCode ?? '--' }}
-                                                                </td>
-                                                            </tr><tr>
-                                                                <td>
-                                                                    {{ $SemesterCourse->course->CourseName ?? '--' }}
-
-                                                                </td>
-                                                            </tr><tr>
-                                                                <td>
-                                                                    {{ $SemesterCourse->course->CreditHours ?? '--' }}
-                                                                </td>
-                                                            </tr><tr>
-                                                                <td>
-                                                                    {{ $type ?? '--' }}
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
+      
                                                     </table>
                                                 </div>
                                             </div>
