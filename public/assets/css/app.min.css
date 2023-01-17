@@ -14127,3 +14127,23 @@ a.text-dark:hover {
   -webkit-font-feature-settings: "liga";
   font-feature-settings: "liga";
 }
+
+.stamp {
+        position: relative;
+        display: inline-block;
+        color: blue;
+        padding: 15px;
+        background-color: white;
+        box-shadow: inset 0px 0px 0px 10px blue;
+    }
+
+        .stamp:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("http://i.imgur.com/5O74VI6.jpg");
+            mix-blend-mode: lighten;
+        }

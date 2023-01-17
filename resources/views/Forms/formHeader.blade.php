@@ -14,10 +14,10 @@
               <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>{{ $title }}</h4>
+                    <h4>{{ $title ?? '' }}</h4>
                   </div>
 
-                  <form id="myForm" action="{{ $route }}" method="POST" enctype="multipart/form-data">
+                  <form id="myForm" action="{{ $route ?? '' }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                   
 

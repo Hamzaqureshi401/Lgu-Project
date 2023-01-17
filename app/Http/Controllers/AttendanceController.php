@@ -7,6 +7,7 @@ use App\Http\Classes\SessionClass;
 use App\Models\SemesterCourse;
 use App\Models\TimeTable;
 use App\Models\Attendance;
+use App\Models\Course;
 
 use App\Models\Enrollment;
 use Illuminate\Support\Facades\DB;
@@ -169,17 +170,61 @@ class AttendanceController extends Controller
 
         $session    =  $this->sessionData->getSessionData();
         $Emp_ID     = $session['ID'];
-        dd($Emp_ID);
         $attendances  = Attendance::where('Emp_ID' , $Emp_ID)->get();
         $enrollments  = Enrollment::whereIn('ID' , $attendances->pluck('Enroll_ID')->toArray())->get();
-        //dd( $enrollments->pluck('ID')->toArray());
-
-        
-
-        return view('Attandences.viewEmpAttendence' , compact('attendances' , 'enrollments'));
+        return view('Attandences.viewEmpAttendence' , 
+            compact(
+                'attendances' , 
+                'enrollments'
+            ));
 
     }
 
+    public function courseConfigration($id){
+
+         $button = 'Update Course Configration';
+        $title  = 'Edit Course Configration';
+        $route  = '/updateCourse';
+        $semesterCourse = SemesterCourse::where('ID' , $id)->first();
+         return
+         view('Attandences.courseConfigration',
+            compact(
+                'semesterCourse',
+                'title',
+                'route',
+                'button',
+            ));
+
+    }
+
+    public function studentAssesment($id){
+
+        $SemesterCourse = SemesterCourse::where('ID' , $id)->first();
+
+        return view('Attandences.studentAssesment' , compact('SemesterCourse' , 'id'));
+    }
+    public function assignMarks($id , $type){
+
+        $SemesterCourse = SemesterCourse::where('ID' , $id)->first();
+        $enrollments = Enrollment::where('SemCourses_ID' , $id)->get();
+
+        return view('Attandences.assignMarks' , compact('SemesterCourse' , 'type' , 'enrollments'));
+
+    }
+
+    public function gradeConfigration($id){
+
+        $SemesterCourse = SemesterCourse::where('ID' , $id)->first();
+        $enrollments = Enrollment::where('SemCourses_ID' , $id)->get();
+
+        return view('Attandences.gradeConfigration' , compact('SemesterCourse'  , 'enrollments'));
+    }
+
+    public function igradeMarksEntry($id){
+
+        return view('Attandences.igradeMarksEntry');
+
+    }
 
 
 

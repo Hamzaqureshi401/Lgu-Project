@@ -190,6 +190,18 @@ Route::get('/studentAttandenceView/{day}/{id}', [App\Http\Controllers\Attendance
 Route::post('/storeAttandences', [App\Http\Controllers\AttendanceController::class, 'storeAttandences'])->name('store.Attandences');
 
 
+Route::get('/courseConfigration/{id}', [App\Http\Controllers\AttendanceController::class, 'courseConfigration'])->name('course.Configration');
+
+Route::get('/studentAssesment/{id}', [App\Http\Controllers\AttendanceController::class, 'studentAssesment'])->name('student.Assesment');
+
+Route::get('/assignMarks/{id}/{type}', [App\Http\Controllers\AttendanceController::class, 'assignMarks'])->name('assign.Marks');
+
+Route::get('/gradeConfigration/{id}', [App\Http\Controllers\AttendanceController::class, 'gradeConfigration'])->name('grade.Configration');
+
+Route::get('/igradeMarksEntry/{id}', [App\Http\Controllers\AttendanceController::class, 'igradeMarksEntry'])->name('igrade.Marks.Entry');
+
+
+
 
 Route::get('/deanAttandence', [App\Http\Controllers\AttendanceController::class, 'deanAttandence'])->name('attandence.Dashboard');
 
