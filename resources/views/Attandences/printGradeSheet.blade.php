@@ -398,89 +398,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Final Submission</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Comments</label>
-                            <textarea class="form-control"></textarea>
-                        </div>
-                        <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1 form-control" type="submit">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-12">
-                <div class="card">
-                    <div class="padding-20">
-                        <div class="section-body bg-info">
-                            <div class="row">
-                                <div class="col-12 col-md-12 col-lg-12">
-                                    <div class="card">
-                                        <div class="card-header bg-info d-flex justify-content-center">
-                                            <h4 style="color: white;">Courses Assessment</h4>
-                                            <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="" data-target="#exampleModal"><i class="far fa-edit"></i> {{ 'Create Short Attandence Report' }}</button> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-content tab-bordered" id="myTab3Content">
-                            <div class="tab-pane fade show active" id="about" role="tabpanel"
-                                aria-labelledby="home-tab2">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-body p-0">
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Assessment</th>
-                                                                <th>0</th>
-                                                                <th>0</th>
-                                                                <th>0</th>
-                                                                <th>0</th>
-                                                                <th>1</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Total</th>
-                                                                <th>Final Term</th>
-                                                                <th>Mid Term</th>
-                                                                <th>Quiz</th>
-                                                                <th>Assignment</th>
-                                                                <th>Class Participation</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Status</th>
-                                                                <th>0</th>
-                                                                <th>0</th>
-                                                                <th>0</th>
-                                                                <th>0</th>
-                                                                <th>1</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
@@ -653,6 +571,60 @@
                 </div>
             </div>
         </div>
+
+
+        
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-12">
+                <div class="card">
+                    <div class="padding-20">
+                        <div class="section-body bg-info">
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header bg-info d-flex justify-content-center">
+                                            <h4 style="color: white;">Courses Assessment</h4>
+                                            <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="" data-target="#exampleModal"><i class="far fa-edit"></i> {{ 'Create Short Attandence Report' }}</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content tab-bordered" id="myTab3Content">
+                            <div class="tab-pane fade show active" id="about" role="tabpanel"
+                                aria-labelledby="home-tab2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body p-0">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Assessment</th>
+                                                                <th>0</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </section>
     <div class="bg-white text-center" style=" margin-left: 50px; margin-bottom: 90px; width:93%;">
         <a class="btn btn-warning btn-icon icon-left" style="color: white; margin: 10px;"
