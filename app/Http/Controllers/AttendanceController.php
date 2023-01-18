@@ -366,13 +366,14 @@ class AttendanceController extends Controller
 
          
             $semesterCourseWeightages       = SemesterCourseWeightage::where(['SemCourse_ID' => $request->SemCourses_ID , 'Type' => $request->type])->first()->ID; 
+            $SemCourseWeightage_ID = SemesterCourseWeightageDetail::where('SemCourseWeightage_ID' , $semesterCourseWeightages)->first()->ID;
             
         foreach($request->Enroll_ID as $key => $Enroll_ID ){
 
             $ObtainedMarks = $request['ObtainedMarks'][$key];
             if($request->ObtainedMarks[$key] != 0){
                 $submit             = DB::Update("EXEC insertStudentMarks
-                    @SemCourseWeightagedetail_ID       = '$semesterCourseWeightages',
+                    @SemCourseWeightagedetail_ID       = '$SemCourseWeightage_ID',
                     @ObtainedMarks                     = '$ObtainedMarks',
                     @Enroll_ID                         = '$Enroll_ID'
                     ;

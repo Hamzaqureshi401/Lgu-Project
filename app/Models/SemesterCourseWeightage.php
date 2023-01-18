@@ -12,6 +12,6 @@ class SemesterCourseWeightage extends Model
     public $timestamps = false;
 
     public function SemesterCourseWeightageDetail(){
-        return $this->belongsTo('App\Models\SemesterCourseWeightageDetail', 'SemCourseWeightage_ID');
+        return $this->belongsTo('App\Models\SemesterCourseWeightageDetail', 'SemCourseWeightage_ID' , 'ID');
     }
 }
