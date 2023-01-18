@@ -118,12 +118,13 @@
                                     <tbody>
                                     @foreach($enrollments as $enrollment)
                                     @include('Forms.formHeader')  
-
+                                    <input type="hidden" class="form-control" name="Enroll_ID[]" value="{{ $enrollment->ID
+                                  }}">
                                       <tr>
                                         <td>{{ $enrollment->student->StdRollNo }}</td>
                                         <td>{{ $enrollment->student->Std_FName }}</td>
                                         <td>{{ $enrollment->student->Std_FName }}</td>
-                                        <td> <input type="number" class="form-control" name="ObtainedMarks" value="0.00"></td>
+                                        <td> <input type="number" class="form-control" name="ObtainedMarks[]" value="0.00"></td>
                                         <td><div class="pretty p-switch p-slim">
                                           <input type="checkbox" name="Status[]" >
                                           <div class="state p-success">
