@@ -179,7 +179,7 @@
             </div>
           </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="assets/img/user.png"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{ asset('assets/img/user.jpg') }}"
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">Hello Sarah Smith</div>
@@ -374,7 +374,7 @@
           position: 'topRight'
         });
          @elseif(session('warningToaster'))
-         var msg = "{{session('infoToaster')}}";
+         var msg = "{{session('warningToaster')}}";
          var title = "{{session('title')}}";
          iziToast.warning({
           title: title,

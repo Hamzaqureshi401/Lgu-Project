@@ -76,7 +76,7 @@
                    
              </div>
 
-                   <div class="row">
+            <div class="row">
               <div class="col-12 col-md-6 col-lg-12">
                 <div class="card">
                   <div class="padding-20">
@@ -117,6 +117,8 @@
                                     </thead>
                                     <tbody>
                                     @foreach($enrollments as $enrollment)
+                                    @include('Forms.formHeader')  
+
                                       <tr>
                                         <td>{{ $enrollment->student->StdRollNo }}</td>
                                         <td>{{ $enrollment->student->Std_FName }}</td>
@@ -131,10 +133,12 @@
                                         </td>
 
                                       </tr>
+
                                     @endforeach
                                     </tbody>                   
                                   </table>
-                                 
+                                  <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ "Submit" }}</button>
+                                   @include('Forms.formFooter')
                                 </div>
                               </div>
                              

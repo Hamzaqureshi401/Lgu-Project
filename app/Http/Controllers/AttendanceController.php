@@ -8,8 +8,11 @@ use App\Models\SemesterCourse;
 use App\Models\TimeTable;
 use App\Models\Attendance;
 use App\Models\Course;
-
+use Redirect;
 use App\Models\Enrollment;
+use App\Models\SemesterCourseWeightage;
+use App\Models\SemesterCourseWeightageDetail;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -37,6 +40,8 @@ class AttendanceController extends Controller
         $route = 'updateCourse';
         $getEditRoute = 'editCourse';
         $modalTitle = 'Edit Course';
+
+
 
         return view('Dean.StudentsAttendance.allStudentAttandence'  , 
             compact(
@@ -67,7 +72,7 @@ class AttendanceController extends Controller
         
        
         return 
-        view('SemesterCourses.allSemesterCourses' , 
+        view('Attandences.empSemesterCourses' , 
             compact(
                 'semesterCourses' , 
                 'title' , 
@@ -110,7 +115,8 @@ class AttendanceController extends Controller
         $students = Enrollment::where(['SemCourses_ID' => $id])->get();
         $Sem_ID =  SemesterCourse::where('ID' , $id)->first();
 
-        return view('Attandences.studentAttandenceView' , compact('Sem_ID' , 'students' , 'day'));
+       
+        return view('Attandences.studentAttandenceView' , compact('Sem_ID' , 'students' , 'day' , 'semesterCourseWeightage'));
     }
     public function storeAttandences(Request $request){
 
@@ -184,7 +190,7 @@ class AttendanceController extends Controller
 
          $button = 'Update Course Configration';
         $title  = 'Edit Course Configration';
-        $route  = '/updateCourse';
+        $route  = '/storeCourseConfigration';
         $semesterCourse = SemesterCourse::where('ID' , $id)->first();
          return
          view('Attandences.courseConfigration',
@@ -197,18 +203,14 @@ class AttendanceController extends Controller
 
     }
 
-    public function studentAssesment($id){
 
-        $SemesterCourse = SemesterCourse::where('ID' , $id)->first();
-
-        return view('Attandences.studentAssesment' , compact('SemesterCourse' , 'id'));
-    }
     public function assignMarks($id , $type){
 
         $SemesterCourse = SemesterCourse::where('ID' , $id)->first();
         $enrollments = Enrollment::where('SemCourses_ID' , $id)->get();
+        $route = 'storeStudentMark';
 
-        return view('Attandences.assignMarks' , compact('SemesterCourse' , 'type' , 'enrollments'));
+        return view('Attandences.assignMarks' , compact('SemesterCourse' , 'type' , 'enrollments' , 'route'));
 
     }
 
@@ -234,7 +236,151 @@ class AttendanceController extends Controller
         return view('Attandences.printGradeSheet', compact('SemesterCourse'  , 'enrollments'));
 
     }
-   
+
+   public function storeCourseConfigration(Request $request){
+
+        $session    =  $this->sessionData->getSessionData();
+        $Emp_ID     = $session['ID'];
+        $types = [
+            $request->FinalTerm,
+            $request->MidTerm,
+            $request->Quiz,
+            $request->Assignment,
+            $request->ClassParticipation,
+            $request->Attandence,
+        ];
+        $sum = array_sum($types);
+       
+        if($sum != 100){
+            return Redirect::back()->withInput($request->all())->with(['errorToaster' => 'All The weitage shoud be sum of 100' , 'title' => 'Warning']);
+        }
+
+        $ntype = explode('-' , $request->type);
+        
+
+        
+        foreach($types as $key => $type){            
+
+            
+                //  $submit = DB::update("EXEC sp_InsertSemesterCourse_Weightage
+                // @SemCourse_ID,   ='1',
+                // @Type,           ='$ntype[$key]',
+                // @Weightage,      ='$type',
+                // @LectureType     ='$request->LectureType'
+                // ;");
+
+            $a = new SemesterCourseWeightage();
+
+            $a->SemCourse_ID    = $request->id;
+            $a->Type            = $ntype[$key];
+            $a->Weightage       = $type;
+            $a->LectureType     = $request->LectureType;
+
+
+            $a->save();
+
+            SemesterCourseWeightage::where(['SemCourse_ID' => $request->id , 'Weightage' => 0])->orWhereNull('Weightage')->delete();
+            }
+
+            return redirect()->back()->with(['successToaster' => 'Course Weightage Set Successfully' , 'title' => 'Success']);
+   }
+   public function addSemesterCourseWeightageDetails(Request $request){
+
+            $data = $this->validateMarks($request);
+            if ($data['totalMarks'] > 25){
+                return Redirect::back()->withInput($request->all())->with(['errorToaster' => 'Weitage shoud be sum of 100' , 'title' => 'Warning']);
+             }elseif($data['totalCount'] == 1 && $data['totalMarks'] != 25){
+                 return Redirect::back()->withInput($request->all())->with(['errorToaster' => 'Your Last Entry should be equal to 25' , 'title' => 'Warning']);
+             }
+            $a = new SemesterCourseWeightageDetail();
+
+            $a->SemCourseWeightage_ID    = $request->SemCourseWeightage_ID;
+            $a->TotalMarks               = $request->TotalMarks;
+            $a->save();
+
+          return redirect()->back()->with(['successToaster' => 'Course Weightage Set Successfully' , 'title' => 'Success']);
+   }
+
+   public function validateMarks($request){
+
+            $semesterCourseWeightages       = SemesterCourseWeightage::where('SemCourse_ID' , $request->SemCourseID)->pluck('ID'); 
+            $SemesterCourseWeightageDetails = SemesterCourseWeightageDetail::whereIn('SemCourseWeightage_ID' , $semesterCourseWeightages->toArray());
+            
+            $semesterCourseWeightagescount = $semesterCourseWeightages->count();
+            $SemesterCourseWeightageDetailscont = $SemesterCourseWeightageDetails->count();
+
+            $data['totalCount'] = $semesterCourseWeightagescount - $SemesterCourseWeightageDetailscont - 2;// Mid And Final rocrd
+
+             $SemesterCourseWeightageDetailsall = SemesterCourseWeightageDetail::whereIn('SemCourseWeightage_ID' , $semesterCourseWeightages)->get();
+
+             $subtotalMarks = 0;
+             foreach($SemesterCourseWeightageDetailsall as $SemesterCourseWeightageDetails){
+                $subtotalMarks = $subtotalMarks + $SemesterCourseWeightageDetails->TotalMarks;
+             }
+             $totalMarks = $subtotalMarks + $request->TotalMarks;
+
+            
+             $data['totalMarks'] = $totalMarks;
+             return $data;
+             
+
+
+         
+           // dd($request->all() , $semesterCourseWeightages , $SemesterCourseWeightageDetails , $semesterCourseWeightagescount , $SemesterCourseWeightageDetailscont , $totalCount , $TotalMarks);
+
+
+
+            //SemesterCourseWeightageDetail::where()
+   }
+
+   public function studentAssesment($id){
+
+         $SemesterCourse                 = SemesterCourse::where('ID' , $id)->first();
+         $semesterCourseWeightages       = SemesterCourseWeightage::where('SemCourse_ID' , $id); 
+         $route                          = '/addSemesterCourseWeightageDetails';
+         $typefilter                     = SemesterCourseWeightageDetail::pluck('SemCourseWeightage_ID')->toArray();
+         $optionSemesterCourseWeightages = SemesterCourseWeightage::whereNotIn('ID' , $typefilter)->get();
+         $semesterCourseWeightagesID     = $semesterCourseWeightages->pluck('ID')->toArray();
+         $SemesterCourseWeightageDetails = SemesterCourseWeightageDetail::whereIn('SemCourseWeightage_ID' , $semesterCourseWeightagesID)->get();
+         $semesterCourseWeightages       = $semesterCourseWeightages->get();
+
+         
+         //dd($SemesterCourseWeightage);
+
+         
+         
+
+
+        return view('Attandences.studentAssesment' , 
+            compact(
+                'SemesterCourse' , 
+                'id' , 
+                'semesterCourseWeightages' ,  
+                'route',
+                'optionSemesterCourseWeightages',
+                'SemesterCourseWeightageDetails'
+            ));
+    }
+
+    public function deleteMarks($id){
+
+        SemesterCourseWeightageDetail::where('ID' , $id)->delete();
+         return redirect()->back()->with(['warningToaster' => 'Marks Deleted Successfully' , 'title' => 'Success']);
+    }
+
+     public function storeStudentMark(Request $request){
+
+        dd($request->all());
+
+            $submit             = DB::Update("EXEC insertStudentMarks
+            @SemCourses_ID       = '$request->SemCourses_ID',
+            @ObtainedMarks       = '$request->ObtainedMarks',
+            @Enroll_ID           = '$request->Enroll_ID'
+            ;
+        ");
+        
+             return redirect()->back()->with(['successToaster' => 'Dasignation Added' , 'title' => 'Success']);
+    }
 
 
 

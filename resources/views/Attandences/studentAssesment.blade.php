@@ -53,41 +53,33 @@
          </tr>
       </thead>
       <tbody>
+          @foreach($optionSemesterCourseWeightages as $key => $semesterCourseWeightage)
+          @if($key < 2)
         <tr>
-         <td>1</td>
-           <td>Final Term</td>
-           <td>{{ 0.00 }}</td>
+         <td>{{ $loop->index + 1}}</td>
+         @php 
+         $ind = 0;
+         $ind = $ind + ($loop->index) + 1;
+         @endphp
+           <td>{{ $semesterCourseWeightage->Type }}</td>
+           <td>{{ $semesterCourseWeightage->Weightage }}</td>
            <td> -- </td>
-           <td> <a href="{{ route('assign.Marks' , [$id , 'Final'])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
+           <td> <a href="{{ route('assign.Marks' , [$id , $semesterCourseWeightage->Type])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
         </tr>
-        <tr>
-         <td>2</td>
-           <td>Mid Term</td>
-           <td>{{ 0.00 }}</td>
-           <td> -- </td>
-           <td> <a href="{{ route('assign.Marks' , [$id , 'Mid'])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
+         @endif
+         @endforeach
+          @foreach($SemesterCourseWeightageDetails as $SemesterCourseWeightageDetail)
+           <tr>
+         <td>{{ $ind + 1}}</td>
+           <td>{{ $SemesterCourseWeightageDetail->SemesterCourseWeightage->Type }}</td>
+           <td>{{ $SemesterCourseWeightageDetail->TotalMarks }}</td>
+           <td> <a href="{{ route('delete.Marks' , $SemesterCourseWeightageDetail->ID)}}" class="btn btn-sm btn-danger">Delete Marks</a> </td>
+           <td> <a href="{{ route('assign.Marks' , [$id , $SemesterCourseWeightageDetail->SemesterCourseWeightage->Type])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
         </tr>
-         <tr>
-         <td>3</td>
-           <td>Quiz</td>
-           <td>{{ 0.00 }}</td>
-           <td> -- </td>
-           <td> <a href="{{ route('assign.Marks', [$id , 'Quiz'])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
-        </tr>
-         <tr>
-         <td>4</td>
-           <td>Assignment Waite</td>
-           <td>{{ 0.00 }}</td>
-           <td> -- </td>
-           <td> <a href="{{ route('assign.Marks', [$id , 'Assignment'])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
-        </tr>
-         <tr>
-         <td>4</td>
-           <td>Class Participation</td>
-           <td>{{ 0.00 }}</td>
-           <td> -- </td>
-           <td> <a href="{{ route('assign.Marks', [$id , 'Participation'])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
-        </tr>
+         @endforeach
+         
+
+       
       </tbody>
    </table>
 </div>
@@ -101,7 +93,7 @@
       <div class="col-12 col-md-12 col-lg-12">
          <div class="card">
             <div class="card-header bg-success d-flex justify-content-center">
-               <h4 style="color: white;">Attandence Of Classes</h4>
+               <h4 style="color: white;">Set Course marks</h4>
                <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="" data-target="#exampleModal"><i class="far fa-edit"></i> {{ "Create Short Attandence Report" }}</button> -->
             </div>
          </div>
@@ -112,14 +104,15 @@
 
 
                   <div class="card-body">
-                    
-                     <div class="form-group">
-                      <label>Dpt Name</label>
-                      <select class="form-control" name="type"  required>
-                        
-                        <option value="{{ 'Quiz' }}">{{ 'Quiz' }}</option>
-                        <option value="{{ 'ClassPrepation' }}">{{ 'ClassPrepation' }}</option>
-                        <option value="{{ 'Assignment' }}">{{ 'Assignment' }}</option>
+                    <input type="hidden" name="SemCourseID" value="{{ $SemesterCourse->ID }}">
+                       <div class="form-group">
+                      <label>Type</label>
+                      <select class="form-control" name="SemCourseWeightage_ID"  required>
+                        @foreach($optionSemesterCourseWeightages as $key => $semesterCourseWeightage)
+                        @if($key > 1)
+                        <option value="{{ $semesterCourseWeightage->ID }}">{{ $semesterCourseWeightage->Type }}</option>
+                        @endif
+                        @endforeach
                         
                       </select>
                     </div>

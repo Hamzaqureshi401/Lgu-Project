@@ -116,7 +116,6 @@ Route::post('/updateDesignation', [App\Http\Controllers\DesignationController::c
 
 Route::get('/addStudentMark', [App\Http\Controllers\StudentMarksCotroller::class, 'addStudentMark'])->name('add.StudentMark');
 Route::get('/allStudentMarks', [App\Http\Controllers\StudentMarksCotroller::class, 'allStudentMarks'])->name('all.StudentMarks');
-Route::post('/storeStudentMark', [App\Http\Controllers\StudentMarksCotroller::class, 'storeStudentMark'])->name('store.StudentMark');
 Route::get('editStudentMark/{id}', [App\Http\Controllers\StudentMarksCotroller::class, 'editStudentMark'])->name('edit.StudentMark');
 Route::post('/updateStudentMark', [App\Http\Controllers\StudentMarksCotroller::class, 'updateStudentMark'])->name('update.StudentMark');
 
@@ -192,7 +191,19 @@ Route::post('/storeAttandences', [App\Http\Controllers\AttendanceController::cla
 
 Route::get('/courseConfigration/{id}', [App\Http\Controllers\AttendanceController::class, 'courseConfigration'])->name('course.Configration');
 
+
+Route::post('/storeCourseConfigration', [App\Http\Controllers\AttendanceController::class, 'storeCourseConfigration'])->name('store.Course.Configration');
+
+Route::post('/addSemesterCourseWeightageDetails', [App\Http\Controllers\AttendanceController::class, 'addSemesterCourseWeightageDetails'])->name('add.Semester.Course.Weightage.Details');
+
+Route::post('/storeStudentMark', [App\Http\Controllers\AttendanceController::class, 'storeStudentMark'])->name('store.StudentMark');
+
+
+
 Route::get('/studentAssesment/{id}', [App\Http\Controllers\AttendanceController::class, 'studentAssesment'])->name('student.Assesment');
+
+Route::get('/deleteMarks/{id?}', [App\Http\Controllers\AttendanceController::class, 'deleteMarks'])->name('delete.Marks');
+
 
 Route::get('/assignMarks/{id}/{type}', [App\Http\Controllers\AttendanceController::class, 'assignMarks'])->name('assign.Marks');
 
