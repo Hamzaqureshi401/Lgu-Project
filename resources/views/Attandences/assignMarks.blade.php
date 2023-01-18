@@ -120,6 +120,8 @@
                                     @include('Forms.formHeader')  
                                     <input type="hidden" class="form-control" name="Enroll_ID[]" value="{{ $enrollment->ID
                                   }}">
+                                  <input type="hidden" name="SemCourses_ID" value="{{ $SemesterCourse->ID }}">
+                                  <input type="hidden" name="type" value="{{ $type }}">
                                       <tr>
                                         <td>{{ $enrollment->student->StdRollNo }}</td>
                                         <td>{{ $enrollment->student->Std_FName }}</td>

@@ -344,12 +344,6 @@ class AttendanceController extends Controller
          $SemesterCourseWeightageDetails = SemesterCourseWeightageDetail::whereIn('SemCourseWeightage_ID' , $semesterCourseWeightagesID)->get();
          $semesterCourseWeightages       = $semesterCourseWeightages->get();
 
-         
-         //dd($SemesterCourseWeightage);
-
-         
-         
-
 
         return view('Attandences.studentAssesment' , 
             compact(
@@ -370,16 +364,25 @@ class AttendanceController extends Controller
 
      public function storeStudentMark(Request $request){
 
-        dd($request->all());
+         
+            $semesterCourseWeightages       = SemesterCourseWeightage::where(['SemCourse_ID' => $request->SemCourses_ID , 'Type' => $request->type])->first()->ID; 
+            
+        foreach($request->Enroll_ID as $key => $Enroll_ID ){
 
-            $submit             = DB::Update("EXEC insertStudentMarks
-            @SemCourses_ID       = '$request->SemCourses_ID',
-            @ObtainedMarks       = '$request->ObtainedMarks',
-            @Enroll_ID           = '$request->Enroll_ID'
-            ;
-        ");
+            $ObtainedMarks = $request['ObtainedMarks'][$key];
+            if($request->ObtainedMarks[$key] != 0){
+                $submit             = DB::Update("EXEC insertStudentMarks
+                    @SemCourseWeightagedetail_ID       = '$semesterCourseWeightages',
+                    @ObtainedMarks                     = '$ObtainedMarks',
+                    @Enroll_ID                         = '$Enroll_ID'
+                    ;
+                ");
+            }
+        }
+
+            
         
-             return redirect()->back()->with(['successToaster' => 'Dasignation Added' , 'title' => 'Success']);
+             return redirect()->back()->with(['successToaster' => 'MArks Added Successfully' , 'title' => 'Success']);
     }
 
 
