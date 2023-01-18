@@ -208,7 +208,7 @@ class AttendanceController extends Controller
 
         $SemesterCourse = SemesterCourse::where('ID' , $id)->first();
         $enrollments = Enrollment::where('SemCourses_ID' , $id)->get();
-        $route = 'storeStudentMark';
+        $route = '/storeStudentMark';
 
         return view('Attandences.assignMarks' , compact('SemesterCourse' , 'type' , 'enrollments' , 'route'));
 
