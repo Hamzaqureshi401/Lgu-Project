@@ -365,7 +365,7 @@ class AttendanceController extends Controller
      public function storeStudentMark(Request $request){
 
          
-            $SemCourseWeightage_ID       = SemesterCourseWeightage::where(['SemCourse_ID' => $request->SemCourses_ID , 'Type' => dd($SemCourseWeightage_ID);
+            $SemCourseWeightage_ID       = SemesterCourseWeightage::where(['SemCourse_ID' => $request->SemCourses_ID , 'Type' => $request->type])->with('WeightageDetail')->first()->ID;
             
         foreach($request->Enroll_ID as $key => $Enroll_ID ){
 
