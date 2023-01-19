@@ -292,19 +292,17 @@
                                           </tr>
                                           <tr>
                                              <th>Total</th>
-                                             <th>Final Term</th>
-                                             <th>Mid Term</th>
-                                             <th>Quiz</th>
-                                             <th>Assignment</th>
-                                             <th>Class Participation</th>
+                                              @foreach($optionSemesterCourseWeightages as $key => $semesterCourseWeightage)
+                                             <th>{{ $semesterCourseWeightage->Type }}</th>
+                                             @endforeach                                             
                                           </tr>
+
                                           <tr>
                                              <th>Status</th>
-                                             <th>0</th>
-                                             <th>0</th>
-                                             <th>0</th>
-                                             <th>0</th>
-                                             <th>1</th>
+                                             @foreach($optionSemesterCourseWeightages as $key => $semesterCourseWeightage)
+                                             <th>{{ $semesterCourseWeightage->Weightage }}</th>
+                                             @endforeach
+                                            
                                           </tr>
                                        </thead>
                                        <tbody>
@@ -321,6 +319,14 @@
          </div>
       </div>
    </div>
+
+   
+         
+       
+         
+         
+
+
    <div class="row">
       <div class="col-12 col-md-12 col-lg-12">
          <div class="card">

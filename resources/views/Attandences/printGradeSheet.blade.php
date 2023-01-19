@@ -20,7 +20,7 @@
                            Lahore Garrison University
                         </h1>
                         <h3 class="panel-title" style="text-align:center">
-                           Award List - I GRADE MARKS ENTRY { Fa-2021 }
+                           Award List  { {{ $SemesterCourse->semester->SemSession }} }
                         </h3>
                      </th>
                      <th width="30%" rowspan="3">
@@ -63,6 +63,11 @@
                                     <table class="table table-striped">
                                        <thead>
                                           <tr>
+                                             <th>Teacher Name</th>
+                                             
+                                             <td> {{ Session::get('user')->Emp_FirstName ?? '--' }}  {{ Session::get('user')->Emp_LastName ?? '--' }}</td>
+                                          </tr>
+                                           <tr>
                                              <th>Course Code</th>
                                              <td> {{ $SemesterCourse->course->CourseCode ?? '--' }}</td>
                                           </tr>
@@ -74,8 +79,24 @@
                                              <th>Credit Hours</th>
                                              <td>{{ $SemesterCourse->course->CreditHours ?? '--' }}</td>
                                           </tr>
-                                          <th>Asessment</th>
-                                          <td>{{ $type ?? '--' }}</td>
+                                          <th>Department</th>
+                                          <td>{{ $SemesterCourse->degreeBatches->degree->department->Dpt_Name ?? '--' }}</td>
+                                          </tr>
+                                           <tr>
+                                             <th>Degree</th>
+                                             <td> {{ $SemesterCourse->degreeBatches->degree->DegreeFullName ?? '--' }}</td>
+                                          </tr>
+                                           <tr>
+                                             <th>Award No</th>
+                                             <td> {{ $SemesterCourse->b->CourseCode ?? '--' }}</td>
+                                          </tr>
+                                           <tr>
+                                             <th>Status</th>
+                                             <td> {{ $SemesterCourse->b->CourseCode ?? 'Not Submitted' }}</td>
+                                          </tr>
+                                           <tr>
+                                             <th>Session / Class / Secation</th>
+                                             <td> {{ $SemesterCourse->semester->SemSession ?? '--' }}</td>
                                           </tr>
                                        </thead>
                                     </table>

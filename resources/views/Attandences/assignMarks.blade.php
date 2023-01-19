@@ -86,7 +86,7 @@
                         <div class="col-12 col-md-12 col-lg-12">
                           <div class="card">
                             <div class="card-header bg-success d-flex justify-content-center">
-                              <h4 style="color: white;">Upadte Student Marks</h4>
+                              <h4 style="color: white;">Add Student Marks</h4>
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="" data-target="#exampleModal"><i class="far fa-edit"></i> {{ "Create Short Attandence Report" }}</button> -->
                             </div>
                           </div>
@@ -125,8 +125,8 @@
                                       <tr>
                                         <td>{{ $enrollment->student->StdRollNo }}</td>
                                         <td>{{ $enrollment->student->Std_FName }}</td>
-                                        <td>{{ $enrollment->student->Std_FName }}</td>
-                                        <td> <input type="number" class="form-control" name="ObtainedMarks[]" value="0.00"></td>
+                                        <td>{{ $SemesterCourseWeightageDetail->TotalMarks }}</td>
+                                        <td> <input type="number" class="form-control" name="ObtainedMarks[]" value="{{ $StudentMarks->ObtainedMarks ?? '0' }}" max="{{$SemesterCourseWeightageDetail->TotalMarks}}"></td>
                                         <td><div class="pretty p-switch p-slim">
                                           <input type="checkbox" name="Status[]" >
                                           <div class="state p-success">
@@ -140,7 +140,9 @@
                                     @endforeach
                                     </tbody>                   
                                   </table>
+                                  @if(empty($StudentMarks->ObtainedMarks))
                                   <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ "Submit" }}</button>
+                                  @endif
                                    @include('Forms.formFooter')
                                 </div>
                               </div>

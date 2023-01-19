@@ -34,13 +34,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'StudentAuth'], function () {
 
-// SemesterDetails Routes start
 
-// Route::get('/addSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'addSemesterDetails'])->name('add.SemesterDetails');
-// Route::get('/allSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'allSemesterDetails'])->name('all.SemesterDetails');
-// Route::post('/storeSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'storeSemesterDetails'])->name('store.SemesterDetails');
-// Route::get('/editSemesterDetail/{id?}', [App\Http\Controllers\SemesterDetailsController::class, 'editSemesterDetail'])->name('edit.SemesterDetail');
-// Route::post('/updateSemesterDetail', [App\Http\Controllers\SemesterDetailsController::class, 'updateSemesterDetail'])->name('update.SemesterDetail');
 // Enrollments Routes start
 
 Route::get('/addEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollment'])->name('add.Enrollment');
@@ -246,3 +240,11 @@ Route::get('/stdWiseAward', [App\Http\Controllers\ViewController::class, 'stdWis
 Route::get('/stdAffairs', [App\Http\Controllers\ViewController::class, 'stdAffairs'])->name('std.Affairs');
 
 });
+
+//StdRollNoSlips Routes start
+
+Route::get('/addStdRollNoSlips', [App\Http\Controllers\StdRollNoSlipsController::class, 'addStdRollNoSlips'])->name('add.StdRollNoSlips');
+Route::get('/allStdRollNoSlips', [App\Http\Controllers\StdRollNoSlipsController::class, 'allStdRollNoSlips'])->name('all.StdRollNoSlips');
+Route::post('/storeStdRollNoSlips', [App\Http\Controllers\StdRollNoSlipsController::class, 'storeStdRollNoSlips'])->name('store.StdRollNoSlips');
+Route::get('/editStdRollNoSlip/{id?}', [App\Http\Controllers\StdRollNoSlipsController::class, 'editStdRollNoSlip'])->name('edit.StdRollNoSlip');
+Route::post('/updateStdRollNoSlip', [App\Http\Controllers\StdRollNoSlipsController::class, 'updateStdRollNoSlip'])->name('update.StdRollNoSlip');

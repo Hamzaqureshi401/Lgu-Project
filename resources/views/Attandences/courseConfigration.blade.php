@@ -22,21 +22,24 @@
                       <label>Mid Term %</label>
                       <input type="number" name="MidTerm" class="form-control" value="25" placeholder="Enter Total Marks"  readonly>
                     </div>
+
+                    @if(empty($SemesterCourseWeightage->first()))
+
                    <div class="form-group">
                       <label>Quiz %</label>
-                      <input type="number" name="Quiz" class="form-control" value="old('Quiz')" placeholder="Enter Total Marks" >
+                      <input type="number" name="Quiz" class="form-control" value="{{old('Quiz')}}" placeholder="Enter Total Marks" >
                     </div>
                     <div class="form-group">
                       <label>Assignment % </label>
-                      <input type="number" name="Assignment" class="form-control" value="old('Assignment')" placeholder="Enter Total Marks" >
+                      <input type="number" name="Assignment" class="form-control" value="{{old('Assignment')}}" placeholder="Enter Total Marks" >
                     </div>
                     <div class="form-group">
                       <label>Class Participation %</label>
-                      <input type="number" name="ClassParticipation" class="form-control" value="old('ClassParticipation')" placeholder="Enter Total Marks" >
+                      <input type="number" name="ClassParticipation" class="form-control" value="{{old('ClassParticipation')}}" placeholder="Enter Total Marks" >
                     </div>
                      <div class="form-group">
                       <label>Attandence %</label>
-                      <input type="number" name="Attandence" class="form-control" value="old('Attandence')" placeholder="Enter Total Marks" >
+                      <input type="number" name="Attandence" class="form-control" value="{{old('Attandence')}}" placeholder="Enter Total Marks" >
                     </div>
                     <div class="form-group">
                       <label>Lecture Type </label>
@@ -46,8 +49,18 @@
                    <input type="hidden" name="type" value="FinalTerm-MidTerm-Quiz-Assignment-ClassParticipation-Attandence">
                    
                  <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
-               </div>
-    
+               
+               @else
+               @foreach($SemesterCourseWeightage as $SemesterCourseWeightag)
+                <div class="form-group">
+                      <label>{{$SemesterCourseWeightag->Type}} %</label>
+                      <input type="number" name="Quiz" class="form-control" value="{{ $SemesterCourseWeightag->Weightage }}" placeholder="Enter Total Marks" readonly>
+                    </div>
+                           
+               
+               @endforeach
+               @endif
+    </div>
                 
 @include('Forms.formFooter')   
 

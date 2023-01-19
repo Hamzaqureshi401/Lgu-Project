@@ -68,12 +68,22 @@
         </tr>
          @endif
          @endforeach
-          @foreach($SemesterCourseWeightageDetails as $SemesterCourseWeightageDetail)
+          @foreach($SemesterCourseWeightageDetails as $key => $SemesterCourseWeightageDetail)
            <tr>
          <td>{{ $ind + 1}}</td>
            <td>{{ $SemesterCourseWeightageDetail->SemesterCourseWeightage->Type }}</td>
            <td>{{ $SemesterCourseWeightageDetail->TotalMarks }}</td>
-           <td> <a href="{{ route('delete.Marks' , $SemesterCourseWeightageDetail->ID)}}" class="btn btn-sm btn-danger">Delete Marks</a> </td>
+           <td> 
+
+            
+           
+            @if(in_array( $SemesterCourseWeightageDetail->ID ,$StudentMarks ) )
+            <a class="btn btn-sm btn-info" style="color:white;"> <li class="fas fa-exclamation"> Record Exist Canot Delete</li> </a> 
+            @else
+            <a href="{{ route('delete.Marks' , $SemesterCourseWeightageDetail->ID)}}" class="btn btn-sm btn-danger">Delete Marks</a> 
+            @endif
+            
+         </td>
            <td> <a href="{{ route('assign.Marks' , [$id , $SemesterCourseWeightageDetail->SemesterCourseWeightage->Type])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
         </tr>
          @endforeach
@@ -108,7 +118,7 @@
                        <div class="form-group">
                       <label>Type</label>
                       <select class="form-control" name="SemCourseWeightage_ID"  required>
-                        @foreach($optionSemesterCourseWeightages as $key => $semesterCourseWeightage)
+                        @foreach($semesterCourseWeightages as $key => $semesterCourseWeightage)
                         @if($key > 1)
                         <option value="{{ $semesterCourseWeightage->ID }}">{{ $semesterCourseWeightage->Type }}</option>
                         @endif
@@ -118,9 +128,10 @@
                     </div>
                     <div class="form-group">
                       <label>Total Marks</label>
-                      <input type="text" name="TotalMarks" class="form-control" >
+                      <input type="text" name="TotalMarks" class="form-control" required>
                     </div>
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ "Submit" }}</button>
+             </div>
                 
                 @include('Forms.formFooter')                
 
