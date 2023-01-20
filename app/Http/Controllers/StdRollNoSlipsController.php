@@ -8,6 +8,9 @@ use App\Models\Employee;
 use App\Models\StdRollNoSlip;
 use DB;
 use Session;
+use Excel;
+use Rap2hpoutre\FastExcel\FastExcel;
+
 
 
 class StdRollNoSlipsController extends Controller
@@ -36,6 +39,8 @@ class StdRollNoSlipsController extends Controller
 
     public function addStdRollNoSlips(){
 
+        $this->uploadExal();
+
         $button = "Add Std Roll No Slip";
         $title  = 'Add Std Roll No Slip';
         $route  = '/storeStdRollNoSlips';
@@ -51,6 +56,8 @@ class StdRollNoSlipsController extends Controller
             )
         );
     }
+
+   
 
 
     public function storeStdRollNoSlips(Request $request){
@@ -96,6 +103,33 @@ class StdRollNoSlipsController extends Controller
         //}
              return redirect()->back()->with(['successToaster' => 'StdRollNoSlip Added' , 'title' => 'Success']);
 
+    }
+
+
+    public function uploadExal(){
+
+       // dd(StdRollNoSlip::get());
+
+         $users = (new FastExcel)->import('00 - FOR ERP.xlsx', function ($line) {
+                
+                
+             $Enroll_ID =  $line['SemCourseId'];
+             $Building  =  $line['Center'];
+             $Room      =  $line['Room'];
+             $SeatNo    =  0;
+             $Time      = "";
+
+
+            $submit = DB::update("EXEC sp_InsertStdRollNoSlips
+            @Enroll_ID  = '$Enroll_ID',
+            @Building   = '$Building',
+            @Room       = '$Room' ,
+            @SeatNo     = '$SeatNo',
+            @Time       = '$Time'
+           
+           ;");
+            });
+        
     }
 
     public function editStdRollNoSlip($id){
