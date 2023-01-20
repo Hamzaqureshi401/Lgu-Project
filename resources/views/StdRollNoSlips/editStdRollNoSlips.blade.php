@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                        <label>Time</label>
-                      <input type="time" name="Time" class="form-control"  value="" > 
+                      <input type="time" name="Time" class="form-control"  value="{{ $stdRollNoSlips->Time }}" > 
                       
                     </div>
                   

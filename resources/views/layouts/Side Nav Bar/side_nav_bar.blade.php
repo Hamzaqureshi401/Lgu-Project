@@ -95,6 +95,14 @@
                 
               </ul>
             </li>
+             <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Std Roll No Slips </span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.StdRollNoSlips') }}">Add Std Roll No Slips</a></li>
+                <li><a class="nav-link" href="{{ route('all.StdRollNoSlips') }}">All Std Roll No Slips</a></li>
+                
+              </ul>
+            </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Attandence</span></a>
               <ul class="dropdown-menu">

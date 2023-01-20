@@ -36,8 +36,8 @@ class StdRollNoSlipsController extends Controller
 
     public function addStdRollNoSlips(){
 
-        $button = "Add StdRollNoSlip";
-        $title  = 'Add StdRollNoSlip';
+        $button = "Add Std Roll No Slip";
+        $title  = 'Add Std Roll No Slip';
         $route  = '/storeStdRollNoSlips';
         $enrollments = Enrollment::get()->unique('Std_ID');
         return
@@ -101,8 +101,8 @@ class StdRollNoSlipsController extends Controller
     public function editStdRollNoSlip($id){
          
        
-        $button = 'Update StdRollNoSlip';
-        $title  = 'Edit StdRollNoSlip';
+        $button = 'Update Std Roll No Slip';
+        $title  = 'Edit Std Roll No Slip';
         $route  = '/updateStdRollNoSlip';
         $stdRollNoSlips = StdRollNoSlip::where('ID' , $id)->first();
         $enrollments = Enrollment::get()->unique('Std_ID');
@@ -121,10 +121,10 @@ class StdRollNoSlipsController extends Controller
     public function allStdRollNoSlips(){
 
         $stdRollNoSlips = StdRollNoSlip::paginate(10);
-        $title  = 'All StdRollNoSlips';
+        $title  = 'All Std Roll No Slips';
         $route = 'editStdRollNoSlip/';
         $getEditRoute = 'editStdRollNoSlip';
-        $modalTitle = 'Edit StdRollNoSlip';
+        $modalTitle = 'Edit Std Roll No Slip';
 
         return
         view('StdRollNoSlips.allStdRollNoSlips' ,
