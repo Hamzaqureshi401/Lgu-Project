@@ -8,6 +8,7 @@ use App\Models\Enrollment;
 use App\Models\Student;
 use App\Models\Degree;
 use App\Models\Department;
+use App\Models\DegreeBatche;
 
 
 class DeanController extends Controller
@@ -18,7 +19,8 @@ class DeanController extends Controller
         $enrollment = Enrollment::pluck('id')->count();
         $students   = Student::get();
         $degrees    = Degree::paginate(10);
-        $departments = Department::paginate(10);
+        $departments= Department::paginate(10);
+        $degreeBatches = DegreeBatche::paginate(10);
         
         return 
         view('Dean.deanDashboard' , 
@@ -27,7 +29,8 @@ class DeanController extends Controller
                 'enrollment',
                 'students',
                 'degrees',
-                'departments'
+                'departments',
+                'degreeBatches'
             ));
     }
 

@@ -23,15 +23,23 @@
                         <th>Female</th>
                         <th>Total</th>
                       </tr>
-                      <tr>
+                     
+                        @foreach($degreeBatches as $degreeBatche)
+                         <tr>
+	                      <td>{{ $degreeBatche->degree->DegreeName ?? ''}}/{{ $degreeBatche->batch->SemSession ?? ''}}</td>
+	                      <td>{{ 
+                          $students->where(['Degrees_ID' => $degreeBatche->degree , 'Gender' => 'Male'])->count()  }}</td>
 	                      <td>{{ "Status" }}</td>
 	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-                      </tr>                     
+                        </tr>     
+                        @endforeach
+                                      
                     </table>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+           <div class="d-flex justify-content-center">
+                        {{ $degreeBatches->links() }}
+                    </div>
