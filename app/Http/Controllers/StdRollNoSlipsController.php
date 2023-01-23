@@ -9,6 +9,9 @@ use App\Models\StdRollNoSlip;
 use DB;
 use Session;
 use Excel;
+use File;
+use Log;
+use Response;
 use Rap2hpoutre\FastExcel\FastExcel;
 
 
@@ -106,31 +109,82 @@ class StdRollNoSlipsController extends Controller
     }
 
 
-    public function uploadExal(){
+    public function uploadStdRollNoSlipExcel(Request $request){
 
-       // dd(StdRollNoSlip::get());
+      
+      
+        $this->validate($request, [
+            "stdRollFile" => "required|file|mimes:xlsx",
+        ]);
+        $stdRollFile = $request->file("stdRollFile");
+        $input["file"] = time() . "." . $stdRollFile->getClientOriginalExtension();
+        
+        $destinationPath = public_path().'/stdRollFilesExcal/';
+            if (!File::exists($destinationPath)) {
+                 File::makeDirectory($destinationPath, 0755, true);
+            }
+             $stdRollFile->move($destinationPath, $input["file"]);
+         $users = (new FastExcel)->import($destinationPath.$input["file"], function ($line) {
+            
 
-         $users = (new FastExcel)->import('00 - FOR ERP.xlsx', function ($line) {
-                
-                
              $Enroll_ID =  $line['SemCourseId'];
              $Building  =  $line['Center'];
              $Room      =  $line['Room'];
              $SeatNo    =  0;
              $Time      = "";
-
-
+             if (empty($e)){
+                $e = Enrollment::pluck('ID')->toArray();
+             }
+             
+             $s = StdRollNoSlip::pluck('Enroll_ID')->toArray();
+             if(in_array($Enroll_ID, $e) && !in_array($Enroll_ID, $s)){
             $submit = DB::update("EXEC sp_InsertStdRollNoSlips
             @Enroll_ID  = '$Enroll_ID',
             @Building   = '$Building',
             @Room       = '$Room' ,
             @SeatNo     = '$SeatNo',
             @Time       = '$Time'
+
            
            ;");
-            });
+        }else{
+            $std[] = $Enroll_ID;
+            return $line['StdRollNo'];
+        }
+            });      
+           $requests = $users;
+
+           if(!empty($requests[0])){
+             $content = "Std Enrollment Id Not Found \n";
+                foreach ($requests as $request) {
+                  $content .= $request;
+                  $content .= "\n";
+                }
+
+                // file name that will be used in the download
+                $fileName = "NotFoundStudent.txt";
+
+                // use headers in order to generate the download
+                $headers = [
+                  'Content-type' => 'text/plain', 
+                  'Content-Disposition' => sprintf('attachment; filename="%s"', $fileName)
+                  // 'Content-Length' => sizeof($content)
+                ];
+
+                // make a response, with the content, a 200 response code and the headers
+                return Response::make($content, 200, $headers);
+            }else{
+                return redirect()->back()->with(['successToaster' => 'StdRollNoSlip Updated' , 'title' => 'Success']);
+            }
+
+            
+        
+          
         
     }
+
+   
+
 
     public function editStdRollNoSlip($id){
          

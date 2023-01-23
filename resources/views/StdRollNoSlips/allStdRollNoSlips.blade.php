@@ -48,8 +48,50 @@
                         </tbody>
                       </table>
                     </div>
+                 
                     <div class="d-flex justify-content-center">
                         {{ $stdRollNoSlips->links() }}
                     </div>
+                     
+                     <button 
+                     type="button"  
+                     class="btn btn-warning float-right" 
+                     data-toggle="modal" 
+                     data-target="#exampleModal"
+                     style="margin: 10px ;" 
+                     >Export Excel Sheet</button>
+
+         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="formModal" style="display: none;" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="formModal">Import File</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="POST" action="{{ route('upload.StdRollNoSlip.Excel') }}" enctype="multipart/form-data">
+                  {{ csrf_field() }}
+                  <div class="form-group">
+                    <label>Upload File</label>
+                    <div class="form-group">
+         <label>Student Files 
+         </label>
+         <input type="file" value="{{ old('stdfile') }}" name="stdRollFile"  class="form-control">
+         <br>
+        
+      </div>
+                  </div>
+                 
+                  
+                  <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
 @include('Table.table_footer') 
 @endsection   
+

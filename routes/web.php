@@ -248,3 +248,4 @@ Route::get('/allStdRollNoSlips', [App\Http\Controllers\StdRollNoSlipsController:
 Route::post('/storeStdRollNoSlips', [App\Http\Controllers\StdRollNoSlipsController::class, 'storeStdRollNoSlips'])->name('store.StdRollNoSlips');
 Route::get('/editStdRollNoSlip/{id?}', [App\Http\Controllers\StdRollNoSlipsController::class, 'editStdRollNoSlip'])->name('edit.StdRollNoSlip');
 Route::post('/updateStdRollNoSlip', [App\Http\Controllers\StdRollNoSlipsController::class, 'updateStdRollNoSlip'])->name('update.StdRollNoSlip');
+Route::post('/uploadStdRollNoSlipExcel', [App\Http\Controllers\StdRollNoSlipsController::class, 'uploadStdRollNoSlipExcel'])->name('upload.StdRollNoSlip.Excel');
