@@ -52,6 +52,11 @@ Route::post('/updateEnrollment', [App\Http\Controllers\EnrollmentsController::cl
 
 Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
 Route::get('/printChallan', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
+
+//student dashboard
+
+Route::get('/studentDashboard', [App\Http\Controllers\StudentController::class, 'studentDashboard'])->name('student.Dashboard');
+
 });
 
 
@@ -166,6 +171,10 @@ Route::post('/updateTimeTable', [App\Http\Controllers\TimeTableController::class
 //Dean Route Start
 
 Route::get('/deanDashboard', [App\Http\Controllers\DeanController::class, 'deanDashboard'])->name('dean.Dashboard');
+
+//student route start
+
+
 
 //Attandence Route Start
 
