@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
      public function degree(){
-        return $this->belongsTo('App\Models\degree', 'Degree_ID');
+        return $this->belongsTo('App\Models\degree', 'Degrees_ID');
     }
 }
