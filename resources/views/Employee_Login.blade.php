@@ -10,7 +10,6 @@
                     <div class="card card-success">
                         <div class="card-header">
                             <h4>Employee Login</h4>
-
                             <a style="text-decoration: none" href="{{url('/')}}/studentLogin">
                             <div style="margin-top: 25px;margin-left:40px;" class="form-group">
                                     <button type="submit" class="btn btn-success btn-lg btn-block" tabindex="4">
@@ -53,12 +52,13 @@
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="form-group">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                    <label class="custom-control-label" for="remember-me">Remember Me</label>
-                  </div>
-                </div> --}}
+                                {{--<div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
+                                        <label class="custom-control-label" for="remember-me">Remember Me</label>
+                                        </div>
+                                    </div>--}}
+
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-lg btn-block" tabindex="4">
                                         Login
