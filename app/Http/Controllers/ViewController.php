@@ -7,6 +7,7 @@ use App\Models\SemesterCourse;
 use App\Models\DegreeBatche;
 use App\Models\Student;
 use App\Models\Enrollment;
+use App\Models\TimeTable;
 
 
 use Illuminate\Http\Request;
@@ -150,20 +151,15 @@ class ViewController extends Controller
             );
 
     }
-    public function courseTimeTable(){
-
-            $enrollments    = Enrollment::get();
-        return 
-        view('View.courseTimeTable', 
-            compact(
-                
-                'enrollments')    
-            );
-    }
 
     public function findCourseDay(Request $request){
 
-       
-
+        $courses = TimeTable::where('Day' , $request->Day)->get();
+         return 
+        view('View.courseTimeTable', 
+            compact(
+                
+                'courses')    
+            );
     }
 }

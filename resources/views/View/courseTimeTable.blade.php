@@ -44,24 +44,25 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Sr</th>
-                            <th>Award Id  </th>
-                            <th>Degree Name </th>
-                            
                             <th>Course Code </th>
                             <th>Course Name</th>
-                            <th>CreditHr</th>
-                            <th>Semester session  </th>
-                            <th>Total Std </th>
-                            <th>Std In Award  </th>
-                            <th>Status</th>
-                            <th>Instructor Name</th>
-                            
-                            
+                            <th>Lecture Type</th>
+                            <th>Teacher Name  </th>
+                            <th>Start Time  </th>
+                            <th>End Time</th>
                           </tr>
                         </thead>
                         <tbody>
-                         
+                          @foreach($employees as $employee)
+                          <tr>
+                            <td>{{ $employee->semesterCourse->course->CourseCode ?? '--'}}</td>
+                            <td>{{ $employee->semesterCourse->course->CourseName ?? '--'}}</td>
+                            <td>{{ $employee->semesterCourse->course->LectureType ?? '--'}}</td>
+                            <td>{{ $employee->Emp_FirstName ?? '--'}} {{ $employee->Emp_LastName ?? '--'}}</td>
+                            <td>{{  $employee->semesterCourse->timeTable->StartTime ?? '--'}}</td>
+                            <td>{{  $employee->semesterCourse->timeTable->StartTime ?? '--'}}</td>
+                          </tr>
+                         @endforeach
                         </tbody>
                       </table>
                     </div>
