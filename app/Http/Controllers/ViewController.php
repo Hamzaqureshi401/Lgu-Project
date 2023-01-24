@@ -1,6 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Course;
+use App\Models\Employee;
+use App\Models\SemesterCourse;
+use App\Models\DegreeBatche;
+use App\Models\Student;
+use App\Models\Enrollment;
+
 
 use Illuminate\Http\Request;
 
@@ -88,5 +95,63 @@ class ViewController extends Controller
         return view('View.stdAffairs', 
             
                );
+    }
+    public function reports(){
+
+        return view('View.reports', 
+            
+               );
+    }
+    public function assessmentDetail(){
+        $employees = Employee::get();
+        $semesterCourse = SemesterCourse::get();
+        return 
+        view('View.assessmentDetail', 
+            compact(
+                'employees' , 
+                'semesterCourse')    
+            );
+    }
+    public function departmentFactSheet(){
+
+        $degreeBatches = DegreeBatche::paginate(10);
+        $students = Student::get();
+        return 
+        view('View.departmentFactSheet', 
+            compact(
+                
+                'degreeBatches',
+                'students'
+            )    
+            );
+    }
+
+    public function degSemesterWiseReport(){
+        $employees = Employee::get();
+        $semesterCourse = SemesterCourse::get();
+        $degreeBatches = DegreeBatche::get();
+        return 
+        view('View.degSemesterWiseReport', 
+            compact(
+                'employees' , 
+                'semesterCourse', 
+                'degreeBatches')    
+            );
+
+    }
+     public function studentAttendance(){
+
+       $enrollments    = Enrollment::get();
+        return 
+        view('View.studentAttendance', 
+            compact(
+                
+                'enrollments')    
+            );
+
+    }
+    public function courseTimeTable(){
+
+
     }
 }

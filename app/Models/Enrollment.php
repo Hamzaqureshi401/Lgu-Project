@@ -20,4 +20,7 @@ class Enrollment extends Model
     public function attandence($id){
       return Attendance::where('Enroll_ID' , $id)->get();
     }
+    public function att(){
+        return $this->belongsTo('App\Models\Attendance' , 'Enroll_ID');
+    }
 }

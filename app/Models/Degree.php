@@ -13,4 +13,6 @@ class Degree extends Model
 
           return $this->belongsTo('App\Models\Department' , 'Dpt_ID');
    }
+   
+
 }

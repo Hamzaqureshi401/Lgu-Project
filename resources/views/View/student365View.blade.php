@@ -148,74 +148,92 @@
                     </ul>
                     <div class="tab-content tab-bordered" id="myTab3Content">
                       <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="home-tab2">
-                        <div class="row">
-                          <div class="col-md-3 col-6 b-r">
-                            <strong>Full Name</strong>
-                            <br>
-                            <p class="text-muted">Emily Smith</p>
+                       
+                       
+                        <form method="post" class="needs-validation">
+                          <div class="card-header">
+                            <h4>Edit Profile</h4>
                           </div>
-                          <div class="col-md-3 col-6 b-r">
-                            <strong>Mobile</strong>
-                            <br>
-                            <p class="text-muted">(123) 456 7890</p>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="form-group col-md-4 col-12">
+                                <label>Name</label>
+                                <input type="text" class="form-control" name="Name" value="John">
+                                <div class="invalid-feedback">
+                                  Please fill in the first name
+                                </div>
+                              </div>
+                              <div class="form-group col-md-4 col-12">
+                                <label>FATHER NAME</label>
+                                <input type="text" class="form-control" name="FATHERNAME" value="Deo">
+                                <div class="invalid-feedback">
+                                  Please fill in the last name
+                                </div>
+                              </div>
+                               <div class="form-group col-md-4 col-12">
+                                <label>REGITRATION NO</label>
+                                <input type="text" class="form-control" name="REGITRATIONNO" value="Deo">
+                                <div class="invalid-feedback">
+                                  Please fill in the last name
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="form-group col-md-4 col-12">
+                                <label>CNIC</label>
+                                <input type="text" class="form-control" name="CNIC" value="John">
+                                <div class="invalid-feedback">
+                                  Please fill in the first name
+                                </div>
+                              </div>
+                              <div class="form-group col-md-4 col-12">
+                                <label>EMAIL</label>
+                                <input type="text" class="form-control" name="EMAIL" value="Deo">
+                                <div class="invalid-feedback">
+                                  Please fill in the last name
+                                </div>
+                              </div>
+                               <div class="form-group col-md-4 col-12">
+                                <label>MOBILE NO.</label>
+                                <input type="text" class="form-control" name="MOBILENO" value="Deo">
+                                <div class="invalid-feedback">
+                                  Please fill in the last name
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="form-group col-md-4 col-12">
+                                <label>ADDRESS</label>
+                                <input type="text" class="form-control" name="ADDRESS" value="John">
+                                <div class="invalid-feedback">
+                                  Please fill in the first name
+                                </div>
+                              </div>
+                              <div class="form-group col-md-4 col-12">
+                                <label>CLASSS SECTION</label>
+                                <input type="text" class="form-control" name="CLASSSSECTION" value="Deo">
+                                <div class="invalid-feedback">
+                                  Please fill in the last name
+                                </div>
+                              </div>
+                               <div class="form-group col-md-4 col-12">
+                                <label>DEGREE</label>
+                                <input type="text" class="form-control" name="DEGREE" value="Deo">
+                                <div class="invalid-feedback">
+                                  Please fill in the last name
+                                </div>
+                              </div>
+                            </div>
+                            </div>
+
+                           
+                           
+                           
                           </div>
-                          <div class="col-md-3 col-6 b-r">
-                            <strong>Email</strong>
-                            <br>
-                            <p class="text-muted">johndeo@example.com</p>
+                          <div class="card-footer text-right">
+                            <button class="btn btn-primary">Save Changes</button>
                           </div>
-                          <div class="col-md-3 col-6">
-                            <strong>Location</strong>
-                            <br>
-                            <p class="text-muted">India</p>
-                          </div>
-                        </div>
-                        <p class="m-t-30">Completed my graduation in Arts from the well known and
-                          renowned institution
-                          of India – SARDAR PATEL ARTS COLLEGE, BARODA in 2000-01, which was
-                          affiliated
-                          to M.S. University. I ranker in University exams from the same
-                          university
-                          from 1996-01.</p>
-                        <p>Worked as Professor and Head of the department at Sarda Collage, Rajkot,
-                          Gujarat
-                          from 2003-2015 </p>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                          industry. Lorem
-                          Ipsum has been the industry's standard dummy text ever since the 1500s,
-                          when
-                          an unknown printer took a galley of type and scrambled it to make a
-                          type
-                          specimen book. It has survived not only five centuries, but also the
-                          leap
-                          into electronic typesetting, remaining essentially unchanged.</p>
-                        <div class="section-title">Education</div>
-                        <ul>
-                          <li>B.A.,Gujarat University, Ahmedabad,India.</li>
-                          <li>M.A.,Gujarat University, Ahmedabad, India.</li>
-                          <li>P.H.D., Shaurashtra University, Rajkot</li>
-                        </ul>
-                        <div class="section-title">Experience</div>
-                        <ul>
-                          <li>One year experience as Jr. Professor from April-2009 to march-2010
-                            at B.
-                            J. Arts College, Ahmedabad.</li>
-                          <li>Three year experience as Jr. Professor at V.S. Arts &amp; Commerse
-                            Collage
-                            from April - 2008 to April - 2011.</li>
-                          <li>Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.
-                          </li>
-                          <li>Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.
-                          </li>
-                          <li>Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.
-                          </li>
-                          <li>Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.
-                          </li>
-                        </ul>
+                        </form>
                       </div>
                       <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
                         <form method="post" class="needs-validation">

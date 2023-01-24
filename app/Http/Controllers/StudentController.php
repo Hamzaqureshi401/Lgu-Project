@@ -15,12 +15,12 @@ class StudentController extends Controller
     {
         $session = $this->getSessionData();
         //dd($session);
-        $user = explode('/',$session['user']);
-        $semester = Semester::where('SemSession' , $user[0])->first();
-        $enrollments = Enrollment::where('Std_ID' , $session['std_ID'])->get();
+        $user         = explode('/',$session['user']);
+        $semester     = Semester::where('SemSession' , $user[0])->first();
+        $enrollments  = Enrollment::where('Std_ID' , $session['std_ID'])->get()->first();
         $registration = Registration::where('Std_ID' , $session['std_ID'])->first();
         if (!empty($registration)){
-            $challans = Challan::where('Reg_ID' , $registration->ID)->paginate(10);    
+            $challans = Challan::where('Reg_ID' , $registration->ID)->get();    
         }else{
             $challans = '';
         }

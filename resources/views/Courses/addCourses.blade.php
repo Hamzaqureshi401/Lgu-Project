@@ -21,6 +21,16 @@
                       <label>Lecture Type</label>
                       <input type="text" name="LectureType" class="form-control"  value="{{ old('LectureType') }}">
                     </div>
+                     <div class="form-group">
+                      <label>Lecture Type</label>
+                      <select class="form-control" name="LectureType"  required>
+                       
+                        <option value="{{ 'Theory' }}">{{ 'Theory' }}</option>
+                        <option value="{{  'Lab' }}">{{ 'Lab' }}</option>
+                        
+                      </select>
+                    </div>
+
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
 
 @include('Forms.formFooter')   

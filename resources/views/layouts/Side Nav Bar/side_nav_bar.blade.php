@@ -1,4 +1,6 @@
-
+            
+                <li><a class="nav-link" href="{{ route('dean.Dashboard') }}">Dashboard</a></li>
+                
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
                   data-feather="briefcase"></i><span>Courses</span></a>
@@ -153,6 +155,8 @@
                   <li><a class="nav-link" href="{{ route('student.Result')}}">Student Result</a></li>
                   <li><a class="nav-link" href="{{ route('std.Wise.Award')}}">Student Wise Award</a></li> 
                   <li><a class="nav-link" href="{{ route('std.Affairs')}}">Std Affairs</a></li>
+                 <li><a class="nav-link" href="{{ route('reports')}}">Reports</a></li>
+                 <li><a class="nav-link" href="{{ route('assessment.Detail')}}">assessmentDetail</a></li>
                   
               </ul>
               

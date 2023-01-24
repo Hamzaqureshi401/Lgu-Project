@@ -234,6 +234,20 @@ Route::get('/igradeStdhodView', [App\Http\Controllers\ViewController::class, 'ig
 
 Route::get('/student365View', [App\Http\Controllers\ViewController::class, 'student365View'])->name('student.365View');
 
+Route::get('/reports', [App\Http\Controllers\ViewController::class, 'reports'])->name('reports');
+
+Route::get('/assessmentDetail', [App\Http\Controllers\ViewController::class, 'assessmentDetail'])->name('assessment.Detail');
+
+Route::get('/departmentFactSheet', [App\Http\Controllers\ViewController::class, 'departmentFactSheet'])->name('department.FactSheet');
+Route::get('/hodCourses', [App\Http\Controllers\ViewController::class, 'hodCourses'])->name('hod.Courses');
+Route::get('/degSemesterWiseReport', [App\Http\Controllers\ViewController::class, 'degSemesterWiseReport'])->name('deg.Semester.Wise.Report');
+
+Route::get('/studentAttendance', [App\Http\Controllers\ViewController::class, 'studentAttendance'])->name('student.Attendance');
+
+Route::get('/courseTimeTable', [App\Http\Controllers\ViewController::class, 'courseTimeTable'])->name('course.Time.Table');
+
+
+
 Route::get('/reportingPanel', [App\Http\Controllers\ViewController::class, 'reportingPanel'])->name('reporting.Panel');
 
 Route::get('/sectionWIseReport', [App\Http\Controllers\ViewController::class, 'sectionWIseReport'])->name('section.WIse.Report');
