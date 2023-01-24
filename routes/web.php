@@ -265,8 +265,10 @@ Route::get('/studentResult', [App\Http\Controllers\ViewController::class, 'stude
 Route::get('/stdWiseAward', [App\Http\Controllers\ViewController::class, 'stdWiseAward'])->name('std.Wise.Award');
 
 Route::get('/stdAffairs', [App\Http\Controllers\ViewController::class, 'stdAffairs'])->name('std.Affairs');
+Route::get('/findCourseDay', [App\Http\Controllers\ViewController::class, 'findCourseDay'])->name('find.Course.Day');
 
 });
+
 
 //StdRollNoSlips Routes start
 

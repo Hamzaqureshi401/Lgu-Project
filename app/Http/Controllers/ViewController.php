@@ -152,6 +152,18 @@ class ViewController extends Controller
     }
     public function courseTimeTable(){
 
+            $enrollments    = Enrollment::get();
+        return 
+        view('View.courseTimeTable', 
+            compact(
+                
+                'enrollments')    
+            );
+    }
+
+    public function findCourseDay(Request $request){
+
+       
 
     }
 }

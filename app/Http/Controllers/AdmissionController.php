@@ -275,9 +275,9 @@ class AdmissionController extends Controller
         //     'message'=> ''.$validator['validation']
         //     ]);
         // }else {
-        //     $this->createStudentDetail($request);
-        //     $this->createStudentQualification($request);
-        //   return response()->json([
+            $this->createStudentDetail($request);
+            $this->createStudentQualification($request);
+         // return response()->json([
         //     'title' => 'Done' ,
         //     'type'=> 'success',
         //     'message'=> 'Admission Added!
