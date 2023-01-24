@@ -2,7 +2,10 @@
 @section('title')  @endsection <!--add title here -->
 @section('content')
        <!-- Main Content -->
-      
+      @php 
+      $user = explode('/' , Session::get('user')) ?? '--';
+      @endphp
+
         <section class="section">
           <div class="row ">
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -13,8 +16,8 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">ENROLLED SEMESTER</h5>
-                          <h2 class="mb-3 font-18">258</h2>
-                          <p class="mb-0"><span class="col-green">10%</span> Increase</p>
+                          <h2 class="mb-3 font-18">{{ $user[0] }}</h2>
+                          
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -35,13 +38,13 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">OUTSTANDING</h5>
-                          <h2 class="mb-3 font-18">1,287</h2>
-                          <p class="mb-0"><span class="col-orange">09%</span> Decrease</p>
+                          <h2 class="mb-3 font-18">{{$challans->sum('Amount') ?? '--'}}</h2>
+                          
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                         <div class="banner-img">
-                          <img src="assets/img/banner/2.png" alt="">
+                          <img src="assets/img/banner/outstanding.jpg" alt="">
                         </div>
                       </div>
                     </div>
@@ -57,14 +60,13 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">CHALLANS</h5>
-                          <h2 class="mb-3 font-18">128</h2>
-                          <p class="mb-0"><span class="col-green">18%</span>
-                            Increase</p>
+                          
+                          <a href="{{ route('all.Challans') }}" class="btn btn-sm btn-success">Get Challan</a>
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                         <div class="banner-img">
-                          <img src="assets/img/banner/3.png" alt="">
+                          <img src="assets/img/banner/inv.png" alt="" style="max-width: 105px; max-height: 150px;">
                         </div>
                       </div>
                     </div>
@@ -79,9 +81,9 @@
                     <div class="row ">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
-                          <h5 class="font-15">MOODLE USERNAME</h5>
-                          <h2 class="mb-3 font-18">$48,697</h2>
-                          <p class="mb-0"><span class="col-green">42%</span> Increase</p>
+                          <h5 class="font-15">USER</h5>
+                          <h2 class="mb-3 font-18">{{ Session::get('user') }}</h2>
+                          <p class="mb-0"><span class="col-green">{{ Session::get('Std')->Std_FName }} {{ Session::get('std')->Std_LName ?? '--'}} </span></p>
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -122,9 +124,46 @@
                         <th>Date</th>
                       </tr>
                       <tr>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-                      </tr>                     
+                        <th>{{ 'Semester Start'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->SemStartDate)) ?? '--'}}</th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'Semester End'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->SemEndDate)) ?? '--'}}</th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'Enrollment Start'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->EnrollmentStartDate)) ?? '--'}}</th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'Enrollment End'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->EnrollmentEndDate)) ?? '--'}}</th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'Exam Start'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->ExamStartDate)) ?? '--'}}</th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'Exam End'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->ExamEndDate)) ?? '--'}}</th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'Mid Start'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->I_mid_StartDate)) ?? '--'}}</th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'Mid End'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->I_mid_EndDate)) ?? '--'}}</th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'Final Start'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->I_final_StartDate)) ?? '--'}}</th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'Final End'}}</th>
+                        <th>{{ date('Y-m-d', strtotime($semester->I_final_EndDate)) ?? '--'}}</th>
+                      </tr>
+                                          
                     </table>
                   </div>
                 </div>
@@ -154,15 +193,23 @@
                             <th>T/L</th>
                             <th>P</th>
                             <th>A</th>
-                            <th>%</th>
+                            
                             <th>CONSOLIDATE %</th>
                         </tr>
+                        @foreach($enrollments as $enrollment)
+                        @php 
+                        $present = $enrollment->attandence($enrollment->ID)->where('Status' , 1)->count();
+                        $absent = $enrollment->attandence($enrollment->ID)->where('Status' , 0)->count();
+                        @endphp
                         <tr>
+                            <td>{{ $enrollment->semesterCourse->course->CourseName ?? '--' }}</td>
+                            <td>{{  $enrollment->semesterCourse->emplyee->Emp_FirstName  ?? '--'}}  {{  $enrollment->semesterCourse->emplyee->Emp_LastName ?? '--' }}</td>
                             <td>{{ "Status" }}</td>
-                            <td>{{ "Status" }}</td>
-                            <td>{{ "Status" }}</td>
-                            <td>{{ "Status" }}</td>
+                            <td>{{ $present }}</td>
+                             <td>{{ $absent }}</td>
+                              <td>{{ ($present/($absent + $present))*100 }} %</td>
                         </tr>
+                        @endforeach
                       </table>
                     </div>
                   </div>
@@ -170,84 +217,7 @@
               </div>
           </div>
 
-           <div class="row ">
-              <div class="col-xl-3 col-lg-6">
-                <div class="card l-bg-green">
-                  <div class="card-statistic-3">
-                    <div class="card-icon card-icon-large"><i class="fa fa-award"></i></div>
-                    <div class="card-content">
-                      <h4 class="card-title">Degree Wise Students</h4>
-                      <span>524</span>
-                      <div class="progress mt-1 mb-1" data-height="8">
-                        <div class="progress-bar l-bg-purple" role="progressbar" data-width="25%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <p class="mb-0 text-sm">
-                        <span class="mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
-                        <span class="text-nowrap">Since last month</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6">
-                <div class="card l-bg-cyan">
-                  <div class="card-statistic-3">
-                    <div class="card-icon card-icon-large"><i class="fa fa-briefcase"></i></div>
-                    <div class="card-content">
-                      <h4 class="card-title">Department Wise Students</h4>
-                      <span>1,258</span>
-                      <div class="progress mt-1 mb-1" data-height="8">
-                        <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <p class="mb-0 text-sm">
-                        <span class="mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
-                        <span class="text-nowrap">Since last month</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6">
-                <div class="card l-bg-purple">
-                  <div class="card-statistic-3">
-                    <div class="card-icon card-icon-large"><i class="fa fa-globe"></i></div>
-                    <div class="card-content">
-                      <h4 class="card-title">Gender Wise Strength</h4>
-                      <span>10,225</span>
-                      <div class="progress mt-1 mb-1" data-height="8">
-                        <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <p class="mb-0 text-sm">
-                        <span class="mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
-                        <span class="text-nowrap">Since last month</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6">
-                <div class="card l-bg-orange">
-                  <div class="card-statistic-3">
-                    <div class="card-icon card-icon-large"><i class="fa fa-money-bill-alt"></i></div>
-                    <div class="card-content">
-                      <h4 class="card-title">Degree Wise Short-Att Strength</h4>
-                      <span>$2,658</span>
-                      <div class="progress mt-1 mb-1" data-height="8">
-                        <div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25"
-                          aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <p class="mb-0 text-sm">
-                        <span class="mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
-                        <span class="text-nowrap">Since last month</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      
 
 
         </section>

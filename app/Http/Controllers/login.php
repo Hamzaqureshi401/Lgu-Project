@@ -130,7 +130,8 @@ class login extends Controller
                 'std_ID'      => $submit->ID,
                 'sem_ID'      => $sem_ID,
                 'dpt_ID'      => $dpt_ID,
-                'degree_ID'   => $degreeID
+                'degree_ID'   => $degreeID,
+                'Std'         => $submit
             ]);
 
     

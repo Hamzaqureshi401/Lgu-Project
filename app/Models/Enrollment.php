@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Attendance;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,5 +16,8 @@ class Enrollment extends Model
     }
     public function student(){
         return $this->belongsTo('App\Models\Student' , 'Std_ID');
+    }
+    public function attandence($id){
+      return Attendance::where('Enroll_ID' , $id)->get();
     }
 }
