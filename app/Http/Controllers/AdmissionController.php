@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Models\Student;
 use App\Models\Degree;
+use App\Models\Semester;
+
 use App\Models\StudentEducation;
 
 
@@ -61,6 +63,11 @@ class AdmissionController extends Controller
     public function addStudentAdmission(){
 
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
+
+        $admissionsession = Semester::where('Year','=', date('Y'))->get();
+
+
+
         $button = "Add Student Admission";
         $title  = 'Add Student Admissions';
         $route  = '/storeStudentAdmission';
@@ -70,11 +77,13 @@ class AdmissionController extends Controller
                     'degree',
                     'button',
                     'title',
-                    'route'
+                    'route',
+                    'admissionsession'
                 ));
     }
 
     protected function createStudentDetail($request){
+
 
 
          $stdfilename = time() . "_studentfile." . $request->file('stdfile')->getClientOriginalExtension();
@@ -119,6 +128,7 @@ class AdmissionController extends Controller
     }
 
     protected function createStudentQualification($request){
+        dd($request);
 
         $student = Student::where(['CNIC' => $request->CNIC , 'FatherCNIC' => $request->FatherCNIC])->first();
 
