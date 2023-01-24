@@ -196,8 +196,10 @@
             <label style="font-size: 13px">Country <span style="color: red">*</span></label>
             <select name="country" id="country" value="{{ old('country') }}"
                onchange="print_state('state',this.selectedIndex);" class="custom-select">
+
                <option value="{{ old('country') }}" selected>{{ old('country') }}
                </option>
+               
             </select>
          </div>
          <br>
@@ -257,16 +259,25 @@
          <div class="alert alert-danger">{{ $message }}</div>
          @enderror
       </div>
+
+      {{-- AdmissionSession --}}
+
       <div class="form-group">
-         <label style="font-size: 13px">Admission Session <span style="color: red">*</span>
-         </label>
-         <input type="text" value="{{ old('AdmissionSession') }}" name="AdmissionSession"
-            id="AdmissionSession" class="form-control" maxlength=15>
-         <br>
+         <label style="font-size: 13px">Admission Session<span style="color: red">*</span></label>
+         <select name="AdmissionSession" class="custom-select">
+
+            @foreach ($admissionsession as $admissionsessiondeatils)
+            <option value="{{ $admissionsessiondeatils->ID }}" {{old('AdmissionSession')===$admissionsessiondeatils->ID ? "selected":" " }}>
+               {{ $admissionsessiondeatils->SemSession }}
+            </option>
+            @endforeach
+         </select>
          @error('AdmissionSession')
          <div class="alert alert-danger">{{ $message }}</div>
          @enderror
       </div>
+
+
       <div class="form-group">
          <label style="font-size: 13px">Blood Group <span style="color: red">*</span>
          </label>
@@ -369,98 +380,118 @@
             <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Examination <br>
             Passed</label>
             <select name="matric_examination" id="matric_examination" class="form-control my-2  ">
-               <option value="Matric">Matric</option>
-               <option value="O-Level">O-Level</option>
+               <option value="Matric" {{old('matric_examination')==="Matric"?"selected":" "}}>Matric</option>
+               <option value="O-Level"  {{old('matric_examination')==="O-Level"?"selected":" "}}>O-Level</option>
             </select>
             <select name="fsc_examination" id="fsc_examination" class="form-control  my-2  ">
-               <option value="FSC Pre-Eng">FSC Pre-Eng</option>
-               <option value="FSC Pre-Med">FSC Pre-Med</option>
-               <option value="ICS">ICS</option>
-               <option value="FA">FA</option>
-               <option value="D.Com">D.Com</option>
-               <option value="DAE">DAE</option>
-               <option value="A-Level">A-Level</option>
+               <option value="FSC Pre-Eng" {{old('fsc_examination')==="FSC Pre-Eng"?"selected":" "}} >FSC Pre-Eng</option>
+               <option value="FSC Pre-Med" {{old('fsc_examination')==="FSC Pre-Med"?"selected":" "}}>FSC Pre-Med</option>
+               <option value="ICS" {{old('fsc_examination')==="ICS"?"selected":" "}}>ICS</option>
+               <option value="FA" {{old('fsc_examination')==="FA"?"selected":" "}}>FA</option>
+               <option value="D.Com" {{old('fsc_examination')==="D.Com"?"selected":" "}}>D.Com</option>
+               <option value="DAE" {{old('fsc_examination')==="DAE"?"selected":" "}}>DAE</option>
+               <option value="A-Level" {{old('fsc_examination')==="A-Level"?"selected":" "}}>A-Level</option>
             </select>
-            <input type="text" class="form-control mt-2  " name="becholars_examination"
+            <input type="text" class="form-control mt-2  " name="becholars_examination" value="{{old('becholars_examination')}}"
                id="becholars_examination" placeholder="BSc/BSCS/B.com/BA">
-            <input type="text" class="form-control mt-2  " name="master_examination" id="master_examination"
+            <input type="text" class="form-control mt-2  " name="master_examination" value="{{old('master_examination')}}" id="master_examination"
                placeholder="MA/MSc/M.Com/MBA">
-            <input type="text" class="form-control mt-2  " name="masters_examination"
+            <input type="text" class="form-control mt-2  " name="masters_examination" value="{{old('masters_examination')}}"
                id="masters_examination" placeholder="MS/M-Phil">
          </div>
          <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Date Started <br> i.e
             (2019) </label>
-            <input type="number" class="form-control my-2  " value="" name="matric_board"
+            <input type="number" class="form-control my-2  " value="{{old('matric_board')}}" name="matric_board"
             id="matric_board" placeholder="" max="{{date("Y")}}">
-            <input type="number" class="form-control my-2  " value="" name="fsc_board" id="fsc_board"
+            <input type="number" class="form-control my-2  " value="{{old('fsc_board')}}" name="fsc_board" id="fsc_board"
             placeholder="" max="{{date("Y")}}">
-            <input type="number" class="form-control mt-2  " value="" name="becholars_board"
+            <input type="number" class="form-control mt-2  " value="{{old('becholars_board')}}" name="becholars_board"
             id="becholars_board" placeholder="" max="{{date("Y")}}">
-            <input type="number" class="form-control mt-2  " value="" name="master_board"
+            <input type="number" class="form-control mt-2  " value="{{old('master_board')}}" name="master_board"
             id="master_board" placeholder="" max="{{date("Y")}}">
-            <input type="number" class="form-control mt-2  " value="" name="masters_board"
+            <input type="number" class="form-control mt-2  " value="{{old('masters_board')}}" name="masters_board"
             id="masters_board" placeholder="" max="{{date("Y")}}">
          </div>
          <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Date Ended</label>
             <br>
             <br>
-            <input type="number" class="form-control my-2" value="" min="1971" max="{{date("Y")}}"
+            <input type="number" class="form-control my-2" value="{{old('matric_passing_year')}}" min="1971" max="{{date("Y")}}"
             name="matric_passing_year" id="matric_passing_year" placeholder="{{date("Y")}}">
-            <input type="number" class="form-control my-2  " value="" min="1971" max="{{date("Y")}}"
+
+            <input type="number" class="form-control my-2  " value="{{old('fsc_passing_year')}}" min="1971" max="{{date("Y")}}"
             name="fsc_passing_year" id="fsc_passing_year" placeholder="{{date("Y")}}">
-            <input type="number" class="form-control mt-2  " value="" name="becholars_passing_year"
+
+            <input type="number" class="form-control mt-2  " value="{{old('becholars_passing_year')}}" name="becholars_passing_year"
             id="becholars_passing_year" placeholder="{{date("Y")}}" min="1971" max="{{date("Y")}}">
-            <input type="number" class="form-control mt-2  " value="" name="master_passing_year"
+
+            <input type="number" class="form-control mt-2  " value="{{old('master_passing_year')}}" name="master_passing_year"
             id="master_passing_year" placeholder="{{date("Y")}}" min="1971" max="{{date("Y")}}">
-            <input type="number" class="form-control mt-2  " value="" name="masters_passing_year"
+
+            <input type="number" class="form-control mt-2  " value="{{old('masters_passing_year')}}" name="masters_passing_year"
             id="masters_passing_year" placeholder="{{date("Y")}}" min="1971" max="{{date("Y")}}">
+
          </div>
          <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Roll No.</label>
             <br>
             <br>
-            <input type="number" class="form-control my-2" value="" name="matric_rollno"
+            <input type="number" class="form-control my-2" value="{{old('matric_rollno')}}" name="matric_rollno"
                id="matric_rollno" placeholder="123456">
-            <input type="number" class="form-control my-2" value="" name="fsc_rollno" id="fsc_rollno"
+
+            <input type="number" class="form-control my-2" value="{{old('fsc_rollno')}}" name="fsc_rollno" id="fsc_rollno"
                placeholder="123456">
-            <input type="number" class="form-control mt-2  " value="" name="becholars_rollno"
+
+            <input type="number" class="form-control mt-2  " value="{{old('becholars_rollno')}}" name="becholars_rollno"
                id="becholars_rollno" placeholder="123456">
-            <input type="number" class="form-control mt-2  " value="" name="master_rollno"
+
+            <input type="number" class="form-control mt-2  " value="{{old('master_rollno')}}" name="master_rollno"
                id="master_rollno" placeholder="123456">
-            <input type="number" class="form-control mt-2  " value="" name="masters_rollno"
+
+            <input type="number" class="form-control mt-2  " value="{{old('masters_rollno')}}" name="masters_rollno"
                id="masters_rollno" placeholder="123456">
+
          </div>
          <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Total Marks</label>
             <br>
             <br>
-            <input type="number" class="form-control my-2" value="" min="1" max="1100"
+            <input type="number" class="form-control my-2" value="{{old('matric_total_marks')}}" min="1" max="1100"
                name="matric_total_marks" id="matric_total_marks" placeholder="1100">
-            <input type="number" class="form-control my-2  " value="" min="1" max="1100"
+
+            <input type="number" class="form-control my-2  " value="{{old('fsc_total_marks')}}" min="1" max="1100"
                name="fsc_total_marks" id="fsc_total_marks" placeholder="1100">
-            <input type="number" class="form-control mt-2  " value="" min="1" max="1100"
+
+            <input type="number" class="form-control mt-2  " value="{{old('becholars_total_marks')}}" min="1" max="1100"
                name="becholars_total_marks" id="becholars_total_marks" placeholder="1100">
-            <input type="number" class="form-control mt-2  " value="" min="1" max="1100"
+
+            <input type="number" class="form-control mt-2  " value="{{old('master_total_marks')}}" min="1" max="1100"
                name="master_total_marks" id="master_total_marks" placeholder="1100">
-            <input type="number" class="form-control mt-2  " value="" min="1" max="1100"
+
+            <input type="number" class="form-control mt-2  " value="{{old('masters_total_marks')}}" min="1" max="1100"
                name="masters_total_marks" id="masters_total_marks" placeholder="1100">
+
          </div>
          <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Marks Obtained</label>
             <br>
             <br>
-            <input type="number" class="form-control  my-2" value="" name="matric_marks_obtained"
+            <input type="number" class="form-control  my-2" value="{{old('matric_marks_obtained')}}" name="matric_marks_obtained"
                id="matric_marks_obtained" placeholder="700">
-            <input type="number" class="form-control my-2  " value="" name="fsc_marks_obtained"
+
+            <input type="number" class="form-control my-2  " value="{{old('fsc_marks_obtained')}}" name="fsc_marks_obtained"
                id="fsc_marks_obtained" placeholder="700">
-            <input type="number" class="form-control mt-2  " value="" name="becholars_marks_obtained"
+
+            <input type="number" class="form-control mt-2  " value="{{old('becholars_marks_obtained')}}" name="becholars_marks_obtained"
                id="becholars_marks_obtained" placeholder="700">
-            <input type="number" class="form-control mt-2  " value="" name="master_marks_obtained"
+
+            <input type="number" class="form-control mt-2  " value="{{old('master_marks_obtained')}}" name="master_marks_obtained"
                id="master_marks_obtained" placeholder="700">
-            <input type="number" class="form-control mt-2  " value="" name="masters_marks_obtained"
+
+            <input type="number" class="form-control mt-2  " value="{{old('masters_marks_obtained')}}" name="masters_marks_obtained"
                id="masters_marks_obtained" placeholder="700">
+
          </div>
          <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examinationw" style="font-size: 0.8rem; font-weight: bold;">Marks
@@ -481,16 +512,21 @@
          <div class="pl-3 pb-4" style="width: 12%;">
             <label for="Institution" style="font-size: 0.8rem; font-weight: bold;">Institution Appeared</label>
             <br><br>
-            <input type="text" class="form-control my-2  " value="" name="matric_appeared"
+            <input type="text" class="form-control my-2  " value="{{old('matric_appeared')}}" name="matric_appeared"
                id="matric_appeared" placeholder="Bise Lahore">
-            <input type="text" class="form-control my-2  " value="" name="fsc_appeared"
+               
+            <input type="text" class="form-control my-2  " value="{{old('fsc_appeared')}}" name="fsc_appeared"
                id="fsc_appeared" placeholder="Bise Lahore">
-            <input type="text" class="form-control mt-2  " value="" name="becholars_appeared"
+
+            <input type="text" class="form-control mt-2  " value="{{old('becholars_appeared')}}" name="becholars_appeared"
                id="becholars_appeared" placeholder="">
-            <input type="text" class="form-control mt-2  " value="" name="master_appeared"
+
+            <input type="text" class="form-control mt-2  " value="{{old('master_appeared')}}" name="master_appeared"
                id="master_appeared" placeholder="">
-            <input type="text" class="form-control mt-2  " value="" name="masters_appeared"
+
+            <input type="text" class="form-control mt-2  " value="{{old('masters_appeared')}}" name="masters_appeared"
                id="masters_appeared" placeholder="">
+
          </div>
       </div>
       <div class="form-group">
