@@ -20,7 +20,11 @@ class DeanController extends Controller
         $students   = Student::get();
         $degrees    = Degree::paginate(10);
         $departments= Department::paginate(10);
-        $degreeBatches = DegreeBatche::paginate(10);
+        $degreeBatches = DegreeBatche::whereNotNull('Batch_ID')->paginate(10);
+        // foreach($degreeBatches as $degreeBatche){
+        //      dd($students->where(['Degrees_ID' => $degreeBatche->degree->ID])->count() ?? 0);
+        // }
+       
         
         return 
         view('Dean.deanDashboard' , 

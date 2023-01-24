@@ -28,18 +28,20 @@
                          <tr>
 	                      <td>{{ $degreeBatche->degree->DegreeName ?? ''}}/{{ $degreeBatche->batch->SemSession ?? ''}}</td>
 	                      <td>{{ 
-                          $students->where(['Degrees_ID' => $degreeBatche->degree , 'Gender' => 'Male'])->count()  }}</td>
-	                      <td>{{ "Status" }}</td>
+                          $students->where(['Degrees_ID' => $degreeBatche->degree->ID , 'Gender' => 'Male'])->count()  }}</td>
+	                      <td>{{ 
+                          $students->where(['Degrees_ID' => $degreeBatche->degree->ID , 'Gender' => 'Female'])->count()  }}</td>
 	                      <td>{{ "Status" }}</td>
                         </tr>     
                         @endforeach
                                       
                     </table>
+                     <div class="d-flex justify-content-center">
+                        {{ $degreeBatches->links() }}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-           <div class="d-flex justify-content-center">
-                        {{ $degreeBatches->links() }}
-                    </div>
+          

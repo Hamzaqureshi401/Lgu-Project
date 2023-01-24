@@ -37,11 +37,12 @@
                       </tr>  
                       @endforeach                   
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $departments->links() }}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="d-flex justify-content-center">
-                        {{ $departments->links() }}
-                    </div>
+          

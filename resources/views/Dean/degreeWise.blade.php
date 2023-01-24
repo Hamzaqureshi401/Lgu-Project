@@ -38,11 +38,12 @@
                       </tr>         
                       @endforeach            
                     </table>
+                     <div class="d-flex justify-content-center">
+                        {{ $degrees->links() }}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-           <div class="d-flex justify-content-center">
-                        {{ $degrees->links() }}
-                    </div>
+          

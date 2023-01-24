@@ -174,8 +174,8 @@
           </div>
 
 
-           <div class="row ws">
-              <div class="col-xl-3 col-lg-6">
+           <div class="row">
+              <div class="col-xl-3 col-lg-6 degreeWise">
                 <div class="card l-bg-green">
                   <div class="card-statistic-3">
                     <div class="card-icon card-icon-large"><i class="fa fa-award"></i></div>
@@ -194,7 +194,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-lg-6">
+              <div class="col-xl-3 col-lg-6 departmentWise">
                 <div class="card l-bg-cyan">
                   <div class="card-statistic-3">
                     <div class="card-icon card-icon-large"><i class="fa fa-briefcase"></i></div>
@@ -213,7 +213,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-lg-6">
+              <div class="col-xl-3 col-lg-6 genderWise">
                 <div class="card l-bg-purple">
                   <div class="card-statistic-3">
                     <div class="card-icon card-icon-large"><i class="fa fa-globe"></i></div>
@@ -232,7 +232,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-lg-6">
+              <div class="col-xl-3 col-lg-6 degreeWiseShort">
                 <div class="card l-bg-orange">
                   <div class="card-statistic-3">
                     <div class="card-icon card-icon-large"><i class="fa fa-money-bill-alt"></i></div>
@@ -252,11 +252,19 @@
                 </div>
               </div>
             </div>
-            <div class="wse" style="display: none;">
+            <div class="degreeW" style="display: none;">
             @include('Dean.degreeWise')
-             @include('Dean.departmentWise')
+          </div>
+          <div class="departmentW" style="display: none;">
+             @include('Dean.departmentWise')>
+           </div>
+              <div class="genderW" style="display: none;">
               @include('Dean.genderWise')
+            </div>
+               <div class="degreeWiseS" style="display: none;">
                @include('Dean.degreeWiseShort-Att Strength')
+             </div>
+
 </div>
         </section>
     <script
@@ -264,8 +272,17 @@
   integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
   crossorigin="anonymous"></script>
    <script type="text/javascript">
-    $(document).on('click', '.ws', function() {
-        $('.wse').toggle();
+    $(document).on('click', '.degreeWise', function() {
+        $('.degreeW').toggle();
+    });
+    $(document).on('click', '.departmentWise', function() {
+        $('.departmentW').toggle();
+    });
+    $(document).on('click', '.genderWise', function() {
+        $('.genderW').toggle();
+    });
+    $(document).on('click', '.degreeWiseShort', function() {
+        $('.degreeWiseS').toggle();
     });
     
    </script>   
