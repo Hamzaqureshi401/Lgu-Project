@@ -14,7 +14,7 @@
                         <div class="card-content">
                           <h5 class="font-15">Courses Offered</h5>
                           <h2 class="mb-3 font-18">258</h2>
-                          <p class="mb-0"><span class="col-green">10%</span> Increase</p>
+                          
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -35,13 +35,13 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15"> Enrolled Students</h5>
-                          <h2 class="mb-3 font-18">1,287</h2>
-                          <p class="mb-0"><span class="col-orange">09%</span> Decrease</p>
+                          <h2 class="mb-3 font-18">{{ $enrollment }}</h2>
+                          
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                         <div class="banner-img">
-                          <img src="assets/img/banner/2.png" alt="">
+                          <img src="assets/img/banner/4.png" alt="">
                         </div>
                       </div>
                     </div>
@@ -57,14 +57,13 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">Courses Enrollment</h5>
-                          <h2 class="mb-3 font-18">128</h2>
-                          <p class="mb-0"><span class="col-green">18%</span>
-                            Increase</p>
+                          <h2 class="mb-3 font-18">{{ $course }}</h2>
+                          
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                         <div class="banner-img">
-                          <img src="assets/img/banner/3.png" alt="">
+                          <img src="assets/img/banner/1.png" alt="">
                         </div>
                       </div>
                     </div>
@@ -81,7 +80,7 @@
                         <div class="card-content">
                           <h5 class="font-15">Assesment Details</h5>
                           <h2 class="mb-3 font-18">$48,697</h2>
-                          <p class="mb-0"><span class="col-green">42%</span> Increase</p>
+                          
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -175,8 +174,8 @@
           </div>
 
 
-           <div class="row ">
-              <div class="col-xl-3 col-lg-6">
+           <div class="row">
+              <div class="col-xl-3 col-lg-6 degreeWise">
                 <div class="card l-bg-green">
                   <div class="card-statistic-3">
                     <div class="card-icon card-icon-large"><i class="fa fa-award"></i></div>
@@ -195,12 +194,12 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-lg-6">
+              <div class="col-xl-3 col-lg-6 departmentWise">
                 <div class="card l-bg-cyan">
                   <div class="card-statistic-3">
                     <div class="card-icon card-icon-large"><i class="fa fa-briefcase"></i></div>
                     <div class="card-content">
-                      <h4 class="card-title">Department Wise Students</h4>
+                      <h4 class="card-title">Dtp Wise Students</h4>
                       <span>1,258</span>
                       <div class="progress mt-1 mb-1" data-height="8">
                         <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25"
@@ -214,7 +213,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-lg-6">
+              <div class="col-xl-3 col-lg-6 genderWise">
                 <div class="card l-bg-purple">
                   <div class="card-statistic-3">
                     <div class="card-icon card-icon-large"><i class="fa fa-globe"></i></div>
@@ -233,7 +232,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-lg-6">
+              <div class="col-xl-3 col-lg-6 degreeWiseShort">
                 <div class="card l-bg-orange">
                   <div class="card-statistic-3">
                     <div class="card-icon card-icon-large"><i class="fa fa-money-bill-alt"></i></div>
@@ -253,11 +252,40 @@
                 </div>
               </div>
             </div>
+            <div class="degreeW" style="display: none;">
+            @include('Dean.degreeWise')
+          </div>
+          <div class="departmentW" style="display: none;">
+             @include('Dean.departmentWise')>
+           </div>
+              <div class="genderW" style="display: none;">
+              @include('Dean.genderWise')
+            </div>
+               <div class="degreeWiseS" style="display: none;">
+               @include('Dean.degreeWiseShort-Att Strength')
+             </div>
 
-
+</div>
         </section>
+    <script
+  src="https://code.jquery.com/jquery-3.6.3.js"
+  integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+  crossorigin="anonymous"></script>
+   <script type="text/javascript">
+    $(document).on('click', '.degreeWise', function() {
+        $('.degreeW').toggle();
+    });
+    $(document).on('click', '.departmentWise', function() {
+        $('.departmentW').toggle();
+    });
+    $(document).on('click', '.genderWise', function() {
+        $('.genderW').toggle();
+    });
+    $(document).on('click', '.degreeWiseShort', function() {
+        $('.degreeWiseS').toggle();
+    });
     
-      
+   </script>   
    
 <script src="{{ asset('assets/js/app.min.js') }}"></script>
 <script src="{{ asset('assets/js/page/index.js') }}"></script>

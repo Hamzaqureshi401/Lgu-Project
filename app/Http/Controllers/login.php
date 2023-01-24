@@ -54,15 +54,12 @@ class login extends Controller
             'Username' => 'required',
             'password' => 'required',
         ]);
-        $username = $Employee_data->input('Username');
-        $password = $Employee_data->input('password');
-
-        $submit = 
-        DB::table('Employees')->where(['UserName' => $username  , 'Password' => $password])->first();
-         //  dd($submit);
+        
+        $submit = DB::table('Employees')
+        ->where(['UserName' => $Employee_data->Username  , 'Password' => $Employee_data->password])
+        ->first();
+        
         if ($submit != NUll) {
-
-            
                 $Emp_FirstName = $submit->Emp_FirstName;
                 $Emp_LastName = $submit->Emp_LastName;
                 $Designation = $submit->Designation;
@@ -76,17 +73,14 @@ class login extends Controller
 
             ]);
              return  redirect()->route('dean.Dashboard');
-            switch ($Designation) {
-                case 'Assistant Lecturer/TA':
-                     return  redirect()->route('Dean.deanDashboard');
-                    break;
-
-                case 'Addmission':
-                    return  redirect()->route('Dean.deanDashboard');
-                    break;
-            }
         } else {
-            return  redirect()->route('emp.login')->with(['errorToaster'   => 'Employee Not Found' , 'title' => 'No Record']);
+            return  
+            redirect()
+            ->route('emp.login')
+            ->with([
+                'errorToaster'   => 'Employee Not Found' , 
+                'title' => 'No Record'
+            ]);
         }
     }
 
@@ -136,7 +130,8 @@ class login extends Controller
                 'std_ID'      => $submit->ID,
                 'sem_ID'      => $sem_ID,
                 'dpt_ID'      => $dpt_ID,
-                'degree_ID'   => $degreeID
+                'degree_ID'   => $degreeID,
+                'Std'         => $submit
             ]);
 
     

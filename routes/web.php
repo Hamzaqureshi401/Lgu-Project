@@ -52,6 +52,15 @@ Route::post('/updateEnrollment', [App\Http\Controllers\EnrollmentsController::cl
 
 Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
 Route::get('/printChallan', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
+
+//student roll no slip route
+
+Route::get('/getStudentRollNoSlip',[App\Http\Controllers\StdRollNoSlipsController::class,'getStudentRollNoSlip'])->name('getStudentRollNoSlip');
+
+//student dashboard
+
+Route::get('/studentDashboard', [App\Http\Controllers\StudentController::class, 'studentDashboard'])->name('student.Dashboard');
+
 });
 
 
@@ -167,6 +176,10 @@ Route::post('/updateTimeTable', [App\Http\Controllers\TimeTableController::class
 
 Route::get('/deanDashboard', [App\Http\Controllers\DeanController::class, 'deanDashboard'])->name('dean.Dashboard');
 
+//student route start
+
+
+
 //Attandence Route Start
 
 Route::get('/empSemesterCourses', [App\Http\Controllers\AttendanceController::class, 'empSemesterCourses'])->name('emp.SemesterCourses');
@@ -248,3 +261,4 @@ Route::get('/allStdRollNoSlips', [App\Http\Controllers\StdRollNoSlipsController:
 Route::post('/storeStdRollNoSlips', [App\Http\Controllers\StdRollNoSlipsController::class, 'storeStdRollNoSlips'])->name('store.StdRollNoSlips');
 Route::get('/editStdRollNoSlip/{id?}', [App\Http\Controllers\StdRollNoSlipsController::class, 'editStdRollNoSlip'])->name('edit.StdRollNoSlip');
 Route::post('/updateStdRollNoSlip', [App\Http\Controllers\StdRollNoSlipsController::class, 'updateStdRollNoSlip'])->name('update.StdRollNoSlip');
+Route::post('/uploadStdRollNoSlipExcel', [App\Http\Controllers\StdRollNoSlipsController::class, 'uploadStdRollNoSlipExcel'])->name('upload.StdRollNoSlip.Excel');
