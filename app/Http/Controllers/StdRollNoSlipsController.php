@@ -257,4 +257,17 @@ class StdRollNoSlipsController extends Controller
 
 
     }
+
+    public function getStudentRollNoSlip()
+    {
+        $session = $this->getSessionData();
+        $enrollments = Enrollment::where('Std_ID' , $session['std_ID'])->get();
+        // dd($enrollments);
+        return view('StdRollNoSlips.printRollNoSlip');
+    }
+
+    public function getSessionData(){
+
+        return session::all();
+    }
 }

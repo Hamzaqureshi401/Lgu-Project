@@ -27,7 +27,7 @@
                       </select>
                     </div>
                      <div class="form-group">
-                      <label>Romm</label>
+                      <label>Room</label>
                       <select class="form-control" name="Room"  required>
                         @foreach($room as $number)
                         <option value="{{ $number }}">{{ $number }}</option>
