@@ -198,8 +198,9 @@
                         </tr>
                         @foreach($enrollments as $enrollment)
                         @php 
-                        $present = $enrollment->attandence($enrollment->ID)->where('Status' , 1)->count();
-                        $absent = $enrollment->attandence($enrollment->ID)->where('Status' , 0)->count();
+                       
+                        $present =  $attendences->where(['Enroll_ID' => $enrollment->ID , 'Status' => 1])->count();
+                        $absent = $attendences->where(['Enroll_ID' => $enrollment->ID, 'Status' => 0])->count() ;
                         @endphp
                         <tr>
                             <td>{{ $enrollment->semesterCourse->course->CourseName ?? '--' }}</td>

@@ -31,6 +31,10 @@ class SemesterCourse extends Model
     public function SemesterDetail(){
         return $this->belongsTo('App\Models\SemesterDetail' , 'Sem_ID');
     }
+     public function timeTable(){
+        return $this->belongsTo('App\Models\TimeTable' , 'SemCourse_ID');
+    }
+    
     
 
 

@@ -44,19 +44,12 @@
                               </div>
 
                                <div class="form-group col-md-4 col-12">
-                                <a href="{{ route('course.Time.Table')}}" class="btn btn-sm btn-info form-control">Check Class Time Table</a>
+                                <a href="{{ route('find.Course.Day')}}" class="btn btn-sm btn-info form-control">Check Course Time Table</a>
                               </div>
                              
-                              </div>
-
-                              <div class="row">
-                              <div class="form-group  col-12">
-                                <a href="" class="btn btn-sm btn-light form-control">Courses Time Table</a>
                               </div>
 
                               
-                             
-                              </div>
                             </div>
                 
                         </form>

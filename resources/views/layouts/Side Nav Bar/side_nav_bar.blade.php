@@ -112,6 +112,13 @@
                  
               </ul>
             </li>
+             <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Attandence</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('course.Offering') }}">Course Offering</a></li>
+                 
+              </ul>
+            </li>
            <!--  <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Enrollments</span></a>
               <ul class="dropdown-menu">

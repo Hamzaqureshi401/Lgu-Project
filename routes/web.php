@@ -55,7 +55,7 @@ Route::get('/printChallan', [App\Http\Controllers\ChallanController::class, 'pri
 
 //student roll no slip route
 
-Route::get('/getStudentRollNoSlip',[App\Http\Controllers\StdRollNoSlipsController::class,'getStudentRollNoSlip'])->name('getStudentRollNoSlip');
+Route::get('/getStudentRollNoSlip',[App\Http\Controllers\StdRollNoSlipsController::class,'getStudentRollNoSlip'])->name('get.Student.Roll.No.Slip');
 
 //student dashboard
 
@@ -248,7 +248,6 @@ Route::get('/degSemesterWiseReport', [App\Http\Controllers\ViewController::class
 
 Route::get('/studentAttendance', [App\Http\Controllers\ViewController::class, 'studentAttendance'])->name('student.Attendance');
 
-Route::get('/courseTimeTable', [App\Http\Controllers\ViewController::class, 'courseTimeTable'])->name('course.Time.Table');
 
 
 
@@ -266,6 +265,8 @@ Route::get('/stdWiseAward', [App\Http\Controllers\ViewController::class, 'stdWis
 
 Route::get('/stdAffairs', [App\Http\Controllers\ViewController::class, 'stdAffairs'])->name('std.Affairs');
 Route::get('/findCourseDay', [App\Http\Controllers\ViewController::class, 'findCourseDay'])->name('find.Course.Day');
+
+Route::get('/courseOffering/{id?}', [App\Http\Controllers\ViewController::class, 'courseOffering'])->name('course.Offering');
 
 });
 
