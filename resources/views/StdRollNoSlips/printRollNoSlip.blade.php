@@ -26,7 +26,7 @@
                                  <thead>
                                     <tr>
                                        <th width="2%">
-                                          <img class="img-fluid" src="{{ asset('images/lgu_logo.jpg') }}" alt="Order Header Image"style=" height: 115px;        margin-bottom: 18px;        margin-left: 58px;"/>
+                                          <img class="img-fluid" src="{{ asset('images/lgu_logo.jpg') }}" alt="Order Header Image"style=" height: 115px;        margin-bottom: 18px;        margin-left: 115px;"/>
                                        </th>
                                        <th width="55%">
                                           <h1 style="text-align:center">

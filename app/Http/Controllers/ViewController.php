@@ -8,6 +8,8 @@ use App\Models\DegreeBatche;
 use App\Models\Student;
 use App\Models\Enrollment;
 use App\Models\TimeTable;
+use App\Models\Degree;
+use App\Models\Semester;
 
 
 use Illuminate\Http\Request;
@@ -168,5 +170,40 @@ class ViewController extends Controller
                 'semesterCourses'
             )    
             );
+    }
+    public function courseOffering(Request $request){
+
+        // /dd($request->all());
+        $semesterCourses = SemesterCourse::where('DegBatches_ID' , $request->degreeBatche_ID)->select('Course_ID')->get();
+
+       $degrees      =  Degree::get();
+       $semesters    =  semester::get();
+       $courses      = Course::paginate(30);
+       $degreeBatches  = DegreeBatche::get();
+
+        $title      = 'All Courses';
+        $route      = 'courseOffering/';
+        $getEditRoute = 'editCourse';
+        $modalTitle = 'Edit Course';
+        $button = 'Submit';
+        $request->request->remove('_token');
+
+       return 
+        view('View.courseOffering', 
+            compact(
+                
+                'degrees',
+                'courses',
+                'semesters',
+                'title',
+                'route',
+                'getEditRoute',
+                'modalTitle',
+                'button',
+                'degreeBatches',
+                'semesterCourses'
+            )    
+            );
+
     }
 }

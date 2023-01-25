@@ -32,7 +32,7 @@ class SemesterCourse extends Model
         return $this->belongsTo('App\Models\SemesterDetail' , 'Sem_ID');
     }
      public function timeTable(){
-        return $this->hasMany('App\Models\TimeTable' , 'SemCourse_ID');
+        return $this->belongsTo('App\Models\TimeTable' , 'SemCourse_ID');
     }
     
     

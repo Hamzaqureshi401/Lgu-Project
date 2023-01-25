@@ -137,7 +137,7 @@ class login extends Controller
     
 
            
-         return redirect()->route('add.Enrollment')
+         return redirect()->route('student.Dashboard')
                         ->withSuccess('Signed in');
         } else {
             return  redirect()->route('std.login')->with(['errorToaster'   => 'Student Not Found' , 'title' => 'No Record']);
