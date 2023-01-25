@@ -171,29 +171,29 @@ class ViewController extends Controller
             )    
             );
     }
-    public function courseOffering(Request $request){
+    public function courseOffering($degree = null , $batch = null){
 
-        // /dd($request->all());
-        $semesterCourses = SemesterCourse::where('DegBatches_ID' , $request->degreeBatche_ID)->select('Course_ID')->get();
-
+        $degreeBatches  = DegreeBatche::where(['Degree_ID' => $degree , 'Batch_ID' => $batch])->first();
+        if(!empty($degreeBatches)){
+            $semesterCourses = SemesterCourse::where('DegBatches_ID' , $degreeBatches->ID)->get();
+        }else{
+            $semesterCourses = "";
+        }
        $degrees      =  Degree::get();
        $semesters    =  semester::get();
-       $courses      = Course::paginate(30);
-       $degreeBatches  = DegreeBatche::get();
-
+      
         $title      = 'All Courses';
         $route      = 'courseOffering/';
-        $getEditRoute = 'editCourse';
-        $modalTitle = 'Edit Course';
-        $button = 'Submit';
-        $request->request->remove('_token');
-
+        $getEditRoute = 'courseAssign';
+        $modalTitle = 'Assign Course';
+        $button     = 'Submit';
+        
        return 
         view('View.courseOffering', 
             compact(
                 
                 'degrees',
-                'courses',
+                
                 'semesters',
                 'title',
                 'route',
@@ -204,6 +204,22 @@ class ViewController extends Controller
                 'semesterCourses'
             )    
             );
+
+    }
+
+    public function courseAssign($id){
+
+        $button = 'Do You Wisht To Submit?';
+        $courses = Course::where('ID' , $id)->first();
+
+        return 
+        view('View.courseAssign', 
+            compact(
+                
+                'courses',
+                'button'
+              
+            ));
 
     }
 }

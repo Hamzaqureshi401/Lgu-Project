@@ -266,7 +266,10 @@ Route::get('/stdWiseAward', [App\Http\Controllers\ViewController::class, 'stdWis
 Route::get('/stdAffairs', [App\Http\Controllers\ViewController::class, 'stdAffairs'])->name('std.Affairs');
 Route::get('/findCourseDay', [App\Http\Controllers\ViewController::class, 'findCourseDay'])->name('find.Course.Day');
 
-Route::get('/courseOffering/{id?}', [App\Http\Controllers\ViewController::class, 'courseOffering'])->name('course.Offering');
+Route::get('/courseOffering/{id?}/{id2?}', [App\Http\Controllers\ViewController::class, 'courseOffering'])->name('course.Offering');
+
+Route::get('/courseAssign/{id?}', [App\Http\Controllers\ViewController::class, 'courseAssign'])->name('course.Assign');
+
 
 });
 
