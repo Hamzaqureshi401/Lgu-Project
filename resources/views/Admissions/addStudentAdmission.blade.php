@@ -222,11 +222,9 @@
       </div>
       <div class="form-group">
          <label style="font-size: 13px">Degree<span style="color: red">*</span></label>
-         <select name="Degree_ID" value="{{ old('ID') }}" class="custom-select">
-            <option value="{{ old('ID') }}" selected>{{ old('ID') }}
-            </option>
+         <select name="Degree_ID"  class="custom-select">
             @foreach ($degree as $degreeid)
-            <option value="{{ $degreeid->ID }}">
+            <option value="{{ $degreeid->ID }}" {{old('Degree_ID')===$degreeid->ID ? "selected":" " }}>
                {{ $degreeid->DegreeName }}
             </option>
             @endforeach
@@ -260,12 +258,10 @@
          @enderror
       </div>
 
-      {{-- AdmissionSession --}}
 
       <div class="form-group">
          <label style="font-size: 13px">Admission Session<span style="color: red">*</span></label>
          <select name="AdmissionSession" class="custom-select">
-
             @foreach ($admissionsession as $admissionsessiondeatils)
             <option value="{{ $admissionsessiondeatils->ID }}" {{old('AdmissionSession')===$admissionsessiondeatils->ID ? "selected":" " }}>
                {{ $admissionsessiondeatils->SemSession }}

@@ -128,7 +128,6 @@ class AdmissionController extends Controller
     }
 
     protected function createStudentQualification($request){
-        dd($request);
 
         $student = Student::where(['CNIC' => $request->CNIC , 'FatherCNIC' => $request->FatherCNIC])->first();
 
