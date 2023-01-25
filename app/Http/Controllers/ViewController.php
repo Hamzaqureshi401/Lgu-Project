@@ -104,7 +104,7 @@ class ViewController extends Controller
                );
     }
     public function assessmentDetail(){
-        $employees = Employee::get();
+        $employees      = Employee::get();
         $semesterCourse = SemesterCourse::get();
         return 
         view('View.assessmentDetail', 
@@ -115,8 +115,8 @@ class ViewController extends Controller
     }
     public function departmentFactSheet(){
 
-        $degreeBatches = DegreeBatche::paginate(10);
-        $students = Student::get();
+        $degreeBatches  = DegreeBatche::paginate(10);
+        $students       = Student::get();
         return 
         view('View.departmentFactSheet', 
             compact(
@@ -128,9 +128,9 @@ class ViewController extends Controller
     }
 
     public function degSemesterWiseReport(){
-        $employees = Employee::get();
+        $employees      = Employee::get();
         $semesterCourse = SemesterCourse::get();
-        $degreeBatches = DegreeBatche::get();
+        $degreeBatches  = DegreeBatche::get();
         return 
         view('View.degSemesterWiseReport', 
             compact(
@@ -154,12 +154,19 @@ class ViewController extends Controller
 
     public function findCourseDay(Request $request){
 
-        $courses = TimeTable::where('Day' , $request->Day)->get();
+        $timeTable = TimeTable::where('Day' , $request->Day)->get();
+        $semesterCourses = SemesterCourse::join('TimeTable' , 'timeTable.SemCourse_ID' , 'semesterCourses.ID')
+        ->where('Day' , $request->Day)
+        ->get();
+        //dd(SemesterCourse::with('timeTable')->where('Day' , $request->Day)->get());
          return 
         view('View.courseTimeTable', 
             compact(
                 
-                'courses')    
+                'timeTable',
+                
+                'semesterCourses'
+            )    
             );
     }
 }

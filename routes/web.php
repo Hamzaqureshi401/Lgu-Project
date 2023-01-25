@@ -248,7 +248,6 @@ Route::get('/degSemesterWiseReport', [App\Http\Controllers\ViewController::class
 
 Route::get('/studentAttendance', [App\Http\Controllers\ViewController::class, 'studentAttendance'])->name('student.Attendance');
 
-Route::get('/courseTimeTable', [App\Http\Controllers\ViewController::class, 'courseTimeTable'])->name('course.Time.Table');
 
 
 

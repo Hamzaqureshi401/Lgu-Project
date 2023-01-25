@@ -53,14 +53,15 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($employees as $employee)
+                          @foreach($semesterCourses as $semesterCourse)
                           <tr>
-                            <td>{{ $employee->semesterCourse->course->CourseCode ?? '--'}}</td>
-                            <td>{{ $employee->semesterCourse->course->CourseName ?? '--'}}</td>
-                            <td>{{ $employee->semesterCourse->course->LectureType ?? '--'}}</td>
-                            <td>{{ $employee->Emp_FirstName ?? '--'}} {{ $employee->Emp_LastName ?? '--'}}</td>
-                            <td>{{  $employee->semesterCourse->timeTable->StartTime ?? '--'}}</td>
-                            <td>{{  $employee->semesterCourse->timeTable->StartTime ?? '--'}}</td>
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $semesterCourse->course->CourseCode ?? '--'}}</td>
+                            <td>{{ $semesterCourse->course->CourseName ?? '--'}}</td>
+                            <td>{{ $semesterCourse->course->LectureType ?? '--'}}</td>
+                            <td>{{ $semesterCourse->employee->Emp_FirstName ?? '--'}} {{$semesterCourse->employee->Emp_LastName ?? '--'}}</td>
+                            <td>{{  $semesterCourse->StartTime ?? '--'}}</td>
+                            <td>{{  $semesterCourse->StartTime ?? '--'}}</td>
                           </tr>
                          @endforeach
                         </tbody>
