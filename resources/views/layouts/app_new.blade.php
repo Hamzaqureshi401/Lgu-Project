@@ -8,7 +8,9 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>Lahore Garrison University</title>
   <!-- General CSS Files -->
+
   <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
+
   <link rel="stylesheet" href="{{ asset('assets/bundles/fullcalendar/fullcalendar.min.css') }}">
  
   <link rel="stylesheet" href="{{ asset('assets/bundles/summernote/summernote-bs4.css') }}">
@@ -32,6 +34,7 @@
 
   <!-- Load paper.css for happy printing -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+
 
   <!-- Set page size here: A5, A4 or A3 -->
   <!-- Set also "landscape" if you need -->
@@ -232,6 +235,10 @@
 
         <!-- star main content  -->
         @yield('content')
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
+        
+
+
         <!-- end main content -->
 
         <div class="settingSidebar">
@@ -331,6 +338,7 @@
   </div>
   
   <!-- General JS Scripts -->
+
   <script src="{{ asset('assets/js/app.min.js') }}"></script>
  
  <script src="{{ asset('assets/bundles/izitoast/js/iziToast.min.js') }}"></script>
@@ -344,6 +352,7 @@
    <script src="{{ asset('assets/bundles/sweetalert/sweetalert.min.js') }}"></script>
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/sweetalert.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 
   <script type="text/javascript">
       

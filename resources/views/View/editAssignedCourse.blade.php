@@ -22,7 +22,7 @@
       </div>
        <div class="form-group col-md-12 col-12">
          <label>Employee</label>
-         <select class="form-control" name="Emp_ID[]"  >
+         <select class="form-control select2" name="Emp_ID[]"  >
             @foreach($employees as $employee)
             <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
             @endforeach
@@ -30,7 +30,7 @@
       </div>
       <div class="form-group col-md-6 col-12">
          <label>Section</label>
-         <select class="form-control" name="Section"  required>
+         <select class="form-control select2" name="Section"  required>
             @foreach (range('A', 'Z') as $l) 
             <option value="{{ $l }}">{{ $l }}</option>
             @endforeach
@@ -61,6 +61,44 @@
               </div>
             </div>
       </div>
+    </div>
+ <div class="section-body bg-warning">
+      <div class="col-12 col-md-12 col-lg-12">
+         <div class="card">
+            <div class="card-header bg-warning d-flex justify-content-center">
+               <h4 style="color: white;">Exception</h4>
+               <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="" data-target="#exampleModal"><i class="far fa-edit"></i> Create Short Attandence Report</button> -->
+            </div>
+         </div>
+      </div>
+   </div>
+     <div class="row">
+      
+      <div class="form-group col-md-3 col-12">
+                      <label>Degree</label>
+                      <select class="form-control select2" id="degree" name="Degree_ID"  required>
+                        @foreach($degrees as $degree)
+                        <option value="{{ $degree->ID }}">{{ $degree->DegreeName }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+
+                    <div class="form-group col-md-3 col-12">
+                      <label>Batch</label>
+                      <select class="form-control select2" id="batch" name="Batch_ID"  required>
+                        @foreach($semesters as $semester)
+                        <option value="{{ $semester->ID }}">{{ $semester->SemSession }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group col-md-3 col-12">
+                  <label>Roll No</label>
+                  <input type="text"  class="form-control">
+               </div>
+                <div class="form-group col-md-3 col-12">
+                  <label>Find Student</label>
+                  <button id="button" style="color: white;" class="btn btn-success btn-block submit-form">{{ "Find" }}</button>
+               </div>
 
     </div>
   
@@ -80,7 +118,7 @@
       @endphp
       <div class="form-group col-md-2 col-12">
          <label>Day</label>
-         <select class="form-control" name="Day[]"  >
+         <select class="form-control select2" name="Day[]"  >
             @foreach($days as $day)
             <option value="{{ $day }}">{{ $day}}</option>
             @endforeach
@@ -100,7 +138,7 @@
       </div>
       <div class="form-group col-md-2 col-12">
          <label>Room</label>
-          <select class="form-control" name="Section[]"  required>
+          <select class="form-control select2" name="Section[]"  required>
             @foreach (range(1, 100) as $l) 
             <option value="{{ $l }}">{{ $l }}</option>
             @endforeach
@@ -117,13 +155,14 @@
 </div>
 </div>
 @include('Forms.formFooter')   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 <script type="text/javascript">
   $('.clone').click(function(){
   var a = $("#clon").clone().appendTo('#copied');
 });
-  $(document).ready(function() {
-    $('.select2').select2();
-});
+  
+
 </script>
 @endsection
 
