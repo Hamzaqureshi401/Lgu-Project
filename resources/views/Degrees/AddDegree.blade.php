@@ -11,7 +11,7 @@
                     </div>
                     <div class="form-group">
                       <label>Degree Level</label>
-                      <select class="form-control select2" name="DegreeLevel"  required>
+                      <select class="form-control" name="DegreeLevel"  required>
                         
                         <option value="{{ 'UG' }}" selected>{{ 'UG' }}</option>
                        <option value="{{ 'PG' }}">{{ 'PG' }}</option>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                       <label>Dpt Name</label>
-                      <select class="form-control select2" name="Dpt_ID"  required>
+                      <select class="form-control" name="Dpt_ID"  required>
                         @foreach($departments as $department)
                         <option value="{{ $department->ID }}">{{ $department->Dpt_Name }}</option>
                         @endforeach

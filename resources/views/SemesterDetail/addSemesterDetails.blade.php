@@ -9,7 +9,7 @@
 
                      <div class="form-group">
                       <label>Degree / Batch</label>
-                      <select class="form-control select2" name="DegBatches_ID"  >
+                      <select class="form-control" name="DegBatches_ID"  >
                         @foreach($degreeCourses as $degreeCourse)
                         <option value="{{ $degreeCourse->ID }}">{{ $degreeCourse->DegreeName }} / {{ $degreeCourse->SemSession }}</option>
                         @endforeach
@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                       <label>Semester</label>
-                      <select class="form-control select2" name="Sem_ID"  >
+                      <select class="form-control" name="Sem_ID"  >
                         @foreach($semesters as $semester)
                         <option value="{{ $semester->ID }}">{{ $semester->SemSession }}</option>
                         @endforeach

@@ -11,7 +11,7 @@
 
                       <div class="form-group">
                       <label>Semester / Courses</label>
-                      <select class="form-control select2" name="SemCourse_ID"  required>
+                      <select class="form-control" name="SemCourse_ID"  required>
                         @foreach($semesterCourses as $semesterCourse)
                         <option value="{{ $semesterCourse->ID }}" {{ $semesterCourse->ID == $timeTable->SemCourse_ID ? 'selected' : '' }}>{{ $semesterCourse->semester->SemSession }} / {{ $semesterCourse->course->CourseName }}</option>
                         @endforeach
@@ -32,7 +32,7 @@
                       @endphp
                      <div class="form-group">
                       <label>Day</label>
-                      <select class="form-control select2" name="Day"  value="{{$timeTable->Day}}">
+                      <select class="form-control" name="Day"  value="{{$timeTable->Day}}">
                         @foreach($days as $day)
                         <option value="{{ $day }}" {{ $day == $timeTable->Day ? 'selected' : '' }}>{{ $day}}</option>
                         @endforeach
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group">
                       <label>Employee</label>
-                      <select class="form-control select2" name="Emp_ID"  >
+                      <select class="form-control" name="Emp_ID"  >
                         @foreach($employees as $employee)
                         <option value="{{ $employee->ID }}"  {{ $employee->ID == $timeTable->Emp_ID ? 'selected' : '' }}>{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
                         @endforeach

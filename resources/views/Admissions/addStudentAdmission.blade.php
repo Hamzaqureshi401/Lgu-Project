@@ -375,11 +375,11 @@
          <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Examination <br>
             Passed</label>
-            <select name="matric_examination" id="matric_examination" class="form-control my-2 select2 ">
+            <select name="matric_examination" id="matric_examination" class="form-control my-2  ">
                <option value="Matric" {{old('matric_examination')==="Matric"?"selected":" "}}>Matric</option>
                <option value="O-Level"  {{old('matric_examination')==="O-Level"?"selected":" "}}>O-Level</option>
             </select>
-            <select name="fsc_examination" id="fsc_examination" class="form-control  my-2  select2">
+            <select name="fsc_examination" id="fsc_examination" class="form-control  my-2  ">
                <option value="FSC Pre-Eng" {{old('fsc_examination')==="FSC Pre-Eng"?"selected":" "}} >FSC Pre-Eng</option>
                <option value="FSC Pre-Med" {{old('fsc_examination')==="FSC Pre-Med"?"selected":" "}}>FSC Pre-Med</option>
                <option value="ICS" {{old('fsc_examination')==="ICS"?"selected":" "}}>ICS</option>

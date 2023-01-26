@@ -22,7 +22,7 @@
       </div>
        <div class="form-group col-md-12 col-12">
          <label>Employee</label>
-         <select class="form-control select2" name="Emp_ID[]"  >
+         <select class="form-control" name="Emp_ID[]"  >
             @foreach($employees as $employee)
             <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
             @endforeach
@@ -30,7 +30,7 @@
       </div>
       <div class="form-group col-md-6 col-12">
          <label>Section</label>
-         <select class="form-control select2" name="Section"  required>
+         <select class="form-control" name="Section"  required>
             @foreach (range('A', 'Z') as $l) 
             <option value="{{ $l }}">{{ $l }}</option>
             @endforeach
@@ -80,7 +80,7 @@
       @endphp
       <div class="form-group col-md-2 col-12">
          <label>Day</label>
-         <select class="form-control select2" name="Day[]"  >
+         <select class="form-control" name="Day[]"  >
             @foreach($days as $day)
             <option value="{{ $day }}">{{ $day}}</option>
             @endforeach
@@ -100,7 +100,7 @@
       </div>
       <div class="form-group col-md-2 col-12">
          <label>Room</label>
-          <select class="form-control select2" name="Section[]"  required>
+          <select class="form-control" name="Section[]"  required>
             @foreach (range(1, 100) as $l) 
             <option value="{{ $l }}">{{ $l }}</option>
             @endforeach

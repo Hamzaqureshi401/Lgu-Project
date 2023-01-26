@@ -8,7 +8,7 @@
                   
                   <div class="form-group">
                       <label>Semester</label>
-                      <select class="form-control select2" name="Sem_ID"  >
+                      <select class="form-control" name="Sem_ID"  >
                         @foreach($semesters as $semester)
                         <option value="{{ $semester->ID }}">{{ $semester->SemSession }}</option>
                         @endforeach
@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                       <label>Employee</label>
-                      <select class="form-control select2" name="Emp_ID"  >
+                      <select class="form-control" name="Emp_ID"  >
                         @foreach($employees as $employee)
                         <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
                         @endforeach
@@ -28,7 +28,7 @@
                     </div>
                      <div class="form-group">
                       <label>Degree / Batch</label>
-                      <select class="form-control select2" name="DegCourse_ID"  >
+                      <select class="form-control" name="DegCourse_ID"  >
                         @foreach($degreeCourses as $degreeCourse)
                         <option value="{{ $degreeCourse->ID }}">{{ $degreeCourse->DegreeName }} / {{ $degreeCourse->SemSession }}</option>
                         @endforeach
@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group">
                       <label>Course</label>
-                      <select class="form-control select2" name="Course_ID"  >
+                      <select class="form-control" name="Course_ID"  >
                         @foreach($courses as $course)
                         <option value="{{ $course->ID }}">{{ $course->CourseName }} </option>
                         @endforeach

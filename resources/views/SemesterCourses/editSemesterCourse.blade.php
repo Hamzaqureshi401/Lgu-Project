@@ -6,7 +6,7 @@
                 <input type="hidden" name="SemCourse_ID" value="{{ $semesterCourse->ID }}">
                  <div class="form-group">
                       <label>Semester</label>
-                      <select class="form-control select2" name="Sem_ID"  >
+                      <select class="form-control" name="Sem_ID"  >
                         @foreach($semesters as $semester)
                         <option value="{{ $semester->ID }}" {{ $semesterCourse->Sem_ID == $semester->ID ? 'selected' : '' }}>{{ $semester->SemSession }}</option>
                         @endforeach
@@ -24,7 +24,7 @@
 
                      <div class="form-group">
                       <label>Degree / Course</label>
-                      <select class="form-control select2" name="DegCourse_ID"  >
+                      <select class="form-control" name="DegCourse_ID"  >
                         @foreach($degreeCourses as $degreeCourse)
                         <option value="{{ $degreeCourse->ID }}" {{ $semesterCourse->DegBatches_ID == $degreeCourse->ID ? 'selected' : '' }}>{{ $degreeCourse->degree->DegreeName }} / {{ $degreeCourse->batch->SemSession }} </option>
                         @endforeach
@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group">
                       <label>Course</label>
-                      <select class="form-control select2" name="Course_ID"  >
+                      <select class="form-control" name="Course_ID"  >
                         @foreach($courses as $course)
                         <option value="{{ $course->ID }}" {{ $semesterCourse->Course_ID == $course->ID ? 'selected' : '' }}>{{ $course->CourseName }} </option>
                         @endforeach
