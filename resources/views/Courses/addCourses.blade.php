@@ -23,7 +23,7 @@
                     </div>
                      <div class="form-group">
                       <label>Lecture Type</label>
-                      <select class="form-control" name="LectureType"  required>
+                      <select class="form-control select2" name="LectureType"  required>
                        
                         <option value="{{ 'Theory' }}">{{ 'Theory' }}</option>
                         <option value="{{  'Lab' }}">{{ 'Lab' }}</option>

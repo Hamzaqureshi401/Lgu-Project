@@ -65,7 +65,7 @@
                   
                <div class="form-group">
                       <label>Department</label>
-                      <select class="form-control" name="Dpt_ID"  >
+                      <select class="form-control select2" name="Dpt_ID"  >
                         @foreach($departments as $department)
                         <option value="{{ $department->ID }}"{{ $department->ID == $employee->Dpt_ID ? 'selected' : '' }} >{{ $department->Dpt_Name }}</option>
                         @endforeach

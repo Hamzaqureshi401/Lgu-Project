@@ -97,7 +97,7 @@
                       @endphp
                      <div class="form-group">
                       <label>Day</label>
-                      <select class="form-control" name="Day"  >
+                      <select class="form-control select2" name="Day"  >
                         @foreach($days as $day)
                         <option value="{{ $day }}">{{ $day}}</option>
                         @endforeach

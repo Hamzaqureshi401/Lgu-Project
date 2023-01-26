@@ -13,7 +13,7 @@
                         <form method="post" action="https://e.lgu.edu.pk/exam/student">
                             <div class="col-lg-12">
                                 <label for="input-states-1"><b>Select Batch</b></label>
-                                <select class="form-control" name="Batch">
+                                <select class="form-control select2" name="Batch">
                                             <option>Fa-2012</option>
                                             <option>Sp-2013</option>
                                             <option>Su-2013</option>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <label for="input-states-1"><b>Select Degree</b></label>
-                                <select class="form-control" name="Degree">
+                                <select class="form-control select2" name="Degree">
                                             <option>ADCP</option>
                                             <option>B.Com (Hons)</option>
                                             <option>BBA (Hons)</option>

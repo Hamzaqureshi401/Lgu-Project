@@ -12,7 +12,7 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Degree</label>
-                      <select class="form-control" id="degree" name="Degree_ID"  required>
+                      <select class="form-control select2" id="degree" name="Degree_ID"  required>
                         @foreach($degrees as $degree)
                         <option value="{{ $degree->ID }}">{{ $degree->DegreeName }}</option>
                         @endforeach
@@ -21,7 +21,7 @@
 
                     <div class="form-group">
                       <label>Batch</label>
-                      <select class="form-control" id="batch" name="Batch_ID"  required>
+                      <select class="form-control select2" id="batch" name="Batch_ID"  required>
                         @foreach($semesters as $semester)
                         <option value="{{ $semester->ID }}">{{ $semester->SemSession }}</option>
                         @endforeach

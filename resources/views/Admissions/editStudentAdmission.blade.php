@@ -231,7 +231,7 @@
       <div class="form-group">
          <input type="hidden" name="id" value="{{ $studentAdmission->ID }}">
          <label>Degree</label>
-         <select class="form-control" name="Degree_ID" required>
+         <select class="form-control select2" name="Degree_ID" required>
          @foreach ($degrees as $degree)
          <option value="{{ $degree->ID }}"
          {{ $studentAdmission->Degree_ID == $degree->ID ? 'selected' : '' }}>
@@ -259,7 +259,7 @@
    <div class="form-group">
       <div class="form-group">
          <label style="font-size: 13px">Status <span style="color: red">*</span></label>
-         <select name="Status" class="custom-select">
+         <select name="Status" class="custom-select select2">
             <option value="{{ $studentAdmission->Status }}" selected>{{ $studentAdmission->Status }}</option>
             <option value="In Progress">In Progress</option>
          </select>
@@ -282,7 +282,7 @@
    <div class="form-group">
       <label style="font-size: 13px">Blood Group <span style="color: red">*</span>
       </label>
-      <select name="BloodGroup" class="custom-select">
+      <select name="BloodGroup" class="custom-select select2">
          <option value="{{ $studentAdmission->BloodGroup }}" selected>{{ $studentAdmission->BloodGroup }}
          </option>
          <option value="A+">A Positive</option>

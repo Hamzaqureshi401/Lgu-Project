@@ -90,7 +90,7 @@
                     {{ csrf_field() }}
                       <div class="form-group">
                       <label>Select Session</label>
-                      <select class="form-control" name=""  required>
+                      <select class="form-control select2" name=""  required>
                     <option value="Fa-2012">Fa-2012</option>
                     <option value="Sp-2013">Sp-2013</option>
                     <option value="Su-2013">Su-2013</option>
@@ -128,7 +128,7 @@
                     </div>
                     <div class="form-group">
                       <label>Select Degree Level</label>
-                      <select class="form-control" name=""  required>
+                      <select class="form-control select2" name=""  required>
                     
                     <option value="Ug">Ug</option>
                     <option value="Pg">Pg</option>
