@@ -163,7 +163,14 @@
                   <li><a class="nav-link" href="{{ route('std.Wise.Award')}}">Student Wise Award</a></li> 
                   <li><a class="nav-link" href="{{ route('std.Affairs')}}">Std Affairs</a></li>
                  <li><a class="nav-link" href="{{ route('reports')}}">Reports</a></li>
-                 <li><a class="nav-link" href="{{ route('assessment.Detail')}}">assessmentDetail</a></li>
+                 <li><a class="nav-link" href="{{ route('assessment.Detail')}}">Assessment Detail</a></li>
+                 <li><a class="nav-link" href="{{ route('finance.Dashboard')}}">Finance Dashboard</a></li>
+                 <li><a class="nav-link" href="{{ route('audit.Report')}}">Audit Report</a></li>
+                 <li><a class="nav-link" href="{{ route('student.Ledger')}}">Student Ledger</a></li>
+                 <li><a class="nav-link" href="{{ route('admission.Dashboard')}}">Admission Dashboard</a></li>
+                 <li><a class="nav-link" href="{{ route('exam.Seating')}}">Exam Seattings</a></li>
+                 <li><a class="nav-link" href="{{ route('student.Balance')}}">Student Balance</a></li>
+                  <li><a class="nav-link" href="{{ route('defualter.List')}}">Defualter List</a></li>
                   
               </ul>
               

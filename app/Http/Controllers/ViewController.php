@@ -250,4 +250,117 @@ class ViewController extends Controller
             ));
 
     }
+
+    public function financeDashboard(){
+
+        $enrollment = Enrollment::pluck('id')->count();
+
+        return view('View.financeDashboard' , compact('enrollment'));
+    }
+
+    public function ScholarshipDetail(){
+
+        return view('view.scholarshipDetail');
+    }
+
+    public function auditReport(){
+
+         $students = Student::paginate(10);
+        $title  = 'All Student Admissions';
+        $route = 'updateStudentAdmission';
+        $getEditRoute = 'editStudentAdmission';
+        $modalTitle = 'Edit Student Admission';
+        return view('View.auditReport' , 
+            compact(
+                'students' ,
+                'title' ,
+                'modalTitle' ,
+                'route',
+                'getEditRoute'
+            ));
+    }
+
+    public function studentLedger(){
+
+        $students = Student::paginate(10);
+        $title  = 'All Student Admissions';
+        $route = 'updateStudentAdmission';
+        $getEditRoute = 'editStudentAdmission';
+        $modalTitle = 'Edit Student Admission';
+        return view('View.studentLedger' , 
+            compact(
+                'students' ,
+                'title' ,
+                'modalTitle' ,
+                'route',
+                'getEditRoute'
+            ));
+
+    }
+
+    public function admissionDashboard(){
+
+        return view('View.admissionDashboard');
+    }
+    public function examSeating(){
+
+         return view('View.examSeating');
+    }
+     public function masterSheet(){
+
+        $students = Student::paginate(10);
+        $title  = 'All Student Admissions';
+        $route = 'updateStudentAdmission';
+        $getEditRoute = 'editStudentAdmission';
+        $modalTitle = 'Edit Student Admission';
+        return view('View.masterSheet' , 
+            compact(
+                'students' ,
+                'title' ,
+                'modalTitle' ,
+                'route',
+                'getEditRoute'
+            ));
+
+    }
+    public function defualtSeating(){
+
+        $students = Student::paginate(10);
+        $title  = 'All Student Admissions';
+        $route = 'updateStudentAdmission';
+        $getEditRoute = 'editStudentAdmission';
+        $modalTitle = 'Edit Student Admission';
+        return view('View.defualtSeating' , 
+            compact(
+                'students' ,
+                'title' ,
+                'modalTitle' ,
+                'route',
+                'getEditRoute'
+            ));
+
+    }
+
+    public function studentBalance(){
+
+        $students       = Student::paginate(10);
+        $title          = 'All Student Admissions';
+        $route          = 'updateStudentAdmission';
+        $getEditRoute   = 'editStudentAdmission';
+        $modalTitle     = 'Edit Student Admission';
+        return view('View.studentBalance' , 
+            compact(
+                'students' ,
+                'title' ,
+                'modalTitle' ,
+                'route',
+                'getEditRoute'
+            ));
+
+    }
+
+    public function defualterList(){
+
+        return view('View.defualterList');
+    }
 }

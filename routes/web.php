@@ -271,6 +271,25 @@ Route::get('/courseOffering/{id?}/{id2?}', [App\Http\Controllers\ViewController:
 Route::get('/courseAssign/{id?}', [App\Http\Controllers\ViewController::class, 'courseAssign'])->name('course.Assign');
 Route::get('/editAssignedCourse/{id?}', [App\Http\Controllers\ViewController::class, 'editAssignedCourse'])->name('edit.Assigned.Course');
 
+Route::get('/financeDashboard', [App\Http\Controllers\ViewController::class, 'financeDashboard'])->name('finance.Dashboard');
+
+Route::get('/scholarshipDetail', [App\Http\Controllers\ViewController::class, 'scholarshipDetail'])->name('scholarship.Detail');
+Route::get('/auditReport', [App\Http\Controllers\ViewController::class, 'auditReport'])->name('audit.Report');
+Route::get('/studentLedger', [App\Http\Controllers\ViewController::class, 'studentLedger'])->name('student.Ledger');
+Route::get('/admissionDashboard', [App\Http\Controllers\ViewController::class, 'admissionDashboard'])->name('admission.Dashboard');
+
+Route::get('/examSeating', [App\Http\Controllers\ViewController::class, 'examSeating'])->name('exam.Seating');
+
+Route::get('/masterSheet', [App\Http\Controllers\ViewController::class, 'masterSheet'])->name('master.Sheet');
+Route::get('/defualtSeating', [App\Http\Controllers\ViewController::class, 'defualtSeating'])->name('defualt.Seating');
+
+Route::get('/studentBalance', [App\Http\Controllers\ViewController::class, 'studentBalance'])->name('student.Balance');
+
+Route::get('/defualterList', [App\Http\Controllers\ViewController::class, 'defualterList'])->name('defualter.List');
+
+
+
+
 
 });
 
