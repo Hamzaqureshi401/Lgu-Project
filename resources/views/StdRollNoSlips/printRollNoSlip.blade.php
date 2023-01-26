@@ -3,7 +3,7 @@
 @endsection
 <!--add title here -->
 @section('content')
-    {{-- <style>
+    <style>
         @media screen and (max-width: 663px) {
             .lguhead1 {
 
@@ -25,9 +25,9 @@
 
 
         }
-    </style> --}}
+    </style>
 
-    {{-- <body class="A4 ">
+    <body class="A4 ">
         <!-- Each sheet element should have the class "sheet" -->
         <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
         <!-- Write HTML just like a web page -->
@@ -202,8 +202,8 @@
         </div>
         <hr>
 
-    </body> --}}
-    <body>
+    </body>
+    {{-- <body>
          <section class="section">
             <div class="section-body">
                <div class="invoice">
@@ -321,7 +321,7 @@
                </div>
             </div>
          </section>
-    </body>
+    </body> --}}
 
 <body>
    <section>
