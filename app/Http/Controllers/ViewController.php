@@ -211,13 +211,41 @@ class ViewController extends Controller
 
         $button = 'Do You Wisht To Submit?';
         $courses = Course::where('ID' , $id)->first();
+        $employees      = Employee::get();
+
+
 
         return 
         view('View.courseAssign', 
             compact(
                 
                 'courses',
-                'button'
+                'button',
+                'employees'
+              
+            ));
+
+    }
+
+     public function editAssignedCourse($id){
+
+        $button = 'Do You Wisht To Submit?';
+        $courses = Course::where('ID' , $id)->first();
+        $employees      = Employee::get();
+        $degrees      =  Degree::get();
+        $semesters    =  semester::get();
+
+        
+
+        return 
+        view('View.editAssignedCourse', 
+            compact(
+                
+                'courses',
+                'button',
+                'employees',
+                'degrees',
+                'semesters'
               
             ));
 

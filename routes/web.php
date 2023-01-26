@@ -269,6 +269,7 @@ Route::get('/findCourseDay', [App\Http\Controllers\ViewController::class, 'findC
 Route::get('/courseOffering/{id?}/{id2?}', [App\Http\Controllers\ViewController::class, 'courseOffering'])->name('course.Offering');
 
 Route::get('/courseAssign/{id?}', [App\Http\Controllers\ViewController::class, 'courseAssign'])->name('course.Assign');
+Route::get('/editAssignedCourse/{id?}', [App\Http\Controllers\ViewController::class, 'editAssignedCourse'])->name('edit.Assigned.Course');
 
 
 });
