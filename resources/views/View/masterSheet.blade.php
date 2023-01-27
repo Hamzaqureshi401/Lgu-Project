@@ -9,36 +9,19 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Std First Name</th>
-                            <th>Std Last Name</th>
-                            <th>Password</th>
-                            <th>Class Section</th>
-                            <th>CNIC</th>
-                            <th>Nationality</th>
-                            <th>DOB</th>
-                            <th>Gender</th>
-                            <th>Email</th>
-                            <th>Father Name</th>
-                            <th>Father CNIC</th>
-                            <th>Guardian Name</th>
-                            <th>Guardian CNIC</th>
-                            <th>Std Phone</th>
-                            <th>Father Phone</th>
-                            <th>Guardian Phone</th>
-                            <th>Parent Occupation</th>
-                            <th>Address</th>
-                            <th>Tehsil</th>
-                            <th>City</th>
-                            <th>Province</th>
-                            <th>Country</th>
-                            <th>Degree</th>
-                            <th>Current Semester</th>
-                            <th>Status</th>
-                            <th>Admission Session</th>
-                            <th>Blood Group</th>
-                            <th>Father Email</th>
-                            <th>stdfilename</th>
-                            <th>stdImagename</th>
+                            <th>Std Roll No</th>
+                            <th>Std Name</th>
+                            <th>Course Code</th>
+                            <th>Course Name</th>
+                            <th>Emp Name</th>
+                            <th>Percent</th>
+                            <th>ABS</th>
+                            <th>Per</th>
+                            <th>Date</th>
+                            <th>Center</th>
+                            <th>Group Id</th>
+                            <th>Time</th>
+                            <th>Room</th>
                             <th>Action</th>
 
                           </tr>
@@ -67,23 +50,6 @@
                             <td>{{ $student->GuardianName ?? '--' }}</td>
                             <td>{{ $student->GuardianCNIC ?? '--' }}</td>
                             <td>{{ $student->StdPhone ?? '--' }}</td>
-                            <td>{{ $student->FatherPhone ?? '--' }}</td>
-                            <td>{{ $student->GuardianPhone ?? '--' }}</td>
-                            <td>{{ $student->ParentOccupation ?? '--' }}</td>
-                            <td>{{ $student->Address ?? '--' }}</td>
-                            <td>{{ $student->Tehsil ?? '--' }}</td>
-                            <td>{{ $student->City ?? '--' }}</td>
-                            <td>{{ $student->Province ?? '--' }}</td>
-                            <td>{{ $student->Country ?? '--' }}</td>
-                            <td>{{ $student->Degrees_ID ?? '--' }}</td>
-                            <td>{{ $student->CurrentSemester ?? '--' }}</td>
-                            <td>{{ $student->Status ?? '--' }}</td>
-                            <td>{{ $student->AdmissionSession ?? '--' }}</td>
-                            <td>{{ $student->BloodGroup ?? '--' }}</td>
-                            <td>{{ $student->FatherEmail ?? '--' }}</td>
-                            <td>{{ $student->Files ?? '--' }}</td>
-                            <td>{{ $student->Image ?? '--' }}</td>
-
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->

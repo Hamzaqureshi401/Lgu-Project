@@ -54,8 +54,6 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-
-
                             <td>{{ $student->Std_FName ?? '--' }}</td>
                             <td>{{ $student->Std_LName ?? '--' }}</td>
                             <td>{{ $student->Password ?? '--' }}</td>

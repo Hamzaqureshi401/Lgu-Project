@@ -9,38 +9,23 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Std First Name</th>
-                            <th>Std Last Name</th>
-                            <th>Password</th>
-                            <th>Class Section</th>
-                            <th>CNIC</th>
-                            <th>Nationality</th>
-                            <th>DOB</th>
-                            <th>Gender</th>
-                            <th>Email</th>
-                            <th>Father Name</th>
-                            <th>Father CNIC</th>
-                            <th>Guardian Name</th>
-                            <th>Guardian CNIC</th>
-                            <th>Std Phone</th>
-                            <th>Father Phone</th>
-                            <th>Guardian Phone</th>
-                            <th>Parent Occupation</th>
-                            <th>Address</th>
-                            <th>Tehsil</th>
-                            <th>City</th>
-                            <th>Province</th>
-                            <th>Country</th>
-                            <th>Degree</th>
-                            <th>Current Semester</th>
-                            <th>Status</th>
-                            <th>Admission Session</th>
-                            <th>Blood Group</th>
-                            <th>Father Email</th>
-                            <th>stdfilename</th>
-                            <th>stdImagename</th>
-                            <th>Action</th>
-
+                            <th>Std Roll No</th>
+                            <th>Std Name</th>
+                            <th>Course Code</th>
+                            <th>Course Name</th>
+                            <th>Emp Name</th>
+                            <th>Percent</th>
+                            <th>ABS</th>
+                            <th>Per</th>
+                            <th>Date</th>
+                            <th>Center</th>
+                            <th>Group Id</th>
+                            <th>Time</th>
+                            <th>Room</th>
+                            <th>Scholarship</th>
+                            <th>Paid_Fee</th>
+                            <th>Paid</th>
+                            <th>BP</th>
                           </tr>
                         </thead>
                         <tbody>

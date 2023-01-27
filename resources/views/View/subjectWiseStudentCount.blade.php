@@ -38,52 +38,17 @@
                 <div class="card-body p-0">
                   <div class="table-responsive">
                     <table class="table table-striped">
-                      <tbody><tr>
-                        <th>Activity</th>
-                        <th>Date</th>
-                      </tr>
+                      <tbody>
                       <tr>
-                        <th>Semester Start</th>
-                        <th>2023-01-01</th>
-                      </tr>
-                      <tr>
-                        <th>Semester End</th>
-                        <th>2023-12-31</th>
-                      </tr>
-                      <tr>
-                        <th>Enrollment Start</th>
-                        <th>2021-03-03</th>
-                      </tr>
-                      <tr>
-                        <th>Enrollment End</th>
-                        <th>2021-03-10</th>
-                      </tr>
-                      <tr>
-                        <th>Exam Start</th>
-                        <th>2023-02-01</th>
-                      </tr>
-                      <tr>
-                        <th>Exam End</th>
-                        <th>2023-02-02</th>
-                      </tr>
-                      <tr>
-                        <th>Mid Start</th>
-                        <th>2021-03-17</th>
-                      </tr>
-                      <tr>
-                        <th>Mid End</th>
-                        <th>2021-03-17</th>
-                      </tr>
-                      <tr>
-                        <th>Final Start</th>
-                        <th>2020-07-03</th>
-                      </tr>
-                      <tr>
-                        <th>Final End</th>
-                        <th>2020-07-03</th>
-                      </tr>
-                                          
-                    </tbody></table>
+                        <th>Degree Name</th>
+                        <th>Sem Session</th>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Std Name Total Std</th>
+                        <th>All Roll No</th>
+                      </tr>                          
+                    </tbody>
+                  </table>
                   </div>
                 </div>
               </div>
