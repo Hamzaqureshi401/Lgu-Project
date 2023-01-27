@@ -72,7 +72,7 @@
       <div class="form-group">
          <div class="form-group">
             <label style="font-size: 13px">Gender <span style="color: red">*</span></label>
-            <select name="Gender" value="{{ old('Gender') }}" class="custom-select">
+            <select name="Gender" value="{{ old('Gender') }}" class="custom-select select2">
                <option value="{{ old('Gender') }}" selected>{{ old('Gender') }}</option>
                <option value="Male">Male</option>
                <option value="Female">Female</option>
@@ -195,7 +195,7 @@
          <div class="form-group">
             <label style="font-size: 13px">Country <span style="color: red">*</span></label>
             <select name="country" id="country" value="{{ old('country') }}"
-               onchange="print_state('state',this.selectedIndex);" class="custom-select">
+               onchange="print_state('state',this.selectedIndex);" class="custom-select select2">
 
                <option value="{{ old('country') }}" selected>{{ old('country') }}
                </option>
@@ -210,7 +210,7 @@
       <div class="form-group">
          <div class="form-group">
             <label style="font-size: 13px">Province <span style="color: red">*</span></label>
-            <select name="state" id="state" value="{{ old('state') }}" class="custom-select">
+            <select name="state" id="state" value="{{ old('state') }}" class="select2 custom-select">
                <option value="{{ old('state') }}" selected>{{ old('state') }}
                </option>
             </select>
@@ -222,7 +222,7 @@
       </div>
       <div class="form-group">
          <label style="font-size: 13px">Degree<span style="color: red">*</span></label>
-         <select name="Degree_ID"  class="custom-select">
+         <select name="Degree_ID"  class="custom-select select2">
             @foreach ($degree as $degreeid)
             <option value="{{ $degreeid->ID }}" {{old('Degree_ID')===$degreeid->ID ? "selected":" " }}>
                {{ $degreeid->DegreeName }}
@@ -247,7 +247,7 @@
       <div class="form-group">
          <div class="form-group">
             <label style="font-size: 13px">Status <span style="color: red">*</span></label>
-            <select name="Status" class="custom-select">
+            <select name="Status" class="custom-select select2">
                <option value="{{ old('Status') }}" selected>{{ old('Status') }}</option>
                <option value="In Progress">In Progress</option>
             </select>
@@ -261,7 +261,7 @@
 
       <div class="form-group">
          <label style="font-size: 13px">Admission Session<span style="color: red">*</span></label>
-         <select name="AdmissionSession" class="custom-select">
+         <select name="AdmissionSession" class="custom-select select2">
             @foreach ($admissionsession as $admissionsessiondeatils)
             <option value="{{ $admissionsessiondeatils->ID }}" {{old('AdmissionSession')===$admissionsessiondeatils->ID ? "selected":" " }}>
                {{ $admissionsessiondeatils->SemSession }}
@@ -277,7 +277,7 @@
       <div class="form-group">
          <label style="font-size: 13px">Blood Group <span style="color: red">*</span>
          </label>
-         <select name="BloodGroup" class="custom-select">
+         <select name="BloodGroup" class="custom-select select2">
             <option value="{{ old('BloodGroup') }}" selected>{{ old('BloodGroup') }}
             </option>
             <option value="A+">A Positive</option>
@@ -375,11 +375,11 @@
          <div class="pl-3 pt-3" style="width: 12.5%;">
             <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Examination <br>
             Passed</label>
-            <select name="matric_examination" id="matric_examination" class="form-control my-2  ">
+            <select name="matric_examination" id="matric_examination" class="form-control my-2  select2">
                <option value="Matric" {{old('matric_examination')==="Matric"?"selected":" "}}>Matric</option>
                <option value="O-Level"  {{old('matric_examination')==="O-Level"?"selected":" "}}>O-Level</option>
             </select>
-            <select name="fsc_examination" id="fsc_examination" class="form-control  my-2  ">
+            <select name="fsc_examination" id="fsc_examination" class="form-control select2 my-2  ">
                <option value="FSC Pre-Eng" {{old('fsc_examination')==="FSC Pre-Eng"?"selected":" "}} >FSC Pre-Eng</option>
                <option value="FSC Pre-Med" {{old('fsc_examination')==="FSC Pre-Med"?"selected":" "}}>FSC Pre-Med</option>
                <option value="ICS" {{old('fsc_examination')==="ICS"?"selected":" "}}>ICS</option>
