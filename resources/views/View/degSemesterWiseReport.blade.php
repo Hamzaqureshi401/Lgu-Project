@@ -47,7 +47,7 @@
                             </th>
                             <th>CourseCode</th>
                             <th>CourseName</th>
-                            <th>Employee</th>
+                            <th>Employees</first()->th>
                             <th>CreditHours</th>
                             <th>LectureType</th>
                             <!-- <th>Status</th> -->
@@ -69,11 +69,11 @@
                               
                             </td>
                             
-                            <td>{{ $semesterCourse->where('Emp_ID' , $employee->ID)->first()->course->CourseCode ?? '--' }}</td>
-                            <td>{{  $semesterCourse->where('Emp_ID' , $employee->ID)->first()->course->CourseName ?? '--' }}</td>
-                            <td>{{  $employee->Emp_FirstName }}{{  $employee->Emp_LastName }}</td>
-                            <td>{{  $semesterCourse->where('Emp_ID' , $employee->ID)->first()->course->CreditHours ?? '--'}}</td>
-                              <td>{{  $semesterCourse->where('Emp_ID' , $employee->ID)->first()->course->LectureType ?? '--'}}</td>
+                            <td>{{ $semesterCourse->where('Emp_ID' , $employees->first()->ID)->first()->course->CourseCode ?? '--' }}</td>
+                            <td>{{  $semesterCourse->where('Emp_ID' , $employees->first()->ID)->first()->course->CourseName ?? '--' }}</td>
+                            <td>{{  $employees->first()->Emp_FirstName }}{{  $employees->first()->Emp_LastName }}</td>
+                            <td>{{  $semesterCourse->where('Emp_ID' , $employees->first()->ID)->first()->course->CreditHours ?? '--'}}</td>
+                              <td>{{  $semesterCourse->where('Emp_ID' , $employees->first()->ID)->first()->course->LectureType ?? '--'}}</td>
                             
                               
                           </tr>

@@ -287,6 +287,20 @@ Route::get('/studentBalance', [App\Http\Controllers\ViewController::class, 'stud
 
 Route::get('/defualterList', [App\Http\Controllers\ViewController::class, 'defualterList'])->name('defualter.List');
 
+Route::get('/collectionReport', [App\Http\Controllers\ViewController::class, 'collectionReport'])->name('collection.Report');
+
+Route::get('/subjectWiseStudentCount', [App\Http\Controllers\ViewController::class, 'subjectWiseStudentCount'])->name('subject.Wise.Student.Count');
+
+Route::get('/igradeDefualter', [App\Http\Controllers\ViewController::class, 'igradeDefualter'])->name('igrade.Defualter');
+
+Route::get('/igradeDefualterMasterSheet', [App\Http\Controllers\ViewController::class, 'igradeDefualterMasterSheet'])->name('igradeDefualter.MasterSheet');
+Route::get('/igradeDefualtSeating', [App\Http\Controllers\ViewController::class, 'igradeDefualtSeating'])->name('igrade.Defualt.Seating');
+
+Route::get('/feeRescheduling', [App\Http\Controllers\ViewController::class, 'feeRescheduling'])->name('fee.Rescheduling');
+Route::get('/taxReport', [App\Http\Controllers\ViewController::class, 'taxReport'])->name('tax.Report');
+Route::get('/ledger', [App\Http\Controllers\ViewController::class, 'ledger'])->name('ledger');
+
+
 
 
 

@@ -171,6 +171,12 @@
                  <li><a class="nav-link" href="{{ route('exam.Seating')}}">Exam Seattings</a></li>
                  <li><a class="nav-link" href="{{ route('student.Balance')}}">Student Balance</a></li>
                   <li><a class="nav-link" href="{{ route('defualter.List')}}">Defualter List</a></li>
+                  <li><a class="nav-link" href="{{ route('collection.Report')}}">Collection Report</a></li>
+                  <li><a class="nav-link" href="{{ route('subject.Wise.Student.Count')}}">Subject Wise Student Count</a></li>
+                  <li><a class="nav-link" href="{{ route('igrade.Defualter')}}">Igrade Defualter</a></li>
+                  <li><a class="nav-link" href="{{ route('fee.Rescheduling')}}">Fee Rescheduling</a></li>
+                  <li><a class="nav-link" href="{{ route('tax.Report')}}">Tax Report</a></li>
+                  <li><a class="nav-link" href="{{ route('ledger')}}">Ledger</a></li>
                   
               </ul>
               

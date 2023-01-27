@@ -10,6 +10,7 @@ use App\Models\Enrollment;
 use App\Models\TimeTable;
 use App\Models\Degree;
 use App\Models\Semester;
+use App\Models\Attendance;
 
 
 use Illuminate\Http\Request;
@@ -145,11 +146,14 @@ class ViewController extends Controller
      public function studentAttendance(){
 
        $enrollments    = Enrollment::get();
+       $attandences = Attendance::get();
         return 
         view('View.studentAttendance', 
             compact(
                 
-                'enrollments')    
+                'enrollments',
+                'attandences'
+            )    
             );
 
     }
@@ -363,4 +367,93 @@ class ViewController extends Controller
 
         return view('View.defualterList');
     }
+
+    public function collectionReport(){
+
+        return view('View.collectionReport');
+    }
+    public function subjectWiseStudentCount(){
+
+        return view('View.subjectWiseStudentCount');
+    }
+    public function igradeDefualter(){
+
+        return view('View.igradeDefualter');
+    }
+    public function igradeDefualterMasterSheet(){
+
+        $students = Student::paginate(10);
+        $title  = 'All Student Admissions';
+        $route = 'updateStudentAdmission';
+        $getEditRoute = 'editStudentAdmission';
+        $modalTitle = 'Edit Student Admission';
+        return view('View.igradeDefualterMasterSheet' , 
+            compact(
+                'students' ,
+                'title' ,
+                'modalTitle' ,
+                'route',
+                'getEditRoute'
+            ));
+
+    }
+
+     public function igradeDefualtSeating(){
+
+        $students = Student::paginate(10);
+        $title  = 'All Student Admissions';
+        $route = 'updateStudentAdmission';
+        $getEditRoute = 'editStudentAdmission';
+        $modalTitle = 'Edit Student Admission';
+        return view('View.igradeDefualtSeating' , 
+            compact(
+                'students' ,
+                'title' ,
+                'modalTitle' ,
+                'route',
+                'getEditRoute'
+            ));
+
+    }
+    public function feeRescheduling(){
+
+        $students = Student::paginate(10);
+        $title  = 'All Student Admissions';
+        $route = 'updateStudentAdmission';
+        $getEditRoute = 'editStudentAdmission';
+        $modalTitle = 'Edit Student Admission';
+        return view('View.feeRescheduling' , 
+            compact(
+                'students' ,
+                'title' ,
+                'modalTitle' ,
+                'route',
+                'getEditRoute'
+            ));
+
+    }
+    public function taxReport(){
+
+        $students = Student::paginate(10);
+        $title  = 'All Student Admissions';
+        $route = 'updateStudentAdmission';
+        $getEditRoute = 'editStudentAdmission';
+        $modalTitle = 'Edit Student Admission';
+        return view('View.taxReport' , 
+            compact(
+                'students' ,
+                'title' ,
+                'modalTitle' ,
+                'route',
+                'getEditRoute'
+            ));
+
+    }
+     public function ledger(){
+
+        $enrollment = Enrollment::pluck('id')->count();
+
+        return view('View.ledger' , compact('enrollment'));
+    }
+
 }

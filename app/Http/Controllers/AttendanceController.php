@@ -8,6 +8,12 @@ use App\Models\SemesterCourse;
 use App\Models\TimeTable;
 use App\Models\Attendance;
 use App\Models\Course;
+use App\Models\Student;
+use App\Models\Degree;
+use App\Models\Department;
+use App\Models\DegreeBatche;
+
+
 use Redirect;
 use App\Models\Enrollment;
 use App\Models\StudentMark;
@@ -35,22 +41,39 @@ class AttendanceController extends Controller
     }
      public function deanAllStuAttandence(){
 
-        $students     = false;
-        $title        = 'All Courses';
-        $route        = 'updateCourse';
-        $getEditRoute = 'editCourse';
-        $modalTitle   = 'Edit Course';
+        // $students     = false;
+        // $title        = 'All Courses';
+        // $route        = 'updateCourse';
+        // $getEditRoute = 'editCourse';
+        // $modalTitle   = 'Edit Course';
 
 
+         $course     = Course::pluck('id')->count();
+        $enrollment = Enrollment::pluck('id')->count();
+        $students   = Student::get();
+        $degrees    = Degree::paginate(10);
+        $departments= Department::paginate(10);
+        $degreeBatches = DegreeBatche::whereNotNull('Batch_ID')->paginate(10);
 
-        return view('Dean.StudentsAttendance.allStudentAttandence'  , 
+
+        return 
+        view('Dean.deanDashboard' , 
             compact(
-                'students' , 
-                'title' , 
-                'modalTitle' , 
-                'route',
-                'getEditRoute'
+                'course',
+                'enrollment',
+                'students',
+                'degrees',
+                'departments',
+                'degreeBatches'
             ));
+        // return view('Dean.StudentsAttendance.allStudentAttandence'  , 
+        //     compact(
+        //         'students' , 
+        //         'title' , 
+        //         'modalTitle' , 
+        //         'route',
+        //         'getEditRoute'
+        //     ));
     }
 
       public function empSemesterCourses(){

@@ -64,8 +64,8 @@
                         <tbody>
                           @foreach($enrollments as $enrollment)
                           @php 
-                          $present = $enrollment->attandence($enrollment->ID)->where('Status' , 1)->count();
-                          $absent = $enrollment->attandence($enrollment->ID)->where('Status' , 0)->count();
+                          $present = $attandences->where(['Enroll_ID' => $enrollment->ID , 'Status' , 1])->count();
+                          $absent = $attandences->where(['Enroll_ID' => $enrollment->ID , 'Status' , 0])->count();
                           if ($present != 0 && $absent != 0)
                           $percentage = ($present / ($present + $absent)) * 100;
                           
