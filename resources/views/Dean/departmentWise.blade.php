@@ -16,7 +16,8 @@
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
+                      <thead>
                       <tr>
                         <th>Department</th>
                         <th>Defence</th>
@@ -25,8 +26,10 @@
                         <th>Sports</th>
                         <th>Total</th>
                       </tr>
+                      </thead>
+                      <tbody>
                       @foreach($departments as $department)
-
+                      
                       <tr>
 	                      <td>{{ $department->Dpt_Name }}</td>
 	                      <td>{{ $department->countStudent($department->ID)->count()  }}</td>
@@ -35,10 +38,12 @@
                         <td>{{ "Status" }}</td>
                         <td>{{ "Status" }}</td>
                       </tr>  
-                      @endforeach                   
+                      
+                      @endforeach
+                      </tbody>                   
                     </table>
                     <div class="d-flex justify-content-center">
-                        {{ $departments->links() }}
+                        
                     </div>
                   </div>
                 </div>

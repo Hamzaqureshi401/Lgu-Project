@@ -16,18 +16,22 @@
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
+                      <thead>
                       <tr>
                         <th>Degrees</th>
                         <th>Student Count</th>
                         
                         
                       </tr>
+                      </thead>
+                      <tbody>
                       <tr>
 	                      <td>{{ "Status" }}</td>
 	                      <td>{{ "Status" }}</td>
 	                      
-                      </tr>                     
+                      </tr>     
+                      </tbody>                
                     </table>
                   </div>
                 </div>

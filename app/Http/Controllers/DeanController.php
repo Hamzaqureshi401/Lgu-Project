@@ -18,9 +18,9 @@ class DeanController extends Controller
         $course     = Course::pluck('id')->count();
         $enrollment = Enrollment::pluck('id')->count();
         $students   = Student::get();
-        $degrees    = Degree::paginate(10);
-        $departments= Department::paginate(10);
-        $degreeBatches = DegreeBatche::whereNotNull('Batch_ID')->paginate(10);
+        $degrees    = Degree::get();
+        $departments= Department::get();
+        $degreeBatches = DegreeBatche::whereNotNull('Batch_ID')->get();
         // foreach($degreeBatches as $degreeBatche){
         //      dd($students->where(['Degrees_ID' => $degreeBatche->degree->ID])->count() ?? 0);
         // }

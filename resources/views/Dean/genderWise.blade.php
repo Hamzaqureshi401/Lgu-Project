@@ -16,14 +16,16 @@
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable" >
+                      <thead>
                       <tr>
                         <th>Degree - Batch</th>
                         <th>Male</th>
                         <th>Female</th>
                         <th>Total</th>
                       </tr>
-                     
+                     </thead>
+                     <tbody>
                         @foreach($degreeBatches as $degreeBatche)
                          <tr>
 	                      <td>{{ $degreeBatche->degree->DegreeName ?? ''}}/{{ $degreeBatche->batch->SemSession ?? ''}}</td>
@@ -34,10 +36,11 @@
 	                      <td>{{ "Status" }}</td>
                         </tr>     
                         @endforeach
+                      </tbody>
                                       
                     </table>
                      <div class="d-flex justify-content-center">
-                        {{ $degreeBatches->links() }}
+                        
                     </div>
                   </div>
                 </div>

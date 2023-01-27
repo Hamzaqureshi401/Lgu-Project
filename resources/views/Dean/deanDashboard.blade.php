@@ -18,9 +18,9 @@
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
+                        <!-- <div class="banner-img">
                           <img src="assets/img/banner/1.png" alt="">
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -40,9 +40,9 @@
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
+                       <!--  <div class="banner-img">
                           <img src="assets/img/banner/4.png" alt="">
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -62,9 +62,9 @@
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
+                        <!-- <div class="banner-img">
                           <img src="assets/img/banner/1.png" alt="">
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -84,9 +84,9 @@
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
+                        <!-- <div class="banner-img">
                           <img src="assets/img/banner/4.png" alt="">
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -116,18 +116,22 @@
                 <div class="card-body p-0">
                   <div class="table-responsive">
                     <table class="table table-striped">
+                      <thead>
                       <tr>
                         <th>Status</th>
                         <th>Initial Enrollment</th>
                         <th>Add</th>
                         <th>Drop</th>
                       </tr>
+                    </thead>
+                    <tbody>
                       <tr>
 	                      <td>{{ "Status" }}</td>
 	                      <td>{{ "Status" }}</td>
 	                      <td>{{ "Status" }}</td>
 	                      <td>{{ "Status" }}</td>
-                      </tr>                     
+                      </tr> 
+                      </tbody>                    
                     </table>
                   </div>
                 </div>
@@ -154,18 +158,22 @@
                 <div class="card-body p-0">
                   <div class="table-responsive">
                     <table class="table table-striped">
+                      <thead>
                       <tr>
-	                        <th>Status</th>
-	                        <th>Initial Enrollment</th>
-	                        <th>Add</th>
-	                        <th>Drop</th>
+                        <th>Status</th>
+                        <th>Initial Enrollment</th>
+                        <th>Add</th>
+                        <th>Drop</th>
                       </tr>
+                    </thead>
+                    <tbody>
                       <tr>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-                      </tr>
+                        <td>{{ "Status" }}</td>
+                        <td>{{ "Status" }}</td>
+                        <td>{{ "Status" }}</td>
+                        <td>{{ "Status" }}</td>
+                      </tr> 
+                      </tbody>                    
                     </table>
                   </div>
                 </div>
@@ -182,14 +190,14 @@
                     <div class="card-content">
                       <h4 class="card-title">Degree Wise Students</h4>
                       <span>524</span>
-                      <div class="progress mt-1 mb-1" data-height="8">
+                      <!-- <div class="progress mt-1 mb-1" data-height="8">
                         <div class="progress-bar l-bg-purple" role="progressbar" data-width="25%" aria-valuenow="25"
                           aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <p class="mb-0 text-sm">
                         <span class="mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
                         <span class="text-nowrap">Since last month</span>
-                      </p>
+                      </p> -->
                     </div>
                   </div>
                 </div>
@@ -201,14 +209,14 @@
                     <div class="card-content">
                       <h4 class="card-title">Dtp Wise Students</h4>
                       <span>1,258</span>
-                      <div class="progress mt-1 mb-1" data-height="8">
+                     <!--  <div class="progress mt-1 mb-1" data-height="8">
                         <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25"
                           aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <p class="mb-0 text-sm">
                         <span class="mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
                         <span class="text-nowrap">Since last month</span>
-                      </p>
+                      </p> -->
                     </div>
                   </div>
                 </div>
@@ -220,14 +228,14 @@
                     <div class="card-content">
                       <h4 class="card-title">Gender Wise Strength</h4>
                       <span>10,225</span>
-                      <div class="progress mt-1 mb-1" data-height="8">
+                      <!-- <div class="progress mt-1 mb-1" data-height="8">
                         <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25"
                           aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <p class="mb-0 text-sm">
                         <span class="mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
                         <span class="text-nowrap">Since last month</span>
-                      </p>
+                      </p> -->
                     </div>
                   </div>
                 </div>
@@ -237,16 +245,16 @@
                   <div class="card-statistic-3">
                     <div class="card-icon card-icon-large"><i class="fa fa-money-bill-alt"></i></div>
                     <div class="card-content">
-                      <h4 class="card-title">Degree Wise Short-Att Strength</h4>
+                      <h4 class="card-title">Deg Ws Sht-Att Strnth</h4>
                       <span>$2,658</span>
-                      <div class="progress mt-1 mb-1" data-height="8">
+                     <!--  <div class="progress mt-1 mb-1" data-height="8">
                         <div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25"
                           aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <p class="mb-0 text-sm">
                         <span class="mr-2"><i class="fa fa-arrow-up"></i> 10%</span>
                         <span class="text-nowrap">Since last month</span>
-                      </p>
+                      </p> -->
                     </div>
                   </div>
                 </div>
@@ -272,23 +280,38 @@
   integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
   crossorigin="anonymous"></script>
    <script type="text/javascript">
+    var toggle = '';
     $(document).on('click', '.degreeWise', function() {
-        $('.degreeW').toggle();
+      if(toggle != ''){
+        toggle.toggle();
+      }
+      toggle = $('.degreeW');
+        toggle.toggle();
     });
     $(document).on('click', '.departmentWise', function() {
-        $('.departmentW').toggle();
+      if(toggle != ''){
+        toggle.toggle();
+      }
+      toggle = $('.departmentW');
+        toggle.toggle();
     });
     $(document).on('click', '.genderWise', function() {
-        $('.genderW').toggle();
+      if(toggle != ''){
+        toggle.toggle();
+      }
+      toggle = $('.genderW');
+        toggle.toggle();
     });
     $(document).on('click', '.degreeWiseShort', function() {
-        $('.degreeWiseS').toggle();
+      if(toggle != ''){
+        toggle.toggle();
+      }
+      toggle = $('.degreeWiseS');
+        toggle.toggle();
     });
     
    </script>   
    
-<script src="{{ asset('assets/js/app.min.js') }}"></script>
-<script src="{{ asset('assets/js/page/index.js') }}"></script>
-<script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script>
+ 
 
 @endsection   

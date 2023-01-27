@@ -35,6 +35,8 @@
   <!-- Load paper.css for happy printing -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
 
+<link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
 
   <!-- Set page size here: A5, A4 or A3 -->
   <!-- Set also "landscape" if you need -->
@@ -353,6 +355,17 @@
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/sweetalert.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
+
+  <script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}"></script>
+  <script src="{{ asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('assets/bundles/jquery-ui/jquery-ui.min.js') }}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{{ asset('assets/js/page/datatables.js') }}"></script>
+  
+
+
+
 
   <script type="text/javascript">
       

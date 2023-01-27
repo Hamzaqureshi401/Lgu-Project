@@ -116,7 +116,7 @@
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
                       <tr>
                         <th>Status</th>
                         <th>Initial Enrollment</th>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
                       <tr>
 	                        <th>Status</th>
 	                        <th>Initial Enrollment</th>
@@ -262,5 +262,14 @@
 <script src="{{ asset('assets/js/app.min.js') }}"></script>
 <script src="{{ asset('assets/js/page/index.js') }}"></script>
 <script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript">
+  $(document).ready( function () {
+    $('.table_id').DataTable();
+});
+</script>
 
 @endsection   

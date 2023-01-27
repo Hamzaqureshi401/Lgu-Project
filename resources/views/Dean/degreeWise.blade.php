@@ -16,7 +16,8 @@
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
+                      <thead>
                       <tr>
                         <th>Degrees</th>
                         <th>Defence</th>
@@ -26,6 +27,8 @@
                         <th>Total</th>
                         
                       </tr>
+                      </thead>
+                      <tbody>
                        @foreach($degrees as $degree)
                       <tr>
 
@@ -36,10 +39,11 @@
                         <td>{{ "Status" }}</td>
                         <td>{{ "Status" }}</td>
                       </tr>         
-                      @endforeach            
+                      @endforeach  
+                      </tbody>          
                     </table>
                      <div class="d-flex justify-content-center">
-                        {{ $degrees->links() }}
+                        
                     </div>
                   </div>
                 </div>
