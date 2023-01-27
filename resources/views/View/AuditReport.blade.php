@@ -9,38 +9,41 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Std First Name</th>
-                            <th>Std Last Name</th>
+                            <th>Std Roll No</th>
+                            <th>Std Name</th>
                             <th>Password</th>
-                            <th>Class Section</th>
-                            <th>CNIC</th>
-                            <th>Nationality</th>
-                            <th>DOB</th>
-                            <th>Gender</th>
-                            <th>Email</th>
                             <th>Father Name</th>
-                            <th>Father CNIC</th>
-                            <th>Guardian Name</th>
-                            <th>Guardian CNIC</th>
-                            <th>Std Phone</th>
-                            <th>Father Phone</th>
-                            <th>Guardian Phone</th>
-                            <th>Parent Occupation</th>
-                            <th>Address</th>
-                            <th>Tehsil</th>
-                            <th>City</th>
-                            <th>Province</th>
-                            <th>Country</th>
-                            <th>Degree</th>
-                            <th>Current Semester</th>
-                            <th>Status</th>
-                            <th>Admission Session</th>
-                            <th>Blood Group</th>
-                            <th>Father Email</th>
-                            <th>stdfilename</th>
-                            <th>stdImagename</th>
-                            <th>Action</th>
-
+                            <th>Id</th>
+                            <th>Tution Fee</th>
+                            <th>Type</th>
+                            <th>Joining Session</th>
+                            <th>Degree Name</th>
+                            <th>Additional Chr</th>
+                            <th>Admission Fee</th>
+                            <th>Unisequrity</th>
+                            <th>Sesmester Registration</th>
+                            <th>Lab Fee</th>
+                            <th>Exam Reschedulling Fee</th>
+                            <th>ID Card Fee</th>
+                            <th>Misclamious Fee</th>
+                            <th>Sports Fund</th>
+                            <th>Magazine Fee</th>
+                            <th>Migration Fee</th>
+                            <th>Category</th>
+                            <th>CRH</th>
+                            <th>TFEE</th>
+                            <th>Others</th>
+                            <th>GP</th>
+                            <th>Paid Scholarship</th>
+                            <th>SCH_PER</th>
+                            <th>SCH_CAT</th>
+                            <th>PRE_OS</th>
+                            <th>DName</th>
+                            <th>Faculty Name</th>
+                            <th>BP</th>
+                            <th>PAID_FRE</th>
+                            <th>Degree Level</th>
+                            <th>Fine</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -83,7 +86,6 @@
                             <td>{{ $student->FatherEmail ?? '--' }}</td>
                             <td>{{ $student->Files ?? '--' }}</td>
                             <td>{{ $student->Image ?? '--' }}</td>
-
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
