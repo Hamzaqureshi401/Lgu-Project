@@ -61,12 +61,23 @@ Route::get('/getStudentRollNoSlip',[App\Http\Controllers\StdRollNoSlipsControlle
 
 Route::get('/studentDashboard', [App\Http\Controllers\StudentController::class, 'studentDashboard'])->name('student.Dashboard');
 
+
+Route::get('/applyIgrades/{id?}', [App\Http\Controllers\IgradesController::class, 'applyIgrades'])->name('apply.Igrades');
+Route::get('/allIgrades', [App\Http\Controllers\IgradesController::class, 'allIgrades'])->name('all.Igrades');
+Route::post('/storeIgrades', [App\Http\Controllers\IgradesController::class, 'storeIgrades'])->name('store.Igrades');
+
+
+
+
+
+
 });
 
 
 Route::group(['middleware' => 'EmpAuth'], function () {
 
-
+Route::get('/confirmIgrades/{id?}', [App\Http\Controllers\IgradesController::class, 'confirmIgrades'])->name('confirm.Igrades');
+Route::get('/teacherStdIgrade', [App\Http\Controllers\IgradesController::class, 'teacherStdIgrade'])->name('teacher.Std.Igrade');
 
 Route::get('/addStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'addStudentAdmission'])->name('add.StudentAdmissions');
 Route::get('/allStudentAdmissions', [App\Http\Controllers\AdmissionController::class, 'allStudentAdmissions'])->name('all.StudentAdmissions');
