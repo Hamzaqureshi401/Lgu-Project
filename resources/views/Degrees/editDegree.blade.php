@@ -21,7 +21,7 @@
 
                       <div class="form-group">
                       <label>Dpt Name</label>
-                      <select class="form-control" name="DegreeLevel"  required>
+                      <select class="form-control select2" name="DegreeLevel"  required>
                         @foreach($degreeLevels as $degreeLevel)
                         <option value="{{ $degreeLevel }}" {{ $degreeLevel == $degree->DegreeLevel ? 'selected' : '' }}>{{ $degreeLevel }}</option>
                         @endforeach
@@ -37,7 +37,7 @@
 
                     <div class="form-group">
                       <label>Dpt Name</label>
-                      <select class="form-control" name="Dpt_ID"  required>
+                      <select class="form-control select2" name="Dpt_ID"  required>
                         @foreach($departments as $department)
                         <option value="{{ $department->ID }}" {{ $department->ID == $degree->Dpt_ID ? 'selected' : '' }}>{{ $department->Dpt_Name }}</option>
                         @endforeach

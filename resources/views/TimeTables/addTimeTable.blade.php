@@ -7,7 +7,7 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Semester / Courses</label>
-                      <select class="form-control" name="SemCourse_ID"  >
+                      <select class="form-control select2" name="SemCourse_ID"  >
                         @foreach($semesterCourses as $semestercourse)
                         <option value="{{ $semestercourse->ID }}">{{ $semestercourse->semester->SemSession }} / {{ $semestercourse->course->CourseName }}</option>
                         @endforeach
@@ -26,7 +26,7 @@
                       @endphp
                      <div class="form-group">
                       <label>Day</label>
-                      <select class="form-control" name="Day"  >
+                      <select class="form-control select2" name="Day"  >
                         @foreach($days as $day)
                         <option value="{{ $day }}">{{ $day}}</option>
                         @endforeach
@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                       <label>Employee</label>
-                      <select class="form-control" name="Emp_ID"  >
+                      <select class="form-control select2" name="Emp_ID"  >
                         @foreach($employees as $employee)
                         <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
                         @endforeach

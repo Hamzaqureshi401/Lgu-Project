@@ -51,7 +51,7 @@
                     </div>
                  <div class="form-group">
                       <label for="gender">Gender</label>
-                      <select name="Gender" class="form-control">
+                      <select name="Gender" class="form-control select2">
                         <option value="">Please select one…</option>
                         <option value="female">Female</option>
                         <option value="male">Male</option>
@@ -73,7 +73,7 @@
                   
                  <div class="form-group">
                       <label>Department</label>
-                      <select class="form-control" name="Dpt_ID"  >
+                      <select class="form-control select2" name="Dpt_ID"  >
                         @foreach($departments as $department)
                         <option value="{{ $department->ID }}">{{ $department->Dpt_Name }}</option>
                         @endforeach
