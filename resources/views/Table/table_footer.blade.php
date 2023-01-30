@@ -2,10 +2,7 @@
                 </div>
               </div>
             </div>
-       
-        </section>
-
- <!-- Modal with form -->
+       <!-- Modal with form -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
           aria-hidden="true">
           <div class="modal-dialog" style="max-width: 80%;"  role="document">
@@ -23,20 +20,13 @@
             </div>
           </div>
         </div>
+        </section>
 
- <script src="assets/js/app.min.js"></script>
-  <!-- JS Libraies -->
-  <script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Page Specific JS File -->
-  <script src="assets/js/page/advance-table.js"></script>
-  <!-- Template JS File -->
-  <script src="assets/js/scripts.js"></script>
-  <!-- Custom JS File -->
-  <script src="assets/js/custom.js"></script>
+
   <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
 
 
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
 
   $(document).ready(function(){    
    var table= $('.table-datatable').DataTable({
@@ -96,3 +86,4 @@
 });
 
 </script>   
+ -->

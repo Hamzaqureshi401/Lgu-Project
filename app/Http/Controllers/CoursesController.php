@@ -65,7 +65,8 @@ class CoursesController extends Controller
             $CourseCode = end($CourseCode);
             
             if ($CourseCode[0] == 0){
-                 $CourseCode = $CourseCode[1];    
+                 $CourseCode = $CourseCode[1];
+
             }elseif($CourseCode[1] == '_'){
 
                 $CourseCode = $CourseCode[0];
@@ -149,7 +150,13 @@ class CoursesController extends Controller
     public function updateCourse(Request $request){
 
         $validator = $this->validationUpdate($request);
-        $CreditHours = $this->validteCreditHours($request);
+        $CreditHours = Course::where('ID' , $request->id)->first()->CreditHours;
+        if ($CreditHours != $request->CreditHours){
+            $CreditHours = $this->validteCreditHours($request);
+        }
+
+        //dd($request->all());
+        
 
         
         //  $validator = $this->validation($request);

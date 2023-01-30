@@ -63,12 +63,18 @@
                       <input type="number" name="Practical_charges" class="form-control">
                     </div>
                      <div class="form-group">
-                      <label>SSports Fund</label>
+                      <label>Sports Fund</label>
                       <input type="number" name="Sports_Fund" class="form-control">
                     </div>
-                    <div class="form-group">
+                    
+                     <div class="form-group">
                       <label>Fee Type</label>
-                      <input type="number" name="FeeType" class="form-control">
+                      <select class="form-control select2" name="FeeType"  required>
+                       
+                        <option value="{{ 'Per Semester' }}">{{ 'Per Semester' }}</option>
+                        <option value="{{  'Per Course' }}">{{ 'Per Course' }}</option>
+                        
+                      </select>
                     </div>
                    
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>

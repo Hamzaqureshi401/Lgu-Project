@@ -7,7 +7,13 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Degree Name</label>
-                      <input type="text" name="DegreeName" class="form-control" required>
+                      <input 
+                      type="text" 
+                      name="DegreeName" 
+                      class="form-control" 
+                      required
+                      onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));"
+                      >
                     </div>
                     <div class="form-group">
                       <label>Degree Level</label>
@@ -22,7 +28,13 @@
                     
                     <div class="form-group">
                       <label>Degree Full Name</label>
-                      <input type="text" name="DegreeFullName" class="form-control"required>
+                      <input 
+                      type="text" 
+                      name="DegreeFullName" 
+                      class="form-control"
+                      required
+                      onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));"
+                      >
                     </div>
                     <div class="form-group">
                       <label>Dpt Name</label>

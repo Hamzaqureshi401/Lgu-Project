@@ -55,9 +55,22 @@
                       <label>Room</label>
                       <input type="number" name="Room" class="form-control"  value="{{$timeTable->Room}}">
                     </div>
-                    <div class="form-group">
+                   
+                     @php
+                    $types = ['Theory' , 'Lab'];
+                    @endphp
+
+                     <div class="form-group">
                       <label>Type</label>
-                      <input type="number" name="Type" class="form-control"  value="{{$timeTable->Type}}">
+                      <select class="form-control select2" name="Type"  required>
+                        @foreach($types as $type)
+                       
+                        <option value="{{ $type }}" {{ $timeTable->Type == $type ? 'selected' : '' }}>{{ $type }}</option>
+
+                        @endforeach
+                        
+                        
+                      </select>
                     </div>
                     <div class="form-group">
                       <label>Employee</label>

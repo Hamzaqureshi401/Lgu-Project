@@ -49,9 +49,14 @@
                       <label>Room</label>
                       <input type="number" name="Room" class="form-control">
                     </div>
-                    <div class="form-group">
+                    
+                      <div class="form-group">
                       <label>Type</label>
-                      <input type="number" name="Type" class="form-control">
+                      <select class="form-control select2" name="Type"  required>
+                        <option value="{{ 'Theory' }}">{{ 'Theory' }}</option>
+                        <option value="{{  'Lab' }}">{{ 'Lab' }}</option>
+                        
+                      </select>
                     </div>
                     <div class="form-group">
                       <label>Employee</label>
