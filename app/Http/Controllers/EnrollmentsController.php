@@ -198,8 +198,7 @@ class EnrollmentsController extends Controller
          $Sem_ID = $registration->first()->Sem_ID;
           $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
          $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'DegBatches_ID' => $DegreeBatche->ID])->first() ?? '';
-        // dd($Sem_ID  , $sem_details , $DegreeBatche , $DegreeBatche->ID);
-         //dd($degreeName[1] ,$degree);
+        
          $registrationId = $registration->ID;
 
 
@@ -216,7 +215,13 @@ class EnrollmentsController extends Controller
         $PaidDate   = "";
         $Status     = "Valid";
         $Fine       = 0;
-        $Amount     = $totalCreditHours * $fee;
+        if($sem_details->FeeType == 'Per Course'){
+            $Amount     = $totalCreditHours * $fee;
+        }else{
+            $Amount     = $fee;
+        }
+        
+
         $Type       = "Registration";
         
         
@@ -301,160 +306,5 @@ class EnrollmentsController extends Controller
         );
     }
 
-  // public function storeEnrollments(Request $request){
-        
-  //        $request['Std_ID'] = 1;
-  //        $enrollments = Enrollment::where('Std_ID' , $request['Std_ID']);
-  //       if($request->listvalues != "false"){  
-  //           $SemCourses_ID = $request->listvalues;
-  //       }else{
-            
-  //           if(empty($enrollments->exists())){
-  //               $db = false;
-  //                return
-  //                   response()->json([
-  //                   'db' => 'empty' ,
-  //                   ]);
-  //           }else{
-  //               $db = true;
-  //               $enrollments = $enrollments->get();
-  //           }
-  //           return
-  //           view('Enrollments.submitedEnrollment' , compact('enrollments'));
-  //       }
-
-  //       $SemesterCourse = SemesterCourse::where('ID' , $SemCourses_ID)->first();
-  //       $Sem_ID = $SemesterCourse->Sem_ID;
-        
-
-  //       $request['AcaStdID']        = 1;
-  //       $request['Sem_ID']          = $Sem_ID;
-  //       $request['SemCourses_ID']   = $SemCourses_ID;
-  //       $request['Is_i_mid']        = 10;
-  //       $request['Is_i_final']      = 10;
-
-  //       $registration = Registration::where('Std_ID' , $request['Std_ID']);
-  //       if (empty($registration->exists())){
-  //           $this->storeRegistrationInDb($request);
-  //           $request['Reg_ID'] = (clone $registration)->first()->ID;
-  //       }else{
-  //           $request['Reg_ID'] = (clone $registration)->first()->ID;
-  //       }
-  //       $enrollment = Enrollment::where(['Std_ID' => $request['Std_ID'] , 'SemCourses_ID' => $SemCourses_ID]);
-  //       if (empty($enrollment->exists())){
-  //           $this->storeEnrollmentsInDb($request);           
-  //       }else{
-  //           $request['Enrollment_ID'] = $enrollment->first()->ID;
-  //           $this->deleteEnrollment($request);
-  //       }
-
-  //        if(empty($enrollments->exists())){
-  //               $db = false;
-  //                return
-  //                   response()->json([
-  //                   'db' => 'empty' ,
-  //                   ]);
-  //           }else{
-  //               $db = true;
-  //               $enrollments = $enrollments->get();
-  //           }
-
-  //       return
-  //       view('Enrollments.submitedEnrollment' , compact('enrollments'));
-
-  //   }
-
-
-  //   public function deleteEnrollment($request){
-  //       $submit = DB::statement("EXEC sp_DeleteEnrollment
-  //           @ID         = '$request->Enrollment_ID'
-  //           ;");
-
-  //   }
-  //   public function storeRegistrationInDb($request){
-
-  //       $submit = DB::statement("EXEC sp_InsertRegistrations
-  //           @Std_ID         = '$request->Std_ID',
-  //           @AcaStdID       = '$request->AcaStdID',
-  //           @Sem_ID         = '$request->Sem_ID'
-  //           ;");
-
-  //   }
-  //   public function storeEnrollmentsInDb($request){
-
-  //       $submit = DB::statement("EXEC sp_InsertEnrollment
-  //           @Std_ID         = '$request->Std_ID',
-  //           @SemCourses_ID  = '$request->SemCourses_ID',
-  //           @Is_i_mid       = '$request->Is_i_mid' ,
-  //           @Is_i_final     = '$request->Is_i_final',
-  //           @Reg_ID         = '$request->Reg_ID'
-
-  //           ;");
-
-  //   }
-
-  //   public function editEnrollment($id){
-
-  //       $button = 'Update Enrollment';
-  //       $title  = 'Edit Enrollment';
-  //       $route  = '/updateEnrollment';
-  //       $courses = Enrollment::where('ID' , $id)->first();
-  //        return
-  //        view('Enrollments.editEnrollment',
-  //           compact(
-  //               'courses',
-  //               'button' ,
-  //               'title' ,
-  //               'route'
-  //           ));
-  //   }
-  //   public function allEnrollments(){
-
-  //       $courses = Enrollment::paginate(10);
-  //       $title  = 'All Enrollments';
-  //       $route = 'updateEnrollment';
-  //       $getEditRoute = 'editEnrollment';
-  //       $modalTitle = 'Edit Enrollment';
-
-  //       return
-  //       view('Enrollments.allEnrollments' ,
-  //           compact(
-  //               'courses' ,
-  //               'title' ,
-  //               'modalTitle' ,
-  //               'route',
-  //               'getEditRoute'
-  //           ));
-  //   }
-
-  //   public function updateEnrollment(Request $request){
-
-  //        $validator = $this->validation($request);
-  //       if ($validator['error'] == true) {
-  //           return
-  //           response()->json([
-  //           'title' => 'Failed' ,
-  //           'type'=> 'error',
-  //           'message'=> ''.$validator['validation']
-  //           ]);
-  //       }else {
-  //             $submit = DB::update("EXEC sp_UpdateEnrollment
-
-  //           @ID              = '$request->id',
-  //           @Std_ID          = '$request->Std_ID',
-  //           @SemCourses_ID   = '$request->SemCourses_ID',
-  //           @Is_i_mid        = '$request->Is_i_mid' ,
-  //           @Is_i_final      = '$request->Is_i_final',
-  //           @Reg_ID          = '$request->Reg_ID'
-  //           ;");
-
-  //       return response()->json([
-  //           'title' => 'Done' ,
-  //           'type'=> 'success',
-  //           'message'=> 'Enrollment Updated!
-  //           ']);
-  //       }
-
-
-  //   }
+ 
 }
