@@ -144,8 +144,8 @@
             </div>
             <div class="form-group">
                 <label style="font-size: 13px">Student Phone <span style="color: red">*</span></label>
-                <input type="text" data-inputmask="'mask': '0999-9999999'" name="StdPhone" id="StdPhone"
-                    value="{{ old('StdPhone') }}" class="form-control" maxlength=12>
+                <input type="number"  name="StdPhone" id="StdPhone"
+                    value="{{ old('StdPhone') }}" class="form-control" maxlength="11" oninput="maxLengthphone(this)" >
                 <br>
                 @error('StdPhone')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -153,8 +153,8 @@
             </div>
             <div class="form-group">
                 <label style="font-size: 13px">Father Phone <span style="color: red">*</span></label>
-                <input type="text" value="{{ old('FatherPhone') }}" data-inputmask="'mask': '0999-9999999'"
-                    name="FatherPhone" id="FatherPhone" class="form-control" maxlength=13>
+                <input type="number" value="{{ old('FatherPhone') }}" 
+                    name="FatherPhone" id="FatherPhone" class="form-control"  maxlength="11" oninput="maxLengthphone(this)">
                 <br>
                 @error('FatherPhone')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -162,8 +162,8 @@
             </div>
             <div class="form-group">
                 <label style="font-size: 13px">Guardian Phone </label>
-                <input type="text" value="{{ old('GuardianPhone') }}" data-inputmask="'mask': '0999-9999999'"
-                    name="GuardianPhone" id="GuardianPhone" class="form-control" maxlength=13>
+                <input type="number" value="{{ old('GuardianPhone') }}" data-inputmask="'mask': '0999-9999999'"
+                    name="GuardianPhone" id="GuardianPhone" class="form-control"  maxlength="11" oninput="maxLengthphone(this)">
                 <br>
                 @error('GuardianPhone')
                     <div class="alert alert-danger">{{ $message }}</div>
