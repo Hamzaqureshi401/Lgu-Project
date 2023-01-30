@@ -106,9 +106,9 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Attandence</span></a>
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Attendance</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="{{ route('emp.SemesterCourses') }}">Add Attandence</a></li>
+                <li><a class="nav-link" href="{{ route('emp.SemesterCourses') }}">Add Attendance</a></li>
                  
               </ul>
             </li>
@@ -132,7 +132,7 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('dean.Dashboard') }}">Dashboard</a></li>
                 <li><a class="nav-link" href="{{ route('attandence.Dashboard') }}">All Student Attandence</a></li>
-                 <li><a class="nav-link" href="{{ route('dean.All.Stu.Attandence') }}">Attandence</a></li>
+                 <li><a class="nav-link" href="{{ route('dean.All.Stu.Attandence') }}">Attendance</a></li>
                 
               </ul>
             </li>
@@ -151,8 +151,8 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('vc.View') }}">Vc View</a></li>
                 <li><a class="nav-link" href="{{ route('igrade.StudentView') }}">Igrade Student View</a></li>
-                 <li><a class="nav-link" href="{{ route('dean.All.Stu.Attandence') }}">Attandence</a></li>
-                <li><a class="nav-link" href="{{ route('exam.dasshboardView')}}">Exam Dasshboard View</a></li>
+                 <li><a class="nav-link" href="{{ route('dean.All.Stu.Attandence') }}">Attendance</a></li>
+                <li><a class="nav-link" href="{{ route('exam.dasshboardView')}}">Exam Dashboard View</a></li>
                  <li><a class="nav-link" href="{{ route('igrade.StdhodView')}}">Igrade Std hod View</a></li>
                  <li><a class="nav-link" href="{{ route('student.365View')}}">Student 365 View</a></li>
                  <li><a class="nav-link" href="{{ route('reporting.Panel')}}">Reporting Panel View</a></li>

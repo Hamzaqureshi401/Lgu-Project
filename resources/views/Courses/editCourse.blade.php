@@ -5,23 +5,55 @@
  
 
                   <div class="card-body">
-                    <input type="hidden" name="id" value="{{ $courses->ID }}">
+                    <input 
+                    type="hidden" 
+                    name="id" 
+                    value="{{ $courses->ID }}"
+                    >
                     <div class="form-group">
                       <label>Course Code</label>
-                      <input type="text" name="CourseCode" class="form-control" value="{{ $courses->CourseCode }} "required>
+                      <input 
+                      type="text" 
+                      name="CourseCode" 
+                      class="form-control" 
+                      value="{{ $courses->CourseCode }} 
+                      "required
+                      onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));"
+                      >
                     </div>
                     <div class="form-group">
                       <label>Course Name</label>
-                      <input type="text" name="CourseName" class="form-control" value="{{ $courses->CourseName }}" required>
+                      <input 
+                      type="text" 
+                      name="CourseName" 
+                      class="form-control" 
+                      value="{{ $courses->CourseName }}" 
+                      required
+                      onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));"
+                      >
                     </div>
                     <div class="form-group">
                       <label>Credit Hours</label>
                       <input type="tel" id="CreditHours" data-inputmask="'mask': '9-9-99'" placeholder="Example 9-9-09" maxlength=6 name="CreditHours" class="form-control" value="{{ $courses->CreditHours }}" required>
                     </div>
-                    <div class="form-group">
+                  
+                    @php
+                    $types = ['Theory' , 'Lab'];
+                    @endphp
+
+                     <div class="form-group">
                       <label>Lecture Type</label>
-                      <input type="text" name="LectureType" class="form-control" value="{{ $courses->LectureType }}" required>
+                      <select class="form-control select2" name="LectureType"  required>
+                        @foreach($types as $type)
+                       
+                        <option value="{{ $type }}" {{ $courses->LectureType == $type ? 'selected' : '' }}>{{ $type }}</option>
+
+                        @endforeach
+                        
+                        
+                      </select>
                     </div>
+
                  <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
                </div>
     

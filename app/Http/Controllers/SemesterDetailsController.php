@@ -24,7 +24,7 @@ class SemesterDetailsController extends Controller
             'Registration_Fee'  => 'required|numeric',
             'Practical_charges' => 'required|numeric',
             'Sports_Fund'       => 'required|numeric',
-            'FeeType'           => 'required|numeric',
+            'FeeType'           => 'required',
             'Tuition_Fee'       => 'required|numeric',
             
         ]);
@@ -49,7 +49,7 @@ class SemesterDetailsController extends Controller
             'Registration_Fee'  => 'required|numeric',
             'Practical_charges' => 'required|numeric',
             'Sports_Fund'       => 'required|numeric',
-            'FeeType'           => 'required|numeric',
+            'FeeType'           => 'required',
             'Tuition_Fee'       => 'required|numeric',
             
         ]);

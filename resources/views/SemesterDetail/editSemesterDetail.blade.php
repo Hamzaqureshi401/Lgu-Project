@@ -58,13 +58,27 @@
                       <input type="number" name="Practical_charges" class="form-control" value="{{ $semesterDetail->Practical_charges }}">
                     </div>
                      <div class="form-group">
-                      <label>SSports Fund</label>
+                      <label>Sports Fund</label>
                       <input type="number" name="Sports_Fund" class="form-control" value="{{ $semesterDetail->Sports_Fund }}">
                     </div>
-                    <div class="form-group">
+                     @php
+                    $types = ['Per Semester' , 'Per Course'];
+                    @endphp
+
+                     <div class="form-group">
                       <label>Fee Type</label>
-                      <input type="number" name="FeeType" class="form-control" value="{{ $semesterDetail->FeeType }}">
+                      <select class="form-control select2" name="FeeType"  required>
+                        @foreach($types as $type)
+                       
+                        <option value="{{ $type }}" {{ $semesterDetail->FeeType == $type ? 'selected' : '' }}>{{ $type }}</option>
+
+                        @endforeach
+                        
+                        
+                      </select>
                     </div>
+
+                
                  <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
                </div>
           

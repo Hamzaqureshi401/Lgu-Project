@@ -20,7 +20,7 @@ class TimeTableController extends Controller
             'EndTime'           => 'required|date_format:H:i|after:StartTime',
             'Building'          => 'required',
             'Room'              => 'required',
-            'Type'              => 'required|numeric',
+            'Type'              => 'required',
             'Emp_ID'            => 'required|numeric'
         ]);
         // $validation['validation'] = $validator->errors()->first();
@@ -40,7 +40,7 @@ class TimeTableController extends Controller
             'EndTime'           => 'required|date_format:H:i|after:StartTime',
             'Building'          => 'required',
             'Room'              => 'required',
-            'Type'              => 'required|numeric',
+            'Type'              => 'required',
             'Emp_ID'            => 'required|numeric'
 
         ]);
