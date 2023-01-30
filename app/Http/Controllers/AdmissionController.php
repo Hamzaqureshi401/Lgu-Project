@@ -20,8 +20,8 @@ class AdmissionController extends Controller
         $this->validate($request, [
 
             'Password'          => 'required|max:12',
-            'Std_FName'         => 'required|string|max:20',
-            'Std_LName'         => 'required|string|max:15',
+            'Std_FName'         => 'required|string|max:20|regex:/^[a-zA-Z]+$/',
+            'Std_LName'         => 'required|string|max:15|regex:/^[a-zA-Z]+$/',
             'ClassSection'      => 'required|string||max:1',
             'CNIC'              => 'required|max:15|unique:Students',
             'Nationality'       => 'required|string',
@@ -361,6 +361,7 @@ class AdmissionController extends Controller
 
     public function updateEducation($request){
 
+
         $examination        = $request['examination'];
         $InstitutionName    = $request['InstitutionName'];
         $DateStarted        = $request['DateStarted'];
@@ -385,6 +386,9 @@ class AdmissionController extends Controller
 
     }
     public function updateStudentTable($request , $Date_of_birth ,$state ,$Country ,$file ,$stdImage){
+
+
+
 
         $submit = DB::update("EXEC sp_UpdateStudentDetails
         @Std_ID             ='$request->Student_ID',
@@ -423,6 +427,8 @@ class AdmissionController extends Controller
 
 
      public function updateStudentAdmission(Request $request){
+
+        dd($request->all());
 
 
         if($request->country || $request->state || $request->DOB || $request->stdfile || $request->Image)

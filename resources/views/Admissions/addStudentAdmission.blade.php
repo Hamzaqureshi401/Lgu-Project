@@ -19,7 +19,10 @@
       <div class="form-group">
          <label style="font-size: 13px">Student First Name <span style="color: red">*</span></label>
          <input type="text" name="Std_FName" id="Std_FName" value="{{ old('Std_FName') }}" class="form-control"
-            maxlength=20>
+            maxlength=20
+            onkeypress="return (event.charCode > 64 && 
+	event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+            >
          <br>
          @error('Std_FName')
          <div class="alert alert-danger">{{ $message }}</div>
@@ -28,7 +31,10 @@
       <div class="form-group">
          <label style="font-size: 13px">Student Last Name <span style="color: red">*</span></label>
          <input type="text" name="Std_LName" id="Std_LName" value="{{ old('Std_LName') }}" class="form-control"
-            maxlength=15>
+            maxlength=15
+            onkeypress="return (event.charCode > 64 && 
+            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+            >
          <br>
          @error('Std_LName')
          <div class="alert alert-danger">{{ $message }}</div>
@@ -45,7 +51,7 @@
       </div>
       <div class="form-group">
          <label style="font-size: 13px">CNIC <span style="color: red">*</span></label>
-         <input type="text" value="{{ old('CNIC') }}" data-inputmask="'mask': '99999-9999999-9'" name="CNIC"
+         <input type="number" value="{{ old('CNIC') }}" name="CNIC"
             id="CNIC" class="form-control" maxlength=15>
          <br>
          @error('CNIC')
