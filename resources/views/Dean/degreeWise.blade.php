@@ -5,12 +5,12 @@
                   <h4>Degree Wise</h4>
                   <div class="card-header-form">
                     <form>
-                      <div class="input-group">
+                      <!-- <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search">
                         <div class="input-group-btn">
                           <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
-                      </div>
+                      </div> -->
                     </form>
                   </div>
                 </div>
