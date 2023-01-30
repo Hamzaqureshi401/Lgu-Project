@@ -52,6 +52,14 @@
                       <label>I final EndDate</label>
                       <input type="Date" value="{{ date('Y-m-d', strtotime($semester->I_final_EndDate)) }}" name="I_final_EndDate" class="form-control"required>
                     </div>
+                    <div class="form-group">
+                      <label>Current Semester Status</label>
+                      <select class="form-control select2" name="Current_Semester">
+                              <option {{$semester->Current_Semester==0?"required":" "}} value="0">0</option>
+                              <option {{$semester->Current_Semester==1?"required":" "}} value="1">1</option>
+      
+                      </select>
+                  </div>
                  <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
               
           </div>      
