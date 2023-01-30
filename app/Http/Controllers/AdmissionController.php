@@ -20,17 +20,17 @@ class AdmissionController extends Controller
         $this->validate($request, [
 
             'Password'          => 'required|max:12',
-            'Std_FName'         => 'required|string|max:20|regex:/^[a-zA-Z]+$/',
-            'Std_LName'         => 'required|string|max:15|regex:/^[a-zA-Z]+$/',
+            'Std_FName'         => 'required|string|max:20|regex:/^[a-zA-Z\s]+$/',
+            'Std_LName'         => 'required|string|max:15|regex:/^[a-zA-Z\s]+$/',
             'ClassSection'      => 'required|string||max:1',
             'CNIC'              => 'required|max:15|unique:Students',
             'Nationality'       => 'required|string',
             'DOB'               => 'required|Date',
             'Gender'            => 'required|string',
             'Email'             => 'required|Email|max:25',
-            'FatherName'        => 'required|string|max:25',
+            'FatherName'        => 'required|string|max:25||regex:/^[a-zA-Z\s]+$/',
             'FatherCNIC'        => 'required|string|max:15',
-            'GuardianName'      => 'string|max:25',
+            'GuardianName'      => 'string|max:25|regex:/^[a-zA-Z\s]+$/',
             'GuardianCNIC'      => 'max:15|max:15',
             'StdPhone'          => 'required|max:12',
             'FatherPhone'       => 'required|max:12',
@@ -390,6 +390,7 @@ class AdmissionController extends Controller
 
 
 
+
         $submit = DB::update("EXEC sp_UpdateStudentDetails
         @Std_ID             ='$request->Student_ID',
         @Std_FName          ='$request->Std_FName',
@@ -428,26 +429,61 @@ class AdmissionController extends Controller
 
      public function updateStudentAdmission(Request $request){
 
-        dd($request->all());
 
-
-        if($request->country || $request->state || $request->DOB || $request->stdfile || $request->Image)
+    
+        if($request->country)
         {
+            $Country            =  $request->country;
+
+        }
+        else{
+            $Country           =   $request->country_pre;
+
+        }
+
+        if($request->state){
+            $state              =  $request->state;
+
+
+        }
+        else{
+            $state             =   $request->Province_pre;
+
+        }
+
+        if($request->DOB)
+        {
+            $Date_of_birth      =  $request->DOB;
+
+        }
+        else{
+            $Date_of_birth     =   $request->DOB_pre;
+
+        }
+
+        if($request->stdfile){
+
             $file               = time() . "_studentfileupdate." . $request->file('stdfile')->getClientOriginalExtension();
             $request->file('stdfile')->storeAs('studentsFiles', $file);
+        }
+        else{
+            $file              =   $request->stdfile_pre;
+
+        }
+
+        if($request->Image)
+        {
             $stdImage           = time() . "_studentImageupdate." . $request->file('Image')->getClientOriginalExtension();
             $request->file('Image')->storeAs('studentsImages', $stdImage);
-
-            $Country            =  $request->country;
-            $state              =  $request->state;
-            $Date_of_birth      =  $request->DOB;
-        }else{
-             $Country           =   $request->country_pre;
-             $state             =   $request->Province_pre;
-             $Date_of_birth     =   $request->DOB_pre;
-             $file              =   $request->stdfile_pre;
-             $stdImage          =   $request->image_pre;
         }
+        else{
+            $stdImage          =   $request->image_pre;
+
+        }
+
+
+
+ 
 
         $this->updateStudentTable($request , $Date_of_birth ,$state ,$Country ,$file ,$stdImage);
 
