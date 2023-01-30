@@ -211,12 +211,12 @@
 <div class="main-sidebar sidebar-style-2">    
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.png') }}" alt="Order Header Image" width="470px" height="200px"/> <span
-                class="logo-name">LGU</span>
+            <a > <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.png') }}" alt="Order Header Image" width="470px" height="200px"/> <!-- <span
+                class="logo-name">LGU</span> -->
             </a>
           </div>
           <ul class="sidebar-menu">
-            <li class="menu-header">Main</li>
+            <!-- <li class="menu-header">Main</li> -->
             <!-- <li class="dropdown">
               <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li> -->
