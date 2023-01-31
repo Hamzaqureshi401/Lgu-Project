@@ -25,7 +25,6 @@ class SemesterController extends Controller
             'I_mid_EndDate'      => 'required|date',
             'I_final_StartDate'  => 'required|date',
             'I_final_EndDate'    => 'required|date',
-            'Current_Semester'   => 'required'
         ]);
         // $validation['validation'] = $validator->errors()->first();
         // if ($validator->fails()) {
@@ -51,8 +50,6 @@ class SemesterController extends Controller
             'I_mid_EndDate'      => 'required|date',
             'I_final_StartDate'  => 'required|date',
             'I_final_EndDate'    => 'required|date',
-            'Current_Semester'   => 'required'
-
         ]);
         // $validation['validation'] = $validator->errors()->first();
         // if ($validator->fails()) {
@@ -101,8 +98,7 @@ class SemesterController extends Controller
             @I_mid_StartDate        = '$request->I_mid_StartDate' ,
             @I_mid_EndDate          = '$request->I_mid_EndDate' ,
             @I_final_StartDate      = '$request->I_final_StartDate' ,
-            @I_final_EndDate        = '$request->I_final_EndDate' ,
-            @CurrentSemester        = '$request->Current_Semester'
+            @I_final_EndDate        = '$request->I_final_EndDate'
             ;");
 
         //   return response()->json([
@@ -173,9 +169,7 @@ class SemesterController extends Controller
             @I_mid_StartDate        = '$request->I_mid_StartDate' ,
             @I_mid_EndDate          = '$request->I_mid_EndDate' ,
             @I_final_StartDate      = '$request->I_final_StartDate' ,
-            @I_final_EndDate        = '$request->I_final_EndDate',
-            @CurrentSemester        = '$request->Current_Semester'
-
+            @I_final_EndDate        = '$request->I_final_EndDate'
             ;");
 
         // return response()->json([
