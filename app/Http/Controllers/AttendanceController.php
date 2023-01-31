@@ -111,6 +111,15 @@ class AttendanceController extends Controller
          $timeTable     = TimeTable::where(['SemCourse_ID' => $id , 'Emp_ID' =>  $session['ID']])->first();
          $SemEndDate    = strtotime($SemEndDate);
 
+
+        if(empty($timeTable)){
+            return redirect()
+            ->back()
+            ->with([
+                'errorToaster' => 'Your Classes Timt Table not Found' , 
+                'title' => 'Error'
+            ]);
+        }
         for($i = strtotime($timeTable->Day, strtotime($SemStartDate)); $i <= $SemEndDate; $i = strtotime('+1 week', $i)){
             $eachDays[]  = date('l Y-m-d', $i);
         }

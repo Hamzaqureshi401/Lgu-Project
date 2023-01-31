@@ -184,6 +184,7 @@
                   <li><a class="nav-link" href="{{ route('fee.Rescheduling')}}">Fee Rescheduling</a></li>
                   <li><a class="nav-link" href="{{ route('tax.Report')}}">Tax Report</a></li>
                   <li><a class="nav-link" href="{{ route('ledger')}}">Ledger</a></li>
+                  <li><a class="nav-link" href="{{ route('teacher.Std.Igrade')}}">Teacher Std Igrade</a></li>
                   
               </ul>
               
