@@ -481,6 +481,15 @@ class AdmissionController extends Controller
 
         }
 
+        
+        // if($request->Status=='Admitted')
+        // {
+        //     dd($request);
+
+        // }
+        // else{
+
+        // }
 
 
  

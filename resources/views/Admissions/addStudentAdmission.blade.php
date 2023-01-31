@@ -261,8 +261,7 @@
                 <div class="form-group">
                     <label style="font-size: 13px">Status <span style="color: red">*</span></label>
                     <select name="Status" class="custom-select">
-                        <option value="{{ old('Status') }}" selected>{{ old('Status') }}</option>
-                        <option value="In Progress">In Progress</option>
+                        <option value="In Progress" selected>In Progress</option>
                     </select>
                 </div>
                 <br>
