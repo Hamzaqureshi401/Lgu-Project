@@ -36,7 +36,9 @@
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Designation</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('add.Designation') }}">Add Designation</a></li>
-                <li><a class="nav-link" href="{{ route('all.Designations') }}">All Designation</a></li>
+                <li><a class="nav-link" href="{{ route('all.Designations') }}">All Designation</a></li> 
+                <li><a class="nav-link" href="{{ route('set.EmpDesignation') }}">Set Emp Designation</a></li>
+                <li><a class="nav-link" href="{{ route('all.EmpDesignations') }}">All Emp Designation</a></li>
                 
               </ul>
             </li>

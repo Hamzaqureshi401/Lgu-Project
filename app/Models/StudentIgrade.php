@@ -9,4 +9,5 @@ class StudentIgrade extends Model
 {
     use HasFactory;
     protected $table = 'Student_Igrade';
+    public $timestamps = false;
 }

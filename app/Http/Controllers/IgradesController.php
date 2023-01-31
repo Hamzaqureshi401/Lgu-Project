@@ -13,7 +13,7 @@ use File;
 
 class IgradesController extends Controller
 {
-    public function allIgrades(){
+    public function studentIgrades(){
         $enrollments =  Enrollment::where('Std_ID' , Session::get('std_ID'))->get();
         
         $title  = 'All Igrades';
@@ -25,7 +25,7 @@ class IgradesController extends Controller
         //dd($studentIgrade);
 
         return
-        view('Igrades.allIgrades' ,
+        view('Igrades.studentIgrades' ,
             compact(
                 'enrollments' ,
                 'title' ,
@@ -126,34 +126,44 @@ class IgradesController extends Controller
         // dd($semCourse , $enrollments , $a);
        //$enrollments =  Enrollment::where(['ID' => $studentIgrade])->get();
 
-       $studentIgrade   = StudentIgrade::select('Enroll_ID' , 'ID')->get();
+       $studentIgrade   = StudentIgrade::where('Status' , 'Teacher')->select('Enroll_ID' , 'ID')->get();
       
        $semCourse       = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('ID')->toArray();
        $enrollments     =  Enrollment::where(['SemCourses_ID' => $semCourse , 'ID' => $studentIgrade->pluck('Enroll_ID')->toArray()])->get();  
        $igArr = $studentIgrade->pluck('ID')->toArray();    
         $title  = 'All Igrades';
-        $route = 'confirmIgrades/';
-        $getEditRoute = 'confirmIgrades';
+        $route = 'confirmIgradesTeacher/';
+        $getEditRoute = 'confirmIgradesTeacher';
         $modalTitle = 'Confirm Igrade';
-        $studentIgrade = StudentIgrade::pluck('Enroll_ID')->toArray();
-
-        //dd($studentIgrade);
 
         return
-        view('Igrades.allIgrades' ,
+        view('Igrades.teacherStdIgrade' ,
             compact(
                 'enrollments' ,
                 'title' ,
                 'modalTitle' ,
                 'route',
                 'getEditRoute',
-                'studentIgrade',
+                
                 'igArr'
             ));
     }
-    public function confirmIgrades($id){
+    public function confirmIgradesTeacher($id){
 
-        StudentIgrade::where('ID' , $id)->update(['Status' => 't']);
+         StudentIgrade::where('ID' , $id)->update(['Status' => 'Hod']);
+        
+
+        return redirect()->back()->with(['successToaster' => 'Course Added' , 'title' => 'Success']);
+
+    }
+    public function confirmIgradesHod($id){
+
+        StudentIgrade::where('ID' , $id)->update(['Status' => 'Dean']);
+
+    }
+    public function confirmIgradesDean($id){
+
+        StudentIgrade::where('ID' , $id)->update(['Status' => 'Coe']);
 
     }
    

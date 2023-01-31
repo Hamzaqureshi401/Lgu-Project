@@ -35,13 +35,11 @@
 
 
 
-                                @if (in_array($enrollment->ID , $studentIgrade) && Session()->has('std_session'))
-                                <a class="btn btn-info"><i class="far fa-edit"></i>{{ 'Applied' }}</a>
-                                @elseif(Session()->has('Emp_session'))
-                                <a href="{{ $getEditRoute }}/{{ $igArr[$key] }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
-                                @else
-                                <a href="{{ $getEditRoute }}/{{ $enrollment->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
-                                @endif
+                                
+                                
+                                <a href="{{ route('confirm.Igrades.Teacher' , $igArr[$key]) }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                               
+                               
 
                               
 

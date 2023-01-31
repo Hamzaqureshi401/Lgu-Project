@@ -63,7 +63,7 @@ Route::get('/studentDashboard', [App\Http\Controllers\StudentController::class, 
 
 
 Route::get('/applyIgrades/{id?}', [App\Http\Controllers\IgradesController::class, 'applyIgrades'])->name('apply.Igrades');
-Route::get('/allIgrades', [App\Http\Controllers\IgradesController::class, 'allIgrades'])->name('all.Igrades');
+Route::get('/studentIgrades', [App\Http\Controllers\IgradesController::class, 'studentIgrades'])->name('all.Igrades');
 Route::post('/storeIgrades', [App\Http\Controllers\IgradesController::class, 'storeIgrades'])->name('store.Igrades');
 
 
@@ -73,10 +73,16 @@ Route::post('/storeIgrades', [App\Http\Controllers\IgradesController::class, 'st
 
 });
 
+Route::get('/test', [App\Http\Controllers\ViewController::class, 'test'])->name('test');
+Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'downloadcstorepdf'])->name('downloadcstorepdf');
+
 
 Route::group(['middleware' => 'EmpAuth'], function () {
 
-Route::get('/confirmIgrades/{id?}', [App\Http\Controllers\IgradesController::class, 'confirmIgrades'])->name('confirm.Igrades');
+
+
+Route::get('/confirmIgradesTeacher/{id?}', [App\Http\Controllers\IgradesController::class, 'confirmIgradesTeacher'])->name('confirm.Igrades.Teacher');
+
 Route::get('/teacherStdIgrade', [App\Http\Controllers\IgradesController::class, 'teacherStdIgrade'])->name('teacher.Std.Igrade');
 
 Route::get('/addStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'addStudentAdmission'])->name('add.StudentAdmissions');
@@ -125,6 +131,14 @@ Route::get('/allDesignations', [App\Http\Controllers\DesignationController::clas
 Route::post('/storeDesignation', [App\Http\Controllers\DesignationController::class, 'storeDesignation'])->name('store.Designation');
 Route::get('editDesignation/{id}', [App\Http\Controllers\DesignationController::class, 'editDesignation'])->name('edit.Designation');
 Route::post('/updateDesignation', [App\Http\Controllers\DesignationController::class, 'updateDesignation'])->name('update.Designation');
+
+// EmpDesignation Routes start
+
+Route::get('/setEmpDesignation', [App\Http\Controllers\DesignationController::class, 'setEmpDesignation'])->name('set.EmpDesignation');
+Route::get('/allEmpDesignations', [App\Http\Controllers\DesignationController::class, 'allEmpDesignations'])->name('all.EmpDesignations');
+Route::post('/storeEmpDesignation', [App\Http\Controllers\DesignationController::class, 'storeEmpDesignation'])->name('store.EmpDesignation');
+Route::get('editEmpDesignation/{id}', [App\Http\Controllers\DesignationController::class, 'editEmpDesignation'])->name('edit.EmpDesignation');
+Route::post('/updateEmpDesignation', [App\Http\Controllers\DesignationController::class, 'updateEmpDesignation'])->name('update.EmpDesignation');
 
 // StudentMark Routes start
 

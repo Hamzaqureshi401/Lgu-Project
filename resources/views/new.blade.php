@@ -1,76 +1,12 @@
-@extends('layouts.app_new')
-@section('title')
-@endsection
-<!--add title here -->
-@section('content')
-    <style>
-        @media screen and (max-width: 969px) {
-            .lguhead1 {
-
-                font-size: 20px;
-
-            }
-
-            .lguhead2 {
-
-                font-size: 20px;
-
-            }
-            .containerdown
-            {
-                flex-direction:column !important ;
-                text-align: center !important;
-                padding-top: 10px !important;
-
-
-            }
-
-
-        }
-
-        @media screen and (max-width: 867px) {
-            .lguhead1 {
-
-                font-size: 17px;
-
-            }
-
-            .lguhead2 {
-
-                font-size: 17px;
-
-            }
-            .myheadings
-            {
-                flex-direction:column !important ;
-                text-align: center !important;
-                padding-top: 10px !important;
-
-            }
-
-
-        }
-    </style>
-
-
-<body class="A4 landscape">
-    <!-- Each sheet element should have the class "sheet" -->
-    <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-    <!-- Write HTML just like a web page -->
-    <div id="printableArea">
-
-        <!-- Main Content -->
-        <section class="section">
-            <div class="row">
+<div class="row">
                     <div class="card">
-                        <div >
+                        <div>
                             <div class="page-content">
                                 <!-- Panel Example 1 -->
                                 <div style="padding-left:1rem;" class="panel-body containerdown d-flex flex-row">
                                     <div>
 
-                                        <img src="{{ asset('images/lgu_logo.jpg') }}"
-                                            alt="lgu logo"style="height:100px;width:100px;" />
+                                        <img src="http://127.0.0.1:8000/images/lgu_logo.jpg" alt="lgu logo" style="height:100px;width:100px;">
                                     </div>
 
                                     <div class="myheadings" style="display: flex;padding-top:45px;">
@@ -78,8 +14,7 @@
                                         <h6 class="lguhead1" style="text-align:center;margin:0px;">
                                             LAHORE GARRISON UNIVERSITY
                                         </h6>
-                                        <h6 class="lguhead2" class="panel-title"
-                                            style="text-align:center;margin:0px;padding-left:15px;">
+                                        <h6 class="lguhead2" style="text-align:center;margin:0px;padding-left:15px;">
                                             |STUDENT ADMIT CARD | Fa-2022 Mid Term Exam |
                                         </h6>
                                     </div>
@@ -145,7 +80,7 @@
                                             </h6>
                                             <p style="color:black;padding:0px;margin:0px;">
 
-                                                1. Bring this Admit Card & Student Identity Card during the
+                                                1. Bring this Admit Card &amp; Student Identity Card during the
                                                 examination and show when required.
                                             </p>
                                             <p style="color:black;padding:0px;margin:0px;">
@@ -160,7 +95,7 @@
                                             </p>
                                             <p style="color:black;padding:0px;margin:0px;">
 
-                                                4. Mobile Phones & Other Valuables are not allowed in the
+                                                4. Mobile Phones &amp; Other Valuables are not allowed in the
                                                 examination centre.
                                             </p>
                                             <p style="color:black;padding:0px;margin:0px;">
@@ -183,7 +118,7 @@
                                             <br>
                                             <p style="color:rgb(0, 0, 0);padding:0px;margin:0px;font-weight:bolder;">
 
-                                                PRINT DATE |TIME: {{ now()->format('Y-m-d h:i:s A') }}
+                                                PRINT DATE |TIME: 2023-01-31 08:15:09 AM
 
                                             </p>
 
@@ -192,7 +127,7 @@
 
                                                 For any correction/information, please visit the Examination Office,
                                                 No candidate will be entertained after due date.<br>
-                                                Powered by : LGU ERP OFFICE- {{ now()->format('Y-m-d h:i:s A') }}
+                                                Powered by : LGU ERP OFFICE- 2023-01-31 08:15:09 AM
 
                                             </h6>
 
@@ -202,37 +137,3 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-    </div>
-    </div>
-    </section>
-
-    </div>
-    <hr>
-
-</body>
-
-<body>
-    <section>
-        <div class="bg-white text-center" style=" margin-left: 50px; margin-bottom: 90px; width:93%;">
-            <a href="http://127.0.0.1:8000/downloadcstorepdf" class="btn btn-warning btn-icon icon-left" style="color: white; margin: 10px;"
-                ><i class="fas fa-print"></i> Print Slip</a>
-
-        </div>
-    </section>
-</body>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script type="text/javascript">
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-    }
-</script>
-@endsection

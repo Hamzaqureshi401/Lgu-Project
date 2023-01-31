@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Designation;
 use App\Models\Department;
+use App\Models\Employee;
+
 
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -42,6 +44,40 @@ class DesignationController extends Controller
                 'route',
                 'departments'
             ));
+    }
+
+    public function setEmpDesignation(){
+
+        $button = "Add Emp Designation";
+        $title  = 'Add Emp Designation';
+        $route  = '/storeEmpDesignation';
+        $designations = Designation::get();
+        $employees = Employee::get();
+        return
+        view('Designation.setEmpDesignation',
+            compact(
+                'button' ,
+                'title' ,
+                'route',
+                'designations',
+                'employees'
+            ));
+    }
+
+    public function storeEmpDesignation(Request $request){
+
+        dd($request->all());
+        $validator = $this->validation($request);
+
+        
+       
+            $submit             = DB::Update("EXEC sp_InsertDesignations
+            @Designation       = '$request->Designation',
+            @Dpt_ID            = '$request->Dpt_ID'
+            ;
+        ");
+       
+             return redirect()->back()->with(['successToaster' => 'Dasignation Added' , 'title' => 'Success']);
     }
 
     public function storeDesignation(Request $request){
