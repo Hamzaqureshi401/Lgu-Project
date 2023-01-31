@@ -262,6 +262,14 @@
          <select name="Status" class="custom-select select2">
             <option value="{{ $studentAdmission->Status }}" selected>{{ $studentAdmission->Status }}</option>
             <option value="In Progress">In Progress</option>
+            <option value="Admitted">Admitted</option>
+            <option value="Completed">Completed</option>
+            <option value="On Merit">On Merit</option>
+            <option value="On Waiting">On Waiting</option>
+            <option value="Step1">Step1</option>
+
+
+
          </select>
       </div>
       <br>

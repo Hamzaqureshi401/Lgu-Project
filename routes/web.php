@@ -61,6 +61,7 @@ Route::get('/getStudentRollNoSlip',[App\Http\Controllers\StdRollNoSlipsControlle
 
 Route::get('/studentDashboard', [App\Http\Controllers\StudentController::class, 'studentDashboard'])->name('student.Dashboard');
 
+// <<<<<<< HEAD
 
 Route::get('/applyIgrades/{id?}', [App\Http\Controllers\IgradesController::class, 'applyIgrades'])->name('apply.Igrades');
 Route::get('/studentIgrades', [App\Http\Controllers\IgradesController::class, 'studentIgrades'])->name('all.Igrades');
@@ -71,6 +72,8 @@ Route::post('/storeIgrades', [App\Http\Controllers\IgradesController::class, 'st
 
 
 
+// =======
+// >>>>>>> 41d144ff03424468b2b5ce44897e2f7d9b2ef217
 });
 
 Route::get('/test', [App\Http\Controllers\ViewController::class, 'test'])->name('test');
@@ -80,10 +83,13 @@ Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'd
 Route::group(['middleware' => 'EmpAuth'], function () {
 
 
+// <<<<<<< HEAD
 
 Route::get('/confirmIgradesTeacher/{id?}', [App\Http\Controllers\IgradesController::class, 'confirmIgradesTeacher'])->name('confirm.Igrades.Teacher');
 
 Route::get('/teacherStdIgrade', [App\Http\Controllers\IgradesController::class, 'teacherStdIgrade'])->name('teacher.Std.Igrade');
+// =======
+// >>>>>>> 41d144ff03424468b2b5ce44897e2f7d9b2ef217
 
 Route::get('/addStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'addStudentAdmission'])->name('add.StudentAdmissions');
 Route::get('/allStudentAdmissions', [App\Http\Controllers\AdmissionController::class, 'allStudentAdmissions'])->name('all.StudentAdmissions');

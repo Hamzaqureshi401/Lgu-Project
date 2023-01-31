@@ -481,11 +481,24 @@ class AdmissionController extends Controller
 
         }
 
+        
+        if($request->Status=='Admitted')
+        {
+            // $ = Degree::select('ID', 'DegreeName')->distinct()->get();
+
+            // dd($request);
+
+        }
+        else{
+
+        }
 
 
  
 
         $this->updateStudentTable($request , $Date_of_birth ,$state ,$Country ,$file ,$stdImage);
+
+        // dd($request->examination);
 
         for ($i=0; $i < sizeof($request->examination) ; $i++) { 
 
