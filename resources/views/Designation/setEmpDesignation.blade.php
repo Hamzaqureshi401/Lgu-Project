@@ -7,7 +7,7 @@
                    
                      <div class="form-group">
                       <label>Designation</label>
-                      <select class="form-control select2" name="Designation"  required>
+                      <select class="form-control select2" name="Des_ID"  required>
                         @foreach($designations as $designation)
                         <option value="{{ $designation->ID }}">{{ $designation->Designation }}</option>
                         @endforeach

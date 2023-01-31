@@ -11,6 +11,8 @@
                               <i class="fas fa-th"></i>
                             </th>
                             <th>Designation</th>
+                            <th>Emp Name</th>
+                           
                             <th>Department Name</th>
                            
                             <th>Action</th>
@@ -24,8 +26,10 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $designation->Designation }}</td>
-                            <td>{{ $designation->department->Dpt_Name }}</td>
+                            <td>{{ $designation->designation->Designation }}</td>
+                            <td>{{ $designation->employee->Emp_FirstName }}{{ $designation->employee->Emp_LastName }}</td>
+                            <td>{{ $designation->Status}}</td>
+                            
                            
                             <td> <div class="card-body">
                                 <!-- only change id -->
