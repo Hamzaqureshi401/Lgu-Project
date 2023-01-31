@@ -22,7 +22,7 @@
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Apply I-Grade</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="{{ route('all.Igrades') }}">Apply I-Grade</a></li>
+                <li><a class="nav-link" href="{{ route('all.Challans') }}">Apply I-Grade</a></li>
               </ul>
             </li>
 

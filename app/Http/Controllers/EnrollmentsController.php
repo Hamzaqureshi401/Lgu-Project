@@ -220,7 +220,8 @@ class EnrollmentsController extends Controller
         }else{
             $Amount     = $fee;
         }
-    
+        
+
         $Type       = "Registration";
         
         
