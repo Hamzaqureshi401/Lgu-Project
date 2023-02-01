@@ -488,6 +488,7 @@ class AdmissionController extends Controller
         {
             $applicantid = Student::where(['ID' => $request->Student_ID])->first();
 
+            // dd{}
 
             if($applicantid->StdRollNo==null){
 
