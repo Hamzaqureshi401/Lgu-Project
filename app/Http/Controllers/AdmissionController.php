@@ -23,18 +23,18 @@ class AdmissionController extends Controller
             'Std_FName'         => 'required|string|max:20|regex:/^[a-zA-Z\s]+$/',
             'Std_LName'         => 'required|string|max:15|regex:/^[a-zA-Z\s]+$/',
             'ClassSection'      => 'required|string||max:1',
-            'CNIC'              => 'required|max:15|unique:Students',
+            'CNIC'              => 'required|max:13|unique:Students',
             'Nationality'       => 'required|string',
             'DOB'               => 'required|Date',
             'Gender'            => 'required|string',
             'Email'             => 'required|Email|max:25',
             'FatherName'        => 'required|string|max:25||regex:/^[a-zA-Z\s]+$/',
-            'FatherCNIC'        => 'required|string|max:15',
+            'FatherCNIC'        => 'required|string|max:13',
             'GuardianName'      => 'string|max:25|regex:/^[a-zA-Z\s]+$/',
-            'GuardianCNIC'      => 'max:15|max:15',
-            'StdPhone'          => 'required|max:12',
-            'FatherPhone'       => 'required|max:12',
-            'GuardianPhone'     => 'max:12',
+            'GuardianCNIC'      => 'max:15|max:13',
+            'StdPhone'          => 'required|max:11',
+            'FatherPhone'       => 'required|max:11',
+            'GuardianPhone'     => 'max:11',
             'ParentOccupation'  => 'required|max:30',
             'Address'           => 'required',
             'Tehsil'            => 'required',
@@ -339,6 +339,7 @@ class AdmissionController extends Controller
         $studentAdmission = Student::where('ID' , $id)->first();
         $degrees = Degree::get();
         $studentEducations = StudentEducation::where('Std_ID' , $id)->get();
+        $admissionsession = Semester::where('Year','=', date('Y'))->get();
 
 
 
@@ -354,7 +355,8 @@ class AdmissionController extends Controller
                 'button' ,
                 'title' ,
                 'route',
-                'degree'
+                'degree',
+                'admissionsession'
                
             ));
     }
@@ -484,14 +486,22 @@ class AdmissionController extends Controller
         
         if($request->Status=='Admitted')
         {
-            // $ = Degree::select('ID', 'DegreeName')->distinct()->get();
+            $applicantid = Student::where(['ID' => $request->Student_ID])->first();
 
-            // dd($request);
+            // dd{}
+
+            if($applicantid->StdRollNo==null){
+
+
+                DB::update("EXEC sp_RollNoAssign
+                @App_ID='$applicantid->ApplicantID'
+                ;");
+
+            }
+
 
         }
-        else{
 
-        }
 
 
  

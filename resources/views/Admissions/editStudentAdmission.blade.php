@@ -4,10 +4,10 @@
 @include('Forms.formHeader')
 <div class="card-body">
    <div class="form-group">
-      <input type="text" hidden name="Student_ID"  value="{{ $studentAdmission->ID }}">
+      <input class="form-control" type="text"  name="Student_ID"  value="{{ $studentAdmission->ID }}" hidden>
 
       <label style="font-size: 13px">Student Password <span style="color: red">*</span></label>
-      <input type="text" name="Password" id="Password" value="{{ $studentAdmission->Password }}"
+      <input  type="text" name="Password" id="Password" value="{{ $studentAdmission->Password }}"
          class="form-control" maxlength=12>
       <br>
       @error('Password')
@@ -277,16 +277,25 @@
       <div class="alert alert-danger">{{ $message }}</div>
       @enderror
    </div>
+
    <div class="form-group">
-      <label style="font-size: 13px">Admission Session <span style="color: red">*</span>
-      </label>
-      <input type="text" value="{{ $studentAdmission->AdmissionSession }}" name="AdmissionSession"
-         id="AdmissionSession" class="form-control" maxlength=15>
-      <br>
+      <label style="font-size: 13px">Admission Session<span style="color: red">*</span></label>
+      <select name="AdmissionSession" class="custom-select">
+         <option value="{{ $studentAdmission->SemSession }}" selected>{{ $studentAdmission->SemSession}}
+         </option>
+         @foreach ($admissionsession as $admissionsessiondeatils)
+         
+         <option value="{{ $admissionsessiondeatils->SemSession }}" >
+            {{ $admissionsessiondeatils->SemSession }}
+         </option>
+         @endforeach
+      </select>
       @error('AdmissionSession')
       <div class="alert alert-danger">{{ $message }}</div>
       @enderror
    </div>
+
+
    <div class="form-group">
       <label style="font-size: 13px">Blood Group <span style="color: red">*</span>
       </label>
