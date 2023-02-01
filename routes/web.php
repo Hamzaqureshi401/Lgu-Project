@@ -68,7 +68,7 @@ Route::post('/storeIgrades', [App\Http\Controllers\IgradesController::class, 'st
 
 });
 
-Route::get('/test', [App\Http\Controllers\ViewController::class, 'test'])->name('test');
+Route::get('/printRollNoSlip', [App\Http\Controllers\StdRollNoSlipsController::class, 'printRollNoSlip'])->name('print.RollNo.Slip');
 Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'downloadcstorepdf'])->name('downloadcstorepdf');
 
 

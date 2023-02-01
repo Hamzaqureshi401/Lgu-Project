@@ -37,6 +37,10 @@
          .brd{
              border: 1px solid;
          }
+         table { border-collapse: collapse; }
+tr { border: solid thin; }
+table { border-collapse: collapse; }
+td { border: solid thin; }
       </style>
    </head>
    <body>

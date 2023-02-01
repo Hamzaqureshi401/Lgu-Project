@@ -3,68 +3,18 @@
 @endsection
 <!--add title here -->
 @section('content')
-    <style>
-        @media screen and (max-width: 969px) {
-            .lguhead1 {
-
-                font-size: 20px;
-
-            }
-
-            .lguhead2 {
-
-                font-size: 20px;
-
-            }
-            .containerdown
-            {
-                flex-direction:column !important ;
-                text-align: center !important;
-                padding-top: 10px !important;
-
-
-            }
-
-
-        }
-
-        @media screen and (max-width: 867px) {
-            .lguhead1 {
-
-                font-size: 17px;
-
-            }
-
-            .lguhead2 {
-
-                font-size: 17px;
-
-            }
-            .myheadings
-            {
-                flex-direction:column !important ;
-                text-align: center !important;
-                padding-top: 10px !important;
-
-            }
-
-
-        }
-    </style>
-
-
-<body class="A4 landscape">
-    <!-- Each sheet element should have the class "sheet" -->
-    <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-    <!-- Write HTML just like a web page -->
+    
     <div id="printableArea">
 
         <!-- Main Content -->
         <section class="section">
+
+             <div class="section-body">
             <div class="row">
-                    <div class="card">
-                        <div >
-                            <div class="page-content">
+              <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+
+           
                                 <!-- Panel Example 1 -->
                                 <div style="padding-left:1rem;" class="panel-body containerdown d-flex flex-row">
                                     <div>
@@ -195,17 +145,16 @@
                                                 Powered by : LGU ERP OFFICE- {{ now()->format('Y-m-d h:i:s A') }}
 
                                             </h6>
-
+                                             <a href="{{route('print.RollNo.Slip')}}" class="btn btn-warning btn-icon icon-left" style="color: white; margin: 10px;"
+                ><i class="fas fa-print"></i> Print Slip</a>
                                         </div>
                                     </div>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-    </div>
-    </div>
+            
     </section>
 
     </div>
@@ -213,15 +162,8 @@
 
 </body>
 
-<body>
-    <section>
-        <div class="bg-white text-center" style=" margin-left: 50px; margin-bottom: 90px; width:93%;">
-            <a href="http://127.0.0.1:8000/downloadcstorepdf" class="btn btn-warning btn-icon icon-left" style="color: white; margin: 10px;"
-                ><i class="fas fa-print"></i> Print Slip</a>
 
-        </div>
-    </section>
-</body>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
 
