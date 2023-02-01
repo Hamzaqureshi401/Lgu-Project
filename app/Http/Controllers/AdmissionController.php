@@ -488,12 +488,12 @@ class AdmissionController extends Controller
         {
             $applicantid = Student::where(['ID' => $request->Student_ID])->first();
 
+
             if($applicantid->StdRollNo==null){
 
-                // {{echo "Assign it" ;}}
 
                 DB::update("EXEC sp_RollNoAssign
-                @App_ID='$request->Student_ID'
+                @App_ID='$applicantid->ApplicantID'
                 ;");
 
             }
