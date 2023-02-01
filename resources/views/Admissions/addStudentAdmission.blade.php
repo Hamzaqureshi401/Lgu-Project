@@ -136,7 +136,7 @@
             </div>
             <div class="form-group">
                 <label style="font-size: 13px">Guardian Cnic</label>
-                <input type="text" name="GuardianCNIC"
+                <input type="number" name="GuardianCNIC"
                     value="{{ old('GuardianCNIC') }}" id="GuardianCNIC" class="form-control" oninput="maxLengthCheck(this)" maxlength="13">
                 <br>
                 @error('GuardianCNIC')
@@ -154,7 +154,7 @@
             </div>
             <div class="form-group">
                 <label style="font-size: 13px">Father Phone <span style="color: red">*</span></label>
-                <input type="text" value="{{ old('FatherPhone') }}" 
+                <input type="number" value="{{ old('FatherPhone') }}" 
                     name="FatherPhone" id="FatherPhone" class="form-control" oninput="maxLengthphone(this)" maxlength="11">
                 <br>
                 @error('FatherPhone')
@@ -163,7 +163,7 @@
             </div>
             <div class="form-group">
                 <label style="font-size: 13px">Guardian Phone </label>
-                <input type="text" value="{{ old('GuardianPhone') }}" 
+                <input type="number" value="{{ old('GuardianPhone') }}" 
                     name="GuardianPhone" id="GuardianPhone" class="form-control" oninput="maxLengthphone(this)" maxlength="11">
                 <br>
                 @error('GuardianPhone')
