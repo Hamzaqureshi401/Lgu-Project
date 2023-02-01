@@ -90,6 +90,21 @@ Route::post('/updateStudentAdmission', [App\Http\Controllers\AdmissionController
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/main', [App\Http\Controllers\HomeController::class, 'main'])->name('main');
+// Module Routes start
+
+Route::get('/addModules', [App\Http\Controllers\ModulesController::class, 'addModules'])->name('add.Modules');
+Route::get('/allModules', [App\Http\Controllers\ModulesController::class, 'allModules'])->name('all.Modules');
+Route::post('/storeModules', [App\Http\Controllers\ModulesController::class, 'storeModules'])->name('store.Modules');
+Route::get('/editModule/{id?}', [App\Http\Controllers\ModulesController::class, 'editModule'])->name('edit.Module');
+Route::post('/updateModule', [App\Http\Controllers\ModulesController::class, 'updateModule'])->name('update.Module');
+
+// UserRights Routes start
+
+Route::get('/addUserRights', [App\Http\Controllers\UserRightsController::class, 'addUserRights'])->name('add.UserRights');
+Route::get('/allUserRights', [App\Http\Controllers\UserRightsController::class, 'allUserRights'])->name('all.UserRights');
+Route::post('/storeUserRight', [App\Http\Controllers\UserRightsController::class, 'storeUserRight'])->name('store.UserRight');
+Route::get('/editUserRight/{id?}', [App\Http\Controllers\UserRightsController::class, 'editUserRight'])->name('edit.UserRight');
+Route::post('/updateUserRight', [App\Http\Controllers\UserRightsController::class, 'updateUserRight'])->name('update.UserRight');
 
 // Courses Routes start
 

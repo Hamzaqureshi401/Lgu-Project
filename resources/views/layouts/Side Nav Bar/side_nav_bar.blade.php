@@ -10,6 +10,23 @@
                 
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                  data-feather="briefcase"></i><span>Module</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.Modules') }}">Add Modules</a></li>
+                <li><a class="nav-link" href="{{ route('all.Modules') }}">All Modules</a></li>
+              </ul>
+            </li>
+                 
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                  data-feather="briefcase"></i><span>User Right</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.UserRights') }}">Add UserRights</a></li>
+                <li><a class="nav-link" href="{{ route('all.UserRights') }}">All UserRights</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i
                   data-feather="briefcase"></i><span>Courses</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('add.Courses') }}">Add Courses</a></li>
