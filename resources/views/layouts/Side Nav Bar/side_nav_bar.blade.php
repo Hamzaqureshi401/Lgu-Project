@@ -115,14 +115,14 @@
                 
               </ul>
             </li>
-            <li class="dropdown">
+           <!--  <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Student Marks</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('add.StudentMark') }}">Add Marks</a></li>
                 <li><a class="nav-link" href="{{ route('all.StudentMarks') }}">All Marks</a></li>
                 
               </ul>
-            </li>
+            </li> -->
              <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Std Roll No Slips </span></a>
               <ul class="dropdown-menu">

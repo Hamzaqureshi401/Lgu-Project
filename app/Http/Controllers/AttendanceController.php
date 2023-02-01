@@ -250,6 +250,7 @@ class AttendanceController extends Controller
         $SemCourseWeightage             = SemesterCourseWeightage::where(['SemCourse_ID' => $id , 'Type' => $type])->first();
         $SemesterCourseWeightageDetail  = SemesterCourseWeightageDetail::where('SemCourseWeightage_ID' , $SemCourseWeightage->ID)->first();
         $route                          = '/storeStudentMark';
+        dd($SemesterCourseWeightageDetail->ID);
         $StudentMarks = StudentMark::where('SemCourseWeightagedetail_ID' , $SemesterCourseWeightageDetail->ID)->first();
         
 
@@ -300,7 +301,7 @@ class AttendanceController extends Controller
 
     }
 
-   public function storeCourseConfigration(Request $request){
+    public function storeCourseConfigration(Request $request){
 
         $session    =  $this->sessionData->getSessionData();
         $Emp_ID     = $session['ID'];
@@ -317,7 +318,9 @@ class AttendanceController extends Controller
             return Redirect::back()->withInput($request->all())->with(['errorToaster' => 'All The weitage shoud be sum of 100' , 'title' => 'Warning']);
         }
         $ntype = explode('-' , $request->type);  
-        foreach($types as $key => $type){            
+        foreach($types as $key => $type){
+
+                  
 
             $a = new SemesterCourseWeightage();
             $a->SemCourse_ID    = $request->id;
@@ -325,8 +328,15 @@ class AttendanceController extends Controller
             $a->Weightage       = $type;
             $a->LectureType     = $request->LectureType;
             $a->save();
+
+             if ($key < 2){
+            $this->storeFixedWeightageDetails($a->id , $type);
+        } 
             SemesterCourseWeightage::where(['SemCourse_ID' => $request->id , 'Weightage' => 0])->orWhereNull('Weightage')->delete();
             }
+
+            
+            
 
             return redirect()
             ->back()
@@ -334,6 +344,15 @@ class AttendanceController extends Controller
                 'successToaster' => 'Course Weightage Set Successfully' , 
                 'title' => 'Success'
             ]);
+   }
+
+   public function storeFixedWeightageDetails($id , $marks){
+
+     $a = new SemesterCourseWeightageDetail();
+
+            $a->SemCourseWeightage_ID    = $id;
+            $a->TotalMarks               = $marks;
+            $a->save();
    }
    public function addSemesterCourseWeightageDetails(Request $request){
 

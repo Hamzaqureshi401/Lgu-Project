@@ -42,8 +42,6 @@ class StdRollNoSlipsController extends Controller
 
     public function addStdRollNoSlips(){
 
-        $this->uploadExal();
-
         $button = "Add Std Roll No Slip";
         $title  = 'Add Std Roll No Slip';
         $route  = '/storeStdRollNoSlips';
