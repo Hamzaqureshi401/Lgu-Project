@@ -5,7 +5,7 @@
 
                 
                   <div class="card-body">
-                    <input type="hidden" name="id" value="{{ $degree->ID }}">
+                    <input type="hidden" name="id" value="{{ $userRight->ID }}">
                     <div class="form-group">
                       <label>Designation</label>
                       <select class="form-control select2" name="Des_ID"  required>
@@ -27,45 +27,63 @@
                       </select>
                     </div>
 
-                    <div class="form-group">
-                      <label>Is Insert</label>
-                      <input 
-                      type="text" 
-                      name="IsInsert" 
-                      class="form-control" 
-                      required
-                      value="{{ $userRight->IsInsert }}" 
-                      
-                      >
-                    </div>
-                    <div class="form-group">
-                      <label>Is Update</label>
-                     <input 
-                      type="text" 
-                      name="IsUpdate" 
-                      class="form-control" 
-                      required
-                       value="{{ $userRight->IsUpdate }}" 
-                      >
-                    </div>
+          <div class="form-group col-3">
+             <label>Is Insert</label>
+             <div class="pretty p-switch p-slim">
+              <input type='hidden' value='0' name='IsInsert'>
+                <input type="checkbox" value="1" name="IsInsert" {{ $userRight->IsInsert == 1 ? 'checked' : '' }}>
+                  <div class="state p-success"
+
+                  >
+                    <label></label>
+                  </div>
+                </div>
+              </div>
+
+          <div class="form-group col-3">
+             <label>Is Update</label>
+             <div class="pretty p-switch p-slim">
+              <input type='hidden' value='0' name='IsUpdate'>
+                <input type="checkbox" value="1" name="IsUpdate" {{ $userRight->IsUpdate == 1 ? 'checked' : '' }}>
+                  <div class="state p-success"
+
+                  >
+                    <label></label>
+                  </div>
+                </div>
+              </div>
+
+          <div class="form-group col-3">
+             <label>Is Delete</label>
+             <div class="pretty p-switch p-slim">
+              <input type='hidden' value='0' name='IsDelete'>
+                <input type="checkbox" value="1" name="IsDelete" {{ $userRight->IsDelete == 1 ? 'checked' : '' }}>
+                  <div class="state p-success"
+
+                  >
+                    <label></label>
+                  </div>
+                </div>
+              </div>
+
+          <div class="form-group col-3">
+             <label>Is Browse</label>
+             <div class="pretty p-switch p-slim">
+              <input type='hidden' value='0' name='IsBrowse'>
+                <input type="checkbox" value="1" name="IsBrowse" {{ $userRight->IsBrowse == 1 ? 'checked' : '' }}>
+                  <div class="state p-success"
+
+                  >
+                    <label></label>
+                  </div>
+                </div>
+              </div>
+                    <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
+                   
                     
-                    <div class="form-group">
-                      <label>Is Delete</label>
-                      <input 
-                      type="text" 
-                      name="IsDelete" 
-                      class="form-control"
-                      required
-                       value="{{ $userRight->IsDelete }}" 
-                      >
-                    </div>
+                  
                     
-                    <div class="form-group">
-                      <label>Is Browse</label>
-                      <input type="number" name="IsBrowse" class="form-control"required
-                      value="{{ $userRight->IsBrowse }}"
-                      >  
-                    </div>
+          
                     
   
                 

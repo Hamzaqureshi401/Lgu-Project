@@ -2,8 +2,7 @@
 @section('title')  @endsection <!--add title here -->
 @section('content')
 @include('Forms.formHeader')
-              <form id="myForm" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+            
                   <div class="card-body">
 
                     <div class="form-group">
@@ -22,46 +21,54 @@
                         @endforeach
                       </select>
                     </div>
-
-                    <div class="form-group">
-                      <label>Is Insert</label>
-                      <input 
-                      type="text" 
-                      name="IsInsert" 
-                      class="form-control" 
-                      required
-                      
-                      >
-                    </div>
-                    <div class="form-group">
-                      <label>Is Update</label>
-                     <input 
-                      type="text" 
-                      name="IsUpdate" 
-                      class="form-control" 
-                      required
-                      
-                      >
-                    </div>
+                    <div class="row">
+            <div class="form-group col-3">
+                     <label>Is Insert</label>
+             <div class="pretty p-switch p-slim">
+              <input type='hidden' value='0' name='IsInsert'>
+                <input type="checkbox" value="1" name="IsInsert">
+                  <div class="state p-success">
+                    <label></label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-3">
+                     <label>Is Update</label>
+             <div class="pretty p-switch p-slim">
+              <input type='hidden' value='0' name='IsUpdate'>
+                <input type="checkbox" value="1" name="IsUpdate">
+                  <div class="state p-success">
+                    <label></label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-3">
+                     <label>Is Delete</label>
+             <div class="pretty p-switch p-slim">
+              <input type='hidden' value='0' name='IsDelete'>
+                <input type="checkbox" value="1" name="IsDelete">
+                  <div class="state p-success">
+                    <label></label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-3">
+                     <label>Is Browse</label>
+             <div class="pretty p-switch p-slim">
+              <input type='hidden' value='0' name='IsBrowse'>
+                <input type="checkbox" value="1" name="IsBrowse">
+                  <div class="state p-success">
+                    <label></label>
+                  </div>
+                </div>
+            </div>
+            </div>
+                                                 
                     
-                    <div class="form-group">
-                      <label>Is Delete</label>
-                      <input 
-                      type="text" 
-                      name="IsDelete" 
-                      class="form-control"
-                      required
-                      
-                      >
-                    </div>
-                    
-                    <div class="form-group">
-                      <label>Is Browse</label>
-                      <input type="number" name="IsBrowse" class="form-control"required>
-                    </div>
                     
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
-                </form>
+                
+              </div>
 @include('Forms.formFooter')                
 @endsection
 @include('js.form_submit_script')

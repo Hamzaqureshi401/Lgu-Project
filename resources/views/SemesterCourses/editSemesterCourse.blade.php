@@ -31,26 +31,6 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label>Quiz Weightage%</label>
-                      <input type="number" name="QuizWeightage" value="{{ $semesterCourse->QuizWeightage }}" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>Assignment Weightage%</label>
-                      <input type="number" name="AssignmentWeightage" value="{{ $semesterCourse->AssignmentWeightage }}" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>Presentation Weightage%</label>
-                      <input type="number" name="PresentationWeightage" value="{{ $semesterCourse->PresentationWeightage }}" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>Mid Weightage%</label>
-                      <input type="number" name="MidWeightage" value="{{ $semesterCourse->MidWeightage }}" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>FinalWeightage%</label>
-                      <input type="number" name="FinalWeightage" value="{{ $semesterCourse->FinalWeightage }}" class="form-control">
-                    </div>
-                    <div class="form-group">
                       <label>Section</label>
                       <input type="text" name="Section" value="{{ $semesterCourse->Section }}" class="form-control" onkeydown="return /[a-z]/i.test(event.key)" maxlength="1">
                     </div>

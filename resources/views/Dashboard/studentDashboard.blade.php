@@ -22,7 +22,7 @@
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                         <div class="banner-img">
-                          <img src="assets/img/banner/1.png" alt="">
+                          <!-- <img src="assets/img/banner/1.png" alt=""> -->
                         </div>
                       </div>
                     </div>
@@ -38,13 +38,16 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">OUTSTANDING</h5>
+                          @if(!empty($challans->Amount))
                           <h2 class="mb-3 font-18">{{$challans->sum('Amount') ?? '--'}}</h2>
-                          
+                          @else
+                          <h2 class="mb-3 font-18">{{"0"}}</h2>
+                          @endif
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                         <div class="banner-img">
-                          <img src="assets/img/banner/outstanding.jpg" alt="">
+                          <!-- <img src="assets/img/banner/outstanding.jpg" alt=""> -->
                         </div>
                       </div>
                     </div>
@@ -66,7 +69,7 @@
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                         <div class="banner-img">
-                          <img src="assets/img/banner/inv.png" alt="" style="max-width: 105px; max-height: 150px;">
+                          <!-- <img src="assets/img/banner/inv.png" alt="" style="max-width: 105px; max-height: 150px;"> -->
                         </div>
                       </div>
                     </div>
@@ -88,7 +91,7 @@
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                         <div class="banner-img">
-                          <img src="assets/img/banner/4.png" alt="">
+                          <!-- <img src="assets/img/banner/4.png" alt=""> -->
                         </div>
                       </div>
                     </div>

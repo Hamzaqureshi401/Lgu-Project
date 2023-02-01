@@ -19,11 +19,6 @@ class SemesterCoursesController extends Controller
             'Emp_ID'                => 'required|numeric',
             'CampusLimit'           => 'required|numeric',
             'DegCourse_ID'          => 'required|numeric|unique:SemesterCourses',
-            'QuizWeightage'         => 'required|max:10',
-            'AssignmentWeightage'   => 'required|max:10',
-            'PresentationWeightage' => 'required|max:10',
-            'MidWeightage'          => 'required|max:10',
-            'FinalWeightage'        => 'required|max:10',
             'Section'               => 'required|max:1|unique:SemesterCourses',
             'Course_ID'             => 'required|numeric|unique:SemesterCourses',
             
@@ -43,11 +38,6 @@ class SemesterCoursesController extends Controller
             'Emp_ID'                => 'required|numeric',
             'CampusLimit'           => 'required|numeric',
             'DegCourse_ID'          => 'required|numeric',
-            'QuizWeightage'         => 'required|max:10',
-            'AssignmentWeightage'   => 'required|max:10',
-            'PresentationWeightage' => 'required|max:10',
-            'MidWeightage'          => 'required|max:10',
-            'FinalWeightage'        => 'required|max:10',
             'Section'               => 'required|max:10',
             'Course_ID'             => 'required|numeric',
             
@@ -104,10 +94,6 @@ class SemesterCoursesController extends Controller
             @CampusLimit           = '$request->CampusLimit' , 
             @DegBatches_ID         = '$request->DegCourse_ID',
             @QuizWeightage         = '$request->QuizWeightage' , 
-            @AssignmentWeightage   = '$request->AssignmentWeightage',
-            @PresentationWeightage = '$request->PresentationWeightage' , 
-            @MidWeightage          = '$request->MidWeightage',
-            @FinalWeightage        = '$request->FinalWeightage' , 
             @Section               = '$request->Section',
             @Course_ID             = '$request->Course_ID'
             ;");
@@ -189,11 +175,6 @@ class SemesterCoursesController extends Controller
             @Emp_ID                 = '$request->Emp_ID', 
             @CampusLimit            = '$request->CampusLimit' , 
             @DegBatches_ID          = '$request->DegCourse_ID',
-            @QuizWeightage          = '$request->QuizWeightage' , 
-            @AssignmentWeightage    = '$request->AssignmentWeightage',
-            @PresentationWeightage  = '$request->PresentationWeightage', 
-            @MidWeightage           = '$request->MidWeightage' , 
-            @FinalWeightage         = '$request->FinalWeightage',
             @Section                = '$request->Section',
             @Course_ID              = '$request->Course_ID' 
             ;");

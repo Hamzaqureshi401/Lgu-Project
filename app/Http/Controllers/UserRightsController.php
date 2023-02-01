@@ -37,6 +37,8 @@ class UserRightsController extends Controller
        
     }
 
+
+
     public function addUserRights(){
         $button = "Add UserRight";
         $title  = 'Add UserRight';
@@ -57,16 +59,16 @@ class UserRightsController extends Controller
 
     public function storeUserRight(Request $request){
 
-        dd($request->all());
+        
 
         $validator = $this->validation($request);
        
-           $submit = DB::update("EXEC sp_InsertUserRights
-            @Des_ID         = '$request->Des_ID',
-            @Mod_ID        = '$request->Mod_ID',
-            @IsInsert     = '$request->IsInsert',
+           $submit = DB::update("EXEC sp_InsertUserRight
+            @Des_ID               = '$request->Des_ID',
+            @Mod_ID               = '$request->Mod_ID',
+            @IsInsert             = '$request->IsInsert',
             @IsUpdate             = '$request->IsUpdate',
-            @IsDelete = '$request->IsDelete',
+            @IsDelete             = '$request->IsDelete',
             @IsBrowse             = '$request->IsBrowse';
             ");
     
@@ -78,7 +80,8 @@ class UserRightsController extends Controller
         $button = "Update UserRight";
         $title  = 'Edit UserRight';
         $route  = '/updateUserRight';
-        $departments = Designation::get();
+        $designations = Designation::get();
+        $modules = Module::get();
         $userRight = UserRight::where('ID' , $id)->first();
 
         return
@@ -88,7 +91,8 @@ class UserRightsController extends Controller
             'button',
             'title' ,
             'route',
-            'departments'
+            'designations',
+            'modules'
          ));
     }
 
@@ -114,15 +118,15 @@ class UserRightsController extends Controller
 
          $validator = $this->validationUpdate($request);
      
-           $submit = DB::update("EXEC sp_UpdateUserRights
+           $submit = DB::update("EXEC sp_UpdateUserRight
 
-            @ID           = '$request->id',
-            @Des_ID          = '$request->Des_ID',
-            @Mod_ID         = '$request->Mod_ID',
-            @IsInsert      = '$request->IsInsert' ,
-            @IsUpdate              = '$request->IsUpdate',
-            @IsDelete  = '$request->IsDelete' ,
-            @IsBrowse              = '$request->IsBrowse';
+            @ID                   = '$request->id',
+            @Des_ID               = '$request->Des_ID',
+            @Mod_ID               = '$request->Mod_ID',
+            @IsInsert             = '$request->IsInsert',
+            @IsUpdate             = '$request->IsUpdate',
+            @IsDelete             = '$request->IsDelete',
+            @IsBrowse             = '$request->IsBrowse';
             ");
 
      
