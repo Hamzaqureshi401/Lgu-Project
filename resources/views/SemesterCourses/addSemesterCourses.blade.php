@@ -34,26 +34,7 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
-                      <label>Quiz Weightage%</label>
-                      <input type="number" name="QuizWeightage" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>Assignment Weightage%</label>
-                      <input type="number" name="AssignmentWeightage" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>Presentation Weightage%</label>
-                      <input type="number" name="PresentationWeightage" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>Mid Weightage%</label>
-                      <input type="number" name="MidWeightage" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label>FinalWeightage%</label>
-                      <input type="number" name="FinalWeightage" class="form-control">
-                    </div>
+                    
                     <div class="form-group">
                       <label>Section</label>
                       <input type="text" name="Section" class="form-control" maxlength="1" onkeydown="return /[a-z]/i.test(event.key)">

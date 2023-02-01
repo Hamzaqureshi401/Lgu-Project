@@ -18,6 +18,7 @@
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}">
     <link rel='shortcut icon' type='image/x-icon' href='{{ URL::asset('assets/img/logo.png') }}' />
+    <link rel="stylesheet" href="{{ asset('assets/bundles/select2/dist/css/select2.min.css') }}">
 
 
 </head>

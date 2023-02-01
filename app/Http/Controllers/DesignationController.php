@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Designation;
 use App\Models\Department;
+use App\Models\Employee;
+use App\Models\EmpDesignation;
+
+
 
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -42,6 +46,39 @@ class DesignationController extends Controller
                 'route',
                 'departments'
             ));
+    }
+
+    public function setEmpDesignation(){
+
+        $button = "Add Emp Designation";
+        $title  = 'Add Emp Designation';
+        $route  = '/storeEmpDesignation';
+        $empDesignations = EmpDesignation::select('Emp_ID')->get();
+        $designations = Designation::get();
+        $employees = Employee::whereNotIn('ID' , $empDesignations->pluck('Emp_ID')->toArray())->get();
+        return
+        view('Designation.setEmpDesignation',
+            compact(
+                'button' ,
+                'title' ,
+                'route',
+                'designations',
+                'employees'
+            ));
+    }
+
+    public function storeEmpDesignation(Request $request){
+
+    
+            $submit       = DB::Update("EXEC insertEmpDesignation
+            @Des_ID       = '$request->Des_ID',
+            @Emp_ID       = '$request->Emp_ID',
+            @Status       = '1'
+            
+            ;
+        ");
+       
+             return redirect()->back()->with(['successToaster' => 'Dasignation Added' , 'title' => 'Success']);
     }
 
     public function storeDesignation(Request $request){
@@ -88,6 +125,26 @@ class DesignationController extends Controller
             ));
 
     }
+
+     public function editEmpDesignation($id){
+
+        $button = "Update Emp Designation";
+        $title  = 'Edit EmpDesignation';
+        $route  = '/updateEmpDesignation';
+        $empDesignation = EmpDesignation::where('ID' , $id)->first();
+        $designations = Designation::get();
+
+        return
+        view('Designation.editEmpDesignation',
+            compact(
+                'empDesignation',
+                'button' ,
+                'title' ,
+                'route',
+                'designations'
+            ));
+
+    }
     public function allDesignations(){
 
         $designations = Designation::paginate(10);
@@ -108,6 +165,29 @@ class DesignationController extends Controller
             'title'  => 'Done' ,
             'type'   => 'success',
             'message'=> 'Designation Updated!
+            ']);
+    }
+
+     public function allEmpDesignations(){
+
+        $designations = EmpDesignation::paginate(10);
+        $title  = 'All Emp Designations';
+        $route = 'updateEmpDesignation';
+        $getEditRoute = 'editEmpDesignation';
+        $modalTitle = 'Edit Emp Designations';
+        return
+        view('Designation.allEmpDesignations' ,
+            compact(
+                'designations' ,
+                'title',
+                'route',
+                'getEditRoute',
+                'modalTitle'
+            ));
+        return response()->json([
+            'title'  => 'Done' ,
+            'type'   => 'success',
+            'message'=> 'EmpDesignation Updated!
             ']);
     }
 
@@ -135,6 +215,20 @@ class DesignationController extends Controller
         //     'message'=> 'Designation Updated!
         //     ']);
         // }
+              return redirect()->back()->with(['successToaster' => 'Designation Updated' , 'title' => 'Success']);
+
+    }
+    public function updateEmpDesignation (Request $request){
+
+
+        
+             $submit = DB::update("EXEC UpdateEmpDesignation
+            @ID         = '$request->id',
+            @Des_ID       = '$request->Des_ID',
+            @Status       = '$request->Status'
+            ;");
+
+        
               return redirect()->back()->with(['successToaster' => 'Designation Updated' , 'title' => 'Success']);
 
     }

@@ -1,5 +1,6 @@
 
 <!-- General JS Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 <script src="{{ URL::asset('assets/js/app.min.js')}}"></script>
 
  <script src="{{ asset('assets/bundles/izitoast/js/iziToast.min.js') }}"></script>

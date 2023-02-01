@@ -14,10 +14,6 @@
                             <th>Campus Limit</th>
                             <th>Degree Batch</th>
                             <th>Quiz Weightage</th>
-                            <th>Assignment Weightage</th>
-                            <th>Presentation Weightage</th>
-                            <th>Mid Weightage</th>
-                            <th>Final Weightage</th>
                             <th>Section</th>
                             <th>Course</th>
                             
@@ -37,12 +33,7 @@
                             <td>{{ $semesterCourse->employee->Emp_FirstName ?? '--' }} {{ $semesterCourse->employee->Emp_LastName ?? '--' }}</td>
                             <td>{{ $semesterCourse->CampusLimit  ?? '--'}}</td>
                             <td>{{ $semesterCourse->degreeBatches->degree->DegreeName ?? '--'}} / {{ $semesterCourse->degreeBatches->batch->SemSession ?? '--'}}</td>
-                            <td>{{ $semesterCourse->QuizWeightage  ?? '--'}}</td>
-                            <td>{{ $semesterCourse->AssignmentWeightage  ?? '--'}}</td>
-                            <td>{{ $semesterCourse->PresentationWeightage  ?? '--'}}</td>
-                            <td>{{ $semesterCourse->MidWeightage  ?? '--'}}</td>
-                            <td>{{ $semesterCourse->FinalWeightage  ?? '--'}}</td>
-                            <td>{{ $semesterCourse->Section  ?? '--'}}</td>
+                           <td>{{ $semesterCourse->Section  ?? '--'}}</td>
                             <td>{{ $semesterCourse->course->CourseName  ?? '--'}}</td>
                             <td>
                               <div class="card-body">

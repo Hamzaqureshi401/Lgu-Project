@@ -11,7 +11,7 @@ use App\Models\TimeTable;
 use App\Models\Degree;
 use App\Models\Semester;
 use App\Models\Attendance;
-
+use PDF;
 
 use Illuminate\Http\Request;
 
@@ -455,5 +455,18 @@ class ViewController extends Controller
 
         return view('View.ledger' , compact('enrollment'));
     }
+
+    public function test(){
+
+        return view('test');
+    }
+
+      public function downloadcstorepdf(){
+        $data = "";
+        view()->share('data',$data);
+        $pdf = PDF::loadView('test');
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->download('itemized_sales_report.pdf');
+      }
 
 }
