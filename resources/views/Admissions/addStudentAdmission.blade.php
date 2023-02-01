@@ -269,7 +269,7 @@
          <label style="font-size: 13px">Admission Session<span style="color: red">*</span></label>
          <select name="AdmissionSession" class="custom-select">
             @foreach ($admissionsession as $admissionsessiondeatils)
-            <option value="{{ $admissionsessiondeatils->ID }}" {{old('AdmissionSession')===$admissionsessiondeatils->ID ? "selected":" " }}>
+            <option value="{{ $admissionsessiondeatils->SemSession }}" {{old('AdmissionSession')===$admissionsessiondeatils->SemSession ? "selected":" " }}>
                {{ $admissionsessiondeatils->SemSession }}
             </option>
             @endforeach

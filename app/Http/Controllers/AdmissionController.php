@@ -339,6 +339,7 @@ class AdmissionController extends Controller
         $studentAdmission = Student::where('ID' , $id)->first();
         $degrees = Degree::get();
         $studentEducations = StudentEducation::where('Std_ID' , $id)->get();
+        $admissionsession = Semester::where('Year','=', date('Y'))->get();
 
 
 
@@ -354,7 +355,8 @@ class AdmissionController extends Controller
                 'button' ,
                 'title' ,
                 'route',
-                'degree'
+                'degree',
+                'admissionsession'
                
             ));
     }
@@ -484,14 +486,21 @@ class AdmissionController extends Controller
         
         if($request->Status=='Admitted')
         {
-            // $ = Degree::select('ID', 'DegreeName')->distinct()->get();
+            $applicantid = Student::where(['ID' => $request->Student_ID])->first();
 
-            // dd($request);
+            if($applicantid->StdRollNo==null){
+
+                // {{echo "Assign it" ;}}
+
+                DB::update("EXEC sp_RollNoAssign
+                @App_ID='$request->Student_ID'
+                ;");
+
+            }
+
 
         }
-        else{
 
-        }
 
 
  
