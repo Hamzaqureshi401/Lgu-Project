@@ -98,6 +98,14 @@ Route::post('/storeModules', [App\Http\Controllers\ModulesController::class, 'st
 Route::get('/editModule/{id?}', [App\Http\Controllers\ModulesController::class, 'editModule'])->name('edit.Module');
 Route::post('/updateModule', [App\Http\Controllers\ModulesController::class, 'updateModule'])->name('update.Module');
 
+// StdScholarShips Routes start
+
+Route::get('/addStdScholarShips', [App\Http\Controllers\StdScholarShipsController::class, 'addStdScholarShips'])->name('add.StdScholarShips');
+Route::get('/allStdScholarShips', [App\Http\Controllers\StdScholarShipsController::class, 'allStdScholarShips'])->name('all.StdScholarShips');
+Route::post('/storeStdScholarShip', [App\Http\Controllers\StdScholarShipsController::class, 'storeStdScholarShip'])->name('store.StdScholarShip');
+Route::get('/editStdScholarShip/{id?}', [App\Http\Controllers\StdScholarShipsController::class, 'editStdScholarShip'])->name('edit.StdScholarShip');
+Route::post('/updateStdScholarShip', [App\Http\Controllers\StdScholarShipsController::class, 'updateStdScholarShip'])->name('update.StdScholarShip');
+
 // UserRights Routes start
 
 Route::get('/addUserRights', [App\Http\Controllers\UserRightsController::class, 'addUserRights'])->name('add.UserRights');

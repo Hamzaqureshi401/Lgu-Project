@@ -14,7 +14,7 @@ class UserRightsController extends Controller
        public function validation($request){
 
         $this->validate($request, [
-            'Des_ID'        => 'required|max:50|unique:UserRights',
+            'Des_ID'        => 'required|max:50',
             'Mod_ID'       => 'required|max:30',
             'IsInsert'    => 'required|max:70',
             'IsUpdate'            => 'required|numeric',
