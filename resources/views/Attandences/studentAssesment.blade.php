@@ -1,12 +1,6 @@
 @extends('layouts.app_new')
 @section('title')  @endsection <!--add title here -->
 @section('content')
-@push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css') }}/app.min.css') }}">
-<!-- Template CSS') }} -->
-<link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/bundles/datatables/DataTables-1.10.16/css') }}/dataTables.bootstrap4.min.css') }}">
-@endpush
 
 <section class="section">
    <div class="section-body bg-success">
@@ -142,12 +136,4 @@
 <script type="text/javascript">
    $("#exampleModal").prependTo("body"); 
 </script>
-<script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}"></script>
-<script src="{{ asset('assets/bundles/datatables/export-tables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/bundles/datatables/export-tables/buttons.flash.min.js') }}"></script>
-<script src="{{ asset('assets/bundles/datatables/export-tables/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/bundles/datatables/export-tables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/bundles/datatables/export-tables/vfs_fonts.js') }}"></script>
-<script src="{{ asset('assets/bundles/datatables/export-tables/buttons.print.min.js') }}"></script>
-<script src="{{ asset('assets/js/page/datatables.js') }}"></script>
 @endsection
