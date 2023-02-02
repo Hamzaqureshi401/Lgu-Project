@@ -487,16 +487,8 @@ class AdmissionController extends Controller
         if($request->Status=='Admitted')
         {
             $applicantid = Student::where(['ID' => $request->Student_ID])->first();
-
-            // dd{}
-
             if($applicantid->StdRollNo==null){
-
-
-                DB::update("EXEC sp_RollNoAssign
-                @App_ID='$applicantid->ApplicantID'
-                ;");
-
+                DB::update("EXEC sp_RollNoAssign @App_ID='$applicantid->ApplicantID' ;");
             }
 
 
