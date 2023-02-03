@@ -47,7 +47,8 @@
          </tr>
       </thead>
       <tbody>
-          @foreach($optionSemesterCourseWeightages as $key => $semesterCourseWeightage)
+
+         @foreach($wetaigePlusDetails as $key => $wetaigePlusDetail)
           @if($key < 2)
         <tr>
          <td>{{ $loop->index + 1}}</td>
@@ -55,14 +56,17 @@
          $ind = 0;
          $ind = $ind + ($loop->index) + 1;
          @endphp
-           <td>{{ $semesterCourseWeightage->Type }}</td>
-           <td>{{ $semesterCourseWeightage->Weightage }}</td>
+           <td>{{ $wetaigePlusDetail->Type }}</td>
+           <td>{{ $wetaigePlusDetail->TotalMarks }}</td>
            <td> -- </td>
-           <td> <a href="{{ route('assign.Marks' , [$id , $semesterCourseWeightage->Type])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
+           <td> <a href="{{ route('assign.Marks' , [$id , $wetaigePlusDetail->Type])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
         </tr>
          @endif
          @endforeach
+
+
           @foreach($SemesterCourseWeightageDetails as $key => $SemesterCourseWeightageDetail)
+           @if($key > 1)
            <tr>
          <td>{{ $ind + 1}}</td>
            <td>{{ $SemesterCourseWeightageDetail->SemesterCourseWeightage->Type }}</td>
@@ -72,7 +76,7 @@
             
            
             @if(in_array( $SemesterCourseWeightageDetail->ID ,$StudentMarks ) )
-            <a class="btn btn-sm btn-info" style="color:white;"> <li class="fas fa-exclamation"> Record Exist Canot Delete</li> </a> 
+            <a class="btn btn-sm btn-info" style="color:white;"> <li class="fas fa-exclamation"> Marks Exist Canot Delete</li> </a> 
             @else
             <a href="{{ route('delete.Marks' , $SemesterCourseWeightageDetail->ID)}}" class="btn btn-sm btn-danger">Delete Marks</a> 
             @endif
@@ -80,7 +84,8 @@
          </td>
            <td> <a href="{{ route('assign.Marks' , [$id , $SemesterCourseWeightageDetail->SemesterCourseWeightage->Type])}}" class="btn btn-sm btn-primary">Assign Obtained Marks</a></td>
         </tr>
-         @endforeach
+        @endif
+         @endforeach 
          
 
        

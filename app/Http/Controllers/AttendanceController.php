@@ -250,7 +250,7 @@ class AttendanceController extends Controller
         $SemCourseWeightage             = SemesterCourseWeightage::where(['SemCourse_ID' => $id , 'Type' => $type])->first();
         $SemesterCourseWeightageDetail  = SemesterCourseWeightageDetail::where('SemCourseWeightage_ID' , $SemCourseWeightage->ID)->first();
         $route                          = '/storeStudentMark';
-        dd($SemesterCourseWeightageDetail->ID);
+       
         $StudentMarks = StudentMark::where('SemCourseWeightagedetail_ID' , $SemesterCourseWeightageDetail->ID)->first();
         
 
@@ -406,13 +406,23 @@ class AttendanceController extends Controller
 
          $SemesterCourse                 = SemesterCourse::where('ID' , $id)->first();
          $semesterCourseWeightages       = SemesterCourseWeightage::where('SemCourse_ID' , $id); 
+
+         $wetaigePlusDetails = SemesterCourseWeightage::
+         join('SemesterCourse_WeightageDetail' , 'SemesterCourse_WeightageDetail.SemCourseWeightage_ID' , 'SemesterCourse_Weightage.ID')
+         ->select('SemesterCourse_Weightage.ID' , 'SemesterCourse_Weightage.Type' , 'SemesterCourse_WeightageDetail.TotalMarks')
+         ->where('SemesterCourse_Weightage.SemCourse_ID' , $id)
+         ->get();
+
          $route                          = '/addSemesterCourseWeightageDetails';
          $typefilter                     = SemesterCourseWeightageDetail::pluck('SemCourseWeightage_ID')->toArray();
-         $optionSemesterCourseWeightages = SemesterCourseWeightage::whereNotIn('ID' , $typefilter)->get();
+         
+
          $semesterCourseWeightagesID     = $semesterCourseWeightages->pluck('ID')->toArray();
          $SemesterCourseWeightageDetails = SemesterCourseWeightageDetail::whereIn('SemCourseWeightage_ID' , $semesterCourseWeightagesID)->get();
          $semesterCourseWeightages       = $semesterCourseWeightages->get();
+        // dd($semesterCourseWeightages);
          $StudentMarks = StudentMark::pluck('SemCourseWeightagedetail_ID')->toArray();
+         $stdMars = StudentMark::pluck('ID')->toArray();
          
 
         return view('Attandences.studentAssesment' , 
@@ -421,9 +431,11 @@ class AttendanceController extends Controller
                 'id' , 
                 'semesterCourseWeightages' ,  
                 'route',
-                'optionSemesterCourseWeightages',
+                
                 'SemesterCourseWeightageDetails',
-                'StudentMarks'
+                'StudentMarks',
+                'wetaigePlusDetails',
+                'stdMars'
             ));
     }
 
@@ -439,6 +451,8 @@ class AttendanceController extends Controller
     }
 
      public function storeStudentMark(Request $request){
+
+       // dd($request->all());
 
         $SemCourseWeightage_ID       = SemesterCourseWeightage::where(['SemCourse_ID' => $request->SemCourses_ID , 'Type' => $request->type])->first()->ID;
         $SemCourseWeightage_ID       = SemesterCourseWeightageDetail::where('SemCourseWeightage_ID' , $SemCourseWeightage_ID)->first()->ID;
