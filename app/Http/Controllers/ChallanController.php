@@ -5,7 +5,7 @@ use App\Models\Challan;
 use Illuminate\Http\Request;
 use Session;
 use App\Models\Registration;
-
+use DB;
 use PDF;
 use Dompdf\Dompdf;
 class ChallanController extends Controller
@@ -89,5 +89,74 @@ class ChallanController extends Controller
     public function getSessionData(){
 
         return session::all();
+    }
+
+    public function createChallan(
+           
+            $Amount,
+            $Type,
+            $Reg,
+            $Sem_ID
+    ){
+
+        $IssueDate  = date('m/d/Y h:i:s a', time());
+        $DueDate    = Date('m/d/Y', strtotime('+10 days'));
+        $PaidDate   = "";
+        $Status     = "Valid";
+        $Fine       = 0;
+
+       // dd($Reg);
+        
+
+         $submit = DB::statement("EXEC sp_InsertChallans
+            
+            @IssueDate             = '$IssueDate',
+            @DueDate               = '$DueDate',
+            @PaidDate              = '$PaidDate',
+            @Status                = '$Status',
+            @Fine                  = '$Fine',
+            @Amount                = '$Amount',
+            @Type                  = '$Type',
+            @Reg_ID                = '$Reg',
+            @Sem_ID                = '$Sem_ID'
+            ;");
+
+        // return Challan::where(['DueDate' => $IssueDate , 'Reg_ID' => 30021 , 'Sem_ID' =>  $Sem_ID])->first();
+         return Challan::latest('ID')->first();
+
+
+    }
+
+    public function createChallanDetail(
+
+        $Challans_ID,
+        // $SemesterFee,
+        $Magazine_Fee,
+        $Exam_Fee,
+        $Society_Fee,
+        $Misc_Fee,
+        $Registration_Fee,
+        $Practical_charges,
+        $Sports_Fund,
+        // $FeeType,
+         $Tuition_Fee
+    ){
+
+         $submit = DB::statement("EXEC sp_InsertChallanDetails
+            
+            @Challans_ID             = '$Challans_ID',
+            
+            @Magazine_Fee            = '$Magazine_Fee',
+            @Exam_Fee                = '$Exam_Fee',
+            @Society_Fee             = '$Society_Fee',
+            @Misc_Fee                = '$Misc_Fee',
+            @Registration_Fee        = '$Registration_Fee',
+            @Practical_charges       = '$Practical_charges',
+            @Sports_Fund             = '$Sports_Fund',
+            @Tuition_Fee             = '$Tuition_Fee'
+            
+            ;");
+
+
     }
 }

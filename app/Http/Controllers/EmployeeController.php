@@ -62,7 +62,7 @@ class EmployeeController extends Controller
             'Address'            => 'required|max:50',
             'Dpt_ID'             => 'required|numeric',
             'Grade'              => 'required|numeric',
-            'Contact_Number'     => 'required|max:10',
+            'Contact_Number'     => 'required|max:12',
 
         ]);
         // $validation['validation'] = $validator->errors()->first();

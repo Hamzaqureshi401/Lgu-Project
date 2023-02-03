@@ -41,7 +41,7 @@ class SemesterDetailsController extends Controller
         $this->validate($request, [
             'DegBatches_ID'         => 'required|numeric',
             'Sem_ID'            => 'required|numeric',
-             'SemesterFee'       => 'required|numeric',
+            'SemesterFee'       => 'required|numeric',
             'Magazine_Fee'      => 'required|numeric',
             'Exam_Fee'          => 'required|numeric',
             'Society_Fee'       => 'required|numeric',

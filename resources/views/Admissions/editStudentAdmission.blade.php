@@ -281,11 +281,10 @@
    <div class="form-group">
       <label style="font-size: 13px">Admission Session<span style="color: red">*</span></label>
       <select name="AdmissionSession" class="custom-select">
-         <option value="{{ $studentAdmission->SemSession }}" selected>{{ $studentAdmission->SemSession}}
-         </option>
+         
          @foreach ($admissionsession as $admissionsessiondeatils)
          
-         <option value="{{ $admissionsessiondeatils->SemSession }}" >
+         <option value="{{ $admissionsessiondeatils->ID }}" {{ $admissionsessiondeatils->ID == $studentAdmission->AdmissionSession ? 'selected' : '' }}>
             {{ $admissionsessiondeatils->SemSession }}
          </option>
          @endforeach

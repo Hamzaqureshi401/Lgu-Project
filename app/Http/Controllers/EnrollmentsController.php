@@ -10,6 +10,7 @@ use App\Models\Semester;
 use App\Models\Degree;
 use App\Models\DegreeBatche;
 use App\Models\SemesterDetail;
+use App\Http\Controllers\ChallanController;
 
 use App\Models\Exam_AcademicStandingRule;
 use Illuminate\Http\Request;
@@ -222,22 +223,44 @@ class EnrollmentsController extends Controller
         }
         
 
-        $Type       = "Registration";
+         $Type           = "Registration";
+         $challan        = new ChallanController();
+         $challancreated = $challan->createChallan(
+            $amount , 
+            $Type, 
+            $registrationId, 
+            $Sem_ID
+        );
+
+        $challan->createChallanDetail(
+
+        $challancreated->ID,
+        // $SemesterFee,
+        $sem_details->Magazine_Fee,
+        $sem_details->Exam_Fee,
+        $sem_details->Society_Fee,
+        $sem_details->Misc_Fee,
+        $sem_details->Registration_Fee,
+        $sem_details->Practical_charges,
+        $sem_details->Sports_Fund,
+        // $FeeType,
+        $sem_details->Tuition_Fee
+    );
         
         
 
-         $submit = DB::statement("EXEC sp_InsertChallans
+         // $submit = DB::statement("EXEC sp_InsertChallans
             
-            @IssueDate             = '$IssueDate',
-            @DueDate               = '$DueDate',
-            @PaidDate              = '$PaidDate',
-            @Status                = '$Status',
-            @Fine                  = '$Fine',
-            @Amount                = '$Amount',
-            @Type                  = '$Type',
-            @Reg_ID                = '$registrationId',
-            @Sem_ID                = '$Sem_ID'
-            ;");
+         //    @IssueDate             = '$IssueDate',
+         //    @DueDate               = '$DueDate',
+         //    @PaidDate              = '$PaidDate',
+         //    @Status                = '$Status',
+         //    @Fine                  = '$Fine',
+         //    @Amount                = '$Amount',
+         //    @Type                  = '$Type',
+         //    @Reg_ID                = '$registrationId',
+         //    @Sem_ID                = '$Sem_ID'
+         //    ;");
     }
 
 

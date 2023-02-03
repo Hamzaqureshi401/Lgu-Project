@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Models\Student;
+use App\Models\Challan;
 use App\Models\Degree;
 use App\Models\Semester;
+use App\Models\DegreeBatche;
+use App\Models\SemesterDetail;
+use App\Http\Controllers\ChallanController;
 
 use App\Models\StudentEducation;
 
@@ -433,34 +437,25 @@ class AdmissionController extends Controller
 
 
     
-        if($request->country)
-        {
+        if($request->country){
             $Country            =  $request->country;
-
         }
         else{
             $Country           =   $request->country_pre;
-
         }
 
         if($request->state){
             $state              =  $request->state;
-
-
         }
         else{
             $state             =   $request->Province_pre;
-
         }
 
-        if($request->DOB)
-        {
+        if($request->DOB){
             $Date_of_birth      =  $request->DOB;
-
         }
         else{
             $Date_of_birth     =   $request->DOB_pre;
-
         }
 
         if($request->stdfile){
@@ -470,22 +465,18 @@ class AdmissionController extends Controller
         }
         else{
             $file              =   $request->stdfile_pre;
-
         }
 
-        if($request->Image)
-        {
+        if($request->Image){
             $stdImage           = time() . "_studentImageupdate." . $request->file('Image')->getClientOriginalExtension();
             $request->file('Image')->storeAs('studentsImages', $stdImage);
         }
         else{
             $stdImage          =   $request->image_pre;
-
         }
 
         
-        if($request->Status=='Admitted')
-        {
+        if($request->Status=='Admitted'){
             $applicantid = Student::where(['ID' => $request->Student_ID])->first();
             if($applicantid->StdRollNo==null){
                 DB::update("EXEC sp_RollNoAssign @App_ID='$applicantid->ApplicantID' ;");
@@ -493,14 +484,15 @@ class AdmissionController extends Controller
 
 
         }
+        if($request->Status=='Completed'){
+            $this->createChallan($request);
+        }
 
 
 
  
 
         $this->updateStudentTable($request , $Date_of_birth ,$state ,$Country ,$file ,$stdImage);
-
-        // dd($request->examination);
 
         for ($i=0; $i < sizeof($request->examination) ; $i++) { 
 
@@ -516,27 +508,59 @@ class AdmissionController extends Controller
            $this->updateEducation($data);
         }
 
-        // $validator = $this->validation($request);
-
-
-        // if ($validator['error'] == true) {
-        //     return
-        //     response()->json([
-        //     'title' => 'Failed' ,
-        //     'type'=> 'error',
-        //     'message'=> ''.$validator['validation']
-        //     ]);
-        // }else {
-            // $this->createStudentDetail($request);
-            // $this->createStudentQualification($request);
-        //   return response()->json([
-        //     'title' => 'Done' ,
-        //     'type'=> 'success',
-        //     'message'=> 'Student Admission Updated!
-        //     ']);
-        // }
+        
         return redirect()->back()->with(['successToaster' => 'Student Admission Added!' , 'title' => 'Success']);
 
+    }
+
+    public function createChallan($request){
+
+        //dd($request->AdmissionSession , $request->Degree_ID);
+        $challan = new ChallanController();
+        $degreeBatch = DegreeBatche::where(['Degree_ID' => $request->Degree_ID , 'Batch_ID' => $request->AdmissionSession])->first()->ID;
+
+        $semesterDetail = SemesterDetail::where(['DegBatches_ID' => $degreeBatch , 'Sem_ID' => $request->AdmissionSession])->first();
+        $amount = $semesterDetail->SemesterFee + 
+        $semesterDetail->Tuition_Fee +  
+        $semesterDetail->Magazine_Fee +
+        $semesterDetail->Exam_Fee +
+        $semesterDetail->Society_Fee +
+        $semesterDetail->Misc_Fee +
+        $semesterDetail->Registration_Fee +
+        $semesterDetail->Practical_charges +
+        $semesterDetail->Sports_Fund;
+
+        // dd($amount , $Type= "Registration" , $registrationId = 000 , $request->AdmissionSession);
+
+        // DB::table('ChallanDetails')->truncate();
+        // DB::table('Challans')->truncate();
+        
+
+       $challancreated = $challan->createChallan(
+            $amount , 
+            $Type= "Registration" , 
+            $registrationId = '30021' , 
+            $request->AdmissionSession
+        );
+       
+
+
+
+        $challan->createChallanDetail(
+
+        $challancreated->ID,
+        // $SemesterFee,
+        $semesterDetail->Magazine_Fee,
+        $semesterDetail->Exam_Fee,
+        $semesterDetail->Society_Fee,
+        $semesterDetail->Misc_Fee,
+        $semesterDetail->Registration_Fee,
+        $semesterDetail->Practical_charges,
+        $semesterDetail->Sports_Fund,
+        // $FeeType,
+        $semesterDetail->Tuition_Fee
+    );
+        
     }
 
 
