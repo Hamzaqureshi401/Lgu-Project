@@ -16,6 +16,6 @@ class Department extends Model
         return Degree::where('ID' , $id)->first();
     }
     public function countStudent($id){
-        return Student::where('Degrees_ID' , $this->getDegree($id)->ID ?? '')->get() ?? '';
+        return Student::where('Degree_ID' , $this->getDegree($id)->ID ?? '')->get() ?? '';
     }
 }

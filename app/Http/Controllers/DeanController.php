@@ -22,7 +22,7 @@ class DeanController extends Controller
         $departments= Department::get();
         $degreeBatches = DegreeBatche::whereNotNull('Batch_ID')->get();
         // foreach($degreeBatches as $degreeBatche){
-        //      dd($students->where(['Degrees_ID' => $degreeBatche->degree->ID])->count() ?? 0);
+        //      dd($students->where(['Degree_ID' => $degreeBatche->degree->ID])->count() ?? 0);
         // }
        
         

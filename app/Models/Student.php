@@ -9,7 +9,7 @@ class Student extends Model
 {
    public $timestamps = false;
      public function degree(){
-        return $this->belongsTo('App\Models\degree', 'Degrees_ID');
+        return $this->belongsTo('App\Models\degree', 'Degree_ID');
     }
      public function semester(){
 

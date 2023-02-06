@@ -44,7 +44,14 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+           if ($e instanceof \Illuminate\Database\QueryException) {
+       // dd($e->getMessage());
+        return response()->view('Errors.dbConnectionLost');
+    } elseif ($e instanceof \PDOException) {
+        //dd($e->getMessage());
+        return response()->view('Errors.dbConnectionLost');
+        //return response()->view('custom_view');
+    }
         });
     }
 }

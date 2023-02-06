@@ -15,7 +15,7 @@ class login extends Controller
     public function index()
     {
         $error = "";
-        return view('Employee_Login', compact('error'));
+        return view('Login.Employee_Login', compact('error'));
     }
 
     public function Emp_login_1()
