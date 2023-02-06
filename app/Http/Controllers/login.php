@@ -24,7 +24,7 @@ class login extends Controller
             return view('Dashboard.Employee_dashboard');
         } else {
             $error = "";
-            return view('Employee_Login', compact('error'));
+            return view('Login.Employee_Login', compact('error'));
         }
     }
     public function Std_login_view()
@@ -36,7 +36,7 @@ class login extends Controller
             $batch      = Semester::get();
             $department = DB::table('Departments')->select('Dpt_Name')->get();
             $error      = "";
-            return view('Student_Login', compact('error', 'batch', 'department'));
+            return view('Login.Student_Login', compact('error', 'batch', 'department'));
         }
     }
     public function logoutsessions()
