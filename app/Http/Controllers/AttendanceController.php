@@ -83,7 +83,7 @@ class AttendanceController extends Controller
         $title          = 'All Semester Courses';
         $route          = 'updateSemesterCourse';
         $getEditRoute   = 'empSemesterCoursesAttandence';
-        $modalTitle     = 'Go To Attandence';
+        $modalTitle     = 'Go To Attendence';
 
         return 
         view('Attandences.empSemesterCourses' , 
@@ -115,7 +115,7 @@ class AttendanceController extends Controller
             return redirect()
             ->back()
             ->with([
-                'errorToaster' => 'Your Classes Timt Table not Found' , 
+                'errorToaster' => 'Your Classes Time Table not Found' , 
                 'title' => 'Error'
             ]);
         }

@@ -493,6 +493,7 @@ class AdmissionController extends Controller
  
 
         $this->updateStudentTable($request , $Date_of_birth ,$state ,$Country ,$file ,$stdImage);
+        if(!empty($request->examination)){
 
         for ($i=0; $i < sizeof($request->examination) ; $i++) { 
 
@@ -506,6 +507,7 @@ class AdmissionController extends Controller
            $data['educationID']      = $request->educationID[$i];
 
            $this->updateEducation($data);
+        }
         }
 
         

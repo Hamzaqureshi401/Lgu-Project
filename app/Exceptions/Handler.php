@@ -45,13 +45,22 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
            if ($e instanceof \Illuminate\Database\QueryException) {
-       // dd($e->getMessage());
-        return response()->view('Errors.dbConnectionLost');
+        //dd($e->getMessage());
+            
+        return response()->view('Errors.dbConnectionLost', [], 500);
     } elseif ($e instanceof \PDOException) {
         //dd($e->getMessage());
         return response()->view('Errors.dbConnectionLost');
         //return response()->view('custom_view');
     }
+
+    // Add extra custom render.
+    if ($e instanceof ModelNotFoundException) {
+        return response()->view('Errors.dbConnectionLost', [], 500);
+    }
+
+    
+
         });
     }
 }
