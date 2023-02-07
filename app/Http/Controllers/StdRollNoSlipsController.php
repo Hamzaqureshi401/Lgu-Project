@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Enrollment;
 use App\Models\Employee;
 use App\Models\StdRollNoSlip;
+use App\Models\Student;
+
 use DB;
 use Session;
 use Excel;
@@ -271,6 +273,12 @@ class StdRollNoSlipsController extends Controller
 
     public function printRollNoSlip(){
 
-        return view('StdRollNoSlips.printStudentRollNoSlip');
+        $studentrollno=Session::get('user');
+        $studentdatarollnoslip     = Student::where('StdRollNo' , $studentrollno)->first();
+
+
+        // dd($studentdatarollnoslip);
+
+        return view('StdRollNoSlips.printStudentRollNoSlip',compact('studentdatarollnoslip'));
     }
 }

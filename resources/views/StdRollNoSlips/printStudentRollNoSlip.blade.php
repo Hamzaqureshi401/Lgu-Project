@@ -53,20 +53,20 @@ td { border: solid thin; }
             <p style="font-size: 25px;">LAHORE GARRISON UNIVERSITY</p>
          </div>
          <div class="imgleftdiv">
-            <p style="font-size: 25px;">TUDENT ADMIT CARD</p>
+            <p style="font-size: 25px;">STUDENT ADMIT CARD</p>
          </div>
          <div class="imgleftdiv">
             <p style="font-size: 25px;">Fa-2022 Mid Term Exam</p>
          </div>
          <div class="d-50 ">
-            <p>Std Roll No: </p>
-            <p>Name: </p>
-            <p>Section: </p>
+            <p>Std Roll No: <b>{{$studentdatarollnoslip['StdRollNo']}} </b> </p>
+            <p>Name: <b>{{$studentdatarollnoslip['Std_FName']." ".$studentdatarollnoslip['Std_LName']}} </b> </p>
+            <p>Section: <b>{{$studentdatarollnoslip['ClassSection']}} </b> </p>
          </div>
          <div class="d-50 ">
             <p>Exam Type: </p>
-            <p>Father Name: </p>
-            <p>CNIC :</p>
+            <p>Father Name:  <b>{{$studentdatarollnoslip['FatherName']}} </b></p>
+            <p>CNIC : <b>{{$studentdatarollnoslip['CNIC']}} </b></p>
          </div>
     
                      <div class="">
