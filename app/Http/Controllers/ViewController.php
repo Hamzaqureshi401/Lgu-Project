@@ -175,85 +175,86 @@ class ViewController extends Controller
             )    
             );
     }
-    public function courseOffering($degree = null , $batch = null){
 
-        $degreeBatches  = DegreeBatche::where(['Degree_ID' => $degree , 'Batch_ID' => $batch])->first();
-        if(!empty($degreeBatches)){
-            $semesterCourses = SemesterCourse::where('DegBatches_ID' , $degreeBatches->ID)->get();
-        }else{
-            $semesterCourses = "";
-        }
-       $degrees      =  Degree::get();
-       $semesters    =  semester::get();
+    // public function courseOffering($degree = null , $batch = null){
+
+    //     $degreeBatches  = DegreeBatche::where(['Degree_ID' => $degree , 'Batch_ID' => $batch])->first();
+    //     if(!empty($degreeBatches)){
+    //         $semesterCourses = SemesterCourse::where('DegBatches_ID' , $degreeBatches->ID)->get();
+    //     }else{
+    //         $semesterCourses = "";
+    //     }
+    //    $degrees      =  Degree::get();
+    //    $semesters    =  semester::get();
       
-        $title      = 'All Courses';
-        $route      = 'courseOffering/';
-        $getEditRoute = 'courseAssign';
-        $modalTitle = 'Assign Course';
-        $button     = 'Submit';
+    //     $title      = 'All Courses';
+    //     $route      = 'courseOffering/';
+    //     $getEditRoute = 'courseAssign';
+    //     $modalTitle = 'Assign Course';
+    //     $button     = 'Submit';
         
-       return 
-        view('View.courseOffering', 
-            compact(
+    //    return 
+    //     view('View.courseOffering', 
+    //         compact(
                 
-                'degrees',
+    //             'degrees',
                 
-                'semesters',
-                'title',
-                'route',
-                'getEditRoute',
-                'modalTitle',
-                'button',
-                'degreeBatches',
-                'semesterCourses'
-            )    
-            );
+    //             'semesters',
+    //             'title',
+    //             'route',
+    //             'getEditRoute',
+    //             'modalTitle',
+    //             'button',
+    //             'degreeBatches',
+    //             'semesterCourses'
+    //         )    
+    //         );
 
-    }
+    // }
 
-    public function courseAssign($id){
+    // public function courseAssign($id){
 
-        $button = 'Do You Wisht To Submit?';
-        $courses = Course::where('ID' , $id)->first();
-        $employees      = Employee::get();
+    //     $button = 'Do You Wisht To Submit?';
+    //     $courses = Course::where('ID' , $id)->first();
+    //     $employees      = Employee::get();
 
 
 
-        return 
-        view('View.courseAssign', 
-            compact(
+    //     return 
+    //     view('View.courseAssign', 
+    //         compact(
                 
-                'courses',
-                'button',
-                'employees'
+    //             'courses',
+    //             'button',
+    //             'employees'
               
-            ));
+    //         ));
 
-    }
+    // }
 
-     public function editAssignedCourse($id){
+    //  public function editAssignedCourse($id){
 
-        $button = 'Do You Wisht To Submit?';
-        $courses = Course::where('ID' , $id)->first();
-        $employees      = Employee::get();
-        $degrees      =  Degree::get();
-        $semesters    =  semester::get();
+    //     $button = 'Do You Wisht To Submit?';
+    //     $courses = Course::where('ID' , $id)->first();
+    //     $employees      = Employee::get();
+    //     $degrees      =  Degree::get();
+    //     $semesters    =  semester::get();
 
         
 
-        return 
-        view('View.editAssignedCourse', 
-            compact(
+    //     return 
+    //     view('View.editAssignedCourse', 
+    //         compact(
                 
-                'courses',
-                'button',
-                'employees',
-                'degrees',
-                'semesters'
+    //             'courses',
+    //             'button',
+    //             'employees',
+    //             'degrees',
+    //             'semesters'
               
-            ));
+    //         ));
 
-    }
+    // }
 
     public function financeDashboard(){
 

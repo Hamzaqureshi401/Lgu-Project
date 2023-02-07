@@ -308,10 +308,12 @@ Route::get('/stdWiseAward', [App\Http\Controllers\ViewController::class, 'stdWis
 Route::get('/stdAffairs', [App\Http\Controllers\ViewController::class, 'stdAffairs'])->name('std.Affairs');
 Route::get('/findCourseDay', [App\Http\Controllers\ViewController::class, 'findCourseDay'])->name('find.Course.Day');
 
-Route::get('/courseOffering/{id?}/{id2?}', [App\Http\Controllers\ViewController::class, 'courseOffering'])->name('course.Offering');
+Route::get('/courseOffering/{id?}/{id2?}', [App\Http\Controllers\CoursesController::class, 'courseOffering'])->name('course.Offering');
 
-Route::get('/courseAssign/{id?}', [App\Http\Controllers\ViewController::class, 'courseAssign'])->name('course.Assign');
-Route::get('/editAssignedCourse/{id?}', [App\Http\Controllers\ViewController::class, 'editAssignedCourse'])->name('edit.Assigned.Course');
+Route::get('/courseAssign/{id?}', [App\Http\Controllers\CoursesController::class, 'courseAssign'])->name('course.Assign');
+
+
+Route::get('/editAssignedCourse/{id?}', [App\Http\Controllers\CoursesController::class, 'editAssignedCourse'])->name('edit.Assigned.Course');
 
 Route::get('/financeDashboard', [App\Http\Controllers\ViewController::class, 'financeDashboard'])->name('finance.Dashboard');
 

@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\Course;
+use App\Models\DegreeBatche;
+use App\Models\Degree;
+use App\Models\Semester;
+use App\Models\SemesterCourse;
+use App\Models\Employee;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -187,4 +193,90 @@ class CoursesController extends Controller
 
     }
 
+
+
+
+    ############################ Courses ###########################
+
+    public function courseOffering($degree = null , $batch = null){
+
+        $degreeBatches  = DegreeBatche::where(['Degree_ID' => $degree , 'Batch_ID' => $batch])->first();
+        if(!empty($degreeBatches)){
+            $semesterCourses = SemesterCourse::where('DegBatches_ID' , $degreeBatches->ID)->get();
+        }else{
+            $semesterCourses = "";
+        }
+       $degrees      =  Degree::get();
+       $semesters    =  semester::get();
+      
+        $title      = 'All Courses';
+        $route      = 'courseOffering/';
+        $getEditRoute = 'courseAssign';
+        $modalTitle = 'Assign Course';
+        $button     = 'Submit';
+        
+       return 
+        view('View.courseOffering', 
+            compact(
+                
+                'degrees',
+                
+                'semesters',
+                'title',
+                'route',
+                'getEditRoute',
+                'modalTitle',
+                'button',
+                'degreeBatches',
+                'semesterCourses'
+            )    
+            );
+
+    }
+
+
+    public function courseAssign($id){
+
+        $button = 'Do You Wisht To Submit?';
+        $courses = Course::where('ID' , $id)->first();
+        $employees      = Employee::get();
+
+
+
+        return 
+        view('View.courseAssign', 
+            compact(
+                
+                'courses',
+                'button',
+                'employees'
+              
+            ));
+
+    }
+
+
+    public function editAssignedCourse($id){
+
+        $button = 'Do You Wisht To Submit?';
+        $courses = Course::where('ID' , $id)->first();
+        $employees      = Employee::get();
+        $degrees      =  Degree::get();
+        $semesters    =  semester::get();
+
+        
+
+        return 
+        view('View.editAssignedCourse', 
+            compact(
+                
+                'courses',
+                'button',
+                'employees',
+                'degrees',
+                'semesters'
+              
+            ));
+
+    }
 }
