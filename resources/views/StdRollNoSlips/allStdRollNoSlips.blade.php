@@ -11,7 +11,7 @@
                             </th>
                             <th>Enrolled Student</th>
                             <th>Building</th>
-                            <th>Romm</th>
+                            <th>Room</th>
                             <th>Seat No</th>
                             <th>Time</th>
                             

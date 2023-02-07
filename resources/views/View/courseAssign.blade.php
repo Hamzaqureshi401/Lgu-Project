@@ -117,6 +117,7 @@
 </div>
 </div>
 @include('Forms.formFooter')   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
   $('.clone').click(function(){
   var a = $("#clon").clone().appendTo('#copied');

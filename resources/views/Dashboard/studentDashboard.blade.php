@@ -211,7 +211,11 @@
                             <td>{{ "Status" }}</td>
                             <td>{{ $present }}</td>
                              <td>{{ $absent }}</td>
+                             @if($present != 0)
                               <td>{{ ($present/($absent + $present))*100 }} %</td>
+                              @else
+                              <td>{{ '--' }}</td>
+                              @endif
                         </tr>
                         @endforeach
                       </table>

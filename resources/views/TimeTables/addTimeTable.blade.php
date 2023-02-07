@@ -35,19 +35,19 @@
 
                     <div class="form-group">
                       <label>Start Time</label>
-                      <input type="time" name="StartTime" class="form-control">
+                      <input type="time" name="StartTime" class="form-control" value="{{ old('StartTime') }}">
                     </div>
                     <div class="form-group">
                       <label>End Time</label>
-                      <input type="time" name="EndTime" class="form-control">
+                      <input type="time" name="EndTime" class="form-control" value="{{ old('EndTime') }}">
                     </div>
                     <div class="form-group">
                       <label>Building</label>
-                      <input type="text" name="Building" class="form-control">
+                      <input type="text" name="Building" class="form-control" value="{{ old('Building') }}">
                     </div>
                     <div class="form-group">
                       <label>Room</label>
-                      <input type="number" name="Room" class="form-control">
+                      <input type="number" name="Room" class="form-control" value="{{ old('Room') }}">
                     </div>
                     
                       <div class="form-group">
@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group">
                       <label>Employee</label>
-                      <select class="form-control select2" name="Emp_ID"  >
+                      <select class="form-control select2" name="Emp_ID"   >
                         @foreach($employees as $employee)
                         <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
                         @endforeach
