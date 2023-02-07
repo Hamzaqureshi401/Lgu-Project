@@ -284,7 +284,7 @@
          
          @foreach ($admissionsession as $admissionsessiondeatils)
          
-         <option value="{{ $admissionsessiondeatils->ID }}" {{ $admissionsessiondeatils->ID == $studentAdmission->AdmissionSession ? 'selected' : '' }}>
+         <option value="{{ $admissionsessiondeatils->SemSession }}" {{ $admissionsessiondeatils->SemSession == $studentAdmission->AdmissionSession ? 'selected' : '' }}>
             {{ $admissionsessiondeatils->SemSession }}
          </option>
          @endforeach

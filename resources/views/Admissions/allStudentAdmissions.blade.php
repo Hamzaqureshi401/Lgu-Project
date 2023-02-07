@@ -11,6 +11,10 @@
                             </th>
                             <th>Std First Name</th>
                             <th>Std Last Name</th>
+
+                            <th>Student RollNo</th>
+
+
                             <th>Password</th>
                             <th>Class Section</th>
                             <th>CNIC</th>
@@ -55,6 +59,9 @@
 
                             <td>{{ $student->Std_FName ?? '--' }}</td>
                             <td>{{ $student->Std_LName ?? '--' }}</td>
+
+                            <td>{{ $student->StdRollNo ?? '--' }}</td>
+
                             <td>{{ $student->Password ?? '--' }}</td>
                             <td>{{ $student->ClassSection ?? '--' }}</td>
                             <td>{{ $student->CNIC ?? '--' }}</td>
@@ -75,7 +82,7 @@
                             <td>{{ $student->City ?? '--' }}</td>
                             <td>{{ $student->Province ?? '--' }}</td>
                             <td>{{ $student->Country ?? '--' }}</td>
-                            <td>{{ $student->Degrees_ID ?? '--' }}</td>
+                            <td>{{ $student->Degree_ID ?? '--' }}</td>
                             <td>{{ $student->CurrentSemester ?? '--' }}</td>
                             <td>{{ $student->Status ?? '--' }}</td>
                             <td>{{ $student->AdmissionSession ?? '--' }}</td>
