@@ -183,7 +183,7 @@ class AttendanceController extends Controller
             return redirect()
             ->route('emp.SemesterCourses')
             ->with([
-                'successToaster' => 'Attandence Added' , 
+                'successToaster' => 'Attendence Added' , 
                 'title' => 'Success'
             ]);
     }

@@ -23,7 +23,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>{{ "All Attandence" }}</h4>
+                    <h4>{{ "All Attendence" }}</h4>
                     <div class="card-header-action">
                       <form>
                         <div class="input-group">

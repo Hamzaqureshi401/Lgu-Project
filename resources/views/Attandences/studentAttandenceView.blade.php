@@ -39,8 +39,8 @@
                             
                             <th>Roll No</th>
                             <th>Student Name</th>
-                            <th>Fee</th>
-                            <th>Attandence</th>
+                            
+                            <th>Attendance</th>
                                            
                           </tr>
                         </thead>
@@ -52,7 +52,7 @@
                           <td>{{ $loop->index+1 }}</td>
                           <td>{{ $student->student->StdRollNo}}</td>
                           <td>{{ $student->student->Std_FName}} {{ $student->student->Std_LName}}</td>
-                          <td>'--'</td>
+                          
                           <td><div class="pretty p-switch p-slim">
                           <input type="checkbox" name="Status[]" >
                           <div class="state p-success">

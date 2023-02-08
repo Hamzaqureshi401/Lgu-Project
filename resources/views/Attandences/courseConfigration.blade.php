@@ -14,14 +14,7 @@
                       <label>Course Name</label>
                       <input type="text"  class="form-control" value="{{ $semesterCourse->course->CourseName }}"  readonly>
                     </div>
-                    <div class="form-group">
-                      <label>Final Term %</label>
-                      <input type="number" name="FinalTerm" class="form-control" value="{{ 50 }}" placeholder="Enter Total Marks"  readonly>
-                    </div>
-                    <div class="form-group">
-                      <label>Mid Term %</label>
-                      <input type="number" name="MidTerm" class="form-control" value="25" placeholder="Enter Total Marks"  readonly>
-                    </div>
+                    
 
                     @if(empty($SemesterCourseWeightage->first()))
 
@@ -38,7 +31,7 @@
                       <input type="number" name="ClassParticipation" class="form-control" value="{{old('ClassParticipation')}}" placeholder="Enter Total Marks" >
                     </div>
                      <div class="form-group">
-                      <label>Attandence %</label>
+                      <label>Attendence %</label>
                       <input type="number" name="Attandence" class="form-control" value="{{old('Attandence')}}" placeholder="Enter Total Marks" >
                     </div>
                     <div class="form-group">

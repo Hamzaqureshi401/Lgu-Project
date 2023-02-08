@@ -29,7 +29,7 @@
                     </div>
 
                      <div class="form-group">
-                      <label>Tution Fee</label>
+                      <label>Tuition Fee</label>
                       <input type="text" name="Tuition_Fee" class="form-control" value="{{ $semesterDetail->Tuition_Fee }}"required>
                     </div>
                      

@@ -20,23 +20,10 @@ class SidebarController extends Controller
            $userRights['rights'] = UserRight::where('Des_ID' , $empDesignation->Des_ID)->get();
 
         }
-        
-        // dd(
-        //     $userRights['rights']->first()->module->ModuleName,// result Add Course
-        //     $userRights['rights']->first()->module->URL        // /addCourse 
-
-        // );
-
-
+        if (empty($userRights)){
+            $userRights = "";
+        }
         return $userRights;
-
-        //result should be 
-        // Courses
-        //Add Course
-
-
-
-
 
     }
 }

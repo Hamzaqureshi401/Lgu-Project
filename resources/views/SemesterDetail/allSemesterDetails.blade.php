@@ -21,7 +21,7 @@
                             <th>Practical charges</th>
                             <th>Sports Fund</th>
                             <th>Fee Type</th>
-                            <th>Tution Fee</th>
+                            <th>Tuition Fee</th>
                             <!-- <th>Status</th> -->
                             <th>Action</th>
                           </tr>

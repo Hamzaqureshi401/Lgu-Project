@@ -11,7 +11,7 @@
            
 
             
-
+            @if(!empty($sidbar['rights']))
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
                   data-feather="briefcase"></i><span>Header Name</span></a><!-- this will be Category --> 
@@ -22,6 +22,7 @@
                 
               </ul>
             </li>
+            @endif
             
                 
             <li class="dropdown">
@@ -182,7 +183,7 @@
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Dean</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('dean.Dashboard') }}">Dashboard</a></li>
-                <li><a class="nav-link" href="{{ route('attandence.Dashboard') }}">All Student Attandence</a></li>
+                <li><a class="nav-link" href="{{ route('attandence.Dashboard') }}">All Student Attendence</a></li>
                  <li><a class="nav-link" href="{{ route('dean.All.Stu.Attandence') }}">Attendance</a></li>
                 
               </ul>

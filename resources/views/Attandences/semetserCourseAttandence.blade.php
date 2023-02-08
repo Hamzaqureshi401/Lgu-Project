@@ -66,7 +66,7 @@
                           <div class="card-body">
                           <div class="row">
                               <div class="form-group col-md-6 col-12">
-                               <a href="{{ route('course.Configration' , $semetserCourse->ID)}}" class="btn btn-success btn-block " style="color:white;">Course Configration</a>
+                               <a href="{{ route('course.Configration' , $semetserCourse->ID)}}" class="btn btn-success btn-block " style="color:white;">Course Configuration</a>
                               </div>
                               <div class="form-group col-md-6 col-12">
                                <a href="{{ route('student.Assesment' ,   $semetserCourse->ID)}}" class="btn btn-info btn-block" style="color:white;">Student Assessment</a>
@@ -74,7 +74,7 @@
                             </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-12">
-                               <a href="{{ route('grade.Configration' , $semetserCourse->ID)}}" class="btn btn-success btn-block " style="color:white;">Grade Configration</a>
+                               <a href="{{ route('grade.Configration' , $semetserCourse->ID)}}" class="btn btn-success btn-block " style="color:white;">Grade Configuration</a>
                               </div>
                               <div class="form-group col-md-6 col-12">
                                <a href="{{ route('print.Grade.Sheet' ,  $semetserCourse->ID)}}" class="btn btn-info btn-block" style="color:white;">Print Grade Sheet</a>

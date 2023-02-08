@@ -30,7 +30,7 @@
                       <input type="number" name="SemesterFee" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label>Tutuion Fee</label>
+                      <label>Tuition Fee</label>
                       <input type="number" name="Tuition_Fee" class="form-control">
                     </div>
                     <!--  <div class="form-group">

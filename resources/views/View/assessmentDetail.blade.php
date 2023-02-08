@@ -55,7 +55,7 @@
                             <th>Finel Term </th>
                             <th>Term Project</th>
                             <th>Mid Term</th>
-                            <th>Attandences</th>
+                            <th>Attendences</th>
                             <th>Presentation</th>
                             <th>Quis</th>
                             <th>Assignment</th>

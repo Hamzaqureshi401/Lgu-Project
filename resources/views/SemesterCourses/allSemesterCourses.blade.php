@@ -13,7 +13,7 @@
                             <th>Emp</th>
                             <th>Campus Limit</th>
                             <th>Degree Batch</th>
-                            <th>Quiz Weightage</th>
+                            
                             <th>Section</th>
                             <th>Course</th>
                             

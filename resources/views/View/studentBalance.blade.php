@@ -6,7 +6,7 @@
               <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                   <div class="card-header d-flex justify-content-center">
-                      <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="" data-target="#exampleModal"><i class="far fa-edit"></i> {{ "Create Short Attandence Report" }}</button>
+                      <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="" data-target="#exampleModal"><i class="far fa-edit"></i> {{ "Create Short Attendence Report" }}</button>
                   </div>
                 </div>
               </div>

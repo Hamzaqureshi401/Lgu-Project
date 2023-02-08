@@ -12,7 +12,7 @@
                             
                             <th>Module Name</th>
                             <th>Url</th>
-                            <th>Statu</th>
+                            <th>Status</th>
                             
                             <th>Action</th>
                           </tr>
@@ -28,7 +28,7 @@
                             <td>{{ $module->ModuleName ?? '--' }}</td>
                             <td>{{ $module->URL ?? '--' }}</td>
                             <td>{{ $module->Status  ?? '--'}}</td>
-                            <
+                            
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
