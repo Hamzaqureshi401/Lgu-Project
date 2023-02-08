@@ -80,6 +80,10 @@
                       <label>Contact Number</label>
                       <input type="tel" name="Contact_Number" class="form-control cnic"  data-inputmask="'mask': '9999-9999999'" value="{{ $employee->Contact_Number}}" >
                     </div>
+                  <div class="form-group">
+                      <label>Defualt Url</label>
+                      <input type="text" name="DefualtUrl" class="form-control" value="{{ $employee->DefualtUrl }}">
+                    </div>
                 <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
             </div> 
                 

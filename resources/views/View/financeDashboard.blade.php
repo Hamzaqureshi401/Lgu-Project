@@ -193,8 +193,8 @@
                        
                       </tr>
                       <tr>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
+	                      <td>{{ "--" }}</td>
+	                      <td>{{ "--" }}</td>
 	                     
                       </tr>                     
                     </table>
@@ -223,8 +223,8 @@
                         
                       </tr>
                       <tr>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
                        
                       </tr>                     
                     </table>
@@ -260,13 +260,13 @@
                           
                       </tr>
                       <tr>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
+	                      <td>{{ "--" }}</td>
+	                      <td>{{ "--" }}</td>
+	                      <td>{{ "--" }}</td>
+	                      <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
                       </tr>
                     </table>
                   </div>
@@ -299,13 +299,13 @@
                           <th>Received</th>
                       </tr>
                       <tr>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
                        
                       </tr>
                     </table>
@@ -323,8 +323,8 @@
     
       
    
-<script src="{{ asset('assets/js/app.min.js') }}"></script>
+<!-- <script src="{{ asset('assets/js/app.min.js') }}"></script>
 <script src="{{ asset('assets/js/page/index.js') }}"></script>
 <script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script>
-
+ -->
 @endsection   

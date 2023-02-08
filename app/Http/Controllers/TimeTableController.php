@@ -73,32 +73,33 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
-      $validator = $this->validation($request);
-        // if ($validator['error'] == true) {
-        //     return
-        //     response()->json([
-        //     'title' => 'Failed' ,
-        //     'type'=> 'error',
-        //     'message'=> ''.$validator['validation']
-        //     ]);
-        // }else {
+         //dd($request->all());
+
+      //$validator = $this->validation($request);
+
+        foreach($request->Day as $key => $data){
+
+        
+        $day        = $request['Day'][$key];
+        $EndTime    = $request['EndTime'][$key];
+        $StartTime  = $request['StartTime'][$key];
+        $Building   = $request['Building'][$key];
+        $Room       = $request['room'][$key];
+       
+
+        //dd($day);
             $submit = DB::update("EXEC sp_InsertTimeTable
             @SemCourse_ID       = '$request->SemCourse_ID',
-            @Day                =  '$request->Day',
-            @StartTime          = '$request->StartTime' ,
-            @EndTime            = '$request->EndTime',
-            @Building           = '$request->Building',
-            @Room               = '$request->Room',
+            @Day                = '$day',
+            @StartTime          = '$StartTime' ,
+            @EndTime            = '$EndTime',
+            @Building           = '$Building',
+            @Room               = '$Room',
             @Type               = '$request->Type',
             @Emp_ID             = '$request->Emp_ID'
             ;");
+        }
 
-        //   return response()->json([
-        //     'title' => 'Done' ,
-        //     'type'=> 'success',
-        //     'message'=> 'TimeTable Added!
-        //     ']);
-        // }
          return redirect()->back()->with(['successToaster' => 'TimeTable Added' , 'title' => 'Success']);
 
 

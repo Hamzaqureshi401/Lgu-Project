@@ -25,7 +25,9 @@
                             <th>Address</th>
                             <th>Dpt ID</th>
                             <th>Grade</th>
+
                             <th>Contact_Number</th>
+                            <th>Defual Url</th>
                             <!-- <th>Status</th> -->
                             <th>Action</th>
                           </tr>
@@ -55,6 +57,7 @@
                             <td>{{ $employee->department->Dpt_Name ?? '--' }}</td>
                             <td>{{ $employee->Grade  ?? '--'}}</td>
                             <td>{{ $employee->Contact_Number  ?? '--'}}</td>
+                            <td>{{ $employee->DefualtUrl  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->

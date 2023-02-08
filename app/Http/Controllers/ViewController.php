@@ -39,6 +39,24 @@ class ViewController extends Controller
                 'getEditRoute'));
     }
 
+     public function igradeStdDean(){
+
+        $students = false;
+
+        $title  = 'All Courses';
+        $route = 'updateCourse';
+        $getEditRoute = 'editCourse';
+        $modalTitle = 'Edit Course';
+
+        return view('View.igradeStdDean', 
+            compact(
+                'students' , 
+                'title' , 
+                'modalTitle' , 
+                'route',
+                'getEditRoute'));
+    }
+
     public function examDashboardView(){
 
         return view('View.examDashboardView', 

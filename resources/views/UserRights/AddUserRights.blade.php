@@ -26,7 +26,7 @@
                      <label>Is Insert</label>
              <div class="pretty p-switch p-slim">
               <input type='hidden' value='0' name='IsInsert'>
-                <input type="checkbox" value="1" name="IsInsert">
+                <input type="checkbox" value="1" name="IsInsert" checked>
                   <div class="state p-success">
                     <label></label>
                   </div>
@@ -36,7 +36,7 @@
                      <label>Is Update</label>
              <div class="pretty p-switch p-slim">
               <input type='hidden' value='0' name='IsUpdate'>
-                <input type="checkbox" value="1" name="IsUpdate">
+                <input type="checkbox" value="1" name="IsUpdate" checked>
                   <div class="state p-success">
                     <label></label>
                   </div>
@@ -46,7 +46,7 @@
                      <label>Is Delete</label>
              <div class="pretty p-switch p-slim">
               <input type='hidden' value='0' name='IsDelete'>
-                <input type="checkbox" value="1" name="IsDelete">
+                <input type="checkbox" value="1" name="IsDelete" checked>
                   <div class="state p-success">
                     <label></label>
                   </div>
@@ -56,7 +56,7 @@
                      <label>Is Browse</label>
              <div class="pretty p-switch p-slim">
               <input type='hidden' value='0' name='IsBrowse'>
-                <input type="checkbox" value="1" name="IsBrowse">
+                <input type="checkbox" value="1" name="IsBrowse" checked>
                   <div class="state p-success">
                     <label></label>
                   </div>

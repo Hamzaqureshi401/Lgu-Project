@@ -175,34 +175,34 @@
                   </tr>
                   <tr>
                     <td>
-                      <a href="https://e.lgu.edu.pk/coe/exceptThesis"> 1024</a>
+                      <a href=""> 1024</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/coe/PendingResults_Faculty"> 1024</a>
+                      <a href=""> 1024</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/SubmittedResultlistCoE?Status=1"> 0</a>
+                      <a href=""> 0</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/SubmittedResultlistCoE?Status=0"> 0</a>
+                      <a href=""> 0</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/SubmittedResultlistCoE?Status=3">0</a>
+                      <a href="">0</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/absolute?Status=r">389</a>
+                      <a href="">389</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/absolute?Status=a">546</a>
+                      <a href="">546</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/SubmittedResultlistCoE?Status=2">0</a>
+                      <a href="">0</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/SubmittedResultlistCoE?Status=2&amp;Statuss=4">0</a>
+                      <a href="">0</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/coe/total">1024</a>
+                      <a href="">1024</a>
                     </td>
                   </tr>
                   <tr>
@@ -276,13 +276,13 @@
                   </tr>
                   <tr>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/SubmittedResultlistCoE?Status=4"> 0</a>
+                      <a href=""> 0</a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/SubmittedResultlistCoE?Status=1"> 0 </a>
+                      <a href=""> 0 </a>
                     </td>
                     <td>
-                      <a href="https://e.lgu.edu.pk/Exam/SubmittedResultlistCoE?Status=0"> 0 </a>
+                      <a href=""> 0 </a>
                     </td>
                   </tr>
                 </tbody>
@@ -365,6 +365,6 @@
 </footer>
 </div>
 </div>
-<script src="{{ asset('assets/js/app.min.js') }}"></script>
+<!-- <script src="{{ asset('assets/js/app.min.js') }}"></script>
 <script src="{{ asset('assets/js/page/index.js') }}"></script>
-<script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script> @endsection
+<script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script>  -->@endsection

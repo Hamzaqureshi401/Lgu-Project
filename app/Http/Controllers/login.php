@@ -72,7 +72,15 @@ class login extends Controller
                 'ID'          => $submit->ID,
 
             ]);
-             return  redirect()->route('dean.Dashboard');
+             if(empty($submit->DefualtUrl)){
+                $url = '/deanDashboard';
+                return  redirect($url);
+            }else{
+                $url = $submit->DefualtUrl;
+                return  redirect($url);
+             
+            }
+            
         } else {
             return  
             redirect()

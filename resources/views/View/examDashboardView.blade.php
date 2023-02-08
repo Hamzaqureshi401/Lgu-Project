@@ -58,14 +58,14 @@
                         </thead>
                         <tbody>
                           <tr>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
                           
                           </tr>                 
                         </tbody>
@@ -122,14 +122,14 @@
                         </thead>
                         <tbody>
                           <tr>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
-                          <td>aa</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
+                          <td>{{'--'}}</td>
                           
                           </tr>                 
                         </tbody>

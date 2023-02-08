@@ -211,9 +211,10 @@
 <div class="main-sidebar sidebar-style-2">    
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a > <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.png') }}" alt="Order Header Image" width="470px" height="200px"/> <!-- <span
-                class="logo-name">LGU</span> -->
+            <a > <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.png') }}" alt="Order Header Image" width="470px" height="200px"/> <span
+                class="logo-name">({{ $sidbar['empDesignations']->designation->Designation ?? 'Student' }})</span>
             </a>
+
           </div>
           <ul class="sidebar-menu">
             <!-- <li class="menu-header">Main</li> -->
@@ -222,9 +223,10 @@
             </li> -->
         @if (session()->has('std_session')) 
             @include('layouts.Side Nav Bar.student_side_nav_bar')
-        @else
+        @elseif (session::get('user')->Grade == 22)
           @include('layouts.Side Nav Bar.side_nav_bar')
-        
+        @else
+        @include('layouts.Side Nav Bar.allowed_side_nav_bar')
         @endif
       
 <!-- end side nav bar -->

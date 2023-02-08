@@ -235,12 +235,12 @@ class CoursesController extends Controller
     }
 
 
-    public function courseAssign($id){
+    public function courseAssign($id , $SemCourse_ID){
 
         $button = 'Do You Wisht To Submit?';
         $courses = Course::where('ID' , $id)->first();
         $employees      = Employee::get();
-
+        $route  = '/storeTimeTable';
 
 
         return 
@@ -249,7 +249,9 @@ class CoursesController extends Controller
                 
                 'courses',
                 'button',
-                'employees'
+                'employees',
+                'route',
+                'SemCourse_ID'
               
             ));
 

@@ -132,16 +132,16 @@
                                       <td>Total Awards</td>
                                   </tr>
                                   <tr>
-                                      <td><a href="https://e.lgu.edu.pk/Result/SubmittedResultlist?Status=1">0</a></td>
-                                      <td><a href="https://e.lgu.edu.pk/Result/SubmittedResultlist?Status=2">0</a></td>
-                                      <td><a href="https://e.lgu.edu.pk/Result/SubmittedResultlist">1062</a></td>
-                                      <td><a href="https://e.lgu.edu.pk/Result/SubmittedResultlist?Status=0">0</a></td>
-                                      <td><a href="https://e.lgu.edu.pk/Result/SubmittedResultlist?Status=3">0</a></td>
-                                      <td><a href="https://e.lgu.edu.pk/Result/SubmittedResultlist?Status=4">0</a></td>
-                                      <td><a href="https://e.lgu.edu.pk/Result/SubmittedResultlist?Status=5">0</a></td>
-                                      <td><a href="https://e.lgu.edu.pk/Exam/absolute?Status=r">389</a> </td>
-                                      <td><a href="https://e.lgu.edu.pk/Exam/absolute?Status=a">546</a> </td>
-                                      <td><a href="https://e.lgu.edu.pk/exam/TotalAwards">1062</a></td>
+                                      <td><a href="">0</a></td>
+                                      <td><a href="">0</a></td>
+                                      <td><a href="">1062</a></td>
+                                      <td><a href="">0</a></td>
+                                      <td><a href="">0</a></td>
+                                      <td><a href="">0</a></td>
+                                      <td><a href="">0</a></td>
+                                      <td><a href="">389</a> </td>
+                                      <td><a href="">546</a> </td>
+                                      <td><a href="">1062</a></td>
                                   </tr>
                               </tbody>
                               <tfoot>
@@ -218,31 +218,34 @@
                                 </tr>
                                 <tr>
                                     <td>Mid-Term</td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=full&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=pending&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=HoD&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=Dean&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=CoE&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=Rejected&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=HoD-Rejected&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=Dean-Rejected&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IGRADEAPPLICATIONS?Status=E&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IGRADEAPPLICATIONS?Status=U&amp;type=0">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IGRADEAPPLICATIONS?Status=P&amp;type=0">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    
                                 </tr>
                                 <tr>
                                     <td>Final-Term</td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=full&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=pending&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=HoD&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=Dean&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=CoE&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=Rejected&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=HoD-Rejected&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IgradeHoD?Status=Dean-Rejected&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IGRADEAPPLICATIONS?Status=E&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IGRADEAPPLICATIONS?Status=U&amp;type=1">0</a></td>
-                                    <td><a href="https://e.lgu.edu.pk/Result/IGRADEAPPLICATIONS?Status=P&amp;type=1">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                    <td><a href="">0</a></td>
+                                   
+
                                 </tr>
                             </tbody>
                              
@@ -267,8 +270,8 @@
       </footer>
     </div>
   </div>
-<script src="{{ asset('assets/js/app.min.js') }}"></script>
+<!-- <script src="{{ asset('assets/js/app.min.js') }}"></script>
 <script src="{{ asset('assets/js/page/index.js') }}"></script>
 <script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script>
-
+ -->
 @endsection   

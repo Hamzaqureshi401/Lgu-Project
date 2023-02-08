@@ -274,6 +274,8 @@ Route::get('/deanAllStuAttandence', [App\Http\Controllers\AttendanceController::
 Route::get('/vcView', [App\Http\Controllers\ViewController::class, 'vcView'])->name('vc.View');
 Route::get('/igradeStudentView', [App\Http\Controllers\ViewController::class, 'igradeStudentView'])->name('igrade.StudentView');
 
+Route::get('/igradeStdDean', [App\Http\Controllers\ViewController::class, 'igradeStdDean'])->name('igrade.StdDean');
+
 Route::get('/examDashboardView', [App\Http\Controllers\ViewController::class, 'examDashboardView'])->name('exam.dasshboardView');
 
 Route::get('/igradeStdhodView', [App\Http\Controllers\ViewController::class, 'igradeStdhodView'])->name('igrade.StdhodView');
@@ -310,7 +312,7 @@ Route::get('/findCourseDay', [App\Http\Controllers\ViewController::class, 'findC
 
 Route::get('/courseOffering/{id?}/{id2?}', [App\Http\Controllers\CoursesController::class, 'courseOffering'])->name('course.Offering');
 
-Route::get('/courseAssign/{id?}', [App\Http\Controllers\CoursesController::class, 'courseAssign'])->name('course.Assign');
+Route::any('/courseAssign/{id?}/{id2?}', [App\Http\Controllers\CoursesController::class, 'courseAssign'])->name('course.Assign');
 
 
 Route::get('/editAssignedCourse/{id?}', [App\Http\Controllers\CoursesController::class, 'editAssignedCourse'])->name('edit.Assigned.Course');

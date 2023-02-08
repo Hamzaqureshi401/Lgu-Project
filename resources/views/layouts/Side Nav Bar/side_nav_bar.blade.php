@@ -203,6 +203,7 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('vc.View') }}">Vc View</a></li>
                 <li><a class="nav-link" href="{{ route('igrade.StudentView') }}">Igrade Student View</a></li>
+                 <li><a class="nav-link" href="{{ route('igrade.StdDean') }}">Igrade Student Dean View</a></li>
                  <li><a class="nav-link" href="{{ route('dean.All.Stu.Attandence') }}">Attendance</a></li>
                 <li><a class="nav-link" href="{{ route('exam.dasshboardView')}}">Exam Dashboard View</a></li>
                  <li><a class="nav-link" href="{{ route('igrade.StdhodView')}}">Igrade Std hod View</a></li>

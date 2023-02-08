@@ -32,6 +32,7 @@ class EmployeeController extends Controller
             'Dpt_ID'             => 'required|numeric',
             'Grade'              => 'required|numeric',
             'Contact_Number'     => 'required|max:12',
+            'DefualtUrl'         => 'required|max:70'
 
         ]);
         // $validation['validation'] = $validator->errors()->first();
@@ -63,6 +64,7 @@ class EmployeeController extends Controller
             'Dpt_ID'             => 'required|numeric',
             'Grade'              => 'required|numeric',
             'Contact_Number'     => 'required|max:12',
+            'DefualtUrl'         => 'required|max:70'
 
         ]);
         // $validation['validation'] = $validator->errors()->first();
@@ -119,7 +121,8 @@ class EmployeeController extends Controller
             @Address            = '$request->Address' ,
             @Dpt_ID             = '$request->Dpt_ID' ,
             @Grade              = '$request->Grade' ,
-            @Contact_Number     = '$request->Contact_Number'
+            @Contact_Number     = '$request->Contact_Number',
+            @DefualtUrl         = '$request->DefualtUrl'
             ;");
 
           // return response()->json([
@@ -200,7 +203,8 @@ class EmployeeController extends Controller
             @Address            = '$request->Address' ,
             @Dpt_ID             = '$request->Dpt_ID' ,
             @Grade              = '$request->Grade' ,
-            @Contact_Number     = '$request->Contact_Number'
+            @Contact_Number     = '$request->Contact_Number',
+            @DefualtUrl         = '$request->DefualtUrl'
             ;");
 
         // return response()->json([

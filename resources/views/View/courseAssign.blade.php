@@ -4,6 +4,8 @@
 @include('Forms.formHeader')  
 <div class="card-body">
    <div class="row">
+      <input type="hidden" name="SemCourse_ID" value="{{ $SemCourse_ID }}">
+      <input type="hidden" name="Type" value="{{ $courses->LectureType }}">
       <div class="form-group col-md-6 col-12">
          <label>Course Code</label>
          <input type="text"  class="form-control" value="{{ $courses->CourseCode }} "readonly>
@@ -22,7 +24,7 @@
       </div>
        <div class="form-group col-md-12 col-12">
          <label>Employee</label>
-         <select class="form-control" name="Emp_ID[]"  >
+         <select class="form-control" name="Emp_ID"  >
             @foreach($employees as $employee)
             <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
             @endforeach
@@ -77,6 +79,8 @@
    <div class="row" id="clon">
       @php 
       $days = ['Monday' , 'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday' , 'Sunday'];
+
+      $building = ['New' , 'Old']
       @endphp
       <div class="form-group col-md-2 col-12">
          <label>Day</label>
@@ -96,11 +100,16 @@
       </div>
       <div class="form-group col-md-2 col-12">
          <label>Building</label>
-         <input type="text" name="Building[]" class="form-control">
+         
+         <select class="form-control" name="Building[]"  required>
+            @foreach ($building as $l) 
+            <option value="{{ $l }}">{{ $l }}</option>
+            @endforeach
+         </select>
       </div>
       <div class="form-group col-md-2 col-12">
          <label>Room</label>
-          <select class="form-control" name="Section[]"  required>
+          <select class="form-control" name="room[]"  required>
             @foreach (range(1, 100) as $l) 
             <option value="{{ $l }}">{{ $l }}</option>
             @endforeach
