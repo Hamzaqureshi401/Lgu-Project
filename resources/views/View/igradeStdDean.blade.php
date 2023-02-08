@@ -64,7 +64,7 @@
                <div class="d-flex justify-content-center">
                       
                </div>
-<script src="{{ asset('assets/js/app.min.js') }}"></script>
+<!-- <script src="{{ asset('assets/js/app.min.js') }}"></script> -->
 <script type="text/javascript">
   $("#exampleModal").prependTo("body"); 
 </script>
