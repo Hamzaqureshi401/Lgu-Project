@@ -33,10 +33,10 @@
                       <tr>
 	                      <td>{{ $department->Dpt_Name }}</td>
 	                      <td>{{ $department->countStudent($department->ID)->count()  }}</td>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
+	                      <td>{{ "--" }}</td>
+	                      <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
                       </tr>  
                       
                       @endforeach

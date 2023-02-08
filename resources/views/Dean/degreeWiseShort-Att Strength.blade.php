@@ -27,8 +27,8 @@
                       </thead>
                       <tbody>
                       <tr>
-	                      <td>{{ "Status" }}</td>
-	                      <td>{{ "Status" }}</td>
+	                      <td>{{ "--" }}</td>
+	                      <td>{{ "--" }}</td>
 	                      
                       </tr>     
                       </tbody>                

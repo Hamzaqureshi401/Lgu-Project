@@ -34,10 +34,10 @@
 
 	                      <td>{{ $degree->DegreeName }}</td>
 	                      <td>{{ $students->where('Degrees_ID' , $degree->ID)->count() }}</td>
-	                      <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
-                        <td>{{ "Status" }}</td>
+	                      <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
+                        <td>{{ "--" }}</td>
                       </tr>         
                       @endforeach  
                       </tbody>          

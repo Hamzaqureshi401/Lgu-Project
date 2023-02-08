@@ -33,7 +33,7 @@
                           $students->where(['Degrees_ID' => $degreeBatche->degree->ID , 'Gender' => 'Male'])->count()  }}</td>
 	                      <td>{{ 
                           $students->where(['Degrees_ID' => $degreeBatche->degree->ID , 'Gender' => 'Female'])->count()  }}</td>
-	                      <td>{{ "Status" }}</td>
+	                      <td>{{ "--" }}</td>
                         </tr>     
                         @endforeach
                       </tbody>

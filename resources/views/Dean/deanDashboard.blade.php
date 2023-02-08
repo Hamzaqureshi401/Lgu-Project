@@ -168,7 +168,7 @@
                     <div class="card-icon card-icon-large"><i class="fa fa-award"></i></div>
                     <div class="card-content">
                       <h4 class="card-title">Degree Wise Students</h4>
-                      <span>524</span>
+                      <span>{{$degrees->pluck('id')->count()}}</span>
                       <!-- <div class="progress mt-1 mb-1" data-height="8">
                         <div class="progress-bar l-bg-purple" role="progressbar" data-width="25%" aria-valuenow="25"
                           aria-valuemin="0" aria-valuemax="100"></div>
@@ -187,7 +187,7 @@
                     <div class="card-icon card-icon-large"><i class="fa fa-briefcase"></i></div>
                     <div class="card-content">
                       <h4 class="card-title">Dtp Wise Students</h4>
-                      <span>1,258</span>
+                      <span>{{$departments->pluck('id')->count()}}</span>
                      <!--  <div class="progress mt-1 mb-1" data-height="8">
                         <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25"
                           aria-valuemin="0" aria-valuemax="100"></div>
@@ -206,7 +206,7 @@
                     <div class="card-icon card-icon-large"><i class="fa fa-globe"></i></div>
                     <div class="card-content">
                       <h4 class="card-title">Gender Wise Strength</h4>
-                      <span>10,225</span>
+                      <span>{{$degreeBatches->pluck('id')->count()}}</span>
                       <!-- <div class="progress mt-1 mb-1" data-height="8">
                         <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25"
                           aria-valuemin="0" aria-valuemax="100"></div>
@@ -225,7 +225,7 @@
                     <div class="card-icon card-icon-large"><i class="fa fa-money-bill-alt"></i></div>
                     <div class="card-content">
                       <h4 class="card-title">Deg Ws Sht-Att Strnth</h4>
-                      <span>$2,658</span>
+                      <span>{{'0'}}</span>
                      <!--  <div class="progress mt-1 mb-1" data-height="8">
                         <div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25"
                           aria-valuemin="0" aria-valuemax="100"></div>

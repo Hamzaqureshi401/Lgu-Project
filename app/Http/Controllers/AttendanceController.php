@@ -149,7 +149,7 @@ class AttendanceController extends Controller
                 'Sem_ID' , 
                 'students' , 
                 'day' , 
-                'semesterCourseWeightage'
+                
         ));
     }
     public function storeAttandences(Request $request){
