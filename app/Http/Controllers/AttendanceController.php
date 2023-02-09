@@ -141,6 +141,14 @@ class AttendanceController extends Controller
     public function studentAttandenceView($day , $id){
 
         $students = Enrollment::where(['SemCourses_ID' => $id])->get();
+        if($students->pluck('id')->count() == 0){
+            return redirect()
+            ->back()
+            ->with([
+                'errorToaster' => 'No Enrolled Student Found' , 
+                'title' => 'Error'
+            ]);
+        }
         $Sem_ID =  SemesterCourse::where('ID' , $id)->first();
 
        

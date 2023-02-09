@@ -43,7 +43,7 @@ Route::get('/confirmEnrollment', [App\Http\Controllers\EnrollmentsController::cl
 
 
 Route::get('/addEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollments'])->name('add.Enrollments');
-Route::get('/allEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'allEnrollments'])->name('all.Enrollments');
+
 Route::post('/storeEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'storeEnrollments'])->name('store.Enrollments');
 Route::get('/editEnrollment/{id?}', [App\Http\Controllers\EnrollmentsController::class, 'editEnrollment'])->name('edit.Enrollment');
 Route::post('/updateEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'updateEnrollment'])->name('update.Enrollment');
@@ -61,6 +61,8 @@ Route::get('/getStudentRollNoSlip',[App\Http\Controllers\StdRollNoSlipsControlle
 
 Route::get('/studentDashboard', [App\Http\Controllers\StudentController::class, 'studentDashboard'])->name('student.Dashboard');
 
+
+
 Route::get('/applyIgrades/{id?}', [App\Http\Controllers\IgradesController::class, 'applyIgrades'])->name('apply.Igrades');
 Route::get('/studentIgrades', [App\Http\Controllers\IgradesController::class, 'studentIgrades'])->name('all.Igrades');
 Route::post('/storeIgrades', [App\Http\Controllers\IgradesController::class, 'storeIgrades'])->name('store.Igrades');
@@ -74,7 +76,12 @@ Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'd
 
 Route::group(['middleware' => 'EmpAuth'], function () {
 
+Route::post('/findStudent', [App\Http\Controllers\StudentController::class, 'findStudent'])->name('find.Student');
 
+Route::get('/getFactSheet/{id}', [App\Http\Controllers\StudentController::class, 'getFactSheet'])->name('download.FactSheet');
+
+
+Route::get('/allEnrollments', [App\Http\Controllers\EnrollmentsController::class, 'allEnrollments'])->name('all.Enrollments');
 Route::get('/confirmIgradesTeacher/{id?}', [App\Http\Controllers\IgradesController::class, 'confirmIgradesTeacher'])->name('confirm.Igrades.Teacher');
 
 Route::get('/teacherStdIgrade', [App\Http\Controllers\IgradesController::class, 'teacherStdIgrade'])->name('teacher.Std.Igrade');
@@ -216,7 +223,7 @@ Route::post('/updateTimeTable', [App\Http\Controllers\TimeTableController::class
 
 //Dean Route Start
 
-Route::get('/deanDashboard', [App\Http\Controllers\DeanController::class, 'deanDashboard'])->name('dean.Dashboard');
+Route::get('/empDashboard', [App\Http\Controllers\DeanController::class, 'deanDashboard'])->name('dean.Dashboard');
 
 //student route start
 

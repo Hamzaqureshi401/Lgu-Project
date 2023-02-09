@@ -73,7 +73,7 @@ class login extends Controller
 
             ]);
              if(empty($submit->DefualtUrl)){
-                $url = '/deanDashboard';
+                $url = '/empDashboard';
                 return  redirect($url);
             }else{
                 $url = $submit->DefualtUrl;

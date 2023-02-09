@@ -171,14 +171,14 @@
                  
               </ul>
             </li>
-           <!--  <li class="dropdown">
+            <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Enrollments</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="{{ route('add.Enrollments') }}">Add Enrollment</a></li>
+                <li><a class="nav-link" href="{{ route('all.Enrollments') }}">All Enrollment</a></li>
                 
                 
               </ul>
-            </li> -->
+            </li> 
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Dean</span></a>
               <ul class="dropdown-menu">

@@ -329,5 +329,25 @@ class EnrollmentsController extends Controller
         );
     }
 
+    public function allEnrollments(){
+
+        $enrollments = Enrollment::paginate(10);
+        $title  = 'All Enrollments';
+        $route = 'updateEnrollment';
+        $getEditRoute = 'editEnrollment';
+        $modalTitle = 'Edit Enrollment';
+
+
+        return
+            view('Enrollments.allEnrollments' ,
+               compact(
+                  'enrollments' ,
+                  'title',
+                  'route',
+                  'modalTitle',
+                  'getEditRoute'
+               ));
+    }
+
  
 }

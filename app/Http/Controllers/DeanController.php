@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Models\Degree;
 use App\Models\Department;
 use App\Models\DegreeBatche;
+use App\Models\SemesterCourse;
 
 
 class DeanController extends Controller
@@ -21,6 +22,7 @@ class DeanController extends Controller
         $degrees    = Degree::get();
         $departments= Department::get();
         $degreeBatches = DegreeBatche::whereNotNull('Batch_ID')->get();
+        $semesterCourses = SemesterCourse::pluck('ID')->count();
         // foreach($degreeBatches as $degreeBatche){
         //      dd($students->where(['Degree_ID' => $degreeBatche->degree->ID])->count() ?? 0);
         // }
@@ -34,7 +36,8 @@ class DeanController extends Controller
                 'students',
                 'degrees',
                 'departments',
-                'degreeBatches'
+                'degreeBatches',
+                'semesterCourses'
             ));
     }
 

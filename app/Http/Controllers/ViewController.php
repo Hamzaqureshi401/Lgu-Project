@@ -72,7 +72,10 @@ class ViewController extends Controller
     
      public function student365View(){
 
-        return view('View.student365View', 
+        $Degree = Degree::select('DegreeName' , 'ID')->get();
+        $Semester = Semester::select('SemSession' , 'ID')->get();
+        return view('View.student365View',
+            compact('Degree' , 'Semester') 
             
                );
     }

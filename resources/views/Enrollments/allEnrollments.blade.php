@@ -9,30 +9,31 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>CourseCode</th>
-                            <th>CourseName</th>
-                            <th>CreditHours</th>
-                            <th>LectureType</th>
-                            <!-- <th>Status</th> -->
+                            <th>Student</th>
+                            <th>Semester Course</th>
+                            <th>Mid</th>
+                            <th>Final</th>
+                            <th>Status</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($courses as $course)
+                          @foreach($enrollments  as $enrollment)
                           <tr>
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $course->CourseCode ?? '--' }}</td>
-                            <td>{{ $course->CourseName ?? '--' }}</td>
-                            <td>{{ $course->CreditHours  ?? '--'}}</td>
-                            <td>{{ $course->LectureType  ?? '--'}}</td>
+                            <td>{{ $enrollment->student->Std_FName ?? '--' }} {{ $enrollment->student->Std_LName ?? '--' }}</td>
+                            <td>{{ $enrollment->SemesterCourse->semester->SemSession ?? '--' }}/{{ $enrollment->SemesterCourse->course->CourseName ?? '--' }}</td>
+                            <td>{{ $enrollment->Is_i_mid  ?? '--'}}</td>
+                            <td>{{ $enrollment->Is_i_final  ?? '--'}}</td>
+                            <td>{{ $enrollment->Status  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->
-                                <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $course->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button>
+                                <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $enrollment->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
                                 
                               </div>
                             </td>
@@ -42,7 +43,7 @@
                       </table>
                     </div>
                     <div class="d-flex justify-content-center">
-                        {{ $courses->links() }}
+                        {{ $enrollments->links() }}
                     </div>
 @include('Table.table_footer') 
 @endsection   
