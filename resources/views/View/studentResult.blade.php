@@ -142,7 +142,7 @@
                             </div>
                             
                             <div class="form-group">
-                                <button type="submit" class="btn btn-sm btn-primary form-control" style=>Submit</button>
+                                <!-- <button type="submit" class="btn btn-sm btn-primary form-control" style=>Submit</button> -->
                             </div>
                         </form>
                     </div>

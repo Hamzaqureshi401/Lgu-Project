@@ -12,16 +12,16 @@
               <div class="row ">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                   <div class="card-content">
-                    <h5 class="font-15">Courses Offered</h5>
-                    <h2 class="mb-3 font-18">258</h2>
+                    <h5 class="font-15">Data</h5>
+                    <h2 class="mb-3 font-18">0</h2>
                     <p class="mb-0">
-                      <span class="col-green">10%</span> Increase
+                      <!-- <span class="col-green">10%</span> Increase -->
                     </p>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                   <div class="banner-img">
-                    <img src="assets/img/banner/1.png" alt="">
+                    <!-- <img src="assets/img/banner/1.png" alt=""> -->
                   </div>
                 </div>
               </div>
@@ -36,16 +36,16 @@
               <div class="row ">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                   <div class="card-content">
-                    <h5 class="font-15"> Enrolled Students</h5>
-                    <h2 class="mb-3 font-18">1,287</h2>
+                    <h5 class="font-15"> Data</h5>
+                    <h2 class="mb-3 font-18">0</h2>
                     <p class="mb-0">
-                      <span class="col-orange">09%</span> Decrease
+                      <!-- <span class="col-orange">09%</span> Decrease -->
                     </p>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                   <div class="banner-img">
-                    <img src="assets/img/banner/2.png" alt="">
+                    <!-- <img src="assets/img/banner/2.png" alt=""> -->
                   </div>
                 </div>
               </div>
@@ -60,16 +60,16 @@
               <div class="row ">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                   <div class="card-content">
-                    <h5 class="font-15">Courses Enrollment</h5>
-                    <h2 class="mb-3 font-18">128</h2>
+                    <h5 class="font-15">Data</h5>
+                    <h2 class="mb-3 font-18">0</h2>
                     <p class="mb-0">
-                      <span class="col-green">18%</span> Increase
+                      <!-- <span class="col-green">18%</span> Increase -->
                     </p>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                   <div class="banner-img">
-                    <img src="assets/img/banner/3.png" alt="">
+                    <!-- <img src="assets/img/banner/3.png" alt=""> -->
                   </div>
                 </div>
               </div>
@@ -84,16 +84,16 @@
               <div class="row ">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                   <div class="card-content">
-                    <h5 class="font-15">Assesment Details</h5>
-                    <h2 class="mb-3 font-18">$48,697</h2>
+                    <h5 class="font-15">Data</h5>
+                    <h2 class="mb-3 font-18">0</h2>
                     <p class="mb-0">
-                      <span class="col-green">42%</span> Increase
+                      <!-- <span class="col-green">42%</span> Increase -->
                     </p>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                   <div class="banner-img">
-                    <img src="assets/img/banner/4.png" alt="">
+                    <!-- <img src="assets/img/banner/4.png" alt=""> -->
                   </div>
                 </div>
               </div>
@@ -175,10 +175,10 @@
                   </tr>
                   <tr>
                     <td>
-                      <a href=""> 1024</a>
+                      <a href=""> 0</a>
                     </td>
                     <td>
-                      <a href=""> 1024</a>
+                      <a href=""> 0</a>
                     </td>
                     <td>
                       <a href=""> 0</a>
@@ -190,10 +190,10 @@
                       <a href="">0</a>
                     </td>
                     <td>
-                      <a href="">389</a>
+                      <a href="">0</a>
                     </td>
                     <td>
-                      <a href="">546</a>
+                      <a href="">0</a>
                     </td>
                     <td>
                       <a href="">0</a>
@@ -202,7 +202,7 @@
                       <a href="">0</a>
                     </td>
                     <td>
-                      <a href="">1024</a>
+                      <a href="">0</a>
                     </td>
                   </tr>
                   <tr>
@@ -214,8 +214,8 @@
                     </td>
                   </tr>
                   <tr>
-                    <td colspan="5">75926</td>
-                    <td colspan="5">107177</td>
+                    <td colspan="5">0</td>
+                    <td colspan="5">0</td>
                   </tr>
                 </tbody>
               </table>
@@ -339,11 +339,11 @@
                     <td>Below 60</td>
                   </tr>
                   <tr>
-                    <td>4016 </td>
-                    <td>18 </td>
-                    <td>2 </td>
-                    <td>100 </td>
-                    <td>735 </td>
+                    <td>0 </td>
+                    <td>0 </td>
+                    <td>0 </td>
+                    <td>0 </td>
+                    <td>0 </td>
                   </tr>
                 </tbody>
               </table>
