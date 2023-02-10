@@ -313,9 +313,11 @@ class AttendanceController extends Controller
 
         $session    =  $this->sessionData->getSessionData();
         $Emp_ID     = $session['ID'];
+        $FinalTerm  = 50;
+        $MidTerm    = 25;
         $types = [
-            $request->FinalTerm,
-            $request->MidTerm,
+            $FinalTerm,
+            $MidTerm,
             $request->Quiz,
             $request->Assignment,
             $request->ClassParticipation,
@@ -340,6 +342,7 @@ class AttendanceController extends Controller
              if ($key < 2){
             $this->storeFixedWeightageDetails($a->id , $type);
         } 
+         SemesterCourseWeightageDetail::orWhereNull('SemCourseWeightage_ID')->delete();
             SemesterCourseWeightage::where(['SemCourse_ID' => $request->id , 'Weightage' => 0])->orWhereNull('Weightage')->delete();
             }
 

@@ -370,6 +370,7 @@
                                           </tr>
                                        </thead>
                                        <tbody>
+                                          @if(!empty($StudentIgrade))
                                           @foreach($StudentIgrade  as $enrollment)
                                           <tr>
                                              <td>
@@ -385,6 +386,7 @@
                                              
                                           </tr>
                                           @endforeach
+                                          @endif
                                        </tbody>
                                     </table>
                            <!-- <form method="post" class="needs-validation">

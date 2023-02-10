@@ -19,6 +19,14 @@
                     @if(empty($SemesterCourseWeightage->first()))
 
                    <div class="form-group">
+                      <label>FinalTerm %</label>
+                      <input type="number" name="FinalTerm" class="form-control" value="50" placeholder="Enter Total Marks" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label>MidTerm %</label>
+                      <input type="number" name="MidTerm" class="form-control" value="25" placeholder="Enter Total Marks" readonly>
+                    </div>
+                    <div class="form-group">
                       <label>Quiz %</label>
                       <input type="number" name="Quiz" class="form-control" value="{{old('Quiz')}}" placeholder="Enter Total Marks" >
                     </div>
