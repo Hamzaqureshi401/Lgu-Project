@@ -34,7 +34,10 @@
                            </div>
                            <div class="form-group col-md-4 col-12">
                               <label>Roll Number</label>
-                              <input type="tel" name="Rollno" id="CreditHours" 
+                              <input 
+                              type="number" 
+                              name="Rollno" 
+
                                  placeholder="Example 001" 
                                  class="form-control"  
                                  value="{{ old('Rollno') }}" 
@@ -155,7 +158,7 @@
                            Registration No
                            </span>
                            <span class="float-right text-muted">
-                           <a href="#">{{ $Registration->ID ?? '--' }}</a>
+                           <a>{{ $Registration->ID ?? '--' }}</a>
                            </span>
                         </p>
                      </div>
@@ -201,6 +204,7 @@
                   </div>
                </div> -->
             </div>
+            @if(!empty($semesterSession))
             <div class="col-12 col-md-12 col-lg-8">
                <div class="card">
                   <div class="padding-20">
@@ -267,6 +271,7 @@
                                     </table>
                                  </div>
                                  @endforeach
+                                 @endif
                                  <!--                                  <div class="row">
                                     <div class="form-group col-md-4 col-12">
                                        <label>Name</label>
@@ -337,9 +342,11 @@
                                     </div>
                                     </div> -->
                               </div>
+                              @if(!empty($student))
                               <div class="card-footer text-right">
                                  <a href="{{ route('download.FactSheet' , $student->ID) }}" class="btn btn-sm btn-primary">Download Fact Sheet </a>
                               </div>
+                              @endif
                            </form>
                         </div>
                         <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">

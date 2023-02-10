@@ -7,25 +7,37 @@
    height: 60%;
    }  
 
-   @media print {
-  body * {
-    visibility: hidden;
-  }
-  #content, #content * {
+
+@page {
+    size: 21cm 29.7cm;
+/*    margin: 30mm 45mm 30mm 45mm;*/
+     /* change the margins as you want them to be. */
+}
+
+@media print {
+    body{
+        width: 21cm;
+        height: 29.7cm;
+        visibility: hidden;
+        -webkit-print-color-adjust:exact !important;
+  		print-color-adjust:exact !important;
+        /* change the margins as you want them to be. */
+   } 
+   #content, #content * {
     visibility: visible;
   }
-  #content {
-    position: absolute;
-    left: 0;
-    top: 0;
+  * {
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
+
 }
-/*@media only print{
-   #content { height:50%}
-}*/
+
+
 
 </style>
-<section class="section" id="content">
+<section class="section page" id="content">
    <div class="section-body html-content" >
       <div class="invoice">
          <div class="invoice-print">
@@ -119,8 +131,13 @@
                   <span><b>Father Contact:</b> </span>{{ $student->FatherPhone ?? '--' }}
                </div>
             </div>
+            <div class="row">
+               <div class="col-12 bg-dark" style="color: white;">
+                  <b> .</b>
+               </div>
+            </div>
             <div class="table-responsive">
-               <table class="table table-striped table-datatable" id="sortable-table">
+               <table class="table table-bordered table-striped table-datatable" id="sortable-table">
                   <thead>
                      <tr>
                         <th class="text-center">
@@ -131,7 +148,7 @@
                         <th>Mid</th>
                         <th>Final</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        
                      </tr>
                   </thead>
                   <tbody>
@@ -147,17 +164,19 @@
                         <td>{{ $enrollment->Is_i_mid  ?? '--'}}</td>
                         <td>{{ $enrollment->Is_i_final  ?? '--'}}</td>
                         <td>{{ $enrollment->Status  ?? '--'}}</td>
-                        <td>
-                           <div class="card-body">
-                           </div>
-                        </td>
+                        
                      </tr>
                      @endforeach
                   </tbody>
                </table>
             </div>
+             <div class="row">
+               <div class="col-12 bg-dark" style="color: white;">
+                  <b> .</b>
+               </div>
+            </div>
             <div class="table-responsive">
-               <table class="table table-striped table-datatable" id="sortable-table">
+               <table class="table table-bordered table-striped table-datatable" id="sortable-table">
                   <thead>
                      <tr>
                         <th class="text-center">
@@ -187,23 +206,20 @@
                         <td>{{ $enrollment->ObtainedMarks ?? '--' }} </td>
                         <td>{{ $enrollment->TotalMarks ?? '--' }} </td>
                         <td>{{ $enrollment->Rollno ?? '--' }} </td>
-                        <td>
-                           <div class="card-body">
-                           </div>
-                        </td>
+                        
                      </tr>
                      @endforeach
                   </tbody>
                </table>
             </div>
             <div id="editor"></div>
-            <button id="cmd" onclick="CreatePDFfromHTML();">generate PDF</button>
+            <!-- <button id="cmd" onclick="CreatePDFfromHTML();">generate PDF</button> -->
             <hr>
          </div>
       </div>
    </div>
 </section>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
  <script type="text/javascript">
         function CreatePDFfromHTML() {
@@ -229,5 +245,5 @@
         //$(".html-content").hide();
     });
 }
-    </script>
+    </script> -->
 @endsection

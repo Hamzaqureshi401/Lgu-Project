@@ -43,9 +43,25 @@ class StudentController extends Controller
     public function findStudent(Request $request){
 
       $student      =  Student::where('StdRollNo' , $request->SemSession.'/'.$request->DegreeName.'/'.$request->Rollno)->first();
+      if(empty($student)){
+        return redirect()
+            ->back()
+            ->with([
+                'errorToaster' => 'Student Not Found!' , 
+                'title' => 'Error'
+            ]);
+      }
       $Degree       = Degree::select('DegreeName' , 'ID')->get();
       $Semester     = Semester::select('SemSession' , 'ID')->get();
       $Registration = Registration::where('Std_ID' , $student->ID)->first();
+      if(empty($Registration)){
+        return redirect()
+            ->back()
+            ->with([
+                'errorToaster' => 'Student Did Not Enroll Any Subject!' , 
+                'title' => 'Error'
+            ]);
+      }
       $Enrollment   = Enrollment::where('Std_ID' , $student->ID)->get();
       foreach($Enrollment as $Enrollment){
         $semesterSession[] = $Enrollment->semesterCourse->semester->SemSession;
