@@ -6,7 +6,11 @@
 <section class="section">
    <div class="section-body">
       <div class="section-body">
+        @if(!empty($student))
+         <div class="row d-none">
+         @else
          <div class="row">
+          @endif
             <div class="col-12 col-md-12 col-lg-12">
                <div class="card">
                   <div class="card-header">
@@ -344,13 +348,46 @@
                               </div>
                               @if(!empty($student))
                               <div class="card-footer text-right">
-                                 <a href="{{ route('download.FactSheet' , $student->ID) }}" class="btn btn-sm btn-primary">Download Fact Sheet </a>
+                                 <a href="{{ route('download.FactSheet' , $student->ID) }}" class="btn btn-sm btn-primary">Get Fact Sheet </a>
                               </div>
                               @endif
                            </form>
                         </div>
                         <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
-                           <form method="post" class="needs-validation">
+
+                            <table class="table table-striped table-datatable" id="sortable-table">
+                                       <thead>
+                                          <tr>
+                                             <th class="text-center">
+                                                <i class="fas fa-th"></i>
+                                             </th>
+                                             <th>Course</th>
+                                             <th>Date</th>
+                                             <th>Status</th>
+                                             <th>Type</th>
+                                             <th>Remarks</th>
+                                             <!-- <th>Image</th> -->
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          @foreach($StudentIgrade  as $enrollment)
+                                          <tr>
+                                             <td>
+                                                <div class="sort-handler">
+                                                   <i class="fas fa-th"></i>
+                                                </div>
+                                             </td>
+                                             <td>{{ $enrollment->enrollment->semsterCourse->course->CourseName ?? '--'}}</td>
+                                             <td>{{ $enrollment->Date ?? '--' }}/{{ $enrollment->SemesterCourse->course->CourseName ?? '--' }}</td>
+                                             <td>{{ $enrollment->Status  ?? '--'}}</td>
+                                             <td>{{ $enrollment->Type  ?? '--'}}</td>
+                                             <td>{{ $enrollment->Remarks  ?? '--'}}</td>
+                                             
+                                          </tr>
+                                          @endforeach
+                                       </tbody>
+                                    </table>
+                           <!-- <form method="post" class="needs-validation">
                               <div class="card-header">
                                  <h4>Edit Profile</h4>
                               </div>
@@ -406,7 +443,7 @@
                               <div class="card-footer text-right">
                                  <button class="btn btn-primary">Save Changes</button>
                               </div>
-                           </form>
+                           </form> -->
                         </div>
                      </div>
                   </div>

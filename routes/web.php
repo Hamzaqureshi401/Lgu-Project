@@ -76,6 +76,8 @@ Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'd
 
 Route::group(['middleware' => 'EmpAuth'], function () {
 
+Route::any('/student365View', [App\Http\Controllers\StudentController::class, 'student365View'])->name('student.365View');
+
 Route::post('/findStudent', [App\Http\Controllers\StudentController::class, 'findStudent'])->name('find.Student');
 
 Route::get('/getFactSheet/{id}', [App\Http\Controllers\StudentController::class, 'getFactSheet'])->name('download.FactSheet');
@@ -287,7 +289,6 @@ Route::get('/examDashboardView', [App\Http\Controllers\ViewController::class, 'e
 
 Route::get('/igradeStdhodView', [App\Http\Controllers\ViewController::class, 'igradeStdhodView'])->name('igrade.StdhodView');
 
-Route::get('/student365View', [App\Http\Controllers\ViewController::class, 'student365View'])->name('student.365View');
 
 Route::get('/reports', [App\Http\Controllers\ViewController::class, 'reports'])->name('reports');
 

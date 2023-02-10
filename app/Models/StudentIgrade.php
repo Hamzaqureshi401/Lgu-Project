@@ -10,4 +10,9 @@ class StudentIgrade extends Model
     use HasFactory;
     protected $table = 'Student_Igrade';
     public $timestamps = false;
+
+    public function enrollment(){
+
+          return $this->belongsTo('App\Models\Enrollment' , 'Enroll_ID' );
+   }
 }

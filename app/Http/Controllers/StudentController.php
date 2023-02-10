@@ -9,6 +9,7 @@ use App\Models\Degree;
 use App\Models\Enrollment;
 use App\Models\Attendance;
 use App\Models\Student;
+use App\Models\StudentIgrade;
 use App\Models\SemesterCourse;
 use App\Models\StudentEducation;
 
@@ -74,23 +75,21 @@ class StudentController extends Controller
       foreach($semesterID as $semesterID){
         $SemesterCourse[] = SemesterCourse::where('Sem_ID' , $semesterID)->pluck('id')->toArray();
       }
-      //dd($SemesterCourse);
       
       foreach($SemesterCourse as $key => $SemesterCourse){
         $EnrollBySem[$semesterSession[$key]]  = Enrollment::where('Std_ID' , $student->ID)->whereIn('SemCourses_ID' , $SemesterCourse)->get();
       }
-      
-      //dd($EnrollBySem);
 
-        //dd();
-        return view('View.student365View',
+      $StudentIgrade = StudentIgrade::whereIn('Enroll_ID' , $Enrollment->pluck('id')->toArray());
+        return view('Student.student365View',
             compact(
                 'Degree' , 
                 'Semester',
                 'student',
                 'Registration',
                 'semesterSession',
-                'EnrollBySem'
+                'EnrollBySem',
+                'StudentIgrade'
                 
             ) 
             
@@ -104,6 +103,15 @@ class StudentController extends Controller
          $StudentEducation  = StudentEducation::where('Std_ID' , $student->ID)->get();
 
           return view('Student.getFactSheet' , compact('student' , 'Enrollment' , 'StudentEducation')
+            
+               );
+    }
+    public function student365View(){
+
+        $Degree = Degree::select('DegreeName' , 'ID')->get();
+        $Semester = Semester::select('SemSession' , 'ID')->get();
+        return view('Student.student365View',
+            compact('Degree' , 'Semester') 
             
                );
     }
