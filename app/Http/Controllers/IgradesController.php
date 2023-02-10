@@ -16,10 +16,10 @@ class IgradesController extends Controller
     public function studentIgrades(){
         $enrollments =  Enrollment::where('Std_ID' , Session::get('std_ID'))->get();
         
-        $title  = 'All Igrades';
-        $route = 'applyIgrades/';
+        $title        = 'All Igrades';
+        $route        = 'applyIgrades/';
         $getEditRoute = 'applyIgrades';
-        $modalTitle = 'Apply Igrade';
+        $modalTitle   = 'Apply Igrade';
         $studentIgrade = StudentIgrade::pluck('Enroll_ID')->toArray();
 
         //dd($studentIgrade);
@@ -127,9 +127,12 @@ class IgradesController extends Controller
        //$enrollments =  Enrollment::where(['ID' => $studentIgrade])->get();
 
        $studentIgrade   = StudentIgrade::where('Status' , 'Teacher')->select('Enroll_ID' , 'ID')->get();
+       //dd($studentIgrade);
       
        $semCourse       = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('ID')->toArray();
+
        $enrollments     =  Enrollment::where(['SemCourses_ID' => $semCourse , 'ID' => $studentIgrade->pluck('Enroll_ID')->toArray()])->get();  
+       
        $igArr = $studentIgrade->pluck('ID')->toArray();    
         $title  = 'All Igrades';
         $route = 'confirmIgradesTeacher/';
@@ -153,7 +156,7 @@ class IgradesController extends Controller
          StudentIgrade::where('ID' , $id)->update(['Status' => 'Hod']);
         
 
-        return redirect()->back()->with(['successToaster' => 'Course Added' , 'title' => 'Success']);
+        return redirect()->back()->with(['successToaster' => 'Igrade Confirmed' , 'title' => 'Success']);
 
     }
     public function confirmIgradesHod($id){

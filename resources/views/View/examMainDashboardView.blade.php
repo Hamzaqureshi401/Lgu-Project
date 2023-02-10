@@ -134,21 +134,23 @@
                                   <tr>
                                       <td><a href="">0</a></td>
                                       <td><a href="">0</a></td>
-                                      <td><a href="">1062</a></td>
                                       <td><a href="">0</a></td>
                                       <td><a href="">0</a></td>
                                       <td><a href="">0</a></td>
                                       <td><a href="">0</a></td>
-                                      <td><a href="">389</a> </td>
-                                      <td><a href="">546</a> </td>
-                                      <td><a href="">1062</a></td>
+                                      <td><a href="">0</a></td>
+                                      <td><a href="">0</a> </td>
+                                      <td><a href="">0</a> </td>
+                                      <td><a href="">0</a></td>
                                   </tr>
                               </tbody>
                               <tfoot>
                                   <tr>
                                       <td colspan="2" style="text-align:center">Advance Search</td>
                                       <td colspan="5"><input type="number" class="form-control" name="id" placeholder="Enter Award Id"></td>
-                                      <td colspan="3"><button type="submit" class="btn btn-success form-control waves-effect waves-light waves-round">Submit</button></td>
+                                      <td colspan="3">
+                                        <!-- <button type="submit" class="btn btn-success form-control waves-effect waves-light waves-round">Submit</button> -->
+                                      </td>
                                   </tr>
                               </tfoot>
                           </table>
