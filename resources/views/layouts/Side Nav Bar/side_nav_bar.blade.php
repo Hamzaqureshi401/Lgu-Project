@@ -5,6 +5,8 @@
                   data-feather="briefcase"></i><span>Dashboard</span></a>
               <ul class="dropdown-menu">
                <li><a class="nav-link" href="{{ route('dean.Dashboard') }}">Dashboard</a></li>
+               <li><a class="nav-link" href="{{ route('vc.Dashboard') }}">Vc Dashboard</a></li>
+
               </ul>
             </li>
 

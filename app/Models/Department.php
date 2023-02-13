@@ -18,4 +18,10 @@ class Department extends Model
     public function countStudent($id){
         return Student::where('Degree_ID' , $this->getDegree($id)->ID ?? '')->get() ?? '';
     }
+    public function hod(){
+          return $this->belongsTo('App\Models\Employee' , 'HODUID');
+   }
+   public function dean(){
+          return $this->belongsTo('App\Models\Employee' , 'DeanUID');
+   }
 }

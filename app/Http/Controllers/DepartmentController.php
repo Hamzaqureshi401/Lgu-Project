@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Department;
+use App\Models\Employee;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
@@ -15,36 +16,20 @@ class DepartmentController extends Controller
         $this->validate($request, [
             'Dpt_Name'      => 'required|max:10|unique:Departments',
             'Dpt_FullName'  => 'required|max:50|unique:Departments',
-            'HODUID'        => 'required|numeric',
-            'DeanUID'       => 'required|numeric',
             'Status'        => 'required|numeric',
 
         ]);
-        // $validation['validation'] = $validator->errors()->first();
-        // if ($validator->fails()) {
-        //     $validation['error'] = true;
-        // }else{
-        //     $validation['error'] = false;
-        // }
-        // return $validation;
+        
     }
     public function validationUpdate($request){
 
         $this->validate($request, [
             'Dpt_Name'      => 'required|max:10',
             'Dpt_FullName'  => 'required|max:50',
-            'HODUID'        => 'required|numeric',
-            'DeanUID'       => 'required|numeric',
             'Status'        => 'required|numeric',
 
         ]);
-        // $validation['validation'] = $validator->errors()->first();
-        // if ($validator->fails()) {
-        //     $validation['error'] = true;
-        // }else{
-        //     $validation['error'] = false;
-        // }
-        // return $validation;
+        
     }
 
      public function addDepartment(){
@@ -52,26 +37,25 @@ class DepartmentController extends Controller
         $button = "Add Department";
         $title  = 'Add Department';
         $route  = '/storeDepartment';
+        $employees = Employee::get();
         return
             view('Departments.addDepartment',
                compact(
                   'button' ,
                   'title' ,
-                  'route'
+                  'route',
+                  'employees'
                ));
     }
 
     public function storeDepartment(Request $request){
 
+        if(!empty($request->HODUID) &&  !empty($request->DeanUID)){
+            return redirect()->back()->with(['errorToaster' => 'Please Select One User!' , 'title' => 'Error']);
+        }
+
       $validator = $this->validation($request);
-        // if ($validator['error'] == true) {
-        //     return
-        //     response()->json([
-        //     'title' => 'Failed' ,
-        //     'type'=> 'error',
-        //     'message'=> ''.$validator['validation']
-        //     ]);
-        // }else {
+       
             $submit = DB::update("EXEC sp_InsertDepartments
             @Dpt_Name       = '$request->Dpt_Name',
             @Dpt_FullName   = '$request->Dpt_FullName',
@@ -79,12 +63,7 @@ class DepartmentController extends Controller
             @DeanUID        = '$request->DeanUID',
             @Status         = '$request->Status'
             ;");
-        //   return response()->json([
-        //     'title' => 'Done' ,
-        //     'type'=> 'success',
-        //     'message'=> 'Department Added!
-        //     ']);
-        // }
+       
          return redirect()->back()->with(['successToaster' => 'Department Added' , 'title' => 'Success']);
 
 
@@ -96,6 +75,7 @@ class DepartmentController extends Controller
         $title  = 'Edit Department';
         $route  = '/updateDepartment';
         $department = Department::where('ID' , $id)->first();
+        $employees = Employee::get();
 
         return
             view('Departments.editDepartment',
@@ -103,7 +83,8 @@ class DepartmentController extends Controller
                   'department',
                   'button' ,
                   'title' ,
-                  'route'
+                  'route',
+                  'employees'
                ));
     }
 
@@ -129,15 +110,7 @@ class DepartmentController extends Controller
      public function updateDepartment (Request $request){
 
         $validator = $this->validationUpdate($request);
-       //$validator = $this->validation($request);
-        // if ($validator['error'] == true) {
-        //     return
-        //     response()->json([
-        //     'title' => 'Failed' ,
-        //     'type'=> 'error',
-        //     'message'=> ''.$validator['validation']
-        //     ]);
-        // }else {
+      
              $submit = DB::update("EXEC sp_UpdateDepartments
 
             @Dpt_ID         = '$request->id',
@@ -148,12 +121,6 @@ class DepartmentController extends Controller
             @Status         = '$request->Status'
             ;");
 
-        // return response()->json([
-        //     'title'  => 'Done' ,
-        //     'type'   => 'success',
-        //     'message'=> 'Department Updated!
-        //     ']);
-        // }
     return redirect()->back()->with(['successToaster' => 'Department Updated' , 'title' => 'Success']);
 
     }

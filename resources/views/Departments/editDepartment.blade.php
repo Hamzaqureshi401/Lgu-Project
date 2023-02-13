@@ -11,14 +11,29 @@
                       <label>Dpt Full Name</label>
                       <input type="text" name="Dpt_FullName" class="form-control" value="{{ $department->Dpt_FullName }}" required onkeydown="return /[a-z]/i.test(event.key)">
                     </div>
+
                     <div class="form-group">
-                      <label>HODUID</label>
-                      <input type="number" name="HODUID" class="form-control" value="{{ $department->HODUID }}" required>
+                      <label>Select Hod Employee</label>
+                      <select class="form-control select2" name="HODUID"  >
+                        @foreach($employees as $employee)
+                        <option></option>
+                        <option value="{{ $employee->ID }}" {{ $department->HODUID == $employee->ID ? 'selected' : '' }}>{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
+                        @endforeach
+                      </select>
                     </div>
+
                     <div class="form-group">
-                      <label>Dean U ID</label>
-                      <input type="number" name="DeanUID" class="form-control" value="{{ $department->DeanUID }}" required>
+                      <label>Select Dean Employee</label>
+                      <select class="form-control select2" name="DeanUID"  >
+                        @foreach($employees as $employee)
+                        <option></option>
+                        <option value="{{ $employee->ID }}" {{ $department->DeanUID == $employee->ID ? 'selected' : '' }}>{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
+                        @endforeach
+                      </select>
                     </div>
+
+
+                    
                     <div class="form-group">
                       <label>Status</label>
                       <input type="number" name="Status" class="form-control" value="{{ $department->Status }}" required>

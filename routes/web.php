@@ -38,7 +38,9 @@ Route::group(['middleware' => 'StudentAuth'], function () {
 // Enrollments Routes start
 
 Route::get('/addEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'addEnrollment'])->name('add.Enrollment');
+
 Route::get('/storeEnrollment/{id}', [App\Http\Controllers\EnrollmentsController::class, 'executeEnrollment'])->name('store.Enrollment');
+
 Route::get('/confirmEnrollment', [App\Http\Controllers\EnrollmentsController::class, 'confirmEnrollment'])->name('confirm.Enrollment');
 
 
@@ -71,10 +73,13 @@ Route::post('/storeIgrades', [App\Http\Controllers\IgradesController::class, 'st
 });
 
 Route::get('/printRollNoSlip', [App\Http\Controllers\StdRollNoSlipsController::class, 'printRollNoSlip'])->name('print.RollNo.Slip');
+
 Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'downloadcstorepdf'])->name('downloadcstorepdf');
 
 
 Route::group(['middleware' => 'EmpAuth'], function () {
+
+
 
 Route::any('/student365View', [App\Http\Controllers\StudentController::class, 'student365View'])->name('student.365View');
 
@@ -227,7 +232,14 @@ Route::post('/updateTimeTable', [App\Http\Controllers\TimeTableController::class
 
 Route::get('/empDashboard', [App\Http\Controllers\DeanController::class, 'deanDashboard'])->name('dean.Dashboard');
 
-//student route start
+Route::get('/vcDashboard', [App\Http\Controllers\DeanController::class, 'vcDashboard'])->name('vc.Dashboard');
+
+Route::get('/allowedEmpCourses', [App\Http\Controllers\DeanController::class, 'allCourses'])->name('allowed.EmpCourses');
+
+Route::get('/allowedEmpStudent', [App\Http\Controllers\DeanController::class, 'allowedEmpStudent'])->name('allowed.EmpStudent');
+
+Route::get('/allowedSemesterCourses', [App\Http\Controllers\DeanController::class, 'allowedSemesterCourses'])->name('allowed.SemesterCourses');
+
 
 
 

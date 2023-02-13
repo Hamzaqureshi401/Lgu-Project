@@ -48,7 +48,7 @@ class AttendanceController extends Controller
         // $modalTitle   = 'Edit Course';
 
 
-         $course     = Course::pluck('id')->count();
+        $course     = Course::pluck('id')->count();
         $enrollment = Enrollment::pluck('id')->count();
         $students   = Student::get();
         $degrees    = Degree::paginate(10);

@@ -12,8 +12,8 @@
                             </th>
                             <th>Dpt Name</th>
                             <th>Dpt Full Name</th>
-                            <th>HODUID</th>
-                            <th>DeanUID</th>
+                            <th>HOD</th>
+                            <th>Dean</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
@@ -28,8 +28,8 @@
                             </td>
                             <td>{{ $department->Dpt_Name ?? '--' }}</td>
                             <td>{{ $department->Dpt_FullName ?? '--' }}</td>
-                            <td>{{ $department->HODUID ?? '--' }}</td>
-                            <td>{{ $department->DeanUID ?? '--' }}</td>
+                            <td>{{ $department->hod->Emp_FirstName ?? '--' }} {{ $department->hod->Emp_LastName ?? '--' }}</td>
+                            <td>{{ $department->dean->Emp_FirstName ?? '--' }} {{ $department->dean->Emp_LastName ?? '--' }}</td>
                             <td>{{ $department->Status ?? '--' }}</td>
                             <td><div class="card-body">
                                 <!-- only change id -->
