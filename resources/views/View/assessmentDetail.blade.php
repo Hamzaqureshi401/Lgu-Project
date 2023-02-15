@@ -94,7 +94,6 @@
 <script type="text/javascript">
   $("#exampleModal").prependTo("body"); 
 </script>
-<script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/bundles/datatables/export-tables/dataTables.buttons.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/datatables/export-tables/buttons.flash.min.js') }}"></script>
   <script src="{{ asset('assets/bundles/datatables/export-tables/jszip.min.js') }}"></script>

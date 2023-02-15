@@ -12,6 +12,7 @@ use App\Models\DegreeBatche;
 use App\Models\Attendance;
 use App\Models\SemesterCourse;
 use Session;
+use DB;
 
 class DeanController extends Controller
 {
@@ -31,6 +32,12 @@ class DeanController extends Controller
 
          $totalClasses      = $attandences->whereIn('Status' , [0 , 1])->count();
 
+       $a =   DB::table('Attendances')->
+    select(DB::raw('COUNT(attendances.ID) as tcount'))->groupBy('attendances.Enroll_ID')->where(['Emp_ID' => Session::get('ID') , 'Status' => 1])
+    ->get();
+
+dd($a , $totalClasses);
+
 
         foreach($enrollment_ID as $enrollment_ID){
         
@@ -40,74 +47,74 @@ class DeanController extends Controller
         ->count();
         }
 
-        // foreach($presents as $present){
+        foreach($presents as $present){
 
-        // if ($present != 0 ){
-        //   $percentages[] = ($present / $totalClasses) * 100;
-        // }else{
-        //     $percentages[] = 0;
-        // }
-        // }
+        if ($present != 0 ){
+          $percentages[] = ($present / $totalClasses) * 100;
+        }else{
+            $percentages[] = 0;
+        }
+        }
 
-        // $header[] = '100-80';
-        // $header[] = '80-75';
-        // $header[] = '75-70';
-        // $header[] = '70-65';
-        // $header[] = '65-60';
-        // $header[] = 'Lessthen 60';
+        $header[] = '100-80';
+        $header[] = '80-75';
+        $header[] = '75-70';
+        $header[] = '70-65';
+        $header[] = '65-60';
+        $header[] = 'Lessthen 60';
 
-        // //dd($header);
+        //dd($header);
         
-        // $pr = ['59' ,'60', '64' , '65' , '69' , '70' , '74' , '75' , '79' ,'80', '81'];
+        $pr = ['59' ,'60', '64' , '65' , '69' , '70' , '74' , '75' , '79' ,'80', '81'];
 
-        // foreach($header as $rec){
-        //     foreach($percentages as $keyval => $percentage){
-        //         if($percentage >= 80){
-        //             $record[$rec] =  $pr[$keyval] ?? 0;    
-        //         }else{
-        //             $record[$rec] = 0;
-        //         }
-        //         // if($percentage >=75 && $percentage < 80){
-        //         //     $record[$rec] =  $presents[$keyval] ?? 0;
-        //         // }
-        //         // if($percentage >=70 && $percentage < 75){
-        //         //     $record[$rec] =  $presents[$keyval] ?? 0;
-        //         // }
-        //         // if($percentage >=60 && $percentage < 70){
-        //         //     $record[$rec] =  $presents[$keyval] ?? 0;
-        //         // }
-        //         // if($percentage < 60){
-        //         //     $record[$rec] =  $presents[$keyval] ?? 0;
-        //         // }
+        foreach($header as $rec){
+            foreach($percentages as $keyval => $percentage){
+                if($percentage >= 80){
+                    $record[$rec] =  $pr[$keyval] ?? 0;    
+                }else{
+                    $record[$rec] = 0;
+                }
+                // if($percentage >=75 && $percentage < 80){
+                //     $record[$rec] =  $presents[$keyval] ?? 0;
+                // }
+                // if($percentage >=70 && $percentage < 75){
+                //     $record[$rec] =  $presents[$keyval] ?? 0;
+                // }
+                // if($percentage >=60 && $percentage < 70){
+                //     $record[$rec] =  $presents[$keyval] ?? 0;
+                // }
+                // if($percentage < 60){
+                //     $record[$rec] =  $presents[$keyval] ?? 0;
+                // }
                 
-        //     }
+            }
             
-        // }
-        // foreach ($percentages as $percentage){
+        }
+        foreach ($percentages as $percentage){
 
-        //     if ($percentage > 80){
-        //         $newfilter['100-80'][] = $percentage ?? 0;
-        //     }elseif(($percentage >=75) && ($percentage < 80)){
-        //         $newfilter['80-75'][] = $percentage ?? 0;
-        //     }elseif(($percentage >=70) && ($percentage < 75)){
-        //         $newfilter['75-70'][] = $percentage ?? 0;
-        //     }elseif(($percentage >=65) && ($percentage < 70)){
-        //         $newfilter['70-65'][] = $percentage ?? 0;
-        //     }elseif(($percentage >=60) && ($percentage < 65)){
-        //         $newfilter['65-60'][] = $percentage ?? 0;
-        //     }elseif(($percentage) < 60){
-        //         $newfilter['Lessthen 60'][] = $percentage ?? 0;
-        //     }
-        // }
+            if ($percentage > 80){
+                $newfilter['100-80'][] = $percentage ?? 0;
+            }elseif(($percentage >=75) && ($percentage < 80)){
+                $newfilter['80-75'][] = $percentage ?? 0;
+            }elseif(($percentage >=70) && ($percentage < 75)){
+                $newfilter['75-70'][] = $percentage ?? 0;
+            }elseif(($percentage >=65) && ($percentage < 70)){
+                $newfilter['70-65'][] = $percentage ?? 0;
+            }elseif(($percentage >=60) && ($percentage < 65)){
+                $newfilter['65-60'][] = $percentage ?? 0;
+            }elseif(($percentage) < 60){
+                $newfilter['Lessthen 60'][] = $percentage ?? 0;
+            }
+        }
 
-        // foreach ($percentages as $key => $pr){
+        foreach ($percentages as $key => $pr){
 
-        //     $percentagesVal[] = $pr.'-'.$presents[$key];
-        // }
-
+            $percentagesVal[$presents[$key]] = $pr;
+        }
 
        
-        // dd( $percentages , $presents , $newfilter , $percentagesVal);
+       
+        dd( $percentages , $presents , $newfilter , $percentagesVal);
         
         
         return 
