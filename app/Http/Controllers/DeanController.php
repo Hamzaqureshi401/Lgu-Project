@@ -38,6 +38,15 @@ class DeanController extends Controller
             ->where(['Emp_ID' => Session::get('ID') , 'Status' => 1])
             ->get();
 
+            select count(status) , Enroll_ID from Attendances  group by Enroll_ID,Emp_ID having Emp_ID=20051
+
+
+select count(status) as count_attendance , Enroll_ID,Status ,
+(select count(status) from Attendances group by Enroll_ID,Emp_ID having Emp_ID=20051)
+from Attendances 
+group by Enroll_ID,Status,Emp_ID having Emp_ID=20051 and Status=1
+
+
 dd($a , $totalClasses);
 
 
