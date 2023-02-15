@@ -32,9 +32,11 @@ class DeanController extends Controller
 
          $totalClasses      = $attandences->whereIn('Status' , [0 , 1])->count();
 
-       $a =   DB::table('Attendances')->
-    select(DB::raw('COUNT(attendances.ID) as tcount'))->groupBy('attendances.Enroll_ID')->where(['Emp_ID' => Session::get('ID') , 'Status' => 1])
-    ->get();
+       $a =   DB::table('Attendances')
+            ->select(DB::raw('COUNT(attendances.ID) as pcount'),DB::raw('select COUNT(attendances.ID) form as tcount'))
+            ->groupBy('attendances.Enroll_ID')
+            ->where(['Emp_ID' => Session::get('ID') , 'Status' => 1])
+            ->get();
 
 dd($a , $totalClasses);
 
