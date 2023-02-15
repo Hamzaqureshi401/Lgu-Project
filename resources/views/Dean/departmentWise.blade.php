@@ -32,11 +32,18 @@
                       
                       <tr>
 	                      <td>{{ $department->Dpt_Name }}</td>
-	                      <td>{{ $department->countStudent($department->ID)->count()  }}</td>
-	                      <td>{{ "--" }}</td>
-	                      <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
+	                      <td>{{ $department->countStudent($department->ID , 'Defence')->count()  }}</td>
+	                      <td>{{ $department->countStudent($department->ID , 'Civilian')->count() }}</td>
+	                      <td>{{ $department->countStudent($department->ID , 'Shaheed')->count() }}</td>
+                        <td>{{ $department->countStudent($department->ID , 'Sports')->count() }}</td>
+                        <td>{{ $department->countStudent($department->ID , 'Defence')->count() 
+                        +
+                        $department->countStudent($department->ID , 'Civilian')->count()
+                        +
+                         $department->countStudent($department->ID , 'Shaheed')->count()
+                         +
+                         $department->countStudent($department->ID , 'Sports')->count()
+                         }}</td>
                       </tr>  
                       
                       @endforeach

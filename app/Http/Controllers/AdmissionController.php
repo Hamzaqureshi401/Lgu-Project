@@ -51,6 +51,7 @@ class AdmissionController extends Controller
             'AdmissionSession'  => 'required|max:15',
             'BloodGroup'        => 'required|string',
             'FatherEmail'       => 'required|Email|max:25',
+            'Category'          => 'required|max:10',
             'Image'             => 'required|mimes:jpeg,png,jpg|max:2048',
             'stdfile'           => 'required|mimes:jpeg,png,jpg,pdf|max:3072'
 
@@ -126,6 +127,7 @@ class AdmissionController extends Controller
          @AddmissionSession  =      '$request->AdmissionSession',
          @BloodGroup         =      '$request->BloodGroup',
          @FatherEmail        =      '$request->FatherEmail',
+         @Category           =      '$request->Category',
          @Files              =      '$stdfilename',
          @Image              =      '$stdImagename';");
         return $submit;
@@ -424,6 +426,7 @@ class AdmissionController extends Controller
         @AddmissionSession  ='$request->AdmissionSession',
         @BloodGroup         ='$request->BloodGroup',
         @FatherEmail        ='$request->FatherEmail',
+        @Category           =      '$request->Category',
         @DOB                ='$Date_of_birth',
         @Province           ='$state',
         @Country            ='$Country',  

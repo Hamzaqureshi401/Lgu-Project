@@ -85,7 +85,7 @@
                            <td>{{ $semesterCourse->course->LectureType  ?? '--'}}</td>
                            <td>
                               <div class="card-body">
-                                 <a href="{{ route('course.Assign' , [ $semesterCourse->course->ID , $semesterCourse->ID]) }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $semesterCourse->ID }}</a>
+                                 <a href="{{ route('course.Assign' , [ $semesterCourse->course->ID , $semesterCourse->ID]) }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ 'Assign Course' }}</a>
                               </div>
                            </td>
                         </tr>

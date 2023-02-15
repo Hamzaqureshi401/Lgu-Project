@@ -319,6 +319,31 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
+             @php 
+                      $Category = [
+                      'Defence' , 
+                      'Shaheed' , 
+                      'Civilion' , 
+                      'Sports'
+                      
+                      ];
+                      @endphp
+
+            <div class="form-group">
+                <label style="font-size: 13px">Category <span style="color: red">*</span>
+                </label>
+                <select name="Category" class="custom-select">
+                    <option value="{{ old('Category') }}" selected>{{ old('Category') }}
+                    </option>
+                     @foreach($Category as $Category)
+                        <option value="{{ $Category }}">{{ $Category}}</option>
+                        @endforeach
+                </select>
+                <br>
+                @error('Category')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="form-group">
                 <label style="font-size: 13px">Student Files <span style="color: red">*
                         jpeg,png,jpg,pdf</span>

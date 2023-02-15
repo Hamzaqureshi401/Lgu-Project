@@ -20,8 +20,10 @@ class DeanController extends Controller
         $course             = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('id')->count();
         $enrollment         = Enrollment::where('SemCourses_ID' , $course)->pluck('id')->count();
         $students           = Student::get();
-        $degrees            = Degree::get();
-        $departments        = Department::get();
+        
+        $departments        = Department::where('DeanUID' , Session::get('ID'))->get();
+        $degrees            = Degree::where('Dpt_ID' , $departments->pluck('ID')->toArray())->get();
+       // dd($degrees , $departments->pluck('ID')->toArray());
         $degreeBatches      = DegreeBatche::whereNotNull('Batch_ID')->get();
         $semesterCourses    = SemesterCourse::pluck('ID')->count();
         $attandences        = Attendance::where('Emp_ID' , Session::get('ID'))->get();
@@ -30,13 +32,13 @@ class DeanController extends Controller
          $totalClasses      = $attandences->whereIn('Status' , [0 , 1])->count();
 
 
-        // foreach($enrollment_ID as $enrollment_ID){
+        foreach($enrollment_ID as $enrollment_ID){
         
-        // $presents[] = $attandences
-        // ->where('Status' , 1)
-        // ->where('Enroll_ID' , $enrollment_ID)
-        // ->count();
-        // }
+        $presents[] = $attandences
+        ->where('Status' , 1)
+        ->where('Enroll_ID' , $enrollment_ID)
+        ->count();
+        }
 
         // foreach($presents as $present){
 
@@ -56,7 +58,7 @@ class DeanController extends Controller
 
         // //dd($header);
         
-        // $pr = ['59' , '64' , '69' , '74' , '79' , '81'];
+        // $pr = ['59' ,'60', '64' , '65' , '69' , '70' , '74' , '75' , '79' ,'80', '81'];
 
         // foreach($header as $rec){
         //     foreach($percentages as $keyval => $percentage){
@@ -81,8 +83,31 @@ class DeanController extends Controller
         //     }
             
         // }
+        // foreach ($percentages as $percentage){
 
-        //dd($record , $percentages , $presents);
+        //     if ($percentage > 80){
+        //         $newfilter['100-80'][] = $percentage ?? 0;
+        //     }elseif(($percentage >=75) && ($percentage < 80)){
+        //         $newfilter['80-75'][] = $percentage ?? 0;
+        //     }elseif(($percentage >=70) && ($percentage < 75)){
+        //         $newfilter['75-70'][] = $percentage ?? 0;
+        //     }elseif(($percentage >=65) && ($percentage < 70)){
+        //         $newfilter['70-65'][] = $percentage ?? 0;
+        //     }elseif(($percentage >=60) && ($percentage < 65)){
+        //         $newfilter['65-60'][] = $percentage ?? 0;
+        //     }elseif(($percentage) < 60){
+        //         $newfilter['Lessthen 60'][] = $percentage ?? 0;
+        //     }
+        // }
+
+        // foreach ($percentages as $key => $pr){
+
+        //     $percentagesVal[] = $pr.'-'.$presents[$key];
+        // }
+
+
+       
+        // dd( $percentages , $presents , $newfilter , $percentagesVal);
         
         
         return 

@@ -33,11 +33,19 @@
                       <tr>
 
 	                      <td>{{ $degree->DegreeName }}</td>
-	                      <td>{{ $students->where('Degrees_ID' , $degree->ID)->count() }}</td>
-	                      <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
+	                      <td>{{ $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Defence'])->count() }}</td>
+	                      <td>{{ $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Civilian'])->count() }}</td>
+                        <td>{{ $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Shaheed'])->count() }}</td>
+                        <td>{{ $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Sports'])->count() }}</td>
+                        <td>{{ 
+                          $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Defence'])->count()  
+                          +
+                          $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Civilian'])->count()
+                          +
+                          $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Shaheed'])->count()
+                          +
+                          $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Sports'])->count()
+                        }}</td>
                       </tr>         
                       @endforeach  
                       </tbody>          

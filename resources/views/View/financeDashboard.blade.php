@@ -5,7 +5,7 @@
       
         <section class="section">
           <div class="row ">
-            <div class="col-xl-2 col-lg-6 col-md-6 col-sm-2 col-xs-12">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-2 col-xs-12">
               <div class="card">
                 <div class="card-statistic-4">
                   <div class="align-items-center justify-content-between">
@@ -27,7 +27,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="card">
                 <div class="card-statistic-4">
                   <div class="align-items-center justify-content-between">
@@ -49,7 +49,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="card">
                 <div class="card-statistic-4">
                   <div class="align-items-center justify-content-between">
@@ -72,7 +72,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="card">
                 <div class="card-statistic-4">
                   <div class="align-items-center justify-content-between">
@@ -94,7 +94,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="card">
                 <div class="card-statistic-4">
                   <div class="align-items-center justify-content-between">
@@ -116,7 +116,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="card">
                 <div class="card-statistic-4">
                   <div class="align-items-center justify-content-between">

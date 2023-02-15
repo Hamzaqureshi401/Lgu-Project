@@ -259,7 +259,6 @@
     
       
    
-<script src="{{ asset('assets/js/app.min.js') }}"></script>
 <script src="{{ asset('assets/js/page/index.js') }}"></script>
 <script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
