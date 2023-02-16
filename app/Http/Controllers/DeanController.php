@@ -32,22 +32,14 @@ class DeanController extends Controller
 
          $totalClasses      = $attandences->whereIn('Status' , [0 , 1])->count();
 
-       $a =   DB::table('Attendances')
-            ->select(DB::raw('COUNT(attendances.ID) as pcount'),DB::raw('select COUNT(attendances.ID) form as tcount'))
-            ->groupBy('attendances.Enroll_ID')
-            ->where(['Emp_ID' => Session::get('ID') , 'Status' => 1])
-            ->get();
+         $b = $this->getAttendanceByPercentage($min , $max);
+        // dd($b);
 
-            select count(status) , Enroll_ID from Attendances  group by Enroll_ID,Emp_ID having Emp_ID=20051
+         foreach($att as $a){
 
+            dd($a->pTotal , sizeof($att) , $att);
+         }
 
-select count(status) as count_attendance , Enroll_ID,Status ,
-(select count(status) from Attendances group by Enroll_ID,Emp_ID having Emp_ID=20051)
-from Attendances 
-group by Enroll_ID,Status,Emp_ID having Emp_ID=20051 and Status=1
-
-
-dd($a , $totalClasses);
 
 
         foreach($enrollment_ID as $enrollment_ID){
@@ -141,6 +133,16 @@ dd($a , $totalClasses);
                 'attandences',
                 
             ));
+    }
+
+    public function getAttendanceByPercentage($min , $max){
+
+        return DB::select('select Enroll_ID,pTotal,tTotal,per from (
+                select Enroll_ID,pTotal,tTotal,(pTotal*100)/tTotal as per from 
+                (
+                select Enroll_ID,COUNT(Attendances.ID) as pTotal,(select COUNT(Attendances.ID) from Attendances where Emp_ID='.Session::get('ID').') as tTotal from Attendances where Emp_ID='.Session::get('ID').' and Status=1 group by Enroll_ID
+                ) as Attendance
+                ) as at where per >=  '.$min.' and per <  '.$max.'');
     }
 
     public function allCourses(){
