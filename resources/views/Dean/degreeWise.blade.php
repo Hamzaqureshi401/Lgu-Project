@@ -33,18 +33,34 @@
                       <tr>
 
 	                      <td>{{ $degree->DegreeName }}</td>
-	                      <td>{{ $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Defence'])->count() }}</td>
-	                      <td>{{ $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Civilian'])->count() }}</td>
-                        <td>{{ $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Shaheed'])->count() }}</td>
-                        <td>{{ $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Sports'])->count() }}</td>
+	                      <td>{{ 
+                        
+                          $students->where('Degree_ID' , $degree->ID)->where( 'Category' , 'Defence')->pluck('ID')->count() 
+
+                        }}</td>
+	                      <td>{{ 
+                        
+                          $students->where('Degree_ID' , $degree->ID)->where( 'Category' , 'Civilian')->pluck('ID')->count()
+
+                        }}</td>
                         <td>{{ 
-                          $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Defence'])->count()  
+                        
+                          $students->where('Degree_ID' , $degree->ID)->where( 'Category' , 'Shaheed')->pluck('ID')->count()
+
+                        }}</td>
+                        <td>{{ 
+                        
+                          $students->where('Degree_ID' , $degree->ID)->where( 'Category' , 'Sports')->pluck('ID')->count() 
+
+                        }}</td>
+                        <td>{{ 
+                          $students->where('Degree_ID' , $degree->ID)->where( 'Category' , 'Defence')->pluck('ID')->count()  
                           +
-                          $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Civilian'])->count()
+                         $students->where('Degree_ID' , $degree->ID)->where( 'Category' , 'Civilian')->pluck('ID')->count()
                           +
-                          $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Shaheed'])->count()
+                          $students->where('Degree_ID' , $degree->ID)->where( 'Category' , 'Shaheed')->pluck('ID')->count()
                           +
-                          $students->where(['Degrees_ID' => $degree->ID , 'Category' => 'Sports'])->count()
+                          $students->where('Degree_ID' , $degree->ID)->where( 'Category' , 'Sports')->pluck('ID')->count()
                         }}</td>
                       </tr>         
                       @endforeach  

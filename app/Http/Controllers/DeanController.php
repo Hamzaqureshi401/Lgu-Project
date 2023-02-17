@@ -24,102 +24,21 @@ class DeanController extends Controller
         
         $departments        = Department::where('DeanUID' , Session::get('ID'))->get();
         $degrees            = Degree::where('Dpt_ID' , $departments->pluck('ID')->toArray())->get();
-       // dd($degrees , $departments->pluck('ID')->toArray());
-        $degreeBatches      = DegreeBatche::whereNotNull('Batch_ID')->get();
+        //dd($degrees , $departments);
+        $std = $students->where('Status' , '!=' , 'Completed')->whereIn('Degree_ID' , $degrees->pluck('ID')->toArray());
+        //dd($departments);
+        //$degrees = Degree::get();
+        $degreeBatches      = DegreeBatche::whereIn('Degree_ID' , $degrees->pluck('ID')->toArray())->whereNotNull('Batch_ID')->get();
+           
         $semesterCourses    = SemesterCourse::pluck('ID')->count();
-        $attandences        = Attendance::where('Emp_ID' , Session::get('ID'))->get();
-        $enrollment_ID      = array_unique($attandences->pluck('Enroll_ID')->toArray());
 
-         $totalClasses      = $attandences->whereIn('Status' , [0 , 1])->count();
+        $att['100-80']      = sizeof($this->getAttendanceByPercentage(80 , 100));
+        $att['80-75']       = sizeof($this->getAttendanceByPercentage(80 , 75));
+        $att['75-70']       = sizeof($this->getAttendanceByPercentage(75 , 70));
+        $att['70-65']       = sizeof($this->getAttendanceByPercentage(70 , 65));
+        $att['65-60']       = sizeof($this->getAttendanceByPercentage(65 , 60));
+        $att['Lessthen 60'] = sizeof($this->getAttendanceByPercentage(0  , 60));
 
-         $b = $this->getAttendanceByPercentage($min , $max);
-        // dd($b);
-
-         foreach($att as $a){
-
-            dd($a->pTotal , sizeof($att) , $att);
-         }
-
-
-
-        foreach($enrollment_ID as $enrollment_ID){
-        
-        $presents[] = $attandences
-        ->where('Status' , 1)
-        ->where('Enroll_ID' , $enrollment_ID)
-        ->count();
-        }
-
-        foreach($presents as $present){
-
-        if ($present != 0 ){
-          $percentages[] = ($present / $totalClasses) * 100;
-        }else{
-            $percentages[] = 0;
-        }
-        }
-
-        $header[] = '100-80';
-        $header[] = '80-75';
-        $header[] = '75-70';
-        $header[] = '70-65';
-        $header[] = '65-60';
-        $header[] = 'Lessthen 60';
-
-        //dd($header);
-        
-        $pr = ['59' ,'60', '64' , '65' , '69' , '70' , '74' , '75' , '79' ,'80', '81'];
-
-        foreach($header as $rec){
-            foreach($percentages as $keyval => $percentage){
-                if($percentage >= 80){
-                    $record[$rec] =  $pr[$keyval] ?? 0;    
-                }else{
-                    $record[$rec] = 0;
-                }
-                // if($percentage >=75 && $percentage < 80){
-                //     $record[$rec] =  $presents[$keyval] ?? 0;
-                // }
-                // if($percentage >=70 && $percentage < 75){
-                //     $record[$rec] =  $presents[$keyval] ?? 0;
-                // }
-                // if($percentage >=60 && $percentage < 70){
-                //     $record[$rec] =  $presents[$keyval] ?? 0;
-                // }
-                // if($percentage < 60){
-                //     $record[$rec] =  $presents[$keyval] ?? 0;
-                // }
-                
-            }
-            
-        }
-        foreach ($percentages as $percentage){
-
-            if ($percentage > 80){
-                $newfilter['100-80'][] = $percentage ?? 0;
-            }elseif(($percentage >=75) && ($percentage < 80)){
-                $newfilter['80-75'][] = $percentage ?? 0;
-            }elseif(($percentage >=70) && ($percentage < 75)){
-                $newfilter['75-70'][] = $percentage ?? 0;
-            }elseif(($percentage >=65) && ($percentage < 70)){
-                $newfilter['70-65'][] = $percentage ?? 0;
-            }elseif(($percentage >=60) && ($percentage < 65)){
-                $newfilter['65-60'][] = $percentage ?? 0;
-            }elseif(($percentage) < 60){
-                $newfilter['Lessthen 60'][] = $percentage ?? 0;
-            }
-        }
-
-        foreach ($percentages as $key => $pr){
-
-            $percentagesVal[$presents[$key]] = $pr;
-        }
-
-       
-       
-        dd( $percentages , $presents , $newfilter , $percentagesVal);
-        
-        
         return 
         view('Dean.deanDashboard' , 
             compact(
@@ -130,7 +49,8 @@ class DeanController extends Controller
                 'departments',
                 'degreeBatches',
                 'semesterCourses',
-                'attandences',
+                'att',
+                'std'
                 
             ));
     }

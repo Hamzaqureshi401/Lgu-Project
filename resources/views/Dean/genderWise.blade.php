@@ -30,10 +30,10 @@
                          <tr>
 	                      <td>{{ $degreeBatche->degree->DegreeName ?? ''}}/{{ $degreeBatche->batch->SemSession ?? ''}}</td>
 	                      <td>{{ 
-                          $students->where(['Degrees_ID' => $degreeBatche->degree->ID , 'Gender' => 'Male'])->count()  }}</td>
+                          $students->where('Degree_ID' , $degreeBatche->Degree_ID )->where('Gender' , 'Male')->pluck('ID')->count()  }}</td>
 	                      <td>{{ 
-                          $students->where(['Degrees_ID' => $degreeBatche->degree->ID , 'Gender' => 'Female'])->count()  }}</td>
-	                      <td>{{ "--" }}</td>
+                          $students->where('Degree_ID' , $degreeBatche->Degree_ID )->where('Gender' , 'Female')->pluck('ID')->count()  }}</td>
+	                      <td>{{ $students->where('Degree_ID' , $degreeBatche->Degree_ID )->where('Gender' , 'Male')->pluck('ID')->count() +  $students->where('Degree_ID' , $degreeBatche->Degree_ID )->where('Gender' , 'Female')->pluck('ID')->count()}}</td>
                         </tr>     
                         @endforeach
                       </tbody>

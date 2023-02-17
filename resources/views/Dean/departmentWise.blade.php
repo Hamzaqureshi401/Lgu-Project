@@ -32,17 +32,17 @@
                       
                       <tr>
 	                      <td>{{ $department->Dpt_Name }}</td>
-	                      <td>{{ $department->countStudent($department->ID , 'Defence')->count()  }}</td>
-	                      <td>{{ $department->countStudent($department->ID , 'Civilian')->count() }}</td>
-	                      <td>{{ $department->countStudent($department->ID , 'Shaheed')->count() }}</td>
-                        <td>{{ $department->countStudent($department->ID , 'Sports')->count() }}</td>
-                        <td>{{ $department->countStudent($department->ID , 'Defence')->count() 
+	                      <td>{{ $department->countStudent($degrees->pluck('ID')->toArray() , 'Defence')  }}</td>
+	                      <td>{{ $department->countStudent($degrees->pluck('ID')->toArray() , 'Civilian') }}</td>
+	                      <td>{{ $department->countStudent($degrees->pluck('ID')->toArray() , 'Shaheed') }}</td>
+                        <td>{{ $department->countStudent($degrees->pluck('ID')->toArray() , 'Sports') }}</td>
+                        <td>{{ ($department->countStudent($degrees->pluck('ID')->toArray() , 'Defence')) 
                         +
-                        $department->countStudent($department->ID , 'Civilian')->count()
+                        ($department->countStudent($degrees->pluck('ID')->toArray() , 'Civilian'))
                         +
-                         $department->countStudent($department->ID , 'Shaheed')->count()
+                         ($department->countStudent($degrees->pluck('ID')->toArray() , 'Shaheed'))
                          +
-                         $department->countStudent($department->ID , 'Sports')->count()
+                         ($department->countStudent($degrees->pluck('ID')->toArray() , 'Sports'))
                          }}</td>
                       </tr>  
                       

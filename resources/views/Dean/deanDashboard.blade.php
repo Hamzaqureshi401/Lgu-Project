@@ -85,48 +85,55 @@
 
 <!-- @include('Dean.charts') -->
 
-          <div class="row">
+         <div class="row">
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Student Enrollment Application Status</h4>
+                  <h4>New Students Admission</h4>
                   <div class="card-header-form">
                     <form>
-                      <div class="input-group">
+                     <!--  <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search">
                         <div class="input-group-btn">
                           <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
-                      </div>
+                      </div> -->
                     </form>
                   </div>
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
                       <thead>
-                      <tr>
+                     <tr>
+                        <th>Student</th>
                         <th>Status</th>
-                        <th>Initial Enrollment</th>
-                        <th>Add</th>
-                        <th>Drop</th>
+                        <th>Degree</th>
+                        <th>Semester</th>
+                        <th>City</th>
+
                       </tr>
-                    </thead>
-                    <tbody>
+                      </thead>
+                      <tbody>
+                      @foreach($std as $student)
                       <tr>
-	                      <td>{{ "--" }}</td>
-	                      <td>{{ "--" }}</td>
-	                      <td>{{ "--" }}</td>
-	                      <td>{{ "--" }}</td>
+                        <td>{{ $student->Std_FName ?? '--' }} 
+                            {{ $student->Std_LName ?? '--' }}</td>
+                        <td><p class="badge badge-info badge-shadow" style="color:white;">{{ $student->Status ?? '--' }}</p></td>
+                        <td>{{ $student->degree->DegreeName ?? '--' }}</td>
+                        <td>{{ $student->CurrentSemester ?? '--' }}</td>
+                        <td>{{ $student->City ?? '--' }}</td>
                       </tr> 
-                      </tbody>                    
+                      @endforeach
+                      </tbody>                   
                     </table>
+                   
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
+          
            <div class="row">
             <div class="col-12">
               <div class="card">
@@ -155,16 +162,17 @@
                         <th>65-60</th>
                         <th>Lessthen 60</th>
                       </tr>
-                      <tr>
-                       
-                       
                       
-                      
-                       
-                      </tr>
                     </thead>
                     <tbody>
-                    <!--  -->
+                   <tr>
+                      <td>{{ $att['100-80']}}</td> 
+                      <td>{{ $att['80-75']}}</td> 
+                      <td>{{ $att['75-70']}}</td> 
+                      <td>{{ $att['70-65']}}</td> 
+                      <td>{{ $att['65-60']}}</td> 
+                      <td>{{ $att['Lessthen 60']}}</td>    
+                      </tr>
                       </tbody>                    
                     </table>
                   </div>
