@@ -22,12 +22,11 @@ class DeanController extends Controller
         $enrollment         = Enrollment::where('SemCourses_ID' , $course)->pluck('id')->count();
         $students           = Student::get();
         
-        $departments        = Department::where('DeanUID' , Session::get('ID'))->get();
+        $departments        = Department::where('DeanUID' , Session::get('ID'))->orWhere('HodUID' , Session::get('ID'))->get();
         $degrees            = Degree::where('Dpt_ID' , $departments->pluck('ID')->toArray())->get();
-        //dd($degrees , $departments);
+        
         $std = $students->where('Status' , '!=' , 'Completed')->whereIn('Degree_ID' , $degrees->pluck('ID')->toArray());
-        //dd($departments);
-        //$degrees = Degree::get();
+        
         $degreeBatches      = DegreeBatche::whereIn('Degree_ID' , $degrees->pluck('ID')->toArray())->whereNotNull('Batch_ID')->get();
            
         $semesterCourses    = SemesterCourse::pluck('ID')->count();

@@ -73,6 +73,11 @@
           </ul>
         </div>
         <ul class="navbar-nav navbar-right">
+          <span 
+          style="
+          font-size: 16px; 
+          color: red; 
+          margin-top: 5px"><b>{{ Session::get('user')->Emp_FirstName }} {{ Session::get('user')->Emp_LastName }}</b></span>
 <!--           <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
               class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
               <span class="badge headerBadge1">
@@ -212,9 +217,9 @@
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
             <a > <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.png') }}" alt="Order Header Image" width="470px" height="200px"/> <span
-                class="logo-name">({{ $sidbar['empDesignations']->designation->Designation ?? 'Student' }})</span>
+                class="logo-name" style="color: #ff0000;">({{ $sidbar['empDesignations']->designation->Designation ?? 'Student' }})</span>
             </a>
-
+                
           </div>
           <ul class="sidebar-menu">
             <!-- <li class="menu-header">Main</li> -->
