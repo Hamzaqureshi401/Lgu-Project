@@ -115,4 +115,17 @@ class StudentController extends Controller
             
                );
     }
+
+    public function studentchallan(){
+
+        $Degree = Degree::select('DegreeName' , 'ID')->get();
+        $Semester = Semester::select('SemSession' , 'ID')->get();
+        return view('Student.student_challan',
+            compact('Degree' , 'Semester') 
+            
+               );
+    }
+
+
+    
 }

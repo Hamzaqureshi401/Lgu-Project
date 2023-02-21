@@ -55,6 +55,8 @@ Route::post('/updateEnrollment', [App\Http\Controllers\EnrollmentsController::cl
 Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
 Route::get('/printChallan', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
 
+
+
 //student roll no slip route
 
 Route::get('/getStudentRollNoSlip',[App\Http\Controllers\StdRollNoSlipsController::class,'getStudentRollNoSlip'])->name('get.Student.Roll.No.Slip');
@@ -77,11 +79,20 @@ Route::get('/printRollNoSlip', [App\Http\Controllers\StdRollNoSlipsController::c
 Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'downloadcstorepdf'])->name('downloadcstorepdf');
 
 
+//Student Challan
+Route::any('/studentchallan', [App\Http\Controllers\StudentController::class, 'studentchallan'])->name('student.challan');
+
 Route::group(['middleware' => 'EmpAuth'], function () {
 
 
 
 Route::any('/student365View', [App\Http\Controllers\StudentController::class, 'student365View'])->name('student.365View');
+
+
+
+
+
+
 
 Route::post('/findStudent', [App\Http\Controllers\StudentController::class, 'findStudent'])->name('find.Student');
 
