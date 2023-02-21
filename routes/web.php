@@ -80,7 +80,7 @@ Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'd
 
 
 //Student Challan
-Route::any('/studentchallan', [App\Http\Controllers\StudentController::class, 'studentchallan'])->name('student.challan');
+Route::any('/studentchallan', [App\Http\Controllers\StudentController::class, 'studentchallan'])->name('student.Challan');
 
 Route::group(['middleware' => 'EmpAuth'], function () {
 
