@@ -40,14 +40,6 @@ class AttendanceController extends Controller
         return view('Dean.MarkAttendance.deanAttandence');
     }
      public function deanAllStuAttandence(){
-
-        // $students     = false;
-        // $title        = 'All Courses';
-        // $route        = 'updateCourse';
-        // $getEditRoute = 'editCourse';
-        // $modalTitle   = 'Edit Course';
-
-
         $course     = Course::pluck('id')->count();
         $enrollment = Enrollment::pluck('id')->count();
         $students   = Student::get();
@@ -66,14 +58,7 @@ class AttendanceController extends Controller
                 'departments',
                 'degreeBatches'
             ));
-        // return view('Dean.StudentsAttendance.allStudentAttandence'  , 
-        //     compact(
-        //         'students' , 
-        //         'title' , 
-        //         'modalTitle' , 
-        //         'route',
-        //         'getEditRoute'
-        //     ));
+        
     }
 
       public function empSemesterCourses(){
@@ -366,15 +351,6 @@ class AttendanceController extends Controller
             $a->save();
    }
    public function addSemesterCourseWeightageDetails(Request $request){
-
-            // $data = $this->validateMarks($request);
-            // if ($data['totalMarks'] > 25){
-            //     return Redirect::back()->withInput($request->all())->with(['errorToaster' => 'Weitage shoud be sum of 100' , 'title' => 'Warning']);
-            //  }else
-
-            //  if($data['totalCount'] == 1 && $data['totalMarks'] != 25){
-            //      return Redirect::back()->withInput($request->all())->with(['errorToaster' => 'Your Last Entry should be equal to 25' , 'title' => 'Warning']);
-            //  }
             $a = new SemesterCourseWeightageDetail();
 
             $a->SemCourseWeightage_ID    = $request->SemCourseWeightage_ID;
@@ -384,34 +360,7 @@ class AttendanceController extends Controller
           return redirect()->back()->with(['successToaster' => 'Course Weightage Set Successfully' , 'title' => 'Success']);
    }
 
-   public function marksCalculationsForGrade(){
 
-
-   }
-
-   // public function validateMarks($request){
-
-   //          $semesterCourseWeightages           = SemesterCourseWeightage::where('SemCourse_ID' , $request->SemCourseID)->pluck('ID'); 
-   //          $SemesterCourseWeightageDetails     = SemesterCourseWeightageDetail::whereIn('SemCourseWeightage_ID' , $semesterCourseWeightages->toArray());
-            
-   //          $semesterCourseWeightagescount      = $semesterCourseWeightages->count();
-   //          $SemesterCourseWeightageDetailscont = $SemesterCourseWeightageDetails->count();
-
-   //          $data['totalCount']                 = $semesterCourseWeightagescount - $SemesterCourseWeightageDetailscont - 2;// Mid And Final rocrd
-
-   //           $SemesterCourseWeightageDetailsall = SemesterCourseWeightageDetail::whereIn('SemCourseWeightage_ID' , $semesterCourseWeightages)->get();
-
-   //           $subtotalMarks                     = 0;
-   //           foreach($SemesterCourseWeightageDetailsall as $SemesterCourseWeightageDetails){
-   //              $subtotalMarks                  = $subtotalMarks + $SemesterCourseWeightageDetails->TotalMarks;
-   //           }
-   //           $totalMarks                        = $subtotalMarks + $request->TotalMarks;
-
-            
-   //           $data['totalMarks']                = $totalMarks;
-   //           return $data;
-    
-   // }
 
    public function studentAssesment($id){
 
@@ -462,8 +411,6 @@ class AttendanceController extends Controller
     }
 
      public function storeStudentMark(Request $request){
-
-       // dd($request->all());
 
         $SemCourseWeightage_ID       = SemesterCourseWeightage::where(['SemCourse_ID' => $request->SemCourses_ID , 'Type' => $request->type])->first()->ID;
         $SemCourseWeightage_ID       = SemesterCourseWeightageDetail::where('SemCourseWeightage_ID' , $SemCourseWeightage_ID)->first()->ID;
