@@ -116,11 +116,11 @@ class StudentController extends Controller
                );
     }
 
-    public function studentchallan(){
+    public function studentChallan(){
 
         $Degree = Degree::select('DegreeName' , 'ID')->get();
         $Semester = Semester::select('SemSession' , 'ID')->get();
-        return view('Student.student_challan',
+        return view('Challans.student_challan',
             compact('Degree' , 'Semester') 
             
                );

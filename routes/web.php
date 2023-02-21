@@ -79,11 +79,12 @@ Route::get('/printRollNoSlip', [App\Http\Controllers\StdRollNoSlipsController::c
 Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'downloadcstorepdf'])->name('downloadcstorepdf');
 
 
-//Student Challan
-Route::any('/studentchallan', [App\Http\Controllers\StudentController::class, 'studentchallan'])->name('student.Challan');
+
 
 Route::group(['middleware' => 'EmpAuth'], function () {
 
+    //Student Challan
+Route::any('/studentChallan', [App\Http\Controllers\StudentController::class, 'studentChallan'])->name('student.Challan');
 
 
 Route::any('/student365View', [App\Http\Controllers\StudentController::class, 'student365View'])->name('student.365View');
