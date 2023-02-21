@@ -86,6 +86,7 @@ Route::group(['middleware' => 'EmpAuth'], function () {
     //Student Challan
 Route::any('/studentChallan', [App\Http\Controllers\StudentController::class, 'studentChallan'])->name('student.Challan');
 
+Route::post('/findStudentChallan', [App\Http\Controllers\StudentController::class, 'findStudentChallan'])->name('find.StudentChallan');
 
 Route::any('/student365View', [App\Http\Controllers\StudentController::class, 'student365View'])->name('student.365View');
 

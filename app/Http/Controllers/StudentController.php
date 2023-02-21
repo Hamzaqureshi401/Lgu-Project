@@ -118,14 +118,51 @@ class StudentController extends Controller
 
     public function studentChallan(){
 
+
         $Degree = Degree::select('DegreeName' , 'ID')->get();
         $Semester = Semester::select('SemSession' , 'ID')->get();
+
         return view('Challans.student_challan',
             compact('Degree' , 'Semester') 
             
                );
     }
 
+    
 
+    public function findStudentChallan(Request $request){
+
+        $student      =  Student::where('StdRollNo' , $request->SemSession.'/'.$request->DegreeName.'/'.$request->Rollno)->first();
+        if(empty($student)){
+          return redirect()
+              ->back()
+              ->with([
+                  'errorToaster' => 'Student Not Found!' , 
+                  'title' => 'Error'
+              ]);
+        }
+
+        $registration = Registration::where('Std_ID' , $student->ID)->first();
+        if (!empty($registration)){
+            $challans = Challan::where('Reg_ID' , $registration->ID)->paginate(10);    
+        }else{
+            $challans = '';
+        }
+
+     
+        // dd($challans);
+        $Semester     = Semester::select('SemSession' , 'ID')->get();
+
+        $Degree       = Degree::select('DegreeName' , 'ID')->get();
+
+
+          return view('Challans.student_challan',
+              compact(
+                  'challans','Semester','Degree'
+                  
+              ) 
+              
+                 );
+      }
     
 }
