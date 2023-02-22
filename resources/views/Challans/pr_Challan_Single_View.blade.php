@@ -58,14 +58,14 @@
                         Challan to:
                     </div>
                     <div class="col-4" style="font-size:10px;">
-                        Muhammad Azeem
+                        {{ $challan->Registration->Student->Std_FName}} {{$challan->Registration->Student->Std_LName}}
                     </div>
                     <div class="col-3 font-weight-bold" style="font-size:10px;">
                         Challan #:
                     </div>
                     <div class="col-2" style="font-size:10px;">
                         <span class="" style="width: 40px; overflow: hidden; overflow-wrap: break-word;">
-                            212869
+                            {{ $challan->ID ?? '--' }}
                         </span>
                     </div>
                 </div>
@@ -74,13 +74,13 @@
                         Roll No:
                     </div>
                     <div class="col-4" style="font-size:10px;">
-                        Fa-19/BSCS/310
+                        {{ $challan->Registration->Student->StdRollNo }}
                     </div>
                     <div class="col-3 font-weight-bold" style="font-size:10px;">
                         Issue Date:
                     </div>
                     <div class="col-2" style="font-size:10px;">
-                        3/3/19
+                        {{ $challan->IssueDate ?? '--' }}
                     </div>
                 </div>
                 <div class="row">
@@ -88,13 +88,13 @@
                         Semester:
                     </div>
                     <div class="col-4" style="font-size:10px;">
-                        7
+                        {{ $challan->Registration->Student->CurrentSemester}}
                     </div>
                     <div class="col-3 font-weight-bold" style="font-size:10px;">
                         Due Date:
                     </div>
                     <div class="col-2" style="font-size:10px;">
-                        12/3/19
+                        {{ $challan->DueDate ?? '--' }}
                     </div>
                 </div>
                 <div class="row">
@@ -102,13 +102,13 @@
                         Category:
                     </div>
                     <div class="col-4" style="font-size:10px;">
-                        --
+                        {{ $challan->Registration->Student->Category?? '--' }}
                     </div>
                     <div class="col-3 font-weight-bold" style="font-size:10px;">
                         Degree:
                     </div>
                     <div class="col-2" style="font-size:10px;">
-                        BSCS
+                        {{ $challan->Registration->Student->DegreeName }}
                     </div>
                 </div>
             </td>
