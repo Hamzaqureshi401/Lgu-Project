@@ -45,14 +45,16 @@ class ChallanController extends Controller
             ));
     }
 
-    public function printChallan(){
+    public function printChallan($Challans_ID){
 
-        $session           = $this->getSessionData();
-        $request['Std_ID'] = $session['std_ID'];
+        // dd($Challans_ID);
+
+        // $session           = $this->getSessionData();
+        // $request['Std_ID'] = $session['std_ID'];
         
-        //$registration = Registration::where('Std_ID' , $request['Std_ID'])->first();
+        // $registration = Registration::where('Std_ID' , $request['Std_ID'])->first();
        
-        $challan = Challan::first();
+        $challan = Challan::where('ID',$Challans_ID)->first();
 
 
 

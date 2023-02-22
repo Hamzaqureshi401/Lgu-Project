@@ -40,7 +40,7 @@
                             <td>{{ $challan->Fine  ?? '--'}}</td>
                             <td>{{ $challan->Amount  ?? '--'}}</td>
                             <td>{{ $challan->Type  ?? '--'}}</td>
-                            <td> <a class = "btn btn-primary" href="{{ route('print.Challan') }}">Challan</a> </td>
+                            <td> <a class = "btn btn-primary" href="{{ route('print.Challan') }}/{{$challan->ID}}">Challan</a> </td>
                             @if(session()->has('Emp_session'))
                             <td>
                               <div class="card-body">

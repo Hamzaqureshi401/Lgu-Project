@@ -149,6 +149,9 @@ class StudentController extends Controller
             $challans = '';
         }
 
+        // session(['std_ID' => $student->ID]);
+
+
      
         // dd($challans);
         $Semester     = Semester::select('SemSession' , 'ID')->get();

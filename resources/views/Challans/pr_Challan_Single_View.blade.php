@@ -1,4 +1,8 @@
 @php
+if(empty(Session::get('user')))
+{
+
+}
 $programe = explode('/' , Session::get('user'))
 @endphp
 <td style="border: 5px dotted #000; padding: 10px;">
