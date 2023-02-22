@@ -235,14 +235,14 @@
                                                                     <td>{{ $challan->Fine ?? '--' }}</td>
                                                                     <td>{{ $challan->Amount ?? '--' }}</td>
                                                                     <td>{{ $challan->Type ?? '--' }}</td>
-                                                                    <td> <a class="btn btn-primary"
+                                                                    <td> <a class="btn btn-primary "
                                                                             href="{{ route('print.Challan') }}/{{ $challan->ID }}">Challan</a>
                                                                         @if (session()->has('Emp_session'))
                                                                             <!-- only change id -->
                                                                             @if ($challan->Status === 'Valid')
 
                                                                             <button type="submit"
-                                                                                class="btn btn-primary gt-data"
+                                                                                class="btn btn-primary gt-data mt-1"
                                                                                 data-toggle="modal"
                                                                                 data-id="{{ $challan->ID }}"
                                                                                 data-target="#exampleModal"><i
