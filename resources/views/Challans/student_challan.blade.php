@@ -23,36 +23,36 @@
                                 {{ csrf_field() }}
                                 <div class="card-body">
 
-                                 @if (!empty($Semester))
-                                    
-                                    <div class="row">
-                                        <div class="form-group col-md-4 col-12">
-                                            <label>Semester</label>
-                                            <select class="form-control select2" name="SemSession" required>
-                                                @foreach ($Semester as $Semester)
-                                                    <option value="{{ $Semester->SemSession }}">{{ $Semester->SemSession }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                    @if (!empty($Semester))
+                                        <div class="row">
+                                            <div class="form-group col-md-4 col-12">
+                                                <label>Semester</label>
+                                                <select class="form-control select2" name="SemSession" required>
+                                                    @foreach ($Semester as $Semester)
+                                                        <option value="{{ $Semester->SemSession }}">
+                                                            {{ $Semester->SemSession }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4 col-12">
+                                                <label>Degree</label>
+                                                <select class="form-control select2" name="DegreeName" required>
+                                                    @foreach ($Degree as $Degree)
+                                                        <option value="{{ $Degree->DegreeName }}">{{ $Degree->DegreeName }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4 col-12">
+                                                <label>Roll Number</label>
+                                                <input type="number" name="Rollno" placeholder="Example 001"
+                                                    class="form-control" value="{{ old('Rollno') }}" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-4 col-12">
-                                            <label>Degree</label>
-                                            <select class="form-control select2" name="DegreeName" required>
-                                                @foreach ($Degree as $Degree)
-                                                    <option value="{{ $Degree->DegreeName }}">{{ $Degree->DegreeName }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-4 col-12">
-                                            <label>Roll Number</label>
-                                            <input type="number" name="Rollno" placeholder="Example 001"
-                                                class="form-control" value="{{ old('Rollno') }}" required>
-                                        </div>
-                                    </div>
-                                    <button id="button" type="submit"
-                                        class="btn btn-primary btn-block submit-form">{{ $button ?? 'Submit' }}</button>
-                                        @endif
+                                        <button id="button" type="submit"
+                                            class="btn btn-primary btn-block submit-form">{{ $button ?? 'Submit' }}</button>
+                                    @endif
 
                             </form>
                         </div>
@@ -132,13 +132,13 @@
                                     </span>
                                 </p>
                                 <!-- <p class="clearfix">
-                               <span class="float-left">
-                               Dgree
-                               </span>
-                               <span class="float-right text-muted">
-                               {{ $student->Email ?? '--' }}
-                               </span>
-                               </p> -->
+                                   <span class="float-left">
+                                   Dgree
+                                   </span>
+                                   <span class="float-right text-muted">
+                                   {{ $student->Email ?? '--' }}
+                                   </span>
+                                   </p> -->
                                 <p class="clearfix">
                                     <span class="float-left">
                                         Registration No
@@ -215,13 +215,21 @@
                                                                 <td>{{ $challan->IssueDate ?? '--' }}</td>
                                                                 <td>{{ $challan->DueDate ?? '--' }}</td>
 
-                                                                <form id="myForm" action="{{route('approve.Challan')}}/{{ $challan->ID }}" method="post" enctype="multipart/form-data">
+                                                                <form id="myForm"
+                                                                    action="{{ route('approve.Challan') }}/{{ $challan->ID }}"
+                                                                    method="post" enctype="multipart/form-data">
                                                                     {{ csrf_field() }}
 
-                                                                    <td> <input type="date" name="paiddate"
-                                                                            id="paiddate" value="{{ old('paiddate') }}"
-                                                                            class="form-control" required>
-                                                                    </td>
+                                                                    @if ($challan->Status === 'Valid')
+                                                                        <td> <input type="date" name="paiddate"
+                                                                                id="paiddate"
+                                                                                value="{{ old('paiddate') }}"
+                                                                                class="form-control" required>
+                                                                        </td>
+                                                                     @else
+                                                                     <td>{{ $challan->PaidDate ?? '--' }}</td>
+
+                                                                    @endif
 
                                                                     <td>{{ $challan->Status ?? '--' }}</td>
                                                                     <td>{{ $challan->Fine ?? '--' }}</td>
@@ -231,8 +239,17 @@
                                                                             href="{{ route('print.Challan') }}/{{ $challan->ID }}">Challan</a>
                                                                         @if (session()->has('Emp_session'))
                                                                             <!-- only change id -->
-                                                                                                                      
-                                            <button type="submit" class="btn btn-primary gt-data" data-toggle="modal"  data-id="{{ $challan->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ 'Confirm' }}</button>
+                                                                            @if ($challan->Status === 'Valid')
+
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary gt-data"
+                                                                                data-toggle="modal"
+                                                                                data-id="{{ $challan->ID }}"
+                                                                                data-target="#exampleModal"><i
+                                                                                    class="far fa-edit"></i>
+                                                                                {{ 'Confirm' }}</button>
+
+                                                                                @endif
                                                                             {{-- <a class="btn btn-primary far fa-edit mt-4"
                                                                                 href="{{ route('approve.Challan') }}/{{ $challan->ID }}/{{ $challan->PaidDate }}">Confirm</a> --}}
                                                                         @endif
@@ -246,7 +263,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
