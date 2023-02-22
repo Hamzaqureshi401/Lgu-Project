@@ -92,7 +92,7 @@ Route::any('/student365View', [App\Http\Controllers\StudentController::class, 's
 
 // Route::get('/printChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
 
-
+Route::get('/approveChallan/{Challans_ID?}/{paiddate?}', [App\Http\Controllers\ChallanController::class, 'approvechallan'])->name('approve.Challan');
 
 
 

@@ -217,9 +217,9 @@
                                         
                                           
                                             <!-- only change id -->
-                                           
-                                            <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $challan->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ 'Confirm' }}</button>
-                                            
+{{--                                            
+                                            <button type="button" class="btn btn-primary gt-data" data-toggle="modal"  data-id="{{ $challan->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ 'Confirm' }}</button> --}}
+                                            <a class = "btn btn-primary far fa-edit mt-4" href="{{ route('approve.Challan') }}/{{$challan->ID}}/{{$challan->PaidDate}}">Confirm</a> 
                                          
                                         
                                         @endif

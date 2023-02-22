@@ -46,7 +46,7 @@ class ChallanController extends Controller
     }
 
     public function printChallan($Challans_ID){
-        
+
 
         // dd($Challans_ID);
 
@@ -160,6 +160,38 @@ class ChallanController extends Controller
             
             ;");
 
+
+    }
+
+
+    
+    public function approvechallan($Challans_ID,$paiddate){
+
+        $approvedchallan=DB::table('Challans')
+            ->where('ID', $Challans_ID)
+            ->update(['Status' => "Paid",'PaidDate' => $paiddate]);
+
+            return redirect()->back();
+        // dd($Challans_ID,$paiddate,$approved);
+
+                
+        // if(!empty($approvedchallan)){
+        //     return redirect()
+        //         ->back()
+        //         ->with([
+        //             'successToaster' => 'Challan Status updated!' , 
+        //             'title' => 'Success'
+        //         ]);
+        //   }
+        //   else{
+
+        //     return redirect()
+        //     ->back()
+        //     ->with([
+        //         'errorToaster' => 'Challan Not Updated!' , 
+        //         'title' => 'Error'
+        //     ]);
+        //   }
 
     }
 }
