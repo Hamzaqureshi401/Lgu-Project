@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Challan extends Model
 {
     use HasFactory;
+    public $timestamps = false;
      public function registration(){
 
     return $this->belongsTo('App\Models\Registration','Reg_ID');

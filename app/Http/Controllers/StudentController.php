@@ -163,7 +163,7 @@ class StudentController extends Controller
 
           return view('Challans.student_challan',
               compact(
-                  'challans','Semester','Degree'
+                  'challans','Semester','Degree','student'
                   
               ) 
               

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Challan;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Session;
 use App\Models\Registration;
@@ -165,33 +166,27 @@ class ChallanController extends Controller
 
 
     
-    public function approvechallan($Challans_ID,$paiddate){
+    public function approvechallan(Request $request,$Challans_ID){
 
-        $approvedchallan=DB::table('Challans')
-            ->where('ID', $Challans_ID)
-            ->update(['Status' => "Paid",'PaidDate' => $paiddate]);
+        $challan= Challan::where('ID', $Challans_ID);
+        $challan->update(['Status' => "Paid",'PaidDate' => $request->paiddate]);
+        $student      =  Student::where('StdRollNo' , $challan->first()->registration->student->StdRollNo)->first();
+            $registration = Registration::where('Std_ID' , $student->ID)->first();
+            if (!empty($registration)){
+                $challans = Challan::where('Reg_ID' , $registration->ID)->paginate(10);    
+            }else{
+                $challans = '';
+            }
+           
+    
+              return view('Challans.student_challan',
+                  compact(
+                      'challans','student'
+                      
+                  ) 
+                  
+                     );
+          }
 
-            return redirect()->back();
-        // dd($Challans_ID,$paiddate,$approved);
-
-                
-        // if(!empty($approvedchallan)){
-        //     return redirect()
-        //         ->back()
-        //         ->with([
-        //             'successToaster' => 'Challan Status updated!' , 
-        //             'title' => 'Success'
-        //         ]);
-        //   }
-        //   else{
-
-        //     return redirect()
-        //     ->back()
-        //     ->with([
-        //         'errorToaster' => 'Challan Not Updated!' , 
-        //         'title' => 'Error'
-        //     ]);
-        //   }
-
-    }
+    
 }
