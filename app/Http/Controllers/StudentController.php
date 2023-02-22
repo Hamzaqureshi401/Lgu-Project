@@ -133,6 +133,8 @@ class StudentController extends Controller
     public function findStudentChallan(Request $request){
 
         $student      =  Student::where('StdRollNo' , $request->SemSession.'/'.$request->DegreeName.'/'.$request->Rollno)->first();
+        // dd($student->StdRollNo);
+        
         if(empty($student)){
           return redirect()
               ->back()

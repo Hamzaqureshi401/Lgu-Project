@@ -46,6 +46,7 @@ class ChallanController extends Controller
     }
 
     public function printChallan($Challans_ID){
+        
 
         // dd($Challans_ID);
 

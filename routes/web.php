@@ -53,7 +53,7 @@ Route::post('/updateEnrollment', [App\Http\Controllers\EnrollmentsController::cl
 // Challans Routes start
 
 Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
-Route::get('/printChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
+// Route::get('/printChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
 
 
 
@@ -78,7 +78,7 @@ Route::get('/printRollNoSlip', [App\Http\Controllers\StdRollNoSlipsController::c
 
 Route::get('/downloadcstorepdf', [App\Http\Controllers\ViewController::class, 'downloadcstorepdf'])->name('downloadcstorepdf');
 
-
+Route::get('/printChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
 
 
 Route::group(['middleware' => 'EmpAuth'], function () {
@@ -90,7 +90,7 @@ Route::post('/findStudentChallan', [App\Http\Controllers\StudentController::clas
 
 Route::any('/student365View', [App\Http\Controllers\StudentController::class, 'student365View'])->name('student.365View');
 
-// Route::get('/printChallan', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
+// Route::get('/printChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
 
 
 
