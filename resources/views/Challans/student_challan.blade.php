@@ -207,7 +207,9 @@
                                         <td>{{ $challan->registration->student->Std_FName ?? '--' }} {{ $challan->registration->student->Std_LName ?? '--' }}</td>
                                         <td>{{ $challan->IssueDate ?? '--' }}</td>
                                         <td>{{ $challan->DueDate  ?? '--'}}</td>
+
                                         <td>{{ $challan->PaidDate  ?? '--'}}</td>
+                                        
                                         <td>{{ $challan->Status ?? '--' }}</td>
                                         <td>{{ $challan->Fine  ?? '--'}}</td>
                                         <td>{{ $challan->Amount  ?? '--'}}</td>
