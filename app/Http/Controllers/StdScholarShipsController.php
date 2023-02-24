@@ -15,7 +15,7 @@ class StdScholarShipsController extends Controller
            public function validation($request){
 
         $this->validate($request, [
-            'Std_ID'        => 'required|max:50',
+            'Std_ID'        => 'required|max:50|unique:Students_scholarship',
             'Percentage'    => 'required|numeric',
             'Category'      => 'required|max:70',
             'Scholarship_Type'  => 'required',

@@ -13,7 +13,11 @@ class Student extends Model
     }
      public function semester(){
 
-          return $this->belongsTo('App\Models\Semester' , 'AdmissionSession' );
+          return $this->belongsTo('App\Models\Semester' , 'AdmissionSession' , 'SemSession');
    }
+
+   public function registration(){
+      return $this->belongsTo('App\Models\Registration', 'ID' , 'Std_ID');
+  }
    
 }

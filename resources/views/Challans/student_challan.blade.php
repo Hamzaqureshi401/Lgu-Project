@@ -226,12 +226,17 @@
                                                                                 value="{{ old('paiddate') }}"
                                                                                 class="form-control" required>
                                                                         </td>
+                                                                        
+                                                                    <td><p class="badge badge-danger badge-shadow" style="color:white;">
+                                                                        {{ $challan->Status ?? '--' }}
                                                                      @else
                                                                      <td>{{ $challan->PaidDate ?? '--' }}</td>
 
+                                                                     <td><p class="badge badge-success badge-shadow" style="color:white;">
+                                                                        {{ $challan->Status ?? '--' }}
                                                                     @endif
 
-                                                                    <td>{{ $challan->Status ?? '--' }}</td>
+                                                                     </p>  </td>
                                                                     <td>{{ $challan->Fine ?? '--' }}</td>
                                                                     <td>{{ $challan->Amount ?? '--' }}</td>
                                                                     <td>{{ $challan->Type ?? '--' }}</td>

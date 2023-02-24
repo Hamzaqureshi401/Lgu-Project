@@ -48,9 +48,18 @@ class EnrollmentsController extends Controller
         // dd(1);
       
         //dd(session::all());
+
+
         $session            = $this->getSessionData();    
         $request['Std_ID']  = $session['std_ID'];
-        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
+        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['Std']->Degree_ID , 'Batch_ID' => $session['sem_ID']])->first();
+
+        // dd($session['Std'],$session['sem_ID']);
+        // dd($DegreeBatche);
+
+        if(empty($DegreeBatche)){
+            return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Warning']);
+        }
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
         $semesterCourses    = SemesterCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Sem_ID' => $session['sem_ID']])->get();
@@ -196,9 +205,14 @@ class EnrollmentsController extends Controller
          $degreeName        = explode('/' , session::get('user'));
          $registration      = Registration::where('Std_ID' , $request['Std_ID'])->first();
              
-         $Sem_ID = $registration->first()->Sem_ID;
+         $Sem_ID = $registration->Sem_ID;
           $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
-         $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'DegBatches_ID' => $DegreeBatche->ID])->first() ?? '';
+         $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'DegBatches_ID' => $DegreeBatche->ID])->first();
+        // dd($sem_details , $Sem_ID , $DegreeBatche->ID , $request['Std_ID'] , $registration);
+         if(empty($sem_details))
+        {
+            return "error";
+        }
         
          $registrationId = $registration->ID;
 
@@ -216,10 +230,12 @@ class EnrollmentsController extends Controller
         $PaidDate   = "";
         $Status     = "Valid";
         $Fine       = 0;
+        // dd($sem_details);
+        
         if($sem_details->FeeType == 'Per Course'){
-            $Amount     = $totalCreditHours * $fee;
+            $amount     = $totalCreditHours * $fee;
         }else{
-            $Amount     = $fee;
+            $amount     = $fee;
         }
         
 
@@ -261,6 +277,8 @@ class EnrollmentsController extends Controller
          //    @Reg_ID                = '$registrationId',
          //    @Sem_ID                = '$Sem_ID'
          //    ;");
+
+         return 'Success';
     }
 
 
@@ -299,12 +317,17 @@ class EnrollmentsController extends Controller
         $session           = $this->getSessionData();
         $request['Std_ID'] = $session['std_ID'];
         $enrollments       = Enrollment::where('Std_ID' , $request['Std_ID'])->pluck('ID')->toArray();
+        $type = $this->createChallan();
+
+        if($type == "error"){
+            return redirect()->back()->with(['errorToaster' => 'Conformation Faild Semester deatils not found !' , 'title' => 'Error']);
+
+        }
         foreach($enrollments as $id){
         $submit = DB::statement("EXEC sp_UpdateEnrollment
              @ID         = '$id'
             ;");
         }
-        $this->createChallan();
         return redirect()->back()->with(['successToaster' => 'Enrollment Confirmed' , 'title' => 'Success']);
     }
 

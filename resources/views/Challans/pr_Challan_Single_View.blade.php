@@ -202,6 +202,10 @@
                 </table>
             </td>
         </tr>
+        @php
+            $totalamount= $challan->ChallanDetail->Tuition_Fee+$challan->ChallanDetail->Magazine_Fee+$challan->ChallanDetail->Exam_Fee+$challan->ChallanDetail->Society_Fee+$challan->ChallanDetail->Misc_Fee+$challan->ChallanDetail->Registration_Fee+$challan->ChallanDetail->Practical_charges+$challan->ChallanDetail->Sports_Fund
+        @endphp
+
         <tr>
             <td colspan="3">
                 <table style="width: 100%;">
@@ -209,7 +213,7 @@
                         <td width="80%" style="text-align:center; font-size:14px; border:1px solid #000;">Total
                             Amount</td>
                         <td width="20%" style="text-align:center; border:1px solid #000;">
-                             {{$challan->Amount}}</td>
+                             {{$totalamount}}</td>
                     </tr>
                 </table>
             </td>

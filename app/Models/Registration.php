@@ -15,4 +15,9 @@ class Registration extends Model
 
     return $this->belongsTo('App\Models\Student','Std_ID');
    }
+
+   public function challan(){
+
+    return $this->belongsTo('App\Models\Challan','ID' ,'Reg_ID');
+   }
 }

@@ -10,7 +10,10 @@ use App\Models\Enrollment;
 use App\Models\TimeTable;
 use App\Models\Degree;
 use App\Models\Semester;
+use App\Models\Challan;
 use App\Models\Attendance;
+use App\Models\StdScholarShip;
+use DB;
 use PDF;
 
 use Illuminate\Http\Request;
@@ -272,8 +275,36 @@ class ViewController extends Controller
     public function financeDashboard(){
 
         $enrollment = Enrollment::pluck('id')->count();
+        $newStdAdmission = $this->newStudentAdmissionAmount();
+        
 
-        return view('View.financeDashboard' , compact('enrollment'));
+         return view('View.financeDashboard' , compact('enrollment'));
+    }
+
+    public function newStudentAdmissionAmount(){
+        $start=date("Y-m-01");
+        $end = date("Y-m-t", strtotime($start));
+        $loopend=date("t", strtotime($start));
+        for($i=1;$i<=$loopend;$i++)
+        {
+            $days[$i]=$start; 
+            $start= date('Y-m-d', strtotime($start. ' + 1 days'));
+        }
+        for ($i=1; $i <= sizeof($days) ; $i++) { 
+            $year = date('Y');
+        $amount[$i] = DB::select("SELECT
+        sum( Amount) AS aggregate
+         FROM
+        students
+        INNER JOIN  Registrations  ON Registrations . Std_ID  =  Students . ID
+        INNER JOIN Challans ON  Challans . Reg_ID  = Registrations . ID
+        WHERE
+        (AdmissionSession  = 'Fa-$year'
+        OR  AdmissionSession  = 'Sp-$year')
+        AND cast( IssueDate  AS date)  =  '$days[$i]'") ?? "0";
+        }
+        return $amount;
+
     }
 
     public function ScholarshipDetail(){

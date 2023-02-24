@@ -112,7 +112,7 @@ class login extends Controller
         
         $submit     = DB::table('Students')->where(['StdRollNo' => $roll , 'password' => $password])->first();
     
-         $sem_ID     =  Semester::where('SemSession' , $batch)->first()->ID ?? false;
+         $sem_ID     =  Semester::where('SemSession' , $submit->AdmissionSession)->first()->ID ?? false;
 
             $dpt_ID     = Department::where('Dpt_Name' , $department)->first()->ID ?? false;
            
