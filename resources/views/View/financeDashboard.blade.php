@@ -252,7 +252,9 @@
             </div>
           </div>
           </div>
-
+@php 
+$cat = ['1-SF (Defence)' , '2-SF (Civilian)' , '3-SF (Shaheed)' , 'Sports'];
+@endphp
            <div class="row">
             <div class="col-12">
               <div class="card">
@@ -280,8 +282,9 @@
                       </tr>
                       </thead>
                       <tbody>
+                        @foreach($cat as $c)
                       <tr>
-	                      <td>{{ "--" }}</td>
+	                      <td>{{ $c }}</td>
 	                      <td>{{ "--" }}</td>
 	                      <td>{{ "--" }}</td>
 	                      <td>{{ "--" }}</td>
@@ -289,6 +292,7 @@
                         <td>{{ "--" }}</td>
                         <td>{{ "--" }}</td>
                       </tr>
+                      @endforeach
                       </tbody>
                     </table>
                   </div>
