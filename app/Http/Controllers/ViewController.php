@@ -294,6 +294,7 @@ class ViewController extends Controller
 
 
         $departments = Department::get();
+        $challans = Challan::get();
 
        
          return view('View.financeDashboard' , compact(
@@ -302,18 +303,43 @@ class ViewController extends Controller
             'days', 
             'regularAtdAmount',
             'departments',
-            'CategoryWiseStudent'
+            'CategoryWiseStudent',
+            'challans'
         ));
     }
 
     public function CategoryWiseStudent(){
 
-        $std['1-SF (Defence)'] =  Student::where('Category' , 'Defence')->pluck('ID')->count() ?? 0;
-        $std['2-SF (Civilian)']=  Student::where('Category' , 'Civilion')->pluck('ID')->count() ?? 0;
-        $std['3-SF (Shaheed)'] =  Student::where('Category' , 'Shaheed')->pluck('ID')->count() ?? 0;
-        $std['Sports']  =  Student::where('Category' , 'Sports')->pluck('ID')->count() ?? 0;
+        $students = Student::get();
+
+        $std['cat'][] = $students->where('Category' , 'Defence')->pluck('ID')->count();
+        $std['cat'][] = $students->where('Category' , 'Civilion')->pluck('ID')->count();
+        $std['cat'][] = $students->where('Category' , 'Shaheed')->pluck('ID')->count();
+        $std['cat'][] = $students->where('Category' , 'Sports')->pluck('ID')->count();
+
+        
+        $std['amtByCat'][] = $this->getAmountByCat('Defence');        
+        $std['amtByCat'][] = $this->getAmountByCat('Civilion');        
+        $std['amtByCat'][] = $this->getAmountByCat('Shaheed');     
+        $std['amtByCat'][] = $this->getAmountByCat('Sports');        
+
+     
+        //dd($std);
 
         return $std;
+    }
+
+    public function getAmountByCat($cat){
+         $year  = date('Y');
+         $amount = 
+            Student::
+            join('registrations', 'registrations.Std_ID', '=', 'students.ID')
+            ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
+            ->whereIn('students.AdmissionSession', ['Fa-'.$year,'Sp-'.$year])
+            ->where('Category' , $cat)
+           ->get();
+
+           return $amount;
     }
 
     
