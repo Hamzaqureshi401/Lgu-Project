@@ -190,12 +190,13 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-striped ">
+                                <table class="table table-striped dataTable">
                                     <thead>
                                         <tr>
                                             <th>Date</th>
                                             <th>Amount</th>
-
+                                            <th></th>
+                                            <th></th>
 
                                         </tr>
                                     </thead>
@@ -204,7 +205,8 @@
                                             <tr>
                                                 <td>{{ date('l, F j, Y', strtotime($day)) }}</td>
                                                 <td>{{ $newStdAdmission[$key] }}</td>
-
+                                                <td></td>
+                                                <td></td>
 
                                             </tr>
                                         @endforeach
@@ -213,7 +215,7 @@
                             </div>
                         </div>
 
-                        <div class="card-body col-6">
+                        <div class="card-body col-6 mt-4">
                             <div class="card-header">
                                 <h4>Regular Student</h4>
                                 <div class="card-header-form">
@@ -228,11 +230,14 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-striped ">
+                                <table class="table table-striped dataTable">
                                     <thead>
                                         <tr>
                                             <th>Amount</th>
                                             <th>Date</th>
+                                            <th></th>
+                                            <th></th>
+
 
                                         </tr>
                                     </thead>
@@ -241,6 +246,9 @@
                                             <tr>
                                                 <td>{{ date('l, F j, Y', strtotime($day)) }}</td>
                                                 <td>{{ $regularAtdAmount[$key] }}</td>
+                                                <td></td>
+                                                <td></td>
+
 
                                             </tr>
                                         @endforeach
