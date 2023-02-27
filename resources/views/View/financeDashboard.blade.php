@@ -327,7 +327,7 @@
                       <tr>
                         <td>{{ $department->Dpt_Name }}</td>
                         <td>{{ $department->countStudentsByDpt($department->ID)->count() }}</td>
-                        <td>{{ $department->AmountBooked($department->ID) }}</td>
+                        <td>{{ $department->AmountBooked($department->ID)->sum('Amount') }}</td>
                         <td>{{ "--" }}</td>
                         <td>{{ "--" }}</td>
                         <td>{{ "--" }}</td>
