@@ -56,12 +56,33 @@ class DeanController extends Controller
 
     public function getAttendanceByPercentage($min , $max){
 
-        return DB::select('select Enroll_ID,pTotal,tTotal,per from (
+        $attendance = DB::select('select Enroll_ID,pTotal,tTotal,per from (
                 select Enroll_ID,pTotal,tTotal,(pTotal*100)/tTotal as per from 
                 (
                 select Enroll_ID,COUNT(Attendances.ID) as pTotal,(select COUNT(Attendances.ID) from Attendances where Emp_ID='.Session::get('ID').') as tTotal from Attendances where Emp_ID='.Session::get('ID').' and Status=1 group by Enroll_ID
                 ) as Attendance
                 ) as at where per >=  '.$min.' and per <  '.$max.'');
+
+        // $attendance = DB::table('Attendances')
+        // ->select('Enroll_ID', DB::raw('COUNT(Attendances.ID) as pTotal'))
+        // ->where('Emp_ID', '=', Session::get('ID'))
+        // ->where('Status', '=', 1)
+        // ->groupBy('Enroll_ID');
+
+        // $attendance = DB::table('Attendances')
+        // ->joinSub($attendance, 'Attendance', function ($join) {
+        //     $join->on('Attendances.Enroll_ID', '=', 'Attendance.Enroll_ID');
+        // })
+        // ->select('Attendances.Enroll_ID', 'Attendance.pTotal', DB::raw('(Attendance.pTotal * 100) / tTotal as per'))
+        // ->crossJoin(DB::raw('(select COUNT(Attendances.ID) as tTotal from Attendances where Emp_ID='.Session::get('ID').') as t'))
+        // ->whereRaw('(Attendance.pTotal * 100) / t.tTotal >= ?', [$min])
+        // ->whereRaw('(Attendance.pTotal * 100) / t.tTotal < ?', [$max])
+        // ->get();
+
+
+
+
+    return $attendance;
     }
 
     public function allCourses(){

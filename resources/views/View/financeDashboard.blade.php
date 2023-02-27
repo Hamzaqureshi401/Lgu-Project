@@ -193,11 +193,13 @@
                         <th>Amount</th>
                        
                       </tr>
+                      @foreach($days as $key => $day)
                       <tr>
-	                      <td>{{ "--" }}</td>
-	                      <td>{{ "--" }}</td>
+	                      <td>{{ date("l, F j, Y", strtotime($day)) }}</td>
+	                      <td>{{ $newStdAdmission[$key]  }}</td>
 	                     
-                      </tr>                     
+                      </tr>    
+                      @endforeach                 
                     </table>
                   </div>
                 </div>
@@ -223,11 +225,13 @@
                         <th>Date</th>
                         
                       </tr>
+                       @foreach($days as $key => $day)
                       <tr>
-                        <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
+                        <td>{{ date("l, F j, Y", strtotime($day)) }}</td>
+                        <td>{{ $regularAtdAmount[$key]  }}</td>
                        
-                      </tr>                     
+                      </tr>    
+                      @endforeach                     
                     </table>
                   </div>
                 </div>

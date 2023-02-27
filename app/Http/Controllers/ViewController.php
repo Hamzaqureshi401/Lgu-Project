@@ -275,36 +275,77 @@ class ViewController extends Controller
     public function financeDashboard(){
 
         $enrollment = Enrollment::pluck('id')->count();
-        $newStdAdmission = $this->newStudentAdmissionAmount();
-        
-
-         return view('View.financeDashboard' , compact('enrollment'));
-    }
-
-    public function newStudentAdmissionAmount(){
         $start=date("Y-m-01");
         $end = date("Y-m-t", strtotime($start));
         $loopend=date("t", strtotime($start));
         for($i=1;$i<=$loopend;$i++)
         {
-            $days[$i]=$start; 
-            $start= date('Y-m-d', strtotime($start. ' + 1 days'));
-        }
+            if($start <= date("Y-m-d")){
+                $days[$i]=$start; 
+                $start= date('Y-m-d', strtotime($start. ' + 1 days'));    
+            }
+            }
+        $newStdAdmission = $this->newStudentAdmissionAmount($days);
+
+        $regularAtdAmount = $this->regularStudentAmount($days);
+
+         return view('View.financeDashboard' , compact(
+            'enrollment' , 
+            'newStdAdmission' , 
+            'days', 
+            'regularAtdAmount'
+        ));
+    }
+
+    public function newStudentAdmissionAmount($days){
+        
         for ($i=1; $i <= sizeof($days) ; $i++) { 
             $year = date('Y');
-        $amount[$i] = DB::select("SELECT
-        sum( Amount) AS aggregate
-         FROM
-        students
-        INNER JOIN  Registrations  ON Registrations . Std_ID  =  Students . ID
-        INNER JOIN Challans ON  Challans . Reg_ID  = Registrations . ID
-        WHERE
-        (AdmissionSession  = 'Fa-$year'
-        OR  AdmissionSession  = 'Sp-$year')
-        AND cast( IssueDate  AS date)  =  '$days[$i]'") ?? "0";
+        // $amount[$i] = DB::select("SELECT
+        // sum( Amount) AS aggregate
+        //  FROM
+        // students
+        // INNER JOIN  Registrations  ON Registrations . Std_ID  =  Students . ID
+        // INNER JOIN Challans ON  Challans . Reg_ID  = Registrations . ID
+        // WHERE
+        // (AdmissionSession  = 'Fa-$year'
+        // OR  AdmissionSession  = 'Sp-$year')
+        // AND cast( IssueDate  AS date)  =  '$days[$i]'") ?? "0";
+
+        $amount[$i] = DB::table('students')
+            ->join('registrations', 'registrations.Std_ID', '=', 'students.ID')
+            ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
+            ->selectRaw('SUM(Amount) AS aggregate')
+            ->where(function($query) use ($year) {
+                $query->where('AdmissionSession', '=', "Fa-$year")
+                      ->orWhere('AdmissionSession', '=', "Sp-$year");
+            })
+            ->whereDate('IssueDate', '=', $days[$i])
+            ->value('aggregate') ?? 0;
+        
         }
         return $amount;
 
+    }
+
+    public function regularStudentAmount($days){
+
+        for ($i=1; $i <= sizeof($days) ; $i++) { 
+            $year = date('Y');
+
+        $amount[$i] = DB::table('students')
+        ->join('registrations', 'registrations.Std_ID', '=', 'students.ID')
+        ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
+        ->selectRaw('SUM(Amount) AS aggregate')
+        
+        ->whereDate('IssueDate', '=', $days[$i])
+        ->where(function($query) use ($year) {
+            $query->where('AdmissionSession', 'not like', "%$year%")
+                  ->orWhereNull('AdmissionSession');
+        })
+        ->value('aggregate') ?? 0;
+        }
+        return $amount;
     }
 
     public function ScholarshipDetail(){

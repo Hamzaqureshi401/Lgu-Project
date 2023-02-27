@@ -77,7 +77,7 @@
           style="
           font-size: 16px; 
           color: red; 
-          margin-top: 5px"><b>{{ Session::get('user')->Emp_FirstName ?? Session::get('user')->Std_FName ?? '' }} {{ Session::get('user')->Emp_LastName ?? Session::get('user')->Std_LName ?? '' }}</b></span>
+          margin-top: 5px"><b>{{ Session::get('user')->Emp_FirstName ?? Session::get('user')->Std_FName ?? '' }} {{ Session::get('Std')->Emp_LastName ?? Session::get('Std')->Std_LName ?? '' }}</b></span>
 <!--           <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
               class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
               <span class="badge headerBadge1">
