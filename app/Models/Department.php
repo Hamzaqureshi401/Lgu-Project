@@ -24,4 +24,10 @@ class Department extends Model
    public function dean(){
           return $this->belongsTo('App\Models\Employee' , 'DeanUID');
    }
+
+   public function countStudentsByDpt($id){
+
+   $degreesID = Degree::where('Dpt_ID' , $id)->pluck('ID')->toArray();
+     return Student::whereIn('Degree_ID' , $degreesID);
+   }
 }

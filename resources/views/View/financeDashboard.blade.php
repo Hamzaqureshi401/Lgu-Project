@@ -191,12 +191,14 @@
                       <tr>
                         <th>Date</th>
                         <th>Amount</th>
+
                        
                       </tr>
                       @foreach($days as $key => $day)
                       <tr>
 	                      <td>{{ date("l, F j, Y", strtotime($day)) }}</td>
 	                      <td>{{ $newStdAdmission[$key]  }}</td>
+                       
 	                     
                       </tr>    
                       @endforeach                 
@@ -220,18 +222,23 @@
                 </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
+                       <thead>
                       <tr>
                         <th>Amount</th>
                         <th>Date</th>
                         
                       </tr>
+                    </thead>
+                      <tbody>
                        @foreach($days as $key => $day)
                       <tr>
                         <td>{{ date("l, F j, Y", strtotime($day)) }}</td>
                         <td>{{ $regularAtdAmount[$key]  }}</td>
                        
-                      </tr>    
-                      @endforeach                     
+                      </tr>   
+                     
+                      @endforeach  
+                       </tbody>                    
                     </table>
                   </div>
                 </div>
@@ -254,6 +261,7 @@
                 <div class="card-body p-0">
                   <div class="table-responsive">
                     <table class="table table-striped">
+                      <thead>
                       <tr>
 	                        <th>Category Wise</th>
 	                        <th>Students</th>
@@ -264,6 +272,8 @@
                           <th>Received</th>
                           
                       </tr>
+                      </thead>
+                      <tbody>
                       <tr>
 	                      <td>{{ "--" }}</td>
 	                      <td>{{ "--" }}</td>
@@ -273,6 +283,7 @@
                         <td>{{ "--" }}</td>
                         <td>{{ "--" }}</td>
                       </tr>
+                      </tbody>
                     </table>
                   </div>
                 </div>
@@ -293,7 +304,8 @@
               </div>
                 <div class="card-body p-0">
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
+                      <thead>
                       <tr>
                          <th>Department Wise</th>
                           <th>Students</th>
@@ -303,16 +315,20 @@
                           <th>Scolarship</th>
                           <th>Received</th>
                       </tr>
+                      </thead>
+                      <tbody>
+                      @foreach($departments as $department)
                       <tr>
+                        <td>{{ $department->Dpt_Name }}</td>
+                        <td>{{ $department->countStudentsByDpt($department->ID)->count() }}</td>
                         <td>{{ "--" }}</td>
                         <td>{{ "--" }}</td>
                         <td>{{ "--" }}</td>
                         <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
-                       
+                        <td>{{ "--" }}</td>              
                       </tr>
+                      @endforeach
+                      </tbody>
                     </table>
                   </div>
                 </div>

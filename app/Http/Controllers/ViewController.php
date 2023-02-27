@@ -13,6 +13,7 @@ use App\Models\Semester;
 use App\Models\Challan;
 use App\Models\Attendance;
 use App\Models\StdScholarShip;
+use App\Models\Department;
 use DB;
 use PDF;
 
@@ -286,15 +287,39 @@ class ViewController extends Controller
             }
             }
         $newStdAdmission = $this->newStudentAdmissionAmount($days);
-
         $regularAtdAmount = $this->regularStudentAmount($days);
+
+        $departments = Department::get();
+        
+       // dd($this->categoryWise() , $this->dptWise());
 
          return view('View.financeDashboard' , compact(
             'enrollment' , 
             'newStdAdmission' , 
             'days', 
-            'regularAtdAmount'
+            'regularAtdAmount',
+            'departments'
         ));
+    }
+    public function categoryWise(){
+
+        return Student::
+            join('registrations', 'registrations.Std_ID', '=', 'students.ID')
+            ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
+            ->join('Students_scholarship', 'Students_scholarship.Std_ID', '=', 'students.ID')
+            ->get();
+
+    }
+
+    public function dptWise(){
+
+      // return Degree::join('Departments' , 'Departments.ID' , 'Degrees.Dpt_ID')->get();
+       $Departments = Department::get();
+       foreach($Departments as $Department){
+        $degrees[] = Degree::where('Dpt_ID' , $Department->ID)->pluck('ID')->toArray();
+       }
+       dd($degrees);
+
     }
 
     public function newStudentAdmissionAmount($days){
@@ -312,8 +337,8 @@ class ViewController extends Controller
         // OR  AdmissionSession  = 'Sp-$year')
         // AND cast( IssueDate  AS date)  =  '$days[$i]'") ?? "0";
 
-        $amount[$i] = DB::table('students')
-            ->join('registrations', 'registrations.Std_ID', '=', 'students.ID')
+        $amount[$i] = Student::
+            join('registrations', 'registrations.Std_ID', '=', 'students.ID')
             ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
             ->selectRaw('SUM(Amount) AS aggregate')
             ->where(function($query) use ($year) {
@@ -333,8 +358,8 @@ class ViewController extends Controller
         for ($i=1; $i <= sizeof($days) ; $i++) { 
             $year = date('Y');
 
-        $amount[$i] = DB::table('students')
-        ->join('registrations', 'registrations.Std_ID', '=', 'students.ID')
+        $amount[$i] = Student::
+        join('registrations', 'registrations.Std_ID', '=', 'students.ID')
         ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
         ->selectRaw('SUM(Amount) AS aggregate')
         
