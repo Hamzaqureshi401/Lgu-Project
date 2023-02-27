@@ -281,12 +281,13 @@ $cat = ['1-SF (Defence)' , '2-SF (Civilian)' , '3-SF (Shaheed)' , 'Sports'];
                           
                       </tr>
                       </thead>
+                      
                       <tbody>
-                        @foreach($cat as $c)
+                        @foreach($cat as $key=> $c)
                       <tr>
 	                      <td>{{ $c }}</td>
-	                      <td>{{ "--" }}</td>
-	                      <td>{{ "--" }}</td>
+	                      <td>{{ $CategoryWiseStudent[$c] }}</td>
+                        <td>{{ "--" }}</td>
 	                      <td>{{ "--" }}</td>
                         <td>{{ "--" }}</td>
                         <td>{{ "--" }}</td>

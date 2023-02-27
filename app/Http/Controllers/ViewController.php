@@ -288,6 +288,10 @@ class ViewController extends Controller
             }
         $newStdAdmission = $this->newStudentAdmissionAmount($days);
         $regularAtdAmount = $this->regularStudentAmount($days);
+        $CategoryWiseStudent = $this->CategoryWiseStudent();
+
+        // dd($CategoryWiseStudent);
+
 
         $departments = Department::get();
 
@@ -297,8 +301,19 @@ class ViewController extends Controller
             'newStdAdmission' , 
             'days', 
             'regularAtdAmount',
-            'departments'
+            'departments',
+            'CategoryWiseStudent'
         ));
+    }
+
+    public function CategoryWiseStudent(){
+
+        $std['1-SF (Defence)'] =  Student::where('Category' , 'Defence')->pluck('ID')->count() ?? 0;
+        $std['2-SF (Civilian)']=  Student::where('Category' , 'Civilion')->pluck('ID')->count() ?? 0;
+        $std['3-SF (Shaheed)'] =  Student::where('Category' , 'Shaheed')->pluck('ID')->count() ?? 0;
+        $std['Sports']  =  Student::where('Category' , 'Sports')->pluck('ID')->count() ?? 0;
+
+        return $std;
     }
 
     
