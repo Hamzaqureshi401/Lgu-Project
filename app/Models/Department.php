@@ -38,8 +38,8 @@ class Department extends Model
             join('registrations', 'registrations.Std_ID', '=', 'students.ID')
             ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
             
-            ->where('students.AdmissionSession', 'Fa-2023')
-           ->orWhere('students.AdmissionSession', 'Sp-2023')
+           //  ->where('students.AdmissionSession', 'Fa-2023')
+           // ->orWhere('students.AdmissionSession', 'Sp-2023')
            ->whereIn('students.degree_ID', $degreesID)
            
             ->get();
@@ -48,4 +48,7 @@ class Department extends Model
         return $amount;
      
    }
+//    select * from students 
+// inner join registrations on registrations.Std_ID = students.ID 
+// inner join challans on challans.Reg_ID = registrations.ID
 }
