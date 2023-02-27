@@ -37,12 +37,8 @@ class Department extends Model
             Student::
             join('registrations', 'registrations.Std_ID', '=', 'students.ID')
             ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
-            
-           //  ->where('students.AdmissionSession', 'Fa-2023')
-           // ->orWhere('students.AdmissionSession', 'Sp-2023')
-           ->whereIn('students.degree_ID', $degreesID)
-           
-            ->get();
+            ->whereIn('students.AdmissionSession', ['Fa-2023','Sp-2023'])
+           ->whereIn('students.degree_ID', $degreesID)->get();
 
         
         return $amount;
