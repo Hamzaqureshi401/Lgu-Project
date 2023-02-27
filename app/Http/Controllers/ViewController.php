@@ -290,6 +290,8 @@ class ViewController extends Controller
         $regularAtdAmount = $this->regularStudentAmount($days);
 
         $departments = Department::get();
+
+       // dd($this->AmountBooked());
         
        // dd($this->categoryWise() , $this->dptWise());
 
@@ -300,6 +302,33 @@ class ViewController extends Controller
             'regularAtdAmount',
             'departments'
         ));
+    }
+
+    public function AmountBooked(){
+        
+        $allDegrees = $this->getAlldegreesOfDpt();
+        foreach($allDegrees as $degrees){
+
+            $amount[] = 
+            Student::
+            join('registrations', 'registrations.Std_ID', '=', 'students.ID')
+            ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
+            ->whereIn('students.degree_ID', $degrees)
+            ->get()
+            ->sum('Amount');
+
+        }
+        return $amount;
+        
+
+          
+    }
+    public function getAlldegreesOfDpt(){
+        $departments = Department::get();
+        foreach($departments as $department){
+            $degreesID[] = Degree::where('Dpt_ID' , $department->ID)->pluck('ID')->toArray();
+        }
+        return $degreesID;
     }
     public function categoryWise(){
 

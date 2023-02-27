@@ -30,4 +30,19 @@ class Department extends Model
    $degreesID = Degree::where('Dpt_ID' , $id)->pluck('ID')->toArray();
      return Student::whereIn('Degree_ID' , $degreesID);
    }
+   public function AmountBooked($id){
+    
+   $degreesID = Degree::where('Dpt_ID' , $id)->pluck('ID')->toArray();
+            $amount = 
+            Student::
+            join('registrations', 'registrations.Std_ID', '=', 'students.ID')
+            ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
+            ->whereIn('students.degree_ID', $degreesID)
+            ->get()
+            ->sum('Amount');
+
+        
+        return $amount;
+     
+   }
 }
