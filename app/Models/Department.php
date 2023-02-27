@@ -37,10 +37,21 @@ class Department extends Model
             Student::
             join('registrations', 'registrations.Std_ID', '=', 'students.ID')
             ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
-            ->whereIn('students.AdmissionSession', ['Fa-2023','Sp-2023'])
+            ->whereIn('students.AdmissionSession', ['Fa-'.$year,'Sp-'.$year])
            ->whereIn('students.degree_ID', $degreesID)->get();
+        return $amount;
+     
+   }
 
-        
+   public function previousBalance($id){
+    $year = date('Y');
+   $degreesID = Degree::where('Dpt_ID' , $id)->pluck('ID')->toArray();
+            $amount = 
+            Student::
+            join('registrations', 'registrations.Std_ID', '=', 'students.ID')
+            ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
+            ->whereNotIn('students.AdmissionSession', ['Fa-'.$year,'Sp-'.$year])
+           ->whereIn('students.degree_ID', $degreesID)->get();
         return $amount;
      
    }

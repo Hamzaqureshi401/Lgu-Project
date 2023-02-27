@@ -291,10 +291,7 @@ class ViewController extends Controller
 
         $departments = Department::get();
 
-       // dd($this->AmountBooked());
-        
-       // dd($this->categoryWise() , $this->dptWise());
-
+       
          return view('View.financeDashboard' , compact(
             'enrollment' , 
             'newStdAdmission' , 
@@ -304,25 +301,7 @@ class ViewController extends Controller
         ));
     }
 
-    public function AmountBooked(){
-        
-        $allDegrees = $this->getAlldegreesOfDpt();
-        foreach($allDegrees as $degrees){
-
-            $amount[] = 
-            Student::
-            join('registrations', 'registrations.Std_ID', '=', 'students.ID')
-            ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
-            ->whereIn('students.degree_ID', $degrees)
-            ->get()
-            ->sum('Amount');
-
-        }
-        return $amount;
-        
-
-          
-    }
+    
     public function getAlldegreesOfDpt(){
         $departments = Department::get();
         foreach($departments as $department){
@@ -330,26 +309,9 @@ class ViewController extends Controller
         }
         return $degreesID;
     }
-    public function categoryWise(){
+   
 
-        return Student::
-            join('registrations', 'registrations.Std_ID', '=', 'students.ID')
-            ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
-            ->join('Students_scholarship', 'Students_scholarship.Std_ID', '=', 'students.ID')
-            ->get();
-
-    }
-
-    public function dptWise(){
-
-      // return Degree::join('Departments' , 'Departments.ID' , 'Degrees.Dpt_ID')->get();
-       $Departments = Department::get();
-       foreach($Departments as $Department){
-        $degrees[] = Degree::where('Dpt_ID' , $Department->ID)->pluck('ID')->toArray();
-       }
-       dd($degrees);
-
-    }
+   
 
     public function newStudentAdmissionAmount($days){
         
