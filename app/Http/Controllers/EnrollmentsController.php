@@ -13,6 +13,8 @@ use App\Models\SemesterDetail;
 use App\Http\Controllers\ChallanController;
 
 use App\Models\Exam_AcademicStandingRule;
+use App\Models\StdScholarShip;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -198,31 +200,41 @@ class EnrollmentsController extends Controller
     }
 
     public function createChallan(){
+
+        
          
          $session           = $this->getSessionData();   
          $request['Std_ID'] = $session['std_ID'];
          $Std_ID            = $request['Std_ID'];
          $degreeName        = explode('/' , session::get('user'));
          $registration      = Registration::where('Std_ID' , $request['Std_ID'])->first();
-             
+         $std_sch_details=StdScholarShip::where('Std_ID' , $request['Std_ID'])->first();
+
+
          $Sem_ID = $registration->Sem_ID;
           $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
          $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'DegBatches_ID' => $DegreeBatche->ID])->first();
         // dd($sem_details , $Sem_ID , $DegreeBatche->ID , $request['Std_ID'] , $registration);
-         if(empty($sem_details))
-        {
-            return "error";
-        }
+        $registrationId = $registration->ID;
         
-         $registrationId = $registration->ID;
+        
+
+
+
+
+        //  if(empty($sem_details))
+        // {
+        //     return "error";
+        // }
+        
 
 
        
         $totalCreditHours = $this->getTotalCreditHours($request);
         if(empty($sem_details)){
-            $fee = 0;
+            $Tuition_Fee = 0;
         }else{
-            $fee = $sem_details->SemesterFee;
+            $Tuition_Fee = $sem_details->Tuition_Fee;
         }
         
         $IssueDate  = date('m/d/Y h:i:s a', time());
@@ -232,20 +244,58 @@ class EnrollmentsController extends Controller
         $Fine       = 0;
         // dd($sem_details);
         
-        if($sem_details->FeeType == 'Per Course'){
-            $amount     = $totalCreditHours * $fee;
+        if($sem_details->FeeType === 'Per Course'){
+            $amount     = $totalCreditHours * $Tuition_Fee;
         }else{
-            $amount     = $fee;
+            $amount     = $Tuition_Fee;
         }
+       
+
+        if(!empty($std_sch_details))
+        {
+            if($std_sch_details['Scholarship_Type']==='Percentage')
+            {
+                
+                $std_sch_amount=($std_sch_details['Percentage']/100)*$sem_details->Tuition_Fee ?? 0;
+                
+            }
+            if($std_sch_details['Scholarship_Type']==='Fixed')
+            {
+                $std_sch_amount=$std_sch_details['Percentage'] ?? 0;
+            }
+
+        }
+       $tAmount =  $amount 
+        +
+        $sem_details->Magazine_Fee
+        +
+        $sem_details->Exam_Fee
+        +
+        $sem_details->Society_Fee
+        +
+        $sem_details->Misc_Fee
+        +
+        $sem_details->Registration_Fee
+        +
+        $sem_details->Practical_charges
+        +
+        $sem_details->Sports_Fund;
+////
+       // dd($tAmount , $std_sch_amount);
+
         
+  
+        $std_sch_type=$std_sch_details['Scholarship_Type'] ?? '';
 
          $Type           = "Registration";
          $challan        = new ChallanController();
          $challancreated = $challan->createChallan(
-            $amount , 
+            $tAmount , 
             $Type, 
             $registrationId, 
-            $Sem_ID
+            $Sem_ID,
+            $std_sch_amount ?? 0,
+            $std_sch_type
         );
 
         $challan->createChallanDetail(
@@ -260,7 +310,7 @@ class EnrollmentsController extends Controller
         $sem_details->Practical_charges,
         $sem_details->Sports_Fund,
         // $FeeType,
-        $sem_details->Tuition_Fee
+        $amount
     );
         
         

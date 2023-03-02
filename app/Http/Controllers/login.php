@@ -114,6 +114,7 @@ class login extends Controller
     
          $sem_ID     =  Semester::where('SemSession' , $submit->AdmissionSession)->first()->ID ?? false;
 
+
             $dpt_ID     = Department::where('Dpt_Name' , $department)->first()->ID ?? false;
            
             $degreeID   = Degree::where('Dpt_ID'   , $dpt_ID)->first()->ID  ?? false;

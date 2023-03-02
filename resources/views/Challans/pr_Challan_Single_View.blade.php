@@ -224,10 +224,10 @@
         <tr>
             <td>
                 <div class="row" style="font-size:10px;">
-                    <div class="col-6 text-left">Already Paid:0.0000000 </div>
+                    <div class="col-6 text-left">Already Paid: 0.000000000</div>
                     <div class="col-6 text-right">Pre.OutStandings:0.0000000 </div>
-                    <div class="col-6 text-left">Scholarship:0.0000000 </div>
-                    <div class="col-6 text-right font-weight-bold"><span style="font-size:12px; border-style : solid;">Grand Total:
+                    <div class="col-6 text-left">Scholarship: {{ $challan->Scholarship ?? 0 }}  </div>
+                    <div class="col-6 text-right font-weight-bold"><span style="font-size:12px; border-style : solid;">Grand Total:{{ $totalamount - $challan->Scholarship  }}
 
                         </span></div>
                     <div class="col-12 text-center">Rs.20/- per day to charged after due date</div>

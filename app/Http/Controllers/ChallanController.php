@@ -96,11 +96,13 @@ class ChallanController extends Controller
     }
 
     public function createChallan(
-           
             $Amount,
             $Type,
             $Reg,
-            $Sem_ID
+            $Sem_ID,
+            $std_sch_amount,
+            $std_sch_type
+
     ){
 
         $IssueDate  = date('m/d/Y h:i:s a', time());
@@ -122,7 +124,9 @@ class ChallanController extends Controller
             @Amount                = '$Amount',
             @Type                  = '$Type',
             @Reg_ID                = '$Reg',
-            @Sem_ID                = '$Sem_ID'
+            @Sem_ID                = '$Sem_ID',
+            @Sch                   = '$std_sch_amount',
+            @Sch_type              = '$std_sch_type'
             ;");
 
         // return Challan::where(['DueDate' => $IssueDate , 'Reg_ID' => 30021 , 'Sem_ID' =>  $Sem_ID])->first();
