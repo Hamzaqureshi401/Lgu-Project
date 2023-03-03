@@ -354,6 +354,8 @@ Route::get('/editAssignedCourse/{id?}', [App\Http\Controllers\CoursesController:
 
 Route::get('/financeDashboard', [App\Http\Controllers\ViewController::class, 'financeDashboard'])->name('finance.Dashboard');
 
+Route::post('/financeDashboardBySem', [App\Http\Controllers\ViewController::class, 'financeDashboard'])->name('financeDashboard.BySem');
+
 Route::get('/scholarshipDetail', [App\Http\Controllers\ViewController::class, 'scholarshipDetail'])->name('scholarship.Detail');
 Route::get('/auditReport', [App\Http\Controllers\ViewController::class, 'auditReport'])->name('audit.Report');
 Route::get('/studentLedger', [App\Http\Controllers\ViewController::class, 'studentLedger'])->name('student.Ledger');
