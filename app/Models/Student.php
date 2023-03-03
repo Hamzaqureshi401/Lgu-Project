@@ -19,5 +19,9 @@ class Student extends Model
    public function registration(){
       return $this->belongsTo('App\Models\Registration', 'ID' , 'Std_ID');
   }
+
+  public function std_scholarship(){
+   return $this->belongsTo('App\Models\StdScholarShip','ID','Std_ID');
+}
    
 }

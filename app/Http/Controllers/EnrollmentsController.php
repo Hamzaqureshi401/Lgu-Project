@@ -210,6 +210,7 @@ class EnrollmentsController extends Controller
          $registration      = Registration::where('Std_ID' , $request['Std_ID'])->first();
          $std_sch_details=StdScholarShip::where('Std_ID' , $request['Std_ID'])->first();
 
+        //  dd($std_sch_details);
 
          $Sem_ID = $registration->Sem_ID;
           $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
@@ -265,6 +266,12 @@ class EnrollmentsController extends Controller
             }
 
         }
+        else{
+            $std_sch_amount=0;
+        }
+
+        // dd($std_sch_amount);
+
        $tAmount =  $amount 
         +
         $sem_details->Magazine_Fee
@@ -280,8 +287,8 @@ class EnrollmentsController extends Controller
         $sem_details->Practical_charges
         +
         $sem_details->Sports_Fund;
-////
-       // dd($tAmount , $std_sch_amount);
+
+    //    dd($tAmount , $std_sch_amount);
 
         
   

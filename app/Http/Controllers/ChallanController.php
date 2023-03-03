@@ -58,6 +58,86 @@ class ChallanController extends Controller
        
         $challan = Challan::where('ID',$Challans_ID)->first();
 
+        $std_sch_details=$challan->registration->student->std_scholarship;
+        $challan_deta=$challan->ChallanDetail;
+
+
+        if(!empty($std_sch_details))
+        {
+            $std_sch_details=$challan->registration->student->std_scholarship->latest('Date')->first();
+
+        }
+        
+        // dd($std_sch_details,$challan_deta,$challan);
+
+        // if(empty($challan['Scholarship']) && empty($challan['Sch_Type']))
+        // {
+
+            if(!empty($std_sch_details))
+            {
+                // dd($std_sch_details,$challan_deta,$challan);
+                if($std_sch_details['Scholarship_Type']==='Percentage')
+                {
+                    
+                    $std_sch_amount=($std_sch_details['Percentage']/100)*$challan_deta->Tuition_Fee ?? 0;
+
+
+                    $submit       = DB::Update("EXEC sp_UpdateChallans
+
+                    @ID             = '$challan->ID',
+                    @IssueDate      = '$challan->IssueDate',
+                    @DueDate        = '$challan->DueDate',
+                    @PaidDate       = '$challan->PaidDate',
+                    @Status         = '$challan->Status',
+                    @Fine           = '$challan->Fine',
+                    @Amount         = '$challan->Amount',
+                    @Type           = '$challan->Type',
+                    @Sem_ID         = '$challan->Sem_ID',
+                    @Reg_ID         = '$challan->Reg_ID',
+                    @SchlorShip    = '$std_sch_amount',
+                    @Sch_Type       = '$std_sch_details->Scholarship_Type'
+
+
+                    
+                    ;
+                ");
+                
+
+                    // dd($std_sch_amount);
+                    
+                }
+                if($std_sch_details['Scholarship_Type']==='Fixed')
+                {
+                    $std_sch_amount=$std_sch_details['Percentage'] ?? 0;
+
+                    
+
+                    $submit       = DB::Update("EXEC sp_UpdateChallans
+
+                    @ID             = '$challan->ID',
+                    @IssueDate      = '$challan->IssueDate',
+                    @DueDate        = '$challan->DueDate',
+                    @PaidDate       = '$challan->PaidDate',
+                    @Status         = '$challan->Status',
+                    @Fine           = '$challan->Fine',
+                    @Amount         = '$challan->Amount',
+                    @Type           = '$challan->Type',
+                    @Sem_ID         = '$challan->Sem_ID',
+                    @Reg_ID         = '$challan->Reg_ID',
+                    @SchlorShip    = '$std_sch_amount',
+                    @Sch_Type       = '$std_sch_details->Scholarship_Type'
+
+
+                    
+                    ;
+                ");
+                    // dd($std_sch_amount);
+
+                }
+            }
+        
+        // }
+                
 
 
 
@@ -86,6 +166,14 @@ class ChallanController extends Controller
        // return $dompdf->download('card.pdf');
 
         //dd($challan);
+
+        $challan = Challan::where('ID',$Challans_ID)->first();
+
+        $std_sch_details=$challan->registration->student->std_scholarship;
+        $challan_deta=$challan->ChallanDetail;
+
+        // dd($std_sch_details,$challan,$challan_deta,$std_sch_amount);
+
        return
         view('Challans.printChallan' , compact('challan'));
     }
