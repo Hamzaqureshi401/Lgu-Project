@@ -1,9 +1,37 @@
 @extends('layouts.app_new')
 @section('title')  @endsection <!--add title here -->
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
        <!-- Main Content -->
       
         <section class="section">
+
+          <div class="col-12 col-md-12 col-lg-12">
+               <div class="card">
+                  <div class="card-header">
+                     <h4>{{ $title ?? '' }}</h4>
+                  </div>
+                  <form id="myForm" action="{{ route('financeDashboard.BySem') ?? '' }}" method="POST" enctype="multipart/form-data">
+                     {{ csrf_field() }}
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="form-group col-md-12 col-12">
+                              <label>Semester</label>
+                              <select class="form-control select2" name="ID"  required>
+                                 @foreach($Semester as $Semester)
+                                 <option value="{{ $Semester->ID }}">{{ $Semester->SemSession }}</option>
+                                 @endforeach
+                              </select>
+                           </div>
+                          
+                         
+                        </div>
+                        <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button ?? 'Submit' }}</button>
+
+                  </form>
+                  </div>
+               </div>
+
           <div class="row ">
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-2 col-xs-12">
               <div class="card">
@@ -159,7 +187,7 @@
           </div>
 
 <!-- @include('Dean.charts') -->
-
+@if(!empty($newStdAdmission))
           <div class="row">
             <div class="col-12">
               <div class="card">
@@ -252,6 +280,7 @@
               </div>
             </div>
           </div>
+          @endif
           </div>
           @php 
           $cat = ['1-SF (Defence)' , '2-SF (Civilian)' , '3-SF (Shaheed)' , 'Sports'];
@@ -284,15 +313,15 @@
                       </thead>
                       
                       <tbody>
-                        @foreach($cat as $key=> $c)
+                        @foreach($sp_FinancedDataByCategory as $key=> $data)
                       <tr>
-	                      <td>{{ $c }}</td>
-	                      <td>{{ $CategoryWiseStudent['cat'][$key] }}</td>
-                        <td>{{ $CategoryWiseStudent['amtByCat'][$key]->sum('Amount') ?? 0 }}</td>
+	                      <td>{{ $data->Category ?? '--' }}</td>
+	                      <td>{{ $data->Students ?? 0 }}</td>
+                        <td>{{ $data->AmountBooked ?? 0 }}</td>
 	                      <td>{{ "--" }}</td>
+                        <td>{{ $data->Receivable ?? 0 }}</td>
                         <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>
+                        <td>{{ $data->Received ?? 0 }}</td>
                       </tr>
                       @endforeach
                       </tbody>
@@ -329,15 +358,15 @@
                       </tr>
                       </thead>
                       <tbody>
-                      @foreach($departments as $department)
+                      @foreach($sp_FinancedDataByDpt as $key=> $data)
                       <tr>
-                        <td>{{ $department->Dpt_Name }}</td>
-                        <td>{{ $department->countStudentsByDpt($department->ID)->count() }}</td>
-                        <td>{{ $department->AmountBooked($department->ID)->sum('Amount') }}</td>
-                        <td>{{ $department->previousBalance($department->ID)->sum('Amount') }}</td>
+                        <td>{{ $data->Dpt_Name ?? '--' }}</td>
+                        <td>{{ $data->Students ?? 0 }}</td>
+                        <td>{{ $data->AmountBooked ?? 0 }}</td>
                         <td>{{ "--" }}</td>
+                        <td>{{ $data->Receivable ?? 0 }}</td>
                         <td>{{ "--" }}</td>
-                        <td>{{ "--" }}</td>              
+                        <td>{{ $data->Received ?? 0 }}</td>
                       </tr>
                       @endforeach
                       </tbody>

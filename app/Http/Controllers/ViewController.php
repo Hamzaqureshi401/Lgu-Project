@@ -193,88 +193,16 @@ class ViewController extends Controller
             );
     }
 
-    // public function courseOffering($degree = null , $batch = null){
-
-    //     $degreeBatches  = DegreeBatche::where(['Degree_ID' => $degree , 'Batch_ID' => $batch])->first();
-    //     if(!empty($degreeBatches)){
-    //         $semesterCourses = SemesterCourse::where('DegBatches_ID' , $degreeBatches->ID)->get();
-    //     }else{
-    //         $semesterCourses = "";
-    //     }
-    //    $degrees      =  Degree::get();
-    //    $semesters    =  semester::get();
-      
-    //     $title      = 'All Courses';
-    //     $route      = 'courseOffering/';
-    //     $getEditRoute = 'courseAssign';
-    //     $modalTitle = 'Assign Course';
-    //     $button     = 'Submit';
-        
-    //    return 
-    //     view('View.courseOffering', 
-    //         compact(
-                
-    //             'degrees',
-                
-    //             'semesters',
-    //             'title',
-    //             'route',
-    //             'getEditRoute',
-    //             'modalTitle',
-    //             'button',
-    //             'degreeBatches',
-    //             'semesterCourses'
-    //         )    
-    //         );
-
-    // }
-
-    // public function courseAssign($id){
-
-    //     $button = 'Do You Wisht To Submit?';
-    //     $courses = Course::where('ID' , $id)->first();
-    //     $employees      = Employee::get();
 
 
+    public function financeDashboard(Request $request){
 
-    //     return 
-    //     view('View.courseAssign', 
-    //         compact(
-                
-    //             'courses',
-    //             'button',
-    //             'employees'
-              
-    //         ));
+       // dd($request->request->all());
 
-    // }
+        $SemPassed = Semester::where('ID' , $request->ID)->first();
+       // dd($SemPassed);
 
-    //  public function editAssignedCourse($id){
-
-    //     $button = 'Do You Wisht To Submit?';
-    //     $courses = Course::where('ID' , $id)->first();
-    //     $employees      = Employee::get();
-    //     $degrees      =  Degree::get();
-    //     $semesters    =  semester::get();
-
-        
-
-    //     return 
-    //     view('View.editAssignedCourse', 
-    //         compact(
-                
-    //             'courses',
-    //             'button',
-    //             'employees',
-    //             'degrees',
-    //             'semesters'
-              
-    //         ));
-
-    // }
-
-    public function financeDashboard(){
-
+        $Semester = Semester::get();
         $enrollment = Enrollment::pluck('id')->count();
         $start=date("Y-m-01");
         $end = date("Y-m-t", strtotime($start));
@@ -286,15 +214,24 @@ class ViewController extends Controller
                 $start= date('Y-m-d', strtotime($start. ' + 1 days'));    
             }
             }
-        $newStdAdmission = $this->newStudentAdmissionAmount($days);
-        $regularAtdAmount = $this->regularStudentAmount($days);
-        $CategoryWiseStudent = $this->CategoryWiseStudent();
-
-        // dd($CategoryWiseStudent);
-
+        $newStdAdmission = $this->newStudentAdmissionAmount($days , $SemPassed);
+        $regularAtdAmount = $this->regularStudentAmount($days , $SemPassed);
+       
 
         $departments = Department::get();
         $challans = Challan::get();
+
+         $sp_FinancedDataByDpt = DB::select("EXEC sp_FinancedDataByDpt
+           @sem_ID   = '$request->ID'
+            ;");
+
+         $sp_FinancedDataByCategory = DB::select("EXEC sp_FinancedDataByCategory
+           @sem_ID   = '$request->ID'
+            ;");
+
+        
+
+         //dd($sp_FinancedDataByDpt , $sp_FinancedDataByCategory);
 
        
          return view('View.financeDashboard' , compact(
@@ -303,59 +240,16 @@ class ViewController extends Controller
             'days', 
             'regularAtdAmount',
             'departments',
-            'CategoryWiseStudent',
-            'challans'
+            'challans',
+            'sp_FinancedDataByDpt',
+            'sp_FinancedDataByCategory',
+            'Semester'
         ));
     }
-
-    public function CategoryWiseStudent(){
-
-        $students = Student::get();
-
-        $std['cat'][] = $students->where('Category' , 'Defence')->pluck('ID')->count();
-        $std['cat'][] = $students->where('Category' , 'Civilion')->pluck('ID')->count();
-        $std['cat'][] = $students->where('Category' , 'Shaheed')->pluck('ID')->count();
-        $std['cat'][] = $students->where('Category' , 'Sports')->pluck('ID')->count();
-
+    public function newStudentAdmissionAmount($days , $SemPassed){
         
-        $std['amtByCat'][] = $this->getAmountByCat('Defence');        
-        $std['amtByCat'][] = $this->getAmountByCat('Civilion');        
-        $std['amtByCat'][] = $this->getAmountByCat('Shaheed');     
-        $std['amtByCat'][] = $this->getAmountByCat('Sports');        
 
-     
-        //dd($std);
-
-        return $std;
-    }
-
-    public function getAmountByCat($cat){
-         $year  = date('Y');
-         $amount = 
-            Student::
-            join('registrations', 'registrations.Std_ID', '=', 'students.ID')
-            ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
-            ->whereIn('students.AdmissionSession', ['Fa-'.$year,'Sp-'.$year])
-            ->where('Category' , $cat)
-           ->get();
-
-           return $amount;
-    }
-
-    
-    public function getAlldegreesOfDpt(){
-        $departments = Department::get();
-        foreach($departments as $department){
-            $degreesID[] = Degree::where('Dpt_ID' , $department->ID)->pluck('ID')->toArray();
-        }
-        return $degreesID;
-    }
-   
-
-   
-
-    public function newStudentAdmissionAmount($days){
-        
+        //dd($SemPassed->SemSession);
         for ($i=1; $i <= sizeof($days) ; $i++) { 
             $year = date('Y');
         // $amount[$i] = DB::select("SELECT
@@ -368,27 +262,33 @@ class ViewController extends Controller
         // (AdmissionSession  = 'Fa-$year'
         // OR  AdmissionSession  = 'Sp-$year')
         // AND cast( IssueDate  AS date)  =  '$days[$i]'") ?? "0";
-
+            if(!empty($SemPassed)){
         $amount[$i] = Student::
             join('registrations', 'registrations.Std_ID', '=', 'students.ID')
             ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
             ->selectRaw('SUM(Amount) AS aggregate')
-            ->where(function($query) use ($year) {
-                $query->where('AdmissionSession', '=', "Fa-$year")
-                      ->orWhere('AdmissionSession', '=', "Sp-$year");
+            ->where(function($query) use ($SemPassed) {
+                $query->where('AdmissionSession', '=', "$SemPassed->SemSession");
+                      
             })
             ->whereDate('IssueDate', '=', $days[$i])
             ->value('aggregate') ?? 0;
+        }
         
         }
-        return $amount;
+        return $amount ?? 0;
 
     }
 
-    public function regularStudentAmount($days){
+    public function regularStudentAmount($days , $SemPassed){
+
+        if(!empty($SemPassed)){
+        $year = explode('-', $SemPassed->SemSession);
+        $year = $year[1];
+
 
         for ($i=1; $i <= sizeof($days) ; $i++) { 
-            $year = date('Y');
+            //$year = date('Y');
 
         $amount[$i] = Student::
         join('registrations', 'registrations.Std_ID', '=', 'students.ID')
@@ -402,7 +302,8 @@ class ViewController extends Controller
         })
         ->value('aggregate') ?? 0;
         }
-        return $amount;
+    }
+        return $amount ?? 0;
     }
 
     public function ScholarshipDetail(){

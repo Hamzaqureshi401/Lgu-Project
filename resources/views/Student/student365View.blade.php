@@ -2,7 +2,7 @@
 @section('title')  @endsection <!--add title here -->
 @section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
-<div class="">
+
 <section class="section">
    <div class="section-body">
       <div class="section-body">
@@ -454,7 +454,7 @@
          </div>
       </div>
 </section>
-</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
  <script type="text/javascript">
     var toggle = '';
