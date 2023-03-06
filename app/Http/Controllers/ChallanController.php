@@ -61,13 +61,14 @@ class ChallanController extends Controller
                 if($std_sch_details['Scholarship_Type']==='Percentage')
                 {
                     $std_sch_amount=($std_sch_details['Percentage']/100)*$challan_deta->Tuition_Fee ?? 0;
-                    $submit=$this->Updatescholarship($std_sch_details,$challan,$std_sch_amount);            
                 }
                 if($std_sch_details['Scholarship_Type']==='Fixed')
                 {
                     $std_sch_amount=$std_sch_details['Percentage'] ?? 0;
-                    $submit=$this->Updatescholarship($std_sch_details,$challan,$std_sch_amount);
                 }
+                $submit=$this->Updatescholarship($std_sch_details,$challan,$std_sch_amount);
+
+
             }
 
         $challan = Challan::where('ID',$Challans_ID)->first();
@@ -94,13 +95,9 @@ class ChallanController extends Controller
         @SchlorShip     = '$std_sch_amount',
         @Sch_Type       = '$std_sch_details->Scholarship_Type'
         ;");
-
         return $submit;
     }
-
-
     public function getSessionData(){
-
         return session::all();
     }
 
@@ -113,7 +110,6 @@ class ChallanController extends Controller
             $std_sch_type
 
     ){
-
         $IssueDate  = date('m/d/Y h:i:s a', time());
         $DueDate    = Date('m/d/Y', strtotime('+10 days'));
         $PaidDate   = "";
@@ -121,8 +117,6 @@ class ChallanController extends Controller
         $Fine       = 0;
 
        // dd($Reg);
-        
-
          $submit = DB::statement("EXEC sp_InsertChallans
             
             @IssueDate             = '$IssueDate',
@@ -140,8 +134,6 @@ class ChallanController extends Controller
 
         // return Challan::where(['DueDate' => $IssueDate , 'Reg_ID' => 30021 , 'Sem_ID' =>  $Sem_ID])->first();
          return Challan::latest('ID')->first();
-
-
     }
 
     public function createChallanDetail(
@@ -158,7 +150,6 @@ class ChallanController extends Controller
         // $FeeType,
          $Tuition_Fee
     ){
-
          $submit = DB::statement("EXEC sp_InsertChallanDetails
             
             @Challans_ID             = '$Challans_ID',
@@ -173,12 +164,8 @@ class ChallanController extends Controller
             @Tuition_Fee             = '$Tuition_Fee'
             
             ;");
-
-
     }
 
-
-    
     public function approvechallan(Request $request,$Challans_ID){
 
         $challan= Challan::where('ID', $Challans_ID);
