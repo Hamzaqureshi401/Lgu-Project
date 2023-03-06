@@ -197,13 +197,12 @@ class ViewController extends Controller
 
     public function financeDashboard(Request $request){
 
-       // dd($request->request->all());
+       
 
         $SemPassed = Semester::where('ID' , $request->ID)->first();
-       // dd($SemPassed);
-
+       
         $Semester = Semester::get();
-        $enrollment = Enrollment::pluck('id')->count();
+        
         $start=date("Y-m-01");
         $end = date("Y-m-t", strtotime($start));
         $loopend=date("t", strtotime($start));
@@ -225,17 +224,24 @@ class ViewController extends Controller
            @sem_ID   = '$request->ID'
             ;");
 
+
+
          $sp_FinancedDataByCategory = DB::select("EXEC sp_FinancedDataByCategory
            @sem_ID   = '$request->ID'
             ;");
+
+         $sp_OverallFinanceData = DB::select("EXEC sp_OverallFinanceData
+           @sem_ID   = '$request->ID'
+            ;");
+
+          //dd($sp_FinancedDataByDpt , $sp_FinancedDataByCategory , $sp_OverallFinanceData);
 
         
 
          //dd($sp_FinancedDataByDpt , $sp_FinancedDataByCategory);
 
        
-         return view('View.financeDashboard' , compact(
-            'enrollment' , 
+         return view('View.financeDashboard' , compact( 
             'newStdAdmission' , 
             'days', 
             'regularAtdAmount',
@@ -243,27 +249,17 @@ class ViewController extends Controller
             'challans',
             'sp_FinancedDataByDpt',
             'sp_FinancedDataByCategory',
-            'Semester'
+            'Semester',
+            'sp_OverallFinanceData'
         ));
     }
     public function newStudentAdmissionAmount($days , $SemPassed){
         
-
-        //dd($SemPassed->SemSession);
         for ($i=1; $i <= sizeof($days) ; $i++) { 
             $year = date('Y');
-        // $amount[$i] = DB::select("SELECT
-        // sum( Amount) AS aggregate
-        //  FROM
-        // students
-        // INNER JOIN  Registrations  ON Registrations . Std_ID  =  Students . ID
-        // INNER JOIN Challans ON  Challans . Reg_ID  = Registrations . ID
-        // WHERE
-        // (AdmissionSession  = 'Fa-$year'
-        // OR  AdmissionSession  = 'Sp-$year')
-        // AND cast( IssueDate  AS date)  =  '$days[$i]'") ?? "0";
+        
             if(!empty($SemPassed)){
-        $amount[$i] = Student::
+            $amount[$i] = Student::
             join('registrations', 'registrations.Std_ID', '=', 'students.ID')
             ->join('challans', 'challans.Reg_ID', '=', 'registrations.ID')
             ->selectRaw('SUM(Amount) AS aggregate')

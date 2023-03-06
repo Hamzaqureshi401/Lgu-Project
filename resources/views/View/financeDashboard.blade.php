@@ -41,7 +41,7 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">Booked</h5>
-                          <h2 class="mb-3 font-18">Rs.{{ $challans->sum('Amount') }}</h2>
+                          <h2 class="mb-3 font-18">Rs.{{ $sp_OverallFinanceData[0]->AmountBooked }}</h2>
                           <!-- <p class="mb-0"><span class="col-green">10%</span> Increase</p> -->
                         </div>
                       </div>
@@ -63,7 +63,7 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15"> Enrolled Students</h5>
-                          <h2 class="mb-3 font-18">{{ $enrollment }}</h2>
+                          <h2 class="mb-3 font-18">{{ $sp_OverallFinanceData[0]->Enrollments }}</h2>
                           
                         </div>
                       </div>
@@ -85,7 +85,7 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">ScholarShip</h5>
-                          <h2 class="mb-3 font-18">Rs: </h2>
+                          <h2 class="mb-3 font-18">Rs:{{ $sp_OverallFinanceData[0]->Scholarship }} </h2>
                           <!-- <h2 class="mb-3 font-18">128</h2>
                           <p class="mb-0"><span class="col-green">18%</span>
                             Increase</p> -->
@@ -109,6 +109,7 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">Previous Balance</h5>
+                          <h2 class="mb-3 font-18">Rs.{{$sp_OverallFinanceData[0]->PreviousBalance ?? 0 }}</h2>
                          <!--  <h2 class="mb-3 font-18">$48,697</h2>
                           <p class="mb-0"><span class="col-green">42%</span> Increase</p> -->
                         </div>
@@ -131,7 +132,7 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">Received</h5>
-                          <h2 class="mb-3 font-18">Rs.{{ $challans->where('Status' , 'Paid')->sum('Amount') }}</h2>
+                          <h2 class="mb-3 font-18">Rs.{{$sp_OverallFinanceData[0]->Received ?? 0 }}</h2>
                           <!-- <h2 class="mb-3 font-18">$48,697</h2>
                           <p class="mb-0"><span class="col-green">42%</span> Increase</p> -->
                         </div>
@@ -154,6 +155,7 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">Receiveable</h5>
+                          <h2 class="mb-3 font-18">Rs.{{$sp_OverallFinanceData[0]->Receivable ?? 0 }}</h2>
                          <!--  <h2 class="mb-3 font-18">$48,697</h2>
                           <p class="mb-0"><span class="col-green">42%</span> Increase</p> -->
                         </div>
@@ -318,9 +320,9 @@
 	                      <td>{{ $data->Category ?? '--' }}</td>
 	                      <td>{{ $data->Students ?? 0 }}</td>
                         <td>{{ $data->AmountBooked ?? 0 }}</td>
-	                      <td>{{ "--" }}</td>
+	                      <td>{{ $data->PreviousBalance }}</td>
                         <td>{{ $data->Receivable ?? 0 }}</td>
-                        <td>{{ "--" }}</td>
+                        <td>{{ $data->Scholarship ?? 0 }}</td>
                         <td>{{ $data->Received ?? 0 }}</td>
                       </tr>
                       @endforeach
@@ -363,9 +365,9 @@
                         <td>{{ $data->Dpt_Name ?? '--' }}</td>
                         <td>{{ $data->Students ?? 0 }}</td>
                         <td>{{ $data->AmountBooked ?? 0 }}</td>
-                        <td>{{ "--" }}</td>
+                        <td>{{ $data->PreviousBalance }}</td>
                         <td>{{ $data->Receivable ?? 0 }}</td>
-                        <td>{{ "--" }}</td>
+                        <td>{{ $data->Scholarship ?? 0 }}</td>
                         <td>{{ $data->Received ?? 0 }}</td>
                       </tr>
                       @endforeach
