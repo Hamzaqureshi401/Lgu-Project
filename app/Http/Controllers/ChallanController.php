@@ -49,12 +49,7 @@ class ChallanController extends Controller
     public function printChallan($Challans_ID){
 
 
-        // dd($Challans_ID);
-
-        // $session           = $this->getSessionData();
-        // $request['Std_ID'] = $session['std_ID'];
         
-        // $registration = Registration::where('Std_ID' , $request['Std_ID'])->first();
        
         $challan = Challan::where('ID',$Challans_ID)->first();
 
@@ -62,26 +57,14 @@ class ChallanController extends Controller
         $challan_deta=$challan->ChallanDetail;
 
 
-        if(!empty($std_sch_details))
-        {
+        if(!empty($std_sch_details)){
             $std_sch_details=$challan->registration->student->std_scholarship->latest('Date')->first();
-
         }
         
-        // dd($std_sch_details,$challan_deta,$challan);
-
-        // if(empty($challan['Scholarship']) && empty($challan['Sch_Type']))
-        // {
-
-            if(!empty($std_sch_details))
-            {
-                // dd($std_sch_details,$challan_deta,$challan);
+            if(!empty($std_sch_details)){
                 if($std_sch_details['Scholarship_Type']==='Percentage')
                 {
-                    
                     $std_sch_amount=($std_sch_details['Percentage']/100)*$challan_deta->Tuition_Fee ?? 0;
-
-
                     $submit       = DB::Update("EXEC sp_UpdateChallans
 
                     @ID             = '$challan->ID',
@@ -94,7 +77,7 @@ class ChallanController extends Controller
                     @Type           = '$challan->Type',
                     @Sem_ID         = '$challan->Sem_ID',
                     @Reg_ID         = '$challan->Reg_ID',
-                    @SchlorShip    = '$std_sch_amount',
+                    @SchlorShip     = '$std_sch_amount',
                     @Sch_Type       = '$std_sch_details->Scholarship_Type'
 
 
