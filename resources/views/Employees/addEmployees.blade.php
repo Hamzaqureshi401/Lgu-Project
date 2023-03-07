@@ -7,11 +7,11 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Emp First Name</label>
-                      <input type="text" name="Emp_FirstName" class="form-control" onkeydown="return /[a-z]/i.test(event.key)" value="{{ old('Emp_FirstName') }}">
+                      <input type="text" name="Emp_FirstName" class="form-control" value="{{ old('Emp_FirstName') }}">
                     </div>
                     <div class="form-group">
                       <label>Emp Last Name</label>
-                      <input type="text" name="Emp_LastName" class="form-control"onkeydown="return /[a-z]/i.test(event.key)" value="{{ old('Emp_LastName') }}">
+                      <input type="text" name="Emp_LastName" class="form-control" value="{{ old('Emp_LastName') }}">
                     </div>
                     <div class="form-group">
                       <label>DOB</label>
