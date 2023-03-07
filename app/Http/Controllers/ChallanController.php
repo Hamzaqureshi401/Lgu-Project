@@ -188,5 +188,68 @@ class ChallanController extends Controller
                      );
           }
 
+
+
+
+          public function admissionfeewaveoff(Request $request,$Challans_ID)
+          {
+            
+            $challan = Challan::where('ID',$Challans_ID)->first();
+            $challans_details=$challan->ChallanDetail;
+
+            // dd($challan,$challans_details,$request->admissionfeewaveoff);
+
+
+        if(empty($request->admissionfeewaveoff)){
+            return redirect()
+                ->back()
+                ->with([
+                    'errorToaster' => 'Addmision Wave off details Not Added!' , 
+                    'title' => 'Error'
+                ]);
+          }
+else{
+    
+          $submit = DB::Update("EXEC sp_UpdateChallansDetails
+
+
+            @Challans_ID ='$challans_details->Challans_ID',
+            @Tuition_Fee ='$challans_details->Tuition_Fee',
+            @Magazine_Fee ='$challans_details->Magazine_Fee',
+            @Exam_Fee ='$challans_details->Exam_Fee',
+            @Society_Fee ='$challans_details->Society_Fee',
+            @Misc_Fee ='$challans_details->Misc_Fee',
+            @Registration_Fee = 0 ,
+            @Practical_charges ='$challans_details->Practical_charges',
+            @Sports_Fund ='$challans_details->Sports_Fund',
+            @Admission_Fee_Waveoff_Details ='$request->admissionfeewaveoff'
+            
+
+          
+          ;");
+
+          if(!empty($submit)){
+            return redirect()
+                ->back()
+                ->with([
+                    'successToaster' => 'Addmision fee Wave off successfully!' , 
+                    'title' => 'Success'
+                ]);
+          }
+
+          else{
+            return redirect()
+                ->back()
+                ->with([
+                    'errorToaster' => 'Addmision Wave off Not Added try again!' , 
+                    'title' => 'Error'
+                ]);
+
+          }
+}
+
+
+          }
+
     
 }

@@ -18,7 +18,7 @@
                             <div class="card-header">
                                 <h4>{{ $title ?? '' }}</h4>
                             </div>
-                            <form id="myForm" action="{{ route('find.StudentChallan') ?? '' }}" method="POST"
+                            <form id="myForm" action="{{ route('find.StudentChallan') ?? '' }}" method="GET"
                                 enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="card-body">
@@ -132,13 +132,13 @@
                                     </span>
                                 </p>
                                 <!-- <p class="clearfix">
-                                   <span class="float-left">
-                                   Dgree
-                                   </span>
-                                   <span class="float-right text-muted">
-                                   {{ $student->Email ?? '--' }}
-                                   </span>
-                                   </p> -->
+                                                           <span class="float-left">
+                                                           Dgree
+                                                           </span>
+                                                           <span class="float-right text-muted">
+                                                           {{ $student->Email ?? '--' }}
+                                                           </span>
+                                                           </p> -->
                                 <p class="clearfix">
                                     <span class="float-left">
                                         Registration No
@@ -154,129 +154,146 @@
                 </div>
 
                 <div class="col-12 col-md-12 col-lg-8">
-                    <div class="card">
-                        <div class="padding-20">
-                            <ul class="nav nav-tabs" id="myTab2" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#about"
-                                        role="tab" aria-selected="true">Enrollments</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#settings" role="tab"
-                                        aria-selected="false">Exam/Igrade</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content tab-bordered" id="myTab3Content">
-                                <div class="card">
-                                    <div class="padding-20">
-                                        <ul class="nav nav-tabs" id="myTab2" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="home-tab2" data-toggle="tab"
-                                                    href="#about" role="tab" aria-selected="true">Enrollments</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#settings"
-                                                    role="tab" aria-selected="false">Exam/Igrade</a>
-                                            </li>
-                                        </ul>
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-datatable" id="sortable-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center">
-                                                            <i class="fas fa-th"></i>
-                                                        </th>
-                                                        <th>Student Name</th>
-                                                        <th>Issue Date</th>
-                                                        <th>Due Date</th>
-                                                        <th>Paid Date</th>
-                                                        <th>Status</th>
-                                                        <th>Fine</th>
-                                                        <th>Amount</th>
-                                                        <th>Type</th>
-                                                        <!-- <th>Status</th> -->
+                    <div class="card"></div>
+                    <div class="padding-20"></div>
 
-                                                        <th>Action</th>
+                    <div class="tab-content tab-bordered" id="myTab3Content">
+                        <div class="card">
+                            <div class="padding-20">
+                                <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#about"
+                                            role="tab" aria-selected="true">Student Challan</a>
+                                    </li>
+
+                                </ul>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-datatable" id="sortable-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    <i class="fas fa-th"></i>
+                                                </th>
+                                                <th>Student Name</th>
+                                                <th>Issue Date</th>
+                                                <th>Due Date</th>
+                                                <th>Paid Date</th>
+                                                <th>Status</th>
+                                                <th>Fine</th>
+                                                <th>Amount</th>
+                                                <th>Type</th>
+                                                <!-- <th>Status</th> -->
+
+                                                <th>Action</th>
+                                                <th>Admission Fee wave off deatils</th>
+                                                <th>Action</th>
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (!empty($challans))
+                                                @foreach ($challans as $challan)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="sort-handler">
+                                                                <i class="fas fa-th"></i>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{ $challan->registration->student->Std_FName ?? '--' }}
+                                                            {{ $challan->registration->student->Std_LName ?? '--' }}
+                                                        </td>
+                                                        <td>{{ $challan->IssueDate ?? '--' }}</td>
+                                                        <td>{{ $challan->DueDate ?? '--' }}</td>
+
+                                                        <form id="myForm"
+                                                            action="{{ route('approve.Challan') }}/{{ $challan->ID }}"
+                                                            method="post" enctype="multipart/form-data">
+                                                            {{ csrf_field() }}
+
+                                                            @if ($challan->Status === 'Valid')
+                                                                <td> <input type="date" name="paiddate" id="paiddate"
+                                                                        value="{{ old('paiddate') }}"
+                                                                        class="form-control" required>
+                                                                </td>
+
+                                                                <td>
+                                                                    <p class="badge badge-danger badge-shadow"
+                                                                        style="color:white;">
+                                                                        {{ $challan->Status ?? '--' }}
+                                                                    @else
+                                                                <td>{{ $challan->PaidDate ?? '--' }}</td>
+
+                                                                <td>
+                                                                    <p class="badge badge-success badge-shadow"
+                                                                        style="color:white;">
+                                                                        {{ $challan->Status ?? '--' }}
+                                                            @endif
+
+                                                            </p>
+                                                            </td>
+                                                            <td>{{ $challan->Fine ?? '--' }}</td>
+                                                            <td>{{ $challan->Amount ?? '--' }}</td>
+                                                            <td>{{ $challan->Type ?? '--' }}</td>
+                                                            <td> <a class="btn btn-primary "
+                                                                    href="{{ route('print.Challan') }}/{{ $challan->ID }}">Challan</a>
+                                                                @if (session()->has('Emp_session'))
+                                                                    <!-- only change id -->
+                                                                    @if ($challan->Status === 'Valid')
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary gt-data mt-1"
+                                                                            data-toggle="modal"
+                                                                            data-id="{{ $challan->ID }}"
+                                                                            data-target="#exampleModal"><i
+                                                                                class="far fa-edit"></i>
+                                                                            {{ 'Confirm' }}</button>
+                                                                    @endif
+                                                                    {{-- <a class="btn btn-primary far fa-edit mt-4"
+                                                                                href="{{ route('approve.Challan') }}/{{ $challan->ID }}/{{ $challan->PaidDate }}">Confirm</a> --}}
+                                                                @endif
+                                                            </td>
+                                                        </form>
+
+
+
+
+                                                            <form id="myForm"
+                                                                action="{{ route('admissionfeewaveoff.Challan') }}/{{ $challan->ID }}"
+                                                                method="post" enctype="multipart/form-data">
+                                                                {{ csrf_field() }}
+
+                                                                <td>
+                                                                    <textarea class="form-control" style="width: 200px;resize:none;" type="text"  name="admissionfeewaveoff" id="admissionfeewaveoff"
+                                                                        value="{{ old('admissionfeewaveoff') }}"  required >
+                                                                    </textarea>
+                                                                </td>
+
+                                                                <td> <button type="submit" class="btn btn-primary "
+                                                                        href="{{ route('admissionfeewaveoff.Challan') }}/{{ $challan->ID }}">Admission
+                                                                        fee wave off</button>
+
+                                                                </td>
+
+                                                            </form>
+                                                            
 
                                                     </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (!empty($challans))
-                                                        @foreach ($challans as $challan)
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="sort-handler">
-                                                                        <i class="fas fa-th"></i>
-                                                                    </div>
-                                                                </td>
-                                                                <td>{{ $challan->registration->student->Std_FName ?? '--' }}
-                                                                    {{ $challan->registration->student->Std_LName ?? '--' }}
-                                                                </td>
-                                                                <td>{{ $challan->IssueDate ?? '--' }}</td>
-                                                                <td>{{ $challan->DueDate ?? '--' }}</td>
-
-                                                                <form id="myForm"
-                                                                    action="{{ route('approve.Challan') }}/{{ $challan->ID }}"
-                                                                    method="post" enctype="multipart/form-data">
-                                                                    {{ csrf_field() }}
-
-                                                                    @if ($challan->Status === 'Valid')
-                                                                        <td> <input type="date" name="paiddate"
-                                                                                id="paiddate"
-                                                                                value="{{ old('paiddate') }}"
-                                                                                class="form-control" required>
-                                                                        </td>
-                                                                        
-                                                                    <td><p class="badge badge-danger badge-shadow" style="color:white;">
-                                                                        {{ $challan->Status ?? '--' }}
-                                                                     @else
-                                                                     <td>{{ $challan->PaidDate ?? '--' }}</td>
-
-                                                                     <td><p class="badge badge-success badge-shadow" style="color:white;">
-                                                                        {{ $challan->Status ?? '--' }}
-                                                                    @endif
-
-                                                                     </p>  </td>
-                                                                    <td>{{ $challan->Fine ?? '--' }}</td>
-                                                                    <td>{{ $challan->Amount ?? '--' }}</td>
-                                                                    <td>{{ $challan->Type ?? '--' }}</td>
-                                                                    <td> <a class="btn btn-primary "
-                                                                            href="{{ route('print.Challan') }}/{{ $challan->ID }}">Challan</a>
-                                                                        @if (session()->has('Emp_session'))
-                                                                            <!-- only change id -->
-                                                                            @if ($challan->Status === 'Valid')
-
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary gt-data mt-1"
-                                                                                data-toggle="modal"
-                                                                                data-id="{{ $challan->ID }}"
-                                                                                data-target="#exampleModal"><i
-                                                                                    class="far fa-edit"></i>
-                                                                                {{ 'Confirm' }}</button>
-
-                                                                                @endif
-                                                                            {{-- <a class="btn btn-primary far fa-edit mt-4"
-                                                                                href="{{ route('approve.Challan') }}/{{ $challan->ID }}/{{ $challan->PaidDate }}">Confirm</a> --}}
-                                                                        @endif
-                                                                    </td>
-
-                                                                </form>
-                                                            </tr>
-                                                        @endforeach
-                                                    @endif
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-
                 </div>
             </div>
-        </section>
+
+    </div>
+    </div>
+    </section>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -291,4 +308,6 @@
 
         $('.tb').toggle();
     </script>
+
+
 @endsection

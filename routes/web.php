@@ -86,13 +86,16 @@ Route::group(['middleware' => 'EmpAuth'], function () {
     //Student Challan
 Route::any('/studentChallan', [App\Http\Controllers\StudentController::class, 'studentChallan'])->name('student.Challan');
 
-Route::post('/findStudentChallan', [App\Http\Controllers\StudentController::class, 'findStudentChallan'])->name('find.StudentChallan');
+Route::get('/findStudentChallan', [App\Http\Controllers\StudentController::class, 'findStudentChallan'])->name('find.StudentChallan');
+
 
 Route::any('/student365View', [App\Http\Controllers\StudentController::class, 'student365View'])->name('student.365View');
 
 // Route::get('/printChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
 
 Route::post('/approveChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'approvechallan'])->name('approve.Challan');
+
+Route::post('/admissionFeeWaveOff/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'admissionfeewaveoff'])->name('admissionfeewaveoff.Challan');
 
 
 
