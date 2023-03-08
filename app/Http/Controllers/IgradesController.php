@@ -175,7 +175,7 @@ class IgradesController extends Controller
         $studentIgrade   = StudentIgrade::where('Status' , 'Hod')->select('Enroll_ID' , 'ID')->get();
         // dd($studentIgrade );
         $semCourse = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('ID')->toArray();
-        dd($semCourse);
+        // dd($semCourse);
 
         $enrollments     =  Enrollment::where(['SemCourses_ID' => $semCourse , 'ID' => $studentIgrade->pluck('Enroll_ID')->toArray()])->get();
 
@@ -188,7 +188,7 @@ class IgradesController extends Controller
         $modalTitle = 'Confirm Igrade';
 
         return
-        view('Igrades.teacherStdIgrade' ,
+        view('Igrades.HodStdIgrade' ,
             compact(
                 'enrollments' ,
                 'title' ,

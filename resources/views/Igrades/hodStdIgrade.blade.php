@@ -18,7 +18,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($enrollments as $key => $enrollment)
+                          @foreach($enrollments as $enrollment)
                           <tr>
                             <td>
                               <div class="sort-handler">
