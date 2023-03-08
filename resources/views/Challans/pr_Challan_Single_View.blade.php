@@ -88,7 +88,7 @@
                         Semester:
                     </div>
                     <div class="col-4" style="font-size:10px;">
-                        {{ $challan->Registration->Student->CurrentSemester}}
+                        {{ $challan->registration->student->AdmissionSession ?? '--'}}
                     </div>
                     <div class="col-3 font-weight-bold" style="font-size:10px;">
                         Due Date:
@@ -108,7 +108,7 @@
                         Degree:
                     </div>
                     <div class="col-2" style="font-size:10px;">
-                        {{ $challan->Registration->Student->DegreeName }}
+                        {{ $challan->registration->student->degree->DegreeName ?? '--' }}
                     </div>
                 </div>
             </td>
@@ -224,10 +224,10 @@
         <tr>
             <td>
                 <div class="row" style="font-size:10px;">
-                    <div class="col-6 text-left">Already Paid: 0.000000000</div>
-                    <div class="col-6 text-right">Pre.OutStandings:0.0000000 </div>
+                    <div class="col-6 text-left">Already Paid: 0.00</div>
+                    <div class="col-6 text-right">Pre.OutStandings:0.00</div>
                     <div class="col-6 text-left">Scholarship: {{ $challan->Scholarship ?? 0 }}  </div>
-                    <div class="col-6 text-right font-weight-bold"><span style="font-size:12px; border-style : solid;">Grand Total:{{ $totalamount - $challan->Scholarship  }}
+                    <div class="col-6 text-right font-weight-bold"><span style="font-size:12px; border-style : solid;">Grand Total:<span style="font-size:12px; font-weight: bold;">{{ $totalamount - $challan->Scholarship }}</span>
 
                         </span></div>
                     <div class="col-12 text-center">Rs.20/- per day to charged after due date</div>
