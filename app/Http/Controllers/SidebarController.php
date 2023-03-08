@@ -15,8 +15,12 @@ class SidebarController extends Controller
         
         $userRights['empDesignations'] = EmpDesignation::where('Emp_ID' , Session::get('ID'))->first();
 
+
         //foreach($empDesignations as $empDesignation){
-            //dd($empDesignations);
+            if(empty($userRights['empDesignations'])){
+                $userRights = "";
+                return $userRights;
+            }
            $userRights['rights'] = UserRight::where('Des_ID' , $userRights['empDesignations']->Des_ID)->get();
 
         //}
