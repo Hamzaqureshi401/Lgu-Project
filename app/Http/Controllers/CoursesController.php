@@ -216,7 +216,7 @@ class CoursesController extends Controller
         $button     = 'Submit';
         
        return 
-        view('View.courseOffering', 
+        view('Courses.courseOffering', 
             compact(
                 
                 'degrees',

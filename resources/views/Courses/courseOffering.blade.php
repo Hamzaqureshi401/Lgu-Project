@@ -39,7 +39,7 @@
          <div class="card">
             <div class="card-header">
                <h4>{{ $title }}</h4>
-               <div class="card-header-action">
+              <!--  <div class="card-header-action">
                   <form>
                      <div class="input-group">
                         <input type="text" class="search-inp form-control" id="myInputTextField" placeholder="Search">
@@ -48,11 +48,11 @@
                         </div>
                      </div>
                   </form>
-               </div>
+               </div> -->
             </div>
             <div class="card-body p-0">
                <div class="table-responsive">
-                  <table class="table table-striped table-datatable" id="sortable-table">
+                  <table class="table table-striped dataTable" id="sortable-table">
                      <thead>
                         <tr>
                            <th class="text-center">
