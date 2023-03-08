@@ -37,7 +37,15 @@
                     
                     <div class="form-group">
                       <label>Section</label>
-                      <input type="text" name="Section" class="form-control" maxlength="1" onkeydown="return /[a-z]/i.test(event.key)">
+                     
+
+                  <select class="form-control select2" name="Section"  >
+                   
+
+                    @foreach (range('A', 'Z') as $letter)
+                    <option value="{{ $letter }}">{{ $letter }} </option>
+                    @endforeach
+                  </select>
                     </div>
                     <div class="form-group">
                       <label>Course</label>
