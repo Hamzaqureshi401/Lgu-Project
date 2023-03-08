@@ -198,9 +198,9 @@ class CoursesController extends Controller
 
     ############################ Courses ###########################
 
-    public function courseOffering($degree = null , $batch = null){
+    public function courseOffering($selectedDegreeId = null , $batch = null){
 
-        $degreeBatches  = DegreeBatche::where(['Degree_ID' => $degree , 'Batch_ID' => $batch])->first();
+        $degreeBatches  = DegreeBatche::where(['Degree_ID' => $selectedDegreeId , 'Batch_ID' => $batch])->first();
         if(!empty($degreeBatches)){
             $semesterCourses = SemesterCourse::where('DegBatches_ID' , $degreeBatches->ID)->get();
         }else{
@@ -228,7 +228,9 @@ class CoursesController extends Controller
                 'modalTitle',
                 'button',
                 'degreeBatches',
-                'semesterCourses'
+                'semesterCourses',
+                'selectedDegreeId',
+                'batch'
             )    
             );
 

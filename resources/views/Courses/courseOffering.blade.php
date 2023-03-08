@@ -19,7 +19,7 @@
                   <label>Degree</label>
                   <select class="form-control select2" id="degree" name="Degree_ID"  required>
                      @foreach($degrees as $degree)
-                     <option value="{{ $degree->ID }}">{{ $degree->DegreeName }}</option>
+                     <option value="{{ $degree->ID }}" @if($degree->ID == $selectedDegreeId) selected @endif>{{ $degree->DegreeName }}</option>
                      @endforeach
                   </select>
                </div>
@@ -27,7 +27,7 @@
                   <label>Batch</label>
                   <select class="form-control select2" id="batch" name="Batch_ID"  required>
                      @foreach($semesters as $semester)
-                     <option value="{{ $semester->ID }}">{{ $semester->SemSession }}</option>
+                     <option value="{{ $semester->ID }}" @if($semester->ID == $batch) selected @endif>{{ $semester->SemSession }}</option>
                      @endforeach
                   </select>
                </div>
