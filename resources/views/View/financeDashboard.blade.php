@@ -237,7 +237,7 @@
                                         </thead>
                                         @foreach ($days as $key => $day)
                                             <tr>
-                                                <td>{{ date('l, F j, Y', strtotime($day)) }}</td>
+                                                <td>{{ date('jS F l Y', strtotime($day)) }}</td>
                                                 <td>{{ $newStdAdmission[$key] }}</td>
                                                 <td></td>
                                                 <td></td>
@@ -276,7 +276,7 @@
                                         <tbody>
                                             @foreach ($days as $key => $day)
                                                 <tr>
-                                                    <td>{{ date('l, F j, Y', strtotime($day)) }}</td>
+                                                    <td>{{ date('jS F l Y', strtotime($day)) }}</td>
                                                     <td>{{ $regularAtdAmount[$key] }}</td>
                                                     <td></td>
                                                     <td></td>
