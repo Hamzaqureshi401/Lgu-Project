@@ -47,15 +47,11 @@ class ChallanController extends Controller
     }
 
     public function printChallan($Challans_ID){
-
-
-        
        
         $challan = Challan::where('ID',$Challans_ID)->first();
 
         $std_sch_details=$challan->registration->student->std_scholarship;
         $challan_deta=$challan->ChallanDetail;
-
 
         if(!empty($std_sch_details)){
             $std_sch_details=$challan->registration->student->std_scholarship->latest('Date')->first();
@@ -65,104 +61,43 @@ class ChallanController extends Controller
                 if($std_sch_details['Scholarship_Type']==='Percentage')
                 {
                     $std_sch_amount=($std_sch_details['Percentage']/100)*$challan_deta->Tuition_Fee ?? 0;
-                    $submit       = DB::Update("EXEC sp_UpdateChallans
-
-                    @ID             = '$challan->ID',
-                    @IssueDate      = '$challan->IssueDate',
-                    @DueDate        = '$challan->DueDate',
-                    @PaidDate       = '$challan->PaidDate',
-                    @Status         = '$challan->Status',
-                    @Fine           = '$challan->Fine',
-                    @Amount         = '$challan->Amount',
-                    @Type           = '$challan->Type',
-                    @Sem_ID         = '$challan->Sem_ID',
-                    @Reg_ID         = '$challan->Reg_ID',
-                    @SchlorShip     = '$std_sch_amount',
-                    @Sch_Type       = '$std_sch_details->Scholarship_Type'
-
-
-                    
-                    ;
-                ");
-                
-
-                    // dd($std_sch_amount);
-                    
                 }
                 if($std_sch_details['Scholarship_Type']==='Fixed')
                 {
                     $std_sch_amount=$std_sch_details['Percentage'] ?? 0;
-
-                    
-
-                    $submit       = DB::Update("EXEC sp_UpdateChallans
-
-                    @ID             = '$challan->ID',
-                    @IssueDate      = '$challan->IssueDate',
-                    @DueDate        = '$challan->DueDate',
-                    @PaidDate       = '$challan->PaidDate',
-                    @Status         = '$challan->Status',
-                    @Fine           = '$challan->Fine',
-                    @Amount         = '$challan->Amount',
-                    @Type           = '$challan->Type',
-                    @Sem_ID         = '$challan->Sem_ID',
-                    @Reg_ID         = '$challan->Reg_ID',
-                    @SchlorShip    = '$std_sch_amount',
-                    @Sch_Type       = '$std_sch_details->Scholarship_Type'
-
-
-                    
-                    ;
-                ");
-                    // dd($std_sch_amount);
-
                 }
+                $submit=$this->Updatescholarship($std_sch_details,$challan,$std_sch_amount);
+
+
             }
-        
-        // }
-                
-
-
-
-
-// $dompdf = new Dompdf($options);
-// $table = ;
-// $dompdf->load_html($table);
-// $dompdf->set_paper('A4', 'landscape');
-// $dompdf->render();
-// $dompdf->output();
-
-
-
-       // view()->share('challan',$challan);
-       //  $pdf = PDF::loadView('Challans.printChallan');
-       //  $pdf->setPaper('A4', 'portrait');
-        // $pdf = PDF::loadView('Challans.printChallan' , compact('challan') );
-       //   return $pdf->download('invoice.pdf');
-
-       //  PDF::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
-       // $dompdf = new Dompdf();
-       // $html = view('Challans.printChallan' , compact('challan'))->render();
-       // $dompdf->loadHtml($html);
-       // $dompdf->render();
-
-       // return $dompdf->download('card.pdf');
-
-        //dd($challan);
 
         $challan = Challan::where('ID',$Challans_ID)->first();
-
         $std_sch_details=$challan->registration->student->std_scholarship;
         $challan_deta=$challan->ChallanDetail;
-
         // dd($std_sch_details,$challan,$challan_deta,$std_sch_amount);
-
        return
         view('Challans.printChallan' , compact('challan'));
     }
 
+    function Updatescholarship($std_sch_details,$challan,$std_sch_amount){
+                
+        $submit       = DB::Update("EXEC sp_UpdateChallans
+        @ID             = '$challan->ID',
+        @IssueDate      = '$challan->IssueDate',
+        @DueDate        = '$challan->DueDate',
+        @PaidDate       = '$challan->PaidDate',
+        @Status         = '$challan->Status',
+        @Fine           = '$challan->Fine',
+        @Amount         = '$challan->Amount',
+        @Type           = '$challan->Type',
+        @Sem_ID         = '$challan->Sem_ID',
+        @Reg_ID         = '$challan->Reg_ID',
+        @SchlorShip     = '$std_sch_amount',
+        @Sch_Type       = '$std_sch_details->Scholarship_Type'
+        ;");
+        return $submit;
+    }
     public function getSessionData(){
-
         return session::all();
     }
 
@@ -175,7 +110,6 @@ class ChallanController extends Controller
             $std_sch_type
 
     ){
-
         $IssueDate  = date('m/d/Y h:i:s a', time());
         $DueDate    = Date('m/d/Y', strtotime('+10 days'));
         $PaidDate   = "";
@@ -183,8 +117,6 @@ class ChallanController extends Controller
         $Fine       = 0;
 
        // dd($Reg);
-        
-
          $submit = DB::statement("EXEC sp_InsertChallans
             
             @IssueDate             = '$IssueDate',
@@ -202,8 +134,6 @@ class ChallanController extends Controller
 
         // return Challan::where(['DueDate' => $IssueDate , 'Reg_ID' => 30021 , 'Sem_ID' =>  $Sem_ID])->first();
          return Challan::latest('ID')->first();
-
-
     }
 
     public function createChallanDetail(
@@ -220,7 +150,6 @@ class ChallanController extends Controller
         // $FeeType,
          $Tuition_Fee
     ){
-
          $submit = DB::statement("EXEC sp_InsertChallanDetails
             
             @Challans_ID             = '$Challans_ID',
@@ -235,12 +164,8 @@ class ChallanController extends Controller
             @Tuition_Fee             = '$Tuition_Fee'
             
             ;");
-
-
     }
 
-
-    
     public function approvechallan(Request $request,$Challans_ID){
 
         $challan= Challan::where('ID', $Challans_ID);
@@ -261,6 +186,69 @@ class ChallanController extends Controller
                   ) 
                   
                      );
+          }
+
+
+
+
+          public function admissionfeewaveoff(Request $request,$Challans_ID)
+          {
+            
+            $challan = Challan::where('ID',$Challans_ID)->first();
+            $challans_details=$challan->ChallanDetail;
+
+            // dd($challan,$challans_details,$request->admissionfeewaveoff);
+
+
+        if(empty($request->admissionfeewaveoff)){
+            return redirect()
+                ->back()
+                ->with([
+                    'errorToaster' => 'Addmision Wave off details Not Added!' , 
+                    'title' => 'Error'
+                ]);
+          }
+else{
+    
+          $submit = DB::Update("EXEC sp_UpdateChallansDetails
+
+
+            @Challans_ID ='$challans_details->Challans_ID',
+            @Tuition_Fee ='$challans_details->Tuition_Fee',
+            @Magazine_Fee ='$challans_details->Magazine_Fee',
+            @Exam_Fee ='$challans_details->Exam_Fee',
+            @Society_Fee ='$challans_details->Society_Fee',
+            @Misc_Fee ='$challans_details->Misc_Fee',
+            @Registration_Fee = 0 ,
+            @Practical_charges ='$challans_details->Practical_charges',
+            @Sports_Fund ='$challans_details->Sports_Fund',
+            @Admission_Fee_Waveoff_Details ='$request->admissionfeewaveoff'
+            
+
+          
+          ;");
+
+          if(!empty($submit)){
+            return redirect()
+                ->back()
+                ->with([
+                    'successToaster' => 'Addmision fee Wave off successfully!' , 
+                    'title' => 'Success'
+                ]);
+          }
+
+          else{
+            return redirect()
+                ->back()
+                ->with([
+                    'errorToaster' => 'Addmision Wave off Not Added try again!' , 
+                    'title' => 'Error'
+                ]);
+
+          }
+}
+
+
           }
 
     

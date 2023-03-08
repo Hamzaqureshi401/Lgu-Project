@@ -237,7 +237,7 @@ class CoursesController extends Controller
 
     public function courseAssign($id , $SemCourse_ID){
 
-        $button = 'Do You Wisht To Submit?';
+        $button = 'Do You Wish To Submit?';
         $courses = Course::where('ID' , $id)->first();
         $employees      = Employee::get();
         $route  = '/storeTimeTable';

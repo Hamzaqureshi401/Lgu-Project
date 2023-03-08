@@ -86,13 +86,16 @@ Route::group(['middleware' => 'EmpAuth'], function () {
     //Student Challan
 Route::any('/studentChallan', [App\Http\Controllers\StudentController::class, 'studentChallan'])->name('student.Challan');
 
-Route::post('/findStudentChallan', [App\Http\Controllers\StudentController::class, 'findStudentChallan'])->name('find.StudentChallan');
+Route::get('/findStudentChallan', [App\Http\Controllers\StudentController::class, 'findStudentChallan'])->name('find.StudentChallan');
+
 
 Route::any('/student365View', [App\Http\Controllers\StudentController::class, 'student365View'])->name('student.365View');
 
 // Route::get('/printChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
 
 Route::post('/approveChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'approvechallan'])->name('approve.Challan');
+
+Route::post('/admissionFeeWaveOff/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'admissionfeewaveoff'])->name('admissionfeewaveoff.Challan');
 
 
 
@@ -107,6 +110,7 @@ Route::get('/allEnrollments', [App\Http\Controllers\EnrollmentsController::class
 Route::get('/confirmIgradesTeacher/{id?}', [App\Http\Controllers\IgradesController::class, 'confirmIgradesTeacher'])->name('confirm.Igrades.Teacher');
 
 Route::get('/teacherStdIgrade', [App\Http\Controllers\IgradesController::class, 'teacherStdIgrade'])->name('teacher.Std.Igrade');
+Route::get('/HodStdIgrade', [App\Http\Controllers\IgradesController::class, 'HodStdIgrade']);
 
 Route::get('/addStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'addStudentAdmission'])->name('add.StudentAdmissions');
 Route::get('/allStudentAdmissions', [App\Http\Controllers\AdmissionController::class, 'allStudentAdmissions'])->name('all.StudentAdmissions');
