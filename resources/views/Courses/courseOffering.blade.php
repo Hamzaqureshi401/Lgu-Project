@@ -19,7 +19,7 @@
                   <label>Degree</label>
                   <select class="form-control select2" id="degree" name="Degree_ID"  required>
                      @foreach($degrees as $degree)
-                     <option value="{{ $degree->ID }}">{{ $degree->DegreeName }}</option>
+                     <option value="{{ $degree->ID }}" @if($degree->ID == $selectedDegreeId) selected @endif>{{ $degree->DegreeName }}</option>
                      @endforeach
                   </select>
                </div>
@@ -27,7 +27,7 @@
                   <label>Batch</label>
                   <select class="form-control select2" id="batch" name="Batch_ID"  required>
                      @foreach($semesters as $semester)
-                     <option value="{{ $semester->ID }}">{{ $semester->SemSession }}</option>
+                     <option value="{{ $semester->ID }}" @if($semester->ID == $batch) selected @endif>{{ $semester->SemSession }}</option>
                      @endforeach
                   </select>
                </div>
@@ -39,7 +39,7 @@
          <div class="card">
             <div class="card-header">
                <h4>{{ $title }}</h4>
-               <div class="card-header-action">
+              <!--  <div class="card-header-action">
                   <form>
                      <div class="input-group">
                         <input type="text" class="search-inp form-control" id="myInputTextField" placeholder="Search">
@@ -48,11 +48,11 @@
                         </div>
                      </div>
                   </form>
-               </div>
+               </div> -->
             </div>
             <div class="card-body p-0">
                <div class="table-responsive">
-                  <table class="table table-striped table-datatable" id="sortable-table">
+                  <table class="table table-striped dataTable" id="sortable-table">
                      <thead>
                         <tr>
                            <th class="text-center">

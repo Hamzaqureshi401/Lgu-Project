@@ -198,9 +198,9 @@ class CoursesController extends Controller
 
     ############################ Courses ###########################
 
-    public function courseOffering($degree = null , $batch = null){
+    public function courseOffering($selectedDegreeId = null , $batch = null){
 
-        $degreeBatches  = DegreeBatche::where(['Degree_ID' => $degree , 'Batch_ID' => $batch])->first();
+        $degreeBatches  = DegreeBatche::where(['Degree_ID' => $selectedDegreeId , 'Batch_ID' => $batch])->first();
         if(!empty($degreeBatches)){
             $semesterCourses = SemesterCourse::where('DegBatches_ID' , $degreeBatches->ID)->get();
         }else{
@@ -216,7 +216,7 @@ class CoursesController extends Controller
         $button     = 'Submit';
         
        return 
-        view('View.courseOffering', 
+        view('Courses.courseOffering', 
             compact(
                 
                 'degrees',
@@ -228,7 +228,9 @@ class CoursesController extends Controller
                 'modalTitle',
                 'button',
                 'degreeBatches',
-                'semesterCourses'
+                'semesterCourses',
+                'selectedDegreeId',
+                'batch'
             )    
             );
 
@@ -237,7 +239,7 @@ class CoursesController extends Controller
 
     public function courseAssign($id , $SemCourse_ID){
 
-        $button = 'Do You Wisht To Submit?';
+        $button = 'Do You Wish To Submit?';
         $courses = Course::where('ID' , $id)->first();
         $employees      = Employee::get();
         $route  = '/storeTimeTable';
