@@ -163,9 +163,7 @@ class EnrollmentsController extends Controller
         }else{
             $request['Enrollment_ID'] = $enrollment->first()->ID;
             $this->deleteEnrollmen($request['Enrollment_ID']);
-            
         }
-
         $enrollments = Enrollment::where('Std_ID' , $request['Std_ID'])->get();
         return redirect()->route('add.Enrollment');
 
@@ -298,7 +296,6 @@ class EnrollmentsController extends Controller
 
         if($type == "error"){
             return redirect()->back()->with(['errorToaster' => 'Conformation Faild Semester deatils not found !' , 'title' => 'Error']);
-
         }
         foreach($enrollments as $id){
         $submit = DB::statement("EXEC sp_UpdateEnrollment

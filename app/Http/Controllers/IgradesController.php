@@ -129,10 +129,10 @@ class IgradesController extends Controller
        $studentIgrade   = StudentIgrade::where('Status' , 'Teacher')->select('Enroll_ID' , 'ID')->get();
       
        $semCourse       = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('ID')->toArray();
-       dd($studentIgrade , SemesterCourse::where('ID' , 10017)->first()->course->CourseName , $semCourse);
+       //dd($studentIgrade , SemesterCourse::where('ID' , 10017)->first()->course->CourseName , $semCourse);
     
-       $enrollments     =  Enrollment::where(['SemCourses_ID' => $semCourse , 
-       'ID' => $studentIgrade->pluck('Enroll_ID')->toArray()])->get();  
+       $enrollments     =  Enrollment::whereIn('SemCourses_ID' ,  $semCourse)->whereIn( 
+       'ID' , $studentIgrade->pluck('Enroll_ID')->toArray())->get();  
        
        $igArr = $studentIgrade->pluck('ID')->toArray();    
         $title  = 'All Igrades';
