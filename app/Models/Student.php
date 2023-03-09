@@ -23,5 +23,9 @@ class Student extends Model
   public function std_scholarship(){
    return $this->belongsTo('App\Models\StdScholarShip','ID','Std_ID');
 }
+
+ public function batch(){
+        return $this->belongsTo('App\Models\Semester', 'AdmissionSession' , 'SemSession');
+    }
    
 }

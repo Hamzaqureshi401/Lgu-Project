@@ -7,6 +7,7 @@ use App\Models\Enrollment;
 use App\Models\Registration;
 use App\Models\Challan;
 use App\Models\Semester;
+use App\Models\Student;
 use App\Models\Degree;
 use App\Models\DegreeBatche;
 use App\Models\SemesterDetail;
@@ -54,8 +55,10 @@ class EnrollmentsController extends Controller
 
         $session            = $this->getSessionData();    
         $request['Std_ID']  = $session['std_ID'];
-        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['Std']->Degree_ID , 'Batch_ID' => $session['sem_ID']])->first();
-
+        $student = Student::where('ID' , $session['std_ID'])->first();
+        
+        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $student->batch->ID])->first();
+       
         // dd($session['Std'],$session['sem_ID']);
         // dd($DegreeBatche);
 
@@ -64,7 +67,8 @@ class EnrollmentsController extends Controller
         }
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
-        $semesterCourses    = SemesterCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Sem_ID' => $session['sem_ID']])->get();
+        $semesterCourses    = SemesterCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Sem_ID' => $student->batch->ID , 'Section' => $student->ClassSection])->get();
+        // dd($student , $DegreeBatche , $semesterCourses->first()->semester->SemSession);
         $getEnrollment      = Enrollment::where(['Std_ID' => $request['Std_ID'] ]);
         $enrollmentsArray   = SemesterCourse::whereNotIn('ID' ,  $getEnrollment->pluck('SemCourses_ID')->toArray())->pluck('ID')->toArray();
          $enrollments       = $getEnrollment->get();
