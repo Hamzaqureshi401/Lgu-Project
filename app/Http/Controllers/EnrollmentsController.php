@@ -142,11 +142,8 @@ class EnrollmentsController extends Controller
      public function storeEnrollment($id){
         $session           = $this->getSessionData();   
         $request['Std_ID'] = $session['std_ID'];
-
         $SemesterCourse     = SemesterCourse::where('ID' , $id)->first();
         $Sem_ID             = $SemesterCourse->Sem_ID;
-        
-
         $request['AcaStdID']        = 6;// if first time enrollment defualt is 6 
         $request['Sem_ID']          = $session['sem_ID'];
         $request['SemCourses_ID']   = $id;
@@ -193,20 +190,16 @@ class EnrollmentsController extends Controller
         }else{
             $Tuition_Fee = $sem_details->Tuition_Fee;
         }
-        
         $IssueDate  = date('m/d/Y h:i:s a', time());
         $DueDate    = Date('m/d/Y', strtotime('+10 days'));
         $PaidDate   = "";
         $Status     = "Valid";
-        $Fine       = 0;
-        
+        $Fine       = 0;  
         if($sem_details->FeeType === 'Per Course'){
             $amount     = $totalCreditHours * $Tuition_Fee;
         }else{
             $amount     = $Tuition_Fee;
         }
-       
-
         if(!empty($std_sch_details)){
             if($std_sch_details['Scholarship_Type']==='Percentage'){
                 $std_sch_amount=($std_sch_details['Percentage']/100)*$sem_details->Tuition_Fee ?? 0;
@@ -214,7 +207,6 @@ class EnrollmentsController extends Controller
             if($std_sch_details['Scholarship_Type']==='Fixed'){
                 $std_sch_amount=$std_sch_details['Percentage'] ?? 0;
             }
-
         }
         else{
             $std_sch_amount=0;
@@ -263,8 +255,6 @@ class EnrollmentsController extends Controller
         // $FeeType,
         $amount
     );
-        
-
          return 'Success';
     }
 
