@@ -18,7 +18,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($enrollments as $enrollment)
+                          @foreach($enrollments as $key =>$enrollment)
                           <tr>
                             <td>
                               <div class="sort-handler">
@@ -31,19 +31,7 @@
                             <td>{{ $enrollment->semesterCourse->course->LectureType  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
-
-
-
-
-                                
-                                
                                 <a href="{{ route('confirm.Igrades.Teacher' , $igArr[$key]) }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
-                               
-                               
-
-                              
-
-                                
                               </div>
                             </td>
                           </tr>

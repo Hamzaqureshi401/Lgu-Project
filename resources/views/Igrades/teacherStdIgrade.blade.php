@@ -19,6 +19,7 @@
                         </thead>
                         <tbody>
                           @foreach($enrollments as $key => $enrollment)
+                          @if($enrollment->igrade->Status == 'Teacher')
                           <tr>
                             <td>
                               <div class="sort-handler">
@@ -37,7 +38,7 @@
 
                                 
                                 
-                                <a href="{{ route('confirm.Igrades.Teacher' , $igArr[$key]) }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                <a href="{{ route('confirm.Igrades.Teacher' , $enrollment->igrade->ID) }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                                
                                
 
@@ -47,6 +48,7 @@
                               </div>
                             </td>
                           </tr>
+                          @endif
                            @endforeach
                         </tbody>
                       </table>

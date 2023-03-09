@@ -133,6 +133,7 @@ class IgradesController extends Controller
     
        $enrollments     =  Enrollment::whereIn('SemCourses_ID' ,  $semCourse)->whereIn( 
        'ID' , $studentIgrade->pluck('Enroll_ID')->toArray())->get();  
+
        
        $igArr = $studentIgrade->pluck('ID')->toArray();    
         $title  = 'All Igrades';
@@ -156,7 +157,6 @@ class IgradesController extends Controller
 
          StudentIgrade::where('ID' , $id)->update(['Status' => 'Hod']);
         
-
         return redirect()->back()->with(['successToaster' => 'Igrade Confirmed' , 'title' => 'Success']);
 
     }
@@ -171,21 +171,23 @@ class IgradesController extends Controller
 
     }
     
-    public function HodStdIgrade()
-    {
-        $studentIgrade   = StudentIgrade::where('Status' , 'Hod')->select('Enroll_ID' , 'ID')->get();
-        // dd($studentIgrade );
-        $semCourse = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('ID')->toArray();
-        // dd($semCourse);
+    public function HodStdIgrade(){
 
-        $enrollments     =  Enrollment::where(['SemCourses_ID' => $semCourse , 'ID' => $studentIgrade->pluck('Enroll_ID')->toArray()])->get();
+        // $a = Enrollment::join('semesterCourses' , 'semesterCourses.ID' , 'Enrollments.SemCourses_ID')->where('Emp_ID' , Session::get('ID'))->pluck('Enrollments.ID')->toArray();
+        // dd($semCourse , $enrollments , $a);
+       //$enrollments =  Enrollment::where(['ID' => $studentIgrade])->get();
 
-        // dd($enrollments );
-
-        $igArr = $studentIgrade->pluck('ID')->toArray();    
+       $studentIgrade   = StudentIgrade::where('Status' , 'Hod')->select('Enroll_ID' , 'ID')->get();
+       $semCourse       = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('ID')->toArray();
+       //dd($studentIgrade , SemesterCourse::where('ID' , 10017)->first()->course->CourseName , $semCourse);
+    
+       $enrollments     =  Enrollment::whereIn('SemCourses_ID' ,  $semCourse)->whereIn( 
+       'ID' , $studentIgrade->pluck('Enroll_ID')->toArray())->get();  
+       
+       $igArr = $studentIgrade->pluck('ID')->toArray();    
         $title  = 'All Igrades';
-        $route = 'confirmIgradesTeacher/';
-        $getEditRoute = 'confirmIgradesTeacher';
+        $route = 'confirmIgradesHod/';
+        $getEditRoute = 'confirmIgradesHod';
         $modalTitle = 'Confirm Igrade';
 
         return
@@ -195,7 +197,7 @@ class IgradesController extends Controller
                 'title' ,
                 'modalTitle' ,
                 'route',
-                'getEditRoute',
+                'getEditRoute',  
                 'igArr'
             ));
     }

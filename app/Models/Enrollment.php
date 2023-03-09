@@ -21,4 +21,7 @@ class Enrollment extends Model
     public function att(){
         return $this->belongsTo('App\Models\Attendance' , 'Enroll_ID');
     }
+    public function igrade(){
+        return $this->belongsTo('App\Models\StudentIgrade' ,'ID' , 'Enroll_ID');
+    }
 }
