@@ -30,45 +30,17 @@ class EnrollmentsController extends Controller
         return session::all();
     }
 
-   
-
     public function addEnrollment(){
-
-        
-        // $a = Enrollment::get();
-        // foreach($a as $b){
-        //     Enrollment::where('ID' , $b->ID)->delete();
-        // }
-        // $a = Challan::get();
-        // foreach($a as $b){
-        //     Challan::where('ID' , $b->ID)->delete();
-        // }
-        //  $a = Registration::get();
-        // foreach($a as $b){
-        //     Registration::where('ID' , $b->ID)->delete();
-        // }
-         
-        // dd(1);
-      
-        //dd(session::all());
-
-
         $session            = $this->getSessionData();    
         $request['Std_ID']  = $session['std_ID'];
         $student = Student::where('ID' , $session['std_ID'])->first();
-        
         $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $student->batch->ID])->first();
-       
-        // dd($session['Std'],$session['sem_ID']);
-        // dd($DegreeBatche);
-
         if(empty($DegreeBatche)){
             return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Warning']);
         }
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
         $semesterCourses    = SemesterCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Sem_ID' => $student->batch->ID , 'Section' => $student->ClassSection])->get();
-        // dd($student , $DegreeBatche , $semesterCourses->first()->semester->SemSession);
         $getEnrollment      = Enrollment::where(['Std_ID' => $request['Std_ID'] ]);
         $enrollmentsArray   = SemesterCourse::whereNotIn('ID' ,  $getEnrollment->pluck('SemCourses_ID')->toArray())->pluck('ID')->toArray();
          $enrollments       = $getEnrollment->get();
@@ -165,7 +137,6 @@ class EnrollmentsController extends Controller
         else{
             return redirect()->back()->with('success1', 'Course Dropped');
         }
-   
 
     }
      public function storeEnrollment($id){
@@ -205,35 +176,16 @@ class EnrollmentsController extends Controller
 
     public function createChallan(){
 
-        
-         
          $session           = $this->getSessionData();   
          $request['Std_ID'] = $session['std_ID'];
          $Std_ID            = $request['Std_ID'];
          $degreeName        = explode('/' , session::get('user'));
          $registration      = Registration::where('Std_ID' , $request['Std_ID'])->first();
-         $std_sch_details=StdScholarShip::where('Std_ID' , $request['Std_ID'])->first();
-
-        //  dd($std_sch_details);
-
+         $std_sch_details   = StdScholarShip::where('Std_ID' , $request['Std_ID'])->first();
          $Sem_ID = $registration->Sem_ID;
           $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
          $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'DegBatches_ID' => $DegreeBatche->ID])->first();
-        // dd($sem_details , $Sem_ID , $DegreeBatche->ID , $request['Std_ID'] , $registration);
         $registrationId = $registration->ID;
-        
-        
-
-
-
-
-        //  if(empty($sem_details))
-        // {
-        //     return "error";
-        // }
-        
-
-
        
         $totalCreditHours = $this->getTotalCreditHours($request);
         if(empty($sem_details)){
@@ -247,7 +199,6 @@ class EnrollmentsController extends Controller
         $PaidDate   = "";
         $Status     = "Valid";
         $Fine       = 0;
-        // dd($sem_details);
         
         if($sem_details->FeeType === 'Per Course'){
             $amount     = $totalCreditHours * $Tuition_Fee;
@@ -256,16 +207,11 @@ class EnrollmentsController extends Controller
         }
        
 
-        if(!empty($std_sch_details))
-        {
-            if($std_sch_details['Scholarship_Type']==='Percentage')
-            {
-                
+        if(!empty($std_sch_details)){
+            if($std_sch_details['Scholarship_Type']==='Percentage'){
                 $std_sch_amount=($std_sch_details['Percentage']/100)*$sem_details->Tuition_Fee ?? 0;
-                
             }
-            if($std_sch_details['Scholarship_Type']==='Fixed')
-            {
+            if($std_sch_details['Scholarship_Type']==='Fixed'){
                 $std_sch_amount=$std_sch_details['Percentage'] ?? 0;
             }
 
@@ -273,10 +219,7 @@ class EnrollmentsController extends Controller
         else{
             $std_sch_amount=0;
         }
-
-        // dd($std_sch_amount);
-
-       $tAmount =  $amount 
+        $tAmount =  $amount 
         +
         $sem_details->Magazine_Fee
         +
@@ -291,9 +234,6 @@ class EnrollmentsController extends Controller
         $sem_details->Practical_charges
         +
         $sem_details->Sports_Fund;
-
-    //    dd($tAmount , $std_sch_amount);
-
         
   
         $std_sch_type=$std_sch_details['Scholarship_Type'] ?? '';
@@ -324,20 +264,6 @@ class EnrollmentsController extends Controller
         $amount
     );
         
-        
-
-         // $submit = DB::statement("EXEC sp_InsertChallans
-            
-         //    @IssueDate             = '$IssueDate',
-         //    @DueDate               = '$DueDate',
-         //    @PaidDate              = '$PaidDate',
-         //    @Status                = '$Status',
-         //    @Fine                  = '$Fine',
-         //    @Amount                = '$Amount',
-         //    @Type                  = '$Type',
-         //    @Reg_ID                = '$registrationId',
-         //    @Sem_ID                = '$Sem_ID'
-         //    ;");
 
          return 'Success';
     }
@@ -392,46 +318,9 @@ class EnrollmentsController extends Controller
         return redirect()->back()->with(['successToaster' => 'Enrollment Confirmed' , 'title' => 'Success']);
     }
 
-     public function addEnrollments(){
+    
 
-
-        $semesterCourses = SemesterCourse::get();
-        $enrollments = 
-        Enrollment::where(['Std_ID' => 1 ])->whereIn('SemCourses_ID' , SemesterCourse::pluck('id')->toArray())->pluck('SemCourses_ID')->toArray();
-        $button = "Add Enrollment";
-        $title  = 'Add Enrollment';
-        $route  = '/storeEnrollments';
-        return
-        view('Enrollments.addEnrollments',
-            compact(
-                'button' ,
-                'title' ,
-                'route',
-                'semesterCourses',
-                'enrollments'
-            )
-        );
-    }
-
-    public function allEnrollments(){
-
-        $enrollments = Enrollment::paginate(10);
-        $title  = 'All Enrollments';
-        $route = 'updateEnrollment';
-        $getEditRoute = 'editEnrollment';
-        $modalTitle = 'Edit Enrollment';
-
-
-        return
-            view('Enrollments.allEnrollments' ,
-               compact(
-                  'enrollments' ,
-                  'title',
-                  'route',
-                  'modalTitle',
-                  'getEditRoute'
-               ));
-    }
+   
 
  
 }
