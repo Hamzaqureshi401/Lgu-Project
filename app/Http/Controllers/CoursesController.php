@@ -7,10 +7,12 @@ use App\Models\Degree;
 use App\Models\Semester;
 use App\Models\SemesterCourse;
 use App\Models\Employee;
+use App\Models\TimeTable;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use Session;
 
 class CoursesController extends Controller
 {
@@ -208,6 +210,10 @@ class CoursesController extends Controller
         }
        $degrees      =  Degree::get();
        $semesters    =  semester::get();
+
+     // dd(Session::get('ID'));
+
+       $timeTables = TimeTable::where('Emp_ID' , Session::get('ID'))->get();
       
         $title      = 'All Courses';
         $route      = 'courseOffering/';
@@ -230,7 +236,8 @@ class CoursesController extends Controller
                 'degreeBatches',
                 'semesterCourses',
                 'selectedDegreeId',
-                'batch'
+                'batch',
+                'timeTables'
             )    
             );
 
@@ -282,5 +289,8 @@ class CoursesController extends Controller
               
             ));
 
+    }
+    public function deleteTimeTable($id){
+        dd($id);
     }
 }

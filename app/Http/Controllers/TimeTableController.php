@@ -73,7 +73,7 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
-         //dd($request->all());
+         dd($request->all());
 
       //$validator = $this->validation($request);
 
@@ -104,6 +104,7 @@ class TimeTableController extends Controller
 
 
     }
+
 
     public function editTimeTable($id){
 
@@ -179,4 +180,9 @@ class TimeTableController extends Controller
     return redirect()->back()->with(['successToaster' => 'TimeTable Updated' , 'title' => 'Success']);
 
     }
+     public function deleteTimeTable($id){
+        TimeTable::where('ID' , $id)->delete();
+         return redirect()->back()->with(['successToaster' => 'TimeTable Deleted' , 'title' => 'Success']);
+    }
+
 }
