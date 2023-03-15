@@ -163,8 +163,9 @@ class IgradesController extends Controller
 
     }
     public function confirmIgradesHod($id){
-
+        // dd($id);
         StudentIgrade::where('ID' , $id)->update(['Status' => 'Dean']);
+        return redirect()->back()->with(['successToaster' => 'Igrade Confirmed' , 'title' => 'Success']);
 
     }
     public function confirmIgradesDean($id){
@@ -175,15 +176,8 @@ class IgradesController extends Controller
     
     public function hodStdIgrade(){
 
-      
-
        $studentIgrades   = StudentIgrade::where('Status' , 'Hod')->get();
        $empDepartment   = Department::where('HODUID' , Session::get('ID'))->first();
-
-
-       
-       
-        
         $title  = 'All Igrades';
         $route = 'confirmIgradesHod/';
         $getEditRoute = 'confirmIgradesHod';
