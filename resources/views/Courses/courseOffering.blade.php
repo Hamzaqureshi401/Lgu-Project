@@ -12,7 +12,7 @@
       <div class="col-6 col-md-12 col-lg-12">
          <div class="card">
             <div class="card-header">
-               <h4>{{ $title ?? '' }}</h4>
+               <h4>{{ 'Select Degree And Batch To Assign Course' ?? '' }}</h4>
             </div>
             <div class="card-body">
                <div class="form-group">
@@ -60,8 +60,7 @@
                            </th>
                            <th>CourseCode</th>
                            <th>CourseName</th>
-                           <th>CreditHours</th>
-                           <th>LectureType</th>
+                           
                            <th></th>
                            <th></th>
                            <th></th>
@@ -84,8 +83,7 @@
                            </td>
                            <td>{{ $semesterCourse->course->CourseCode ?? '--' }}</td>
                            <td>{{ $semesterCourse->course->CourseName ?? '--' }}</td>
-                           <td>{{ $semesterCourse->course->CreditHours  ?? '--'}}</td>
-                           <td>{{ $semesterCourse->course->LectureType  ?? '--'}}</td>
+                         
                            <td></td>
                            <td></td>
                            <td></td>
@@ -108,7 +106,7 @@
     <div class="col-6">
          <div class="card">
             <div class="card-header">
-               <h4>{{ 'Assigned Cources' }}</h4>
+               <h4>{{ 'Offered Cources' }}</h4>
               <!--  <div class="card-header-action">
                   <form>
                      <div class="input-group">
@@ -128,13 +126,9 @@
                               <i class="fas fa-th"></i>
                             </th>
                             <th>Semester / Courses</th>
-                            <th>Day</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Building</th>
-                            <th>Room</th>
-                            <th>Type</th>
-                            <th>Employee</th>
+                            <th>Section</th>
+                            <th>Course Code</th>
+                            <th>Chr</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -148,16 +142,15 @@
                             </td>
                             <td>{{ $timeTable->semesterCourse->semester->SemSession ?? '--' }} / {{ $timeTable->semesterCourse->course->CourseName ?? '--' }}</td>
                             <td>{{ $timeTable->Day ?? '--' }}</td>
-                            <td>{{ $timeTable->StartTime ?? '--' }}</td>
-                            <td>{{ $timeTable->EndTime ?? '--' }}</td>
-                            <td>{{ $timeTable->Building ?? '--' }}</td>
-                            <td>{{ $timeTable->Room ?? '--' }}</td>
-                            <td>{{ $timeTable->Type ?? '--' }}</td>
-                            <td>{{ $timeTable->employee->Emp_FirstName ?? '--' }} {{ $timeTable->employee->Emp_LastName ?? '--' }}</td>
+                            <td>{{ $timeTable->semesterCourse->course->CourseCode ?? '--' }}</td>
+                            <td>{{ $timeTable->semesterCourse->course->CreditHours ?? '--' }}</td>
+                            
                             <td><div class="card-body">
                                 <!-- only change id -->
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $timeTable->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
                                  <a href="{{ route('delete.TimeTable' , $timeTable->ID) }}" class="btn btn-danger"><i class="ion-trash-a"></i>{{ 'Delete Course' }}</a>
+
+                                  <a href="{{ route('edit.TimeTableAndCourse' , $timeTable->ID) }}" class="btn btn-primary"><i class="fas fa-primary"></i>{{ 'Edit Course' }}</a>
                                 
                               </div></td>
                           </tr>

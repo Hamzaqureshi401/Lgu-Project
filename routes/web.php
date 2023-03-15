@@ -246,6 +246,9 @@ Route::post('/storeTimeTable', [App\Http\Controllers\TimeTableController::class,
 Route::get('/editTimeTable/{id}', [App\Http\Controllers\TimeTableController::class, 'editTimeTable'])->name('edit.TimeTable');
 Route::post('/updateTimeTable', [App\Http\Controllers\TimeTableController::class, 'updateTimeTable'])->name('update.TimeTable');
 
+Route::post('/updateTimeTableAndCourse', [App\Http\Controllers\TimeTableController::class, 'updateTimeTableAndCourse'])->name('update.TimeTableAndCourse');
+
+
 
 
 //Dean Route Start
@@ -356,6 +359,9 @@ Route::any('/courseAssign/{id?}/{id2?}', [App\Http\Controllers\CoursesController
 
 
 Route::get('/editAssignedCourse/{id?}', [App\Http\Controllers\CoursesController::class, 'editAssignedCourse'])->name('edit.Assigned.Course');
+
+Route::get('/editTimeTableAndCourse/{id}', [App\Http\Controllers\CoursesController::class, 'editTimeTableAndCourse'])->name('edit.TimeTableAndCourse');
+
 
 Route::get('/deleteTimeTable/{id}', [App\Http\Controllers\TimeTableController::class, 'deleteTimeTable'])->name('delete.TimeTable');
 

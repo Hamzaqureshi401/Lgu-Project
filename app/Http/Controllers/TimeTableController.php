@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TimeTable;
 use App\Models\Employee;
+use App\Models\Course;
 use App\Models\SemesterCourse;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -73,7 +74,7 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
-         dd($request->all());
+         //dd($request->all());
 
       //$validator = $this->validation($request);
 
@@ -148,16 +149,7 @@ class TimeTableController extends Controller
     }
      public function updateTimeTable (Request $request){
 
-        $validator = $this->validationUpdate($request);
-       //$validator = $this->validation($request);
-        // if ($validator['error'] == true) {
-        //     return
-        //     response()->json([
-        //     'title' => 'Failed' ,
-        //     'type'=> 'error',
-        //     'message'=> ''.$validator['validation']
-        //     ]);
-        // }else {
+        
              $submit = DB::update("EXEC sp_UpdateTimeTable
 
             @ID                 = '$request->id',
@@ -171,18 +163,35 @@ class TimeTableController extends Controller
             @Emp_ID             = '$request->Emp_ID'
             ;");
 
-        // return response()->json([
-        //     'title'  => 'Done' ,
-        //     'type'   => 'success',
-        //     'message'=> 'TimeTable Updated!
-        //     ']);
-        // }
-    return redirect()->back()->with(['successToaster' => 'TimeTable Updated' , 'title' => 'Success']);
+        
+    // return redirect()->back()->with(['successToaster' => 'TimeTable Updated' , 'title' => 'Success']);
 
     }
      public function deleteTimeTable($id){
         TimeTable::where('ID' , $id)->delete();
          return redirect()->back()->with(['successToaster' => 'TimeTable Deleted' , 'title' => 'Success']);
+    }
+
+    public function updateTimeTableAndCourse(Request $request){
+
+        //dd($request->all());
+
+        foreach($request->id as $key => $id){
+
+            $TimeTable = TimeTable::where('ID' , $id)->first();
+            $data['id']             = $id;
+            $data['SemCourse_ID']   = $request->SemCourse_ID;
+            $data['Day']            = $request->Day[$key];
+            $data['StartTime']      = $request->StartTime[$key];
+            $data['EndTime']        = $request->EndTime[$key];
+            $data['Building']       = $request->Building[$key];
+            $data['Room']           = $request->room[$key];
+            $data['Type']           = $TimeTable->Type;
+            $data['Emp_ID']         = $TimeTable->Emp_ID;
+            $req = new Request($data);
+            $this->updateTimeTable($req);
+        }
+        return redirect()->back()->with(['successToaster' => 'TimeTable Updated' , 'title' => 'Success']);
     }
 
 }

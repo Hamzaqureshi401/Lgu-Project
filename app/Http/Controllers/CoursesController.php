@@ -213,7 +213,9 @@ class CoursesController extends Controller
 
      // dd(Session::get('ID'));
 
-       $timeTables = TimeTable::where('Emp_ID' , Session::get('ID'))->get();
+       $timeTables = TimeTable::get();
+
+       //dd($timeTables , Session::get('ID'));
       
         $title      = 'All Courses';
         $route      = 'courseOffering/';
@@ -253,7 +255,7 @@ class CoursesController extends Controller
 
 
         return 
-        view('View.courseAssign', 
+        view('Courses.courseAssign', 
             compact(
                 
                 'courses',
@@ -290,7 +292,38 @@ class CoursesController extends Controller
             ));
 
     }
-    public function deleteTimeTable($id){
-        dd($id);
+
+    public function editTimeTableAndCourse($id){
+
+       
+        $qury           = TimeTable::where('ID' , $id)->first();
+        $courseID       = $qury->semesterCourse->course->ID;
+        $SemCourse_ID   = $qury->semesterCourse->ID;
+        $timeTable      = TimeTable::where('SemCourse_ID' , $SemCourse_ID)->get();
+
+       // dd($timeTable);
+
+
+        $button         = 'Do You Wish To Submit?';
+        $courses        = Course::where('ID' , $courseID)->first();
+        $employees      = Employee::get();
+        $route          = '/updateTimeTableAndCourse';
+
+
+
+        return 
+        view('Courses.editTimeTableAndCourse', 
+            compact(
+                
+                'courses',
+                'button',
+                'employees',
+                'route',
+                'SemCourse_ID',
+                'timeTable',
+                'qury'
+
+              
+            ));
     }
 }
