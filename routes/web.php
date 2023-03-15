@@ -110,7 +110,7 @@ Route::get('/allEnrollments', [App\Http\Controllers\EnrollmentsController::class
 Route::get('/confirmIgradesTeacher/{id?}', [App\Http\Controllers\IgradesController::class, 'confirmIgradesTeacher'])->name('confirm.Igrades.Teacher');
 
 Route::get('/teacherStdIgrade', [App\Http\Controllers\IgradesController::class, 'teacherStdIgrade'])->name('teacher.Std.Igrade');
-Route::get('/HodStdIgrade', [App\Http\Controllers\IgradesController::class, 'HodStdIgrade']);
+Route::get('/hodStdIgrade', [App\Http\Controllers\IgradesController::class, 'hodStdIgrade'])->name('hod.Std.Igrade');
 
 Route::get('/addStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'addStudentAdmission'])->name('add.StudentAdmissions');
 Route::get('/allStudentAdmissions', [App\Http\Controllers\AdmissionController::class, 'allStudentAdmissions'])->name('all.StudentAdmissions');

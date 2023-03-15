@@ -47,9 +47,13 @@
 
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="briefcase"></i><span>Std Teacher Igrades</span></a><!-- this will be Category --> 
+                  data-feather="briefcase"></i><span>Igrades</span></a><!-- this will be Category --> 
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('teacher.Std.Igrade') }}">Teacher Std Igrade</a></li>
+
+              </ul>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('hod.Std.Igrade') }}">Hod Std Igrade</a></li>
 
               </ul>
             </li>

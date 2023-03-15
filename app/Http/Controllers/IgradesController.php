@@ -5,6 +5,7 @@ use App\Models\Enrollment;
 use App\Models\Course;
 use App\Models\StudentIgrade;
 use App\Models\SemesterCourse;
+use App\Models\Department;
 use Session;
 use Illuminate\Http\Request;
 use DB;
@@ -15,6 +16,7 @@ class IgradesController extends Controller
 {
     public function studentIgrades(){
         $enrollments =  Enrollment::where('Std_ID' , Session::get('std_ID'))->get();
+        
         
         $title        = 'All Igrades';
         $route        = 'applyIgrades/';
@@ -171,20 +173,17 @@ class IgradesController extends Controller
 
     }
     
-    public function HodStdIgrade(){
+    public function hodStdIgrade(){
 
-        // $a = Enrollment::join('semesterCourses' , 'semesterCourses.ID' , 'Enrollments.SemCourses_ID')->where('Emp_ID' , Session::get('ID'))->pluck('Enrollments.ID')->toArray();
-        // dd($semCourse , $enrollments , $a);
-       //$enrollments =  Enrollment::where(['ID' => $studentIgrade])->get();
+      
 
-       $studentIgrade   = StudentIgrade::where('Status' , 'Hod')->select('Enroll_ID' , 'ID')->get();
-       $semCourse       = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('ID')->toArray();
-       //dd($studentIgrade , SemesterCourse::where('ID' , 10017)->first()->course->CourseName , $semCourse);
-    
-       $enrollments     =  Enrollment::whereIn('SemCourses_ID' ,  $semCourse)->whereIn( 
-       'ID' , $studentIgrade->pluck('Enroll_ID')->toArray())->get();  
+       $studentIgrades   = StudentIgrade::where('Status' , 'Hod')->get();
+       $empDepartment   = Department::where('HODUID' , Session::get('ID'))->first();
+
+
        
-       $igArr = $studentIgrade->pluck('ID')->toArray();    
+       
+        
         $title  = 'All Igrades';
         $route = 'confirmIgradesHod/';
         $getEditRoute = 'confirmIgradesHod';
@@ -193,12 +192,14 @@ class IgradesController extends Controller
         return
         view('Igrades.HodStdIgrade' ,
             compact(
-                'enrollments' ,
+                
                 'title' ,
                 'modalTitle' ,
                 'route',
-                'getEditRoute',  
-                'igArr'
+                'getEditRoute',
+                'studentIgrades',
+                'empDepartment'
+                
             ));
     }
    

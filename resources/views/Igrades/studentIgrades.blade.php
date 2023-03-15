@@ -13,6 +13,9 @@
                             <th>CourseName</th>
                             <th>CreditHours</th>
                             <th>LectureType</th>
+                            <th>Teacher</th>
+                            <th>Section</th>
+                            <th>My Section</th>
                             <!-- <th>Status</th> -->
                             <th>Action</th>
                           </tr>
@@ -29,7 +32,13 @@
                             <td>{{ $enrollment->semesterCourse->course->CourseName ?? '--' }}</td>
                             <td>{{ $enrollment->semesterCourse->course->CreditHours  ?? '--'}}</td>
                             <td>{{ $enrollment->semesterCourse->course->LectureType  ?? '--'}}</td>
+                            <td>{{ $enrollment->semesterCourse->employee->Emp_FirstName ?? '--' }}</td>
+                            <td>{{ $enrollment->semesterCourse->Section ?? '--' }}</td>
+                            <td>{{ $enrollment->student->ClassSection ?? '--' }}</td>
+                            
+                            
                             <td>
+
                               <div class="card-body">
 
 

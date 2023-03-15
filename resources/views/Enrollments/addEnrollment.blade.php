@@ -21,6 +21,7 @@
                         <li>
                           Academic Standing:{{  $acdRule['academic_Standing'] }}
                         </li>
+                        <li>Section {{ Session::get('Std')->ClassSection }}</li>
                         </ul>
                   </div>
                 </div>
@@ -104,7 +105,8 @@
                                       <th>Cedit Hours</th>
                                       <th>Degree Name</th>
                                       <th>Semester Session</th>
-                                      <th>Action</th>
+                                      <th>Section</th>
+                                      
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -133,7 +135,7 @@
                                       <td>{{ $semesterCourse->course->CreditHours ?? '--'}}</td>
                                       <td>{{ $semesterCourse->degreeBatches->degree->DegreeName ?? '--'}}</td>
                                       <td>{{ $semesterCourse->semester->SemSession ?? '--'}}</td>
-                                      <td>{{ "Status" }}</td>
+                                      <td>{{ $semesterCourse->Section }}</td>
                                     </tr>  
                                     @endif
                                      @endforeach
