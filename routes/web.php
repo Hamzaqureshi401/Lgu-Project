@@ -247,6 +247,7 @@ Route::get('/editTimeTable/{id}', [App\Http\Controllers\TimeTableController::cla
 Route::post('/updateTimeTable', [App\Http\Controllers\TimeTableController::class, 'updateTimeTable'])->name('update.TimeTable');
 
 
+
 //Dean Route Start
 
 Route::get('/empDashboard', [App\Http\Controllers\DeanController::class, 'deanDashboard'])->name('dean.Dashboard');
@@ -355,6 +356,8 @@ Route::any('/courseAssign/{id?}/{id2?}', [App\Http\Controllers\CoursesController
 
 
 Route::get('/editAssignedCourse/{id?}', [App\Http\Controllers\CoursesController::class, 'editAssignedCourse'])->name('edit.Assigned.Course');
+
+Route::get('/deleteTimeTable/{id}', [App\Http\Controllers\TimeTableController::class, 'deleteTimeTable'])->name('delete.TimeTable');
 
 Route::get('/financeDashboard', [App\Http\Controllers\ViewController::class, 'financeDashboard'])->name('finance.Dashboard');
 
