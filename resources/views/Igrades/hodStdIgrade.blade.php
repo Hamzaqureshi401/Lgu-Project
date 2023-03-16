@@ -36,7 +36,7 @@
                                 {{ $studentIgrade->enrollment->student->Std_LName  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
-                                <a href="confirmIgradesHod/{{ $studentIgrade->enrollment->student->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                <a href="{{ route('confirm.Igrades.Hod' , $studentIgrade->ID) }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                               </div>
                             </td>
                           </tr>

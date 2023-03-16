@@ -170,7 +170,10 @@ class IgradesController extends Controller
     }
     public function confirmIgradesDean($id){
 
+        // dd($id);
+
         StudentIgrade::where('ID' , $id)->update(['Status' => 'Coe']);
+        return redirect()->back()->with(['successToaster' => 'Igrade Confirmed' , 'title' => 'Success']);
 
     }
     
@@ -197,5 +200,34 @@ class IgradesController extends Controller
                 
             ));
     }
+
+
+    public function deanStdIgrade(){
+
+        $studentIgrades   = StudentIgrade::where('Status' , 'Dean')->get();
+        $empDepartment   = Department::where('DeanUID' , Session::get('ID'))->first();
+
+        // dd($studentIgrades,$empDepartment);
+
+
+         $title  = 'All Igrades';
+         $route = 'confirmIgradesdean/';
+         $getEditRoute = 'confirmIgradesDean';
+         $modalTitle = 'Confirm Igrade';
+         // jkrsfjksdf
+ 
+         return
+         view('Igrades.deanStdIgrade' ,
+             compact(
+                 
+                 'title' ,
+                 'modalTitle' ,
+                 'route',
+                 'getEditRoute',
+                 'studentIgrades',
+                 'empDepartment'
+                 
+             ));
+     }
    
 }
