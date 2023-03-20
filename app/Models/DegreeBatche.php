@@ -12,7 +12,7 @@ class DegreeBatche extends Model
 
    public function degree(){
 
-    return $this->belongsTo('App\Models\Degree','Degree_ID');
+    return $this->belongsTo('App\Models\Degree','ID');
    }
 
     public function batch(){

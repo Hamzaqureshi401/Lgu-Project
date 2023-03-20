@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\TimeTable;
 use App\Models\Employee;
 use App\Models\Course;
+use App\Models\DegreeSemCourse;
+
 use App\Models\SemesterCourse;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -24,13 +26,7 @@ class TimeTableController extends Controller
             'Type'              => 'required',
             'Emp_ID'            => 'required|numeric'
         ]);
-        // $validation['validation'] = $validator->errors()->first();
-        // if ($validator->fails()) {
-        //     $validation['error'] = true;
-        // }else{
-        //     $validation['error'] = false;
-        // }
-        // return $validation;
+       
     }
     public function validationUpdate($request){
 
@@ -45,13 +41,7 @@ class TimeTableController extends Controller
             'Emp_ID'            => 'required|numeric'
 
         ]);
-        // $validation['validation'] = $validator->errors()->first();
-        // if ($validator->fails()) {
-        //     $validation['error'] = true;
-        // }else{
-        //     $validation['error'] = false;
-        // }
-        // return $validation;
+        
     }
 
      public function addTimeTable(){
@@ -74,21 +64,24 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
-         //dd($request->all());
+        
 
-      //$validator = $this->validation($request);
+         foreach($request->Merge as $merge){
+            $data = explode('-' , $merge);
+            $DegreeSemCourse = new DegreeSemCourse(); 
+            $DegreeSemCourse->DegBatches_ID = $data[0];
+            $DegreeSemCourse->SemCourse_ID = $data[1];
+            $DegreeSemCourse->save();
+         }
+      
 
         foreach($request->Day as $key => $data){
-
-        
-        $day        = $request['Day'][$key];
-        $EndTime    = $request['EndTime'][$key];
-        $StartTime  = $request['StartTime'][$key];
-        $Building   = $request['Building'][$key];
-        $Room       = $request['room'][$key];
-       
-
-        //dd($day);
+            $day        = $request['Day'][$key];
+            $EndTime    = $request['EndTime'][$key];
+            $StartTime  = $request['StartTime'][$key];
+            $Building   = $request['Building'][$key];
+            $Room       = $request['room'][$key];
+    
             $submit = DB::update("EXEC sp_InsertTimeTable
             @SemCourse_ID       = '$request->SemCourse_ID',
             @Day                = '$day',
@@ -150,11 +143,11 @@ class TimeTableController extends Controller
      public function updateTimeTable (Request $request){
 
         
-             $submit = DB::update("EXEC sp_UpdateTimeTable
+            $submit = DB::update("EXEC sp_UpdateTimeTable
 
             @ID                 = '$request->id',
             @SemCourse_ID       = '$request->SemCourse_ID',
-            @Day                =  '$request->Day',
+            @Day                = '$request->Day',
             @StartTime          = '$request->StartTime' ,
             @EndTime            = '$request->EndTime',
             @Building           = '$request->Building',
@@ -163,9 +156,6 @@ class TimeTableController extends Controller
             @Emp_ID             = '$request->Emp_ID'
             ;");
 
-        
-    // return redirect()->back()->with(['successToaster' => 'TimeTable Updated' , 'title' => 'Success']);
-
     }
      public function deleteTimeTable($id){
         TimeTable::where('ID' , $id)->delete();
@@ -173,8 +163,6 @@ class TimeTableController extends Controller
     }
 
     public function updateTimeTableAndCourse(Request $request){
-
-        //dd($request->all());
 
         foreach($request->id as $key => $id){
 

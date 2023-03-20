@@ -17,7 +17,7 @@ class SemesterCourse extends Model
         return $this->belongsTo('App\Models\Degree', 'Deg_ID');
     }
     public function degreeBatches(){
-        return $this->belongsTo('App\Models\DegreeBatche', 'DegBatches_ID');
+        return $this->belongsTo('App\Models\DegreeBatche', 'Sem_ID', 'Batch_ID');
     } 
     public function semester(){
         return $this->belongsTo('App\Models\Semester', 'Sem_ID');

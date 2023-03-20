@@ -250,6 +250,13 @@ class CoursesController extends Controller
 
         $button = 'Do You Wish To Submit?';
         $courses = Course::where('ID' , $id)->first();
+        $semCourses = SemesterCourse::join('semesters' , 'semesters.ID' , 'SemesterCourses.Sem_ID')
+        ->join('degreeBatches' , 'degreeBatches.Batch_ID' , 'semesters.ID')
+        ->join('Degrees' , 'Degrees.ID' , 'degreeBatches.Degree_ID')
+        ->select('SemesterCourses.ID' , 'DegreeName' , 'SemSession' , 'Section' , 'DegBatches_ID')
+        ->get();
+
+       // dd($semCourses->first());
         $employees      = Employee::get();
         $route  = '/storeTimeTable';
 
@@ -262,7 +269,8 @@ class CoursesController extends Controller
                 'button',
                 'employees',
                 'route',
-                'SemCourse_ID'
+                'SemCourse_ID',
+                'semCourses'
               
             ));
 
