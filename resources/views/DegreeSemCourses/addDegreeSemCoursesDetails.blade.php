@@ -6,14 +6,10 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Degree Batch</label>
-                      <select class="form-control select2" name="DegBatches_ID"  required>
-                        @foreach($degreeBatches as $degreeBatche)
-                        <option value="{{ $degreeBatche->ID }}">{{ $degreeBatche->degree->DegreeName ?? '' }} / {{ $degreeBatche->batch->SemSession ?? '' }}</option>
-                        @endforeach
-                      </select>
+                      <input class="form-control" name="DegBatches_ID" type="text" disabled  value=" {{$degreeBatches }}">
                     </div>
 
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                       <label>Semester Course </label>
                       <select class="form-control select2" name="SemCourse_ID"  required>
                         @foreach($semesterCourses as $semesterCourse)
@@ -28,7 +24,7 @@
                     <option value="{{ $letter }}">{{ $letter }} </option>
                     @endforeach
                       </select>
-                    </div> --}}
+                    </div>
                     
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
               </div>
