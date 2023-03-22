@@ -13,7 +13,7 @@
                       </select>
                     </div>
 
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                       <label>Semester Course </label>
                       <select class="form-control select2" name="SemCourse_ID"  required>
                         @foreach($semesterCourses as $semesterCourse)
@@ -28,7 +28,7 @@
                     <option value="{{ $letter }}">{{ $letter }} </option>
                     @endforeach
                       </select>
-                    </div> --}}
+                    </div>
                     
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
               </div>

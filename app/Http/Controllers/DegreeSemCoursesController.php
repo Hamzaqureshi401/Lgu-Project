@@ -28,12 +28,11 @@ class DegreeSemCoursesController extends Controller
 
      public function addDegreeSemCourses(){
 
-
         $button = "Add Degree Semester Courses";
         $title  = 'Add Degree Semester Courses';
-        $route  = '/storeDegreeSemCoursesDetails';
+        $route  = '/storeDegreeSemCourses';
         $degreeBatches = DegreeBatche::get();
-        // $semesterCourses = SemesterCourse::get();
+        $semesterCourses = SemesterCourse::get();
         return
         view('DegreeSemCourses.addDegreeSemCourses',
             compact(
@@ -41,36 +40,13 @@ class DegreeSemCoursesController extends Controller
                 'title' ,
                 'route',
                 'degreeBatches',
-                // 'semesterCourses'
-                )
-        );
-    }
-
-    public function addDegreeSemCoursesdetails(Request $request ){
-        // dd($request['DegBatches_ID']);
-
-
-        $button = "Add Degree Semester Courses";
-        $title  = 'Add Degree Semester Courses Details';
-        $route  = '/storeDegreeSemCourses';
-        $degreeBatches = $request['DegBatches_ID'];
-        $semesterCourses = SemesterCourse::Where('DegBatches_ID',$request['DegBatches_ID'])->get();
-        // dd($degreeBatches,$semesterCourses);
-        return
-        view('DegreeSemCourses.addDegreeSemCoursesDetails',
-            compact(
-                'button' ,
-                'title' ,
-                'route',
-                'degreeBatches',
-                'semesterCourses'
-                )
+                'semesterCourses')
         );
     }
 
      public function storeDegreeSemCourses(Request $request){
 
-        dd($request->all());
+        //dd($request->all());
 
         $unique = $this->uniqueDigreeBatch($request);
         $validator = $this->validation($request);
