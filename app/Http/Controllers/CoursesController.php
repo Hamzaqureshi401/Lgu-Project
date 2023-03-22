@@ -200,22 +200,20 @@ class CoursesController extends Controller
 
     ############################ Courses ###########################
 
-    public function courseOffering($selectedDegreeId = null , $batch = null){
-
-        $degreeBatches  = DegreeBatche::where(['Degree_ID' => $selectedDegreeId , 'Batch_ID' => $batch])->first();
-        if(!empty($degreeBatches)){
-            $semesterCourses = SemesterCourse::where('DegBatches_ID' , $degreeBatches->ID)->get();
+    public function courseOffering($selectedDegreeId = null){
+       
+        if(!empty($selectedDegreeId)){
+            
+            $semesterCourses = SemesterCourse::join('DegreeSemCourses' , 'DegreeSemCourses.SemCourse_ID' , 'SemesterCourses.ID')
+            ->where('DegreeSemCourses.DegBatches_ID' , $selectedDegreeId)
+            ->get();
         }else{
             $semesterCourses = "";
         }
        $degrees      =  Degree::get();
        $semesters    =  semester::get();
-
-     // dd(Session::get('ID'));
-
-       $timeTables = TimeTable::get();
-
-       //dd($timeTables , Session::get('ID'));
+       $degreeBatchs =  DegreeBatche::get();
+       $timeTables   =  TimeTable::get();
       
         $title      = 'All Courses';
         $route      = 'courseOffering/';
@@ -228,18 +226,16 @@ class CoursesController extends Controller
             compact(
                 
                 'degrees',
-                
                 'semesters',
                 'title',
                 'route',
                 'getEditRoute',
                 'modalTitle',
                 'button',
-                'degreeBatches',
                 'semesterCourses',
                 'selectedDegreeId',
-                'batch',
-                'timeTables'
+                'timeTables',
+                'degreeBatchs'
             )    
             );
 

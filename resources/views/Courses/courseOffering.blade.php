@@ -16,21 +16,14 @@
             </div>
             <div class="card-body">
                <div class="form-group">
-                  <label>Degree</label>
+                  <label>Degree/Batch</label>
                   <select class="form-control select2" id="degree" name="Degree_ID"  required>
-                     @foreach($degrees as $degree)
-                     <option value="{{ $degree->ID }}" @if($degree->ID == $selectedDegreeId) selected @endif>{{ $degree->DegreeName }}</option>
+                     @foreach($degreeBatchs as $degreeBatch)
+                     <option value="{{ $degreeBatch->ID }}" @if($degreeBatch->ID == $selectedDegreeId) selected @endif>{{ $degreeBatch->degree->DegreeName ?? '--' }} / {{ $degreeBatch->batch->SemSession ?? '--' }}</option>
                      @endforeach
                   </select>
                </div>
-               <div class="form-group">
-                  <label>Batch</label>
-                  <select class="form-control select2" id="batch" name="Batch_ID"  required>
-                     @foreach($semesters as $semester)
-                     <option value="{{ $semester->ID }}" @if($semester->ID == $batch) selected @endif>{{ $semester->SemSession }}</option>
-                     @endforeach
-                  </select>
-               </div>
+            
                <a class="btn btn-primary btn-block submit-form submit-form" style="color: white;">{{ $button }}</a>
             </div>
          </div>
@@ -169,7 +162,7 @@
    $(".submit-form").click(function(){
      var degree = $('#degree').find(":selected").val();
      var batch = $('#batch').find(":selected").val();
-     var parm = degree+"/"+batch;
+     var parm = degree;
    
    let url = "{{ route('course.Offering', ':id') }}";
      url = url.replace(':id', parm);
