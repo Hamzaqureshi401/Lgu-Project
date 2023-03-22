@@ -18,9 +18,13 @@
                           </tr>
                         </thead>
                         <tbody>
+                          {{-- {{$empdegreename=}} --}}
+                          
                           @foreach($studentIgrades as $key => $studentIgrade)
-                          {{-- {{dd($studentIgrade->enrollment->student->degree->DegreeName ,$empDepartment->Dpt_Name)}} --}}
-                          @if($studentIgrade->enrollment->student->degree->DegreeName == $empDepartment->DegreeName)
+                          {{-- {{dd($studentIgrade->enrollment->student->degree->DegreeName,$empdegreename )}} --}}
+
+                          {{-- {{dd($studentIgrade->enrollment->semesterCourse->course->CourseName);}} --}}
+                          @if($studentIgrade->enrollment->student->degree->DegreeName == $empDepartment->Dpt_Name)
 
                           <tr>
                             <td>
