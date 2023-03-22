@@ -133,6 +133,14 @@
               </ul>
             </li>
             <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Degree Sem Courses</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('add.DegreeSemCourses') }}">Add Degree Sem Courses</a></li>
+                <li><a class="nav-link" href="{{ route('all.DegreeSemCourses') }}">All Degree Sem Courses</a></li>
+                
+              </ul>
+            </li>
+            <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Employees</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('add.Employee') }}">Add  Employee</a></li>

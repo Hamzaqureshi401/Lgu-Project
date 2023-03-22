@@ -22,7 +22,7 @@
          <label>Lecture Type</label>
          <input type="text"  class="form-control" value="{{ $courses->LectureType }}" readonly>
       </div>
-       <div class="form-group col-md-12 col-12">
+      <div class="form-group col-md-12 col-12">
          <label>Employee</label>
          <select class="form-control" name="Emp_ID"  >
             @foreach($employees as $employee)
@@ -53,19 +53,46 @@
          </div>
       </div>
    </div>
-   <div class="row">
-      <div class="form-group col-md-2 col-12">
-         <label>Course Code</label>
-         <div class="pretty p-switch p-slim">
-            <input type="checkbox" name="Status[]">
-              <div class="state p-success">
-                <label></label>
-              </div>
-            </div>
-      </div>
-
-    </div>
-  
+   <div class="table-responsive">
+      <table class="table table-striped dataTable" id="sortable-table">
+         <thead>
+            <tr>
+               <th class="text-center">
+                  <i class="fas fa-th"></i>
+               </th>
+               <th>Degree</th>
+               <th>Session</th>
+               <th>Section</th>
+               <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach($semCourses as $semCourse)
+            <tr>
+               <td>
+                  <div class="sort-handler">
+                     <i class="fas fa-th"></i>
+                  </div>
+               </td>
+               <td>{{ $semCourse->DegreeName ?? '--' }}
+               <td>{{ $semCourse->SemSession ?? '--' }}</td>
+               <td>{{ $semCourse->Section ?? '--' }}</td>
+               <td>
+                  <div class="form-group col-md-2 col-12">
+                     <label>Merge</label>
+                     <div class="pretty p-switch p-slim">
+                        <input type="checkbox" name="Merge[]" value="{{ $semCourse->DegBatches_ID}}-{{ $semCourse->ID }}-{{ $semCourse->Section }}">
+                        <div class="state p-success">
+                           <label></label>
+                        </div>
+                     </div>
+                  </div>
+               </td>
+            </tr>
+            @endforeach
+         </tbody>
+      </table>
+   </div>
    <div class="section-body bg-info">
       <div class="col-12 col-md-12 col-lg-12">
          <div class="card">
@@ -79,7 +106,6 @@
    <div class="row" id="clon">
       @php 
       $days = ['Monday' , 'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday' , 'Sunday'];
-
       $building = ['New' , 'Old']
       @endphp
       <div class="form-group col-md-2 col-12">
@@ -100,7 +126,6 @@
       </div>
       <div class="form-group col-md-2 col-12">
          <label>Building</label>
-         
          <select class="form-control" name="Building[]"  required>
             @foreach ($building as $l) 
             <option value="{{ $l }}">{{ $l }}</option>
@@ -109,31 +134,29 @@
       </div>
       <div class="form-group col-md-2 col-12">
          <label>Room</label>
-          <select class="form-control" name="room[]"  required>
+         <select class="form-control" name="room[]"  required>
             @foreach (range(1, 100) as $l) 
             <option value="{{ $l }}">{{ $l }}</option>
             @endforeach
          </select>
       </div>
       <div class="form-group col-md-2 col-12">
-        <label>Copy Row</label>
-        <a style="color: white;" class="btn btn-warning btn-block clone">{{ 'Add New Row' }}</a>
+         <label>Copy Row</label>
+         <a style="color: white;" class="btn btn-warning btn-block clone">{{ 'Add New Row' }}</a>
       </div>
    </div>
    <div id="copied"></div>
-   
    <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
 </div>
 </div>
 @include('Forms.formFooter')   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
-  $('.clone').click(function(){
-  var a = $("#clon").clone().appendTo('#copied');
-});
-  $(document).ready(function() {
-    $('.select2').select2();
-});
+   $('.clone').click(function(){
+   var a = $("#clon").clone().appendTo('#copied');
+   });
+   $(document).ready(function() {
+     $('.select2').select2();
+   });
 </script>
 @endsection
-

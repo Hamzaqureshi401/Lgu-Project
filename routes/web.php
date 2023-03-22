@@ -230,6 +230,14 @@ Route::post('/storeDegreeBatch', [App\Http\Controllers\DegreeBatchsController::c
 Route::get('editDegreeBatch/{id}', [App\Http\Controllers\DegreeBatchsController::class, 'editDegreeBatch'])->name('edit.DegreeBatch');
 Route::post('/updateDegreeBatch', [App\Http\Controllers\DegreeBatchsController::class, 'updateDegreeBatch'])->name('update.DegreeBatch');
 
+// DegreeSemCourses Route Start
+
+Route::get('/addDegreeSemCourses', [App\Http\Controllers\DegreeSemCoursesController::class, 'addDegreeSemCourses'])->name('add.DegreeSemCourses');
+Route::get('/allDegreeSemCourses', [App\Http\Controllers\DegreeSemCoursesController::class, 'allDegreeSemCourses'])->name('all.DegreeSemCourses');
+Route::post('/storeDegreeSemCourses', [App\Http\Controllers\DegreeSemCoursesController::class, 'storeDegreeSemCourses'])->name('store.DegreeSemCourses');
+Route::get('editDegreeSemCourses/{id}', [App\Http\Controllers\DegreeSemCoursesController::class, 'editDegreeSemCourses'])->name('edit.DegreeSemCourses');
+Route::post('/updateDegreeSemCourses', [App\Http\Controllers\DegreeSemCoursesController::class, 'updateDegreeSemCourses'])->name('update.DegreeSemCourses');
+
 // SemesterDetails Routes start
 
 Route::get('/addSemesterDetails', [App\Http\Controllers\SemesterDetailsController::class, 'addSemesterDetails'])->name('add.SemesterDetails');
