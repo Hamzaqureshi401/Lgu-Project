@@ -64,6 +64,7 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
+        // dd($request);
         
 
          foreach($request->Merge as $merge){

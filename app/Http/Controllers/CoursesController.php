@@ -249,7 +249,7 @@ class CoursesController extends Controller
         $semCourses = SemesterCourse::join('semesters' , 'semesters.ID' , 'SemesterCourses.Sem_ID')
         ->join('degreeBatches' , 'degreeBatches.Batch_ID' , 'semesters.ID')
         ->join('Degrees' , 'Degrees.ID' , 'degreeBatches.Degree_ID')
-        ->select('SemesterCourses.ID' , 'DegreeName' , 'SemSession' , 'Section' , 'DegBatches_ID')
+        ->select('SemesterCourses.ID' , 'DegreeName' , 'SemSession' , 'Section')
         ->get();
 
        // dd($semCourses->first());

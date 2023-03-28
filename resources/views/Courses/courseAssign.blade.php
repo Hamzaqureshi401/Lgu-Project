@@ -66,6 +66,7 @@
                <th>Action</th>
             </tr>
          </thead>
+
          <tbody>
             @foreach($semCourses as $semCourse)
             <tr>
