@@ -7,6 +7,8 @@ use App\Models\TimeTable;
 use App\Models\Employee;
 use App\Models\Course;
 use App\Models\DegreeSemCourse;
+use App\Models\TimeTableDetail;
+
 
 use App\Models\SemesterCourse;
 use Illuminate\Support\Facades\DB;
@@ -64,16 +66,21 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
+        // $data=TimeTableDetail::get();
         // dd($request);
-        
+    
+        if(!empty($merge))
+        {
 
-         foreach($request->Merge as $merge){
-            $data = explode('-' , $merge);
-            $DegreeSemCourse = new DegreeSemCourse(); 
-            $DegreeSemCourse->DegBatches_ID = $data[0];
-            $DegreeSemCourse->SemCourse_ID = $data[1];
-            $DegreeSemCourse->save();
-         }
+            foreach($request->Merge as $merge){
+            //    $data = explode('-' , $merge);
+               $DegreeSemCourse = new TimeTableDetail(); 
+               $DegreeSemCourse->DegSemCourses_ID = intval($data[0]);
+               $DegreeSemCourse->TimeTable_ID = $data[1];
+               $DegreeSemCourse->save();
+            }
+        }
+
       
 
         foreach($request->Day as $key => $data){

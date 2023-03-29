@@ -8,6 +8,8 @@ use App\Models\Semester;
 use App\Models\SemesterCourse;
 use App\Models\Employee;
 use App\Models\TimeTable;
+use App\Models\DegreeSemCourse;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -246,13 +248,16 @@ class CoursesController extends Controller
 
         $button = 'Do You Wish To Submit?';
         $courses = Course::where('ID' , $id)->first();
-        $semCourses = SemesterCourse::join('semesters' , 'semesters.ID' , 'SemesterCourses.Sem_ID')
-        ->join('degreeBatches' , 'degreeBatches.Batch_ID' , 'semesters.ID')
-        ->join('Degrees' , 'Degrees.ID' , 'degreeBatches.Degree_ID')
-        ->select('SemesterCourses.ID' , 'DegreeName' , 'SemSession' , 'Section')
-        ->get();
+        // $semCourses = SemesterCourse::join('semesters' , 'semesters.ID' , 'SemesterCourses.Sem_ID')
+        // ->join('degreeBatches' , 'degreeBatches.Batch_ID' , 'semesters.ID')
+        // ->join('Degrees' , 'Degrees.ID' , 'degreeBatches.Degree_ID')
+        // ->select('SemesterCourses.ID' , 'DegreeName' , 'SemSession' , 'Section')
+        // ->get();
 
-       // dd($semCourses->first());
+        $degsemcourses=DegreeSemCourse::get();
+        // $degbatch=$degsemcourse->first()->degreeBatch->first();
+        // dd($degbatch);
+
         $employees      = Employee::get();
         $route  = '/storeTimeTable';
 
@@ -266,7 +271,7 @@ class CoursesController extends Controller
                 'employees',
                 'route',
                 'SemCourse_ID',
-                'semCourses'
+                'degsemcourses'
               
             ));
 

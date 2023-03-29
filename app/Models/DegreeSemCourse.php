@@ -20,4 +20,6 @@ class DegreeSemCourse extends Model
 
     return $this->belongsTo('App\Models\SemesterCourse' , 'SemCourse_ID');
    }
+
+
 }

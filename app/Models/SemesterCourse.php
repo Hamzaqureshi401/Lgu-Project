@@ -35,7 +35,9 @@ class SemesterCourse extends Model
         return $this->belongsTo('App\Models\TimeTable' , 'SemCourse_ID');
     }
     
-    
+    public function DegreeSemCourses(){
+        return $this->belongsTo('App\Models\DegreeBatche', 'Sem_ID', 'SemCourse_ID');
+    } 
 
 
 

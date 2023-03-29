@@ -68,21 +68,22 @@
          </thead>
 
          <tbody>
-            @foreach($semCourses as $semCourse)
+            @foreach($degsemcourses as $degsemcourse)
             <tr>
                <td>
                   <div class="sort-handler">
                      <i class="fas fa-th"></i>
                   </div>
                </td>
-               <td>{{ $semCourse->DegreeName ?? '--' }}
-               <td>{{ $semCourse->SemSession ?? '--' }}</td>
-               <td>{{ $semCourse->Section ?? '--' }}</td>
+               {{-- {{dd($degsemcourse,);}} --}}
+               <td>{{ $degsemcourse->degreeBatch->degree->DegreeName ?? '--' }}
+               <td>{{ $degsemcourse->SemCourse_ID ?? '--' }}</td>
+               <td>{{ $degsemcourse->Section ?? '--' }}</td>
                <td>
                   <div class="form-group col-md-2 col-12">
                      <label>Merge</label>
                      <div class="pretty p-switch p-slim">
-                        <input type="checkbox" name="Merge[]" value="{{ $semCourse->DegBatches_ID}}-{{ $semCourse->ID }}-{{ $semCourse->Section }}">
+                        <input type="checkbox" name="Merge[]" value="{{$degsemcourse->ID }}">
                         <div class="state p-success">
                            <label></label>
                         </div>
