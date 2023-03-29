@@ -9,14 +9,14 @@ class TimeTable extends Model
 {
     use HasFactory;
     protected $table = 'TimeTable';
-    public function semesterCourse()
-    {
-
+    public function semesterCourse(){
         return $this->belongsTo('App\Models\SemesterCourse','SemCourse_ID');
     }
-    public function employee()
-    {
-
+    public function employee(){
         return $this->belongsTo('App\Models\Employee','Emp_ID');
+    }
+
+     public function DegreeSemCourse(){
+        return $this->belongsTo('App\Models\DegreeSemCourse','DegreeSemCourses_ID');
     }
 }

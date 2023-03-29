@@ -66,20 +66,18 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
-        // $data=TimeTableDetail::get();
-        // dd($request);
     
-        if(!empty($merge))
-        {
+        // if(!empty($merge)){
 
-            foreach($request->Merge as $merge){
-            //    $data = explode('-' , $merge);
-               $DegreeSemCourse = new TimeTableDetail(); 
-               $DegreeSemCourse->DegSemCourses_ID = intval($data[0]);
-               $DegreeSemCourse->TimeTable_ID = $data[1];
-               $DegreeSemCourse->save();
-            }
-        }
+        //     foreach($request->Merge as $merge){
+        //     //    $data = explode('-' , $merge);
+        //        $DegreeSemCourse = new TimeTableDetail(); 
+        //        $DegreeSemCourse->DegSemCourses_ID = intval($data[0]);
+        //        $DegreeSemCourse->TimeTable_ID = $data[1];
+        //        $DegreeSemCourse->save();
+        //     }
+        // }
+
 
       
 
@@ -98,7 +96,8 @@ class TimeTableController extends Controller
             @Building           = '$Building',
             @Room               = '$Room',
             @Type               = '$request->Type',
-            @Emp_ID             = '$request->Emp_ID'
+            @Emp_ID             = '$request->Emp_ID',
+            @DegreeSemCourses_ID= '$request->SemCourse_ID'
             ;");
         }
 

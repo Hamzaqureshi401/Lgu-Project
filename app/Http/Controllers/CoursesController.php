@@ -306,7 +306,7 @@ class CoursesController extends Controller
 
        
         $qury           = TimeTable::where('ID' , $id)->first();
-        $courseID       = $qury->semesterCourse->course->ID;
+        $courseID       = $qury->DegreeSemCourse->semesterCourse->course->ID;
         $SemCourse_ID   = $qury->semesterCourse->ID;
         $timeTable      = TimeTable::where('SemCourse_ID' , $SemCourse_ID)->get();
 

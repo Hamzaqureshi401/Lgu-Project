@@ -133,10 +133,10 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $timeTable->semesterCourse->semester->SemSession ?? '--' }} / {{ $timeTable->semesterCourse->course->CourseName ?? '--' }}</td>
+                            <td>{{ $timeTable->DegreeSemCourse->semesterCourse->semester->SemSession ?? '--' }} / {{ $timeTable->DegreeSemCourse->semesterCourse->course->CourseName ?? '--' }}</td>
                             <td>{{ $timeTable->Day ?? '--' }}</td>
-                            <td>{{ $timeTable->semesterCourse->course->CourseCode ?? '--' }}</td>
-                            <td>{{ $timeTable->semesterCourse->course->CreditHours ?? '--' }}</td>
+                            <td>{{ $timeTable->DegreeSemCourse->semesterCourse->course->CourseCode ?? '--' }}</td>
+                            <td>{{ $timeTable->DegreeSemCourse->semesterCourse->course->CreditHours ?? '--' }}</td>
                             
                             <td><div class="card-body">
                                 <!-- only change id -->
