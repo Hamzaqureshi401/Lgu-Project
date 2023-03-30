@@ -77,7 +77,7 @@
                </td>
                {{-- {{dd($degsemcourse,);}} --}}
                <td>{{ $degsemcourse->degreeBatch->degree->DegreeName ?? '--' }}
-               <td>{{ $degsemcourse->SemCourse_ID ?? '--' }}</td>
+               <td>{{ $degsemcourse->semesterCourse->semester->SemSession ?? '--' }}</td>
                <td>{{ $degsemcourse->Section ?? '--' }}</td>
                <td>
                   <div class="form-group col-md-2 col-12">

@@ -66,7 +66,7 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
-        // dd($request);
+
     
         // if(!empty($merge)){
 
@@ -99,43 +99,16 @@ class TimeTableController extends Controller
             ;");
 
             $recentRecord = DB::select('SELECT TOP 1 * FROM TimeTable ORDER BY ID DESC');
-
-            // dd($recentRecord);
-
-            // if(!empty($merge)){
-                foreach($request->Merge as $keyval=>$merge){
+            foreach($request->Merge as $merge){
                 
-                    // dd($merge[$keyval]);
-                    $DegreeSemCourse = new TimeTableDetail(); 
-                    $DegreeSemCourse->DegSemCourses_ID = intval($merge[$keyval]) ?? $previousDegSemCourseID;
-                    $DegreeSemCourse->TimeTable_ID = $recentRecord[$keyval]->ID ?? $previousTimeTableID;
-
-                    $previousDegSemCourseID=$DegreeSemCourse->DegSemCourses_ID;
-                    $previousTimeTableID=$DegreeSemCourse->TimeTable_ID;
-                    // dd($previousDegSemCourseID);
-
-                    $DegreeSemCourse->save();
-
-
-                }
-
-            // }
-
-
-        //     foreach($request->Merge as $merge){
-        //     //    $data = explode('-' , $merge);
-        //        $DegreeSemCourse = new TimeTableDetail(); 
-        //        $DegreeSemCourse->DegSemCourses_ID = intval($data[0]);
-        //        $DegreeSemCourse->TimeTable_ID = $data[1];
-        //        $DegreeSemCourse->save();
-        //     }
-        // }
-
+                $DegreeSemCourse = new TimeTableDetail(); 
+                $DegreeSemCourse->DegSemCourses_ID = $merge;
+                $DegreeSemCourse->TimeTable_ID = $recentRecord[0]->ID;
+                $DegreeSemCourse->save();
+            }
         }
 
-         return redirect()->back()->with(['successToaster' => 'TimeTable Added' , 'title' => 'Success']);
-
-
+        return redirect()->back()->with(['successToaster' => 'TimeTable Added' , 'title' => 'Success']);
     }
 
 
