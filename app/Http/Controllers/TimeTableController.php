@@ -66,6 +66,7 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
+        // dd($request);
     
         // if(!empty($merge)){
 
@@ -79,7 +80,6 @@ class TimeTableController extends Controller
         // }
 
 
-      
 
         foreach($request->Day as $key => $data){
             $day        = $request['Day'][$key];
@@ -89,16 +89,48 @@ class TimeTableController extends Controller
             $Room       = $request['room'][$key];
     
             $submit = DB::update("EXEC sp_InsertTimeTable
-            @SemCourse_ID       = '$request->SemCourse_ID',
             @Day                = '$day',
             @StartTime          = '$StartTime' ,
             @EndTime            = '$EndTime',
             @Building           = '$Building',
             @Room               = '$Room',
             @Type               = '$request->Type',
-            @Emp_ID             = '$request->Emp_ID',
-            @DegreeSemCourses_ID= '$request->SemCourse_ID'
+            @Emp_ID             = '$request->Emp_ID'
             ;");
+
+            $recentRecord = DB::select('SELECT TOP 1 * FROM TimeTable ORDER BY ID DESC');
+
+            // dd($recentRecord);
+
+            // if(!empty($merge)){
+                foreach($request->Merge as $keyval=>$merge){
+                
+                    // dd($merge[$keyval]);
+                    $DegreeSemCourse = new TimeTableDetail(); 
+                    $DegreeSemCourse->DegSemCourses_ID = intval($merge[$keyval]) ?? $previousDegSemCourseID;
+                    $DegreeSemCourse->TimeTable_ID = $recentRecord[$keyval]->ID ?? $previousTimeTableID;
+
+                    $previousDegSemCourseID=$DegreeSemCourse->DegSemCourses_ID;
+                    $previousTimeTableID=$DegreeSemCourse->TimeTable_ID;
+                    // dd($previousDegSemCourseID);
+
+                    $DegreeSemCourse->save();
+
+
+                }
+
+            // }
+
+
+        //     foreach($request->Merge as $merge){
+        //     //    $data = explode('-' , $merge);
+        //        $DegreeSemCourse = new TimeTableDetail(); 
+        //        $DegreeSemCourse->DegSemCourses_ID = intval($data[0]);
+        //        $DegreeSemCourse->TimeTable_ID = $data[1];
+        //        $DegreeSemCourse->save();
+        //     }
+        // }
+
         }
 
          return redirect()->back()->with(['successToaster' => 'TimeTable Added' , 'title' => 'Success']);
