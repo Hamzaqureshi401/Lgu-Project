@@ -15,8 +15,8 @@ class TimeTable extends Model
     public function employee(){
         return $this->belongsTo('App\Models\Employee','Emp_ID');
     }
-
-     public function DegreeSemCourse(){
-        return $this->belongsTo('App\Models\DegreeSemCourse','DegreeSemCourses_ID');
+    public function timeTableDetails(){
+        return $this->hasMany('App\Models\TimeTableDetail','ID' , 'TimeTable_ID');
     }
+
 }

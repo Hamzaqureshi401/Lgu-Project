@@ -216,6 +216,11 @@ class CoursesController extends Controller
        $semesters    =  semester::get();
        $degreeBatchs =  DegreeBatche::get();
        $timeTables   =  TimeTable::get();
+
+       $timetable = TimeTable::with("timeTableDetails")->first();
+dd($timetable->timeTableDetails);
+
+       
       
         $title      = 'All Courses';
         $route      = 'courseOffering/';
@@ -306,8 +311,9 @@ class CoursesController extends Controller
 
        
         $qury           = TimeTable::where('ID' , $id)->first();
-        $courseID       = $qury->DegreeSemCourse->semesterCourse->course->ID;
-        $SemCourse_ID   = $qury->semesterCourse->ID;
+        $courseID       = $qury->timeTableDetails->DegreeSemCourse->semesterCourse->course->ID;
+        $SemCourse_ID   = $qury->timeTableDetails->where('TimeTable_ID' , )->pluck('TimeTable_ID')->toArray();
+        dd($SemCourse_ID);
         $timeTable      = TimeTable::where('SemCourse_ID' , $SemCourse_ID)->get();
 
        // dd($timeTable);
@@ -318,7 +324,7 @@ class CoursesController extends Controller
         $employees      = Employee::get();
         $route          = '/updateTimeTableAndCourse';
 
-
+        dd1(1);
 
         return 
         view('Courses.editTimeTableAndCourse', 

@@ -11,5 +11,9 @@ class TimeTableDetail extends Model
     protected $table = 'TimeTableDetail';
      public $timestamps = false;
 
+      public function DegreeSemCourse(){
+        return $this->belongsTo('App\Models\DegreeSemCourse','DegSemCourses_ID');
+    }
+
 
 }
