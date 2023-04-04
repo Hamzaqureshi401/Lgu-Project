@@ -218,7 +218,7 @@ class CoursesController extends Controller
        $timeTables   =  TimeTable::get();
 
        $timetable = TimeTable::with("timeTableDetails")->first();
-dd($timetable->timeTableDetails);
+// dd($timetable->timeTableDetails);
 
        
       

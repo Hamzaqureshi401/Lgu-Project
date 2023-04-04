@@ -12,7 +12,7 @@ class TimeTableDetail extends Model
      public $timestamps = false;
 
       public function DegreeSemCourse(){
-        return $this->belongsTo('App\Models\DegreeSemCourse','DegSemCourses_ID');
+        return $this->belongsTo('App\Models\DegreeSemCourse','DegSemCourses_ID','ID');
     }
 
 
