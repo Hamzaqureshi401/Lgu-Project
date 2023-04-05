@@ -64,7 +64,13 @@ class AttendanceController extends Controller
       public function empSemesterCourses(){
 
        $session         =  $this->sessionData->getSessionData();
-       $semesterCourses = SemesterCourse::where('Emp_ID' , $session['ID'])->paginate(10);
+       $timeTables = TimeTable::join('TimeTableDetail', 'TimeTableDetail.TimeTable_ID', '=', 'TimeTable.ID')
+    ->join('DegreeSemCourses', 'TimeTableDetail.DegSemCourses_ID', '=', 'DegreeSemCourses.ID')
+    ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
+    ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
+    ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
+    ->distinct('Courses.ID')
+    ->get();
         $title          = 'All Semester Courses';
         $route          = 'updateSemesterCourse';
         $getEditRoute   = 'empSemesterCoursesAttandence';
