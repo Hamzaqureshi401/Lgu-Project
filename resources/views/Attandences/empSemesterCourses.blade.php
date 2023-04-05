@@ -20,14 +20,16 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($semesterCourses as $semesterCourse)
+                          @foreach($timetable as $timetable)
+
+                          {{dd($timetable->TimeTableDetail->DegreeSemCourse->SemesterCourse->semester->SemSession ?? '--');}}
                           <tr>
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $semesterCourse->semester->SemSession ?? '--' }}</td>
+                            <td>{{ $timetable->TimeTableDetail->DegreeSemCourse ?? '--' }}</td>
                             <td>{{ $semesterCourse->employee->Emp_FirstName ?? '--' }} {{ $semesterCourse->employee->Emp_LastName ?? '--' }}</td>
                             <td>{{ $semesterCourse->degreeBatches->degree->DegreeName ?? '--'}} / {{ $semesterCourse->degreeBatches->batch->SemSession ?? '--'}}</td>
                             <td>{{ $semesterCourse->Section  ?? '--'}}</td>
