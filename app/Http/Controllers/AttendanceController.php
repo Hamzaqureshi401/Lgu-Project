@@ -64,7 +64,7 @@ class AttendanceController extends Controller
       public function empSemesterCourses(){
 
        $session         =  $this->sessionData->getSessionData();
-       $timetable = TimeTable::where('Emp_ID' , $session['ID'])->paginate(10);
+       $semesterCourses = SemesterCourse::where('Emp_ID' , $session['ID'])->paginate(10);
         $title          = 'All Semester Courses';
         $route          = 'updateSemesterCourse';
         $getEditRoute   = 'empSemesterCoursesAttandence';
@@ -73,7 +73,7 @@ class AttendanceController extends Controller
         return 
         view('Attandences.empSemesterCourses' , 
             compact(
-                'timetable' , 
+                'semesterCourses' , 
                 'title' , 
                 'modalTitle' , 
                 'route',
