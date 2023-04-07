@@ -372,7 +372,7 @@ Route::get('/findCourseDay', [App\Http\Controllers\ViewController::class, 'findC
 
 Route::get('/courseOffering/{id?}/{id2?}', [App\Http\Controllers\CoursesController::class, 'courseOffering'])->name('course.Offering');
 
-Route::any('/courseAssign/{id?}/{id2?}', [App\Http\Controllers\CoursesController::class, 'courseAssign'])->name('course.Assign');
+Route::any('/courseAssign/{id?}', [App\Http\Controllers\CoursesController::class, 'courseAssign'])->name('course.Assign');
 
 
 Route::get('/editAssignedCourse/{id?}', [App\Http\Controllers\CoursesController::class, 'editAssignedCourse'])->name('edit.Assigned.Course');

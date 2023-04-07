@@ -206,11 +206,22 @@ class CoursesController extends Controller
        
         if(!empty($selectedDegreeId)){
             
-            $semesterCourses = SemesterCourse::join('DegreeSemCourses' , 'DegreeSemCourses.SemCourse_ID' , 'SemesterCourses.ID')
+            // $semesterCourses = SemesterCourse::join('DegreeSemCourses' , 'DegreeSemCourses.SemCourse_ID' , 'SemesterCourses.ID')
+            // ->join('Employees' , 'Employees.ID' , 'DegreeSemCourses.Emp_ID')
+            // ->where('DegreeSemCourses.DegBatches_ID' , $selectedDegreeId)
+            // ->get();
+
+           $semesterCourses = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
+            ->join('Employees' , 'Employees.ID' , 'DegreeSemCourses.Emp_ID')
             ->where('DegreeSemCourses.DegBatches_ID' , $selectedDegreeId)
             ->get();
+
+            $DegreeSemCourses = DegreeSemCourse::where('DegBatches_ID' , $selectedDegreeId)->get();
+
+           // dd($semesterCourses);
+
         }else{
-            $semesterCourses = "";
+            $DegreeSemCourses = "";
         }
        $degrees      =  Degree::get();
        $semesters    =  semester::get();
@@ -239,7 +250,7 @@ class CoursesController extends Controller
                 'getEditRoute',
                 'modalTitle',
                 'button',
-                'semesterCourses',
+                'DegreeSemCourses',
                 'selectedDegreeId',
                 'timeTables',
                 'degreeBatchs'
@@ -249,21 +260,23 @@ class CoursesController extends Controller
     }
 
 
-    public function courseAssign($id , $SemCourse_ID){
+    public function courseAssign($DegreeSemCourse_ID){
+
 
         $button = 'Do You Wish To Submit?';
-        $courses = Course::where('ID' , $id)->first();
+        $DegreeSemCourse = DegreeSemCourse::where('ID' , $DegreeSemCourse_ID)->first();
+
         // $semCourses = SemesterCourse::join('semesters' , 'semesters.ID' , 'SemesterCourses.Sem_ID')
         // ->join('degreeBatches' , 'degreeBatches.Batch_ID' , 'semesters.ID')
         // ->join('Degrees' , 'Degrees.ID' , 'degreeBatches.Degree_ID')
         // ->select('SemesterCourses.ID' , 'DegreeName' , 'SemSession' , 'Section')
         // ->get();
 
-        $degsemcourses=DegreeSemCourse::get();
+         $degsemcourses=DegreeSemCourse::get();
         // $degbatch=$degsemcourse->first()->degreeBatch->first();
         // dd($degbatch);
 
-        $employees      = Employee::get();
+        // $employees      = Employee::get();
         $route  = '/storeTimeTable';
 
 
@@ -271,12 +284,12 @@ class CoursesController extends Controller
         view('Courses.courseAssign', 
             compact(
                 
-                'courses',
-                'button',
-                'employees',
-                'route',
-                'SemCourse_ID',
-                'degsemcourses'
+                'DegreeSemCourse',
+                 'button',
+                // 'employees',
+                 'route',
+                // 'SemCourse_ID',
+                 'degsemcourses'
               
             ));
 

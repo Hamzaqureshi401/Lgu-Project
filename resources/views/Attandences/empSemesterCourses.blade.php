@@ -9,10 +9,8 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Sem</th>
+                           
                             <th>Emp</th>
-                            <th>Degree Batch</th>
-                            <th>Section</th>
                             <th>Course</th>
                             
                             <!-- <th>Status</th> -->
@@ -20,23 +18,20 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($semesterCourses as $semesterCourse)
+                          @foreach($DegreeSemCourses as $DegreeSemCourse)
                           <tr>
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $semesterCourse->semester->SemSession ?? '--' }}</td>
-                            <td>{{ $semesterCourse->employee->Emp_FirstName ?? '--' }} {{ $semesterCourse->employee->Emp_LastName ?? '--' }}</td>
-                            <td>{{ $semesterCourse->degreeBatches->degree->DegreeName ?? '--'}} / {{ $semesterCourse->degreeBatches->batch->SemSession ?? '--'}}</td>
-                            <td>{{ $semesterCourse->Section  ?? '--'}}</td>
-                            <td>{{ $semesterCourse->course->CourseName  ?? '--'}}</td>
+                            <td>{{ $DegreeSemCourse->employee->Emp_FirstName ?? '--' }}</td>
+                            <td>{{ $DegreeSemCourse->semesterCourse->Course->CourseName ?? '--' }}</td>
+                           
                             <td>
                               <div class="card-body">
-                                <!-- only change id -->
-                                <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $semesterCourse->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
-                                 <a href="{{ $getEditRoute }}/{{ $semesterCourse->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ 'Tasks' }}</a>
+                                
+                                 <a href="{{ $getEditRoute }}/{{ $DegreeSemCourse->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ 'Tasks' }}</a>
                                  
                                 
                               </div>
@@ -47,7 +42,7 @@
                       </table>
                     </div>
                     <div class="d-flex justify-content-center">
-                        {!! $semesterCourses->links() !!}
+                        
                     </div>
 @include('Table.table_footer') 
 @endsection   

@@ -10,6 +10,8 @@ use App\Models\DegreeBatche;
 use App\Models\Semester;
 use App\Models\SemesterCourse;
 use App\Models\DegreeSemCourse;
+use App\Models\Employee;
+
 
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -33,6 +35,7 @@ class DegreeSemCoursesController extends Controller
         $route  = '/storeDegreeSemCourses';
         $degreeBatches = DegreeBatche::get();
         $semesterCourses = SemesterCourse::get();
+        $employees = Employee::get();
         return
         view('DegreeSemCourses.addDegreeSemCourses',
             compact(
@@ -40,7 +43,9 @@ class DegreeSemCoursesController extends Controller
                 'title' ,
                 'route',
                 'degreeBatches',
-                'semesterCourses')
+                'semesterCourses',
+                'employees'
+            )
         );
     }
 
@@ -48,7 +53,7 @@ class DegreeSemCoursesController extends Controller
 
         //dd($request->all());
 
-        $unique = $this->uniqueDigreeBatch($request);
+        $unique = $this->uniqueDigreeSem($request);
         $validator = $this->validation($request);
       
 
@@ -57,8 +62,9 @@ class DegreeSemCoursesController extends Controller
         }else {
             $submit = DB::update("EXEC sp_InsertDegreeSemCourses
             @DegBatches_ID  = '$request->DegBatches_ID',
-            @SemCourse_ID  = '$request->SemCourse_ID',
-            @Section = '$request->Section'
+            @SemCourse_ID   = '$request->SemCourse_ID',
+            @Section        = '$request->Section',
+            @Emp_ID        = '$request->Emp_ID'
            ;");
             return redirect()->back()->with(['successToaster' => 'Degree Batches Added' , 'title' => 'Success']);
         }
@@ -96,6 +102,7 @@ class DegreeSemCoursesController extends Controller
         $route  = '/updateDegreeSemCourses';
         $degreeBatches = DegreeBatche::get();
         $semesterCourses = SemesterCourse::get();
+        $employees = Employee::get();
         $degreeSemCoursees = DegreeSemCourse::where('ID' , $id)->first();
         //dd($degreeSemCoursees);
 
@@ -107,7 +114,8 @@ class DegreeSemCoursesController extends Controller
                 'title' ,
                 'route',
                 'degreeBatches',
-                'semesterCourses'
+                'semesterCourses',
+                'employees'
             ));
 
     }
@@ -118,14 +126,15 @@ class DegreeSemCoursesController extends Controller
             @ID                     = '$request->id',
             @DegBatches_ID          = '$request->DegBatches_ID',
             @SemCourse_ID           = '$request->SemCourse_ID',
-            @Section                = '$request->Section'
+            @Section                = '$request->Section',
+            @Emp_ID                 = '$request->Emp_ID'
             ;");
         
            return redirect()->back()->with(['successToaster' => 'Degree Batches Updated' , 'title' => 'Success']);
     }
 
-    public function uniqueDigreeBatch($request){
+    public function uniqueDigreeSem($request){
 
-        return DegreeSemCourse::where(['DegBatches_ID' => $request->DegBatches_ID , 'SemCourse_ID' => $request->SemCourse_ID])->exists();
+        return DegreeSemCourse::where(['DegBatches_ID' => $request->DegBatches_ID , 'SemCourse_ID' => $request->SemCourse_ID , 'Section' => $request->Section])->exists();
     }
 }

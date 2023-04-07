@@ -29,6 +29,14 @@
                     @endforeach
                       </select>
                     </div>
+                    <div class="form-group">
+                      <label>Employee </label>
+                      <select class="form-control select2" name="Emp_ID"  required>
+                        @foreach($employees as $employee)
+                        <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
+                        @endforeach
+                      </select>
+                    </div>
                     
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
               </div>

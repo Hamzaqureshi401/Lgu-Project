@@ -11,6 +11,8 @@ use App\Models\Department;
 use App\Models\DegreeBatche;
 use App\Models\Attendance;
 use App\Models\SemesterCourse;
+use App\Models\DegreeSemCourse;
+
 use Session;
 use DB;
 
@@ -18,7 +20,13 @@ class DeanController extends Controller
 {
     public function deanDashboard(){
 
-        $course             = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('id')->count();
+        $course = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
+        ->join('Courses' , 'Courses.ID' , 'SemesterCourses.Course_ID')
+        ->groupBy('CourseCode')
+        ->where('Emp_ID' , Session::get('ID'))->pluck('Courses.CourseCode')->count();
+        
+        // $course             = SemesterCourse::pluck('id')->count();
+        // $course             = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('id')->count();
         $enrollment         = Enrollment::where('SemCourses_ID' , $course)->pluck('id')->count();
         $students           = Student::get();
         

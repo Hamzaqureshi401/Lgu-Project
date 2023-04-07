@@ -19,28 +19,27 @@ class TimeTableController extends Controller
     public function validation($request){
 
         $this->validate($request, [
-            'SemCourse_ID'      => 'required|numeric',
+            
             'Day'               => 'required|max:50',
             'StartTime'         => 'required|date_format:H:i',
             'EndTime'           => 'required|date_format:H:i',
             'Building'          => 'required',
             'Room'              => 'required',
-            'Type'              => 'required',
-            'Emp_ID'            => 'required|numeric'
+            'Type'              => 'required'
+            
         ]);
        
     }
     public function validationUpdate($request){
 
         $this->validate($request, [
-            'SemCourse_ID'      => 'required|numeric',
+            
             'Day'               => 'required|max:50',
             'StartTime'         => 'required|date_format:H:i',
             'EndTime'           => 'required|date_format:H:i',
             'Building'          => 'required',
             'Room'              => 'required',
-            'Type'              => 'required',
-            'Emp_ID'            => 'required|numeric'
+            'Type'              => 'required'
 
         ]);
         
@@ -66,21 +65,6 @@ class TimeTableController extends Controller
 
     public function storeTimeTable(Request $request){
 
-
-    
-        // if(!empty($merge)){
-
-        //     foreach($request->Merge as $merge){
-        //     //    $data = explode('-' , $merge);
-        //        $DegreeSemCourse = new TimeTableDetail(); 
-        //        $DegreeSemCourse->DegSemCourses_ID = intval($data[0]);
-        //        $DegreeSemCourse->TimeTable_ID = $data[1];
-        //        $DegreeSemCourse->save();
-        //     }
-        // }
-
-
-
         foreach($request->Day as $key => $data){
             $day        = $request['Day'][$key];
             $EndTime    = $request['EndTime'][$key];
@@ -94,21 +78,28 @@ class TimeTableController extends Controller
             @EndTime            = '$EndTime',
             @Building           = '$Building',
             @Room               = '$Room',
-            @Type               = '$request->Type',
-            @Emp_ID             = '$request->Emp_ID'
+            @Type               = '$request->Type'
             ;");
 
             $recentRecord = DB::select('SELECT TOP 1 * FROM TimeTable ORDER BY ID DESC');
+            $DegreeSemCourse = DegreeSemCourse::where('ID' , $request->DegSemCourses_ID)->first();
+                $this->storeTimeTableDetail($request->DegSemCourses_ID , $recentRecord , $DegreeSemCourse->Emp_ID);
+            if(!empty($request->Merge)){
             foreach($request->Merge as $merge){
-                
+                $this->storeTimeTableDetail($merge , $recentRecord , $DegreeSemCourse->Emp_ID);
+            }
+        }
+    }
+        return redirect()->back()->with(['successToaster' => 'TimeTable Added' , 'title' => 'Success']);
+    }
+
+    public function storeTimeTableDetail($merge , $recentRecord , $updateEmp){
+
                 $DegreeSemCourse = new TimeTableDetail(); 
                 $DegreeSemCourse->DegSemCourses_ID = $merge;
                 $DegreeSemCourse->TimeTable_ID = $recentRecord[0]->ID;
                 $DegreeSemCourse->save();
-            }
-        }
-
-        return redirect()->back()->with(['successToaster' => 'TimeTable Added' , 'title' => 'Success']);
+                $DegreeSemCourse = DegreeSemCourse::where('ID' , $merge)->update(['Emp_ID' => $updateEmp ]);
     }
 
 
@@ -158,14 +149,12 @@ class TimeTableController extends Controller
             $submit = DB::update("EXEC sp_UpdateTimeTable
 
             @ID                 = '$request->id',
-            @SemCourse_ID       = '$request->SemCourse_ID',
             @Day                = '$request->Day',
             @StartTime          = '$request->StartTime' ,
             @EndTime            = '$request->EndTime',
             @Building           = '$request->Building',
             @Room               = '$request->Room',
-            @Type               = '$request->Type',
-            @Emp_ID             = '$request->Emp_ID'
+            @Type               = '$request->Type'
             ;");
 
     }

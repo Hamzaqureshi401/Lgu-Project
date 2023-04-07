@@ -4,44 +4,40 @@
 @include('Forms.formHeader')  
 <div class="card-body">
    <div class="row">
-      <input type="hidden" name="SemCourse_ID" value="{{ $SemCourse_ID }}">
-      <input type="hidden" name="Type" value="{{ $courses->LectureType }}">
+     
+      <input type="hidden" name="DegSemCourses_ID" value="{{ $DegreeSemCourse->ID }}">
       <div class="form-group col-md-6 col-12">
          <label>Course Code</label>
-         <input type="text"  class="form-control" value="{{ $courses->CourseCode }} "readonly>
+         <input type="text"  class="form-control" value="{{ $DegreeSemCourse->semesterCourse->course->CourseCode }} "readonly>
       </div>
       <div class="form-group col-md-6 col-12">
          <label>Course Name</label>
-         <input type="text"  class="form-control" value="{{ $courses->CourseName }}" readonly>
+         <input type="text"  class="form-control" value="{{ $DegreeSemCourse->semesterCourse->course->CourseName }}" readonly>
       </div>
       <div class="form-group col-md-6 col-12">
          <label>Credit Hours</label>
-         <input type="tel" id="CreditHours" data-inputmask="'mask': '9-9-99'" placeholder="Example 9-9-09" maxlength=6 class="form-control" value="{{ $courses->CreditHours }}" readonly>
+         <input type="tel" id="CreditHours" data-inputmask="'mask': '9-9-99'" placeholder="Example 9-9-09" maxlength=6 class="form-control" value="{{ $DegreeSemCourse->semesterCourse->course->CreditHours }}" readonly>
       </div>
       <div class="form-group col-md-6 col-12">
          <label>Lecture Type</label>
-         <input type="text"  class="form-control" value="{{ $courses->LectureType }}" readonly>
+         <input type="text"  class="form-control" value="{{ $DegreeSemCourse->semesterCourse->course->LectureType }}" readonly>
       </div>
       <div class="form-group col-md-12 col-12">
          <label>Employee</label>
-         <select class="form-control select2" name="Emp_ID"  >
-            @foreach($employees as $employee)
-            <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
-            @endforeach
-         </select>
+        <input type="text"  class="form-control" value="{{ $DegreeSemCourse->employee->Emp_FirstName }} {{ $DegreeSemCourse->employee->Emp_LastName }}" readonly></span>
       </div>
       <div class="form-group col-md-6 col-12">
          <label>Section</label>
-         <select class="form-control" name="Section"  required>
+         <select class="form-control select2" name="Section"  required>
             @foreach (range('A', 'Z') as $l) 
             <option value="{{ $l }}">{{ $l }}</option>
             @endforeach
          </select>
       </div>
-      <div class="form-group col-md-6 col-12">
+     <!--  <div class="form-group col-md-6 col-12">
          <label>Instructions</label>
-         <textarea type="text"  class="form-control" value="{{ $courses->LectureType }}"></textarea>
-      </div>
+         <textarea type="text"  class="form-control" value="{{ $DegreeSemCourse->semesterCourse->course->LectureType }}"></textarea>
+      </div> -->
    </div>
    <div class="section-body bg-danger">
       <div class="col-12 col-md-12 col-lg-12">

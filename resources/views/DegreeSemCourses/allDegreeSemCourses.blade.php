@@ -13,6 +13,7 @@
                             <th>Degree Batch Name</th>
                             <th>Semester Course Name</th>
                               <th>Section</th> 
+                              <th>Employee</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -28,6 +29,7 @@
                             <td>{{ $degreeSemCourse->semesterCourse->semester->SemSession  ?? '--'}} / {{ $degreeSemCourse->semesterCourse->course->CourseName  ?? '--'}}</td>
 
                             <td>{{ $degreeSemCourse->Section ?? '--'}}</td>
+                            <td>{{ $degreeSemCourse->employee->Emp_FirstName ?? '--'}} {{ $degreeSemCourse->employee->Emp_LastName ?? '--'}}</td>
                           
                             <td>
                               <div class="card-body">

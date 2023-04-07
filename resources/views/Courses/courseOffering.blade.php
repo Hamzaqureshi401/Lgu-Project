@@ -59,8 +59,7 @@
                                         </th>
                                         <th>CourseCode</th>
                                         <th>CourseName</th>
-
-                                        <th></th>
+                                        <th>Employee</th>
                                         <th></th>
                                         <th></th>
                                         <!-- <th>Status</th> -->
@@ -68,24 +67,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($semesterCourses == '')
+                                    @if ($DegreeSemCourses == '')
                                         <div class="alert alert-warning">
                                             <strong>Sorry!</strong> No record Found.
                                         </div>
                                     @else
-                                        @foreach ($semesterCourses as $semesterCourse)
+                                        @foreach ($DegreeSemCourses as $DegreeSemCourse)
                                             <tr>
                                                 <td>
                                                     <div class="card-body">
-                                                        <a href="{{ route('course.Assign', [$semesterCourse->course->ID, $semesterCourse->ID]) }}"
+                                                        <a href="{{ route('course.Assign', [ $DegreeSemCourse->ID]) }}"
                                                             class="btn btn-primary"><i
                                                                 class="far fa-edit"></i>{{ 'Assign Course' }}</a>
                                                     </div>
                                                 </td>
-                                                <td>{{ $semesterCourse->course->CourseCode ?? '--' }}</td>
-                                                <td>{{ $semesterCourse->course->CourseName ?? '--' }}</td>
+                                                <td>{{ $DegreeSemCourse->semesterCourse->course->CourseCode ?? '--' }}</td>
+                                                <td>{{ $DegreeSemCourse->semesterCourse->course->CourseName ?? '--' }}</td>
 
-                                                <td></td>
+                                                <td>{{ $DegreeSemCourse->employee->Emp_FirstName ?? '--'}} {{ $DegreeSemCourse->employee->Emp_LastName ?? '--'}}</td>
                                                 <td></td>
                                                 <td></td>
 
@@ -95,7 +94,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        @if ($semesterCourses != '')
+                        @if ($DegreeSemCourses != '')
                             <div class="d-flex justify-content-center"></div>
                         @endif
                     </div>

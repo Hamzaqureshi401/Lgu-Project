@@ -16,6 +16,8 @@ use App\Models\DegreeBatche;
 
 use Redirect;
 use App\Models\Enrollment;
+use App\Models\DegreeSemCourse;
+
 use App\Models\StudentMark;
 use App\Models\SemesterCourseWeightage;
 use App\Models\SemesterCourseWeightageDetail;
@@ -64,13 +66,49 @@ class AttendanceController extends Controller
       public function empSemesterCourses(){
 
        $session         =  $this->sessionData->getSessionData();
-       $timeTables = TimeTable::join('TimeTableDetail', 'TimeTableDetail.TimeTable_ID', '=', 'TimeTable.ID')
-    ->join('DegreeSemCourses', 'TimeTableDetail.DegSemCourses_ID', '=', 'DegreeSemCourses.ID')
+     $DegreeSemCourses = DegreeSemCourse::join('TimeTableDetail', 'TimeTableDetail.DegSemCourses_ID', '=', 'DegreeSemCourses.ID')
     ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
     ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
     ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
-    ->distinct('Courses.ID')
+     ->select('Courses.CourseCode', 'Semesters.SemSession')
+     ->groupBy('Courses.CourseCode', 'Semesters.SemSession')
     ->get();
+
+    $timeTables = TimeTable::join('TimeTableDetail', 'TimeTableDetail.TimeTable_ID', '=', 'TimeTable.ID')
+    ->join('DegreeSemCourses', 'TimeTableDetail.DegSemCourses_ID', '=', 'DegreeSemCourses.ID')
+    // ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
+    // ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
+    // ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
+    // ->select('Courses.CourseCode', 'Semesters.SemSession')
+    // ->groupBy('Courses.CourseCode', 'Semesters.SemSession')
+    //->pluck('TimeTable.ID')->toArray();
+    ->get();
+
+    // dd($DegreeSemCourses , $timeTables ,
+
+    //     // DegreeSemCourse::groupBy('DegBatches_ID' , 'SemCourse_ID' , 'Emp_ID')->select('Section')->get()
+    //     // ,
+
+    //      DegreeSemCourse::select('DegBatches_ID', 'SemCourse_ID' , 'Section')
+    //               ->distinct()
+    //               ->get() ,
+    //              DegreeSemCourse::join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
+    // ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
+    // ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
+    // ->groupBy('Courses.CourseCode')
+    // ->select('Courses.CourseCode', DB::raw('MAX(Courses.CourseName) AS CourseName'))
+    // ->get()
+    // );
+    $uniqueCourseCodes = DegreeSemCourse::distinct('CourseCode')
+    ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
+    ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
+    ->select( 'Courses.ID');
+    dd($uniqueCourseCodes);
+    
+    $DegreeSemCourse = DegreeSemCourse::get();//where('Emp_ID' =>  $session['ID'])->get();
+
+    
+     //dd($timeTables);
         $title          = 'All Semester Courses';
         $route          = 'updateSemesterCourse';
         $getEditRoute   = 'empSemesterCoursesAttandence';
@@ -79,7 +117,7 @@ class AttendanceController extends Controller
         return 
         view('Attandences.empSemesterCourses' , 
             compact(
-                'semesterCourses' , 
+                'DegreeSemCourses' , 
                 'title' , 
                 'modalTitle' , 
                 'route',
