@@ -11,6 +11,7 @@ use App\Models\Student;
 use App\Models\Degree;
 use App\Models\DegreeBatche;
 use App\Models\SemesterDetail;
+use App\Models\DegreeSemCourse;
 use App\Http\Controllers\ChallanController;
 
 use App\Models\Exam_AcademicStandingRule;
@@ -31,19 +32,34 @@ class EnrollmentsController extends Controller
     }
 
     public function addEnrollment(){
+
         $session            = $this->getSessionData();    
         $request['Std_ID']  = $session['std_ID'];
         $student = Student::where('ID' , $session['std_ID'])->first();
         $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $student->batch->ID])->first();
+
+
         if(empty($DegreeBatche)){
             return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Warning']);
         }
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
-        $semesterCourses    = SemesterCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Sem_ID' => $student->batch->ID , 'Section' => $student->ClassSection])->get();
+        
+
+        $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection])->get();
+
+        // dd($DegsemesterCourses);
+
+        if(empty($DegsemesterCourses)){
+            return redirect()->back()->with(['errorToaster'   => 'Course Not Found!' , 'title' => 'Warning']);
+        }
+
+
+
         $getEnrollment      = Enrollment::where(['Std_ID' => $request['Std_ID'] ]);
         $enrollmentsArray   = SemesterCourse::whereNotIn('ID' ,  $getEnrollment->pluck('SemCourses_ID')->toArray())->pluck('ID')->toArray();
          $enrollments       = $getEnrollment->get();
+
 
   
         $button = "Add Enrollment";
@@ -55,7 +71,7 @@ class EnrollmentsController extends Controller
                 'button' ,
                 'title' ,
                 'route',
-                'semesterCourses',
+                'DegsemesterCourses',
                 'enrollments',
                 'enrollmentsArray',
                 'acdRule',
@@ -67,6 +83,8 @@ class EnrollmentsController extends Controller
     public function getAcdRule($Std_ID){
         
         $registration       = Registration::where('Std_ID' , $Std_ID);
+
+
         if($registration->exists()){
             $registration   = $registration->first();
              $data['enrollmentAllowed']     = $registration->acdRule->EnrollmentAllowed;
