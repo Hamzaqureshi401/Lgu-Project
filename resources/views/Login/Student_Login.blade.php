@@ -51,10 +51,11 @@
 
 
                                 <br>
-                                <select name="department" class="form-control form-control-sm select2">
-                                    <option selected disabled>Department</option>
+                                <br>
+                                <select name="degree" class="form-control form-control-sm select2">
+                                    <option selected disabled>Degree</option>
                                     @foreach ( $department as $Departmentsdata)
-                                    <option value="{{$Departmentsdata->Dpt_Name}}">{{$Departmentsdata->Dpt_Name}}</option>
+                                    <option value="{{$Departmentsdata->DegreeName}}">{{$Departmentsdata->DegreeName}}</option>
 
                                     @endforeach
                                 </select>

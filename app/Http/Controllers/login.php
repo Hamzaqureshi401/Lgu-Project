@@ -34,7 +34,7 @@ class login extends Controller
         } else {
 
             $batch      = Semester::get();
-            $department = DB::table('Departments')->select('Dpt_Name')->get();
+            $department = DB::table('Degrees')->select('DegreeName')->get();
             $error      = "";
             return view('Login.Student_Login', compact('error', 'batch', 'department'));
         }
@@ -102,22 +102,25 @@ class login extends Controller
             'rollno' => 'required',
             'password' => 'required',
             'batch' => 'required',
-            'department' => 'required',
+            'degree' => 'required',
         ]);
         $batch      = $Student_data->input('batch');
-        $department = $Student_data->input('department');
+        $degree     = $Student_data->input('degree');
         $rollno     = $Student_data->input('rollno');
         $password   = $Student_data->input('password');
-        $roll       = $batch . "/" . $department . "/" . $rollno;
+        $roll       = $batch . "/" . $degree . "/" . $rollno;
         
         $submit     = DB::table('Students')->where(['StdRollNo' => $roll , 'password' => $password])->first();
     
-         $sem_ID     =  Semester::where('SemSession' , $submit->AdmissionSession)->first()->ID ?? false;
+        // dd($submit);
+            $sem_ID     =  Semester::where('SemSession' , $submit->AdmissionSession)->first()->ID ?? false;
+
+            $degreedata   = Degree::where('DegreeName'   , $degree)->first()  ?? false;
+        
+            $dpt_ID     = Department::where('ID' , $degreedata->Dpt_ID)->first()->ID ?? false;
 
 
-            $dpt_ID     = Department::where('Dpt_Name' , $department)->first()->ID ?? false;
-           
-            $degreeID   = Degree::where('Dpt_ID'   , $dpt_ID)->first()->ID  ?? false;
+
 
              if (empty($sem_ID)){
                  return  redirect()->route('std.login')->with(['errorToaster'   => 'Please Ask Admin to Add Semester' , 'title' => 'Your Semester Not found']);
@@ -125,7 +128,7 @@ class login extends Controller
              if (empty($dpt_ID)){
                  return  redirect()->route('std.login')->with(['errorToaster'   => 'Please Ask Admin to Add Department' , 'title' => 'Your Department Not found']);
             }
-             if (empty($degreeID)){
+             if (empty($degreedata->ID)){
                  return  redirect()->route('std.login')->with(['errorToaster'   => 'Please Ask Admin to Add Degree' , 'title' => 'Your Degree Not found']);
             }
       
@@ -139,7 +142,7 @@ class login extends Controller
                 'std_ID'      => $submit->ID,
                 'sem_ID'      => $sem_ID,
                 'dpt_ID'      => $dpt_ID,
-                'degree_ID'   => $degreeID,
+                'degree_ID'   => $degreedata->ID,
                 'Std'         => $submit
             ]);
 
