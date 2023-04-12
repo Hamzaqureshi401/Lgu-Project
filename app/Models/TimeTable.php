@@ -16,7 +16,10 @@ class TimeTable extends Model
         return $this->belongsTo('App\Models\Employee','Emp_ID');
     }
     public function timeTableDetails(){
-        return $this->hasMany('App\Models\TimeTableDetail','TimeTable_ID');
+        return $this->hasMany('App\Models\TimeTableDetail', 'ID','TimeTable_ID' );
+    }
+    public function timeTableDetailsSingle(){
+        return $this->belongsTo('App\Models\TimeTableDetail','ID' , 'TimeTable_ID');
     }
 
 }
