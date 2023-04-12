@@ -25,7 +25,7 @@
 <div class="col-12">
 <div class="card">
 <div class="card-header">
-   <h4>{{ $Sem_ID->SemesterCourse->semester->SemSession ?? '--' }} / {{ $Sem_ID->SemesterCourse->SemesterCourse->course->CourseName ?? '--' }}</h4>
+   <h4>{{ $Sem_ID->SemesterCourse->semester->SemSession ?? '--' }} / {{ $Sem_ID->SemesterCourse->course->CourseName ?? '--' }}</h4>
    <div class="card-header-action">
       <form>
          <div class="input-group">
