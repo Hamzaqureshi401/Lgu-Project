@@ -122,21 +122,27 @@ class AttendanceController extends Controller
             ]);
         }
 
+        $eachDays = array();
+        $dateArray = array();
+
         for($i = strtotime($timeTable->Day, strtotime($SemStartDate)); $i <= $SemEndDate; $i = strtotime('+1 week', $i)){
             $eachDays[]  = date('l Y-m-d', $i);
         }
+        
         $attandences     = Attendance::select('Date')->get();
-        // dd($attandences , $eachDays);
-        // foreach ($attandences as $attandence){
-        //     $dateArray[] = date('Y-m-d', strtotime($attandence->Date));
-        // }
+        // dd($attandences);
+        foreach ($attandences as $attandence){
+            $dateArray[] = date('Y-m-d', strtotime($attandence->Date));
+        }
+
+
          return 
         view('Attandences.classesShedule' , 
             compact(
                 'timeTable' , 
                 'eachDays' , 
-                'Sem_ID' 
-                //'dateArray'
+                'Sem_ID' ,
+                'dateArray'
             ));
     }
 
