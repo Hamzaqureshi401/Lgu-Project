@@ -83,21 +83,22 @@ class TimeTableController extends Controller
 
             $recentRecord = DB::select('SELECT TOP 1 * FROM TimeTable ORDER BY ID DESC');
             $DegreeSemCourse = DegreeSemCourse::where('ID' , $request->DegSemCourses_ID)->first();
-                $this->storeTimeTableDetail($request->DegSemCourses_ID , $recentRecord , $DegreeSemCourse->Emp_ID);
+                $this->storeTimeTableDetail($request->DegSemCourses_ID , $recentRecord , $DegreeSemCourse->Emp_ID , $status = 1);
             if(!empty($request->Merge)){
             foreach($request->Merge as $merge){
-                $this->storeTimeTableDetail($merge , $recentRecord , $DegreeSemCourse->Emp_ID);
+                $this->storeTimeTableDetail($merge , $recentRecord , $DegreeSemCourse->Emp_ID , $status = 0);
             }
         }
     }
         return redirect()->back()->with(['successToaster' => 'TimeTable Added' , 'title' => 'Success']);
     }
 
-    public function storeTimeTableDetail($merge , $recentRecord , $updateEmp){
+    public function storeTimeTableDetail($merge , $recentRecord , $updateEmp , $status){
 
                 $DegreeSemCourse = new TimeTableDetail(); 
                 $DegreeSemCourse->DegSemCourses_ID = $merge;
                 $DegreeSemCourse->TimeTable_ID = $recentRecord[0]->ID;
+                $DegreeSemCourse->DegSemCoursesParentStatus = $status;
                 $DegreeSemCourse->save();
                 $DegreeSemCourse = DegreeSemCourse::where('ID' , $merge)->update(['Emp_ID' => $updateEmp ]);
     }

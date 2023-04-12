@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Classes\SessionClass;
 use App\Models\SemesterCourse;
 use App\Models\TimeTable;
+use App\Models\TimeTableDetail;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Student;
@@ -67,48 +68,18 @@ class AttendanceController extends Controller
 
        $session         =  $this->sessionData->getSessionData();
      $DegreeSemCourses = DegreeSemCourse::join('TimeTableDetail', 'TimeTableDetail.DegSemCourses_ID', '=', 'DegreeSemCourses.ID')
-    ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
-    ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
-    ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
-     ->select('Courses.CourseCode', 'Semesters.SemSession')
-     ->groupBy('Courses.CourseCode', 'Semesters.SemSession')
-    ->get();
+        ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
+        ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
+        ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
+        // ->select('Courses.CourseCode', 'Semesters.SemSession')
+        // ->groupBy('Courses.CourseCode', 'Semesters.SemSession')
+        ->where('DegSemCoursesParentStatus' , 1)
+        ->where('Emp_ID' , $session['ID'])
+        ->select('DegreeSemCourses.ID' , 'Courses.CourseName')
+         ->get();
 
-    $timeTables = TimeTable::join('TimeTableDetail', 'TimeTableDetail.TimeTable_ID', '=', 'TimeTable.ID')
-    ->join('DegreeSemCourses', 'TimeTableDetail.DegSemCourses_ID', '=', 'DegreeSemCourses.ID')
-    // ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
-    // ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
-    // ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
-    // ->select('Courses.CourseCode', 'Semesters.SemSession')
-    // ->groupBy('Courses.CourseCode', 'Semesters.SemSession')
-    //->pluck('TimeTable.ID')->toArray();
-    ->get();
+         //dd($DegreeSemCourses , $session['ID']);
 
-    // dd($DegreeSemCourses , $timeTables ,
-
-    //     // DegreeSemCourse::groupBy('DegBatches_ID' , 'SemCourse_ID' , 'Emp_ID')->select('Section')->get()
-    //     // ,
-
-    //      DegreeSemCourse::select('DegBatches_ID', 'SemCourse_ID' , 'Section')
-    //               ->distinct()
-    //               ->get() ,
-    //              DegreeSemCourse::join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
-    // ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
-    // ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
-    // ->groupBy('Courses.CourseCode')
-    // ->select('Courses.CourseCode', DB::raw('MAX(Courses.CourseName) AS CourseName'))
-    // ->get()
-    // );
-    $uniqueCourseCodes = DegreeSemCourse::distinct('CourseCode')
-    ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
-    ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
-    ->select( 'Courses.ID');
-    dd($uniqueCourseCodes);
-    
-    $DegreeSemCourse = DegreeSemCourse::get();//where('Emp_ID' =>  $session['ID'])->get();
-
-    
-     //dd($timeTables);
         $title          = 'All Semester Courses';
         $route          = 'updateSemesterCourse';
         $getEditRoute   = 'empSemesterCoursesAttandence';
@@ -134,10 +105,12 @@ class AttendanceController extends Controller
 
     public function claseesShedule($id){
          $session       =  $this->sessionData->getSessionData();
-         $Sem_ID        =  SemesterCourse::where('ID' , $id)->first();
-         $SemStartDate  = $Sem_ID->semester->SemStartDate;
-         $SemEndDate    =   $Sem_ID->semester->SemEndDate;
-         $timeTable     = TimeTable::where(['SemCourse_ID' => $id , 'Emp_ID' =>  $session['ID']])->first();
+         $Sem_ID        =  DegreeSemCourse::where('ID' , $id)->first();
+         $SemStartDate  = $Sem_ID->SemesterCourse->semester->SemStartDate;
+         $SemEndDate    =   $Sem_ID->SemesterCourse->semester->SemEndDate;
+         $TimeTable_ID  = TimeTableDetail::where('DegSemCourses_ID' , $id)->first();
+         // dd($TimeTable_ID , $id);
+         $timeTable     = TimeTable::where(['ID' => $TimeTable_ID->TimeTable_ID ])->first();
          $SemEndDate    = strtotime($SemEndDate);
 
                if(empty($timeTable)){
@@ -153,16 +126,17 @@ class AttendanceController extends Controller
             $eachDays[]  = date('l Y-m-d', $i);
         }
         $attandences     = Attendance::select('Date')->get();
-        foreach ($attandences as $attandence){
-            $dateArray[] = date('Y-m-d', strtotime($attandence->Date));
-        }
+        // dd($attandences , $eachDays);
+        // foreach ($attandences as $attandence){
+        //     $dateArray[] = date('Y-m-d', strtotime($attandence->Date));
+        // }
          return 
         view('Attandences.classesShedule' , 
             compact(
                 'timeTable' , 
                 'eachDays' , 
-                'Sem_ID' , 
-                'dateArray'
+                'Sem_ID' 
+                //'dateArray'
             ));
     }
 
