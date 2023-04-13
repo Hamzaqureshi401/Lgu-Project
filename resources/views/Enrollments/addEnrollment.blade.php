@@ -118,7 +118,7 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($DegsemesterCourses as $DegsemesterCourse)
-                                                                @if (in_array($DegsemesterCourse->ID, $enrollmentsArray))
+                                                                @if (in_array($DegsemesterCourse->semesterCourse->ID, $enrollmentsArray))
                                                                     <tr>
                                                                         <td>
 
@@ -126,7 +126,7 @@
                                                                                 $acdRule['enrollmentAllowed'] == true &&
                                                                                     $getTotalCreditHours <= $acdRule['creditHoursAllowed'] &&
                                                                                     $enrollments->sum('Status') == 0)
-                                                                                <a href="{{ route('store.Enrollment', $DegsemesterCourse->ID) }}"
+                                                                                <a href="{{ route('store.Enrollment', $DegsemesterCourse->semesterCourse->ID) }}"
                                                                                     class="btn btn-sm btn-primary">Add
                                                                                     Course</a>
                                                                             @else

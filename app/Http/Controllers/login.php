@@ -113,12 +113,18 @@ class login extends Controller
         $submit     = DB::table('Students')->where(['StdRollNo' => $roll , 'password' => $password])->first();
     
         // dd($submit);
+         if(empty($submit)){
+                 return  redirect()->route('std.login')->with(['errorToaster'   => 'Student Not Found' , 'title' => 'No Record']);
+            }
+
+        if(empty($submit->AdmissionSession)){
+            return  redirect()->route('std.login')->with(['errorToaster'   => 'Please Ask Admin to Add AdmissionSession' , 'title' => 'Your AdmissionSession Not found']);
+        }
             $sem_ID     =  Semester::where('SemSession' , $submit->AdmissionSession)->first()->ID ?? false;
 
             $degreedata   = Degree::where('DegreeName'   , $degree)->first()  ?? false;
         
             $dpt_ID     = Department::where('ID' , $degreedata->Dpt_ID)->first()->ID ?? false;
-
 
 
 

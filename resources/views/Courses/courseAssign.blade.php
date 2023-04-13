@@ -28,10 +28,10 @@
       </div>
       <div class="form-group col-md-6 col-12">
          <label>Section</label>
-         <select class="form-control select2" name="Section"  required>
-            @foreach (range('A', 'Z') as $l) 
-            <option value="{{ $l }}">{{ $l }}</option>
-            @endforeach
+         <select class="form-control" name="Section"  required>
+            
+            <option>{{ $DegreeSemCourse->Section }}</option>
+           
          </select>
       </div>
      <!--  <div class="form-group col-md-6 col-12">
@@ -116,11 +116,11 @@
       </div>
       <div class="form-group col-md-2 col-12">
          <label>Start Time</label>
-         <input type="time" name="StartTime[]" class="form-control">
+         <input type="time" name="StartTime[]" class="form-control" required>
       </div>
       <div class="form-group col-md-2 col-12">
          <label>End Time</label>
-         <input type="time" name="EndTime[]" class="form-control">
+         <input type="time" name="EndTime[]" class="form-control" required>
       </div>
       <div class="form-group col-md-2 col-12">
          <label>Building</label>
