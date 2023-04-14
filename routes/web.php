@@ -287,7 +287,7 @@ Route::get('/allowedSemesterCourses', [App\Http\Controllers\DeanController::clas
 
 Route::get('/empSemesterCourses', [App\Http\Controllers\AttendanceController::class, 'empSemesterCourses'])->name('emp.SemesterCourses');
 
-Route::get('/empSemesterCoursesAttandence/{id}', [App\Http\Controllers\AttendanceController::class, 'semetserCourseAttandences'])->name('semetser.Course.Attandences');
+Route::get('/empSemesterCoursesAttandence/{id}', [App\Http\Controllers\AttendanceController::class, 'empSemesterCoursesAttandence'])->name('semetser.Course.Attandences');
 
 Route::get('/viewEmpAttendence', [App\Http\Controllers\AttendanceController::class, 'viewEmpAttendence'])->name('view.Emp.Attendence');
 

@@ -195,22 +195,28 @@ class EnrollmentsController extends Controller
          $degreeName        = explode('/' , session::get('user'));
          $registration      = Registration::where('Std_ID' , $request['Std_ID'])->first();
          $std_sch_details   = StdScholarShip::where('Std_ID' , $request['Std_ID'])->first();
-         $Sem_ID = $registration->Sem_ID;
-          $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
-         $sem_details   = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'DegBatches_ID' => $DegreeBatche->ID])->first();
-        $registrationId = $registration->ID;
+         $Sem_ID            = $registration->Sem_ID;
+          $DegreeBatche     = DegreeBatche::where(['Degree_ID' => $session['degree_ID'] , 'Batch_ID' => $session['sem_ID']])->first();
+         $sem_details       = SemesterDetail::where(['Sem_ID' => $Sem_ID , 'DegBatches_ID' => $DegreeBatche->ID])->first();
+ //         dd($Sem_ID ,
+ // $DegreeBatche->ID);
+         if(empty($sem_details)){
+            return 'error';
+         }
+        $registrationId     = $registration->ID;
        
-        $totalCreditHours = $this->getTotalCreditHours($request);
+        $totalCreditHours   = $this->getTotalCreditHours($request);
         if(empty($sem_details)){
-            $Tuition_Fee = 0;
+            $Tuition_Fee    = 0;
         }else{
-            $Tuition_Fee = $sem_details->Tuition_Fee;
+            $Tuition_Fee    = $sem_details->Tuition_Fee;
         }
         $IssueDate  = date('m/d/Y h:i:s a', time());
         $DueDate    = Date('m/d/Y', strtotime('+10 days'));
         $PaidDate   = "";
         $Status     = "Valid";
         $Fine       = 0;  
+        
         if($sem_details->FeeType === 'Per Course'){
             $amount     = $totalCreditHours * $Tuition_Fee;
         }else{

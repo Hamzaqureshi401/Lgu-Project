@@ -71,11 +71,17 @@ class AttendanceController extends Controller
         ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
         ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
         ->join('Courses', 'SemesterCourses.Course_ID', '=', 'Courses.ID')
+        ->join('Employees', 'DegreeSemCourses.Emp_ID', '=', 'Employees.ID')
         // ->select('Courses.CourseCode', 'Semesters.SemSession')
         // ->groupBy('Courses.CourseCode', 'Semesters.SemSession')
         ->where('DegSemCoursesParentStatus' , 1)
         ->where('Emp_ID' , $session['ID'])
-        ->select('DegreeSemCourses.ID' , 'Courses.CourseName')
+        ->select('DegreeSemCourses.ID' , 
+            'Courses.CourseName' , 
+            'SemesterCourses.ID as semcID' , 
+            'employees.Emp_FirstName' ,
+            'employees.Emp_LastName'
+        )
          ->get();
 
          //dd($DegreeSemCourses , $session['ID']);
@@ -96,11 +102,11 @@ class AttendanceController extends Controller
             ));
     }
 
-    public function semetserCourseAttandences($id){
+    public function empSemesterCoursesAttandence($id){
 
         $semetserCourse = SemesterCourse::where('ID' , $id)->first();
          return 
-        view('Attandences.semetserCourseAttandence' , compact('semetserCourse'));
+        view('Attandences.empSemesterCoursesAttandence' , compact('semetserCourse'));
     }
 
     public function claseesShedule($id){
@@ -259,32 +265,6 @@ class AttendanceController extends Controller
 
     }
 
-
-    public function assignMarks($id , $type){
-
-        $SemesterCourse                 = SemesterCourse::where('ID' , $id)->first();
-        $enrollments                    = Enrollment::where('SemCourses_ID' , $id)->get();
-        $SemCourseWeightage             = SemesterCourseWeightage::where(['SemCourse_ID' => $id , 'Type' => $type])->first();
-        $SemesterCourseWeightageDetail  = SemesterCourseWeightageDetail::where('SemCourseWeightage_ID' , $SemCourseWeightage->ID)->first();
-        $route                          = '/storeStudentMark';
-       
-        $StudentMarks = StudentMark::where('SemCourseWeightagedetail_ID' , $SemesterCourseWeightageDetail->ID)->first();
-        
-
-        return 
-        view('Attandences.assignMarks' , 
-            compact(
-                'SemesterCourse' , 
-                'type' , 
-                'enrollments' , 
-                'route' , 
-                'SemCourseWeightage' , 
-                'SemesterCourseWeightageDetail',
-                'StudentMarks'
-            ));
-
-    }
-
     public function gradeConfigration($id){
 
         $SemesterCourse                     = SemesterCourse::where('ID' , $id)->first();
@@ -421,6 +401,32 @@ class AttendanceController extends Controller
                 'wetaigePlusDetails',
                 'stdMars'
             ));
+    }
+
+    public function assignMarks($id , $type){
+
+        $SemesterCourse                 = SemesterCourse::where('ID' , $id)->first();
+        $enrollments                    = Enrollment::where(['SemCourses_ID' => $id , 'Status' => 1])->get();
+        //dd($id , $enrollments);
+        $SemCourseWeightage             = SemesterCourseWeightage::where(['SemCourse_ID' => $id , 'Type' => $type])->first();
+        $SemesterCourseWeightageDetail  = SemesterCourseWeightageDetail::where('SemCourseWeightage_ID' , $SemCourseWeightage->ID)->first();
+        $route                          = '/storeStudentMark';
+       
+        $StudentMarks = StudentMark::where('SemCourseWeightagedetail_ID' , $SemesterCourseWeightageDetail->ID)->first();
+        
+
+        return 
+        view('Attandences.assignMarks' , 
+            compact(
+                'SemesterCourse' , 
+                'type' , 
+                'enrollments' , 
+                'route' , 
+                'SemCourseWeightage' , 
+                'SemesterCourseWeightageDetail',
+                'StudentMarks'
+            ));
+
     }
 
     public function deleteMarks($id){

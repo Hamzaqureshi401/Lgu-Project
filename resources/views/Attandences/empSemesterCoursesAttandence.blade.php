@@ -21,7 +21,13 @@
                       <div class="author-box-name">
                         <h6>Course : {{ $semetserCourse->course->CourseName ?? '--'}}</h6>
                         <h6>Course Code: {{ $semetserCourse->course->CourseCode ?? '--'}}</h6>
-                        <h6>Section : {{ $semetserCourse->Section ?? '--'}}</h6>
+                        <h6>Section : 
+
+                          @foreach($semetserCourse->DegreeSemCoursesMany as $DegreeSemCoursesMany)
+                            {{ $DegreeSemCoursesMany->Section }}
+                          @endforeach
+
+                        </h6>
                         <h6>Lecture : {{ $semetserCourse->CourseName ?? '--'}}</h6>
                         <h6>Quiz : {{ $semetserCourse->CourseName ?? '--'}}</h6>
                         <h6>Assignment : {{ $semetserCourse->CourseName ?? '--'}}</h6>

@@ -25,13 +25,13 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $DegreeSemCourse->employee->Emp_FirstName ?? '--' }}</td>
+                            <td>{{ $DegreeSemCourse->Emp_FirstName ?? '--' }}</td>
                             <td>{{ $DegreeSemCourse->CourseName ?? '--' }}</td>
                            
                             <td>
                               <div class="card-body">
                                 
-                                 <a href="{{ $getEditRoute }}/{{ $DegreeSemCourse->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ 'Tasks' }}{{ $DegreeSemCourse->ID }}</a>
+                                 <a href="{{ $getEditRoute }}/{{ $DegreeSemCourse->semcID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ 'Tasks' }}</a>
                                  
                                 
                               </div>
