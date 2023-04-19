@@ -64,6 +64,7 @@ class TimeTableController extends Controller
     }
 
     public function storeTimeTable(Request $request){
+        dd($request);
 
         foreach($request->Day as $key => $data){
             $day        = $request['Day'][$key];
