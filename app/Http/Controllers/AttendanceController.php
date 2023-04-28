@@ -13,6 +13,7 @@ use App\Models\Student;
 use App\Models\Degree;
 use App\Models\Department;
 use App\Models\DegreeBatche;
+use App\Models\Semester;
 
 
 use Redirect;
@@ -105,18 +106,35 @@ class AttendanceController extends Controller
     public function empSemesterCoursesAttandence($id){
 
         $semetserCourse = SemesterCourse::where('ID' , $id)->first();
+        $session       =  $this->sessionData->getSessionData();
+        $DegreeSemCourses = DegreeSemCourse::join('TimeTableDetail', 'TimeTableDetail.DegSemCourses_ID', '=', 'DegreeSemCourses.ID')
+        ->join('SemesterCourses', 'DegreeSemCourses.SemCourse_ID', '=', 'SemesterCourses.ID')
+        ->join('Semesters', 'SemesterCourses.Sem_ID', '=', 'Semesters.ID')
+        ->where('DegSemCoursesParentStatus' , 1)
+        ->where('Emp_ID' , $session['ID'])
+        ->where('SemCourse_ID' , $id)
+        ->select('DegreeSemCourses.ID'
+        )
+         ->first();
+        // dd($DegreeSemCourses);
          return 
-        view('Attandences.empSemesterCoursesAttandence' , compact('semetserCourse'));
+        view('Attandences.empSemesterCoursesAttandence' , compact('semetserCourse' , 'DegreeSemCourses'));
     }
 
-    public function claseesShedule($id){
+    public function claseesShedule($id , $semesterID){
+        //dd($semesterID);
          $session       =  $this->sessionData->getSessionData();
-         $Sem_ID        =  DegreeSemCourse::where('ID' , $id)->first();
-         $SemStartDate  = $Sem_ID->SemesterCourse->semester->SemStartDate;
-         $SemEndDate    =   $Sem_ID->SemesterCourse->semester->SemEndDate;
-         $TimeTable_ID  = TimeTableDetail::where('DegSemCourses_ID' , $id)->first();
+         $DegreeSemCourse        =  DegreeSemCourse::where(['SemCourse_ID' => $id , 'Emp_ID' => $session['ID']])->get();
+        // dd($DegreeSemCourse);
+         $semester = Semester::where('ID' , $semesterID)->first();
+         $SemStartDate  = $semester->SemStartDate;
+         $SemEndDate    =   $semester->SemEndDate;
+         $SemCourse = $id;
+         //dd($SemStartDate);
+         $TimeTable_ID  = TimeTableDetail::whereIn('DegSemCourses_ID' , $DegreeSemCourse->pluck('ID')->toArray())->first();
          // dd($TimeTable_ID , $id);
          $timeTable     = TimeTable::where(['ID' => $TimeTable_ID->TimeTable_ID ])->first();
+        // dd($timeTable);
          $SemEndDate    = strtotime($SemEndDate);
 
                if(empty($timeTable)){
@@ -140,6 +158,7 @@ class AttendanceController extends Controller
         foreach ($attandences as $attandence){
             $dateArray[] = date('Y-m-d', strtotime($attandence->Date));
         }
+      //  dd(1);
 
 
          return 
@@ -147,7 +166,7 @@ class AttendanceController extends Controller
             compact(
                 'timeTable' , 
                 'eachDays' , 
-                'Sem_ID' ,
+                'SemCourse' ,
                 'dateArray'
             ));
     }

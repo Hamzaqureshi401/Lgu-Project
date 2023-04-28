@@ -57,7 +57,8 @@
                      <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="home-tab2">
                         <div class="row">
                               <div class="form-group col-md-6 col-12">
-                               <a href="{{ route('clasees.Shedule' , $semetserCourse->ID)}}" class="btn btn-success btn-block " style="color:white;">Mark Attendence</a>
+                              <a href="{{ route('clasees.Shedule', [$semetserCourse->ID, $DegreeSemCourses->ID]) }}" class="btn btn-success btn-block" style="color:white;">Mark Attendence</a>
+
                               </div>
                               <div class="form-group col-md-6 col-12">
                                <a href="{{ route('view.Emp.Attendence' )}}" class="btn btn-info btn-block" style="color:white;">View Attendence</a>

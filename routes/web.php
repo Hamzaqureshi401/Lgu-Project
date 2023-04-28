@@ -230,6 +230,14 @@ Route::post('/storeDegreeBatch', [App\Http\Controllers\DegreeBatchsController::c
 Route::get('editDegreeBatch/{id}', [App\Http\Controllers\DegreeBatchsController::class, 'editDegreeBatch'])->name('edit.DegreeBatch');
 Route::post('/updateDegreeBatch', [App\Http\Controllers\DegreeBatchsController::class, 'updateDegreeBatch'])->name('update.DegreeBatch');
 
+// Fee Route Start
+
+Route::get('/addFees', [App\Http\Controllers\FeeController::class, 'addFee'])->name('add.Fee');
+Route::get('/allFees', [App\Http\Controllers\FeeController::class, 'allFees'])->name('all.Fees');
+Route::post('/storeFee', [App\Http\Controllers\FeeController::class, 'storeFee'])->name('store.Fee');
+Route::get('editFee/{id}', [App\Http\Controllers\FeeController::class, 'editFee'])->name('edit.Fee');
+Route::post('/updateFee', [App\Http\Controllers\FeeController::class, 'updateFee'])->name('update.Fee');
+
 // DegreeSemCourses Route Start
 
 Route::get('/addDegreeSemCourses', [App\Http\Controllers\DegreeSemCoursesController::class, 'addDegreeSemCourses'])->name('add.DegreeSemCourses');
@@ -291,7 +299,7 @@ Route::get('/empSemesterCoursesAttandence/{id}', [App\Http\Controllers\Attendanc
 
 Route::get('/viewEmpAttendence', [App\Http\Controllers\AttendanceController::class, 'viewEmpAttendence'])->name('view.Emp.Attendence');
 
-Route::get('/claseesShedule/{id}', [App\Http\Controllers\AttendanceController::class, 'claseesShedule'])->name('clasees.Shedule');
+Route::get('/claseesShedule/{id}/{parm}', [App\Http\Controllers\AttendanceController::class, 'claseesShedule'])->name('clasees.Shedule');
 
 
 Route::get('/studentAttandenceView/{day}/{id}', [App\Http\Controllers\AttendanceController::class, 'studentAttandenceView'])->name('student.Attandence.View');

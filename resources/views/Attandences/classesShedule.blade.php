@@ -74,7 +74,7 @@
             </td>
             @else
             <td>
-               <a href="{{ route('student.Attandence.View' , [$day , $Sem_ID->ID])}}">
+               <a href="{{ route('student.Attandence.View' , [$day , $SemCourse])}}">
                   <p class="badge badge-info badge-shadow" style="color:white;">{{ $day }}</p>
                   <p class="badge badge-success badge-shadow"style="color:white;">
                      {{ \Carbon\Carbon::parse( $timeTable->StartTime)->format('g:i a')}}
