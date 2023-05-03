@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Fee;
 use App\Models\DegreeBatche;
+use App\Models\Degree;
+
 use App\Models\Semester;
 use Illuminate\Support\Facades\DB;
 
@@ -70,20 +72,21 @@ class FeeController extends Controller
     public function allFees()
     {
 
-        $degreeBatchs = Fee::paginate(10);
-        $title         = 'Degree Batch';
+        $fees = Fee::paginate(10);
+        $title         = 'All Fees';
         $route         = 'updateFee';
         $getEditRoute  = 'editFee';
-        $modalTitle    = 'Edit Degree Batch';
+        $modalTitle    = 'Edit Fee';
 
+        // dd($fees);
 
 
 
         return
             view(
-                'Fees.allFees',
+                'Fee.allFees',
                 compact(
-                    'degreeBatchs',
+                    'fees',
                     'title',
                     'modalTitle',
                     'route',
@@ -104,7 +107,7 @@ class FeeController extends Controller
 
         return
             view(
-                'Fees.editFee',
+                'Fee.editFee',
                 compact(
                     'fees',
                     'button',

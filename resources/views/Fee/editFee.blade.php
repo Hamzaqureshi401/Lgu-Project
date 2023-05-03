@@ -6,12 +6,12 @@
                     {{ csrf_field() }}
                  <div class="card-body">
                     <div class="form-group">
-                      <input type="hidden" name="id" value="{{ $degreeBatches->ID }}">
+                      <input type="hidden" name="id" value="{{ $fees->ID }}">
                       <label>Degree</label>
                       <select class="form-control select2" name="Degree_ID"  required>
                         @foreach($degrees as $degree)
                         <option value="{{ $degree->ID }}"
-                          {{ $degreeBatches->Degree_ID == $degree->ID ? 'selected' : '' }}
+                          {{ $degreeBatchs->Degree_ID == $degree->ID ? 'selected' : '' }}
                           >{{ $degree->DegreeName }}</option>
                         @endforeach
                       </select>
