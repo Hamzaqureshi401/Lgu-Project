@@ -13,8 +13,10 @@ class FeeController extends Controller
      public function validation($request){
 
         $this->validate($request, [
-            'Degree_ID'        => 'required|numeric',
-            'Batch_ID'        => 'required|numeric',
+            'DegreeBatches_ID'        => 'required|numeric',
+            'Sem_ID'                  => 'required|numeric',
+            'PerCourseFee'            => 'required|numeric',
+            'PerSemesterFee'          => 'required|numeric',
 
         ]);
         
@@ -40,12 +42,12 @@ class FeeController extends Controller
 
      public function storeFee(Request $request){
 
-        $unique = $this->uniqueDigreeBatch($request);
+        $unique = $this->uniqueDigreeBatchAndSemeseter($request);
         $validator = $this->validation($request);
       
 
             if($unique == true){
-             return redirect()->back()->with(['errorToaster' => 'Degree Batches Must Be Uniqle' , 'title' => 'Warning']);
+             return redirect()->back()->with(['errorToaster' => 'Degree Batches ans Semester Must Be Uniqle' , 'title' => 'Warning']);
         }else {
             $submit = DB::update("EXEC sp_InsertFees
             @Degree_ID  = '$request->Degree_ID',
@@ -113,8 +115,8 @@ class FeeController extends Controller
            return redirect()->back()->with(['successToaster' => 'Degree Batches Updated' , 'title' => 'Success']);
     }
 
-    public function uniqueDigreeBatch($request){
+    public function uniqueDigreeBatchAndSemeseter($request){
 
-        return Fee::where(['Degree_ID' => $request->Degree_ID , 'Batch_ID' => $request->Batch_ID])->exists();
+        return Fee::where(['DegreeBatches_ID' => $request->DegreeBatches_ID , 'Sem_ID' => $request->Sem_ID])->exists();
     }
 }
