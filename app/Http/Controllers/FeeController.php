@@ -27,8 +27,8 @@ class FeeController extends Controller
     public function addFee()
     {
 
-        $button = "Add Degree Batches";
-        $title  = 'Add Degree Batches';
+        $button = "Add Fees";
+        $title  = 'Add Fees';
         $route  = '/storeFee';
         $degreeBatche = DegreeBatche::get();
         $semesters = Semester::get();
