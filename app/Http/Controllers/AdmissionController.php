@@ -12,7 +12,7 @@ use App\Models\Semester;
 use App\Models\DegreeBatche;
 use App\Models\SemesterDetail;
 use App\Http\Controllers\ChallanController;
-
+use App\Http\Controllers\RegistrationController;
 use App\Models\StudentEducation;
 use App\Models\Registration;
 
@@ -79,6 +79,26 @@ class AdmissionController extends Controller
                 ));
     }
 
+     public function storeStudentAdmission(Request $request){
+
+        $validator = $this->validation($request);
+       DB::beginTransaction();
+
+        try {
+            $this->createStudentDetail($request);
+            $this->createStudentQualification($request);
+            $this->storeRegistrationInDb($request);
+            
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+            return redirect()->back()->with(['successToaster' => 'Admission Added!' , 'title' => 'Success']);
+
+        //}
+    }
+
     protected function createStudentDetail($request){
 
          $stdfilename = time() . "_studentfile." . $request->file('stdfile')->getClientOriginalExtension();
@@ -119,6 +139,22 @@ class AdmissionController extends Controller
          @Files              =      '$stdfilename',
          @Image              =      '$stdImagename';");
         return $submit;
+    }
+
+    public function storeRegistrationInDb($request){
+
+        $registration = new RegistrationController();
+        $Sem_ID = Semester::where('SemSession' ,$request->AdmissionSession)->pluck('ID')->first();
+        if(!empty($request->Student_ID)){
+            $Std_ID = $request->Student_ID;
+        }else{
+            $Std_ID = Student::where(['CNIC' => $request->CNIC , 'FatherCNIC' => $request->FatherCNIC])->pluck('ID')->first();
+        }
+        $registrationCreated = $registration->storeRegistrationInDB( 
+            $Std_ID , 
+            15 , 
+            $Sem_ID
+        );
     }
 
     protected function createStudentQualification($request){
@@ -256,30 +292,6 @@ class AdmissionController extends Controller
         }
     }
 
-
-    public function storeStudentAdmission(Request $request){
-
-        $validator = $this->validation($request);
-        // if ($validator['error'] == true) {
-        //     return
-        //     response()->json([
-        //     'title' => 'Failed' ,
-        //     'type'=> 'error',
-        //     'message'=> ''.$validator['validation']
-        //     ]);
-        // }else {
-            $this->createStudentDetail($request);
-            $this->createStudentQualification($request);
-         // return response()->json([
-        //     'title' => 'Done' ,
-        //     'type'=> 'success',
-        //     'message'=> 'Admission Added!
-        //     ']);
-            return redirect()->back()->with(['successToaster' => 'Admission Added!' , 'title' => 'Success']);
-
-        //}
-    }
-
     public function addStudentExamination(
 
         $Std_ID,
@@ -383,10 +395,6 @@ class AdmissionController extends Controller
     }
     public function updateStudentTable($request , $Date_of_birth ,$state ,$Country ,$file ,$stdImage){
 
-
-
-
-
         $submit = DB::update("EXEC sp_UpdateStudentDetails
         @Std_ID             ='$request->Student_ID',
         @Std_FName          ='$request->Std_FName',
@@ -426,26 +434,31 @@ class AdmissionController extends Controller
 
      public function updateStudentAdmission(Request $request){
 
+        $registration = Registration::where('Std_ID' , $request->Student_ID);
+        //dd($registration , $request->all());
+        if (empty($registration->exists())){
+           $this->storeRegistrationInDb($request);
+            $request['Reg_ID'] = (clone $registration)->first()->ID;
+        }else{
+            $request['Reg_ID'] = (clone $registration)->first()->ID;
+        }
 
     
         if($request->country){
             $Country            =  $request->country;
-        }
-        else{
+        }else{
             $Country           =   $request->country_pre;
         }
 
         if($request->state){
             $state              =  $request->state;
-        }
-        else{
+        }else{
             $state             =   $request->Province_pre;
         }
 
         if($request->DOB){
             $Date_of_birth      =  $request->DOB;
-        }
-        else{
+        }else{
             $Date_of_birth     =   $request->DOB_pre;
         }
 
@@ -453,16 +466,14 @@ class AdmissionController extends Controller
 
             $file               = time() . "_studentfileupdate." . $request->file('stdfile')->getClientOriginalExtension();
             $request->file('stdfile')->storeAs('studentsFiles', $file);
-        }
-        else{
+        }else{
             $file              =   $request->stdfile_pre;
         }
 
         if($request->Image){
             $stdImage           = time() . "_studentImageupdate." . $request->file('Image')->getClientOriginalExtension();
             $request->file('Image')->storeAs('studentsImages', $stdImage);
-        }
-        else{
+        }else{
             $stdImage          =   $request->image_pre;
         }
 
@@ -560,44 +571,24 @@ class AdmissionController extends Controller
         
         $challan = new ChallanController();
         $Sem_ID = Semester::where('SemSession' ,$request->AdmissionSession)->first()->ID;
-         $registration = Registration::where('Std_ID' , $request['Std_ID']);
-        if (empty($registration->exists())){
-           $this->storeRegistrationInD($request['Std_ID'] , $request['AcaStdID'] = 6 , $session['sem_ID']);
-            $request['Reg_ID'] = (clone $registration)->first()->ID;
-        }else{
-            $request['Reg_ID'] = (clone $registration)->first()->ID;
-        }
-        //dd($Sem_ID);
-        
+        $registrationId = Registration::where('Std_ID' , $request->Student_ID)->first()->ID;
         $amount = 1500;
-        
 
-       $challancreated = $challan->createChallan(
+        $oldChallan = Challan::where(['Reg_ID' => $registrationId , 'Amount' => $amount]);
+        if(empty($oldChallan->exists())){
+            $challancreated = $challan->createChallan(
             $amount , 
             $Type= "Registration" , 
-            $registrationId = '30021' , 
+            $registrationId , 
             $Sem_ID,
             0,
             0
         );
        
-
-
-
         $challan->createChallanDetail(
-
-        $challancreated->ID,
-        // $SemesterFee,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        // $FeeType,
-        0
-    );
+        $challancreated->ID,0,0,0,0,0,0,0,0);
+        }
+      
         
     }
     public function storeRegistrationInD($Std_ID , $AcaStdID , $Sem_ID){
