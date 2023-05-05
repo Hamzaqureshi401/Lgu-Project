@@ -14,6 +14,7 @@ use App\Models\SemesterDetail;
 use App\Http\Controllers\ChallanController;
 
 use App\Models\StudentEducation;
+use App\Models\Registration;
 
 
 class AdmissionController extends Controller
@@ -56,13 +57,7 @@ class AdmissionController extends Controller
             'stdfile'           => 'required|mimes:jpeg,png,jpg,pdf|max:3072'
 
         ]);
-        // $validation['validation'] = $validator->errors()->first();
-        // if ($validator->fails()) {
-        //     $validation['error'] = true;
-        // }else{
-        //     $validation['error'] = false;
-        // }
-        // return $validation;
+        
     }
 
     public function addStudentAdmission(){
@@ -70,9 +65,6 @@ class AdmissionController extends Controller
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
 
         $admissionsession = Semester::where('Year','=', date('Y'))->get();
-
-
-
         $button = "Add Student Admission";
         $title  = 'Add Student Admissions';
         $route  = '/storeStudentAdmission';
@@ -89,12 +81,8 @@ class AdmissionController extends Controller
 
     protected function createStudentDetail($request){
 
-
-
          $stdfilename = time() . "_studentfile." . $request->file('stdfile')->getClientOriginalExtension();
         $request->file('stdfile')->storeAs('studentsFiles', $stdfilename);
-
-
         $stdImagename = time() . "_studentImage." . $request->file('Image')->getClientOriginalExtension();
         $request->file('Image')->storeAs('studentsImages', $stdImagename);
 
@@ -488,7 +476,11 @@ class AdmissionController extends Controller
 
         }
         if($request->Status=='Completed'){
-            $this->createChallan($request);
+            $this->createFeeChallan($request);
+        }
+
+         if($request->Status=='In Progress'){
+            $this->createProgressChallan($request);
         }
 
 
@@ -518,9 +510,9 @@ class AdmissionController extends Controller
 
     }
 
-    public function createChallan($request){
+    public function createFeeChallan($request){
 
-        //dd($request->AdmissionSession , $request->Degree_ID);
+        
         $challan = new ChallanController();
         $degreeBatch = DegreeBatche::where(['Degree_ID' => $request->Degree_ID , 'Batch_ID' => $request->AdmissionSession])->first()->ID;
 
@@ -534,11 +526,6 @@ class AdmissionController extends Controller
         $semesterDetail->Registration_Fee +
         $semesterDetail->Practical_charges +
         $semesterDetail->Sports_Fund;
-
-        // dd($amount , $Type= "Registration" , $registrationId = 000 , $request->AdmissionSession);
-
-        // DB::table('ChallanDetails')->truncate();
-        // DB::table('Challans')->truncate();
         
 
        $challancreated = $challan->createChallan(
@@ -566,6 +553,61 @@ class AdmissionController extends Controller
         $semesterDetail->Tuition_Fee
     );
         
+    }    
+
+    public function createProgressChallan($request){
+
+        
+        $challan = new ChallanController();
+        $Sem_ID = Semester::where('SemSession' ,$request->AdmissionSession)->first()->ID;
+         $registration = Registration::where('Std_ID' , $request['Std_ID']);
+        if (empty($registration->exists())){
+           $this->storeRegistrationInD($request['Std_ID'] , $request['AcaStdID'] = 6 , $session['sem_ID']);
+            $request['Reg_ID'] = (clone $registration)->first()->ID;
+        }else{
+            $request['Reg_ID'] = (clone $registration)->first()->ID;
+        }
+        //dd($Sem_ID);
+        
+        $amount = 1500;
+        
+
+       $challancreated = $challan->createChallan(
+            $amount , 
+            $Type= "Registration" , 
+            $registrationId = '30021' , 
+            $Sem_ID,
+            0,
+            0
+        );
+       
+
+
+
+        $challan->createChallanDetail(
+
+        $challancreated->ID,
+        // $SemesterFee,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        // $FeeType,
+        0
+    );
+        
+    }
+    public function storeRegistrationInD($Std_ID , $AcaStdID , $Sem_ID){
+
+        $submit = DB::statement("EXEC sp_InsertRegistrations
+            @Std_ID         = '$Std_ID',
+            @AcaStdID       = '$AcaStdID',
+            @Sem_ID         = '$Sem_ID'
+            ;");
+
     }
 
 
