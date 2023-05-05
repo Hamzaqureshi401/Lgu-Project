@@ -542,7 +542,7 @@ class AdmissionController extends Controller
        $challancreated = $challan->createChallan(
             $amount , 
             $Type= "Registration" , 
-            $registrationId = '30021' , 
+            $registrationId = Registration::where('Std_ID' , $request->Student_ID)->first()->ID,
             $request->AdmissionSession
         );
        
