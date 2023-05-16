@@ -36,8 +36,17 @@
             </div>
             <div class="form-group">
                 <label style="font-size: 13px">Class Section <span style="color: red">*</span></label>
-                <input type="text" name="ClassSection" value="{{ old('ClassSection') }}" id="ClassSection"
-                    class="form-control" maxlength=1>
+               
+
+               <select name="ClassSection" class="form-control">
+                <option value="" selected disabled>Select Class Section</option>
+                @foreach (range('A', 'Z') as $letter)
+                    <option value="{{ $letter }}" {{ old('ClassSection') == $letter ? 'selected' : '' }}>
+                        {{ $letter }}
+                    </option>
+                @endforeach
+            </select>
+
                 <br>
                 @error('ClassSection')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -262,8 +271,7 @@
                 <div class="form-group">
                     <label style="font-size: 13px">Status <span style="color: red">*</span></label>
                     <select name="Status" class="custom-select">
-                        <option value="{{ old('Status') }}" selected>{{ old('Status') }}</option>
-                        <option value="In Progress">In Progress</option>
+                        <option value="In Progress" selected>In Progress</option>
                     </select>
                 </div>
                 <br>

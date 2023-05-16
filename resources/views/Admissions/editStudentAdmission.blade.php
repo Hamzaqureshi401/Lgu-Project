@@ -34,8 +34,16 @@
    </div>
    <div class="form-group">
       <label style="font-size: 13px">Class Section <span style="color: red">*</span></label>
-      <input type="text" name="ClassSection" value="{{ $studentAdmission->ClassSection }}" id="ClassSection"
-         class="form-control" maxlength=1>
+      
+          <select name="ClassSection" class="form-control">
+                 <option value="{{ $studentAdmission->ClassSection }}" selected>{{ $studentAdmission->ClassSection }}</option>
+           
+                @foreach (range('A', 'Z') as $letter)
+                    <option value="{{ $letter }}" {{ old('ClassSection') == $letter ? 'selected' : '' }}>
+                        {{ $letter }}
+                    </option>
+                @endforeach
+            </select>
       <br>
       @error('ClassSection')
       <div class="alert alert-danger">{{ $message }}</div>
@@ -261,12 +269,16 @@
          <label style="font-size: 13px">Status <span style="color: red">*</span></label>
          <select name="Status" class="custom-select select2">
             <option value="{{ $studentAdmission->Status }}" selected>{{ $studentAdmission->Status }}</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Admitted">Admitted</option>
-            <option value="Completed">Completed</option>
+            @if( $studentAdmission->Status == 'In Progress')
             <option value="On Merit">On Merit</option>
-            <option value="On Waiting">On Waiting</option>
-            <option value="Step1">Step1</option>
+            @elseif($studentAdmission->Status == 'On Merit')
+            <option value="Completed">Completed</option>
+            @elseif($studentAdmission->Status == 'Admitted')
+            
+            @endif
+            <!-- 'Progress->Merit->Completed->Admitted' -->
+            
+            <!-- <option value="Step1">Step1</option> -->
 
 
 
