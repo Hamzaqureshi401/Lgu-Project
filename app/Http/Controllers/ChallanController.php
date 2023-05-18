@@ -110,6 +110,9 @@ class ChallanController extends Controller
             $std_sch_type
 
     ){
+
+        $oldAmount  = Challan::getOldAmount($Reg);
+        $Amount     = $Amount + $oldAmount;
         $IssueDate  = date('m/d/Y h:i:s a', time());
         $DueDate    = Date('m/d/Y', strtotime('+10 days'));
         $PaidDate   = "";

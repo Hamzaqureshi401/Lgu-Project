@@ -273,7 +273,10 @@
             <option value="On Merit">On Merit</option>
             @elseif($studentAdmission->Status == 'On Merit')
             <option value="Completed">Completed</option>
+            @elseif($studentAdmission->Status == 'Completed' && !empty($enrollments))
+            <option value="Admitted">Admitted</option>
             @elseif($studentAdmission->Status == 'Admitted')
+            
             
             @endif
             <!-- 'Progress->Merit->Completed->Admitted' -->
@@ -438,6 +441,27 @@
    </div>
    --}}
     @include('Admissions.studentEducation')
+
+    @if(empty($DegreeBatche) && $studentAdmission->Status == 'Completed')
+      <div class="form-group">
+      <span
+         class="" style="color: red;">Note: Degree Batch Not Found Enrollment will be Failed!</span>
+   </div>
+   @endif
+   @if(($DegsemesterCourses->isEmpty()) && $studentAdmission->Status == 'Completed')
+
+       <div class="form-group">
+      <span
+         class="" style="color: red;">Note: Deg Semester Courses Not Found Enrollment will be Failed!</span>
+   </div>
+   @endif
+
+    <div class="form-group">
+      @foreach($enrollments as $enrollment)
+      <span
+         class="" style="color: red;">Enrolled In: {{ $enrollment->semesterCourse->course->CourseName }}</span>
+   </div>
+      @endforeach
    
    <div class="form-group">
       <button id="button" type="submit"

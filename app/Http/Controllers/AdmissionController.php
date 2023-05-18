@@ -361,6 +361,18 @@ class AdmissionController extends Controller
         $admissionsession = Semester::where('Year','=', date('Y'))->get();
 
 
+        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $studentAdmission->Degree_ID , 'Batch_ID' => $studentAdmission->batch->ID])->first();
+        if($DegreeBatche){
+            $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $studentAdmission->ClassSection])->get();
+        }else{
+            $DegsemesterCourses = null;
+        }
+
+        $enrollments = Enrollment::where('Std_ID' , $studentAdmission->ID)->get();
+
+        
+
+
 
         // dd($matric[0]['ID'],$matric[0]['Degree'],$matric[0]['InstitutionName']);
 
@@ -375,7 +387,10 @@ class AdmissionController extends Controller
                 'title' ,
                 'route',
                 'degree',
-                'admissionsession'
+                'admissionsession',
+                'DegreeBatche',
+                'DegsemesterCourses',
+                'enrollments'
                
             ));
     }
@@ -447,9 +462,9 @@ class AdmissionController extends Controller
 
      public function updateStudentAdmission(Request $request){
 
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
-        try {
+        // try {
         $request['Reg_ID'] = $this->storeRegistrationInDbReturnId($request);
 
         if($request->country){
@@ -457,58 +472,35 @@ class AdmissionController extends Controller
         }else{
             $Country           =   $request->country_pre;
         }
-
         if($request->state){
             $state              =  $request->state;
         }else{
             $state             =   $request->Province_pre;
         }
-
         if($request->DOB){
             $Date_of_birth      =  $request->DOB;
         }else{
             $Date_of_birth     =   $request->DOB_pre;
         }
-
         if($request->stdfile){
-
             $file               = time() . "_studentfileupdate." . $request->file('stdfile')->getClientOriginalExtension();
             $request->file('stdfile')->storeAs('studentsFiles', $file);
         }else{
             $file              =   $request->stdfile_pre;
         }
-
         if($request->Image){
             $stdImage           = time() . "_studentImageupdate." . $request->file('Image')->getClientOriginalExtension();
             $request->file('Image')->storeAs('studentsImages', $stdImage);
         }else{
             $stdImage          =   $request->image_pre;
         }
-         if($request->Status=='Completed'){
-            $challanStatus = $this->createFeeChallan($request);
-            if($challanStatus == "error"){
-                 return redirect()->back()->with(['errorToaster' => 'Failed Degree Batch Not Found!' , 'title' => 'Add Or Set Degree Batches']);
-            }elseif($challanStatus == "error1"){
-                return redirect()->back()->with(['errorToaster' => 'Failed Semeter Detail Not found!' , 'title' => 'Set Semester Detail to Create Challan']);
-            }
-
-           $enrollment = $this->enrollStudentCourses($request);
-           if($enrollment == 'Degree Batch Not Found!'){
-                return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Enrollment Failled Please Add Degree Batch']);
-           }elseif($enrollment == 'Degree SemesterCourse Not Found!'){
-                return redirect()->back()->with(['errorToaster'   => 'Degree SemesterCourse Not Found!' , 'title' => 'Enrollment Failled Please Add Degree SemesterCourse']);
-           }
-
-           
-        }
+         
         if($request->Status=='Admitted'){
             $applicantid = Student::where(['ID' => $request->Student_ID])->first();
             if($applicantid->StdRollNo==null){
                 DB::update("EXEC sp_RollNoAssign @App_ID='$applicantid->ApplicantID' ;");
             }
         }
-       
-
          if($request->Status=='In Progress'){
             $this->createProgressChallan($request);
         }
@@ -530,11 +522,26 @@ class AdmissionController extends Controller
         }
         }
 
-        DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
+        if($request->Status=='Completed'){
+            $challanStatus = $this->createFeeChallan($request);
+            if($challanStatus == "error"){
+                 return redirect()->back()->with(['errorToaster' => 'Failed Degree Batch Not Found!' , 'title' => 'Add Or Set Degree Batches']);
+            }elseif($challanStatus == "error1"){
+                return redirect()->back()->with(['errorToaster' => 'Failed Semeter Detail Not found!' , 'title' => 'Set Semester Detail to Create Challan']);
+            }
+           $enrollment = $this->enrollStudentCourses($request);
+           if($enrollment == 'Degree Batch Not Found!'){
+                return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Enrollment Failled Please Add Degree Batch']);
+           }elseif($enrollment == 'Degree SemesterCourse Not Found!'){
+                return redirect()->back()->with(['errorToaster'   => 'Degree SemesterCourse Not Found!' , 'title' => 'Enrollment Failled Please Add Degree SemesterCourse']);
+           }  
         }
+
+        // DB::commit();
+        // } catch (\Exception $e) {
+        //     DB::rollBack();
+        //     throw $e;
+        // }
 
         
         return redirect()->back()->with(['successToaster' => 'Student Admission Added!' , 'title' => 'Success']);
@@ -665,25 +672,30 @@ class AdmissionController extends Controller
             return 'Degree SemesterCourse Not Found!';
         }
 
-        $old_Enrollment = Enrollment::where([
-        'Std_ID'        => $request->Student_ID,
-        'SemCourses_ID' => $DegsemesterCourses->semesterCourse->ID,
-        'Is_i_mid'      => 10,
-        'Is_i_final'    => 10,
-        'Reg_ID'        => $Reg_ID]);
-        $old_Enrollment = $this->oldEnrollment($request , $DegsemesterCourses->semesterCourse->ID , $Is_i_mid = 10 , $Is_i_final = 10 , $Reg_ID);
-        if($old_Enrollment->exists() != true){
+
+
+       
             foreach($DegsemesterCourses as $DegsemesterCourse){
+                //dd($DegsemesterCourses);
+
+                $old_Enrollment = Enrollment::where([
+                'Std_ID'        => $request->Student_ID,
+                'SemCourses_ID' => $DegsemesterCourse->semesterCourse->ID,
+                'Is_i_mid'      => 10,
+                'Is_i_final'    => 10,
+                'Reg_ID'        => $Reg_ID]);
+                $old_Enrollment = $this->oldEnrollment($request , $DegsemesterCourse->semesterCourse->ID , $Is_i_mid = 10 , $Is_i_final = 10 , $Reg_ID);
+                if($old_Enrollment->exists() != true){
                 
                 $enrollment         = new EnrollmentsController();
                 $storeEnrollment    = $enrollment->storeEnrollmentsInD( 
                 $request->Student_ID , 
-                $DegsemesterCourses->semesterCourse->ID , 
+                $DegsemesterCourse->semesterCourse->ID , 
                 $Is_i_mid           = 10 , 
                 $Is_i_final         = 10 , 
                 $Reg_ID             = $Reg_ID
             );
-                $id = $this->oldEnrollment($request , $DegsemesterCourses->semesterCourse->ID , $Is_i_mid = 10 , $Is_i_final = 10 , $Reg_ID)->first()->ID;
+                $id = $this->oldEnrollment($request , $DegsemesterCourse->semesterCourse->ID , $Is_i_mid = 10 , $Is_i_final = 10 , $Reg_ID)->first()->ID;
                  $ConfirmEnrollment = DB::statement("EXEC sp_UpdateEnrollment
                      @ID         = '$id'
                  ;");
@@ -693,12 +705,8 @@ class AdmissionController extends Controller
 
     public function oldEnrollment($request , $semesterCourse_ID , $Is_i_mid , $Is_i_final , $Reg_ID){
 
-        return Enrollment::where([
-        'Std_ID'        => $request->Student_ID,
-        'SemCourses_ID' => $semesterCourse_ID,
-        'Is_i_mid'      => $Is_i_mid,
-        'Is_i_final'    => $Is_i_final,
-        'Reg_ID'        => $Reg_ID]);
+        return  Enrollment::where('Std_ID', $request->Student_ID)
+        ->where('Reg_ID', $Reg_ID)->where('SemCourses_ID' , $semesterCourse_ID)->orderBy('ID' , 'desc');
     }
 
 

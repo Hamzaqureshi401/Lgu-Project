@@ -175,35 +175,27 @@
                         <td width="20%" style="text-align:right; border:1px solid #000;">
                             {{ $challan->ChallanDetail->Sports_Fund ?? '--' }}</td>
                     </tr>
-                    {{-- <tr>
-                        <td width="15%" style="text-align:center; border:1px solid #000;">9</td>
-                        <td width="65%" style=" font-size:14px; border:1px solid #000;">Security</td>
-                        <td width="20%" style="text-align:right; border:1px solid #000;">
-                            {{ $challan->ChallanDetail>Sports_Fund ?? '--' }}</td>
-                    </tr> --}}
-                    {{-- <tr>
-                        <td width="15%" style="text-align:center; border:1px solid #000;">10</td>
-                        <td width="65%" style=" font-size:14px; border:1px solid #000;">Admission Office</td>
-                        <td width="20%" style="text-align:right; border:1px solid #000;">
-                            {{ $challan->ChallanDetail>Sports_Fund ?? '--' }}</td>
-                    </tr> --}}
-                    {{-- <tr>
-                        <td width="15%" style="text-align:center; border:1px solid #000;">11</td>
-                        <td width="65%" style=" font-size:14px; border:1px solid #000;">ID Card Fee</td>
-                        <td width="20%" style="text-align:right; border:1px solid #000;">
-                            {{ $challan->ChallanDetail>Sports_Fund ?? '--' }}</td>
-                    </tr> --}}
-                    {{-- <tr>
-                        <td width="15%" style="text-align:center; border:1px solid #000;">12</td>
-                        <td width="65%" style=" font-size:14px; border:1px solid #000;">Migration Fee</td>
-                        <td width="20%" style="text-align:right; border:1px solid #000;">
-                            {{ $challan->ChallanDetail>Sports_Fund ?? '--' }}</td>
-                    </tr> --}}
+                    
                 </table>
             </td>
         </tr>
         @php
-            $totalamount= $challan->ChallanDetail->Tuition_Fee+$challan->ChallanDetail->Magazine_Fee+$challan->ChallanDetail->Exam_Fee+$challan->ChallanDetail->Society_Fee+$challan->ChallanDetail->Misc_Fee+$challan->ChallanDetail->Registration_Fee+$challan->ChallanDetail->Practical_charges+$challan->ChallanDetail->Sports_Fund
+            $totalamount= 
+            $challan->ChallanDetail->Tuition_Fee
+            +
+            $challan->ChallanDetail->Magazine_Fee
+            +
+            $challan->ChallanDetail->Exam_Fee
+            +
+            $challan->ChallanDetail->Society_Fee
+            +
+            $challan->ChallanDetail->Misc_Fee
+            +
+            $challan->ChallanDetail->Registration_Fee
+            +
+            $challan->ChallanDetail->Practical_charges
+            +
+            $challan->ChallanDetail->Sports_Fund
         @endphp
 
         <tr>
@@ -227,7 +219,7 @@
                     <div class="col-6 text-left">Already Paid: 0.00</div>
                     <div class="col-6 text-right">Pre.OutStandings:0.00</div>
                     <div class="col-6 text-left">Scholarship: {{ $challan->Scholarship ?? 0 }}  </div>
-                    <div class="col-6 text-right font-weight-bold"><span style="font-size:12px; border-style : solid;">Grand Total:<span style="font-size:12px; font-weight: bold;">{{ $totalamount - $challan->Scholarship }}</span>
+                    <div class="col-6 text-right font-weight-bold"><span style="font-size:12px; border-style : solid;">Grand Total:<span style="font-size:12px; font-weight: bold;">{{ $challan->Amount - $challan->Scholarship }}</span>
 
                         </span></div>
                     <div class="col-12 text-center">Rs.20/- per day to charged after due date</div>

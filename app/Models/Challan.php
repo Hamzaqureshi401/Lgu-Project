@@ -13,13 +13,21 @@ class Challan extends Model
 
     return $this->belongsTo('App\Models\Registration','Reg_ID');
    }
-   public function ChallanDetail()
-   {
+   public function ChallanDetail(){
     return $this->belongsTo('App\Models\ChallanDetail','ID','Challans_ID');
    }
 
-   public function registration()
-   {
+   public function registration(){
     return $this->belongsTo('App\Models\Registration','Reg_ID');
    }
+
+   public static function getOldAmount($Reg_ID){
+    
+        $old_Challans = self::where('Reg_ID', $Reg_ID);
+        if ($old_Challans->exists()) {
+            return $old_Challans->where('Status', 'Valid')->sum('Amount');
+        } else {
+            return 0;
+        }
+    }
 }

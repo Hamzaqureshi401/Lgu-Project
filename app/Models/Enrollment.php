@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Enrollment extends Model
 {
     use HasFactory;
+    public $timestamps = false;
      public function course(){
         return $this->belongsTo('App\Models\Course' , 'Course_ID');
     }

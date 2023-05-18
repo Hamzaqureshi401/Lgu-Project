@@ -37,31 +37,18 @@ class EnrollmentsController extends Controller
         $request['Std_ID']  = $session['std_ID'];
         $student = Student::where('ID' , $session['std_ID'])->first();
         $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $student->batch->ID])->first();
-
-
         if(empty($DegreeBatche)){
             return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Warning']);
         }
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
-        
-
         $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection])->get();
-
-        // dd($DegsemesterCourses);
-
         if(empty($DegsemesterCourses)){
             return redirect()->back()->with(['errorToaster'   => 'Course Not Found!' , 'title' => 'Warning']);
         }
-
-
-
         $getEnrollment      = Enrollment::where(['Std_ID' => $request['Std_ID'] ]);
         $enrollmentsArray   = SemesterCourse::whereNotIn('ID' ,  $getEnrollment->pluck('SemCourses_ID')->toArray())->pluck('ID')->toArray();
          $enrollments       = $getEnrollment->get();
-
-
-  
         $button = "Add Enrollment";
         $title  = 'Add Enrollment';
         $route  = '/storeEnrollments';
