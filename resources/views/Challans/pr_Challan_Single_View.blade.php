@@ -217,7 +217,7 @@
             <td>
                 <div class="row" style="font-size:10px;">
                     <div class="col-6 text-left">Already Paid: 0.00</div>
-                    <div class="col-6 text-right">Pre.OutStandings:0.00</div>
+                    <div class="col-6 text-right">Pre.OutStandings:{{ $previousBalance ?? '0.00'}}</div>
                     <div class="col-6 text-left">Scholarship: {{ $challan->Scholarship ?? 0 }}  </div>
                     <div class="col-6 text-right font-weight-bold"><span style="font-size:12px; border-style : solid;">Grand Total:<span style="font-size:12px; font-weight: bold;">{{ $challan->Amount - $challan->Scholarship }}</span>
 

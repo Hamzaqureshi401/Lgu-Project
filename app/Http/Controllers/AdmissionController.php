@@ -568,7 +568,8 @@ class AdmissionController extends Controller
         }
 
         //dd($semesterDetail);
-        $amount = $semesterDetail->SemesterFee + 
+        $amount = 
+        $semesterDetail->SemesterFee + 
         $semesterDetail->Tuition_Fee +  
         $semesterDetail->Magazine_Fee +
         $semesterDetail->Exam_Fee +
@@ -603,7 +604,8 @@ class AdmissionController extends Controller
         $semesterDetail->Practical_charges,
         $semesterDetail->Sports_Fund,
         // $FeeType,
-        $semesterDetail->Tuition_Fee
+        $semesterDetail->Tuition_Fee,
+         $semesterDetail->SemesterFee
     );
         }
         
@@ -643,7 +645,10 @@ class AdmissionController extends Controller
         $Registration_Fee   = 0,
         $Practical_charges  = 0,
         $Sports_Fund        = 0,
-        $Tuition_Fee        = 0);
+        $Tuition_Fee        = 0,
+        $Semester_Fee       = 0
+
+    );
         }
       
         

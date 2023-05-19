@@ -23,9 +23,9 @@ class Challan extends Model
 
    public static function getOldAmount($Reg_ID){
     
-        $old_Challans = self::where('Reg_ID', $Reg_ID);
-        if ($old_Challans->exists()) {
-            return $old_Challans->where('Status', 'Valid')->sum('Amount');
+        $old_Challans = self::where('Reg_ID', $Reg_ID)->orderBy('ID' , 'desc');
+        if ($old_Challans->exists() && $old_Challans->first()->Status == 'Valid') {
+            return $old_Challans->first()->Amount;
         } else {
             return 0;
         }

@@ -28,7 +28,7 @@ class ChallanController extends Controller
         $route = '';
         $getEditRoute = '';
         $modalTitle = '';
-     }else{
+     }elseif(session()->has('Emp_session')){
         $challans = Challan::paginate(10);
         $title  = 'All Challan';
         $route = 'updateChallan';
@@ -48,10 +48,18 @@ class ChallanController extends Controller
 
     public function printChallan($Challans_ID){
        
-        $challan = Challan::where('ID',$Challans_ID)->first();
+        $challan            = Challan::where('ID',$Challans_ID)->first();
 
-        $std_sch_details=$challan->registration->student->std_scholarship;
-        $challan_deta=$challan->ChallanDetail;
+        $previousChallan = Challan::where('Reg_ID' , $challan->Reg_ID)->where('ID', '<', $Challans_ID)->orderBy('ID', 'desc');
+        if($previousChallan->exists() == true && $previousChallan->first()->Status == 'Valid'){
+            $previousBalance = $previousChallan->first()->Amount;
+        }else{
+            $previousBalance = 0.00;
+        }
+        
+        
+        $std_sch_details    = $challan->registration->student->std_scholarship;
+        $challan_deta       = $challan->ChallanDetail;
 
         if(!empty($std_sch_details)){
             $std_sch_details=$challan->registration->student->std_scholarship->latest('Date')->first();
@@ -60,23 +68,23 @@ class ChallanController extends Controller
             if(!empty($std_sch_details)){
                 if($std_sch_details['Scholarship_Type']==='Percentage')
                 {
-                    $std_sch_amount=($std_sch_details['Percentage']/100)*$challan_deta->Tuition_Fee ?? 0;
+                    $std_sch_amount = ($std_sch_details['Percentage']/100)*$challan_deta->Tuition_Fee ?? 0;
                 }
                 if($std_sch_details['Scholarship_Type']==='Fixed')
                 {
-                    $std_sch_amount=$std_sch_details['Percentage'] ?? 0;
+                    $std_sch_amount = $std_sch_details['Percentage'] ?? 0;
                 }
                 $submit=$this->Updatescholarship($std_sch_details,$challan,$std_sch_amount);
 
 
             }
 
-        $challan = Challan::where('ID',$Challans_ID)->first();
-        $std_sch_details=$challan->registration->student->std_scholarship;
-        $challan_deta=$challan->ChallanDetail;
+        $challan        = Challan::where('ID',$Challans_ID)->first();
+        $std_sch_details= $challan->registration->student->std_scholarship;
+        $challan_deta   = $challan->ChallanDetail;
         // dd($std_sch_details,$challan,$challan_deta,$std_sch_amount);
        return
-        view('Challans.printChallan' , compact('challan'));
+        view('Challans.printChallan' , compact('challan' , 'previousBalance'));
     }
 
     function Updatescholarship($std_sch_details,$challan,$std_sch_amount){
@@ -142,7 +150,6 @@ class ChallanController extends Controller
     public function createChallanDetail(
 
         $Challans_ID,
-        // $SemesterFee,
         $Magazine_Fee,
         $Exam_Fee,
         $Society_Fee,
@@ -151,7 +158,9 @@ class ChallanController extends Controller
         $Practical_charges,
         $Sports_Fund,
         // $FeeType,
-         $Tuition_Fee
+         $Tuition_Fee,
+         $SemesterFee
+        
     ){
          $submit = DB::statement("EXEC sp_InsertChallanDetails
             
@@ -164,14 +173,28 @@ class ChallanController extends Controller
             @Registration_Fee        = '$Registration_Fee',
             @Practical_charges       = '$Practical_charges',
             @Sports_Fund             = '$Sports_Fund',
-            @Tuition_Fee             = '$Tuition_Fee'
+            @Tuition_Fee             = '$Tuition_Fee',
+            @Semester_Fee            = '$SemesterFee'
             
             ;");
     }
 
     public function approvechallan(Request $request,$Challans_ID){
 
-        $challan= Challan::where('ID', $Challans_ID);
+        if(session()->has('Emp_session')){
+
+        $challan = Challan::where('ID', $Challans_ID);
+        $checkNextChallan = Challan::where('Reg_ID' , $challan->first()->Reg_ID)->where('ID', '>', $Challans_ID)->first();
+
+        if(!empty($checkNextChallan)){
+             return redirect()
+                ->back()
+                ->with([
+                    'errorToaster' => 'Challan Confirmation Failed!' , 
+                    'title' => 'Only Last Challn Can Be Confirmed!'
+                ]);
+        }
+        
         $challan->update(['Status' => "Paid",'PaidDate' => $request->paiddate]);
         $student      =  Student::where('StdRollNo' , $challan->first()->registration->student->StdRollNo)->first();
             $registration = Registration::where('Std_ID' , $student->ID)->first();
@@ -180,20 +203,14 @@ class ChallanController extends Controller
             }else{
                 $challans = '';
             }
-           
-    
               return view('Challans.student_challan',
                   compact(
                       'challans','student'
                       
-                  ) 
-                  
+                  )
                      );
+              }
           }
-
-
-
-
           public function admissionfeewaveoff(Request $request,$Challans_ID)
           {
             
@@ -226,6 +243,7 @@ else{
             @Practical_charges ='$challans_details->Practical_charges',
             @Sports_Fund ='$challans_details->Sports_Fund',
             @Admission_Fee_Waveoff_Details ='$request->admissionfeewaveoff'
+            @Semester_Fee = 0
             
 
           

@@ -262,7 +262,8 @@ class EnrollmentsController extends Controller
         $sem_details->Practical_charges,
         $sem_details->Sports_Fund,
         // $FeeType,
-        $amount
+        $amount,
+        $sem_details->SemesterFee
     );
          return 'Success';
     }

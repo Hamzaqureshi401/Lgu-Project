@@ -52,7 +52,6 @@ Route::post('/updateEnrollment', [App\Http\Controllers\EnrollmentsController::cl
 
 // Challans Routes start
 
-Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
 // Route::get('/printChallan/{Challans_ID?}', [App\Http\Controllers\ChallanController::class, 'printChallan'])->name('print.Challan');
 
 
@@ -437,3 +436,8 @@ Route::post('/storeStdRollNoSlips', [App\Http\Controllers\StdRollNoSlipsControll
 Route::get('/editStdRollNoSlip/{id?}', [App\Http\Controllers\StdRollNoSlipsController::class, 'editStdRollNoSlip'])->name('edit.StdRollNoSlip');
 Route::post('/updateStdRollNoSlip', [App\Http\Controllers\StdRollNoSlipsController::class, 'updateStdRollNoSlip'])->name('update.StdRollNoSlip');
 Route::post('/uploadStdRollNoSlipExcel', [App\Http\Controllers\StdRollNoSlipsController::class, 'uploadStdRollNoSlipExcel'])->name('upload.StdRollNoSlip.Excel');
+
+//open rotes
+
+Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
+

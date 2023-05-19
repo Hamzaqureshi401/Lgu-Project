@@ -237,21 +237,23 @@
                                                             <td>{{ $challan->Amount ?? '--' }}</td>
                                                             <td>{{ $challan->Type ?? '--' }}</td>
                                                             <td> <a class="btn btn-primary "
-                                                                    href="{{ route('print.Challan') }}/{{ $challan->ID }}">Challan</a>
-                                                                @if (session()->has('Emp_session'))
+                                                                    href="{{ route('print.Challan') }}/{{ $challan->ID }}">Challan Details</a>
+                                                               
                                                                     <!-- only change id -->
-                                                                    @if ($challan->Status === 'Valid')
+                                                                    @if ($challan->Status === 'Valid' && $loop->last && session()->has('Emp_session'))
+                                                                    
                                                                         <button type="submit"
-                                                                            class="btn btn-primary gt-data mt-1"
+                                                                            class="btn btn-danger gt-data mt-1"
                                                                             data-toggle="modal"
                                                                             data-id="{{ $challan->ID }}"
                                                                             data-target="#exampleModal"><i
                                                                                 class="far fa-edit"></i>
                                                                             {{ 'Confirm' }}</button>
-                                                                    @endif
+                                                                            @endif
+                                                                   
                                                                     {{-- <a class="btn btn-primary far fa-edit mt-4"
                                                                                 href="{{ route('approve.Challan') }}/{{ $challan->ID }}/{{ $challan->PaidDate }}">Confirm</a> --}}
-                                                                @endif
+                                                               
                                                             </td>
                                                         </form>
 
@@ -269,9 +271,13 @@
                                                                     </textarea>
                                                                 </td>
 
-                                                                <td> <button type="submit" class="btn btn-primary "
+                                                                <td>
+                                                               
+                                                                @if ($loop->last && $challan->Status === 'Valid')
+                                                                 <button type="submit" class="btn btn-sm btn-warning "
                                                                         href="{{ route('admissionfeewaveoff.Challan') }}/{{ $challan->ID }}">Admission
                                                                         fee wave off</button>
+                                                                        @endif
 
                                                                 </td>
 
