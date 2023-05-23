@@ -216,6 +216,7 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($enrollments as $enrollment)
+                                                            @if($enrollment->semesterCourse->Sem_ID == $semester->ID)
                                                                 <tr>
                                                                     <!--  <td >{{ 'Status' }}
                                             <div class="badge badge-success">Active</div>
@@ -238,6 +239,7 @@
                                                                     <td>{{ $enrollment->semesterCourse->course->CreditHours ?? '--' }}
                                                                     </td>
                                                                 </tr>
+                                                                @endif
                                                             @endforeach
                                                         </tbody>
                                                     </table>

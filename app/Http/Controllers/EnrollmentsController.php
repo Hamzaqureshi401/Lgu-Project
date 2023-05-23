@@ -31,6 +31,12 @@ class EnrollmentsController extends Controller
         return session::all();
     }
 
+   /*  Step 1 Set Semester = currentsemesetre = 1
+    Step 2 Set DegreeBatch example student u want to enroll check his degree select from degreebach as degree and set semester you make currentsemesetre
+    Step 3 Set SemesterCourse use step 1 semester iD select course
+    Step 4 Set DegreeSemCourse example student u want to enroll use step 2 DegreeBatch ID select semesterCourse Step 3 ID And Select Student Section
+    */
+
     public function addEnrollment(){
 
         $session            = $this->getSessionData();    
@@ -48,32 +54,13 @@ class EnrollmentsController extends Controller
         }
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
-        $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection])->get();
-        // dd(
-        //     DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
-        //     ->join('Courses' , 'courses.id' , 'SemesterCourses.Course_ID')
-        //     ->where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection , 'Sem_ID' => $semester->ID])
-        //     ->select(
-        //         'DegreeSemCourses.ID as DegreeSemCourse_ID',
-        //         'DegBatches_ID',
-        //         'SemCourse_ID',
-        //         'Section',
-        //         'Emp_ID',
-        //         'Sem_ID',
-        //         'CampusLimit',
-        //         'Course_ID',
-        //         'CourseCode',
-        //         'CourseName',
-        //         'CreditHours',
-        //         'LectureType'
-        //     )
-        //     ->get() , $DegsemesterCourses
-        // );
+        // $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection])->get();
+        
         $DegsemesterCourses = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
             ->join('Courses' , 'courses.id' , 'SemesterCourses.Course_ID')
             ->where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection , 'Sem_ID' => $semester->ID])
             ->select(
-                'DegreeSemCourses.ID as DegreeSemCourse_ID',
+                'DegreeSemCourses.ID',
                 'DegBatches_ID',
                 'SemCourse_ID',
                 'Section',
@@ -92,8 +79,22 @@ class EnrollmentsController extends Controller
         }
         $getEnrollment      = Enrollment::where(['Std_ID' => $request['Std_ID'] ]);
         //dd($semesterCourse , $getEnrollment->get());
-        $enrollmentsArray   = SemesterCourse::whereNotIn('ID' ,  $getEnrollment->pluck('SemCourses_ID')->toArray())->pluck('ID')->toArray();
-         $enrollments       = $getEnrollment->get();
+        $enrollmentsArray   = SemesterCourse::whereNotIn('ID' ,  $getEnrollment->pluck('SemCourses_ID')->toArray())->where('Sem_ID' , $semester->ID)->pluck('ID')->toArray();
+       // dd($enrollmentsArray  , $acdRule['enrollmentAllowed'] , $getTotalCreditHours , $acdRule['creditHoursAllowed'] );
+         $enrollments       = $getEnrollment->join('semesterCourses', 'Enrollments.SemCourses_ID', '=', 'semesterCourses.ID')
+                            ->where('semesterCourses.Sem_ID', $semester->ID)
+                            ->select('Enrollments.ID',
+                                    'Std_ID',
+                                    'SemCourses_ID',
+                                    'Is_i_mid',
+                                    'Is_i_final',
+                                    'Reg_ID',
+                                    'Status',
+                                    'Sem_ID',
+                                    'CampusLimit',
+                                    'Course_ID')
+                                    ->get();
+        // dd($enrollments);
         $button = "Add Enrollment";
         $title  = 'Add Enrollment';
         $route  = '/storeEnrollments';
@@ -140,8 +141,23 @@ class EnrollmentsController extends Controller
     }
 
     public function getTotalCreditHours($request){
+
+        $semester = Semester::where('CurrentSemester' , true)->latest('ID')->first();
         
-        $enrollments            = Enrollment::where('Std_ID' , $request['Std_ID'])->get();
+        $enrollments            = Enrollment::where('Std_ID' , $request['Std_ID'])
+        ->join('semesterCourses', 'Enrollments.SemCourses_ID', '=', 'semesterCourses.ID')
+        ->where('semesterCourses.Sem_ID', $semester->ID)
+        ->select('Enrollments.ID',
+                'Std_ID',
+                'SemCourses_ID',
+                'Is_i_mid',
+                'Is_i_final',
+                'Reg_ID',
+                'Status',
+                'Sem_ID',
+                'CampusLimit',
+                'Course_ID')
+        ->get();
         foreach($enrollments as $enrollment){
             $crHrsAllowed       = explode("-", $enrollment->semesterCourse->course->CreditHours ?? 0);
             $totalCreditHours[] = end($crHrsAllowed);
