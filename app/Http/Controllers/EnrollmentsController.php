@@ -42,11 +42,14 @@ class EnrollmentsController extends Controller
         $session            = $this->getSessionData();    
         $request['Std_ID']  = $session['std_ID'];
         $student = Student::where('ID' , $session['std_ID'])->first();
-        $semester = Semester::where('CurrentSemester' , true)->latest('ID');
+
+        $semester = Semester::where('CurrentSemester' , 1)->first('ID');
+        // dd($semester);
+
         if($semester->exists() != true){
             return redirect()->back()->with(['errorToaster'   => 'No Semester Is Active for Enrollment!' , 'title' => 'Plese Ask Admin to Active Semester first']);
         }
-        $semester = $semester->first();
+        // $semester = $semester->first();
         //$semesterCourse     = SemesterCourse::where('Sem_ID' , $semester->ID)->pluck('ID')->toArray();
         $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $semester->ID])->first();
         if(empty($DegreeBatche)){
