@@ -31,10 +31,11 @@ class EnrollmentsController extends Controller
         return session::all();
     }
 
-   /*  Step 1 Set Semester = currentsemesetre = 1
+   /*  Step 1 Set Semester = currentsemesetre = 'checked'
     Step 2 Set DegreeBatch example student u want to enroll check his degree select from degreebach as degree and set semester you make currentsemesetre
     Step 3 Set SemesterCourse use step 1 semester iD select course
-    Step 4 Set DegreeSemCourse example student u want to enroll use step 2 DegreeBatch ID select semesterCourse Step 3 ID And Select Student Section
+    Step 4 Set DegreeSemCourse example student u want to enroll use step 2 DegreeBatch ID select semesterCourse Semester ID And Select Student Section
+    then course will be appear
     */
 
     public function addEnrollment(){
