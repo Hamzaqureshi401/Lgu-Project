@@ -448,7 +448,7 @@
          class="" style="color: red;">Note: Degree Batch Not Found Enrollment will be Failed!</span>
    </div>
    @endif
-   @if(($DegsemesterCourses->isEmpty()) && $studentAdmission->Status == 'Completed')
+   @if((empty($DegsemesterCourses)) && $studentAdmission->Status == 'Completed')
 
        <div class="form-group">
       <span

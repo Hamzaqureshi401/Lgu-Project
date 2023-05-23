@@ -10,14 +10,15 @@ use Validator;
 class SemesterController extends Controller
 {
 
-    public function validation($request){
+    public function validation($request)
+    {
 
         $this->validate($request, [
             'SemSession'         => 'required|max:30|unique:Semesters',
             'Year'               => 'required|numeric',
             'SemStartDate'       => 'required|date',
             'SemEndDate'         => 'required|date',
-            'EnrollmentStartDate'=> 'required|date',
+            'EnrollmentStartDate' => 'required|date',
             'EnrollmentEndDate'  => 'required|date',
             'ExamStartDate'      => 'required|date',
             'ExamEndDate'        => 'required|date',
@@ -35,14 +36,15 @@ class SemesterController extends Controller
         // return $validation;
 
     }
- public function updateValidation($request){
+    public function updateValidation($request)
+    {
 
         $this->validate($request, [
             'SemSession'         => 'required|max:30',
             'Year'               => 'required|numeric',
             'SemStartDate'       => 'required|date',
             'SemEndDate'         => 'required|date',
-            'EnrollmentStartDate'=> 'required|date',
+            'EnrollmentStartDate' => 'required|date',
             'EnrollmentEndDate'  => 'required|date',
             'ExamStartDate'      => 'required|date',
             'ExamEndDate'        => 'required|date',
@@ -61,22 +63,27 @@ class SemesterController extends Controller
 
     }
 
-    public function addSemester(){
+    public function addSemester()
+    {
 
         $button = "Add Semester";
         $title  = 'Add Semester';
         $route  = '/storeSemester';
         return
-        view('Semesters.addSemesters',
-            compact(
-                'button' ,
-                'title' ,
-                'route')
-        );
+            view(
+                'Semesters.addSemesters',
+                compact(
+                    'button',
+                    'title',
+                    'route'
+                )
+            );
     }
 
-    public function storeSemester(Request $request){
+    public function storeSemester(Request $request)
+    {
 
+        // dd($request);
         // $validator = $this->validation($request);
         // if ($validator['error'] == true) {
         //     return
@@ -86,20 +93,26 @@ class SemesterController extends Controller
         //     'message'=> ''.$validator['validation']
         //     ]);
         // }else {
-            $submit = DB::update("EXEC sp_InsertSemesters
-            @SemSession             = '$request->SemSession',
-            @Year                   = '$request->Year',
-            @SemStartDate           = '$request->SemStartDate' ,
-            @SemEndDate             = '$request->SemEndDate' ,
-            @EnrollmentStartDate    = '$request->EnrollmentStartDate' ,
-            @EnrollmentEndDate      = '$request->EnrollmentEndDate' ,
-            @ExamStartDate          = '$request->ExamStartDate' ,
-            @ExamEndDate            = '$request->ExamEndDate' ,
-            @I_mid_StartDate        = '$request->I_mid_StartDate' ,
-            @I_mid_EndDate          = '$request->I_mid_EndDate' ,
-            @I_final_StartDate      = '$request->I_final_StartDate' ,
-            @I_final_EndDate        = '$request->I_final_EndDate'
-            ;");
+        if ($request->CurrentSemester == 1) {
+            $Update_CurrentSemeter = DB::table('Semesters')->update(['CurrentSemester' => "0"]);
+        }
+
+        $submit = DB::update("EXEC sp_InsertSemesters
+        @SemSession             = '$request->SemSession',
+        @Year                   = '$request->Year',
+        @SemStartDate           = '$request->SemStartDate' ,
+        @SemEndDate             = '$request->SemEndDate' ,
+        @EnrollmentStartDate    = '$request->EnrollmentStartDate' ,
+        @EnrollmentEndDate      = '$request->EnrollmentEndDate' ,
+        @ExamStartDate          = '$request->ExamStartDate' ,
+        @ExamEndDate            = '$request->ExamEndDate' ,
+        @I_mid_StartDate        = '$request->I_mid_StartDate' ,
+        @I_mid_EndDate          = '$request->I_mid_EndDate' ,
+        @I_final_StartDate      = '$request->I_final_StartDate' ,
+        @I_final_EndDate        = '$request->I_final_EndDate',
+        @CurrentSemester        = '$request->CurrentSemester'
+
+        ;");
 
         //   return response()->json([
         //     'title' => 'Done' ,
@@ -107,26 +120,29 @@ class SemesterController extends Controller
         //     'message'=> 'Semester Added!
         //     ']);
         // }
-             return redirect()->back()->with(['successToaster' => 'Semester Added' , 'title' => 'Success']);
-
+        return redirect()->back()->with(['successToaster' => 'Semester Added', 'title' => 'Success']);
     }
 
-    public function editSemester($id){
+    public function editSemester($id)
+    {
 
         $button = 'Update Semester';
         $title  = 'Edit Semester';
         $route  = '/updateSemester';
-        $semester = Semester::where('ID' , $id)->first();
-         return
-         view('Semesters.editSemester',
-            compact(
-                'semester',
-                'button' ,
-                'title' ,
-                'route'
-            ));
+        $semester = Semester::where('ID', $id)->first();
+        return
+            view(
+                'Semesters.editSemester',
+                compact(
+                    'semester',
+                    'button',
+                    'title',
+                    'route'
+                )
+            );
     }
-    public function allSemesters(){
+    public function allSemesters()
+    {
 
         $semesters = Semester::paginate(10);
         $title  = 'All Semesters';
@@ -135,20 +151,26 @@ class SemesterController extends Controller
         $modalTitle = 'Edit Semester';
 
         return
-        view('Semesters.allSemesters' ,
-            compact(
-                'semesters' ,
-                'title' ,
-                'modalTitle' ,
-                'route',
-                'getEditRoute'
-            ));
+            view(
+                'Semesters.allSemesters',
+                compact(
+                    'semesters',
+                    'title',
+                    'modalTitle',
+                    'route',
+                    'getEditRoute'
+                )
+            );
     }
 
-    public function updateSemester(Request $request){
+    public function updateSemester(Request $request)
+    {
 
-         $validator = $this->updateValidation($request);
-        // if ($validator['error'] == true) {
+        
+        $validator = $this->updateValidation($request);
+        if ($request->CurrentSemester == 1) {
+            $Update_CurrentSemeter = DB::table('Semesters')->update(['CurrentSemester' => "0"]);
+        }        // if ($validator['error'] == true) {
         //     return
         //     response()->json([
         //     'title' => 'Failed' ,
@@ -156,7 +178,7 @@ class SemesterController extends Controller
         //     'message'=> ''.$validator['validation']
         //     ]);
         // }else {
-            $submit = DB::update("EXEC sp_UpdateSemesters
+        $submit = DB::update("EXEC sp_UpdateSemesters
             @Sem_ID                     = '$request->id',
             @SemSession             = '$request->SemSession',
             @Year                   = '$request->Year',
@@ -169,7 +191,9 @@ class SemesterController extends Controller
             @I_mid_StartDate        = '$request->I_mid_StartDate' ,
             @I_mid_EndDate          = '$request->I_mid_EndDate' ,
             @I_final_StartDate      = '$request->I_final_StartDate' ,
-            @I_final_EndDate        = '$request->I_final_EndDate'
+            @I_final_EndDate        = '$request->I_final_EndDate',
+            @CurrentSemester        = '$request->CurrentSemester'
+
             ;");
 
         // return response()->json([
@@ -178,8 +202,6 @@ class SemesterController extends Controller
         //     'message'=> 'Semester Updated!
         //     ']);
         // }
-             return redirect()->back()->with(['successToaster' => 'Semester Updated' , 'title' => 'Success']);
-
+        return redirect()->back()->with(['successToaster' => 'Semester Updated', 'title' => 'Success']);
     }
-
 }

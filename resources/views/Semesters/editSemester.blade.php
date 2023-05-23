@@ -52,6 +52,16 @@
                       <label>I final EndDate</label>
                       <input type="Date" value="{{ date('Y-m-d', strtotime($semester->I_final_EndDate)) }}" name="I_final_EndDate" class="form-control"required>
                     </div>
+                    
+                    <div class="form-check">
+                      <div class="form-group">
+                          <input class="form-check-input" type="checkbox" value="1" id="defaultCheck1" name="CurrentSemester" {{$semester->CurrentSemester == 1 ? 'checked' : '';}} >
+                          <label class="form-check-label" for="defaultCheck1">
+                              Current Semester ?
+                          </label>
+                      </div>
+                  </div>
+
                  <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
               
           </div>      
