@@ -14,28 +14,28 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
+                   <!--  <div class="form-group">
                       <label>Employee</label>
                       <select class="form-control select2" name="Emp_ID"  >
                         @foreach($employees as $employee)
                         <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
                         @endforeach
                       </select>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                       <label>Campus Limit</label>
                       <input type="number" name="CampusLimit" class="form-control">
                     </div>
-                     <div class="form-group">
+                    <!--  <div class="form-group">
                       <label>Degree / Batch</label>
                       <select class="form-control select2" name="DegCourse_ID"  >
                         @foreach($degreeCourses as $degreeCourse)
                         <option value="{{ $degreeCourse->ID }}">{{ $degreeCourse->DegreeName }} / {{ $degreeCourse->SemSession }}</option>
                         @endforeach
                       </select>
-                    </div>
+                    </div> -->
                     
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Section</label>
                      
 
@@ -46,7 +46,7 @@
                     <option value="{{ $letter }}">{{ $letter }} </option>
                     @endforeach
                   </select>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                       <label>Course</label>
                       <select class="form-control select2" name="Course_ID"  >

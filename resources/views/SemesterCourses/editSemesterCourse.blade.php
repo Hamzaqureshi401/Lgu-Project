@@ -12,17 +12,17 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
+                   <!--  <div class="form-group">
                       <label>Employee</label>
-                      <input type="hidden" name="Emp_ID" value="{{ $semesterCourse->Emp_ID }}">
-                     <input type="text" name=""  class="form-control" value="{{ $semesterCourse->employee->Emp_FirstName }}" readonly>
-                    </div>
+                      <input type="text" name="Emp_ID" value="{{ $semesterCourse->Emp_ID }}">
+                     <input type="text" name=""  class="form-control" value="{{ $semesterCourse->employee->Emp_FirstName ?? '--' }}" readonly>
+                    </div> -->
                     <div class="form-group">
                       <label>Campus Limit</label>
                       <input type="number" name="CampusLimit" value="{{ $semesterCourse->CampusLimit }}" class="form-control">
                     </div>
 
-                     <div class="form-group">
+                     <!-- <div class="form-group">
                       <label>Degree / Course</label>
                       <select class="form-control select2" name="DegCourse_ID"  >
                         @foreach($degreeCourses as $degreeCourse)
@@ -33,7 +33,7 @@
                     <div class="form-group">
                       <label>Section</label>
                       <input type="text" name="Section" value="{{ $semesterCourse->Section }}" class="form-control" onkeydown="return /[a-z]/i.test(event.key)" maxlength="1">
-                    </div>
+                    </div> -->
                     <div class="form-group">
                       <label>Course</label>
                       <select class="form-control select2" name="Course_ID"  >

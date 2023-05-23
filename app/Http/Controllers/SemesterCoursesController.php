@@ -16,10 +16,10 @@ class SemesterCoursesController extends Controller
 
         $this->validate($request, [
             'Sem_ID'                => 'required|numeric|unique:SemesterCourses',
-            'Emp_ID'                => 'required|numeric',
+            //'Emp_ID'                => 'required|numeric',
             'CampusLimit'           => 'required|numeric',
-            'DegCourse_ID'          => 'required|numeric|unique:SemesterCourses',
-            'Section'               => 'required|max:1|unique:SemesterCourses',
+            // 'DegCourse_ID'          => 'required|numeric|unique:SemesterCourses',
+            // 'Section'               => 'required|max:1|unique:SemesterCourses',
             'Course_ID'             => 'required|numeric|unique:SemesterCourses',
             
         ]);
@@ -35,10 +35,10 @@ class SemesterCoursesController extends Controller
 
         $this->validate($request, [
             'Sem_ID'                => 'required|numeric',
-            'Emp_ID'                => 'required|numeric',
+            //'Emp_ID'                => 'required|numeric',
             'CampusLimit'           => 'required|numeric',
-            'DegCourse_ID'          => 'required|numeric',
-            'Section'               => 'required|max:10',
+            // 'DegCourse_ID'          => 'required|numeric',
+            // 'Section'               => 'required|max:10',
             'Course_ID'             => 'required|numeric',
             
         ]);
@@ -53,7 +53,7 @@ class SemesterCoursesController extends Controller
 
     public function addSemesterCourses(){
 
-        $employees   = Employee::get();
+        //$employees   = Employee::get();
         $semesters   = Semester::get();
         $courses     = Course::get();
         $degreeCourses=  DegreeBatche::select('DegreeName' , 'SemSession' , 'DegreeBatches.ID')
@@ -69,7 +69,7 @@ class SemesterCoursesController extends Controller
                 'button' , 
                 'title' , 
                 'route',
-                'employees',
+                //'employees',
                 'semesters',
                 'degreeCourses',
                 'courses'
@@ -90,11 +90,7 @@ class SemesterCoursesController extends Controller
         // }else {
              $submit = DB::update("EXEC sp_InsertSemesterCourses 
             @Sem_ID                = '$request->Sem_ID', 
-            @Emp_ID                = '$request->Emp_ID', 
             @CampusLimit           = '$request->CampusLimit' , 
-            @DegBatches_ID         = '$request->DegCourse_ID',
-            @QuizWeightage         = '$request->QuizWeightage' , 
-            @Section               = '$request->Section',
             @Course_ID             = '$request->Course_ID'
             ;");
 
@@ -157,6 +153,8 @@ class SemesterCoursesController extends Controller
 
     public function updateSemesterCourse(Request $request){
 
+        //dd($request->all());
+         
          $validator = $this->validationUpdate($request);
          //$validator = $this->validation($request);
         // if ($validator['error'] == true) {
@@ -172,10 +170,7 @@ class SemesterCoursesController extends Controller
 
             @SemCourse_ID           = '$request->SemCourse_ID', 
             @Sem_ID                 = '$request->Sem_ID', 
-            @Emp_ID                 = '$request->Emp_ID', 
             @CampusLimit            = '$request->CampusLimit' , 
-            @DegBatches_ID          = '$request->DegCourse_ID',
-            @Section                = '$request->Section',
             @Course_ID              = '$request->Course_ID' 
             ;");
 

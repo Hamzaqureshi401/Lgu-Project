@@ -45,8 +45,8 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
            if ($e instanceof \Illuminate\Database\QueryException) {
-        dd("Db Connection Lost!");
-            return Redirect::back()->withErrors('$validator');
+        //dd("Db Connection Lost!");
+            //return Redirect::back()->withErrors('$validator');
             
         return response()->view('Errors.dbConnectionLost', [], 500);
     } elseif ($e instanceof \PDOException) {

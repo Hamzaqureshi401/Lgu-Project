@@ -10,11 +10,11 @@
                               <i class="fas fa-th"></i>
                             </th>
                             <th>Sem</th>
-                            <th>Emp</th>
+                            <!-- <th>Emp</th> -->
                             <th>Campus Limit</th>
-                            <th>Degree Batch</th>
+                            <!-- <th>Degree Batch</th>
                             
-                            <th>Section</th>
+                            <th>Section</th> -->
                             <th>Course</th>
                             
                             <!-- <th>Status</th> -->
@@ -30,10 +30,10 @@
                               </div>
                             </td>
                             <td>{{ $semesterCourse->semester->SemSession ?? '--' }}</td>
-                            <td>{{ $semesterCourse->employee->Emp_FirstName ?? '--' }} {{ $semesterCourse->employee->Emp_LastName ?? '--' }}</td>
+                            <!-- <td>{{ $semesterCourse->employee->Emp_FirstName ?? '--' }} {{ $semesterCourse->employee->Emp_LastName ?? '--' }}</td> -->
                             <td>{{ $semesterCourse->CampusLimit  ?? '--'}}</td>
-                            <td>{{ $semesterCourse->degreeBatches->degree->DegreeName ?? '--'}} / {{ $semesterCourse->degreeBatches->batch->SemSession ?? '--'}}</td>
-                           <td>{{ $semesterCourse->Section  ?? '--'}}</td>
+                            <!-- <td>{{ $semesterCourse->degreeBatches->degree->DegreeName ?? '--'}} / {{ $semesterCourse->degreeBatches->batch->SemSession ?? '--'}}</td>
+                           <td>{{ $semesterCourse->Section  ?? '--'}}</td> -->
                             <td>{{ $semesterCourse->course->CourseName  ?? '--'}}</td>
                             <td>
                               <div class="card-body">

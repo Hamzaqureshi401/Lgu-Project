@@ -36,17 +36,62 @@ class EnrollmentsController extends Controller
         $session            = $this->getSessionData();    
         $request['Std_ID']  = $session['std_ID'];
         $student = Student::where('ID' , $session['std_ID'])->first();
-        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $student->batch->ID])->first();
+        $semester = Semester::where('CurrentSemester' , true)->latest('ID');
+        if($semester->exists() != true){
+            return redirect()->back()->with(['errorToaster'   => 'No Semester Is Active for Enrollment!' , 'title' => 'Plese Ask Admin to Active Semester first']);
+        }
+        $semester = $semester->first();
+        //$semesterCourse     = SemesterCourse::where('Sem_ID' , $semester->ID)->pluck('ID')->toArray();
+        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $semester->ID])->first();
         if(empty($DegreeBatche)){
             return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Warning']);
         }
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
         $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection])->get();
+        // dd(
+        //     DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
+        //     ->join('Courses' , 'courses.id' , 'SemesterCourses.Course_ID')
+        //     ->where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection , 'Sem_ID' => $semester->ID])
+        //     ->select(
+        //         'DegreeSemCourses.ID as DegreeSemCourse_ID',
+        //         'DegBatches_ID',
+        //         'SemCourse_ID',
+        //         'Section',
+        //         'Emp_ID',
+        //         'Sem_ID',
+        //         'CampusLimit',
+        //         'Course_ID',
+        //         'CourseCode',
+        //         'CourseName',
+        //         'CreditHours',
+        //         'LectureType'
+        //     )
+        //     ->get() , $DegsemesterCourses
+        // );
+        $DegsemesterCourses = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
+            ->join('Courses' , 'courses.id' , 'SemesterCourses.Course_ID')
+            ->where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection , 'Sem_ID' => $semester->ID])
+            ->select(
+                'DegreeSemCourses.ID as DegreeSemCourse_ID',
+                'DegBatches_ID',
+                'SemCourse_ID',
+                'Section',
+                'Emp_ID',
+                'Sem_ID',
+                'CampusLimit',
+                'Course_ID',
+                'CourseCode',
+                'CourseName',
+                'CreditHours',
+                'LectureType'
+            )
+            ->get();
         if(empty($DegsemesterCourses)){
             return redirect()->back()->with(['errorToaster'   => 'Course Not Found!' , 'title' => 'Warning']);
         }
         $getEnrollment      = Enrollment::where(['Std_ID' => $request['Std_ID'] ]);
+        //dd($semesterCourse , $getEnrollment->get());
         $enrollmentsArray   = SemesterCourse::whereNotIn('ID' ,  $getEnrollment->pluck('SemCourses_ID')->toArray())->pluck('ID')->toArray();
          $enrollments       = $getEnrollment->get();
         $button = "Add Enrollment";
@@ -62,7 +107,8 @@ class EnrollmentsController extends Controller
                 'enrollments',
                 'enrollmentsArray',
                 'acdRule',
-                'getTotalCreditHours'
+                'getTotalCreditHours',
+                'semester'
             )
         );
     }
