@@ -24,7 +24,8 @@ use App\Models\Registration;
 class AdmissionController extends Controller
 {
 
-     public function validation($request){
+    public function validation($request)
+    {
 
         $this->validate($request, [
 
@@ -33,7 +34,7 @@ class AdmissionController extends Controller
             'Std_LName'         => 'required|string|max:15|regex:/^[a-zA-Z\s]+$/',
             'ClassSection'      => 'required|string||max:1',
             'CNIC'              => 'required|max:13|unique:Students',
-            'Nationality'       => 'required|string',
+            'Nationality'       => 'required|string|regex:/^[a-zA-Z\s]+$/',
             'DOB'               => 'required|Date',
             'Gender'            => 'required|string',
             'Email'             => 'required|Email|max:25',
@@ -61,54 +62,60 @@ class AdmissionController extends Controller
             'stdfile'           => 'required|mimes:jpeg,png,jpg,pdf|max:3072'
 
         ]);
-        
     }
 
-    public function addStudentAdmission(){
+    public function addStudentAdmission()
+    {
 
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
 
-        $admissionsession = Semester::where('Year','=', date('Y'))->get();
+        $admissionsession = Semester::where('Year', '=', date('Y'))->get();
         $button = "Add Student Admission";
         $title  = 'Add Student Admissions';
         $route  = '/storeStudentAdmission';
         return
-            view('Admissions.addStudentAdmission',
+            view(
+                'Admissions.addStudentAdmission',
                 compact(
                     'degree',
                     'button',
                     'title',
                     'route',
                     'admissionsession'
-                ));
+                )
+            );
     }
 
-     public function storeStudentAdmission(Request $request){
+    public function storeStudentAdmission(Request $request)
+    {
+
+        // dd($request);
 
         $validator = $this->validation($request);
-       DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $this->createStudentDetail($request);
             $this->createStudentQualification($request);
             $this->storeRegistrationInDbReturnId($request);
-            if($request->Status=='In Progress'){
+            if ($request->Status == 'In Progress') {
                 $this->createProgressChallan($request);
             }
-            
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }
-            return redirect()->back()->with(['successToaster' => 'Admission Added!' , 'title' => 'Success']);
+        return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
 
         //}
     }
 
-    protected function createStudentDetail($request){
+    protected function createStudentDetail($request)
+    {
 
-         $stdfilename = time() . "_studentfile." . $request->file('stdfile')->getClientOriginalExtension();
+        $stdfilename = time() . "_studentfile." . $request->file('stdfile')->getClientOriginalExtension();
         $request->file('stdfile')->storeAs('studentsFiles', $stdfilename);
         $stdImagename = time() . "_studentImage." . $request->file('Image')->getClientOriginalExtension();
         $request->file('Image')->storeAs('studentsImages', $stdImagename);
@@ -148,161 +155,193 @@ class AdmissionController extends Controller
         return $submit;
     }
 
-    public function storeRegistrationInDbReturnId($request){
+    public function storeRegistrationInDbReturnId($request)
+    {
 
         $registration = new RegistrationController();
-        $Sem_ID = Semester::where('SemSession' ,$request->AdmissionSession)->pluck('ID')->first();
-        if(!empty($request->Student_ID)){
+        $Sem_ID = Semester::where('SemSession', $request->AdmissionSession)->pluck('ID')->first();
+        if (!empty($request->Student_ID)) {
             $Std_ID = $request->Student_ID;
-        }else{
-            $Std_ID = Student::where(['CNIC' => $request->CNIC , 'FatherCNIC' => $request->FatherCNIC])->pluck('ID')->first();
+        } else {
+            $Std_ID = Student::where(['CNIC' => $request->CNIC, 'FatherCNIC' => $request->FatherCNIC])->pluck('ID')->first();
         }
-        $oldRegistration = Registration::where('Std_ID' , $Std_ID);
-        if($oldRegistration->exists() == true){
+        $oldRegistration = Registration::where('Std_ID', $Std_ID);
+        if ($oldRegistration->exists() == true) {
             return $oldRegistration->first()->ID;
-        }else{
-            $registration->storeRegistrationInDB( 
-            $Std_ID , 
-            $AcaStd_IDRule = 15 , 
-            $Sem_ID
-        );
-            return Registration::where('Std_ID' , $Std_ID)->first()->ID;
+        } else {
+            $registration->storeRegistrationInDB(
+                $Std_ID,
+                $AcaStd_IDRule = 15,
+                $Sem_ID
+            );
+            return Registration::where('Std_ID', $Std_ID)->first()->ID;
         }
     }
 
-    protected function createStudentQualification($request){
+    public function examinationdatainsertion($request,$std_id)
+    {
 
-        $student = Student::where(['CNIC' => $request->CNIC , 'FatherCNIC' => $request->FatherCNIC])->first();
+        for ($i = 0; $i < sizeof($request->examination); $i++) {
+
+            $examination      = $request->examination[$i];
+            $InstitutionName  = $request->InstitutionName[$i];
+            $DateStarted      = $request->DateStarted[$i];
+            $DateEnd          = $request->DateEnd[$i];
+            $ObtainedMarks    = $request->ObtainedMarks[$i];
+            $TotalMarks       = $request->TotalMarks[$i];
+            $Rollno           = $request->Rollno[$i];
+
+            $this->addStudentExamination(
+                $std_id,
+                $examination,
+                $InstitutionName,
+                $DateStarted,
+                $DateEnd,
+                $ObtainedMarks,
+                $TotalMarks,
+                $Rollno
+            );
+        }
+    }
+
+    protected function createStudentQualification($request)
+    {
+
+        $student = Student::where(['CNIC' => $request->CNIC, 'FatherCNIC' => $request->FatherCNIC])->first();
 
         $std_id = $student->ID;
+        // dd($request, $std_id);
+        $this->examinationdatainsertion($request,$std_id);
+
+
 
         // dd($std_id,$request->all(),$student);
 
-         //-----------------QUALIFICATION------------
-        $matric_examination     = $request->matric_examination;
-        $matric_board           = $request->matric_board;
-        $matric_passing_year    = $request->matric_passing_year;
-        $matric_rollno          = $request->matric_rollno;
-        $matric_total_marks     = $request->matric_total_marks;
-        $matric_marks_obtained  = $request->matric_marks_obtained;
-        $matric_percentage      = $request->matric_percentage;
-        $matric_appeared        = $request->matric_appeared;
+        //-----------------QUALIFICATION------------
+        // $matric_examination     = $request->matric_examination;
+        // $matric_board           = $request->matric_board;
+        // $matric_passing_year    = $request->matric_passing_year;
+        // $matric_rollno          = $request->matric_rollno;
+        // $matric_total_marks     = $request->matric_total_marks;
+        // $matric_marks_obtained  = $request->matric_marks_obtained;
+        // $matric_percentage      = $request->matric_percentage;
+        // $matric_appeared        = $request->matric_appeared;
 
 
-        $fsc_examination        = $request->fsc_examination;
-        $fsc_board              = $request->fsc_board;
-        $fsc_passing_year       = $request->fsc_passing_year;
-        $fsc_rollno             = $request->fsc_rollno;
-        $fsc_total_marks        = $request->fsc_total_marks;
-        $fsc_marks_obtained     = $request->fsc_marks_obtained;
-        $fsc_percentage         = $request->fsc_percentage;
-        $fsc_appeared           = $request->fsc_appeared;
+        // $fsc_examination        = $request->fsc_examination;
+        // $fsc_board              = $request->fsc_board;
+        // $fsc_passing_year       = $request->fsc_passing_year;
+        // $fsc_rollno             = $request->fsc_rollno;
+        // $fsc_total_marks        = $request->fsc_total_marks;
+        // $fsc_marks_obtained     = $request->fsc_marks_obtained;
+        // $fsc_percentage         = $request->fsc_percentage;
+        // $fsc_appeared           = $request->fsc_appeared;
 
 
-        $becholars_examination  = $request->becholars_examination;
-        $becholars_board        = $request->becholars_board;
-        $becholars_passing_year = $request->becholars_passing_year;
-        $becholars_rollno       = $request->becholars_rollno;
-        $becholars_total_marks  = $request->becholars_total_marks;
-        $becholars_marks_obtained = $request->becholars_marks_obtained;
-        $becholars_percentage   = $request->becholars_percentage;
-        $becholars_appeared     = $request->becholars_appeared;
+        // $becholars_examination  = $request->becholars_examination;
+        // $becholars_board        = $request->becholars_board;
+        // $becholars_passing_year = $request->becholars_passing_year;
+        // $becholars_rollno       = $request->becholars_rollno;
+        // $becholars_total_marks  = $request->becholars_total_marks;
+        // $becholars_marks_obtained = $request->becholars_marks_obtained;
+        // $becholars_percentage   = $request->becholars_percentage;
+        // $becholars_appeared     = $request->becholars_appeared;
 
-        $master_examination     = $request->master_examination;
-        $master_board           = $request->master_board;
-        $master_passing_year    = $request->master_passing_year;
-        $master_rollno          = $request->master_rollno;
-        $master_total_marks     = $request->master_total_marks;
-        $master_marks_obtained  = $request->master_marks_obtained;
-        $master_percentage      = $request->master_percentage;
-        $master_appeared        = $request->master_appeared;
-
-
-        $masters_examination    = $request->masters_examination;
-        $masters_board          = $request->masters_board;
-        $masters_passing_year   = $request->masters_passing_year;
-        $masters_rollno         = $request->masters_rollno;
-        $masters_total_marks    = $request->masters_total_marks;
-        $masters_marks_obtained = $request->masters_marks_obtained;
-        $masters_percentage     = $request->masters_percentage;
-        $masters_appeared       = $request->masters_appeared;
+        // $master_examination     = $request->master_examination;
+        // $master_board           = $request->master_board;
+        // $master_passing_year    = $request->master_passing_year;
+        // $master_rollno          = $request->master_rollno;
+        // $master_total_marks     = $request->master_total_marks;
+        // $master_marks_obtained  = $request->master_marks_obtained;
+        // $master_percentage      = $request->master_percentage;
+        // $master_appeared        = $request->master_appeared;
 
 
-        if (!empty($matric_examination) && !empty($matric_board)) {
-
-            $this->addStudentExamination(
-            $std_id,
-            $matric_examination,
-            $matric_appeared,
-            $matric_board,
-            $matric_passing_year,
-            $matric_marks_obtained,
-            $matric_total_marks,
-            $matric_rollno
-        );
-        }
+        // $masters_examination    = $request->masters_examination;
+        // $masters_board          = $request->masters_board;
+        // $masters_passing_year   = $request->masters_passing_year;
+        // $masters_rollno         = $request->masters_rollno;
+        // $masters_total_marks    = $request->masters_total_marks;
+        // $masters_marks_obtained = $request->masters_marks_obtained;
+        // $masters_percentage     = $request->masters_percentage;
+        // $masters_appeared       = $request->masters_appeared;
 
 
-        if (!empty($fsc_examination) && !empty($fsc_board)) {
+        // if (!empty($matric_examination) && !empty($matric_board)) {
 
-            $this->addStudentExamination(
-            $std_id,
-            $fsc_examination,
-            $fsc_appeared,
-            $fsc_board,
-            $fsc_passing_year,
-            $fsc_marks_obtained,
-            $fsc_total_marks,
-            $fsc_rollno
-        );
-
-
-        }
-
-        if (!empty($becholars_examination) && !empty($becholars_board)) {
-
-            $this->addStudentExamination(
-            $std_id,
-            $becholars_examination,
-            $becholars_appeared,
-            $becholars_board,
-            $becholars_passing_year,
-            $becholars_marks_obtained,
-            $becholars_total_marks,
-            $becholars_rollno
-        );
-        }
+        //     $this->addStudentExamination(
+        //     $std_id,
+        //     $matric_examination,
+        //     $matric_appeared,
+        //     $matric_board,
+        //     $matric_passing_year,
+        //     $matric_marks_obtained,
+        //     $matric_total_marks,
+        //     $matric_rollno
+        // );
+        // }
 
 
-        if (!empty($master_examination) && !empty($master_examination)) {
+        // if (!empty($fsc_examination) && !empty($fsc_board)) {
 
-            $this->addStudentExamination(
-            $std_id,
-            $master_examination,
-            $master_appeared,
-            $master_board,
-            $master_passing_year,
-            $master_marks_obtained,
-            $master_total_marks,
-            $master_rollno
-        );
-        }
-
+        //     $this->addStudentExamination(
+        //     $std_id,
+        //     $fsc_examination,
+        //     $fsc_appeared,
+        //     $fsc_board,
+        //     $fsc_passing_year,
+        //     $fsc_marks_obtained,
+        //     $fsc_total_marks,
+        //     $fsc_rollno
+        // );
 
 
-        if (!empty($masters_examination) && !empty($masters_examination)) {
+        // }
 
-            $this->addStudentExamination(
-            $std_id,
-            $masters_examination,
-            $masters_appeared,
-            $masters_board,
-            $masters_passing_year,
-            $masters_marks_obtained,
-            $masters_total_marks,
-            $masters_rollno
-        );
-        }
+        // if (!empty($becholars_examination) && !empty($becholars_board)) {
+
+        //     $this->addStudentExamination(
+        //     $std_id,
+        //     $becholars_examination,
+        //     $becholars_appeared,
+        //     $becholars_board,
+        //     $becholars_passing_year,
+        //     $becholars_marks_obtained,
+        //     $becholars_total_marks,
+        //     $becholars_rollno
+        // );
+        // }
+
+
+        // if (!empty($master_examination) && !empty($master_examination)) {
+
+        //     $this->addStudentExamination(
+        //     $std_id,
+        //     $master_examination,
+        //     $master_appeared,
+        //     $master_board,
+        //     $master_passing_year,
+        //     $master_marks_obtained,
+        //     $master_total_marks,
+        //     $master_rollno
+        // );
+        // }
+
+
+
+        // if (!empty($masters_examination) && !empty($masters_examination)) {
+
+        //     $this->addStudentExamination(
+        //     $std_id,
+        //     $masters_examination,
+        //     $masters_appeared,
+        //     $masters_board,
+        //     $masters_passing_year,
+        //     $masters_marks_obtained,
+        //     $masters_total_marks,
+        //     $masters_rollno
+        // );
+        // }
     }
 
     public function addStudentExamination(
@@ -314,8 +353,8 @@ class AdmissionController extends Controller
         $DateEnd,
         $ObtainedMarks,
         $TotalMarks,
-        $RollNo)
-    {
+        $RollNo
+    ) {
 
 
         $matric = DB::statement("EXECUTE sp_InsertStudentEducations
@@ -330,7 +369,8 @@ class AdmissionController extends Controller
             ");
     }
 
-     public function allStudentAdmissions(){
+    public function allStudentAdmissions()
+    {
 
         $students = Student::paginate(10);
         $title  = 'All Student Admissions';
@@ -339,64 +379,72 @@ class AdmissionController extends Controller
         $modalTitle = 'Edit Student Admission';
 
         return
-        view('Admissions.allStudentAdmissions' ,
-            compact(
-                'students' ,
-                'title' ,
-                'modalTitle' ,
-                'route',
-                'getEditRoute'
-            ));
+            view(
+                'Admissions.allStudentAdmissions',
+                compact(
+                    'students',
+                    'title',
+                    'modalTitle',
+                    'route',
+                    'getEditRoute'
+                )
+            );
     }
 
-    public function editStudentAdmission($id){
+    public function editStudentAdmission($id)
+    {
 
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
         $button = 'Update Student Info';
         $title  = 'Edit Student Info';
         $route  = '/updateStudentAdmission';
-        $studentAdmission = Student::where('ID' , $id)->first();
+        $studentAdmission = Student::where('ID', $id)->first();
         $degrees = Degree::get();
-        $studentEducations = StudentEducation::where('Std_ID' , $id)->get();
-        $admissionsession = Semester::where('Year','=', date('Y'))->get();
+        $studentEducations = StudentEducation::where('Std_ID', $id)->get();
+        $admissionsession = Semester::where('Year', '=', date('Y'))->get();
 
 
-        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $studentAdmission->Degree_ID , 'Batch_ID' => $studentAdmission->batch->ID])->first();
-        if($DegreeBatche){
-            $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $studentAdmission->ClassSection])->get();
-        }else{
+        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $studentAdmission->Degree_ID, 'Batch_ID' => $studentAdmission->batch->ID])->first();
+        if ($DegreeBatche) {
+            $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID, 'Section' => $studentAdmission->ClassSection])->get();
+        } else {
             $DegsemesterCourses = null;
         }
 
-        $enrollments = Enrollment::where('Std_ID' , $studentAdmission->ID)->get();
+        $enrollments = Enrollment::where('Std_ID', $studentAdmission->ID)->get();
 
-        
+
 
 
 
         // dd($matric[0]['ID'],$matric[0]['Degree'],$matric[0]['InstitutionName']);
 
 
-         return
-         view('Admissions.editStudentAdmission',
-            compact(
-                'studentAdmission',
-                'studentEducations',
-                'degrees',
-                'button' ,
-                'title' ,
-                'route',
-                'degree',
-                'admissionsession',
-                'DegreeBatche',
-                'DegsemesterCourses',
-                'enrollments'
-               
-            ));
+        return
+            view(
+                'Admissions.editStudentAdmission',
+                compact(
+                    'studentAdmission',
+                    'studentEducations',
+                    'degrees',
+                    'button',
+                    'title',
+                    'route',
+                    'degree',
+                    'admissionsession',
+                    'DegreeBatche',
+                    'DegsemesterCourses',
+                    'enrollments'
+
+                )
+            );
     }
 
-    public function updateEducation($request){
+    public function updateEducation($request)
+    {
 
+
+        // dd($request);
 
         $examination        = $request['examination'];
         $InstitutionName    = $request['InstitutionName'];
@@ -419,9 +467,9 @@ class AdmissionController extends Controller
         @TotalMarks         ='$TotalMarks',
         @RollNo             ='$Rollno'
         ;");
-
     }
-    public function updateStudentTable($request , $Date_of_birth ,$state ,$Country ,$file ,$stdImage){
+    public function updateStudentTable($request, $Date_of_birth, $state, $Country, $file, $stdImage)
+    {
 
         $submit = DB::update("EXEC sp_UpdateStudentDetails
         @Std_ID             ='$request->Student_ID',
@@ -460,81 +508,82 @@ class AdmissionController extends Controller
     }
 
 
-     public function updateStudentAdmission(Request $request){
+    public function updateStudentAdmission(Request $request)
+    {
 
         // DB::beginTransaction();
 
         // try {
         $request['Reg_ID'] = $this->storeRegistrationInDbReturnId($request);
 
-        if($request->country){
+        if ($request->country) {
             $Country            =  $request->country;
-        }else{
+        } else {
             $Country           =   $request->country_pre;
         }
-        if($request->state){
+        if ($request->state) {
             $state              =  $request->state;
-        }else{
+        } else {
             $state             =   $request->Province_pre;
         }
-        if($request->DOB){
+        if ($request->DOB) {
             $Date_of_birth      =  $request->DOB;
-        }else{
+        } else {
             $Date_of_birth     =   $request->DOB_pre;
         }
-        if($request->stdfile){
+        if ($request->stdfile) {
             $file               = time() . "_studentfileupdate." . $request->file('stdfile')->getClientOriginalExtension();
             $request->file('stdfile')->storeAs('studentsFiles', $file);
-        }else{
+        } else {
             $file              =   $request->stdfile_pre;
         }
-        if($request->Image){
+        if ($request->Image) {
             $stdImage           = time() . "_studentImageupdate." . $request->file('Image')->getClientOriginalExtension();
             $request->file('Image')->storeAs('studentsImages', $stdImage);
-        }else{
+        } else {
             $stdImage          =   $request->image_pre;
         }
-         
-        if($request->Status=='Admitted'){
+
+        if ($request->Status == 'Admitted') {
             $applicantid = Student::where(['ID' => $request->Student_ID])->first();
-            if($applicantid->StdRollNo==null){
+            if ($applicantid->StdRollNo == null) {
                 DB::update("EXEC sp_RollNoAssign @App_ID='$applicantid->ApplicantID' ;");
             }
         }
-         if($request->Status=='In Progress'){
+        if ($request->Status == 'In Progress') {
             $this->createProgressChallan($request);
         }
-        $this->updateStudentTable($request , $Date_of_birth ,$state ,$Country ,$file ,$stdImage);
-        if(!empty($request->examination)){
+        $this->updateStudentTable($request, $Date_of_birth, $state, $Country, $file, $stdImage);
+        if (!empty($request->examination)) {
 
-        for ($i=0; $i < sizeof($request->examination) ; $i++) { 
+            for ($i = 0; $i < sizeof($request->examination); $i++) {
 
-           $data['examination']      = $request->examination[$i];
-           $data['InstitutionName']  = $request->InstitutionName[$i];
-           $data['DateStarted']      = $request->DateStarted[$i];
-           $data['DateEnd']          = $request->DateEnd[$i];
-           $data['ObtainedMarks']    = $request->ObtainedMarks[$i];
-           $data['TotalMarks']       = $request->TotalMarks[$i];
-           $data['Rollno']           = $request->Rollno[$i];
-           $data['educationID']      = $request->educationID[$i];
+                $data['examination']      = $request->examination[$i];
+                $data['InstitutionName']  = $request->InstitutionName[$i];
+                $data['DateStarted']      = $request->DateStarted[$i];
+                $data['DateEnd']          = $request->DateEnd[$i];
+                $data['ObtainedMarks']    = $request->ObtainedMarks[$i];
+                $data['TotalMarks']       = $request->TotalMarks[$i];
+                $data['Rollno']           = $request->Rollno[$i];
+                $data['educationID']      = $request->educationID[$i];
 
-           $this->updateEducation($data);
-        }
-        }
-
-        if($request->Status=='Completed'){
-            $challanStatus = $this->createFeeChallan($request);
-            if($challanStatus == "error"){
-                 return redirect()->back()->with(['errorToaster' => 'Failed Degree Batch Not Found!' , 'title' => 'Add Or Set Degree Batches']);
-            }elseif($challanStatus == "error1"){
-                return redirect()->back()->with(['errorToaster' => 'Failed Semeter Detail Not found!' , 'title' => 'Set Semester Detail to Create Challan']);
+                $this->updateEducation($data);
             }
-           $enrollment = $this->enrollStudentCourses($request);
-           if($enrollment == 'Degree Batch Not Found!'){
-                return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Enrollment Failled Please Add Degree Batch']);
-           }elseif($enrollment == 'Degree SemesterCourse Not Found!'){
-                return redirect()->back()->with(['errorToaster'   => 'Degree SemesterCourse Not Found!' , 'title' => 'Enrollment Failled Please Add Degree SemesterCourse']);
-           }  
+        }
+
+        if ($request->Status == 'Completed') {
+            $challanStatus = $this->createFeeChallan($request);
+            if ($challanStatus == "error") {
+                return redirect()->back()->with(['errorToaster' => 'Failed Degree Batch Not Found!', 'title' => 'Add Or Set Degree Batches']);
+            } elseif ($challanStatus == "error1") {
+                return redirect()->back()->with(['errorToaster' => 'Failed Semeter Detail Not found!', 'title' => 'Set Semester Detail to Create Challan']);
+            }
+            $enrollment = $this->enrollStudentCourses($request);
+            if ($enrollment == 'Degree Batch Not Found!') {
+                return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!', 'title' => 'Enrollment Failled Please Add Degree Batch']);
+            } elseif ($enrollment == 'Degree SemesterCourse Not Found!') {
+                return redirect()->back()->with(['errorToaster'   => 'Degree SemesterCourse Not Found!', 'title' => 'Enrollment Failled Please Add Degree SemesterCourse']);
+            }
         }
 
         // DB::commit();
@@ -543,115 +592,113 @@ class AdmissionController extends Controller
         //     throw $e;
         // }
 
-        
-        return redirect()->back()->with(['successToaster' => 'Student Admission Added!' , 'title' => 'Success']);
 
+        return redirect()->back()->with(['successToaster' => 'Student Admission Added!', 'title' => 'Success']);
     }
 
-    public function createFeeChallan($request){
+    public function createFeeChallan($request)
+    {
 
-        
+
         $challan = new ChallanController();
-        $batch_id = Semester::where('SemSession' ,$request->AdmissionSession)->first()->ID;
-        $degreeBatch = DegreeBatche::where(['Degree_ID' => $request->Degree_ID , 'Batch_ID' => $batch_id]);
-        if($degreeBatch->exists() == true){
+        $batch_id = Semester::where('SemSession', $request->AdmissionSession)->first()->ID;
+        $degreeBatch = DegreeBatche::where(['Degree_ID' => $request->Degree_ID, 'Batch_ID' => $batch_id]);
+        if ($degreeBatch->exists() == true) {
             $degreeBatch = $degreeBatch->first()->ID;
-        }else{
+        } else {
             return "error";
         }
 
-        $semesterDetail = SemesterDetail::where(['DegBatches_ID' => $degreeBatch , 'Sem_ID' => $batch_id]);
-        if($semesterDetail->exists() == true){
+        $semesterDetail = SemesterDetail::where(['DegBatches_ID' => $degreeBatch, 'Sem_ID' => $batch_id]);
+        if ($semesterDetail->exists() == true) {
             $semesterDetail = $semesterDetail->first();
-        }else{
+        } else {
             return "error1";
         }
 
         //dd($semesterDetail);
-        $amount = 
-        $semesterDetail->SemesterFee + 
-        $semesterDetail->Tuition_Fee +  
-        $semesterDetail->Magazine_Fee +
-        $semesterDetail->Exam_Fee +
-        $semesterDetail->Society_Fee +
-        $semesterDetail->Misc_Fee +
-        $semesterDetail->Registration_Fee +
-        $semesterDetail->Practical_charges +
-        $semesterDetail->Sports_Fund;
+        $amount =
+            $semesterDetail->SemesterFee +
+            $semesterDetail->Tuition_Fee +
+            $semesterDetail->Magazine_Fee +
+            $semesterDetail->Exam_Fee +
+            $semesterDetail->Society_Fee +
+            $semesterDetail->Misc_Fee +
+            $semesterDetail->Registration_Fee +
+            $semesterDetail->Practical_charges +
+            $semesterDetail->Sports_Fund;
 
         $registrationId = $this->storeRegistrationInDbReturnId($request);
 
-        $oldChallan = Challan::where('Reg_ID' , $registrationId)->orderBy('ID' , 'desc')->first()->Amount;
-        
-        if($oldChallan != $amount){
-       $challancreated = $challan->createChallan(
-            $amount , 
-            $Type= "Registration" , 
-            $registrationId,
-            $batch_id,
-            $std_sch_amount = 0,
-            $std_sch_type = 0
-        );
-        $challan->createChallanDetail(
+        $oldChallan = Challan::where('Reg_ID', $registrationId)->orderBy('ID', 'desc')->first()->Amount;
 
-        $challancreated->ID,
-        // $SemesterFee,
-        $semesterDetail->Magazine_Fee,
-        $semesterDetail->Exam_Fee,
-        $semesterDetail->Society_Fee,
-        $semesterDetail->Misc_Fee,
-        $semesterDetail->Registration_Fee,
-        $semesterDetail->Practical_charges,
-        $semesterDetail->Sports_Fund,
-        // $FeeType,
-        $semesterDetail->Tuition_Fee,
-         $semesterDetail->SemesterFee
-    );
+        if ($oldChallan != $amount) {
+            $challancreated = $challan->createChallan(
+                $amount,
+                $Type = "Registration",
+                $registrationId,
+                $batch_id,
+                $std_sch_amount = 0,
+                $std_sch_type = 0
+            );
+            $challan->createChallanDetail(
+
+                $challancreated->ID,
+                // $SemesterFee,
+                $semesterDetail->Magazine_Fee,
+                $semesterDetail->Exam_Fee,
+                $semesterDetail->Society_Fee,
+                $semesterDetail->Misc_Fee,
+                $semesterDetail->Registration_Fee,
+                $semesterDetail->Practical_charges,
+                $semesterDetail->Sports_Fund,
+                // $FeeType,
+                $semesterDetail->Tuition_Fee,
+                $semesterDetail->SemesterFee
+            );
         }
-        
-    }    
+    }
 
-    public function createProgressChallan($request){
+    public function createProgressChallan($request)
+    {
 
-        
+
         $challan = new ChallanController();
-        $Sem_ID = Semester::where('SemSession' ,$request->AdmissionSession)->first()->ID;
-        if(!empty($request->Student_ID)){
-            $registrationId = Registration::where('Std_ID' , $request->Student_ID)->first()->ID;
-        }else{
-            $student = Student::where(['CNIC' => $request->CNIC , 'FatherCNIC' => $request->FatherCNIC])->first();
+        $Sem_ID = Semester::where('SemSession', $request->AdmissionSession)->first()->ID;
+        if (!empty($request->Student_ID)) {
+            $registrationId = Registration::where('Std_ID', $request->Student_ID)->first()->ID;
+        } else {
+            $student = Student::where(['CNIC' => $request->CNIC, 'FatherCNIC' => $request->FatherCNIC])->first();
             $std_id = $student->ID;
-            $registrationId = Registration::where('Std_ID' , $std_id)->first()->ID;
+            $registrationId = Registration::where('Std_ID', $std_id)->first()->ID;
         }
         $amount = 1500;
 
-        $oldChallan = Challan::where(['Reg_ID' => $registrationId , 'Amount' => $amount]);
-        if(empty($oldChallan->exists())){
+        $oldChallan = Challan::where(['Reg_ID' => $registrationId, 'Amount' => $amount]);
+        if (empty($oldChallan->exists())) {
             $challancreated = $challan->createChallan(
-            $amount , 
-            $Type= "Registration" , 
-            $registrationId , 
-            $Sem_ID,
-            0,
-            0
-        );
-       
-        $challan->createChallanDetail(
-        $challancreated->ID,
-        $Magazine_Fee       = 0,
-        $Exam_Fee           = 0,
-        $Society_Fee        = 0,
-        $Misc_Fee           = 0,
-        $Registration_Fee   = 0,
-        $Practical_charges  = 0,
-        $Sports_Fund        = 0,
-        $Tuition_Fee        = 0,
-        $Semester_Fee       = 0
+                $amount,
+                $Type = "Registration",
+                $registrationId,
+                $Sem_ID,
+                0,
+                0
+            );
 
-    );
+            $challan->createChallanDetail(
+                $challancreated->ID,
+                $Magazine_Fee       = 0,
+                $Exam_Fee           = 0,
+                $Society_Fee        = 0,
+                $Misc_Fee           = 0,
+                $Registration_Fee   = 0,
+                $Practical_charges  = 0,
+                $Sports_Fund        = 0,
+                $Tuition_Fee        = 0,
+                $Semester_Fee       = 0
+
+            );
         }
-      
-        
     }
     // public function storeRegistrationInD($Std_ID , $AcaStdID , $Sem_ID){
 
@@ -663,56 +710,57 @@ class AdmissionController extends Controller
 
     // }
 
-    public function enrollStudentCourses($request){
+    public function enrollStudentCourses($request)
+    {
 
-        $student            = Student::where('ID' , $request->Student_ID)->first();
-        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $student->batch->ID])->first();
+        $student            = Student::where('ID', $request->Student_ID)->first();
+        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID, 'Batch_ID' => $student->batch->ID])->first();
         $Reg_ID             = $this->storeRegistrationInDbReturnId($request);
-        if(empty($DegreeBatche)){
+        if (empty($DegreeBatche)) {
             return 'Degree Batch Not Found!';
         }
-        $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection])->get();
+        $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID, 'Section' => $student->ClassSection])->get();
 
-        if($DegsemesterCourses->isEmpty()){
+        if ($DegsemesterCourses->isEmpty()) {
             return 'Degree SemesterCourse Not Found!';
         }
 
 
 
-       
-            foreach($DegsemesterCourses as $DegsemesterCourse){
-                //dd($DegsemesterCourses);
 
-                $old_Enrollment = Enrollment::where([
+        foreach ($DegsemesterCourses as $DegsemesterCourse) {
+            //dd($DegsemesterCourses);
+
+            $old_Enrollment = Enrollment::where([
                 'Std_ID'        => $request->Student_ID,
                 'SemCourses_ID' => $DegsemesterCourse->semesterCourse->ID,
                 'Is_i_mid'      => 10,
                 'Is_i_final'    => 10,
-                'Reg_ID'        => $Reg_ID]);
-                $old_Enrollment = $this->oldEnrollment($request , $DegsemesterCourse->semesterCourse->ID , $Is_i_mid = 10 , $Is_i_final = 10 , $Reg_ID);
-                if($old_Enrollment->exists() != true){
-                
+                'Reg_ID'        => $Reg_ID
+            ]);
+            $old_Enrollment = $this->oldEnrollment($request, $DegsemesterCourse->semesterCourse->ID, $Is_i_mid = 10, $Is_i_final = 10, $Reg_ID);
+            if ($old_Enrollment->exists() != true) {
+
                 $enrollment         = new EnrollmentsController();
-                $storeEnrollment    = $enrollment->storeEnrollmentsInD( 
-                $request->Student_ID , 
-                $DegsemesterCourse->semesterCourse->ID , 
-                $Is_i_mid           = 10 , 
-                $Is_i_final         = 10 , 
-                $Reg_ID             = $Reg_ID
-            );
-                $id = $this->oldEnrollment($request , $DegsemesterCourse->semesterCourse->ID , $Is_i_mid = 10 , $Is_i_final = 10 , $Reg_ID)->first()->ID;
-                 $ConfirmEnrollment = DB::statement("EXEC sp_UpdateEnrollment
+                $storeEnrollment    = $enrollment->storeEnrollmentsInD(
+                    $request->Student_ID,
+                    $DegsemesterCourse->semesterCourse->ID,
+                    $Is_i_mid           = 10,
+                    $Is_i_final         = 10,
+                    $Reg_ID             = $Reg_ID
+                );
+                $id = $this->oldEnrollment($request, $DegsemesterCourse->semesterCourse->ID, $Is_i_mid = 10, $Is_i_final = 10, $Reg_ID)->first()->ID;
+                $ConfirmEnrollment = DB::statement("EXEC sp_UpdateEnrollment
                      @ID         = '$id'
                  ;");
             }
         }
     }
 
-    public function oldEnrollment($request , $semesterCourse_ID , $Is_i_mid , $Is_i_final , $Reg_ID){
+    public function oldEnrollment($request, $semesterCourse_ID, $Is_i_mid, $Is_i_final, $Reg_ID)
+    {
 
         return  Enrollment::where('Std_ID', $request->Student_ID)
-        ->where('Reg_ID', $Reg_ID)->where('SemCourses_ID' , $semesterCourse_ID)->orderBy('ID' , 'desc');
+            ->where('Reg_ID', $Reg_ID)->where('SemCourses_ID', $semesterCourse_ID)->orderBy('ID', 'desc');
     }
-
-
 }

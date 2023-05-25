@@ -418,8 +418,38 @@
             </tbody>
          </table>
       </div>
-      --}}
-            <div class="row">
+      --}}                  <div class="table-responsive">
+        <table class="table table-striped " id="sortable-table">
+            <thead>
+              <tr>
+                <th class="text-center">
+                  <i class="fas fa-th"></i>
+                </th>
+                <th>Examination Passed</th>
+                <th>Institution Appeared</th>
+                <th>Roll No.</th>
+                <th>Date Started <br>i.e (2019)</th>
+                <th>Date Ended</th>
+                <th>Total Marks</th>
+                <th>Marks Obtained</th>
+
+               
+              </tr>
+            </thead>
+            <tbody>
+             
+                @include('Admissions.studentEducationTr')
+               
+              
+               
+            </tbody>
+          </table>
+         <div class="form-group">
+                <a class="btn btn-warning btn-block tr_clone_add" style="color:white;">Add New Row </a>
+              
+        </div>
+       
+            {{-- <div class="row">
                 <div class="pl-3 pt-3" style="width: 12.5%;">
                     <label for="matric_examination" style="font-size: 0.8rem; font-weight: bold;">Examination <br>
                         Passed</label>
@@ -585,7 +615,7 @@
                         name="masters_appeared" id="masters_appeared" placeholder="">
 
                 </div>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <button id="button" type="submit"
                     class="btn btn-primary btn-block submit-form">{{ $button }}</button>
@@ -594,5 +624,17 @@
     </form>
     @include('Forms.formFooter')
     @include('Admissions.student_js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      $(".tr_clone_add").live('click', function() {
+      var $tr    = $('#tr_clone').closest('#tr_clone');
+      var $clone = $tr.clone();
+      $clone.find(':text').val('');
+      $tr.after($clone);
+      $clone.addClass('bg-warning');
+  });
+
+    </script>
 @endsection
 @include('js.form_submit_script')
