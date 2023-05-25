@@ -44,7 +44,7 @@
                                               @endphp
                                               @foreach ($examinations as $examination)
                                                   <option value="{{ $examination }}"
-                                                      {{ $examination = $studentEducation->Degree ?? 'selected', ' ' }}>
+                                                       {{ $examination ==$studentEducation->Degree ? 'selected' : '' }}>
                                                       {{ $examination }}</option>
                                               @endforeach
                                           </select>
