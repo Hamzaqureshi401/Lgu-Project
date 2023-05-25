@@ -50,12 +50,14 @@ class EnrollmentsController extends Controller
         if($semester->exists() != true){
             return redirect()->back()->with(['errorToaster'   => 'No Semester Is Active for Enrollment!' , 'title' => 'Plese Ask Admin to Active Semester first']);
         }
-        // $semester = $semester->first();
-        //$semesterCourse     = SemesterCourse::where('Sem_ID' , $semester->ID)->pluck('ID')->toArray();
+
+        $semester = $semester->first();
+
         $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $semester->ID])->first();
         if(empty($DegreeBatche)){
             return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Warning']);
         }
+        //dd($semester , $DegreeBatche);
         $acdRule            = $this->getAcdRule($request['Std_ID']);
         $getTotalCreditHours= $this->getTotalCreditHours($request);
         // $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection])->get();
