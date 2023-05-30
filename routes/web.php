@@ -30,6 +30,14 @@ Route::get('/logout', [ControllersLogin::class, 'logoutsessions']);
 Route::post('/Emp_login', [ControllersLogin::class, 'Emp_login'])->name('emp.login');
 Route::post('/Std_login', [ControllersLogin::class, 'Std_login']);
 
+
+
+
+// getadmission
+Route::get('/getStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'getStudentAdmission'])->name('get.StudentAdmissions');
+Route::post('/storegettudentAdmission', [App\Http\Controllers\AdmissionController::class, 'storegetStudentAdmission'])->name('store.getStudentAdmission');
+
+
 Auth::routes();
 
 Route::group(['middleware' => 'StudentAuth'], function () {
@@ -419,8 +427,6 @@ Route::get('/igradeDefualtSeating', [App\Http\Controllers\ViewController::class,
 Route::get('/feeRescheduling', [App\Http\Controllers\ViewController::class, 'feeRescheduling'])->name('fee.Rescheduling');
 Route::get('/taxReport', [App\Http\Controllers\ViewController::class, 'taxReport'])->name('tax.Report');
 Route::get('/ledger', [App\Http\Controllers\ViewController::class, 'ledger'])->name('ledger');
-
-
 
 
 

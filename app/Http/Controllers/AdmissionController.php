@@ -32,7 +32,7 @@ class AdmissionController extends Controller
             'Password'          => 'required|max:12',
             'Std_FName'         => 'required|string|max:20|regex:/^[a-zA-Z\s]+$/',
             'Std_LName'         => 'required|string|max:15|regex:/^[a-zA-Z\s]+$/',
-            'ClassSection'      => 'required|string||max:1',
+            'ClassSection'      => 'string||max:1',
             'CNIC'              => 'required|max:13|unique:Students',
             'Nationality'       => 'required|string|regex:/^[a-zA-Z\s]+$/',
             'DOB'               => 'required|Date',
@@ -52,7 +52,7 @@ class AdmissionController extends Controller
             'state'             => 'required',
             'country'           => 'required',
             'Degree_ID'         => 'required|integer',
-            'CurrentSemester'   => 'required|max:1',
+            'CurrentSemester'   => 'max:1',
             'Status'            => 'required',
             'AdmissionSession'  => 'required|max:15',
             'BloodGroup'        => 'required|string',
@@ -763,4 +763,57 @@ class AdmissionController extends Controller
         return  Enrollment::where('Std_ID', $request->Student_ID)
             ->where('Reg_ID', $Reg_ID)->where('SemCourses_ID', $semesterCourse_ID)->orderBy('ID', 'desc');
     }
+
+
+    public function getStudentAdmission()
+    {
+
+        $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
+
+        $admissionsession = Semester::where('Year', '=', date('Y'))->get();
+        $button = "Get Admission";
+        $title  = 'Get Admissions';
+        $route  = '/storegettudentAdmission';
+        return
+            view(
+                'Admissions.getAdmission',
+                compact(
+                    'degree',
+                    'button',
+                    'title',
+                    'route',
+                    'admissionsession'
+                )
+            );
+    }
+
+    public function storegetStudentAdmission(Request $request)
+    {
+
+        // dd($request);
+
+        $validator = $this->validation($request);
+        DB::beginTransaction();
+
+        try {
+            $this->createStudentDetail($request);
+            $this->createStudentQualification($request);
+            $this->storeRegistrationInDbReturnId($request);
+            if ($request->Status == 'In Progress') {
+                $this->createProgressChallan($request);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
+
+        //}
+    }
+
+
+
+
 }
