@@ -772,7 +772,7 @@ class AdmissionController extends Controller
 
         $admissionsession = Semester::where('Year', '=', date('Y'))->get();
         $button = "Get Admission";
-        $title  = 'Get Admissions';
+        $title  = 'LAHORE GARRISON UNIVERSITY ADMISSION FORM';
         $route  = '/storegettudentAdmission';
         return
             view(

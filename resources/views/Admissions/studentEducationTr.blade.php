@@ -1,11 +1,11 @@
-<tr class="form-group" id="tr_clone">
+<tr class="form-group " id="tr_clone">
     <td>
-      <div class="sort-handler">
+      <div class="sort-handler ">
         <i class="fas fa-th"></i>
       </div>
     </td>
     <td>
-  <select name="examination[]" class="form-control my-2">
+  <select name="examination[]" class="form-control border border-1 rounded border-dark my-2">
     @php
      $examinations = [
      0 => 'Matric',
@@ -29,16 +29,16 @@
     </td>
    
     <td>
-      <input type="text" name="InstitutionName[]" class="form-control" value="">
+      <input type="text" name="InstitutionName[]" class="form-control border border-1 rounded border-dark" value="">
     </td>
-     <td><input type="number" name="Rollno[]" class="form-control" value=""></td>
-     <td><input type="date" name="DateStarted[]" class="form-control" value=""></td>
-      <td><input type="date" name="DateEnd[]" class="form-control" value=""></td>
-       <td><input type="number" name="ObtainedMarks[]" class="form-control" value=""></td>
-        <td><input type="number" name="TotalMarks[]" class="form-control" value=""></td>
+     <td><input type="number" name="Rollno[]" class="form-control border border-1 rounded border-dark" value=""></td>
+     <td><input type="date" name="DateStarted[]" class="form-control border border-1 rounded border-dark" value=""></td>
+      <td><input type="date" name="DateEnd[]" class="form-control border border-1 rounded border-dark" value=""></td>
+       <td><input type="number" name="ObtainedMarks[]" class="form-control border border-1 rounded border-dark" value=""></td>
+        <td><input type="number" name="TotalMarks[]" class="form-control border border-1 rounded border-dark" value=""></td>
         
            <td></td>
-           <td style="display: none"><input type="text" name="educationID[]" class="form-control" value=""></td>
+           <td style="display: none"><input type="text" name="educationID[]" class="form-control border border-1 rounded border-dark" value=""></td>
 
    
    
