@@ -5,7 +5,7 @@
       </div>
     </td>
     <td>
-  <select name="examination[]" class="form-control border border-1 rounded border-dark my-2">
+  <select name="examination[]" class="form-control w-auto border border-1 rounded border-dark my-2">
     @php
      $examinations = [
      0 => 'Matric',
@@ -29,13 +29,14 @@
     </td>
    
     <td>
-      <input type="text" name="InstitutionName[]" class="form-control border border-1 rounded border-dark" value="">
+      <input type="text" name="InstitutionName[]" class="form-control border border-1 rounded border-dark w-auto" placeholder="Institution Appeared" value="">
     </td>
-     <td><input type="number" name="Rollno[]" class="form-control border border-1 rounded border-dark" value=""></td>
+     <td><input type="number" name="Rollno[]" class="form-control border border-1 rounded border-dark w-auto" value="" placeholder="Roll No"></td>
      <td><input type="date" name="DateStarted[]" class="form-control border border-1 rounded border-dark" value=""></td>
       <td><input type="date" name="DateEnd[]" class="form-control border border-1 rounded border-dark" value=""></td>
-       <td><input type="number" name="ObtainedMarks[]" class="form-control border border-1 rounded border-dark" value=""></td>
-        <td><input type="number" name="TotalMarks[]" class="form-control border border-1 rounded border-dark" value=""></td>
+       <td><input type="number" name="ObtainedMarks[]" class="form-control border border-1 rounded border-dark w-auto" value="" placeholder="Total Marks"></td>
+        <td><input type="number" name="TotalMarks[]" class="form-control border border-1 rounded border-dark w-auto" value="" placeholder="Marks Obtained
+          "></td>
         
            <td></td>
            <td style="display: none"><input type="text" name="educationID[]" class="form-control border border-1 rounded border-dark" value=""></td>

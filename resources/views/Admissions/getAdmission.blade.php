@@ -116,7 +116,7 @@
                         <div class="form-group col-md-2">
                             <label style="font-size: 13px">Student First Name <span style="color: red">*</span></label>
                             <input type="text" name="Std_FName" id="Std_FName" value="{{ old('Std_FName') }}"
-                                class="form-control border border-1 rounded border-dark" maxlength=20>
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your first name" maxlength=20>
                             <br>
                             @error('Std_FName')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -125,7 +125,7 @@
                         <div class="form-group col-md-2">
                             <label style="font-size: 13px">Student Last Name <span style="color: red">*</span></label>
                             <input type="text" name="Std_LName" id="Std_LName" value="{{ old('Std_LName') }}"
-                                class="form-control border border-1 rounded border-dark" maxlength=15>
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your last name" maxlength=15>
                             <br>
                             @error('Std_LName')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -135,7 +135,7 @@
                         <div class="form-group col-md-2">
                             <label style="font-size: 13px">Father Name <span style="color: red">*</span></label>
                             <input type="text" name="FatherName" value="{{ old('FatherName') }}" id="FatherName"
-                                class="form-control border border-1 rounded border-dark" maxlength=25>
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your father name" maxlength=25>
                             <br>
                             @error('FatherName')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -146,7 +146,7 @@
 
                             <label style="font-size: 13px">Student CNIC <span style="color: red">*</span></label>
                             <input type="number" value="{{ old('CNIC') }}" name="CNIC" id="CNIC"
-                                class="form-control border border-1 rounded border-dark" oninput="maxLengthCheck(this)" maxlength="13">
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your CNIC" oninput="maxLengthCheck(this)" maxlength="13">
                             <br>
 
 
@@ -171,7 +171,7 @@
 
                             <label style="font-size: 13px">Student Phone <span style="color: red">*</span></label>
                             <input type="number" name="StdPhone" id="StdPhone" value="{{ old('StdPhone') }}"
-                                class="form-control border border-1 rounded border-dark" oninput="maxLengthphone(this)" maxlength="11">
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your phone number" oninput="maxLengthphone(this)" maxlength="11">
                             <br>
                             @error('StdPhone')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -181,17 +181,17 @@
                         <div class="form-group col-md-2">
                             <label style="font-size: 13px">Blood Group <span style="color: red">*</span>
                             </label>
-                            <select name="BloodGroup" class="custom-select border border-1 rounded border-dark border border-1 rounded border-dark">
+                            <select name="BloodGroup"  class="custom-select border border-1 rounded border-dark border border-1 rounded border-dark">
                                 <option value="{{ old('BloodGroup') }}" selected>{{ old('BloodGroup') }}
                                 </option>
-                                <option value="A+">A Positive</option>
-                                <option value="A-">A Negative</option>
-                                <option value="B+">B Positive</option>
-                                <option value="B-">B Negative</option>
-                                <option value="O+">O Positive</option>
-                                <option value="O-">O Negative</option>
-                                <option value="AB+">AB Positive</option>
-                                <option value="AB-">AB Negative</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB+</option>
                             </select>
                             <br>
                             <br>
@@ -234,7 +234,7 @@
                         <div class="form-group col-md-2">
                             <label style="font-size: 13px">Student Password <span style="color: red">*</span></label>
                             <input type="text" name="Password" id="Password" value="{{ old('Password') }}"
-                                class="form-control border border-1 rounded border-dark" maxlength=12>
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your password" maxlength=12>
                             <br>
                             @error('Password')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -243,7 +243,7 @@
                         <div class="form-group col-md-2">
                             <label style="font-size: 13px">Nationality <span style="color: red">*</span></label>
                             <input type="text" name="Nationality" value="{{ old('Nationality') }}"
-                                id="Nationality" class="form-control border border-1 rounded border-dark" maxlength=12>
+                                id="Nationality" class="form-control border border-1 rounded border-dark" placeholder="Enter your Nationality" maxlength=12>
                             <br>
                             @error('Nationality')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -254,7 +254,7 @@
 
                             <label style="font-size: 13px">Student Email <span style="color: red">*</span></label>
                             <input type="email" value="{{ old('Email') }}" name="Email" id="Email"
-                                class="form-control border border-1 rounded border-dark" maxlength=25>
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your Email"  maxlength=25>
                             <br>
                             @error('Email')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -265,7 +265,7 @@
                             <label style="font-size: 13px">Parent Occupation <span style="color: red">*</span>
                             </label>
                             <input type="text" value="{{ old('ParentOccupation') }}" name="ParentOccupation"
-                                id="ParentOccupation" class="form-control border border-1 rounded border-dark" maxlength=30>
+                                id="ParentOccupation" class="form-control border border-1 rounded border-dark" placeholder="Enter your ParentOccupation " maxlength=30>
                             <br>
                             @error('ParentOccupation')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -273,7 +273,7 @@
                         </div>
 
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-12">
                             @php
                                 $Category = ['Defence', 'Shaheed', 'Civilion', 'Sports'];
                             @endphp
@@ -312,7 +312,7 @@
                         <div class="form-group col-md-4">
                             <label style="font-size: 13px">Address <span style="color: red">*</span> </label>
                             <input type="text" value="{{ old('Address') }}" name="Address" id="Address"
-                                class="form-control border border-1 rounded border-dark">
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your Address">
                             <br>
                             @error('Address')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -350,7 +350,7 @@
                         <div class="form-group col-md-2">
                             <label style="font-size: 13px">City <span style="color: red">*</span> </label>
                             <input type="text" value="{{ old('City') }}" name="City" id="City"
-                                class="form-control border border-1 rounded border-dark" maxlength=20>
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your city" maxlength=20>
                             <br>
                             @error('City')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -361,7 +361,7 @@
 
                             <label style="font-size: 13px">Tehsil <span style="color: red">*</span> </label>
                             <input type="text" value="{{ old('Tehsil') }}" name="Tehsil" id="Tehsil"
-                                class="form-control border border-1 rounded border-dark">
+                                class="form-control border border-1 rounded border-dark" placeholder="Enter your Tehsil">
                             <br>
                             @error('Tehsil')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -378,7 +378,7 @@
 
                             <label style="font-size: 13px">Father Cnic <span style="color: red">*</span></label>
                             <input type="number" name="FatherCNIC" value="{{ old('FatherCNIC') }}" id="FatherCNIC"
-                                class="form-control border border-1 rounded border-dark" oninput="maxLengthCheck(this)" maxlength="13">
+                                class="form-control border border-1 rounded border-dark" oninput="maxLengthCheck(this)" maxlength="13" placeholder="Your Father CNIC">
                             <br>
                             @error('FatherCNIC')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -388,7 +388,7 @@
                         <div class="form-group col-md-2">
                             <label style="font-size: 13px">Father Phone <span style="color: red">*</span></label>
                             <input type="number" value="{{ old('FatherPhone') }}" name="FatherPhone"
-                                id="FatherPhone" class="form-control border border-1 rounded border-dark" oninput="maxLengthphone(this)" maxlength="11">
+                                id="FatherPhone" class="form-control border border-1 rounded border-dark" oninput="maxLengthphone(this)" maxlength="11" placeholder="Enter Your Father PhoneNo">
                             <br>
                             @error('FatherPhone')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -398,7 +398,7 @@
                             <label style="font-size: 13px">Father Email <span style="color: red">*</span>
                             </label>
                             <input type="email" value="{{ old('FatherEmail') }}" name="FatherEmail"
-                                id="FatherEmail" class="form-control border border-1 rounded border-dark" maxlength=25>
+                                id="FatherEmail" class="form-control border border-1 rounded border-dark" maxlength=25 placeholder="Enter Your Father Email">
                             <br>
                             @error('FatherEmail')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -408,7 +408,7 @@
                         <div class="form-group col-md-2">
                             <label style="font-size: 13px">Guardian Name</label>
                             <input type="text" value="{{ old('GuardianName') }}" name="GuardianName"
-                                id="GuardianName" class="form-control border border-1 rounded border-dark" maxlength=25>
+                                id="GuardianName" class="form-control border border-1 rounded border-dark" maxlength=25 placeholder="Enter Your Guardian name">
                             <br>
                             @error('GuardianName')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -419,7 +419,7 @@
                             <label style="font-size: 13px">Guardian Cnic</label>
                             <input type="number" name="GuardianCNIC" value="{{ old('GuardianCNIC') }}"
                                 id="GuardianCNIC" class="form-control border border-1 rounded border-dark" oninput="maxLengthCheck(this)"
-                                maxlength="13">
+                                maxlength="13" placeholder="Enter your father CNIC">
                             <br>
                             @error('GuardianCNIC')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -430,14 +430,14 @@
                             <label style="font-size: 13px">Guardian Phone </label>
                             <input type="number" value="{{ old('GuardianPhone') }}" name="GuardianPhone"
                                 id="GuardianPhone" class="form-control border border-1 rounded border-dark" oninput="maxLengthphone(this)"
-                                maxlength="11">
+                                maxlength="11" placeholder="Enter your Guardian PhoneNo">
                             <br>
                             @error('GuardianPhone')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-12">
                             <label style="font-size: 13px">Status <span style="color: red">*</span></label>
                             <select name="Status" class="custom-select border border-1 rounded border-dark">
                                 <option value="In Progress" selected>In Progress</option>
@@ -483,7 +483,7 @@
                         <h4 class="text-white text-center ">Student Qualification</h4>
                     </div>
                     <br>
-                        <table class="table table-striped  " id="sortable-table">
+                        <table class="table table-striped table-responsive " id="sortable-table">
                             <thead>
                                 <tr>
                                     <th class="text-center ">
@@ -520,6 +520,19 @@
                         </div>
                     </div>
             </form>
+
+
+
+
+
+
+
+
+
+
+
+
+            
             @include('Forms.formFooter')
             @include('Admissions.student_js')
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
