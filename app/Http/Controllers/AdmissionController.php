@@ -178,7 +178,7 @@ class AdmissionController extends Controller
         }
     }
 
-    public function examinationdatainsertion($request,$std_id)
+    public function examinationdatainsertion($request, $std_id)
     {
 
         for ($i = 0; $i < sizeof($request->examination); $i++) {
@@ -211,7 +211,7 @@ class AdmissionController extends Controller
 
         $std_id = $student->ID;
         // dd($request, $std_id);
-        $this->examinationdatainsertion($request,$std_id);
+        $this->examinationdatainsertion($request, $std_id);
 
 
 
@@ -764,6 +764,40 @@ class AdmissionController extends Controller
             ->where('Reg_ID', $Reg_ID)->where('SemCourses_ID', $semesterCourse_ID)->orderBy('ID', 'desc');
     }
 
+    public function logingetStudentAdmission()
+    {
+        $route  = '/logingetStudentAdmission';
+
+        return view('Admissions.loginGetAdmission')->with('route');
+    }
+    public function logingetStudentAdmissiondata(Request $request)
+    {
+        $studentRecord = Student::where('CNIC', $request->CNIC)->get();
+        // dd($studentRecord);
+
+        if ($studentRecord->isEmpty()) {
+            $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
+
+            $admissionsession = Semester::where('Year', '=', date('Y'))->get();
+            $button = "Get Admission";
+            $title  = 'LAHORE GARRISON UNIVERSITY ADMISSION FORM';
+            $route  = '/storegettudentAdmission';
+            return
+                view(
+                    'Admissions.getAdmission',
+                    compact(
+                        'degree',
+                        'button',
+                        'title',
+                        'route',
+                        'admissionsession'
+                    )
+                );
+        } else {
+            return redirect()->back()->with(['message' => 'Admission Added!']);
+        }
+    }
+
 
     public function getStudentAdmission()
     {
@@ -812,8 +846,4 @@ class AdmissionController extends Controller
 
         //}
     }
-
-
-
-
 }

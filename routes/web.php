@@ -37,6 +37,9 @@ Route::post('/Std_login', [ControllersLogin::class, 'Std_login']);
 Route::get('/getStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'getStudentAdmission'])->name('get.StudentAdmissions');
 Route::post('/storegettudentAdmission', [App\Http\Controllers\AdmissionController::class, 'storegetStudentAdmission'])->name('store.getStudentAdmission');
 
+Route::get('/logingetStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'logingetStudentAdmission'])->name('login.StudentAdmissions');
+
+Route::post('/logingetStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'logingetStudentAdmissiondata'])->name('login.StudentAdmissionsdata');
 
 Auth::routes();
 
