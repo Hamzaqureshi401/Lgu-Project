@@ -73,12 +73,13 @@
                 {{ csrf_field() }}
                 <div class="card-body">
 
-                    <div class=" container border border-5 rounded border-dark mb-3">
+                    <div style="background-color: #0D3E02;"
+                        class="card-header border border-5 rounded border-dark   mb-4 ">
+                        <h4 class="text-white text-center">Applied Degree Information</h4>
+                    </div>
+                    <div class=" container border border-5 rounded border-dark mb-3 ">
 
-                        <div class="card-header border border-5 rounded border-dark   bg-success mb-4 ">
-                            <h4 class="text-white text-center">Applied Degree Information</h4>
-                        </div>
-                        <div class="form-row ">
+                        <div class="form-row pt-3">
                             <br>
                             <div class="form-group col-md-6">
                                 <label style="font-size: 13px">Degree<span style="color: red">*</span></label>
@@ -117,12 +118,13 @@
                     </div>
                     <br>
 
+                    <div style="background-color: #0D3E02;"
+                        class="card-header border border-5 rounded border-dark    mb-4 ">
+                        <h4 class="text-white text-center">Personal Information</h4>
+                    </div>
                     <div class="form-row container border border-5 rounded border-dark">
-                        <div class="card-header border border-5 rounded border-dark   bg-success mb-4 ">
-                            <h4 class="text-white text-center">Personal Information</h4>
-                        </div>
 
-                        <div class="form-row">
+                        <div class="form-row pt-3">
                             <div class="form-group col-md-2">
                                 <label style="font-size: 13px">Student First Name <span
                                         style="color: red">*</span></label>
@@ -300,7 +302,7 @@
 
                             <div class="form-group col-md-12">
                                 @php
-                                    $Category = ['Defence', 'Shaheed', 'Civilion', 'Sports'];
+                                    $Category = ['Defence', 'Shaheed', 'Civilian', 'Sports'];
                                 @endphp
 
                                 <label style="font-size: 13px">Category <span style="color: red">*</span>
@@ -318,365 +320,503 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div id="defence_form">
-
-                                <h6 class="text-danger fw-bold">For Serving Defence/Rangers Personnel</h6>
-                                <div class="form-row">
-                                    <div class="form-group col-md-2">
-                                        <label style="font-size: 13px">No<span style="color: red">*</span></label>
-                                        <input type="text" name="No" id="No"
-                                            value="{{ old('No') }}"
-                                            class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter No" maxlength=20>
-                                        <br>
-                                        @error('No')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label style="font-size: 13px">Rank <span style="color: red">*</span></label>
-                                        <input type="text" name="Rank" id="Rank"
-                                            value="{{ old('Rank') }}"
-                                            class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter Rank">
-                                        <br>
-                                        @error('Rank')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label style="font-size: 13px">Name <span style="color: red">*</span></label>
-                                        <input type="text" name="Name" value="{{ old('Name') }}"
-                                            id="Name" class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter Name">
-                                        <br>
-                                        @error('Name')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-md-2">
-                                        <label style="font-size: 13px">Serving Since <span
-                                                style="color: red">*</span></label>
-                                        <input type="date" name="serving_since" id="serving_since"
-                                            value="{{ old('serving_since') }}"
-                                            class="form-control border border-1 rounded border-dark">
-                                        <br>
-                                        @error('serving_since')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-
-                                        <label style="font-size: 13px">Now Serving In <span
-                                                style="color: red">*</span></label>
-                                        <input type="text" name="serving_In" id="serving_In"
-                                            value="{{ old('serving_In') }}"
-                                            class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter Serving In">
-                                        <br>
-                                        @error('serving_In')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
 
 
 
 
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label style="font-size: 13px">At<span style="color: red">*</span></label>
-                                        <input type="text" name="At" id="At"
-                                            value="{{ old('At') }}"
-                                            class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter At">
-                                        <br>
-                                        @error('At')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label style="font-size: 13px">Station <span
-                                                style="color: red">*</span></label>
-                                        <input type="text" name="Station" id="Station"
-                                            value="{{ old('Station') }}"
-                                            class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter Station">
-                                        <br>
-                                        @error('Station')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label style="font-size: 13px">Tel No <span
-                                                style="color: red">*</span></label>
-                                        <input type="number" name="tel_No" id="tel_No"
-                                            value="{{ old('tel_No') }}"
-                                            class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter tel_No" oninput="maxLengthphone(this)" maxlength="11">
-                                        <br>
-                                        @error('tel_No')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-
-
-
-
-
-
-
-                                </div>
-                            </div>
-
-                            <div id="Shaheed_form">
-
-                                <h6 class="text-danger fw-bold">For Widows (Widows of Defence Force And Rangers
-                                    Personnal Only)</h6>
-                                <div class="form-row">
-                                    <div class="form-group col-md-2">
-                                        <label style="font-size: 13px">I, Mst<span style="color: red">*</span></label>
-                                        <input type="text" name="Mst_name" id="Mst_name"
-                                            value="{{ old('Mst_name') }}"
-                                            class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter Name">
-                                        <br>
-                                        @error('Mst_name')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label style="font-size: 13px">am Widow of No. <span
-                                                style="color: red">*</span></label>
-                                        <input type="text" name="Widow_no" id="Widow_no"
-                                            value="{{ old('Widow_no') }}"
-                                            class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter Widow Of No">
-                                        <br>
-                                        @error('Widow_no')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label style="font-size: 13px">Rank <span style="color: red">*</span></label>
-                                        <input type="text" name="shaheed_Rank" value="{{ old('shaheed_Rank') }}"
-                                            id="shaheed_Rank" class="form-control border border-1 rounded border-dark"
-                                            placeholder="Enter Shaheed Rank">
-                                        <br>
-                                        @error('shaheed_Rank')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-md-2">
-                                        <label style="font-size: 13px">Name<span style="color: red">*</span></label>
-                                        <input type="date" name="shaheed_Name" id="shaheed_Name"
-                                            value="{{ old('shaheed_Name') }}"
-                                            class="form-control border border-1 rounded border-dark">
-                                        <br>
-                                        @error('shaheed_Name')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-
-                                        <label style="font-size: 13px">who Expired on <span
-                                                style="color: red">*</span></label>
-                                        <input type="date" name="Expired_date" id="Expired_date"
-                                            value="{{ old('Expired_date') }}"
-                                            class="form-control border border-1 rounded border-dark">
-                                        <br>
-                                        @error('Expired_date')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-
-
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
-
-
-
-                    <div class="form-row container border border-5 rounded border-dark mb-5 mt-4">
-                        <div class="card-header border border-5 rounded border-dark   bg-success mb-4 ">
-                            <h4 class="text-white text-center">Contact Information</h4>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label style="font-size: 13px">Address <span style="color: red">*</span> </label>
-                                <input type="text" value="{{ old('Address') }}" name="Address" id="Address"
-                                    class="form-control border border-1 rounded border-dark"
-                                    placeholder="Enter your Address">
-                                <br>
-                                @error('Address')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-2">
-
-                                <label style="font-size: 13px">Country <span style="color: red">*</span></label>
-                                <select name="country" id="country" value="{{ old('country') }}"
-                                    onchange="print_state('state',this.selectedIndex);"
-                                    class="custom-select border border-1 rounded border-dark">
-
-                                    <option value="{{ old('country') }}" selected>{{ old('country') }}
-                                    </option>
-
-                                </select>
-                                <br>
-                                <br>
-                                @error('country')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Province <span style="color: red">*</span></label>
-                                <select name="state" id="state" value="{{ old('state') }}"
-                                    class="custom-select border border-1 rounded border-dark">
-                                    <option value="{{ old('state') }}" selected>{{ old('state') }}
-                                    </option>
-                                </select>
-                                <br>
-                                <br>
-                                @error('state')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label style="font-size: 13px">City <span style="color: red">*</span> </label>
-                                <input type="text" value="{{ old('City') }}" name="City" id="City"
-                                    class="form-control border border-1 rounded border-dark"
-                                    placeholder="Enter your city" maxlength=20>
-                                <br>
-                                @error('City')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group col-md-2">
-
-                                <label style="font-size: 13px">Tehsil <span style="color: red">*</span> </label>
-                                <input type="text" value="{{ old('Tehsil') }}" name="Tehsil" id="Tehsil"
-                                    class="form-control border border-1 rounded border-dark"
-                                    placeholder="Enter your Tehsil">
-                                <br>
-                                @error('Tehsil')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
 
 
                         </div>
 
-
-
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-
-                                <label style="font-size: 13px">Father Cnic <span style="color: red">*</span></label>
-                                <input type="number" name="FatherCNIC" value="{{ old('FatherCNIC') }}"
-                                    id="FatherCNIC" class="form-control border border-1 rounded border-dark"
-                                    oninput="maxLengthCheck(this)" maxlength="13" placeholder="Your Father CNIC">
-                                <br>
-                                @error('FatherCNIC')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Father Phone <span style="color: red">*</span></label>
-                                <input type="number" value="{{ old('FatherPhone') }}" name="FatherPhone"
-                                    id="FatherPhone" class="form-control border border-1 rounded border-dark"
-                                    oninput="maxLengthphone(this)" maxlength="11"
-                                    placeholder="Enter Your Father PhoneNo">
-                                <br>
-                                @error('FatherPhone')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Father Email <span style="color: red">*</span>
-                                </label>
-                                <input type="email" value="{{ old('FatherEmail') }}" name="FatherEmail"
-                                    id="FatherEmail" class="form-control border border-1 rounded border-dark"
-                                    maxlength=25 placeholder="Enter Your Father Email">
-                                <br>
-                                @error('FatherEmail')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Guardian Name</label>
-                                <input type="text" value="{{ old('GuardianName') }}" name="GuardianName"
-                                    id="GuardianName" class="form-control border border-1 rounded border-dark"
-                                    maxlength=25 placeholder="Enter Your Guardian name">
-                                <br>
-                                @error('GuardianName')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-2">
-
-                                <label style="font-size: 13px">Guardian Cnic</label>
-                                <input type="number" name="GuardianCNIC" value="{{ old('GuardianCNIC') }}"
-                                    id="GuardianCNIC" class="form-control border border-1 rounded border-dark"
-                                    oninput="maxLengthCheck(this)" maxlength="13"
-                                    placeholder="Enter your father CNIC">
-                                <br>
-                                @error('GuardianCNIC')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Guardian Phone </label>
-                                <input type="number" value="{{ old('GuardianPhone') }}" name="GuardianPhone"
-                                    id="GuardianPhone" class="form-control border border-1 rounded border-dark"
-                                    oninput="maxLengthphone(this)" maxlength="11"
-                                    placeholder="Enter your Guardian PhoneNo">
-                                <br>
-                                @error('GuardianPhone')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                        <div class="form-row" id="defence_form">
 
                             <div class="form-group col-md-12">
-                                <label style="font-size: 13px">Status <span style="color: red">*</span></label>
-                                <select name="Status" class="custom-select border border-1 rounded border-dark">
-                                    <option value="In Progress" selected>In Progress</option>
-                                </select>
+
+                                <h6 class="text-danger fw-bold">For Serving Defence/Rangers Personnel</h6>
+
                             </div>
-                            <br>
-                            @error('Status')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            <div class="form-group col-md-2">
+                                <label style="font-size: 13px">No<span style="color: red">*</span></label>
+                                <input type="text" name="defence_No" id="defence_No"
+                                    value="{{ old('defence_No') }}"
+                                    class="form-control border border-1 rounded border-dark" placeholder="Enter No"
+                                    maxlength=20>
+                                <br>
+                                @error('defence_No')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label style="font-size: 13px">Rank <span style="color: red">*</span></label>
+                                <input type="text" name="defence_Rank" id="defence_Rank"
+                                    value="{{ old('defence_Rank') }}"
+                                    class="form-control border border-1 rounded border-dark" placeholder="Enter Rank">
+                                <br>
+                                @error('defence_Rank')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label style="font-size: 13px">Name <span style="color: red">*</span></label>
+                                <input type="text" name="defence_Name" value="{{ old('defence_Name') }}"
+                                    id="Name" class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter Name">
+                                <br>
+                                @error('defence_Name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label style="font-size: 13px">Serving Since <span style="color: red">*</span></label>
+                                <input type="date" name="defence_serving_since" id="defence_serving_since"
+                                    value="{{ old('defence_serving_since') }}"
+                                    class="form-control border border-1 rounded border-dark">
+                                <br>
+                                @error('defence_serving_since')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-4">
+
+                                <label style="font-size: 13px">Now Serving In <span
+                                        style="color: red">*</span></label>
+                                <input type="text" name="defence_serving_In" id="defence_serving_In"
+                                    value="{{ old('defence_serving_In') }}"
+                                    class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter Serving In">
+                                <br>
+                                @error('defence_serving_In')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+
+
+
+
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">At<span style="color: red">*</span></label>
+                                <input type="text" name="defence_At" id="defence_At"
+                                    value="{{ old('defence_At') }}"
+                                    class="form-control border border-1 rounded border-dark" placeholder="Enter At">
+                                <br>
+                                @error('defence_At')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">Station <span style="color: red">*</span></label>
+                                <input type="text" name="defence_Station" id="defence_Station"
+                                    value="{{ old('defence_Station') }}"
+                                    class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter Station">
+                                <br>
+                                @error('defence_Station')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">Tel No <span style="color: red">*</span></label>
+                                <input type="number" name="defence_tel_No" id="defence_tel_No"
+                                    value="{{ old('tel_No') }}"
+                                    class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter tel_No" oninput="maxLengthphone(this)" maxlength="11">
+                                <br>
+                                @error('defence_tel_No')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+
+
+
+
+
+
 
                         </div>
 
-                    </div>
+                        <div class="form-row" id="Shaheed_form">
+                            <div class="form-group col-md-12">
+                                <h6 class="text-danger fw-bold">For Widows (Widows of Defence Force And Rangers
+                                    Personnal Only)</h6>
+                            </div>
 
-                    <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label style="font-size: 13px">I, Mst<span style="color: red">*</span></label>
+                                <input type="text" name="Shaheed_Mst_name" id="Shaheed_Mst_name"
+                                    value="{{ old('Shaheed_Mst_name') }}"
+                                    class="form-control border border-1 rounded border-dark" placeholder="Enter Name">
+                                <br>
+                                @error('Shaheed_Mst_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label style="font-size: 13px">am Widow of No. <span
+                                        style="color: red">*</span></label>
+                                <input type="text" name="Shaheed_Widow_no" id="Shaheed_Widow_no"
+                                    value="{{ old('Shaheed_Widow_no') }}"
+                                    class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter Widow Of No">
+                                <br>
+                                @error('Shaheed_Widow_no')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label style="font-size: 13px">Rank <span style="color: red">*</span></label>
+                                <input type="text" name="shaheed_Rank" value="{{ old('shaheed_Rank') }}"
+                                    id="shaheed_Rank" class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter Shaheed Rank">
+                                <br>
+                                @error('shaheed_Rank')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label style="font-size: 13px">Name<span style="color: red">*</span></label>
+                                <input type="date" name="shaheed_Name" id="shaheed_Name"
+                                    value="{{ old('shaheed_Name') }}"
+                                    class="form-control border border-1 rounded border-dark">
+                                <br>
+                                @error('shaheed_Name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-4">
+
+                                <label style="font-size: 13px">who Expired on <span
+                                        style="color: red">*</span></label>
+                                <input type="date" name="Shaheed_Expired_date" id="Shaheed_Expired_date"
+                                    value="{{ old('Shaheed_Expired_date') }}"
+                                    class="form-control border border-1 rounded border-dark">
+                                <br>
+                                @error('Shaheed_Expired_date')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+                        <div class="form-row" id="Civilian_form">
+                            <div class="form-group col-md-12">
+
+                                <h6 class="text-danger fw-bold">For Cilvilan</h6>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">Name<span style="color: red">*</span></label>
+                                <input type="text" name="civilan_name" id="civilan_name"
+                                    value="{{ old('civilan_name') }}"
+                                    class="form-control border border-1 rounded border-dark" placeholder="Enter Name">
+                                <br>
+                                @error('civilan_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">Father of<span style="color: red">*</span></label>
+                                <input type="text" name="civilian_father" id="civilian_father"
+                                    value="{{ old('civilian_father') }}"
+                                    class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter Father Name">
+                                <br>
+                                @error('civilian_father')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">am serving in the Office of <span
+                                        style="color: red">*</span></label>
+                                <input type="text" name="civilian_office" value="{{ old('civilian_office') }}"
+                                    id="civilian_office" class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter civilian office">
+                                <br>
+                                @error('civilian_office')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label style="font-size: 13px">As (Designation)<span
+                                        style="color: red">*</span></label>
+                                <input type="text" name="civilian_Designation" id="civilian_Designation"
+                                    value="{{ old('civilian_Designation') }}"
+                                    class="form-control border border-1 rounded border-dark">
+                                <br>
+                                @error('civilian_Designation')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label style="font-size: 13px">w.e.f<span style="color: red">*</span></label>
+                                <input type="date" name="civilian_wef" id="civilian_wef"
+                                    value="{{ old('civilian_wef') }}"
+                                    class="form-control border border-1 rounded border-dark">
+                                <br>
+                                @error('civilian_wef')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+
+
+
+                        </div>
+
+
+                        <div class="form-row" id="Sports_form">
+                            <div class="form-group col-md-12">
+
+                                <h6 class="text-danger fw-bold">For Sports</h6>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">Name<span style="color: red">*</span></label>
+                                <input type="text" name="sports_name" id="sports_name"
+                                    value="{{ old('sports_name') }}"
+                                    class="form-control border border-1 rounded border-dark" placeholder="Enter Name">
+                                <br>
+                                @error('sports_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">Father of<span style="color: red">*</span></label>
+                                <input type="text" name="sports_father" id="sports_father"
+                                    value="{{ old('sports_father') }}"
+                                    class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter Father Name">
+                                <br>
+                                @error('sports_father')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">am serving in the Office of <span
+                                        style="color: red">*</span></label>
+                                <input type="text" name="sports_office" value="{{ old('sports_office') }}"
+                                    id="sports_office" class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter civilian office">
+                                <br>
+                                @error('sports_office')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label style="font-size: 13px">As (Designation)<span
+                                        style="color: red">*</span></label>
+                                <input type="text" name="sports_Designation" id="sports_Designation"
+                                    value="{{ old('sports_Designation') }}"
+                                    class="form-control border border-1 rounded border-dark">
+                                <br>
+                                @error('sports_Designation')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label style="font-size: 13px">w.e.f<span style="color: red">*</span></label>
+                                <input type="date" name="sport_wef" id="sport_wef"
+                                    value="{{ old('sport_wef') }}"
+                                    class="form-control border border-1 rounded border-dark">
+                                <br>
+                                @error('sport_wef')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+
+                        <div style="background-color: #0D3E02;"
+                            class="card-header border border-5 rounded border-dark">
+                            <h4 class="text-white text-center">Contact Information</h4>
+                        </div>
+                        <div class="form-row container border border-5 rounded border-dark mb-3 mt-3">
+
+                            <div class="form-row pt-3">
+                                <div class="form-group col-md-4">
+                                    <label style="font-size: 13px">Address <span style="color: red">*</span> </label>
+                                    <input type="text" value="{{ old('Address') }}" name="Address"
+                                        id="Address" class="form-control border border-1 rounded border-dark"
+                                        placeholder="Enter your Address">
+                                    <br>
+                                    @error('Address')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-2">
+
+                                    <label style="font-size: 13px">Country <span style="color: red">*</span></label>
+                                    <select name="country" id="country" value="{{ old('country') }}"
+                                        onchange="print_state('state',this.selectedIndex);"
+                                        class="custom-select border border-1 rounded border-dark">
+
+                                        <option value="{{ old('country') }}" selected>{{ old('country') }}
+                                        </option>
+
+                                    </select>
+                                    <br>
+                                    <br>
+                                    @error('country')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label style="font-size: 13px">Province <span style="color: red">*</span></label>
+                                    <select name="state" id="state" value="{{ old('state') }}"
+                                        class="custom-select border border-1 rounded border-dark">
+                                        <option value="{{ old('state') }}" selected>{{ old('state') }}
+                                        </option>
+                                    </select>
+                                    <br>
+                                    <br>
+                                    @error('state')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label style="font-size: 13px">City <span style="color: red">*</span> </label>
+                                    <input type="text" value="{{ old('City') }}" name="City"
+                                        id="City" class="form-control border border-1 rounded border-dark"
+                                        placeholder="Enter your city" maxlength=20>
+                                    <br>
+                                    @error('City')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-2">
+
+                                    <label style="font-size: 13px">Tehsil <span style="color: red">*</span> </label>
+                                    <input type="text" value="{{ old('Tehsil') }}" name="Tehsil"
+                                        id="Tehsil" class="form-control border border-1 rounded border-dark"
+                                        placeholder="Enter your Tehsil">
+                                    <br>
+                                    @error('Tehsil')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+
+                                    <label style="font-size: 13px">Father Cnic <span
+                                            style="color: red">*</span></label>
+                                    <input type="number" name="FatherCNIC" value="{{ old('FatherCNIC') }}"
+                                        id="FatherCNIC" class="form-control border border-1 rounded border-dark"
+                                        oninput="maxLengthCheck(this)" maxlength="13" placeholder="Your Father CNIC">
+                                    <br>
+                                    @error('FatherCNIC')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label style="font-size: 13px">Father Phone <span
+                                            style="color: red">*</span></label>
+                                    <input type="number" value="{{ old('FatherPhone') }}" name="FatherPhone"
+                                        id="FatherPhone" class="form-control border border-1 rounded border-dark"
+                                        oninput="maxLengthphone(this)" maxlength="11"
+                                        placeholder="Enter Your Father PhoneNo">
+                                    <br>
+                                    @error('FatherPhone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label style="font-size: 13px">Father Email <span style="color: red">*</span>
+                                    </label>
+                                    <input type="email" value="{{ old('FatherEmail') }}" name="FatherEmail"
+                                        id="FatherEmail" class="form-control border border-1 rounded border-dark"
+                                        maxlength=25 placeholder="Enter Your Father Email">
+                                    <br>
+                                    @error('FatherEmail')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label style="font-size: 13px">Guardian Name</label>
+                                    <input type="text" value="{{ old('GuardianName') }}" name="GuardianName"
+                                        id="GuardianName" class="form-control border border-1 rounded border-dark"
+                                        maxlength=25 placeholder="Enter Your Guardian name">
+                                    <br>
+                                    @error('GuardianName')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-2">
+
+                                    <label style="font-size: 13px">Guardian Cnic</label>
+                                    <input type="number" name="GuardianCNIC" value="{{ old('GuardianCNIC') }}"
+                                        id="GuardianCNIC" class="form-control border border-1 rounded border-dark"
+                                        oninput="maxLengthCheck(this)" maxlength="13"
+                                        placeholder="Enter your father CNIC">
+                                    <br>
+                                    @error('GuardianCNIC')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label style="font-size: 13px">Guardian Phone </label>
+                                    <input type="number" value="{{ old('GuardianPhone') }}" name="GuardianPhone"
+                                        id="GuardianPhone" class="form-control border border-1 rounded border-dark"
+                                        oninput="maxLengthphone(this)" maxlength="11"
+                                        placeholder="Enter your Guardian PhoneNo">
+                                    <br>
+                                    @error('GuardianPhone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label style="font-size: 13px">Status <span style="color: red">*</span></label>
+                                    <select name="Status" class="custom-select border border-1 rounded border-dark">
+                                        <option value="In Progress" selected>In Progress</option>
+                                    </select>
+                                </div>
+                                <br>
+                                @error('Status')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-row mt-5">
                         <div class="form-group col-md-6">
                             <label style="font-size: 13px">Student Files <span style="color: red">*
                                     jpeg,png,jpg,pdf</span>
@@ -703,7 +843,7 @@
 
                     </div>
 
-                    <div class="card-header border border-5 rounded border-dark   bg-success">
+                    <div style="background-color: #0D3E02;" class="card-header border border-5 rounded border-dark">
                         <h4 class="text-white text-center ">Student Qualification</h4>
                     </div>
                     <br>
@@ -732,73 +872,103 @@
 
                         </tbody>
                     </table>
-                    <div class="form-group">
-                        <a class="btn btn-success btn-block tr_clone_add" style="color:white;">Add New Row </a>
+                </div>
+                <div class="container">
+
+                    <div class="form-group ">
+                        <a style="color:aliceblue; background-color: #0D3E02;font-weight:800;"
+                            class="btn btn-block tr_clone_add">Add New Row </a>
 
                     </div>
 
 
                     <div class="form-group">
-                        <button id="button" type="submit"
-                            class="btn btn-primary btn-block submit-form">{{ $button }}</button>
+                        <button
+                            style="background-color: #FDBF1E;color:rgb(0, 0, 0)
+                            ;font-weight:800;"
+                            id="button" type="submit"
+                            class="btn btn-block submit-form ">{{ $button }}</button>
                     </div>
                 </div>
-            </form>
-
-
-
-
-
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    // Show/hide the defence_form div based on the initial selection
-                    toggleDefenceForm();
-
-                    // Bind an event handler to the change event of the Category dropdown
-                    $('select[name="Category"]').change(function() {
-                        toggleDefenceForm();
-                    });
-
-                    // Function to toggle the visibility of the defence_form div
-                    function toggleDefenceForm() {
-                        var selectedCategory = $('select[name="Category"]').val();
-                        if (selectedCategory === 'Defence') {
-                            $('#Shaheed_form').hide();
-                            $('#defence_form').show();
-                        } else if (selectedCategory === 'Shaheed') {
-                            $('#defence_form').hide();
-                            $('#Shaheed_form').show();
-                        } else {
-                            $('#defence_form').hide();
-                            $('#Shaheed_form').hide();
-
-                        }
-                    }
-                });
-            </script>
-
-
-
-
-
-
-
-            @include('Forms.formFooter')
-            @include('Admissions.student_js')
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-
-            <script type="text/javascript">
-                $(".tr_clone_add").live('click', function() {
-                    var $tr = $('#tr_clone').closest('#tr_clone');
-                    var $clone = $tr.clone();
-                    $clone.find(':text').val('');
-                    $tr.after($clone);
-                    $clone.addClass('bg-success');
-                });
-            </script>
-
         </div>
+        </form>
+
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // Show/hide the defence_form div based on the initial selection
+                toggleDefenceForm();
+
+                // Bind an event handler to the change event of the Category dropdown
+                $('select[name="Category"]').change(function() {
+                    toggleDefenceForm();
+                });
+
+                // Function to toggle the visibility of the defence_form div
+                function toggleDefenceForm() {
+                    var selectedCategory = $('select[name="Category"]').val();
+
+                    if (selectedCategory === 'Defence') {
+                        $('#Shaheed_form').hide();
+                        $('#Civilian_form').hide();
+                        $('#defence_form').show();
+                        $('#Sports_form').hide();
+
+                    } else if (selectedCategory === 'Shaheed') {
+                        $('#Shaheed_form').show();
+                        $('#Civilian_form').hide();
+                        $('#defence_form').hide();
+                        $('#Sports_form').hide();
+
+                    } else if (selectedCategory === 'Civilian') {
+                        $('#Shaheed_form').hide();
+                        $('#Civilian_form').show();
+                        $('#defence_form').hide();
+                        $('#Sports_form').hide();
+
+                    } else if (selectedCategory === 'Sports') {
+                        $('#Shaheed_form').hide();
+                        $('#Civilian_form').hide();
+                        $('#defence_form').hide();
+                        $('#Sports_form').show();
+
+                    } else {
+                        $('#defence_form').hide();
+                        $('#Shaheed_form').hide();
+                        $('#Civilian_form').hide();
+                        $('#Sports_form').hide();
+
+
+                    }
+                }
+            });
+        </script>
+
+
+
+
+
+
+
+        @include('Forms.formFooter')
+        @include('Admissions.student_js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $(".tr_clone_add").live('click', function() {
+                var $tr = $('#tr_clone').closest('#tr_clone');
+                var $clone = $tr.clone();
+                $clone.find(':text').val('');
+                $tr.after($clone);
+                $clone.addClass('bg-success');
+            });
+        </script>
+
+    </div>
 
     </div>
     </div>
