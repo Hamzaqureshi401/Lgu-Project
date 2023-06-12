@@ -817,22 +817,27 @@ class AdmissionController extends Controller
 
         return view('Admissions.loginGetAdmission');
     }
-    public function logingetStudentAdmissiondata(Request $request)
-    {
-        $studentRecord = Student::where('CNIC', $request->CNIC)->get();
-        // dd($studentRecord);
+   public function logingetStudentAdmissiondata(Request $request){
+   
 
-        if ($studentRecord->isEmpty()) {
-             return redirect()->route('get.StudentAdmissions');
-            
-        } else {
-            return redirect()->back()->with(['message' => 'Admission Added!']);
+    if(empty($request->input('CNIC'))){
+           return redirect()->back()->with(['message' => 'CNIC Required']);
         }
-    }
+
+    if ($studentRecord->isEmpty()) {
+        return redirect()->route('get.StudentAdmissions')->withInput();
+    } 
+}
 
 
-    protected function getStudentAdmission()
+
+    protected function getStudentAdmission(Request $request)
     {
+
+        if(empty($request->old('CNIC'))){
+            return redirect()->route('login.StudentAdmissions');
+        }
+        $studentRecord = Student::where('CNIC', $request->CNIC)->first();
 
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
 

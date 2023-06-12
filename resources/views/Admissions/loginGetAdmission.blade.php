@@ -61,16 +61,17 @@
                             </div>
                             <div class="card-body">
 
-                                @if (session('message'))
-                                    <div class="alert alert-danger alert-dismissible show fade">
-                                        <div class="alert-body">
-                                            <button class="close" data-dismiss="alert">
-                                                <span>&times;</span>
-                                            </button>
-                                            Already Submitted! Go to login to Update.
-                                        </div>
+                               @if (session('message'))
+                                <div class="alert alert-danger alert-dismissible show fade">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                            <span>&times;</span>
+                                        </button>
+                                        {{ session('message') }}
                                     </div>
-                                @endif
+                                </div>
+                            @endif
+
                                 <form id="myForm" action="{{ $route ?? '' }}" method="POST"
                                     enctype="multipart/form-data">
                                     {{ csrf_field() }} <div class="form-group">
