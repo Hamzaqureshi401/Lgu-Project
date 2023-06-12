@@ -815,7 +815,7 @@ class AdmissionController extends Controller
     {
         $route  = '/logingetStudentAdmission';
 
-        return view('Admissions.loginGetAdmission')->with('route');
+        return view('Admissions.loginGetAdmission');
     }
     public function logingetStudentAdmissiondata(Request $request)
     {
@@ -823,30 +823,15 @@ class AdmissionController extends Controller
         // dd($studentRecord);
 
         if ($studentRecord->isEmpty()) {
-            $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
-
-            $admissionsession = Semester::where('Year', '=', date('Y'))->get();
-            $button = "Get Admission";
-            $title  = 'LAHORE GARRISON UNIVERSITY ADMISSION FORM';
-            $route  = '/storegettudentAdmission';
-            return
-                view(
-                    'Admissions.getAdmission',
-                    compact(
-                        'degree',
-                        'button',
-                        'title',
-                        'route',
-                        'admissionsession'
-                    )
-                );
+             return redirect()->route('get.StudentAdmissions');
+            
         } else {
             return redirect()->back()->with(['message' => 'Admission Added!']);
         }
     }
 
 
-    public function getStudentAdmission()
+    protected function getStudentAdmission()
     {
 
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
