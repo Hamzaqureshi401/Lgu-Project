@@ -115,6 +115,37 @@ class AdmissionController extends Controller
     protected function createStudentDetail($request)
     {
 
+
+
+        if ($request->Category === "Defence") {
+            $No                   = $request->defence_No;
+            $Rank                 = $request->defence_Rank;
+            $ServingSince         = $request->defence_serving_since;
+            $NowServingIn         = $request->defence_serving_In;
+            $At                   = $request->defence_At;
+            $Station              = $request->defence_Station;
+            $TelNo                = $request->defence_tel_No;
+        } else if ($request->Category === "Shaheed") {
+
+            $I_Mst             = $request->Shaheed_Mst_name;
+            $No                = $request->Shaheed_Widow_no;
+            $Rank              = $request->shaheed_Rank;
+            $WidowOf           = $request->shaheed_Name;
+            $ExpiredOn         = $request->Shaheed_Expired_date;
+        } else if ($request->Category === "Civilian") {
+
+            $NowServingIn        = $request->civilian_office;
+            $Rank                = $request->civilian_Designation;
+            $ServingSince        = $request->civilian_wef;
+        } else if ($request->Category === "Sports") {
+
+            $NowServingIn        = $request->sports_office;
+            $Rank                = $request->sports_Designation;
+            $ServingSince        = $request->sport_wef;
+        }
+
+
+
         $stdfilename = time() . "_studentfile." . $request->file('stdfile')->getClientOriginalExtension();
         $request->file('stdfile')->storeAs('studentsFiles', $stdfilename);
         $stdImagename = time() . "_studentImage." . $request->file('Image')->getClientOriginalExtension();
@@ -151,12 +182,28 @@ class AdmissionController extends Controller
          @FatherEmail        =      '$request->FatherEmail',
          @Category           =      '$request->Category',
          @Files              =      '$stdfilename',
-         @Image              =      '$stdImagename';");
+         @Image              =      '$stdImagename',
+         
+         @No                 =      '$No',
+         @ServingSince       =      '$ServingSince',
+         @NowServingIn       =      '$NowServingIn',
+         @At                 =      '$At',
+         @Station            =      '$Station',
+         @TelNo              =      '$TelNo',
+         @I_Mst              =      '$I_Mst',
+         @WidowOf            =      '$WidowOf',
+         @Rank               =      '$Rank',
+         @ExpiredOn          =      '$ExpiredOn',
+
+         
+         
+         ;");
         return $submit;
     }
 
     public function storeRegistrationInDbReturnId($request)
     {
+
 
         $registration = new RegistrationController();
         $Sem_ID = Semester::where('SemSession', $request->AdmissionSession)->pluck('ID')->first();
@@ -842,7 +889,7 @@ class AdmissionController extends Controller
             DB::rollBack();
             throw $e;
         }
-        return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
+        // return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
 
         //}
     }

@@ -59,7 +59,7 @@
                             <div class="card-header">
                                 <h4>Login Student Admission</h4>
                             </div>
-                            <div class="card-body">`
+                            <div class="card-body">
 
                                 @if (session('message'))
                                     <div class="alert alert-danger alert-dismissible show fade">

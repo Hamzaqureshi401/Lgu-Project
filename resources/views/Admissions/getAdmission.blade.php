@@ -336,7 +336,7 @@
 
                             </div>
                             <div class="form-group col-md-2">
-                                <label style="font-size: 13px">No<span style="color: red">*</span></label>
+                                <label style="font-size: 13px">No</label>
                                 <input type="text" name="defence_No" id="defence_No"
                                     value="{{ old('defence_No') }}"
                                     class="form-control border border-1 rounded border-dark" placeholder="Enter No"
@@ -346,8 +346,8 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Rank <span style="color: red">*</span></label>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">Rank </label>
                                 <input type="text" name="defence_Rank" id="defence_Rank"
                                     value="{{ old('defence_Rank') }}"
                                     class="form-control border border-1 rounded border-dark" placeholder="Enter Rank">
@@ -357,8 +357,8 @@
                                 @enderror
 
                             </div>
-                            <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Name <span style="color: red">*</span></label>
+                            {{-- <div class="form-group col-md-2">
+                                <label style="font-size: 13px">Father Name <span style="color: red">*</span></label>
                                 <input type="text" name="defence_Name" value="{{ old('defence_Name') }}"
                                     id="Name" class="form-control border border-1 rounded border-dark"
                                     placeholder="Enter Name">
@@ -366,10 +366,10 @@
                                 @error('defence_Name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Serving Since <span style="color: red">*</span></label>
+                                <label style="font-size: 13px">Serving Since </label>
                                 <input type="date" name="defence_serving_since" id="defence_serving_since"
                                     value="{{ old('defence_serving_since') }}"
                                     class="form-control border border-1 rounded border-dark">
@@ -381,8 +381,7 @@
 
                             <div class="form-group col-md-4">
 
-                                <label style="font-size: 13px">Now Serving In <span
-                                        style="color: red">*</span></label>
+                                <label style="font-size: 13px">Now Serving In </label>
                                 <input type="text" name="defence_serving_In" id="defence_serving_In"
                                     value="{{ old('defence_serving_In') }}"
                                     class="form-control border border-1 rounded border-dark"
@@ -398,7 +397,7 @@
 
 
                             <div class="form-group col-md-4">
-                                <label style="font-size: 13px">At<span style="color: red">*</span></label>
+                                <label style="font-size: 13px">At</label>
                                 <input type="text" name="defence_At" id="defence_At"
                                     value="{{ old('defence_At') }}"
                                     class="form-control border border-1 rounded border-dark" placeholder="Enter At">
@@ -408,7 +407,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-4">
-                                <label style="font-size: 13px">Station <span style="color: red">*</span></label>
+                                <label style="font-size: 13px">Station </label>
                                 <input type="text" name="defence_Station" id="defence_Station"
                                     value="{{ old('defence_Station') }}"
                                     class="form-control border border-1 rounded border-dark"
@@ -420,7 +419,7 @@
 
                             </div>
                             <div class="form-group col-md-4">
-                                <label style="font-size: 13px">Tel No <span style="color: red">*</span></label>
+                                <label style="font-size: 13px">Tel No </label>
                                 <input type="number" name="defence_tel_No" id="defence_tel_No"
                                     value="{{ old('tel_No') }}"
                                     class="form-control border border-1 rounded border-dark"
@@ -447,7 +446,7 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                <label style="font-size: 13px">I, Mst<span style="color: red">*</span></label>
+                                <label style="font-size: 13px">I, Mst</label>
                                 <input type="text" name="Shaheed_Mst_name" id="Shaheed_Mst_name"
                                     value="{{ old('Shaheed_Mst_name') }}"
                                     class="form-control border border-1 rounded border-dark" placeholder="Enter Name">
@@ -457,8 +456,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-2">
-                                <label style="font-size: 13px">am Widow of No. <span
-                                        style="color: red">*</span></label>
+                                <label style="font-size: 13px">am Widow of No.</label>
                                 <input type="text" name="Shaheed_Widow_no" id="Shaheed_Widow_no"
                                     value="{{ old('Shaheed_Widow_no') }}"
                                     class="form-control border border-1 rounded border-dark"
@@ -470,7 +468,7 @@
 
                             </div>
                             <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Rank <span style="color: red">*</span></label>
+                                <label style="font-size: 13px">Rank </label>
                                 <input type="text" name="shaheed_Rank" value="{{ old('shaheed_Rank') }}"
                                     id="shaheed_Rank" class="form-control border border-1 rounded border-dark"
                                     placeholder="Enter Shaheed Rank">
@@ -481,10 +479,10 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                <label style="font-size: 13px">Name<span style="color: red">*</span></label>
-                                <input type="date" name="shaheed_Name" id="shaheed_Name"
+                                <label style="font-size: 13px">Shaheed Name</label>
+                                <input type="text" name="shaheed_Name" id="shaheed_Name"
                                     value="{{ old('shaheed_Name') }}"
-                                    class="form-control border border-1 rounded border-dark">
+                                    class="form-control border border-1 rounded border-dark" placeholder="Enter Shaheed Name">
                                 <br>
                                 @error('shaheed_Name')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -493,8 +491,7 @@
 
                             <div class="form-group col-md-4">
 
-                                <label style="font-size: 13px">who Expired on <span
-                                        style="color: red">*</span></label>
+                                <label style="font-size: 13px">who Expired on</label>
                                 <input type="date" name="Shaheed_Expired_date" id="Shaheed_Expired_date"
                                     value="{{ old('Shaheed_Expired_date') }}"
                                     class="form-control border border-1 rounded border-dark">
@@ -517,8 +514,8 @@
                                 <h6 class="text-danger fw-bold">For Cilvilan</h6>
                             </div>
 
-                            <div class="form-group col-md-4">
-                                <label style="font-size: 13px">Name<span style="color: red">*</span></label>
+                            {{-- <div class="form-group col-md-4">
+                                <label style="font-size: 13px">Father Name<span style="color: red">*</span></label>
                                 <input type="text" name="civilan_name" id="civilan_name"
                                     value="{{ old('civilan_name') }}"
                                     class="form-control border border-1 rounded border-dark" placeholder="Enter Name">
@@ -538,10 +535,9 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
 
-                            </div>
+                            </div> --}}
                             <div class="form-group col-md-4">
-                                <label style="font-size: 13px">am serving in the Office of <span
-                                        style="color: red">*</span></label>
+                                <label style="font-size: 13px">am serving in the Office of </label>
                                 <input type="text" name="civilian_office" value="{{ old('civilian_office') }}"
                                     id="civilian_office" class="form-control border border-1 rounded border-dark"
                                     placeholder="Enter civilian office">
@@ -551,9 +547,8 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <label style="font-size: 13px">As (Designation)<span
-                                        style="color: red">*</span></label>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">As (Designation)</label>
                                 <input type="text" name="civilian_Designation" id="civilian_Designation"
                                     value="{{ old('civilian_Designation') }}"
                                     class="form-control border border-1 rounded border-dark">
@@ -564,8 +559,8 @@
                             </div>
 
 
-                            <div class="form-group col-md-6">
-                                <label style="font-size: 13px">w.e.f<span style="color: red">*</span></label>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">w.e.f</label>
                                 <input type="date" name="civilian_wef" id="civilian_wef"
                                     value="{{ old('civilian_wef') }}"
                                     class="form-control border border-1 rounded border-dark">
@@ -587,8 +582,8 @@
                                 <h6 class="text-danger fw-bold">For Sports</h6>
                             </div>
 
-                            <div class="form-group col-md-4">
-                                <label style="font-size: 13px">Name<span style="color: red">*</span></label>
+                            {{-- <div class="form-group col-md-4">
+                                <label style="font-size: 13px">Father Name<span style="color: red">*</span></label>
                                 <input type="text" name="sports_name" id="sports_name"
                                     value="{{ old('sports_name') }}"
                                     class="form-control border border-1 rounded border-dark" placeholder="Enter Name">
@@ -608,10 +603,11 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
 
-                            </div>
+                            </div> --}}
+
+
                             <div class="form-group col-md-4">
-                                <label style="font-size: 13px">am serving in the Office of <span
-                                        style="color: red">*</span></label>
+                                <label style="font-size: 13px">am serving in the Office of </label>
                                 <input type="text" name="sports_office" value="{{ old('sports_office') }}"
                                     id="sports_office" class="form-control border border-1 rounded border-dark"
                                     placeholder="Enter civilian office">
@@ -621,9 +617,8 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <label style="font-size: 13px">As (Designation)<span
-                                        style="color: red">*</span></label>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">As (Designation)</label>
                                 <input type="text" name="sports_Designation" id="sports_Designation"
                                     value="{{ old('sports_Designation') }}"
                                     class="form-control border border-1 rounded border-dark">
@@ -634,8 +629,8 @@
                             </div>
 
 
-                            <div class="form-group col-md-6">
-                                <label style="font-size: 13px">w.e.f<span style="color: red">*</span></label>
+                            <div class="form-group col-md-4">
+                                <label style="font-size: 13px">w.e.f</label>
                                 <input type="date" name="sport_wef" id="sport_wef"
                                     value="{{ old('sport_wef') }}"
                                     class="form-control border border-1 rounded border-dark">
