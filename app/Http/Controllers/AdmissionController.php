@@ -824,9 +824,9 @@ class AdmissionController extends Controller
            return redirect()->back()->with(['message' => 'CNIC Required']);
         }
 
-    if ($studentRecord->isEmpty()) {
+    
         return redirect()->route('get.StudentAdmissions')->withInput();
-    } 
+    
 }
 
 
