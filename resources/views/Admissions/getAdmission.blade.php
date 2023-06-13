@@ -45,6 +45,8 @@
     <!-- Set also "landscape" if you need -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+
 
     <style>
         @page {
@@ -897,6 +899,8 @@
                             ;font-weight:800;"
                             id="button" type="submit"
                             class="btn btn-block submit-form ">{{ $button }}</button>
+                            <a class="btn btn-block" onclick="generatePDF()">Generate PDF</a>
+
                     </div>
                 </div>
         </div>
@@ -1046,6 +1050,31 @@
                 position: 'topRight'
             });
         @endif
+
+        function generatePDF() {
+  var doc = new jsPDF();
+
+  // Get the form element
+  var formElement = document.getElementById('myForm');
+
+  // Get all form fields
+  var formFields = formElement.elements;
+
+  // Loop through form fields and add them to the PDF
+  for (var i = 0; i < formFields.length; i++) {
+    var field = formFields[i];
+    var fieldName = field.name;
+    var fieldValue = field.value;
+
+    // Add the field name and value to the PDF
+    doc.text(fieldName + ': ' + fieldValue, 10, 10 + i * 10);
+  }
+
+  // Save the PDF
+  doc.save('form.pdf');
+}
+
+
     </script>
 
 
