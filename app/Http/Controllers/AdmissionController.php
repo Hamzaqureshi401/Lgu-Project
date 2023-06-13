@@ -846,7 +846,21 @@ class AdmissionController extends Controller
         $title  = 'LAHORE GARRISON UNIVERSITY ADMISSION FORM';
         $route  = '/storegettudentAdmission';
 
-        if($studentAdmission->Status == 'In Progress'){
+        if(empty($studentAdmission)){
+            return
+            view(
+                'Admissions.getAdmission',
+                compact(
+                    'degree',
+                    'button',
+                    'title',
+                    'route',
+                    'admissionsession'
+                )
+            );
+        }
+
+        else if($studentAdmission->Status == 'In Progress'){
             $button = 'Update Student Info';
             $title  = 'Edit Student Info';
             $route  = '/updateStudentAdmission';
@@ -868,19 +882,9 @@ class AdmissionController extends Controller
                 )
             );
         }else if($studentAdmission->Status != 'In Progress'){
-            return 'Form In Progress!'
+            return 'Form In Progress!';
         }
-        return
-            view(
-                'Admissions.getAdmission',
-                compact(
-                    'degree',
-                    'button',
-                    'title',
-                    'route',
-                    'admissionsession'
-                )
-            );
+        
     }
 
     public function storegetStudentAdmission(Request $request)
