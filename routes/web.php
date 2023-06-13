@@ -41,6 +41,8 @@ Route::get('/logingetStudentAdmission', [App\Http\Controllers\AdmissionControlle
 
 Route::post('/logingetStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'logingetStudentAdmissiondata'])->name('login.StudentAdmissionsdata');
 
+Route::post('/updateStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'updateStudentAdmission'])->name('update.StudentAdmission');
+
 Auth::routes();
 
 Route::group(['middleware' => 'StudentAuth'], function () {
@@ -135,7 +137,6 @@ Route::get('/addStudentAdmission', [App\Http\Controllers\AdmissionController::cl
 Route::get('/allStudentAdmissions', [App\Http\Controllers\AdmissionController::class, 'allStudentAdmissions'])->name('all.StudentAdmissions');
 Route::post('/storeStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'storeStudentAdmission'])->name('store.StudentAdmission');
 Route::get('/editStudentAdmission/{id?}', [App\Http\Controllers\AdmissionController::class, 'editStudentAdmission'])->name('edit.StudentAdmission');
-Route::post('/updateStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'updateStudentAdmission'])->name('update.StudentAdmission');
 
 
 

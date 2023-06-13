@@ -828,29 +828,30 @@
                         </div>
                     </div>
                     <div class="form-row mt-5">
-                        <div class="form-group col-md-6">
-                            <label style="font-size: 13px">Student Files <span style="color: red">*
-                                    jpeg,png,jpg,pdf</span>
-                            </label>
-                            <input type="file" value="{{ old('stdfile') }}" name="stdfile" id="stdfile"
-                                class="form-control border border-1 rounded border-dark">
-                            <br>
-                            @error('stdfile')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label style="font-size: 13px">Image <span style="color: red">*
-                                    jpeg,png,jpg</span>
-                            </label>
-                            <input type="file" value="{{ old('Image') }}" name="Image" id="Image"
-                                class="form-control border border-1 rounded border-dark">
-                            <br>
-                            @error('Image')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                       <div class="form-group col-md-6">
+  <label style="font-size: 13px">Student Files <span style="color: red">* jpeg,png,jpg,pdf</span></label>
+  <input type="file" name="stdfile" id="stdfile" class="form-control border border-1 rounded border-dark">
+  <br>
+  @error('stdfile')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+  @if(old('stdfile'))
+  <div>Previously uploaded file: {{ old('stdfile') }}</div>
+  @endif
+</div>
 
-                        </div>
+<div class="form-group col-md-6">
+  <label style="font-size: 13px">Image <span style="color: red">* jpeg,png,jpg</span></label>
+  <input type="file" name="Image" id="Image" class="form-control border border-1 rounded border-dark">
+  <br>
+  @error('Image')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+  @if(old('Image'))
+  <div>Previously uploaded image: {{ old('Image') }}</div>
+  @endif
+</div>
+
 
                     </div>
 

@@ -214,17 +214,18 @@
 
             <div class="form-row">
                 @php
-                    $Category = ['Defence', 'Shaheed', 'Civilion', 'Sports'];
+                    $Category = ['Defence', 'Shaheed', 'Civilian', 'Sports'];
                 @endphp
 
                 <div class="form-group col-md-12">
                     <label style="font-size: 13px">Category <span style="color: red">*</span>
                     </label>
                     <select name="Category" class="custom-select">
+                        
 
                         @foreach ($Category as $Category)
                             <option value="{{ $Category }}"
-                                {{ $Category == $studentAdmission->Category ? 'selected' : '' }}>
+                                 {{ $Category == $studentAdmission->Category ? 'selected' : '' }}>
                                 {{ $Category }}</option>
                         @endforeach
                     </select>
@@ -674,7 +675,7 @@
 
 
             </div>
-
+                 @if (session()->has('Emp_session'))
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label style="font-size: 13px">Status <span style="color: red">*</span></label>
@@ -702,6 +703,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
+            @endif
         </div>
 
 
@@ -738,7 +740,7 @@
         </div>
 
         <div class="container border border-5 rounded border-dark ">
-
+                @if (session()->has('Emp_session'))
             <div class="form-row pt-3">
                 <div class="form-group col-md-6">
                     <label style="font-size: 13px">Class Section <span style="color: red">*</span></label>
@@ -773,6 +775,7 @@
 
 
             </div>
+            @endif
 
 
 
@@ -898,11 +901,19 @@
                 toggleDefenceForm();
             });
 
+            var cat = @json($studentAdmission->Category);
+            catFilter(cat);
+
             // Function to toggle the visibility of the defence_form div
             function toggleDefenceForm() {
                 var selectedCategory = $('select[name="Category"]').val();
+                catFilter(selectedCategory);
 
-                if (selectedCategory === 'Defence') {
+               
+            }
+
+            function catFilter(selectedCategory){
+                 if (selectedCategory === 'Defence') {
                     $('#Shaheed_form').hide();
                     $('#Civilian_form').hide();
                     $('#defence_form').show();

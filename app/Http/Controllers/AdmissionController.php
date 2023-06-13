@@ -115,6 +115,19 @@ class AdmissionController extends Controller
     protected function createStudentDetail($request)
     {
 
+        $No           = " ";
+        $Rank         = " ";
+        $ServingSince = " ";
+        $NowServingIn = " ";
+        $At           = " ";
+        $Station      = " ";
+        $TelNo        = " ";
+        $I_Mst        = " ";
+        $WidowOf      = " ";
+        $ExpiredOn    = " ";
+        $NowServingIn = " ";
+        $ServingSince = " ";
+
 
 
         if ($request->Category === "Defence") {
@@ -193,7 +206,7 @@ class AdmissionController extends Controller
          @I_Mst              =      '$I_Mst',
          @WidowOf            =      '$WidowOf',
          @Rank               =      '$Rank',
-         @ExpiredOn          =      '$ExpiredOn',
+         @ExpiredOn          =      '$ExpiredOn'
 
          
          
@@ -518,6 +531,48 @@ class AdmissionController extends Controller
     public function updateStudentTable($request, $Date_of_birth, $state, $Country, $file, $stdImage)
     {
 
+        
+
+        $No           = " ";
+        $Rank         = " ";
+        $ServingSince = " ";
+        $NowServingIn = " ";
+        $At           = " ";
+        $Station      = " ";
+        $TelNo        = " ";
+        $I_Mst        = " ";
+        $WidowOf      = " ";
+        $ExpiredOn    = " ";
+        $NowServingIn = " ";
+        $ServingSince = " ";
+
+         if ($request->Category === "Defence") {
+            $No                   = $request->defence_No;
+            $Rank                 = $request->defence_Rank;
+            $ServingSince         = $request->defence_serving_since;
+            $NowServingIn         = $request->defence_serving_In;
+            $At                   = $request->defence_At;
+            $Station              = $request->defence_Station;
+            $TelNo                = $request->defence_tel_No;
+        } else if ($request->Category === "Shaheed") {
+
+            $I_Mst             = $request->Shaheed_Mst_name;
+            $No                = $request->Shaheed_Widow_no;
+            $Rank              = $request->shaheed_Rank;
+            $WidowOf           = $request->shaheed_Name;
+            $ExpiredOn         = $request->Shaheed_Expired_date;
+        } else if ($request->Category === "Civilian") {
+
+            $NowServingIn        = $request->civilian_office;
+            $Rank                = $request->civilian_Designation;
+            $ServingSince        = $request->civilian_wef;
+        } else if ($request->Category === "Sports") {
+
+            $NowServingIn        = $request->sports_office;
+            $Rank                = $request->sports_Designation;
+            $ServingSince        = $request->sport_wef;
+        }
+
         $submit = DB::update("EXEC sp_UpdateStudentDetails
         @Std_ID             ='$request->Student_ID',
         @Std_FName          ='$request->Std_FName',
@@ -550,7 +605,18 @@ class AdmissionController extends Controller
         @Province           ='$state',
         @Country            ='$Country',  
         @Files              ='$file',
-        @Image              ='$stdImage'
+        @Image              ='$stdImage', 
+
+        @No                 =      '$No',
+        @ServingSince       =      '$ServingSince',
+        @NowServingIn       =      '$NowServingIn',
+        @At                 =      '$At',
+        @Station            =      '$Station',
+        @TelNo              =      '$TelNo',
+        @I_Mst              =      '$I_Mst',
+        @WidowOf            =      '$WidowOf',
+        @Rank               =      '$Rank',
+        @ExpiredOn          =      '$ExpiredOn'
         ;");
     }
 
@@ -908,7 +974,7 @@ class AdmissionController extends Controller
             DB::rollBack();
             throw $e;
         }
-        // return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
+         return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
 
         //}
     }
