@@ -115,6 +115,18 @@ class AdmissionController extends Controller
     protected function createStudentDetail($request)
     {
 
+        $No           = " ";
+        $Rank         = " ";
+        $ServingSince = " ";
+        $NowServingIn = " ";
+        $At           = " ";
+        $Station      = " ";
+        $TelNo        = " ";
+        $I_Mst        = " ";
+        $WidowOf      = " ";
+        $ExpiredOn    = " ";
+        $NowServingIn = " ";
+        $ServingSince = " ";
 
 
         if ($request->Category === "Defence") {
@@ -193,7 +205,7 @@ class AdmissionController extends Controller
          @I_Mst              =      '$I_Mst',
          @WidowOf            =      '$WidowOf',
          @Rank               =      '$Rank',
-         @ExpiredOn          =      '$ExpiredOn',
+         @ExpiredOn          =      '$ExpiredOn'
 
          
          
@@ -817,25 +829,37 @@ class AdmissionController extends Controller
 
         return view('Admissions.loginGetAdmission');
     }
-   public function logingetStudentAdmissiondata(Request $request){
-   
+    public function logingetStudentAdmissiondata(Request $request)
+    {
 
-    if(empty($request->input('CNIC'))){
-           return redirect()->back()->with(['message' => 'CNIC Required']);
+        $Student_Record = Student::where('CNIC', $request->CNIC)->first();
+        // dd($request->CNIC);
+
+        if (empty($request->input('CNIC'))) {
+
+            return redirect()->back()->with(['message' => 'CNIC Required']);
         }
+        // else if($request->CNIC == $Student_Record->CNIC && $Student_Record->Status == "In Progress")
+        // {
+        //     return redirect()->back()->with(['message' => 'Data is Already filled with this Account']);
 
-    
+        // }
+
+        session()->put('Get_Std_Admission_session', trim($Student_Record->CNIC));
+
+        // dd(session()->get('Get_Std_Admission_session'));
         return redirect()->route('get.StudentAdmissions')->withInput();
-    
-}
+    }
 
 
 
     protected function getStudentAdmission(Request $request){
 
-        if(empty($request->old('CNIC'))){
-            return redirect()->route('login.StudentAdmissions');
-        }
+
+
+        // if (empty($request->old('CNIC'))) {
+        //     return redirect()->route('login.StudentAdmissions');
+        // }
         $studentRecord = Student::where('CNIC', $request->CNIC)->first();
 
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
@@ -845,6 +869,7 @@ class AdmissionController extends Controller
         $title  = 'LAHORE GARRISON UNIVERSITY ADMISSION FORM';
         $route  = '/storegettudentAdmission';
 
+<<<<<<< Updated upstream
         if($studentRecord->Status == 'In Progress'){
             $button = 'Update Student Info';
             $title  = 'Edit Student Info';
@@ -861,6 +886,10 @@ class AdmissionController extends Controller
                 )
             );
         }
+=======
+
+
+>>>>>>> Stashed changes
         return
             view(
                 'Admissions.getAdmission',
@@ -898,5 +927,12 @@ class AdmissionController extends Controller
         // return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
 
         //}
+    }
+
+    public function logoutgetStudentAdmission()
+    {
+        session()->flush();
+        return redirect()->route('login.StudentAdmissions');
+
     }
 }

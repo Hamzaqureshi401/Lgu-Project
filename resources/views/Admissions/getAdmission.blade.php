@@ -67,10 +67,20 @@
 
 
         <div class="container mt-5">
+
+
             <!-- Main Content -->
+            <div class="conatiner text-right">
+                <a href="{{route('logout.getStudentAdmission')}}"> <button  style="color:aliceblue; background-color: #ff0000;font-weight:800;" class="btn tr_clone_add">Logout</button>
+                </a>
+                </div>
             @include('Forms.formHeader')
+
+
+
             <form id="myForm" enctype="multipart/form-data">
                 {{ csrf_field() }}
+
                 <div class="card-body">
 
                     <div style="background-color: #0D3E02;"
@@ -482,7 +492,8 @@
                                 <label style="font-size: 13px">Shaheed Name</label>
                                 <input type="text" name="shaheed_Name" id="shaheed_Name"
                                     value="{{ old('shaheed_Name') }}"
-                                    class="form-control border border-1 rounded border-dark" placeholder="Enter Shaheed Name">
+                                    class="form-control border border-1 rounded border-dark"
+                                    placeholder="Enter Shaheed Name">
                                 <br>
                                 @error('shaheed_Name')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -710,8 +721,8 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label style="font-size: 13px">City <span style="color: red">*</span> </label>
-                                    <input type="text" value="{{ old('City') }}" name="City"
-                                        id="City" class="form-control border border-1 rounded border-dark"
+                                    <input type="text" value="{{ old('City') }}" name="City" id="City"
+                                        class="form-control border border-1 rounded border-dark"
                                         placeholder="Enter your city" maxlength=20>
                                     <br>
                                     @error('City')
@@ -722,8 +733,8 @@
                                 <div class="form-group col-md-2">
 
                                     <label style="font-size: 13px">Tehsil <span style="color: red">*</span> </label>
-                                    <input type="text" value="{{ old('Tehsil') }}" name="Tehsil"
-                                        id="Tehsil" class="form-control border border-1 rounded border-dark"
+                                    <input type="text" value="{{ old('Tehsil') }}" name="Tehsil" id="Tehsil"
+                                        class="form-control border border-1 rounded border-dark"
                                         placeholder="Enter your Tehsil">
                                     <br>
                                     @error('Tehsil')
