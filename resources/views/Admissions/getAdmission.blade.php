@@ -668,6 +668,11 @@
                                 <div class="form-group col-md-2">
 
                                     <label style="font-size: 13px">Country <span style="color: red">*</span></label>
+                                     @if(!empty( old('country')))
+                                     <input type="text" value="{{ old('country') }}" name="country"
+                                         class="form-control border border-1 rounded border-dark"
+                                        placeholder="Enter your country">
+                                        @else(empty( old('country')))
                                     <select name="country" id="country" value="{{ old('country') }}"
                                         onchange="print_state('state',this.selectedIndex);"
                                         class="custom-select border border-1 rounded border-dark">
@@ -676,19 +681,27 @@
                                         </option>
 
                                     </select>
+                                    @endif
                                     <br>
                                     <br>
                                     @error('country')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-2"> 
+                                    @if(!empty( old('state')))
+                                    <label style="font-size: 13px">State <span style="color: red">*</span></label>
+                                     <input type="text" value="{{ old('state') }}" name="state"
+                                         class="form-control border border-1 rounded border-dark"
+                                        placeholder="Enter your state">
+                                        @else(empty( old('state')))
                                     <label style="font-size: 13px">Province <span style="color: red">*</span></label>
                                     <select name="state" id="state" value="{{ old('state') }}"
                                         class="custom-select border border-1 rounded border-dark">
                                         <option value="{{ old('state') }}" selected>{{ old('state') }}
                                         </option>
                                     </select>
+                                    @endif
                                     <br>
                                     <br>
                                     @error('state')

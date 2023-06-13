@@ -831,8 +831,7 @@ class AdmissionController extends Controller
 
 
 
-    protected function getStudentAdmission(Request $request)
-    {
+    protected function getStudentAdmission(Request $request){
 
         if(empty($request->old('CNIC'))){
             return redirect()->route('login.StudentAdmissions');
@@ -845,6 +844,23 @@ class AdmissionController extends Controller
         $button = "Get Admission";
         $title  = 'LAHORE GARRISON UNIVERSITY ADMISSION FORM';
         $route  = '/storegettudentAdmission';
+
+        if($studentRecord->Status == 'In Progress'){
+            $button = 'Update Student Info';
+            $title  = 'Edit Student Info';
+            $route  = '/updateStudentAdmission';
+             return
+            view(
+                'Admissions.editStudentAdmission',
+                compact(
+                    'degree',
+                    'button',
+                    'title',
+                    'route',
+                    'admissionsession'
+                )
+            );
+        }
         return
             view(
                 'Admissions.getAdmission',
