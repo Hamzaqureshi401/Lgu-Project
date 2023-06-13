@@ -869,7 +869,7 @@ class AdmissionController extends Controller
         $title  = 'LAHORE GARRISON UNIVERSITY ADMISSION FORM';
         $route  = '/storegettudentAdmission';
 
-
+<<<<<<< Updated upstream
         if($studentRecord->Status == 'In Progress'){
             $button = 'Update Student Info';
             $title  = 'Edit Student Info';
@@ -886,7 +886,10 @@ class AdmissionController extends Controller
                 )
             );
         }
+=======
 
+
+>>>>>>> Stashed changes
         return
             view(
                 'Admissions.getAdmission',
