@@ -652,6 +652,7 @@
                             class="card-header border border-5 rounded border-dark">
                             <h4 class="text-white text-center">Contact Information</h4>
                         </div>
+                        
                         <div class="form-row container border border-5 rounded border-dark mb-3 mt-3">
 
                             <div class="form-row pt-3">
