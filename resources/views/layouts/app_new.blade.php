@@ -226,13 +226,14 @@
             <!-- <li class="dropdown">
               <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li> -->
-        @if (session()->has('std_session')) 
-            @include('layouts.Side Nav Bar.student_side_nav_bar')
-        @elseif (session::get('user')->Grade == 22)
-          @include('layouts.Side Nav Bar.side_nav_bar')
-        @else
-        @include('layouts.Side Nav Bar.allowed_side_nav_bar')
-        @endif
+       @if (session()->has('std_session'))
+    @include('layouts.Side Nav Bar.student_side_nav_bar')
+@elseif (session()->has('user') && session()->get('user')->Grade == 22)
+    @include('layouts.Side Nav Bar.side_nav_bar')
+@else
+    @include('layouts.Side Nav Bar.allowed_side_nav_bar')
+@endif
+
       
 <!-- end side nav bar -->
 

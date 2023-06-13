@@ -836,7 +836,8 @@ class AdmissionController extends Controller
         if(empty($request->old('CNIC'))){
             return redirect()->route('login.StudentAdmissions');
         }
-        $studentRecord = Student::where('CNIC', $request->CNIC)->first();
+        $studentAdmission = Student::where('CNIC', $request->old('CNIC'))->first();
+
 
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
 
@@ -845,21 +846,29 @@ class AdmissionController extends Controller
         $title  = 'LAHORE GARRISON UNIVERSITY ADMISSION FORM';
         $route  = '/storegettudentAdmission';
 
-        if($studentRecord->Status == 'In Progress'){
+        if($studentAdmission->Status == 'In Progress'){
             $button = 'Update Student Info';
             $title  = 'Edit Student Info';
             $route  = '/updateStudentAdmission';
+            $degrees = $degree;
+            $enrollments = Enrollment::where('Std_ID', $studentAdmission->ID)->get();
+            $studentEducations = StudentEducation::where('Std_ID',$studentAdmission->ID)->get();
              return
             view(
                 'Admissions.editStudentAdmission',
                 compact(
-                    'degree',
+                    'degrees',
                     'button',
                     'title',
                     'route',
-                    'admissionsession'
+                    'admissionsession',
+                    'studentAdmission',
+                    'studentEducations',
+                    'enrollments'
                 )
             );
+        }else if($studentAdmission->Status != 'In Progress'){
+            return 'Form In Progress!'
         }
         return
             view(
