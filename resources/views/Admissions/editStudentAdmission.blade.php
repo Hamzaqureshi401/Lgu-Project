@@ -221,11 +221,11 @@
                     <label style="font-size: 13px">Category <span style="color: red">*</span>
                     </label>
                     <select name="Category" class="custom-select">
-                        
+
 
                         @foreach ($Category as $Category)
                             <option value="{{ $Category }}"
-                                 {{ $Category == $studentAdmission->Category ? 'selected' : '' }}>
+                                {{ $Category == $studentAdmission->Category ? 'selected' : '' }}>
                                 {{ $Category }}</option>
                         @endforeach
                     </select>
@@ -235,6 +235,8 @@
                     @enderror
                 </div>
             </div>
+
+
             <div class="form-row" id="defence_form">
 
                 <div class="form-group col-md-12">
@@ -244,7 +246,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">No</label>
-                    <input type="text" name="defence_No" id="defence_No" value="{{ $studentAdmission->defence_No }}"
+                    <input type="text" name="defence_No" id="defence_No" value="{{ $studentAdmission->No }}"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter No" maxlength=20>
                     <br>
                     @error('defence_No')
@@ -253,7 +255,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">Rank </label>
-                    <input type="text" name="defence_Rank" id="defence_Rank" value="{{ $studentAdmission->defence_Rank }}"
+                    <input type="text" name="defence_Rank" id="defence_Rank" value="{{ $studentAdmission->Rank }}"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter Rank">
                     <br>
                     @error('defence_Rank')
@@ -275,7 +277,7 @@
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">Serving Since </label>
                     <input type="date" name="defence_serving_since" id="defence_serving_since"
-                        value="{{ $studentAdmission->defence_serving_since }}"
+                        value="{{ $studentAdmission->ServingSince }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('defence_serving_since')
@@ -287,8 +289,8 @@
 
                     <label style="font-size: 13px">Now Serving In </label>
                     <input type="text" name="defence_serving_In" id="defence_serving_In"
-                        value="{{ $studentAdmission->defence_serving_In }}" class="form-control border border-1 rounded border-dark"
-                        placeholder="Enter Serving In">
+                        value="{{ $studentAdmission->NowServingIn }}"
+                        class="form-control border border-1 rounded border-dark" placeholder="Enter Serving In">
                     <br>
                     @error('defence_serving_In')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -301,7 +303,8 @@
 
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">At</label>
-                    <input type="text" name="defence_At" id="defence_At" value="{{ old('defence_At') }}"
+                    <input type="text" name="defence_At" id="defence_At"
+                        value="{{ $studentAdmission->At }}"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter At">
                     <br>
                     @error('defence_At')
@@ -311,19 +314,21 @@
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">Station </label>
                     <input type="text" name="defence_Station" id="defence_Station"
-                        value="{{ $studentAdmission->defence_Station }}" class="form-control border border-1 rounded border-dark"
-                        placeholder="Enter Station">
+                        value="{{ $studentAdmission->Station }}"
+                        class="form-control border border-1 rounded border-dark" placeholder="Enter Station">
                     <br>
                     @error('defence_Station')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                 </div>
+
+
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">Tel No </label>
-                    <input type="number" name="defence_tel_No" id="defence_tel_No" value="{{ $studentAdmission->tel_No }}"
-                        class="form-control border border-1 rounded border-dark" placeholder="Enter tel_No"
-                        oninput="maxLengthphone(this)" maxlength="11">
+                    <input type="number" name="defence_tel_No" id="defence_tel_No"
+                        value="{{ $studentAdmission->TelNo }}" class="form-control border border-1 rounded border-dark"
+                        placeholder="Enter tel_No" oninput="maxLengthphone(this)" maxlength="11">
                     <br>
                     @error('defence_tel_No')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -331,6 +336,7 @@
                 </div>
 
 
+                
 
 
 
@@ -348,8 +354,8 @@
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">I, Mst</label>
                     <input type="text" name="Shaheed_Mst_name" id="Shaheed_Mst_name"
-                        value="{{ $studentAdmission->Shaheed_Mst_name }}" class="form-control border border-1 rounded border-dark"
-                        placeholder="Enter Name">
+                        value="{{ $studentAdmission->I_Mst }}"
+                        class="form-control border border-1 rounded border-dark" placeholder="Enter Name">
                     <br>
                     @error('Shaheed_Mst_name')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -358,8 +364,8 @@
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">am Widow of No.</label>
                     <input type="text" name="Shaheed_Widow_no" id="Shaheed_Widow_no"
-                        value="{{ $studentAdmission->Shaheed_Widow_no }}" class="form-control border border-1 rounded border-dark"
-                        placeholder="Enter Widow Of No">
+                        value="{{ $studentAdmission->No }}"
+                        class="form-control border border-1 rounded border-dark" placeholder="Enter Widow Of No">
                     <br>
                     @error('Shaheed_Widow_no')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -368,8 +374,9 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">Rank </label>
-                    <input type="text" name="shaheed_Rank" value="{{ $studentAdmission->shaheed_Rank }}" id="shaheed_Rank"
-                        class="form-control border border-1 rounded border-dark" placeholder="Enter Shaheed Rank">
+                    <input type="text" name="shaheed_Rank" value="{{ $studentAdmission->Rank }}"
+                        id="shaheed_Rank" class="form-control border border-1 rounded border-dark"
+                        placeholder="Enter Shaheed Rank">
                     <br>
                     @error('shaheed_Rank')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -378,7 +385,8 @@
 
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">Shaheed Name</label>
-                    <input type="text" name="shaheed_Name" id="shaheed_Name" value="{{ $studentAdmission->shaheed_Name }}"
+                    <input type="text" name="shaheed_Name" id="shaheed_Name"
+                        value="{{ $studentAdmission->WidowOf }}"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter Shaheed Name">
                     <br>
                     @error('shaheed_Name')
@@ -390,7 +398,7 @@
 
                     <label style="font-size: 13px">who Expired on</label>
                     <input type="date" name="Shaheed_Expired_date" id="Shaheed_Expired_date"
-                        value="{{ $studentAdmission->Shaheed_Expired_date }}"
+                        value="{{ $studentAdmission->ExpiredOn }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('Shaheed_Expired_date')
@@ -435,7 +443,7 @@
                </div> --}}
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">am serving in the Office of </label>
-                    <input type="text" name="civilian_office" value="{{ $studentAdmission->civilian_office }}"
+                    <input type="text" name="civilian_office" value="{{ $studentAdmission->NowServingIn }}"
                         id="civilian_office" class="form-control border border-1 rounded border-dark"
                         placeholder="Enter civilian office">
                     <br>
@@ -447,7 +455,7 @@
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">As (Designation)</label>
                     <input type="text" name="civilian_Designation" id="civilian_Designation"
-                        value="{{$studentAdmission->civilian_Designation }}"
+                        value="{{ $studentAdmission->Rank }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('civilian_Designation')
@@ -458,7 +466,8 @@
 
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">w.e.f</label>
-                    <input type="date" name="civilian_wef" id="civilian_wef" value="{{ $studentAdmission->civilian_wef }}"
+                    <input type="date" name="civilian_wef" id="civilian_wef"
+                        value="{{ $studentAdmission->ServingSince }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('civilian_wef')
@@ -470,7 +479,6 @@
 
 
             </div>
-
 
             <div class="form-row" id="Sports_form">
                 <div class="form-group col-md-12">
@@ -504,8 +512,9 @@
 
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">am serving in the Office of </label>
-                    <input type="text" name="sports_office" value="{{ $studentAdmission->sports_office }}" id="sports_office"
-                        class="form-control border border-1 rounded border-dark" placeholder="Enter civilian office">
+                    <input type="text" name="sports_office" value="{{ $studentAdmission->NowServingIn }}"
+                        id="sports_office" class="form-control border border-1 rounded border-dark"
+                        placeholder="Enter civilian office">
                     <br>
                     @error('sports_office')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -515,7 +524,8 @@
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">As (Designation)</label>
                     <input type="text" name="sports_Designation" id="sports_Designation"
-                        value="{{ $studentAdmission->sports_Designation }}" class="form-control border border-1 rounded border-dark">
+                        value="{{ $studentAdmission->Rank }}"
+                        class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('sports_Designation')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -525,7 +535,7 @@
 
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">w.e.f</label>
-                    <input type="date" name="sport_wef" id="sport_wef" value="{{ $studentAdmission->sport_wef }}"
+                    <input type="date" name="sport_wef" id="sport_wef" value="{{ $studentAdmission->ServingSince }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('sport_wef')
@@ -675,7 +685,7 @@
 
 
             </div>
-                 
+
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label style="font-size: 13px">Status <span style="color: red">*</span></label>
@@ -705,7 +715,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            
+
         </div>
 
 
@@ -742,41 +752,42 @@
         </div>
 
         <div class="container border border-5 rounded border-dark ">
-                @if (session()->has('Emp_session'))
-            <div class="form-row pt-3">
-                <div class="form-group col-md-6">
-                    <label style="font-size: 13px">Class Section <span style="color: red">*</span></label>
+            @if (session()->has('Emp_session'))
+                <div class="form-row pt-3">
+                    <div class="form-group col-md-6">
+                        <label style="font-size: 13px">Class Section <span style="color: red">*</span></label>
 
-                    <select name="ClassSection" class="form-control">
-                        <option value="{{ $studentAdmission->ClassSection }}" selected>
-                            {{ $studentAdmission->ClassSection }}
-                        </option>
-
-                        @foreach (range('A', 'Z') as $letter)
-                            <option value="{{ $letter }}" {{ old('ClassSection') == $letter ? 'selected' : '' }}>
-                                {{ $letter }}
+                        <select name="ClassSection" class="form-control">
+                            <option value="{{ $studentAdmission->ClassSection }}" selected>
+                                {{ $studentAdmission->ClassSection }}
                             </option>
-                        @endforeach
-                    </select>
-                    <br>
-                    @error('ClassSection')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+
+                            @foreach (range('A', 'Z') as $letter)
+                                <option value="{{ $letter }}"
+                                    {{ old('ClassSection') == $letter ? 'selected' : '' }}>
+                                    {{ $letter }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <br>
+                        @error('ClassSection')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label style="font-size: 13px">Current Semester <span style="color: red">*</span>
+                        </label>
+                        <input type="number" value="{{ $studentAdmission->CurrentSemester }}" name="CurrentSemester"
+                            id="CurrentSemester" class="form-control" maxlength=1>
+                        <br>
+                        @error('CurrentSemester')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
                 </div>
-
-                <div class="form-group col-md-6">
-                    <label style="font-size: 13px">Current Semester <span style="color: red">*</span>
-                    </label>
-                    <input type="number" value="{{ $studentAdmission->CurrentSemester }}" name="CurrentSemester"
-                        id="CurrentSemester" class="form-control" maxlength=1>
-                    <br>
-                    @error('CurrentSemester')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-
-            </div>
             @endif
 
 
@@ -892,6 +903,20 @@
         </div>
     </div>
 
+    <script>
+        function maxLengthCheck(object) {
+            if (object.value.length > object.maxLength)
+                object.value = object.value.slice(0, object.maxLength)
+        }
+
+        function maxLengthphone(object) {
+            if (object.value.length > object.maxLength)
+                object.value = object.value.slice(0, object.maxLength)
+        }
+    </script>
+
+    @include('Admissions.student_js')
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -911,11 +936,11 @@
                 var selectedCategory = $('select[name="Category"]').val();
                 catFilter(selectedCategory);
 
-               
+
             }
 
-            function catFilter(selectedCategory){
-                 if (selectedCategory === 'Defence') {
+            function catFilter(selectedCategory) {
+                if (selectedCategory === 'Defence') {
                     $('#Shaheed_form').hide();
                     $('#Civilian_form').hide();
                     $('#defence_form').show();
@@ -950,6 +975,5 @@
             }
         });
     </script>
-    @include('Admissions.student_js')
     @include('Forms.formFooter')
 @endsection
