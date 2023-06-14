@@ -43,6 +43,8 @@ Route::post('/logingetStudentAdmission', [App\Http\Controllers\AdmissionControll
 
 Route::post('/updateStudentAdmission', [App\Http\Controllers\AdmissionController::class, 'updateStudentAdmission'])->name('update.StudentAdmission');
 
+Route::get('/generateStudentAdmissionPdf', [App\Http\Controllers\AdmissionController::class, 'generateStudentAdmissionPdf'])->name('generate.Student.Admission.Pdf');
+
 Auth::routes();
 
 Route::group(['middleware' => 'StudentAuth'], function () {

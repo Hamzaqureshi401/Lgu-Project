@@ -19,6 +19,8 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\EnrollmentsController;
 use App\Models\StudentEducation;
 use App\Models\Registration;
+use PDF;
+use Illuminate\Support\Facades\View;
 
 
 class AdmissionController extends Controller
@@ -705,8 +707,13 @@ class AdmissionController extends Controller
         //     throw $e;
         // }
 
-
-        return redirect()->back()->with(['successToaster' => 'Student Admission Added!', 'title' => 'Success']);
+        
+        if (session()->has('Emp_session')){
+            return redirect()->back()->with(['successToaster' => 'Student Updated!', 'title' => 'Success']);
+        }else{
+             return redirect()->route('get.StudentAdmissions')->withInput()->with(['successToaster' => 'Student Updated!', 'title' => 'Success']);
+        }
+        
     }
 
     public function createFeeChallan($request)
@@ -977,5 +984,27 @@ class AdmissionController extends Controller
          return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
 
         //}
+    }
+
+    public function generateStudentAdmissionPdf()
+    {
+       // Get the data to pass to the view
+        $data = [
+            'title' => 'Sample PDF',
+            'content' => 't of the PDF',
+        ];
+
+        // Generate the PDF from the view
+       
+        // $pdf = new Dompdf();
+        // $pdf->loadView('Admissions.studentAdmissionPdf', $data);
+
+        // Output the generated PDF to the browser
+        
+
+         view()->share('data',$data);
+         $pdf = PDF::loadView('Admissions.studentAdmissionPdf', $data);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->download('sample.pdf');
     }
 }

@@ -120,13 +120,65 @@
     </section>
     </div>
     <!-- General JS Scripts -->
-    <script src="assets/js/app.min.js"></script>
-    <!-- JS Libraies -->
-    <!-- Page Specific JS File -->
-    <!-- Template JS File -->
-    <script src="assets/js/scripts.js"></script>
-    <!-- Custom JS File -->
-    <script src="assets/js/custom.js"></script>
+    
+     <script src="{{ asset('assets/js/app.min.js') }}"></script>
+ 
+ <script src="{{ asset('assets/bundles/izitoast/js/iziToast.min.js') }}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{{ asset('assets/js/page/toastr.js') }}"></script>
+  
+
+  <script src="{{ asset('assets/js/scripts.js') }}"></script>
+  <!-- Custom JS File -->
+  <script src="{{ asset('assets/js/custom.js') }}"></script>
+   <script src="{{ asset('assets/bundles/sweetalert/sweetalert.min.js') }}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{{ asset('assets/js/page/sweetalert.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
+
+  <script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}" ></script>
+  <script src="{{ asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('assets/bundles/jquery-ui/jquery-ui.min.js') }}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{{ asset('assets/js/page/datatables.js') }}"></script>
+    <script type="text/javascript">
+         @if(session('successToaster'))
+       
+        var msg = "{{session('successToaster')}}";
+        var title = "{{session('title')}}";
+        
+         iziToast.success({
+          title: title,
+          message: msg,
+          position: 'topRight'
+        });
+        @elseif(session('errorToaster'))
+        var msg = "{{session('errorToaster')}}";
+        var title = "{{session('title')}}";
+         iziToast.error({
+          title: title,
+          message: msg,
+          position: 'topRight'
+        });
+        @elseif(session('infoToaster'))
+         var msg = "{{session('infoToaster')}}";
+         var title = "{{session('title')}}";
+         iziToast.info({
+          title: title,
+          message: msg,
+          position: 'topRight'
+        });
+         @elseif(session('warningToaster'))
+         var msg = "{{session('warningToaster')}}";
+         var title = "{{session('title')}}";
+         iziToast.warning({
+          title: title,
+          message: msg,
+          position: 'topRight'
+        });
+        @endif
+    </script>
 </body>
 
 
