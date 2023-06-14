@@ -244,7 +244,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">No</label>
-                    <input type="text" name="defence_No" id="defence_No" value="{{ old('defence_No') }}"
+                    <input type="text" name="defence_No" id="defence_No" value="{{ $studentAdmission->defence_No }}"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter No" maxlength=20>
                     <br>
                     @error('defence_No')
@@ -253,7 +253,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">Rank </label>
-                    <input type="text" name="defence_Rank" id="defence_Rank" value="{{ old('defence_Rank') }}"
+                    <input type="text" name="defence_Rank" id="defence_Rank" value="{{ $studentAdmission->defence_Rank }}"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter Rank">
                     <br>
                     @error('defence_Rank')
@@ -263,7 +263,7 @@
                 </div>
                 {{-- <div class="form-group col-md-2">
                    <label style="font-size: 13px">Father Name <span style="color: red">*</span></label>
-                   <input type="text" name="defence_Name" value="{{ old('defence_Name') }}"
+                   <input type="text" name="defence_Name" value="{{ $studentAdmission->defence_Name }}"
                        id="Name" class="form-control border border-1 rounded border-dark"
                        placeholder="Enter Name">
                    <br>
@@ -275,7 +275,7 @@
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">Serving Since </label>
                     <input type="date" name="defence_serving_since" id="defence_serving_since"
-                        value="{{ old('defence_serving_since') }}"
+                        value="{{ $studentAdmission->defence_serving_since }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('defence_serving_since')
@@ -287,7 +287,7 @@
 
                     <label style="font-size: 13px">Now Serving In </label>
                     <input type="text" name="defence_serving_In" id="defence_serving_In"
-                        value="{{ old('defence_serving_In') }}" class="form-control border border-1 rounded border-dark"
+                        value="{{ $studentAdmission->defence_serving_In }}" class="form-control border border-1 rounded border-dark"
                         placeholder="Enter Serving In">
                     <br>
                     @error('defence_serving_In')
@@ -311,7 +311,7 @@
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">Station </label>
                     <input type="text" name="defence_Station" id="defence_Station"
-                        value="{{ old('defence_Station') }}" class="form-control border border-1 rounded border-dark"
+                        value="{{ $studentAdmission->defence_Station }}" class="form-control border border-1 rounded border-dark"
                         placeholder="Enter Station">
                     <br>
                     @error('defence_Station')
@@ -321,7 +321,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">Tel No </label>
-                    <input type="number" name="defence_tel_No" id="defence_tel_No" value="{{ old('tel_No') }}"
+                    <input type="number" name="defence_tel_No" id="defence_tel_No" value="{{ $studentAdmission->tel_No }}"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter tel_No"
                         oninput="maxLengthphone(this)" maxlength="11">
                     <br>
@@ -348,7 +348,7 @@
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">I, Mst</label>
                     <input type="text" name="Shaheed_Mst_name" id="Shaheed_Mst_name"
-                        value="{{ old('Shaheed_Mst_name') }}" class="form-control border border-1 rounded border-dark"
+                        value="{{ $studentAdmission->Shaheed_Mst_name }}" class="form-control border border-1 rounded border-dark"
                         placeholder="Enter Name">
                     <br>
                     @error('Shaheed_Mst_name')
@@ -358,7 +358,7 @@
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">am Widow of No.</label>
                     <input type="text" name="Shaheed_Widow_no" id="Shaheed_Widow_no"
-                        value="{{ old('Shaheed_Widow_no') }}" class="form-control border border-1 rounded border-dark"
+                        value="{{ $studentAdmission->Shaheed_Widow_no }}" class="form-control border border-1 rounded border-dark"
                         placeholder="Enter Widow Of No">
                     <br>
                     @error('Shaheed_Widow_no')
@@ -368,7 +368,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">Rank </label>
-                    <input type="text" name="shaheed_Rank" value="{{ old('shaheed_Rank') }}" id="shaheed_Rank"
+                    <input type="text" name="shaheed_Rank" value="{{ $studentAdmission->shaheed_Rank }}" id="shaheed_Rank"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter Shaheed Rank">
                     <br>
                     @error('shaheed_Rank')
@@ -378,7 +378,7 @@
 
                 <div class="form-group col-md-2">
                     <label style="font-size: 13px">Shaheed Name</label>
-                    <input type="text" name="shaheed_Name" id="shaheed_Name" value="{{ old('shaheed_Name') }}"
+                    <input type="text" name="shaheed_Name" id="shaheed_Name" value="{{ $studentAdmission->shaheed_Name }}"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter Shaheed Name">
                     <br>
                     @error('shaheed_Name')
@@ -390,7 +390,7 @@
 
                     <label style="font-size: 13px">who Expired on</label>
                     <input type="date" name="Shaheed_Expired_date" id="Shaheed_Expired_date"
-                        value="{{ old('Shaheed_Expired_date') }}"
+                        value="{{ $studentAdmission->Shaheed_Expired_date }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('Shaheed_Expired_date')
@@ -414,7 +414,7 @@
                 {{-- <div class="form-group col-md-4">
                    <label style="font-size: 13px">Father Name<span style="color: red">*</span></label>
                    <input type="text" name="civilan_name" id="civilan_name"
-                       value="{{ old('civilan_name') }}"
+                       value="{{ $studentAdmission->civilan_name }}"
                        class="form-control border border-1 rounded border-dark" placeholder="Enter Name">
                    <br>
                    @error('civilan_name')
@@ -424,7 +424,7 @@
                <div class="form-group col-md-4">
                    <label style="font-size: 13px">Father of<span style="color: red">*</span></label>
                    <input type="text" name="civilian_father" id="civilian_father"
-                       value="{{ old('civilian_father') }}"
+                       value="{{ $studentAdmission->civilian_father }}"
                        class="form-control border border-1 rounded border-dark"
                        placeholder="Enter Father Name">
                    <br>
@@ -435,7 +435,7 @@
                </div> --}}
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">am serving in the Office of </label>
-                    <input type="text" name="civilian_office" value="{{ old('civilian_office') }}"
+                    <input type="text" name="civilian_office" value="{{ $studentAdmission->civilian_office }}"
                         id="civilian_office" class="form-control border border-1 rounded border-dark"
                         placeholder="Enter civilian office">
                     <br>
@@ -447,7 +447,7 @@
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">As (Designation)</label>
                     <input type="text" name="civilian_Designation" id="civilian_Designation"
-                        value="{{ old('civilian_Designation') }}"
+                        value="{{$studentAdmission->civilian_Designation }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('civilian_Designation')
@@ -458,7 +458,7 @@
 
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">w.e.f</label>
-                    <input type="date" name="civilian_wef" id="civilian_wef" value="{{ old('civilian_wef') }}"
+                    <input type="date" name="civilian_wef" id="civilian_wef" value="{{ $studentAdmission->civilian_wef }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('civilian_wef')
@@ -481,7 +481,7 @@
                 {{-- <div class="form-group col-md-4">
                    <label style="font-size: 13px">Father Name<span style="color: red">*</span></label>
                    <input type="text" name="sports_name" id="sports_name"
-                       value="{{ old('sports_name') }}"
+                       value="{{$studentAdmission->sports_name }}"
                        class="form-control border border-1 rounded border-dark" placeholder="Enter Name">
                    <br>
                    @error('sports_name')
@@ -491,7 +491,7 @@
                <div class="form-group col-md-4">
                    <label style="font-size: 13px">Father of<span style="color: red">*</span></label>
                    <input type="text" name="sports_father" id="sports_father"
-                       value="{{ old('sports_father') }}"
+                       value="{{ $studentAdmission->sports_father }}"
                        class="form-control border border-1 rounded border-dark"
                        placeholder="Enter Father Name">
                    <br>
@@ -504,7 +504,7 @@
 
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">am serving in the Office of </label>
-                    <input type="text" name="sports_office" value="{{ old('sports_office') }}" id="sports_office"
+                    <input type="text" name="sports_office" value="{{ $studentAdmission->sports_office }}" id="sports_office"
                         class="form-control border border-1 rounded border-dark" placeholder="Enter civilian office">
                     <br>
                     @error('sports_office')
@@ -515,7 +515,7 @@
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">As (Designation)</label>
                     <input type="text" name="sports_Designation" id="sports_Designation"
-                        value="{{ old('sports_Designation') }}" class="form-control border border-1 rounded border-dark">
+                        value="{{ $studentAdmission->sports_Designation }}" class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('sports_Designation')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -525,7 +525,7 @@
 
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">w.e.f</label>
-                    <input type="date" name="sport_wef" id="sport_wef" value="{{ old('sport_wef') }}"
+                    <input type="date" name="sport_wef" id="sport_wef" value="{{ $studentAdmission->sport_wef }}"
                         class="form-control border border-1 rounded border-dark">
                     <br>
                     @error('sport_wef')
@@ -675,12 +675,13 @@
 
 
             </div>
-                 @if (session()->has('Emp_session'))
+                 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label style="font-size: 13px">Status <span style="color: red">*</span></label>
                     <select name="Status" class="custom-select select2">
                         <option value="{{ $studentAdmission->Status }}" selected>{{ $studentAdmission->Status }}
+                            @if (session()->has('Emp_session'))
                         </option>
                         @if ($studentAdmission->Status == 'In Progress')
                             <option value="On Merit">On Merit</option>
@@ -689,6 +690,7 @@
                         @elseif($studentAdmission->Status == 'Completed' && !empty($enrollments))
                             <option value="Admitted">Admitted</option>
                         @elseif($studentAdmission->Status == 'Admitted')
+                        @endif
                         @endif
                         <!-- 'Progress->Merit->Completed->Admitted' -->
 
@@ -703,7 +705,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            @endif
+            
         </div>
 
 
