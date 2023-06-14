@@ -75,6 +75,7 @@
                 {{ csrf_field() }}
                 <div class="card-body">
 
+
                     <div style="background-color: #0D3E02;"
                         class="card-header border border-5 rounded border-dark   mb-4 ">
                         <h4 class="text-white text-center">Applied Degree Information</h4>

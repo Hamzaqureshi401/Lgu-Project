@@ -15,6 +15,8 @@
             <div class="row">
               <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
+                  <a > <img class="img-fluid ml-md-3 mt-3" src="{{ asset('images/LOGO-Final-V2.png') }}" alt="Order Header Image" width="270px" height="90px"/>
+                  </a>
                   <div class="card-header">
                     <h4 class="text-dark">{{ $title ?? '' }}</h4>
                   </div>

@@ -916,7 +916,7 @@ class AdmissionController extends Controller
 
         $admissionsession = Semester::where('Year', '=', date('Y'))->get();
         $button = "Get Admission";
-        $title  = 'LAHORE GARRISON UNIVERSITY ADMISSION FORM';
+        $title  = 'ADMISSION FORM';
         $route  = '/storegettudentAdmission';
 
         if(empty($studentAdmission)){
