@@ -3,6 +3,7 @@
 @section('content')
 @include('Table.table_header')
                     <div class="table-responsive">
+                      <div class="table-container">
                       <table class="table table-striped dataTable">
                         <thead>
                           <tr>
@@ -100,6 +101,7 @@
                            @endforeach
                         </tbody>
                       </table>
+                      </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         {!! $students->links() !!}

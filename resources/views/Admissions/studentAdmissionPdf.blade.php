@@ -141,27 +141,83 @@ tr td span{
         <tr>
         <td>
             <b style="display: inline;">1.</b>
-            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:{{ strtoupper($data['student']['Std_FName'])}} {{ strtoupper($data['student']['Std_LName'])}}</p>
         </td>
         </tr>
          <tr>
          <td>
             <b style="display: inline;">2.</b>
-            <p style="display: inline; margin: 0; margin-left: 5px;">National Identity Card No:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">National Identity Card No:{{ $data['student']['CNIC']}}</p>
         </td>
         </tr>
          <tr>
          <td>
             <b style="display: inline;">3.</b>
-            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Date Of Birth:</p>
             <b style="display: inline;">4.</b>
-            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Nationality:</p>
             <b style="display: inline;">5.</b>
-            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Religion:</p>
             <b style="display: inline;">6.</b>
-            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Section:</p>
         </td>
         </tr>
+        <tr>
+         
+        <td>
+            <b style="display: inline;">7.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Name Of Father:</p>
+        </td>
+        </tr>
+        <tr>
+         
+        <td>
+            <b style="display: inline;">8.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Name Of Gardian:</p>
+        </td>
+        </tr>
+        <tr>
+         
+        <td>
+            <b style="display: inline;">9.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">CNIC No. of Father/Guardian:</p>
+        </td>
+        </tr>
+        <tr>
+         
+        <td>
+            <b style="display: inline;">10.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Father/Guardian's Address(Govt/Private Service/Place of Work:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Address:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Designation:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">TelePhone / Mob:</p>
+        </td>
+        </tr>
+        <tr>
+         
+        <td>
+            <b style="display: inline;">11.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Parent Residential Addres:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Telephone No.Res:</p>
+        </td>
+        </tr>
+        <tr>
+         
+        <td>
+            <b style="display: inline;">12.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Permanent Address:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Emergency Telephone No:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">E-mail:</p>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Blood Group:</p>
+        </td>
+        </tr>
+
+         <tr style="width: 100%" >
+            <td ><span class="thead-dark">Qualification</span></td>
+        
+        </tr>
+
+
 
 
       
@@ -204,7 +260,17 @@ tr td span{
                 
 
             </tr>
+
+
         
+        
+        
+    </table>
+    <table border="0" style="width:100%; border-collapse: collapse" cellspacing="0" cellpadding="0">
+            <tr style="width: 100%">
+            <td style="width:50%;"><span>Date____________</span></td>
+        <td colspan="3" align="right"  style="width:50%;"><span>Signature Of Candidate____________</span></td>
+        </tr>
     </table>
 
     

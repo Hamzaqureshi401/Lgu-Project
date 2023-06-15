@@ -14147,3 +14147,14 @@ a.text-dark:hover {
             background-image: url("http://i.imgur.com/5O74VI6.jpg");
             mix-blend-mode: lighten;
         }
+        /* .table-container {
+  overflow-y: auto;
+  max-height: 400px; /* Adjust the height as needed 
+}*/
+
+/*.table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1;
+}*/

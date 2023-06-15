@@ -502,34 +502,34 @@ class AdmissionController extends Controller
             );
     }
 
-    public function updateEducation($request)
-    {
+    // public function updateEducation($request)
+    // {
 
 
-        // dd($request);
+    //     // dd($request);
 
-        $examination        = $request['examination'];
-        $InstitutionName    = $request['InstitutionName'];
-        $DateStarted        = $request['DateStarted'];
-        $DateEnd            = $request['DateEnd'];
-        $ObtainedMarks      = $request['ObtainedMarks'];
-        $TotalMarks         = $request['TotalMarks'];
-        $Rollno             = $request['Rollno'];
-        $educationID        = $request['educationID'];
+    //     $examination        = $request['examination'];
+    //     $InstitutionName    = $request['InstitutionName'];
+    //     $DateStarted        = $request['DateStarted'];
+    //     $DateEnd            = $request['DateEnd'];
+    //     $ObtainedMarks      = $request['ObtainedMarks'];
+    //     $TotalMarks         = $request['TotalMarks'];
+    //     $Rollno             = $request['Rollno'];
+    //     $educationID        = $request['educationID'];
 
 
-        $submit = DB::update("EXEC sp_UpdateStudentEducations
+    //     $submit = DB::update("EXEC sp_UpdateStudentEducations
 
-        @ID                 ='$educationID',
-        @Degree             ='$examination',
-        @InstitutionName    ='$InstitutionName',
-        @DateStarted        ='$DateStarted',
-        @DateEnd            ='$DateEnd',
-        @ObtainedMarks      ='$ObtainedMarks',
-        @TotalMarks         ='$TotalMarks',
-        @RollNo             ='$Rollno'
-        ;");
-    }
+    //     @ID                 ='$educationID',
+    //     @Degree             ='$examination',
+    //     @InstitutionName    ='$InstitutionName',
+    //     @DateStarted        ='$DateStarted',
+    //     @DateEnd            ='$DateEnd',
+    //     @ObtainedMarks      ='$ObtainedMarks',
+    //     @TotalMarks         ='$TotalMarks',
+    //     @RollNo             ='$Rollno'
+    //     ;");
+    // }
     public function updateStudentTable($request, $Date_of_birth, $state, $Country, $file, $stdImage)
     {
 
@@ -1012,25 +1012,16 @@ class AdmissionController extends Controller
         //}
     }
 
-    public function generateStudentAdmissionPdf()
-    {
-       // Get the data to pass to the view
-        $data = [
-            'title' => 'Sample PDF',
-            'content' => 't of the PDF',
-        ];
+   public function generateStudentAdmissionPdf()
+{
+    // Get the data to pass to the view
+    $student = Student::first();
+    $data = ['student' => $student];
 
-        // Generate the PDF from the view
-       
-        // $pdf = new Dompdf();
-        // $pdf->loadView('Admissions.studentAdmissionPdf', $data);
+    view()->share('data', $data);
+    $pdf = PDF::loadView('Admissions.studentAdmissionPdf', $data);
+    $pdf->setPaper('A4', 'portrait');
+    return $pdf->download('sample.pdf');
+}
 
-        // Output the generated PDF to the browser
-        
-
-         view()->share('data',$data);
-         $pdf = PDF::loadView('Admissions.studentAdmissionPdf', $data);
-        $pdf->setPaper('A4', 'portrait');
-        return $pdf->download('sample.pdf');
-    }
 }
