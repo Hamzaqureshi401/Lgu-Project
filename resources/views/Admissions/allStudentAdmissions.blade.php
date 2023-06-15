@@ -3,7 +3,7 @@
 @section('content')
 @include('Table.table_header')
                     <div class="table-responsive">
-                      <table class="table table-striped table-datatable" id="sortable-table">
+                      <table class="table table-striped dataTable">
                         <thead>
                           <tr>
                             <th class="text-center">
@@ -43,17 +43,21 @@
                             <th>Father Email</th>
                             <th>stdfilename</th>
                             <th>stdImagename</th>
-                            <th>Action</th>
+                            
 
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($students as $student)
                           <tr>
-                            <td>
-                              <div class="sort-handler">
-                                <i class="fas fa-th"></i>
+                             <td>
+                              <div class="card-body">
+                                <!-- only change id -->
+                                <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $student->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
+                                 <a href="{{ $getEditRoute }}/{{ $student->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+
                               </div>
+                            </td>
                             </td>
 
 
@@ -91,14 +95,7 @@
                             <td>{{ $student->Files ?? '--' }}</td>
                             <td>{{ $student->Image ?? '--' }}</td>
 
-                            <td>
-                              <div class="card-body">
-                                <!-- only change id -->
-                                <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $student->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
-                                 <a href="{{ $getEditRoute }}/{{ $student->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
-
-                              </div>
-                            </td>
+                           
                           </tr>
                            @endforeach
                         </tbody>

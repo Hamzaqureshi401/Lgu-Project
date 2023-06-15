@@ -876,8 +876,46 @@
       </table>
    </div>
    --}}
+        @if(!empty($studentEducations->first()))
         @include('Admissions.studentEducation')
+        @else
+         <table class="table table-striped table-responsive " id="sortable-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center ">
+                                    <i class="fas fa-th"></i>
+                                </th>
+                                <th>Examination Passed</th>
+                                <th>Institution Appeared</th>
+                                <th>Roll No.</th>
+                                <th>Date Started <br>i.e (2019)</th>
+                                <th>Date Ended</th>
+                                <th>Total Marks</th>
+                                <th>Marks Obtained</th>
 
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @include('Admissions.studentEducationTr')
+
+
+
+                        </tbody>
+                    </table>
+                    <div class="container">
+
+                    <div class="form-group ">
+                        <a style="color:aliceblue; background-color: #0D3E02;font-weight:800;"
+                            class="btn btn-block tr_clone_add_new">Add New Row </a>
+
+                    </div>
+
+
+                    
+                </div>
+         @endif
         @if (empty($DegreeBatche) && $studentAdmission->Status == 'Completed')
             <div class="form-group">
                 <span class="" style="color: red;">Note: Degree Batch Not Found Enrollment will be Failed!</span>
@@ -918,6 +956,8 @@
     @include('Admissions.student_js')
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
     <script>
         $(document).ready(function() {
             // Show/hide the defence_form div based on the initial selection
@@ -973,6 +1013,25 @@
 
                 }
             }
+        });
+
+         $(".tr_clone_add_new").live('click', function() {
+ var $tr = $('#tr_clone');
+    var $clone = $tr.clone();
+    
+    // Clear previously selected examination
+     // Remove previously selected option
+    //$clone.find('select[name="examination[]"]').prop('selectedIndex', -1);
+   
+    
+    $clone.find(':text').val('');
+    $tr.after($clone);
+    $clone.addClass('bg-success');
+    $clone.find('.tr_remove').removeClass('d-none');
+            });
+            
+        $(".tr_remove").live('click', function() {
+            $(this).closest('tr').remove(); // Remove the corresponding table row
         });
     </script>
     @include('Forms.formFooter')

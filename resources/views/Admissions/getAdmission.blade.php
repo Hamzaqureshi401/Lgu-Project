@@ -901,7 +901,7 @@
                             ;font-weight:800;"
                             id="button" type="submit"
                             class="btn btn-block submit-form ">{{ $button }}</button>
-                            <a class="btn btn-block" onclick="generatePDF()">Generate PDF</a>
+                            <!-- <a class="btn btn-block" onclick="generatePDF()">Generate PDF</a> -->
 
                     </div>
                 </div>
@@ -975,12 +975,23 @@
 
         <script type="text/javascript">
             $(".tr_clone_add").live('click', function() {
-                var $tr = $('#tr_clone').closest('#tr_clone');
-                var $clone = $tr.clone();
-                $clone.find(':text').val('');
-                $tr.after($clone);
-                $clone.addClass('bg-success');
+ var $tr = $('#tr_clone');
+    var $clone = $tr.clone();
+    
+    // Clear previously selected examination
+     // Remove previously selected option
+    //$clone.find('select[name="examination[]"]').prop('selectedIndex', -1);
+   
+    
+    $clone.find(':text').val('');
+    $tr.after($clone);
+    $clone.addClass('bg-success');
+    $clone.find('.tr_remove').removeClass('d-none');
             });
+            
+        $(".tr_remove").live('click', function() {
+            $(this).closest('tr').remove(); // Remove the corresponding table row
+        });
         </script>
 
     </div>

@@ -9,18 +9,20 @@
                             <th class="text-center">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>SemSession</th>
+                            <th>Sem Session</th>
                             <th>Year</th>
-                            <th>SemStartDate</th>
-                            <th>SemEndDate</th>
-                            <th>EnrollmentStartDate</th>
-                            <th>EnrollmentEndDate</th>
-                            <th>ExamStartDate</th>
-                            <th>ExamEndDate</th>
-                            <th>I_mid_StartDate</th>
-                            <th>I_mid_EndDate</th>
-                            <th>I_final_StartDate</th>
-                            <th>I_final_EndDate</th>
+                            <th>Sem Start Date</th>
+                            <th>Sem End Date</th>
+                            <th>Enrollment Start Date</th>
+                            <th>Enrollment End Date</th>
+                            <th>Exam Start Date</th>
+                            <th>Exam End Date</th>
+                            <th>I mid StartDate</th>
+                            <th>I mid EndDate</th>
+                            <th>I final StartDate</th>
+                            <th>I final EndDate</th>
+                             <th>Admission Start Date</th>
+                            <th>Admission End Date</th>
                             <!-- <th>Status</th> -->
                             <th>Action</th>
                           </tr>
@@ -45,6 +47,8 @@
                             <td>{{ $semester->I_mid_EndDate ?? '--' }}</td>
                             <td>{{ $semester->I_final_StartDate  ?? '--'}}</td>
                             <td>{{ $semester->I_final_EndDate  ?? '--'}}</td>
+                            <td>{{ $semester->AdmissionStartDate  ?? '--'}}</td>
+                            <td>{{ $semester->AdmissionEndDate  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
                                 <!-- only change id -->

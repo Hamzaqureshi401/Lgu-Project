@@ -72,7 +72,8 @@
                                 </div>
                             @endif
 
-                                <form id="myForm" action="{{ $route ?? '' }}" method="POST"
+                           @if ($semester->exists() && $semester->first()->AdmissionStartDate <= date('Y-m-d') && $semester->first()->AdmissionEndDate >= date('Y-m-d') )
+    <form id="myForm" action="{{ $route ?? '' }}" method="POST"
                                     enctype="multipart/form-data">
                                     {{ csrf_field() }} <div class="form-group">
                                         <label for="email">Student CNIC</label>
@@ -88,20 +89,7 @@
                                                 object.value = object.value.slice(0, object.maxLength)
                                         }
                                     </script>
-                                    {{-- <div class="form-group">
-                    <div class="d-block">
-                      <label for="password" class="control-label">Password</label>
-                      <div class="float-right">
-                        <a href="#" class="text-small">
-                          Forgot Password?
-                        </a>
-                      </div>
-                    </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                      please fill in your password
-                    </div>
-                  </div> --}}
+                                    
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
@@ -109,6 +97,18 @@
                                         </button>
                                     </div>
                                 </form>
+@else
+    <div class="alert alert-danger alert-dismissible show fade">
+        <div class="alert-body">
+            <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            {{ "Admission Not Started" }}
+        </div>
+    </div>
+@endif
+
+
 
                             </div>
                         </div>

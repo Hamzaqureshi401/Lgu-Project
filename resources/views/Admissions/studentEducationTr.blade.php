@@ -40,7 +40,9 @@
         
            <td></td>
            <td style="display: none"><input type="text" name="educationID[]" class="form-control border border-1 rounded border-dark" value=""></td>
-
+<td>
+        <a class="btn btn-danger tr_remove d-none" >Remove Row</a>
+    </td>
    
    
   </tr>

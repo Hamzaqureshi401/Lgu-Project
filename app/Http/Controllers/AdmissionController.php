@@ -669,20 +669,45 @@ class AdmissionController extends Controller
             $this->createProgressChallan($request);
         }
         $this->updateStudentTable($request, $Date_of_birth, $state, $Country, $file, $stdImage);
+
+        StudentEducation::where('Std_ID' , $request->Student_ID)->delete();
+
         if (!empty($request->examination)) {
 
             for ($i = 0; $i < sizeof($request->examination); $i++) {
 
-                $data['examination']      = $request->examination[$i];
-                $data['InstitutionName']  = $request->InstitutionName[$i];
-                $data['DateStarted']      = $request->DateStarted[$i];
-                $data['DateEnd']          = $request->DateEnd[$i];
-                $data['ObtainedMarks']    = $request->ObtainedMarks[$i];
-                $data['TotalMarks']       = $request->TotalMarks[$i];
-                $data['Rollno']           = $request->Rollno[$i];
-                $data['educationID']      = $request->educationID[$i];
+                // $data['examination']      = $request->examination[$i];
+                // $data['InstitutionName']  = $request->InstitutionName[$i];
+                // $data['DateStarted']      = $request->DateStarted[$i];
+                // $data['DateEnd']          = $request->DateEnd[$i];
+                // $data['ObtainedMarks']    = $request->ObtainedMarks[$i];
+                // $data['TotalMarks']       = $request->TotalMarks[$i];
+                // $data['Rollno']           = $request->Rollno[$i];
+                // $data['educationID']      = $request->educationID[$i];
 
-                $this->updateEducation($data);
+
+                
+
+
+            $examination      = $request->examination[$i];
+            $InstitutionName  = $request->InstitutionName[$i];
+            $DateStarted      = $request->DateStarted[$i];
+            $DateEnd          = $request->DateEnd[$i];
+            $ObtainedMarks    = $request->ObtainedMarks[$i];
+            $TotalMarks       = $request->TotalMarks[$i];
+            $Rollno           = $request->Rollno[$i];
+
+                $this->addStudentExamination(
+
+                    $request->Student_ID,
+                    $examination,
+                    $InstitutionName,
+                    $DateStarted,
+                    $DateEnd,
+                    $ObtainedMarks,
+                    $TotalMarks,
+                    $Rollno
+                );
             }
         }
 
@@ -886,9 +911,10 @@ class AdmissionController extends Controller
 
     public function logingetStudentAdmission()
     {
+        $semester = Semester::where('CurrentSemester' , 1);
         $route  = '/logingetStudentAdmission';
 
-        return view('Admissions.loginGetAdmission');
+        return view('Admissions.loginGetAdmission' , compact('semester'));
     }
    public function logingetStudentAdmissiondata(Request $request){
    

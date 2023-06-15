@@ -37,20 +37,29 @@
                       <input type="Date" value="{{ date('Y-m-d', strtotime($semester->ExamEndDate))  }}" name="ExamEndDate" class="form-control"required>
                     </div>
                 <div class="form-group">
-                      <label>I mid StartDate</label>
+                      <label>I mid Start Date</label>
                       <input type="Date" value="{{ date('Y-m-d', strtotime($semester->I_mid_StartDate))  }}" name="I_mid_StartDate" class="form-control"required>
                     </div>
                 <div class="form-group">
-                      <label>I mid EndDate</label>
+                      <label>I mid End Date</label>
                       <input type="Date" value="{{ date('Y-m-d', strtotime($semester->I_mid_EndDate))  }}" name="I_mid_EndDate" class="form-control"required>
                     </div>
                 <div class="form-group">
-                      <label>I final StartDate</label>
+                      <label>I final Star tDate</label>
                       <input type="Date" value="{{ date('Y-m-d', strtotime($semester->I_final_StartDate)) }}" name="I_final_StartDate" class="form-control"required>
                     </div>
                  <div class="form-group">
-                      <label>I final EndDate</label>
+                      <label>I final End Date</label>
                       <input type="Date" value="{{ date('Y-m-d', strtotime($semester->I_final_EndDate)) }}" name="I_final_EndDate" class="form-control"required>
+                    </div>
+
+                     <div class="form-group">
+                      <label>Admission Start Date</label>
+                      <input type="Date" value="{{ date('Y-m-d', strtotime($semester->AdmissionStartDate)) }}" name="AdmissionStartDate" class="form-control"required>
+                    </div>
+                 <div class="form-group">
+                      <label>Admission End Date</label>
+                      <input type="Date" value="{{ date('Y-m-d', strtotime($semester->AdmissionEndDate)) }}" name="AdmissionEndDate" class="form-control"required>
                     </div>
                     
                     <div class="form-check">

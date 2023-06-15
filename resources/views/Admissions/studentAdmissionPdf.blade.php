@@ -110,56 +110,73 @@ tr td span{
 }
 </style>
 </head>
-{{--{{ $requestValue['button_filter'] }}--}}
 <body>
 
       <table border="0" style="width:100%; border-collapse: collapse" cellspacing="0" cellpadding="0">
-        <tr>
+        <tr style="width: 100%">
             <td style="width:50%;"><span>Roll No____________<br>(For Office Use only)</span></td>
-        <td class="text-right" style="width:50%;"><span>Form No____________</span></td>
+        <td colspan="3" align="right"  style="width:50%;"><span>Form No____________</span></td>
+        </tr>
+        <tr style="width: 100%">
+    <td style="width:10%;">
+        <img src="{{ public_path('images/lgu_logo.jpg') }}" style="width: 130px; height: 130px" alt="Image">
+    </td>
+     <td style="width:80%;"><p class="text-left" style="font-size:25px; margin-left: -50px;">Lahore Garrison University</p></td>
+       
+    <td style="width:10%;">
+        <img src="{{ public_path('images/lgu_logo.jpg') }}" style="width: 130px; height: 130px" alt="Image">
+    </td>
+</tr>
+
+     
+    </table>
+    <table border="0" style="width:100%; border-collapse: collapse" cellspacing="0" cellpadding="0">
+        <tr ellpadding="0" cellspacing="0" style="width: 100%">
+            <td valign="middle" class="text-center" style="width:100%"><b>Programme Applying For:Fa-2024</b></td>
+        </tr>
+        <tr style="width: 100%" >
+            <td ><span class="thead-dark">Persional Details</span></td>
+        
         </tr>
         <tr>
-            <td style="width:10%;"><img src="{{ public_path('images/lgu_logo.jpg') }}" style="width: 130px; height: 130px" alt="Image"></td>
-        <td style="width:80%;"><p class="text-left" style="font-size:25px; margin-left: -50px;">Lahore Garrison University</p></td>
-        <td style="width:10%;"><img src="{{ public_path('images/lgu_logo.jpg') }}" style="width: 130px; height: 130px" alt="Image"></td>
+        <td>
+            <b style="display: inline;">1.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+        </td>
         </tr>
-        <tr>
-           
-            <td >
-            <b style="font-size:30px;font-weight:700;word-wrap:normal;">
-            Convenience Store
-            </b>
-            <br>
-            <p style="font-size:18px;">
-            Itemized Sales Report
-            </p>
-            </td>
-            <td valign="bottom" colspan="3" align="right" style="font-size: 15px">
-                
-            </td>
+         <tr>
+         <td>
+            <b style="display: inline;">2.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">National Identity Card No:</p>
+        </td>
+        </tr>
+         <tr>
+         <td>
+            <b style="display: inline;">3.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+            <b style="display: inline;">4.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+            <b style="display: inline;">5.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+            <b style="display: inline;">6.</b>
+            <p style="display: inline; margin: 0; margin-left: 5px;">Applicants Name:</p>
+        </td>
         </tr>
 
-        <tr>
-            <td valign="bottom" colspan="5" align="right">
-                <p style="font-weight: 700;font-size: 12px">
-                  
-                </p>
 
-            </td>
-        </tr>
+      
     </table>
 
     <table border="0" cellpadding="0" cellspacing="0" class="table" id="item" style="margin-top: 5px; width:100%">
         <thead class="thead-dark">
         <tr id="table-th" style="border-style: none">
-            <th valign="middle" class="text-center" style="width:5%;">No</th>
-            <th valign="middle" class="text-left" style="width:20%;">Product</th>
-            <th valign="middle" class="text-center" style="width:10%">Price</th>
-            <th valign="middle" class="text-center" style="width:10%;">Qty</th>
-            <th valign="middle" class="text-center" style="width:10%;">Tax&nbsp;</th>
-            <th valign="middle" class="text-center" style="width:10%;">Sales</th>
-            <th valign="middle" class="text-center" style="width:10%;">Amount</th>
-            <th valign="middle" class="text-center" style="width:10%;">Paid By</th>
+            <th valign="middle" class="text-center" style="width:16%;">Examination Passed</th>
+            <th valign="middle" class="text-center" style="width:16%;">Date Started</th>
+            <th valign="middle" class="text-center" style="width:16%">Date End</th>
+            <th valign="middle" class="text-center" style="width:16%;">Roll No.</th>
+            <th valign="middle" class="text-center" style="width:16%;">Total Marks&nbsp;</th>
+            <th valign="middle" class="text-center" style="width:16%;">Marks Obtained</th>
+            
 
         </tr>
         </thead>
@@ -184,12 +201,7 @@ tr td span{
                  <td style="text-align:center;border-style: none">
                     {{ "999,999.99" }}
                 </td>
-                 <td style="text-align:center;border-style: none">
-                    {{ "999,999.99" }}
-                </td>
-                 <td style="text-align:center;border-style: none">
-                    {{ "60" }}
-                </td>
+                
 
             </tr>
         

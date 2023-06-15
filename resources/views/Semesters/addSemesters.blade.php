@@ -55,6 +55,14 @@
                 <label>I final EndDate</label>
                 <input type="Date" name="I_final_EndDate" class="form-control">
             </div>
+            <div class="form-group">
+                <label>Admission Start Date</label>
+                <input type="Date" name="AdmissionStartDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Admission End Date</label>
+                <input type="Date" name="AdmissionEndDate" class="form-control">
+            </div>
 
             <div class="form-check">
                 <div class="form-group">

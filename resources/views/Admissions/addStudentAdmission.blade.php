@@ -627,13 +627,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 
     <script type="text/javascript">
+     
+
       $(".tr_clone_add").live('click', function() {
-      var $tr    = $('#tr_clone').closest('#tr_clone');
-      var $clone = $tr.clone();
-      $clone.find(':text').val('');
-      $tr.after($clone);
-      $clone.addClass('bg-warning');
-  });
+                var $tr = $('#tr_clone').closest('#tr_clone');
+                var $clone = $tr.clone();
+                $clone.find(':text').val('');
+                $tr.after($clone);
+                $clone.addClass('bg-success');
+                $clone.find('.tr_remove').removeClass('d-none')
+            });
+            
+        $(".tr_remove").live('click', function() {
+            $(this).closest('tr').remove(); // Remove the corresponding table row
+        });
 
     </script>
 @endsection
