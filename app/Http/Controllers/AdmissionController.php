@@ -1016,7 +1016,8 @@ class AdmissionController extends Controller
 {
     // Get the data to pass to the view
     $student = Student::first();
-    $data = ['student' => $student];
+    $StudentEducations = StudentEducation::where('Std_ID' , $student->ID)->get();
+    $data = ['student' => $student , 'education' => $StudentEducations ];
 
     view()->share('data', $data);
     $pdf = PDF::loadView('Admissions.studentAdmissionPdf', $data);
