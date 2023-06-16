@@ -29,14 +29,14 @@
     </td>
    
     <td>
-      <input type="text" name="InstitutionName[]" class="form-control border border-1 rounded border-dark w-auto" placeholder="Institution Appeared" value="">
+      <input type="text" name="InstitutionName[]" class="form-control border border-1 rounded border-dark w-auto" placeholder="Institution Appeared" value="" required>
     </td>
-     <td><input type="number" name="Rollno[]" class="form-control border border-1 rounded border-dark w-auto" value="" placeholder="Roll No"></td>
-     <td><input type="date" name="DateStarted[]" class="form-control border border-1 rounded border-dark" value=""></td>
-      <td><input type="date" name="DateEnd[]" class="form-control border border-1 rounded border-dark" value=""></td>
-       <td><input type="number" name="ObtainedMarks[]" class="form-control border border-1 rounded border-dark w-auto" value="" placeholder="Total Marks"></td>
+     <td><input type="number" name="Rollno[]" class="form-control border border-1 rounded border-dark w-auto" value="" placeholder="Roll No" required></td>
+     <td><input type="date" name="DateStarted[]" class="form-control border border-1 rounded border-dark" value="" required></td>
+      <td><input type="date" name="DateEnd[]" class="form-control border border-1 rounded border-dark" value="" required></td>
+       <td><input type="number" name="ObtainedMarks[]" class="form-control border border-1 rounded border-dark w-auto" value="" placeholder="Total Marks" required></td>
         <td><input type="number" name="TotalMarks[]" class="form-control border border-1 rounded border-dark w-auto" value="" placeholder="Marks Obtained
-          "></td>
+          " required></td>
         
            <td></td>
            <td style="display: none"><input type="text" name="educationID[]" class="form-control border border-1 rounded border-dark" value=""></td>

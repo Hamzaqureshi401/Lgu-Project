@@ -1020,7 +1020,7 @@ class AdmissionController extends Controller
     $data = ['student' => $student , 'education' => $StudentEducations ];
 
     view()->share('data', $data);
-    $pdf = PDF::loadView('Admissions.studentAdmissionPdf', $data);
+    $pdf = PDF::loadView('Admissions.Pdf.studentAdmissionPdf', $data);
     $pdf->setPaper('A4', 'portrait');
     return $pdf->download('sample.pdf');
 }
