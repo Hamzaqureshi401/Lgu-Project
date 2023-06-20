@@ -533,7 +533,7 @@ class AdmissionController extends Controller
     public function updateStudentTable($request, $Date_of_birth, $state, $Country, $file, $stdImage)
     {
 
-        
+
 
         $No           = " ";
         $Rank         = " ";
@@ -548,7 +548,7 @@ class AdmissionController extends Controller
         $NowServingIn = " ";
         $ServingSince = " ";
 
-         if ($request->Category === "Defence") {
+        if ($request->Category === "Defence") {
             $No                   = $request->defence_No;
             $Rank                 = $request->defence_Rank;
             $ServingSince         = $request->defence_serving_since;
@@ -670,7 +670,7 @@ class AdmissionController extends Controller
         }
         $this->updateStudentTable($request, $Date_of_birth, $state, $Country, $file, $stdImage);
 
-        StudentEducation::where('Std_ID' , $request->Student_ID)->delete();
+        StudentEducation::where('Std_ID', $request->Student_ID)->delete();
 
         if (!empty($request->examination)) {
 
@@ -686,16 +686,16 @@ class AdmissionController extends Controller
                 // $data['educationID']      = $request->educationID[$i];
 
 
-                
 
 
-            $examination      = $request->examination[$i];
-            $InstitutionName  = $request->InstitutionName[$i];
-            $DateStarted      = $request->DateStarted[$i];
-            $DateEnd          = $request->DateEnd[$i];
-            $ObtainedMarks    = $request->ObtainedMarks[$i];
-            $TotalMarks       = $request->TotalMarks[$i];
-            $Rollno           = $request->Rollno[$i];
+
+                $examination      = $request->examination[$i];
+                $InstitutionName  = $request->InstitutionName[$i];
+                $DateStarted      = $request->DateStarted[$i];
+                $DateEnd          = $request->DateEnd[$i];
+                $ObtainedMarks    = $request->ObtainedMarks[$i];
+                $TotalMarks       = $request->TotalMarks[$i];
+                $Rollno           = $request->Rollno[$i];
 
                 $this->addStudentExamination(
 
@@ -732,13 +732,12 @@ class AdmissionController extends Controller
         //     throw $e;
         // }
 
-        
-        if (session()->has('Emp_session')){
+
+        if (session()->has('Emp_session')) {
             return redirect()->back()->with(['successToaster' => 'Student Updated!', 'title' => 'Success']);
-        }else{
-             return redirect()->route('get.StudentAdmissions')->withInput()->with(['successToaster' => 'Student Updated!', 'title' => 'Success']);
+        } else {
+            return redirect()->route('get.StudentAdmissions')->withInput()->with(['successToaster' => 'Student Updated!', 'title' => 'Success']);
         }
-        
     }
 
     public function createFeeChallan($request)
@@ -911,28 +910,29 @@ class AdmissionController extends Controller
 
     public function logingetStudentAdmission()
     {
-        $semester = Semester::where('CurrentSemester' , 1);
+        $semester = Semester::where('CurrentSemester', 1);
         $route  = '/logingetStudentAdmission';
 
-        return view('Admissions.loginGetAdmission' , compact('semester'));
+        return view('Admissions.loginGetAdmission', compact('semester'));
     }
-   public function logingetStudentAdmissiondata(Request $request){
-   
+    public function logingetStudentAdmissiondata(Request $request)
+    {
 
-    if(empty($request->input('CNIC'))){
-           return redirect()->back()->with(['message' => 'CNIC Required']);
+
+        if (empty($request->input('CNIC'))) {
+            return redirect()->back()->with(['message' => 'CNIC Required']);
         }
 
-    
+
         return redirect()->route('get.StudentAdmissions')->withInput();
-    
-}
+    }
 
 
 
-    protected function getStudentAdmission(Request $request){
+    protected function getStudentAdmission(Request $request)
+    {
 
-        if(empty($request->old('CNIC'))){
+        if (empty($request->old('CNIC'))) {
             return redirect()->route('login.StudentAdmissions');
         }
         $studentAdmission = Student::where('CNIC', $request->old('CNIC'))->first();
@@ -945,45 +945,42 @@ class AdmissionController extends Controller
         $title  = 'ADMISSION FORM';
         $route  = '/storegettudentAdmission';
 
-        if(empty($studentAdmission)){
+        if (empty($studentAdmission)) {
             return
-            view(
-                'Admissions.getAdmission',
-                compact(
-                    'degree',
-                    'button',
-                    'title',
-                    'route',
-                    'admissionsession'
-                )
-            );
-        }
-
-        else if($studentAdmission->Status == 'In Progress'){
+                view(
+                    'Admissions.getAdmission',
+                    compact(
+                        'degree',
+                        'button',
+                        'title',
+                        'route',
+                        'admissionsession'
+                    )
+                );
+        } else if ($studentAdmission->Status == 'In Progress') {
             $button = 'Update Student Info';
             $title  = 'Edit Student Info';
             $route  = '/updateStudentAdmission';
             $degrees = $degree;
             $enrollments = Enrollment::where('Std_ID', $studentAdmission->ID)->get();
-            $studentEducations = StudentEducation::where('Std_ID',$studentAdmission->ID)->get();
-             return
-            view(
-                'Admissions.editStudentAdmission',
-                compact(
-                    'degrees',
-                    'button',
-                    'title',
-                    'route',
-                    'admissionsession',
-                    'studentAdmission',
-                    'studentEducations',
-                    'enrollments'
-                )
-            );
-        }else if($studentAdmission->Status != 'In Progress'){
+            $studentEducations = StudentEducation::where('Std_ID', $studentAdmission->ID)->get();
+            return
+                view(
+                    'Admissions.editStudentAdmission',
+                    compact(
+                        'degrees',
+                        'button',
+                        'title',
+                        'route',
+                        'admissionsession',
+                        'studentAdmission',
+                        'studentEducations',
+                        'enrollments'
+                    )
+                );
+        } else if ($studentAdmission->Status != 'In Progress') {
             return 'Form In Progress!';
         }
-        
     }
 
     public function storegetStudentAdmission(Request $request)
@@ -1007,22 +1004,37 @@ class AdmissionController extends Controller
             DB::rollBack();
             throw $e;
         }
-         return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
+        return redirect()->back()->with(['successToaster' => 'Admission Added!', 'title' => 'Success']);
 
         //}
     }
 
-   public function generateStudentAdmissionPdf()
-{
-    // Get the data to pass to the view
-    $student = Student::first();
-    $StudentEducations = StudentEducation::where('Std_ID' , $student->ID)->get();
-    $data = ['student' => $student , 'education' => $StudentEducations ];
+    public function generateStudentAdmissionPdf()
+    {
+        
+        // $pdf = PDF::loadView('Admissions.AdmissionForm1');
+        // $pdf->setPaper('A4', 'portrait');
+        // return $pdf->download('sample.pdf');
 
-    view()->share('data', $data);
-    $pdf = PDF::loadView('Admissions.Pdf.studentAdmissionPdf', $data);
-    $pdf->setPaper('A4', 'portrait');
-    return $pdf->download('sample.pdf');
-}
 
+
+        // return view('Admissions.AdmissionForm1');
+        // return view('Admissions.VerificationofparentPDF');
+
+
+
+
+
+        // Get the data to pass to the view
+        $student = Student::where('ID', 22752)->first();
+        $StudentEducations = StudentEducation::where('Std_ID', 22752)->get();
+        $data = ['student' => $student, 'education' => $StudentEducations];
+
+        // dd($data);
+
+        view()->share('data', $data);
+        $pdf = PDF::loadView('Admissions.Pdf.admissionformPDF', $data);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->download('sample.pdf');
+    }
 }

@@ -164,6 +164,8 @@
     @include('Admissions.Pdf.faterAndSondiclaration')
     <div class="page-break"></div>
     @include('Admissions.Pdf.Verificationofparentcategory')
+    <div class="page-break"></div>
+    @include('Admissions.Pdf.faterAndSondiclaration')
 
 
     <img class="img-fluid" src="{{ public_path('images/HalafNama.jpg') }}" alt="Order Header Image"
