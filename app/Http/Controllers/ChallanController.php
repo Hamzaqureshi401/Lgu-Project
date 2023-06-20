@@ -50,9 +50,16 @@ class ChallanController extends Controller
        
         $challan            = Challan::where('ID',$Challans_ID)->first();
 
-        $previousChallan = Challan::where('Reg_ID' , $challan->Reg_ID)->where('ID', '<', $Challans_ID)->orderBy('ID', 'desc');
-        if($previousChallan->exists() == true && $previousChallan->first()->Status == 'Valid'){
-            $previousBalance = $previousChallan->first()->Amount;
+        // $previousChallan = Challan::where('Reg_ID' , $challan->Reg_ID)->where('ID', '<', $Challans_ID)->orderBy('ID', 'desc');
+        // if($previousChallan->exists() == true && $previousChallan->first()->Status == 'Valid'){
+        //     $previousBalance = $previousChallan->first()->Amount;
+        // }else{
+        //     $previousBalance = 0.00;
+        // }
+
+        $previousChallan = Challan::where('Reg_ID' , $challan->Reg_ID);
+        if($previousChallan->exists() == true ){
+            $previousBalance = $previousChallan->where('Status' , 'Valid')->sum('Amount');
         }else{
             $previousBalance = 0.00;
         }
@@ -119,8 +126,8 @@ class ChallanController extends Controller
 
     ){
 
-        $oldAmount  = Challan::getOldAmount($Reg);
-        $Amount     = $Amount + $oldAmount;
+       // $oldAmount  = Challan::getOldAmount($Reg);
+        $Amount     = $Amount ;//+ $oldAmount;
         $IssueDate  = date('m/d/Y h:i:s a', time());
         $DueDate    = Date('m/d/Y', strtotime('+10 days'));
         $PaidDate   = "";

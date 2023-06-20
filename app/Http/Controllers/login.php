@@ -58,6 +58,8 @@ class login extends Controller
         $submit = DB::table('Employees')
         ->where(['UserName' => $Employee_data->Username  , 'Password' => $Employee_data->password])
         ->first();
+
+        //dd($submit);
         
         if ($submit != NUll) {
                 $Emp_FirstName = $submit->Emp_FirstName;

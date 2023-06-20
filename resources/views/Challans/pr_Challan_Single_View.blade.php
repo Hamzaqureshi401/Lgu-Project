@@ -219,7 +219,7 @@
                     <div class="col-6 text-left">Already Paid: 0.00</div>
                     <div class="col-6 text-right">Pre.OutStandings:{{ $previousBalance ?? '0.00'}}</div>
                     <div class="col-6 text-left">Scholarship: {{ $challan->Scholarship ?? 0 }}  </div>
-                    <div class="col-6 text-right font-weight-bold"><span style="font-size:12px; border-style : solid;">Grand Total:<span style="font-size:12px; font-weight: bold;">{{ $challan->Amount - $challan->Scholarship }}</span>
+                    <div class="col-6 text-right font-weight-bold"><span style="font-size:12px; border-style : solid;">Grand Total:<span style="font-size:12px; font-weight: bold;">{{ $challan->Amount - $challan->Scholarship + $previousBalance }}</span>
 
                         </span></div>
                     <div class="col-12 text-center">Rs.20/- per day to charged after due date</div>
