@@ -90,7 +90,7 @@ class DepartmentController extends Controller
 
      public function allDepartments(){
 
-        $departments = Department::paginate(10);
+        $departments = Department::paginate(1000);
        // dd(Department::pluck('Dpt_Name')->toArray());
         $title  = 'All Departments';
         $route = 'updateDepartment';

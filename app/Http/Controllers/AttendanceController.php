@@ -23,6 +23,7 @@ use App\Models\DegreeSemCourse;
 use App\Models\StudentMark;
 use App\Models\SemesterCourseWeightage;
 use App\Models\SemesterCourseWeightageDetail;
+use Session;
 
 use Illuminate\Support\Facades\DB;
 
@@ -44,13 +45,32 @@ class AttendanceController extends Controller
         return view('Dean.MarkAttendance.deanAttandence');
     }
      public function deanAllStuAttandence(){
-        $course     = Course::pluck('id')->count();
-        $enrollment = Enrollment::pluck('id')->count();
-        $students   = Student::get();
-        $degrees    = Degree::paginate(10);
-        $departments= Department::paginate(10);
-        $degreeBatches = DegreeBatche::whereNotNull('Batch_ID')->paginate(10);
+       
+          $course = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
+        ->join('Courses' , 'Courses.ID' , 'SemesterCourses.Course_ID')
+        ->groupBy('CourseCode')
+        ->where('Emp_ID' , Session::get('ID'))->pluck('Courses.CourseCode')->count();
+        
+        // $course             = SemesterCourse::pluck('id')->count();
+        // $course             = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('id')->count();
+        $enrollment         = Enrollment::where('SemCourses_ID' , $course)->pluck('id')->count();
+        $students           = Student::get();
+        
+        $departments        = Department::where('DeanUID' , Session::get('ID'))->orWhere('HodUID' , Session::get('ID'))->get();
+        $degrees            = Degree::where('Dpt_ID' , $departments->pluck('ID')->toArray())->get();
+        
+        $std = $students->where('Status' , '!=' , 'Completed')->whereIn('Degree_ID' , $degrees->pluck('ID')->toArray());
+        
+        $degreeBatches      = DegreeBatche::whereIn('Degree_ID' , $degrees->pluck('ID')->toArray())->whereNotNull('Batch_ID')->get();
+           
+        $semesterCourses    = SemesterCourse::pluck('ID')->count();
 
+        $att['100-80']      = sizeof($this->getAttendanceByPercentage(80 , 100));
+        $att['80-75']       = sizeof($this->getAttendanceByPercentage(80 , 75));
+        $att['75-70']       = sizeof($this->getAttendanceByPercentage(75 , 70));
+        $att['70-65']       = sizeof($this->getAttendanceByPercentage(70 , 65));
+        $att['65-60']       = sizeof($this->getAttendanceByPercentage(65 , 60));
+        $att['Lessthen 60'] = sizeof($this->getAttendanceByPercentage(0  , 60));
 
         return 
         view('Dean.deanDashboard' , 
@@ -60,9 +80,67 @@ class AttendanceController extends Controller
                 'students',
                 'degrees',
                 'departments',
-                'degreeBatches'
+                'degreeBatches',
+                'semesterCourses',
+                'att',
+                'std'
+                
             ));
+
+
+
+
+
+        // $course     = Course::pluck('id')->count();
+        // $enrollment = Enrollment::pluck('id')->count();
+        // $students   = Student::get();
+        // $degrees    = Degree::paginate(10);
+        // $departments= Department::paginate(10);
+        // $degreeBatches = DegreeBatche::whereNotNull('Batch_ID')->paginate(10);
+
+
+        // return 
+        // view('Dean.deanDashboard' , 
+        //     compact(
+        //         'course',
+        //         'enrollment',
+        //         'students',
+        //         'degrees',
+        //         'departments',
+        //         'degreeBatches'
+        //     ));
         
+    }
+
+     public function getAttendanceByPercentage($min , $max){
+
+        $attendance = DB::select('select Enroll_ID,pTotal,tTotal,per from (
+                select Enroll_ID,pTotal,tTotal,(pTotal*100)/tTotal as per from 
+                (
+                select Enroll_ID,COUNT(Attendances.ID) as pTotal,(select COUNT(Attendances.ID) from Attendances where Emp_ID='.Session::get('ID').') as tTotal from Attendances where Emp_ID='.Session::get('ID').' and Status=1 group by Enroll_ID
+                ) as Attendance
+                ) as at where per >=  '.$min.' and per <  '.$max.'');
+
+        // $attendance = DB::table('Attendances')
+        // ->select('Enroll_ID', DB::raw('COUNT(Attendances.ID) as pTotal'))
+        // ->where('Emp_ID', '=', Session::get('ID'))
+        // ->where('Status', '=', 1)
+        // ->groupBy('Enroll_ID');
+
+        // $attendance = DB::table('Attendances')
+        // ->joinSub($attendance, 'Attendance', function ($join) {
+        //     $join->on('Attendances.Enroll_ID', '=', 'Attendance.Enroll_ID');
+        // })
+        // ->select('Attendances.Enroll_ID', 'Attendance.pTotal', DB::raw('(Attendance.pTotal * 100) / tTotal as per'))
+        // ->crossJoin(DB::raw('(select COUNT(Attendances.ID) as tTotal from Attendances where Emp_ID='.Session::get('ID').') as t'))
+        // ->whereRaw('(Attendance.pTotal * 100) / t.tTotal >= ?', [$min])
+        // ->whereRaw('(Attendance.pTotal * 100) / t.tTotal < ?', [$max])
+        // ->get();
+
+
+
+
+    return $attendance;
     }
 
       public function empSemesterCourses(){

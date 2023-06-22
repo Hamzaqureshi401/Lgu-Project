@@ -32,8 +32,7 @@
                             <td>{{ $enrollment->Status  ?? '--'}}</td>
                             <td>
                               <div class="card-body">
-                                <!-- only change id -->
-                                <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $enrollment->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
+                               
                                 
                               </div>
                             </td>

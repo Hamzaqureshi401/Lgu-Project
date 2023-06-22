@@ -59,6 +59,9 @@ class EnrollmentsController extends Controller
         }
         //dd($semester , $DegreeBatche);
         $acdRule            = $this->getAcdRule($request['Std_ID']);
+        if( $acdRule == 'Acd Not Found!'){
+            return redirect()->back()->with(['errorToaster'   => 'Acdamic Standing Not Found!' , 'title' => 'Plese Ask Admin to add Acdamic Standing first']);
+        }
         $getTotalCreditHours= $this->getTotalCreditHours($request);
         // $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection])->get();
         
@@ -127,6 +130,11 @@ class EnrollmentsController extends Controller
 
         if($registration->exists()){
             $registration   = $registration->first();
+
+            
+            if(empty($registration->AcaStd_ID)){
+                return 'Acd Not Found!';
+            }
              $data['enrollmentAllowed']     = $registration->acdRule->EnrollmentAllowed;
              $data['creditHoursAllowed']    = $registration->acdRule->CrHrsAllowed;
              $data['academic_Standing']     = $registration->acdRule->AcademicStanding;
@@ -383,6 +391,18 @@ class EnrollmentsController extends Controller
             ;");
         }
         return redirect()->back()->with(['successToaster' => 'Enrollment Confirmed' , 'title' => 'Success']);
+    }
+
+    public function allEnrollments(){
+
+        $title = 'All Enrollments';
+        $modalTitle  = 'Edit Enrollments';
+        $getEditRoute = '/editEnrollment';
+        $route = '/editEnrollment';
+
+        $enrollments =  Enrollment::paginate(500);
+
+        return view('Enrollments.allEnrollments' , compact('enrollments' , 'title' , 'modalTitle' , 'getEditRoute' , 'route'));
     }
 
     

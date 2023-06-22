@@ -16,7 +16,7 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
                           <h5 class="font-15">ENROLLED SEMESTER</h5>
-                          <h2 class="mb-3 font-18">{{ $user[0] }}</h2>
+                          <h2 class="mb-3 font-18">{{ $enrollments->sortByDesc('ID')->first()->semesterCourse->semester->SemSession ?? '--' }}</h2>
                           
                         </div>
                       </div>
@@ -39,7 +39,7 @@
                         <div class="card-content">
                           <h5 class="font-15">OUTSTANDING</h5>
                           @if(!empty($challans->Amount))
-                          <h2 class="mb-3 font-18">{{$challans->sum('Amount') ?? '--'}}</h2>
+                          <h2 class="mb-3 font-18">{{ $challans->where('Status' , 'Valid')->sum('Amount') - $challans->where('Status' ,'!=', 'Valid')->sum('Amount') ?? '0'}}</h2>
                           @else
                           <h2 class="mb-3 font-18">{{"0"}}</h2>
                           @endif
@@ -84,9 +84,10 @@
                     <div class="row ">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
-                          <h5 class="font-15">USER</h5>
-                          <h2 class="mb-3 font-18">{{ Session::get('user') }}</h2>
-                          <p class="mb-0"><span class="col-green">{{ Session::get('Std')->Std_FName }} {{ Session::get('std')->Std_LName ?? '--'}} </span></p>
+                          <!-- <h5 class="font-15">USER</h5> -->
+                          <p class="mb-3 font-18">{{ Session::get('user') }}</p>
+                          <p class="mb-0"><span class="col-green">{{ Session::get('Std')->Std_FName ?? '--' }} {{ Session::get('Std')->Std_LName ?? '--'}}
+                         <br>Section : {{ Session::get('Std')->ClassSection ?? '--'}}</span></p>
                         </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">

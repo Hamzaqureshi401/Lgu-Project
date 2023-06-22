@@ -8,7 +8,7 @@
                       <label>Enrolled Student</label>
                       <select class="form-control" name="Enroll_ID"  required>
                         @foreach($enrollments as $enrollment)
-                        <option value="{{ $enrollment->ID }}">{{ $enrollment->student->Std_FName }} {{ $enrollment->student->Std_LName }}</option>
+                        <option value="{{ $enrollment->ID }}">{{ $enrollment->student->Std_FName ??'--' }} {{ $enrollment->student->Std_LName ?? '--' }}</option>
                         @endforeach
                       </select>
                     </div>
