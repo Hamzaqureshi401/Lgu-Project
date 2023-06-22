@@ -30,7 +30,7 @@ class login extends Controller
     public function Std_login_view()
     {
         if (session()->has('std_session')) {
-            return view('Dashboard.Student_dashboard');
+             return redirect()->route('student.Dashboard');
         } else {
 
             $batch      = Semester::get();

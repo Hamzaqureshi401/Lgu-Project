@@ -38,14 +38,14 @@
                                 <div class="panel" style="padding-left:2rem;">
                                     <div class="row">
                                         <div class="col-6">
-                                            <p>Std Roll No: </p>
-                                            <p>Name: </p>
-                                            <p>Section: </p>
+                                            <p>Std Roll No: {{ $student->StdRollNo}}</p>
+                                            <p>Name: {{ $student->Std_FName }} {{ $student->Std_LName}}</p>
+                                            <p>Section: {{ $student->ClassSection}}</p>
                                         </div>
                                         <div class="col-6">
                                             <p>Exam Type: </p>
-                                            <p>Father Name: </p>
-                                            <p>CNIC :</p>
+                                            <p>Father Name:{{ $student->FatherName }} </p>
+                                            <p>CNIC :{{ $student->CNIC }}</p>
                                         </div>
                                     </div>
                                     <div class="tab-content tab-bordered" id="myTab3Content">
@@ -57,6 +57,7 @@
                                                                 <table class="table table-striped">
                                                                     <thead>
                                                                         <tr>
+                                                                            <th>#</th>
                                                                             <th>COURSE</th>
                                                                             <th>CENTRE</th>
                                                                             <th>DATE</th>
@@ -68,9 +69,10 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        @foreach($enrollments as $enrollment)
                                                                         <tr>
-                                                                            <td>#</td>
-                                                                            <td>stdrollno</td>
+                                                                            <td>{{ $loop->index + 1 }}</td>
+                                                                            <td>{{ $enrollment->semesterCourse->course->CourseName ?? '--' }}</td>
                                                                             <td>studentname</td>
                                                                             <td>Class Participation Theory (5)</td>
                                                                             <td>Assignment Theory (10)</td>
@@ -78,6 +80,7 @@
                                                                             <td>Mid Term Theory (25)</td>
                                                                             <td>Final Term Theory (50)</td>
                                                                         </tr>
+                                                                        @endforeach
                                                                     </tbody>
                                                                 </table>
                                                             </div>

@@ -258,13 +258,32 @@ class StdRollNoSlipsController extends Controller
 
     }
 
-    public function getStudentRollNoSlip()
-    {
-        $session = $this->getSessionData();
-        $enrollments = Enrollment::where('Std_ID' , $session['std_ID'])->get();
-        // dd($enrollments);
-        return view('StdRollNoSlips.getStudentRollNoSlip');
+   public function getStudentRollNoSlip()
+{
+    $session = $this->getSessionData();
+
+    $semesterID = Enrollment::where('Std_ID', $session['std_ID'])->latest('ID')->first();
+    if ($semesterID) {
+        $enrollments = Enrollment::join('SemesterCourses', 'SemesterCourses.ID', 'Enrollments.SemCourse_ID')
+            ->join('Semesters', 'semesters.ID', 'SemesterCourses.Sem_ID')
+            ->join('StdRollNoSlips', 'StdRollNoSlip.Enroll_ID', 'Enrollments.ID')
+            ->where('Std_ID', $session['std_ID'])
+            ->where('Semesters.ID', $semesterID->SemesterCourse->semester->ID)
+            ->get();
+
+        $student = $session['Std'];
+
+
+
+        return view('StdRollNoSlips.getStudentRollNoSlip', compact('enrollments', 'student'));
+    }else{
+         return redirect()->back()->with(['errorToaster' => 'Stdent Roll No Slip Not Found!' , 'title' => 'Roll No Slip Not Found']);
     }
+
+    // Handle the case when $semesterID is null
+    // For example, return an error view or redirect the user.
+}
+
 
     public function getSessionData(){
 
