@@ -17,7 +17,7 @@
                       <label>Semester Course </label>
                       <select class="form-control select2" name="SemCourse_ID"  required>
                         @foreach($semesterCourses as $semesterCourse)
-                        <option value="{{ $semesterCourse->ID }}">{{ $semesterCourse->semester->SemSession }}/{{ $semesterCourse->course->CourseName }}</option>
+                        <option value="{{ $semesterCourse->ID }}">{{ $semesterCourse->semester->SemSession ?? '--' }}/{{ $semesterCourse->course->CourseName }}</option>
                         @endforeach
                       </select>
                     </div>

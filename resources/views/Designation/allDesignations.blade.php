@@ -24,8 +24,8 @@
                                 <i class="fas fa-th"></i>
                               </div>
                             </td>
-                            <td>{{ $designation->Designation }}</td>
-                            <td>{{ $designation->department->Dpt_Name }}</td>
+                            <td>{{ $designation->Designation ?? '--' }}</td>
+                            <td>{{ $designation->department->Dpt_Name ?? '--' }}</td>
                            
                             <td> <div class="card-body">
                                 <!-- only change id -->

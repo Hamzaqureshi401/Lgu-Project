@@ -5,6 +5,8 @@ use App\Models\Enrollment;
 use App\Models\Course;
 use App\Models\StudentIgrade;
 use App\Models\SemesterCourse;
+use App\Models\DegreeSemCourse;
+
 use App\Models\Department;
 use Session;
 use Illuminate\Http\Request;
@@ -130,7 +132,7 @@ class IgradesController extends Controller
 
        $studentIgrade   = StudentIgrade::where('Status' , 'Teacher')->select('Enroll_ID' , 'ID')->get();
       
-       $semCourse       = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('ID')->toArray();
+       $semCourse       = DegreeSemCourse::where('Emp_ID' , Session::get('ID'))->pluck('SemCourse_ID')->toArray();
        //dd($studentIgrade , SemesterCourse::where('ID' , 10017)->first()->course->CourseName , $semCourse);
     
        $enrollments     =  Enrollment::whereIn('SemCourses_ID' ,  $semCourse)->whereIn( 

@@ -57,15 +57,18 @@ class ChallanController extends Controller
         //     $previousBalance = 0.00;
         // }
 
-        $previousChallan = Challan::where('Reg_ID' , $challan->Reg_ID);
-        if($previousChallan->exists() == true ){
+        $previousChallan = Challan::where('Reg_ID', $challan->Reg_ID);
+
+        if ($previousChallan->exists() == true) {
             $previousBalance = $previousChallan
-            ->where('ID', '>=', (clone $previousChallan->first()->ID)
-            ->where('ID', '<=', $Challans_ID)
-            ->where('Status' , 'Valid')->sum('Amount');
-        }else{
+                ->where('ID', '>=', (clone $previousChallan->first()->ID))
+                ->where('ID', '<=', $Challans_ID)
+                ->where('Status', 'Valid')
+                ->sum('Amount');
+        } else {
             $previousBalance = 0.00;
         }
+
         
         
         $std_sch_details    = $challan->registration->student->std_scholarship;
