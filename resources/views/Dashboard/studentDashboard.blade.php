@@ -105,6 +105,8 @@
 <!-- @include('Dean.charts') -->
 
           <div class="row">
+            @if(!empty($semester))
+
             <div class="col-6">
               <div class="card">
                 <div class="card-header">
@@ -130,6 +132,7 @@
                       <tr>
                         <th>{{ 'Semester Start'}}</th>
                         <th>{{ date('Y-m-d', strtotime($semester->SemStartDate)) ?? '--'}}</th>
+
                       </tr>
                       <tr>
                         <th>{{ 'Semester End'}}</th>
@@ -173,6 +176,7 @@
                 </div>
               </div>
             </div>
+            @endif
             <div class="col-6">
                 <div class="card">
                   <div class="card-header">

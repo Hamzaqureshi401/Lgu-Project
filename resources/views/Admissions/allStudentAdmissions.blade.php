@@ -56,6 +56,7 @@
                                 <!-- only change id -->
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $student->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
                                  <a href="{{ $getEditRoute }}/{{ $student->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                 <a class="btn btn-primary" href="{{ route('emp.Get.Student.Roll.No.Slip' , $student->ID) }}">Get Roll No Slip</a>
 
                               </div>
                             </td>

@@ -98,6 +98,10 @@ Route::get('/printChallan/{Challans_ID?}', [App\Http\Controllers\ChallanControll
 Route::group(['middleware' => 'EmpAuth'], function () {
 
     //Student Challan
+
+Route::get('/empGetStudentRollNoSlip/{id}',[App\Http\Controllers\StdRollNoSlipsController::class,'empGetStudentRollNoSlip'])->name('emp.Get.Student.Roll.No.Slip');
+
+
 Route::any('/studentChallan', [App\Http\Controllers\StudentController::class, 'studentChallan'])->name('student.Challan');
 
 Route::get('/findStudentChallan', [App\Http\Controllers\StudentController::class, 'findStudentChallan'])->name('find.StudentChallan');

@@ -18,24 +18,29 @@ use Session;
 
 class StudentController extends Controller
 {
-    public function studentDashboard()
-    {
-        $session = $this->getSessionData();
-        //dd($session);
-        $user         = explode('/',$session['user']);
-        $semester     = Semester::where('SemSession' , $user[0])->first();
-        $enrollments  = Enrollment::where('Std_ID' , $session['std_ID'])->get();
-        $registration = Registration::where('Std_ID' , $session['std_ID'])->first();
-        $attendences = new Attendance();
-        if (!empty($registration)){
-            $challans = Challan::where('Reg_ID' , $registration->ID)->get();    
-        }else{
-            $challans = '';
-        }
-        
-        return view('Dashboard.studentDashboard',compact('semester' , 'enrollments' , 'challans' , 'attendences'));
-        
+public function studentDashboard()
+{
+    $session = $this->getSessionData();
+    $user = explode('/', $session['user']);
+    $enrollments = Enrollment::where('Std_ID', $session['std_ID'])->get();
+
+    $semesterIDs = $enrollments->pluck('semesterCourse.semester.ID')->unique();
+    $semester = Semester::whereIn('ID', $semesterIDs)->first();
+
+    $registration = Registration::where('Std_ID', $session['std_ID'])->first();
+    $attendances = new Attendance();
+    
+    if (!empty($registration)) {
+        $challans = Challan::where('Reg_ID', $registration->ID)->get();
+    } else {
+        $challans = '';
     }
+    
+    
+    return view('Dashboard.studentDashboard', compact('semester', 'enrollments', 'challans', 'attendances'));
+}
+
+
     public function getSessionData(){
 
         return session::all();

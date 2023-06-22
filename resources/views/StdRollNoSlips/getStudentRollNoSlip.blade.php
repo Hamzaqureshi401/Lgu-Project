@@ -73,11 +73,11 @@
                                                                         <tr>
                                                                             <td>{{ $loop->index + 1 }}</td>
                                                                             <td>{{ $enrollment->semesterCourse->course->CourseName ?? '--' }}</td>
-                                                                            <td>studentname</td>
+                                                                            <td>{{ $enrollment->Building ?? '--' }}</td>
                                                                             <td>Class Participation Theory (5)</td>
-                                                                            <td>Assignment Theory (10)</td>
+                                                                            <td>{{ $enrollment->Time ?? '--' }}</td>
                                                                             <td>Quiz Theory (10)</td>
-                                                                            <td>Mid Term Theory (25)</td>
+                                                                            <td>{{ $enrollment->Room ?? '--' }}</td>
                                                                             <td>Final Term Theory (50)</td>
                                                                         </tr>
                                                                         @endforeach
