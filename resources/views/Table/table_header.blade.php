@@ -4,8 +4,8 @@
             <div class="row">
               <div class="col-12">
                 <div class="card">
-                  <div class="card-header">
-                    <h4>{{ $title }}</h4>
+                  <div class="card-header bg_lgu_green ">
+                    <h4 class="text-white ">{{ $title }}</h4>
                    <!--  <div class="card-header-action">
                       <form>
                         <div class="input-group">
