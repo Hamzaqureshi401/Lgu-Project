@@ -44,6 +44,7 @@ class StudentController extends Controller
     public function findStudent(Request $request){
 
       $student      =  Student::where('StdRollNo' , $request->SemSession.'/'.$request->DegreeName.'/'.$request->Rollno)->first();
+      //dd($request->SemSession.'/'.$request->DegreeName.'/'.$request->Rollno , $student);
       if(empty($student)){
         return redirect()
             ->back()
@@ -63,7 +64,12 @@ class StudentController extends Controller
                 'title' => 'Error'
             ]);
       }
+      $semesterSession  = array(); // Initialize the variable as an empty array
+      $semesterID       = array(); // Initialize the variable as an empty array
+      $SemesterCourse   = array(); // Initialize the variable as an empty array
+      $EnrollBySem      = array();
       $Enrollment   = Enrollment::where('Std_ID' , $student->ID)->get();
+
       foreach($Enrollment as $Enrollment){
         $semesterSession[] = $Enrollment->semesterCourse->semester->SemSession;
         $semesterID[] = $Enrollment->semesterCourse->semester->ID;
