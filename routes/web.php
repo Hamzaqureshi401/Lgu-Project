@@ -104,7 +104,7 @@ Route::get('/empGetStudentRollNoSlip/{id}',[App\Http\Controllers\StdRollNoSlipsC
 
 Route::any('/studentChallan', [App\Http\Controllers\StudentController::class, 'studentChallan'])->name('student.Challan');
 
-Route::get('/findStudentChallan', [App\Http\Controllers\StudentController::class, 'findStudentChallan'])->name('find.StudentChallan');
+Route::get('/findStudentChallan/{id?}', [App\Http\Controllers\StudentController::class, 'findStudentChallan'])->name('find.StudentChallan');
 
 
 Route::any('/student365View', [App\Http\Controllers\StudentController::class, 'student365View'])->name('student.365View');

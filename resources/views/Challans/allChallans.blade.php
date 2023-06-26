@@ -15,7 +15,8 @@
                             <th>Paid Date</th>
                             <th>Status</th>
                             <th>Fine</th>
-                            <th>Amount</th>
+                            <th>Debited</th>
+                            <th>Credited</th>
                             <th>Type</th>
                             <!-- <th>Status</th> -->
                            
@@ -39,6 +40,7 @@
                             <td>{{ $challan->Status ?? '--' }}</td>
                             <td>{{ $challan->Fine  ?? '--'}}</td>
                             <td>{{ $challan->Amount  ?? '--'}}</td>
+                            <td>{{ $challan->getPreviousBalance($challan->Reg_ID , $challan->ID) ?? '0'}}</td>
                             <td>{{ $challan->Type  ?? '--'}}</td>
                             <td> <a class = "btn btn-primary" href="{{ route('print.Challan') }}/{{$challan->ID}}">Challan</a> </td>
                             @if(session()->has('Emp_session'))

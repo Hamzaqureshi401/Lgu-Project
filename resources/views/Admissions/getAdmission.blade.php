@@ -71,8 +71,6 @@
         <div class="container mt-5">
             <!-- Main Content -->
             @include('Forms.formHeader')
-            <form id="myForm" enctype="multipart/form-data">
-                {{ csrf_field() }}
                 <div class="card-body">
 
 
@@ -906,7 +904,7 @@
                     </div>
                 </div>
         </div>
-        </form>
+        
 
 
 

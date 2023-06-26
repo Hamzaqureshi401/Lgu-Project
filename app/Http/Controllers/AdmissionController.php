@@ -434,7 +434,7 @@ class AdmissionController extends Controller
     public function allStudentAdmissions()
     {
 
-        $students = Student::paginate(10000);
+        $students = Student::paginate(1000);
         $title  = 'All Student Admissions';
         $route = 'updateStudentAdmission';
         $getEditRoute = 'editStudentAdmission';

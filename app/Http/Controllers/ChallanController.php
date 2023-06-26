@@ -57,18 +57,9 @@ class ChallanController extends Controller
         //     $previousBalance = 0.00;
         // }
 
-        $previousChallan = Challan::where('Reg_ID', $challan->Reg_ID);
+        $previousBalance = $this->getPreviousBalance($challan);
 
-        if ($previousChallan->exists() == true) {
-            $query = $previousChallan
-                ->where('ID', '>=', (clone $previousChallan->first()->ID))
-                ->where('ID', '<=', $Challans_ID);
-                
-                $previousAmount = $query->sum('Amount');
-                $previousBalance = $previousAmount - $query->sum('Credited');
-        } else {
-            $previousBalance = 0.00;
-        }
+        
 
         
         
@@ -99,6 +90,24 @@ class ChallanController extends Controller
         // dd($std_sch_details,$challan,$challan_deta,$std_sch_amount);
        return
         view('Challans.printChallan' , compact('challan' , 'previousBalance'));
+    }
+
+    public function getPreviousBalance($challan){
+
+        $previousChallan = Challan::where('Reg_ID', $challan->Reg_ID);
+
+        if ($previousChallan->get()->count() > 0) {
+            $query = $previousChallan
+                ->where('ID', '>=', $previousChallan->first()->ID)
+                ->where('ID', '<', $challan->ID);
+
+            $previousAmount = $query->sum('Amount');
+            $previousBalance = $previousAmount - $query->sum('Credited');
+        } else {
+            $previousBalance = 0.00;
+        }
+
+        return $previousBalance;
     }
 
     function Updatescholarship($std_sch_details,$challan,$std_sch_amount){

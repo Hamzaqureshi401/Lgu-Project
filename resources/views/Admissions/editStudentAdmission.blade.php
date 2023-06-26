@@ -939,7 +939,9 @@
             <button id="button" type="submit"
                 class="btn btn-primary btn-block submit-form">{{ $button }}</button>
         </div>
-    </div>
+    
+
+     @include('Forms.formFooter')
 
     <script>
         function maxLengthCheck(object) {
@@ -1034,5 +1036,5 @@
             $(this).closest('tr').remove(); // Remove the corresponding table row
         });
     </script>
-    @include('Forms.formFooter')
+   
 @endsection

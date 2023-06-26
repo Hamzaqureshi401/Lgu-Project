@@ -141,9 +141,16 @@ public function studentDashboard()
 
     
 
-    public function findStudentChallan(Request $request){
+    public function findStudentChallan(Request $request , $std_id = NULL){
 
-        $student      =  Student::where('StdRollNo' , $request->SemSession.'/'.$request->DegreeName.'/'.$request->Rollno)->first();
+        if(!empty($std_id)){
+            $student      =  Student::where('ID' , $std_id)->first();
+        // dd($student->StdRollNo);
+        }else{
+            $student      =  Student::where('StdRollNo' , $request->SemSession.'/'.$request->DegreeName.'/'.$request->Rollno)->first();
+            
+        }
+
         // dd($student->StdRollNo);
         
         if(empty($student)){

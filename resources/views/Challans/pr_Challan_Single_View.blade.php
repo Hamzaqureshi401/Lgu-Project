@@ -180,23 +180,17 @@
             </td>
         </tr>
         @php
-            $totalamount= 
-            $challan->ChallanDetail->Tuition_Fee
-            +
-            $challan->ChallanDetail->Magazine_Fee
-            +
-            $challan->ChallanDetail->Exam_Fee
-            +
-            $challan->ChallanDetail->Society_Fee
-            +
-            $challan->ChallanDetail->Misc_Fee
-            +
-            $challan->ChallanDetail->Registration_Fee
-            +
-            $challan->ChallanDetail->Practical_charges
-            +
-            $challan->ChallanDetail->Sports_Fund
-        @endphp
+    $challanDetail = $challan->ChallanDetail;
+    $totalamount = ($challanDetail->Tuition_Fee ?? 0)
+                    + ($challanDetail->Magazine_Fee ?? 0)
+                    + ($challanDetail->Exam_Fee ?? 0)
+                    + ($challanDetail->Society_Fee ?? 0)
+                    + ($challanDetail->Misc_Fee ?? 0)
+                    + ($challanDetail->Registration_Fee ?? 0)
+                    + ($challanDetail->Practical_charges ?? 0)
+                    + ($challanDetail->Sports_Fund ?? 0);
+@endphp
+
 
         <tr>
             <td colspan="3">
