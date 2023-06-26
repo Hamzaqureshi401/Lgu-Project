@@ -51,6 +51,9 @@
         .bg_lgu_green {
             background-color: #0B4004 !important;
         }
+        .select2 {
+width:100%!important;
+}
         .table-hover:hover
         {
           

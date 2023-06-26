@@ -60,11 +60,12 @@ class ChallanController extends Controller
         $previousChallan = Challan::where('Reg_ID', $challan->Reg_ID);
 
         if ($previousChallan->exists() == true) {
-            $previousBalance = $previousChallan
+            $query = $previousChallan
                 ->where('ID', '>=', (clone $previousChallan->first()->ID))
-                ->where('ID', '<=', $Challans_ID)
-                ->where('Status', 'Valid')
-                ->sum('Amount');
+                ->where('ID', '<=', $Challans_ID);
+                
+                $previousAmount = $query->sum('Amount');
+                $previousBalance = $previousAmount - $query->sum('Credited');
         } else {
             $previousBalance = 0.00;
         }
