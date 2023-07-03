@@ -3,21 +3,21 @@
 @section('content')
 @include('Table.table_header')                   
                     <div class="table-responsive">
-                      <table class="table table-striped table-datatable" id="sortable-table">
+                      <table class="table" id="sortable-table">
                         <thead>
-                          <tr>
-                            <th class="text-center">
+                          <tr class="border border-1 rounded border-dark">
+                            <th class="text-center text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Student Name</th>
-                            <th>Issue Date</th>
-                            <th>Due Date</th>
-                            <th>Paid Date</th>
-                            <th>Status</th>
-                            <th>Fine</th>
-                            <th>Debited</th>
-                            <th>Credited</th>
-                            <th>Type</th>
+                            <th class="text-dark">Student Name</th>
+                            <th class="text-dark">Issue Date</th>
+                            <th class="text-dark">Due Date</th>
+                            <th class="text-dark">Paid Date</th>
+                            <th class="text-dark">Status</th>
+                            <th class="text-dark">Fine</th>
+                            <th class="text-dark">Debited</th>
+                            <th class="text-dark">Credited</th>
+                            <th class="text-dark">Type</th>
                             <!-- <th>Status</th> -->
                            
                             <th>Action</th>
@@ -27,7 +27,7 @@
                         <tbody>
                           @if(!empty($challans))
                           @foreach($challans as $challan)
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover">
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
@@ -42,7 +42,7 @@
                             <td>{{ $challan->Amount  ?? '--'}}</td>
                             <td>{{ $challan->getPreviousBalance($challan->Reg_ID , $challan->ID) ?? '0'}}</td>
                             <td>{{ $challan->Type  ?? '--'}}</td>
-                            <td> <a class = "btn btn-primary" href="{{ route('print.Challan') }}/{{$challan->ID}}">Challan</a> </td>
+                            <td> <a  class="btn bg_lgu_green text-white" href="{{ route('print.Challan') }}/{{$challan->ID}}">Challan</a> </td>
                             @if(session()->has('Emp_session'))
                             <td>
                               <div class="card-body">
@@ -58,11 +58,11 @@
                            @endif
                         </tbody>
                       </table>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                      @if(!empty($challans))
-                        {{ $challans->links() }}
-                        @endif
+                      <div class="d-flex ">
+                        @if(!empty($challans))
+                          {{ $challans->links() }}
+                          @endif
+                      </div>
                     </div>
 @include('Table.table_footer') 
 @endsection   

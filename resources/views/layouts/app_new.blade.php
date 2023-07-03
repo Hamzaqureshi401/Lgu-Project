@@ -51,15 +51,16 @@
         .bg_lgu_green {
             background-color: #0B4004 !important;
         }
+
         .select2 {
-width:100%!important;
-}
-        .table-hover:hover
-        {
-          
-          background-color: #F0BD25 !important;
-          /* color: white; */
-          font-weight: bold;
+            width: 100% !important;
+        }
+
+        .table-hover:hover {
+
+            background-color: #fdbf1e !important;
+            /* color: white; */
+            font-weight: bold;
 
         }
     </style>
@@ -84,7 +85,7 @@ width:100%!important;
                         <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
                                 <i data-feather="maximize"></i>
                             </a></li>
-                       <!--  <li>
+                        <!--  <li>
                             <form class="form-inline mr-auto">
                                 <div class="search-element">
                                     <input class="form-control" type="search" placeholder="Search" aria-label="Search"

@@ -9,7 +9,7 @@
 
         <table class="table  " id="sortable-table">
             <thead>
-                <tr class="border border-1 rounded border-dark ">
+                <tr class="border border-1 rounded border-dark">
                     <th class="text-center text-dark" >
                         <i class="fas fa-th"></i>
                     </th>

@@ -3,26 +3,26 @@
 @section('content')
 @include('Table.table_header')                   
                     <div class="table-responsive">
-                      <table class="table table-striped table-datatable" id="sortable-table">
+                      <table class="table" id="sortable-table">
                         <thead>
-                          <tr>
-                            <th class="text-center">
+                          <tr class="border border-1 rounded border-dark">
+                            <th class="text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>CourseCode</th>
-                            <th>CourseName</th>
-                            <th>CreditHours</th>
-                            <th>LectureType</th>
-                            <th>Student Name</th>
+                            <th class="text-dark">CourseCode</th>
+                            <th class="text-dark">CourseName</th>
+                            <th class="text-dark">CreditHours</th>
+                            <th class="text-dark">LectureType</th>
+                            <th class="text-dark">Student Name</th>
 
                             <!-- <th>Status</th> -->
-                            <th>Action</th>
+                            <th class="text-dark">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($studentIgrades as $key =>$studentIgrade)
                           @if($studentIgrade->enrollment->student->degree->department ->ID == $empDepartment->ID)
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover"> 
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>

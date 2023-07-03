@@ -3,27 +3,27 @@
 @section('content')
 @include('Table.table_header')                   
                     <div class="table-responsive">
-                      <table class="table table-striped table-datatable" id="sortable-table">
+                      <table class="table border-1 rounded border-dark" id="sortable-table">
                         <thead>
                           <tr>
-                            <th class="text-center">
+                            <th class="text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Sem</th>
+                            <th class="text-dark">Sem</th>
                             <!-- <th>Emp</th> -->
-                            <th>Campus Limit</th>
+                            <th class="text-dark">Campus Limit</th>
                             <!-- <th>Degree Batch</th>
                             
                             <th>Section</th> -->
-                            <th>Course</th>
+                            <th class="text-dark">Course</th>
                             
                             <!-- <th>Status</th> -->
-                            <th>Action</th>
+                            <th class="text-dark">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($semesterCourses as $semesterCourse)
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover">
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
@@ -39,7 +39,7 @@
                               <div class="card-body">
                                 <!-- only change id -->
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $semesterCourse->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
-                                 <a href="{{ $getEditRoute }}/{{ $semesterCourse->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                 <a href="{{ $getEditRoute }}/{{ $semesterCourse->ID }}" class="btn bg_lgu_green text-white "><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                                  
                                 
                               </div>
@@ -48,9 +48,9 @@
                            @endforeach
                         </tbody>
                       </table>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        {!! $semesterCourses->links() !!}
+                      <div class="d-flex">
+                          {!! $semesterCourses->links() !!}
+                      </div>
                     </div>
 @include('Table.table_footer') 
 @endsection   

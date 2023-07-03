@@ -3,24 +3,24 @@
 @section('content')
 @include('Table.table_header')                   
                     <div class="table-responsive">
-                      <table class="table table-striped table-datatable" id="sortable-table">
+                      <table class="table "  id="sortable-table">
                         <thead>
-                          <tr>
-                            <th class="text-center">
+                          <tr class="border border-1 rounded border-dark">
+                            <th class="text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>CourseCode</th>
-                            <th>CourseName</th>
-                            <th>CreditHours</th>
-                            <th>LectureType</th>
+                            <th class="text-dark">CourseCode</th>
+                            <th class="text-dark">CourseName</th>
+                            <th class="text-dark">CreditHours</th>
+                            <th class="text-dark">LectureType</th>
                             <!-- <th>Status</th> -->
-                            <th>Action</th>
+                            <th class="text-dark">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($enrollments as $key => $enrollment)
                           @if($enrollment->igrade->Status == 'Teacher')
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover">
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
@@ -38,7 +38,7 @@
 
                                 
                                 
-                                <a href="{{ route('confirm.Igrades.Teacher' , $enrollment->igrade->ID) }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                <a href="{{ route('confirm.Igrades.Teacher' , $enrollment->igrade->ID) }}" class="btn bg_lgu_green text-white"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                                
                                
 
@@ -52,6 +52,7 @@
                            @endforeach
                         </tbody>
                       </table>
+                      
                     </div>
                     
 @include('Table.table_footer') 

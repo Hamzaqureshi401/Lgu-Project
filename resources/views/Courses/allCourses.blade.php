@@ -6,7 +6,7 @@
     @include('Table.table_header')
     <div class="table-responsive p-2">
 
-        <table class="table table-hover" id="sortable-table">
+        <table class="table" id="sortable-table">
             <thead>
                 <tr class="border border-1 rounded border-dark ">
                     <th class="text-dark">
