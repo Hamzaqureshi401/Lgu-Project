@@ -7,7 +7,7 @@
 
     <div class="table-responsive p-2">
 
-        <table class="table  " id="sortable-table">
+        <table class="table table-striped " id="sortable-table">
             <thead>
                 <tr class="border border-1 rounded border-dark">
                     <th class="text-center text-dark" >

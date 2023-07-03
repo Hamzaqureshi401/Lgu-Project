@@ -40,8 +40,8 @@ class UserRightsController extends Controller
 
 
     public function addUserRights(){
-        $button = "Add UserRight";
-        $title  = 'Add UserRight';
+        $button = "Add User Right";
+        $title  = 'Add User Right';
         $route  = '/storeUserRight';
         $designations = Designation::get();
         $modules = Module::get();
