@@ -246,7 +246,14 @@
                     <div class="sidebar-brand">
                         <a> <img class="img-fluid" src="{{ asset('images/LOGO-Final-V2.png') }}"
                                 alt="Order Header Image" width="470px" height="200px" /> <span class="logo-name"
-                                style="color: #ff0000;">({{ $sidbar['empDesignations']->designation->Designation ?? 'Student' }})</span>
+                                style="color: #ff0000;">
+                                @if (session()->has('std_session'))
+                                ({{ 'Student' }})
+                                @else
+                                ({{ $sidbar['empDesignations']->designation->Designation ?? 'Employee' }})
+                                @endif
+
+                            </span>
                         </a>
 
                     </div>

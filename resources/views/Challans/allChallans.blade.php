@@ -3,7 +3,7 @@
 @section('content')
 @include('Table.table_header')                   
                     <div class="table-responsive">
-                      <table class="table" id="sortable-table">
+                      <table class="table table-striped dataTable">
                         <thead>
                           <tr class="border border-1 rounded border-dark">
                             <th class="text-center text-dark">
@@ -43,16 +43,7 @@
                             <td>{{ $challan->getPreviousBalance($challan->Reg_ID , $challan->ID) ?? '0'}}</td>
                             <td>{{ $challan->Type  ?? '--'}}</td>
                             <td> <a  class="btn bg_lgu_green text-white" href="{{ route('print.Challan') }}/{{$challan->ID}}">Challan</a> </td>
-                            @if(session()->has('Emp_session'))
-                            <td>
-                              <div class="card-body">
-                                <!-- only change id -->
-                               
-                                <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $challan->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
-                                
-                              </div>
-                            </td>
-                            @endif
+                           
                           </tr>
                            @endforeach
                            @endif

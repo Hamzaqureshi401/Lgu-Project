@@ -29,7 +29,7 @@ class ChallanController extends Controller
         $getEditRoute = '';
         $modalTitle = '';
      }elseif(session()->has('Emp_session')){
-        $challans = Challan::paginate(10);
+        $challans = Challan::paginate(100);
         $title  = 'All Challan';
         $route = 'updateChallan';
         $getEditRoute = 'editChallan';
@@ -251,7 +251,7 @@ class ChallanController extends Controller
                     'title' => 'Error'
                 ]);
           }
-else{
+        else{
     
           $submit = DB::Update("EXEC sp_UpdateChallansDetails
 

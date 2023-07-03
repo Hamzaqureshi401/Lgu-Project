@@ -28,9 +28,9 @@
                                 <i class="fas fa-th"></i>
                             </div>
                         </td>
-                        <td>{{ $designation->designation->Designation }}</td>
-                        <td>{{ $designation->employee->Emp_FirstName }}{{ $designation->employee->Emp_LastName }}</td>
-                        <td>{{ $designation->Status }}</td>
+                        <td>{{ $designation->designation->Designation ?? '--' }}</td>
+                        <td>{{ $designation->employee->Emp_FirstName ?? '--' }}{{ $designation->employee->Emp_LastName ?? '--' }}</td>
+                        <td>{{ $designation->Status ?? '--' }}</td>
 
 
                         <td>
