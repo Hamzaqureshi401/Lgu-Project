@@ -7,7 +7,7 @@
                      <input type="hidden" name="id" value="{{ $empDesignation->ID }}">
                     <div class="form-group">
                       <label>Employee</label>
-                      <input type="text" class="form-control" value="{{ $empDesignation->employee->Emp_FirstName }}{{ $empDesignation->employee->Emp_LastName }}" readonly>
+                      <input type="text" class="form-control" value="{{ $empDesignation->employee->Emp_FirstName ?? '--' }}{{ $empDesignation->employee->Emp_LastName ?? '--' }}" readonly>
                     </div>
                     <div class="form-group">
                       <label>Designation</label>
