@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Student;
 use App\Models\Degree;
+use App\Models\Semester;
 use App\Models\Department;
 use App\Models\DegreeBatche;
 use App\Models\Attendance;
@@ -33,7 +34,7 @@ class DeanController extends Controller
         $departments        = Department::where('DeanUID' , Session::get('ID'))->orWhere('HodUID' , Session::get('ID'))->get();
         $degrees            = Degree::where('Dpt_ID' , $departments->pluck('ID')->toArray())->get();
         
-        $std = $students->where('Status' , '!=' , 'Completed')->whereIn('Degree_ID' , $degrees->pluck('ID')->toArray());
+        $std = $students->where('Status' , '!=' , 'Completed')->whereIn('Degree_ID' , $degrees->pluck('ID')->toArray())->where('AdmissionSession' , Semester::where('CurrentSemester' , 1)->first()->SemSession);
         
         $degreeBatches      = DegreeBatche::whereIn('Degree_ID' , $degrees->pluck('ID')->toArray())->whereNotNull('Batch_ID')->get();
            
