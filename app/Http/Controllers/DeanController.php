@@ -94,9 +94,12 @@ class DeanController extends Controller
     return $attendance;
     }
 
-    public function allCourses(){
+    public function allowedEmpCourses(){
 
-        $course     = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('Course_ID')->toArray();
+         $course = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
+        ->join('Courses' , 'Courses.ID' , 'SemesterCourses.Course_ID')
+        
+        ->where('Emp_ID' , Session::get('ID'))->pluck('Courses.ID')->toArray();
          $courses = Course::whereIn('ID' , $course)->paginate(10);
         $title  = 'All Courses';
         $route = 'editCourse/';
@@ -117,7 +120,9 @@ class DeanController extends Controller
 
     public function allowedEmpStudent(){
 
-        $SemesterCourse     = SemesterCourse::where('Emp_ID' , Session::get('ID'))->get();
+        $SemesterCourse     = 
+        DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
+        ->where('Emp_ID' , Session::get('ID'))->get();
         $course    =   $SemesterCourse->pluck('Course_ID')->toArray();
         $SemCourse   =   $SemesterCourse->pluck('ID')->toArray();
         $enrollments = Enrollment::whereIn('SemCourses_ID' , $SemCourse)->paginate(10);
@@ -141,7 +146,9 @@ class DeanController extends Controller
 
     public function allowedSemesterCourses(){
 
-        $semesterCourses = SemesterCourse::where('Emp_ID' , Session::get('ID'))->paginate(10);
+        $semesterCourses = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
+        ->where('Emp_ID' , Session::get('ID'))->paginate(10);
+         
 
         $title  = 'All Semester Courses';
         $route = 'updateSemesterCourse';

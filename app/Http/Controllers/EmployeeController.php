@@ -28,7 +28,7 @@ class EmployeeController extends Controller
             'Password'           => 'required|min:6|max:255',
             'Gender'             => 'required|max:10',
             'Email'              => 'required|max:50|unique:employees',
-            'Address'            => 'required|max:50',
+            'Address'            => 'required|max:255',
             'Dpt_ID'             => 'required|numeric',
             'Grade'              => 'required|numeric',
             'Contact_Number'     => 'required|max:12',
@@ -60,7 +60,7 @@ class EmployeeController extends Controller
             'Password'           => 'required|min:6|max:255',
             'Gender'             => 'required|max:10',
             'Email'              => 'required|max:50',
-            'Address'            => 'required|max:50',
+            'Address'            => 'required|max:255',
             'Dpt_ID'             => 'required|numeric',
             'Grade'              => 'required|numeric',
             'Contact_Number'     => 'required|max:12',
@@ -156,7 +156,7 @@ class EmployeeController extends Controller
     }
     public function allEmployees(){
 
-        $employees      = Employee::paginate(10);
+        $employees      = Employee::paginate(1000);
         $title          = 'All Employees';
         $route          = 'updateEmployee';
         $getEditRoute   = 'editEmployee';

@@ -299,7 +299,7 @@ Route::get('/empDashboard', [App\Http\Controllers\DeanController::class, 'deanDa
 
 Route::get('/vcDashboard', [App\Http\Controllers\DeanController::class, 'vcDashboard'])->name('vc.Dashboard');
 
-Route::get('/allowedEmpCourses', [App\Http\Controllers\DeanController::class, 'allCourses'])->name('allowed.EmpCourses');
+Route::get('/allowedEmpCourses', [App\Http\Controllers\DeanController::class, 'allowedEmpCourses'])->name('allowed.EmpCourses');
 
 Route::get('/allowedEmpStudent', [App\Http\Controllers\DeanController::class, 'allowedEmpStudent'])->name('allowed.EmpStudent');
 

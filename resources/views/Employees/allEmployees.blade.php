@@ -3,7 +3,7 @@
 @section('content')
 @include('Table.table_header')                   
                     <div class="table-responsive">
-                      <table class="table table-striped table-datatable" id="sortable-table">
+                      <table class="table table-striped dataTable" id="sortable-table">
                         <thead>
                           <tr>
                             <th class="text-center">

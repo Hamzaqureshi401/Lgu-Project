@@ -15,7 +15,7 @@
                     <th class="text-dark">Designation</th>
                     <th class="text-dark">Emp Name</th>
 
-                    <th class="text-dark">Department Name</th>
+                    <th class="text-dark">Status</th>
 
                     <th class="text-dark">Action</th>
                 </tr>
