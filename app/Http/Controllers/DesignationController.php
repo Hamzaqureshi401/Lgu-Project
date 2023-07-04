@@ -20,7 +20,7 @@ class DesignationController extends Controller
 
        $this->validate($request, [
             'Designation' => 'required',
-            'Dpt_ID'      => 'required|max:255',
+            // 'Dpt_ID'      => 'required|max:255',
 
         ]);
         // $validation['validation'] = $validator->errors()->first();
@@ -93,8 +93,8 @@ class DesignationController extends Controller
         //     ]);
         // }else {
             $submit             = DB::Update("EXEC sp_InsertDesignations
-            @Designation       = '$request->Designation',
-            @Dpt_ID            = '$request->Dpt_ID'
+            @Designation       = '$request->Designation'
+            
             ;
         ");
         //     return response()->json([
@@ -205,8 +205,8 @@ class DesignationController extends Controller
         // }else {
              $submit = DB::update("EXEC sp_UpdateDesignations
             @Des_ID             = '$request->id',
-            @Designation    = '$request->Designation',
-            @Dpt_ID         = '$request->Dpt_ID'
+            @Designation    = '$request->Designation'
+            
             ;");
 
         // return response()->json([
