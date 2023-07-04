@@ -14,7 +14,7 @@
                     </form>
                   </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body px-4 py-4">
                   <div class="table-responsive">
                     <table class="table table-striped dataTable" >
                       <thead>

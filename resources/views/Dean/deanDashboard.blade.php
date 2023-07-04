@@ -102,7 +102,7 @@
                   </div>
                 </div>
                 <div class="card-body p-0">
-                  <div class="table-responsive">
+                  <div class="table-responsive px-4 py-4">
                     <table class="table table-striped dataTable">
                       <thead>
                      <tr>
@@ -137,7 +137,7 @@
            <div class="row">
             <div class="col-12">
               <div class="card">
-                <div class="card-header">
+                <div class="card-header ">
                   <h4>Attendance</h4>
                   <div class="card-header-form">
                     <form>
@@ -150,7 +150,7 @@
                     </form>
                   </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body px-4 py-4">
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
