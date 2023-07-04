@@ -76,10 +76,10 @@ class DegreeSemCoursesController extends Controller
       public function allDegreeSemCourses(){
 
         $degreeSemCourses = DegreeSemCourse::paginate(10);
-        $title         = 'Degree Batch';
+        $title         = 'Degree Semester Courses';
         $route         = 'updateDegreeSemCourses';
         $getEditRoute  = 'editDegreeSemCourses';
-        $modalTitle    = 'Edit Degree Batch';
+        $modalTitle    = 'Edit Semester Course';
 
        
 
