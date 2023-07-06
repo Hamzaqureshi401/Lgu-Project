@@ -221,22 +221,23 @@ class AdmissionController extends Controller
 
 
         $registration = new RegistrationController();
-        $Sem_ID = Semester::where('SemSession', $request->AdmissionSession)->pluck('ID')->first();
+        // $Sem_ID = Semester::where('SemSession', $request->AdmissionSession)->pluck('ID')->first();
         if (!empty($request->Student_ID)) {
             $Std_ID = $request->Student_ID;
         } else {
             $Std_ID = Student::where(['CNIC' => $request->CNIC, 'FatherCNIC' => $request->FatherCNIC])->pluck('ID')->first();
         }
-        $oldRegistration = Registration::where('Std_ID', $Std_ID);
+        $semester = Semester::where('CurrentSemester' , 1)->first();
+        $oldRegistration = Registration::where('Std_ID', $Std_ID)->where('Sem_ID' , $semester->ID);
         if ($oldRegistration->exists() == true) {
             return $oldRegistration->first()->ID;
         } else {
             $registration->storeRegistrationInDB(
                 $Std_ID,
                 $AcaStd_IDRule = 15,
-                $Sem_ID
+                $semester->ID
             );
-            return Registration::where('Std_ID', $Std_ID)->first()->ID;
+            return Registration::where('Std_ID', $Std_ID)->where('Sem_ID' , $semester->ID)->first()->ID;
         }
     }
 
@@ -844,15 +845,7 @@ class AdmissionController extends Controller
             );
         }
     }
-    // public function storeRegistrationInD($Std_ID , $AcaStdID , $Sem_ID){
-
-    //     $submit = DB::statement("EXEC sp_InsertRegistrations
-    //         @Std_ID         = '$Std_ID',
-    //         @AcaStdID       = '$AcaStdID',
-    //         @Sem_ID         = '$Sem_ID'
-    //         ;");
-
-    // }
+    
 
     public function enrollStudentCourses($request)
     {

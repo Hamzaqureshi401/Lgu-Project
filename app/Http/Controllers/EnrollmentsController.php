@@ -230,10 +230,10 @@ class EnrollmentsController extends Controller
         $request['SemCourses_ID']   = $id;
         $request['Is_i_mid']        = 10;
         $request['Is_i_final']      = 10;
-
-        $registration = Registration::where('Std_ID' , $request['Std_ID']);
+        $semester = Semester::where('CurrentSemester' , 1)->first();
+        $registration = Registration::where('Std_ID' , $request['Std_ID'])->where('Sem_ID' , $semester->ID);
         if (empty($registration->exists())){
-           $this->storeRegistrationInD($request['Std_ID'] , $request['AcaStdID'] = 6 , $session['sem_ID']);
+           $this->storeRegistrationInD($request['Std_ID'] , $request['AcaStdID'] = 6 , $semester->ID);
             $request['Reg_ID'] = (clone $registration)->first()->ID;
         }else{
             $request['Reg_ID'] = (clone $registration)->first()->ID;
