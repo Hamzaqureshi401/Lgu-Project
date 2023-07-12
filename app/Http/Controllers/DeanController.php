@@ -21,6 +21,9 @@ class DeanController extends Controller
 {
     public function deanDashboard(){
 
+        $user = DB::connection('lgu_misdb')->table('Users')->first();
+        //dd($user);
+
         $course = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
         ->join('Courses' , 'Courses.ID' , 'SemesterCourses.Course_ID')
         ->groupBy('CourseCode')
