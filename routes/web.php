@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/transferData', [App\Http\Controllers\DataTransferController::class, 'transferData'])->name('transfer.Data');
+
+
 Route::get('/', [ControllersLogin::class, 'index']);
 
 Route::get('/studentLogin', [ControllersLogin::class, 'Std_login_view'])->name('std.login');
