@@ -19,7 +19,7 @@ class DataTransferController extends Controller
         set_time_limit(0);
 
         $this->truncateDb();
-        $this->DBatchFeeInfoALLToSemesterDetail();
+        //$this->DBatchFeeInfoALLToSemesterDetail();
 
         DB::commit();
 
@@ -34,7 +34,7 @@ class DataTransferController extends Controller
 
     protected function truncateDb(){
 
-        SemesterDetail::truncate();
+        //SemesterDetail::truncate();
 
     }
 
