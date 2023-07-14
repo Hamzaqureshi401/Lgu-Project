@@ -79,7 +79,7 @@
       ];
       @endphp
       @foreach ($fields as $field => $label)
-      <div class="form-group col-3">
+      <div class="form-group  col-md-4 col-sm-6">
          <label>{{ $label }}</label>
          <input type="number" name="{{ $field }}" class="form-control border border-1 rounded border-dark" value="{{ old($field) }}" required>
          @error($field)
