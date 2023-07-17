@@ -21,6 +21,7 @@ class DataTransferController extends Controller
         $this->truncateDb();
         //$this->DBatchFeeInfoALLToSemesterDetail();
         //$this->SemesterSessionInfoToSemesters();
+        $this->CoursesToCourses();
 
         DB::commit();
 
@@ -38,6 +39,7 @@ class DataTransferController extends Controller
         //SemesterDetail::truncate();
         //DB::connection('lgu_new_testing')->table('SemesterDetails')->truncate();
         //DB::connection('lgu_new_testing')->table('Semesters')->truncate();
+        //DB::connection('lgu_new_testing')->table('Courses')->truncate();
 
 
     }
@@ -195,6 +197,47 @@ protected function SemesterSessionInfoToSemesters()
              DB::connection('lgu_new_testing')->table('Semesters')->insert($data);
         }
     });
+}
+
+
+protected function CoursesToCourses()
+{
+    $chunkSize = 10;
+
+    dd(array_unique() ,array_unique() );
+    $dataToInsert = DB::connection('lgu_misdb')->table('Courses')->select(
+               'ID'
+      ,'CourseCode'
+      ,'CourseName'
+      ,'CreditHrs'
+      
+
+      
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        $data = [];
+
+        foreach ($dataToInsertChunk as $request) {
+            $data[] = [
+                'ID'                        => $request->ID,
+                'CourseCode'                => $request->CourseCode,
+                'CourseName'                => $request->CourseName,
+                'CreditHours'               => $request->CreditHrs,
+                'LectureType'               => $request->SemEndDate   
+            ];
+        }
+
+        if (!empty($data)) {
+             DB::connection('lgu_new_testing')->table('Courses')->insert($data);
+        }
+    });
+}
+
+protected function findLectureType($CourseCode){
+
+    $SemesterCoursesInfo_ID = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->where('CourseCode' , $CourseCode)->pluck('ID')->toArray();
+    DB::connection('lgu_misdb')->table('SemesterCoursesTimeTable')->whereIn()->pluck('CourseCode')->toArray()
+
+
 }
 
 
