@@ -35,6 +35,8 @@ class DataTransferController extends Controller
     protected function truncateDb(){
 
         //SemesterDetail::truncate();
+        //DB::connection('lgu_new_testing')->table('SemesterDetails')->truncate();
+
 
     }
 
@@ -144,7 +146,7 @@ protected function DBatchFeeInfoALLToSemesterDetail()
         }
 
         if (!empty($data)) {
-            SemesterDetail::insert($data);
+             DB::connection('lgu_new_testing')->table('SemesterDetails')->insert($data);
         }
     });
 }

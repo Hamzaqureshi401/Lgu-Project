@@ -104,6 +104,17 @@ return [
             'prefix' => '',
         ],
 
+       'lgu_new_testing' => [
+            'driver' => env('DB_CONNECTION_THIRD', 'sqlsrv'),
+            'host' => env('DB_HOST_THIRD'),
+            'port' => env('DB_PORT_THIRD'),
+            'database' => env('DB_DATABASE_THIRD'),
+            'username' => env('DB_USERNAME_THIRD'),
+            'password' => env('DB_PASSWORD_THIRD'),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
+
     ],
 
     /*
