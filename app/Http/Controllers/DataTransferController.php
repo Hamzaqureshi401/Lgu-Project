@@ -20,6 +20,7 @@ class DataTransferController extends Controller
 
         $this->truncateDb();
         //$this->DBatchFeeInfoALLToSemesterDetail();
+        //$this->SemesterSessionInfoToSemesters();
 
         DB::commit();
 
@@ -36,6 +37,7 @@ class DataTransferController extends Controller
 
         //SemesterDetail::truncate();
         //DB::connection('lgu_new_testing')->table('SemesterDetails')->truncate();
+        //DB::connection('lgu_new_testing')->table('Semesters')->truncate();
 
 
     }
@@ -44,6 +46,7 @@ protected function DBatchFeeInfoALLToSemesterDetail()
 {
     $chunkSize = 10;
     $dataToInsert = DB::connection('lgu_misdb')->table('DBatchFeeInfoALL')->select(
+        'ID',
         'DegreeBatchID',
         'SemesterSessionID',
         'TutionFee',
@@ -88,11 +91,12 @@ protected function DBatchFeeInfoALLToSemesterDetail()
         'IGradeFee',
         'PerCrdHrFee',
         'OSRegLimit'
-    )->orderBy('DegreeBatchID')->chunk($chunkSize, function ($dataToInsertChunk) {
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
         $data = [];
 
         foreach ($dataToInsertChunk as $request) {
             $data[] = [
+                'ID'                        => $request->ID,
                 'DegBatches_ID'             => $request->DegreeBatchID,
                 'Sem_ID'                    => $request->SemesterSessionID,
                 'SemesterFee'               => null,
@@ -147,6 +151,48 @@ protected function DBatchFeeInfoALLToSemesterDetail()
 
         if (!empty($data)) {
              DB::connection('lgu_new_testing')->table('SemesterDetails')->insert($data);
+        }
+    });
+}
+
+protected function SemesterSessionInfoToSemesters()
+{
+    $chunkSize = 10;
+    $dataToInsert = DB::connection('lgu_misdb')->table('SemesterSessionInfo')->select(
+               'ID'
+      ,'SemesterSession'
+      ,'SemesterYear'
+      ,'SemStartDate'
+      ,'SemEndDate'
+      ,'Feedback_Mid_Start'
+      ,'Feedback_Mid_End'
+      ,'Feedback_Final_Start'
+      ,'Feedback_Final_End'
+      
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        $data = [];
+
+        foreach ($dataToInsertChunk as $request) {
+            $data[] = [
+                'ID'                        => $request->ID,
+                'SemSession'                => $request->SemesterSession,
+                'Year'                      => $request->SemesterYear,
+                'SemStartDate'              => $request->SemStartDate,
+                'SemEndDate'                => $request->SemEndDate,
+                'EnrollmentStartDate'       => $request->SemStartDate,// added Sem Start Date?
+                'EnrollmentEndDate'         => $request->SemEndDate,    // added Sem End Date?
+                'ExamStartDate'             => $request->Feedback_Final_Start,// added final?
+                'ExamEndDate'               => $request->Feedback_Final_End,// added final?
+                'I_mid_StartDate'           => $request->Feedback_Mid_Start,
+                'I_mid_EndDate'             => $request->Feedback_Mid_End,
+                'I_final_StartDate'         => $request->Feedback_Final_Start,
+                'I_final_EndDate'           => $request->Feedback_Final_End
+                
+            ];
+        }
+
+        if (!empty($data)) {
+             DB::connection('lgu_new_testing')->table('Semesters')->insert($data);
         }
     });
 }
