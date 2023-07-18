@@ -31,7 +31,7 @@
 
         </div>
 
-        <div class="form-group col-6">
+        <!-- <div class="form-group col-6">
           <label>Lecture Type</label>
             <select class="custom-select border border-1 rounded border-dark border border-1 rounded border-dark" name="LectureType" required>
 
@@ -39,7 +39,7 @@
                 <option value="{{ 'Lab' }}">{{ 'Lab' }}</option>
 
             </select>
-        </div>
+        </div> -->
         </div>
 
         <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>

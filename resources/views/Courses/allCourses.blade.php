@@ -15,7 +15,7 @@
                     <th class="text-dark">CourseCode</th>
                     <th class="text-dark">CourseName</th>
                     <th class="text-dark">CreditHours</th>
-                    <th class="text-dark">LectureType</th>
+                    <!-- <th class="text-dark">LectureType</th> -->
                     <!-- <th>Status</th> -->
                     <th class="text-dark">Action</th>
                 </tr>
@@ -31,7 +31,7 @@
                         <td>{{ $course->CourseCode ?? '--' }}</td>
                         <td>{{ $course->CourseName ?? '--' }}</td>
                         <td>{{ $course->CreditHours ?? '--' }}</td>
-                        <td>{{ $course->LectureType ?? '--' }}</td>
+                        <!-- <td>{{ $course->LectureType ?? '--' }}</td> -->
                         <td>
                             <div class="card-body">
                                 <!-- only change id -->

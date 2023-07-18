@@ -25,7 +25,7 @@ class CoursesController extends Controller
             'CourseCode'        => 'required|max:30|unique:Courses',
             'CourseName'        => 'required|max:60',
             'CreditHours'       => 'required|max:10',
-            'LectureType'       => 'required|max:10',
+            // 'LectureType'       => 'required|max:10',
         ]);
         // $validation['validation'] = $validator->errors()->first();
         // if ($validator->fails()) {
@@ -43,7 +43,7 @@ class CoursesController extends Controller
             'CourseCode'        => 'required|max:6',
             'CourseName'        => 'required|max:60',
             'CreditHours'       => 'required|max:10',
-            'LectureType'       => 'required|max:10',
+            // 'LectureType'       => 'required|max:10',
         ]);
         // $validation['validation'] = $validator->errors()->first();
         // if ($validator->fails()) {
@@ -110,8 +110,9 @@ class CoursesController extends Controller
              $submit = DB::update("EXEC sp_InsertCourses
             @CourseCode  = '$request->CourseCode',
             @CourseName  = '$request->CourseName',
-            @CreditHours = '$CreditHours' ,
-            @LectureType = '$request->LectureType';");
+            @CreditHours = '$CreditHours' 
+            
+            ;");
 
           // return response()->json([
           //   'title' => 'Done' ,
@@ -183,8 +184,8 @@ class CoursesController extends Controller
             @Course_ID   = '$request->id',
             @CourseCode  = '$request->CourseCode',
             @CourseName  = '$request->CourseName',
-            @CreditHours = '$CreditHours' ,
-            @LectureType = '$request->LectureType';");
+            @CreditHours = '$CreditHours' 
+           ;");
 
         // return response()->json([
         //     'title' => 'Done' ,

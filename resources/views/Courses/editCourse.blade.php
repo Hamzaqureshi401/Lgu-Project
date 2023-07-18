@@ -41,7 +41,7 @@
                     $types = ['Theory' , 'Lab'];
                     @endphp
 
-                     <div class="form-group">
+                    <!--  <div class="form-group">
                       <label>Lecture Type</label>
                       <select class="form-control select2" name="LectureType"  required>
                         @foreach($types as $type)
@@ -52,7 +52,7 @@
                         
                         
                       </select>
-                    </div>
+                    </div> -->
 
                  <button id="button" style="color: white;" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
                </div>
