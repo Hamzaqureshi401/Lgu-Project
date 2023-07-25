@@ -1,34 +1,39 @@
 @extends('layouts.app_new')
-@section('title')  @endsection <!--add title here -->
+@section('title')
+@endsection
+<!--add title here -->
 @section('content')
-@include('Forms.formHeader')  
-              
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label>Degree</label>
-                      <select class="form-control select2" name="Degree_ID"  required>
-                        @foreach($degrees as $degree)
-                        <option value="{{ $degree->ID }}">{{ $degree->DegreeName }}</option>
-                        @endforeach
-                      </select>
-                    </div>
+    @include('Forms.formHeader')
 
-                    <div class="form-group">
-                      <label>Batch</label>
-                      <select class="form-control select2" name="Batch_ID"  required>
-                        @foreach($semesters as $semester)
-                        <option value="{{ $semester->ID }}">{{ $semester->SemSession }}</option>
+    <div class="card-body">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6">
+
+                    <label>Degree</label>
+                    <select class="form-control custom-select border border-1 rounded border-dark border border-1 rounded border-dark" name="Degree_ID" required>
+                        @foreach ($degrees as $degree)
+                            <option value="{{ $degree->ID }}">{{ $degree->DegreeName }}</option>
                         @endforeach
-                      </select>
-                    </div>
-                    
-                <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
-              </div>
-                
-@include('Forms.formFooter')                
+                    </select>
+
+                </div>
+                <div class="col-6">
+
+                    <label>Batch</label>
+                    <select class="form-control custom-select border border-1 rounded border-dark border border-1 rounded border-dark" name="Batch_ID" required>
+                        @foreach ($semesters as $semester)
+                            <option value="{{ $semester->ID }}">{{ $semester->SemSession }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
+    </div>
+
+    @include('Forms.formFooter')
 @endsection
 @include('js.form_submit_script')
-
-
-
-      

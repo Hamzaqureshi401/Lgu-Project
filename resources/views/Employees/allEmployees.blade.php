@@ -5,36 +5,36 @@
                     <div class="table-responsive">
                       <table class="table table-striped dataTable" id="sortable-table">
                         <thead>
-                          <tr>
-                            <th class="text-center">
+                          <tr class="border border-1 rounded border-dark">
+                            <th class="text-center text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Emp First Name</th>
-                            <th>Emp Last Name</th>
-                            <th>DOB</th>
-                            <th>CNIC</th>
-                            <th>Date Of Joining</th>
-                            <th>Date Of Appointment</th>
-                            <th>Specialization</th>
-                            <th>Designation</th>
-                            <th>Status</th>
-                            <th>User Name</th>
-                            <th>Password</th>
-                            <th>Gender</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Dpt ID</th>
-                            <th>Grade</th>
+                            <th class="text-dark">Emp First Name</th>
+                            <th class="text-dark">Emp Last Name</th>
+                            <th class="text-dark">DOB</th>
+                            <th class="text-dark">CNIC</th>
+                            <th class="text-dark">Date Of Joining</th>
+                            <th class="text-dark">Date Of Appointment</th>
+                            <th class="text-dark">Specialization</th>
+                            <th class="text-dark">Designation</th>
+                            <th class="text-dark">Status</th>
+                            <th class="text-dark">User Name</th>
+                            <th class="text-dark">Password</th>
+                            <th class="text-dark">Gender</th>
+                            <th class="text-dark">Email</th>
+                            <th class="text-dark">Address</th>
+                            <th class="text-dark">Dpt ID</th>
+                            <th class="text-dark">Grade</th>
 
-                            <th>Contact_Number</th>
-                            <th>Defual Url</th>
+                            <th class="text-dark">Contact_Number</th>
+                            <th class="text-dark">Defual Url</th>
                             <!-- <th>Status</th> -->
-                            <th>Action</th>
+                            <th class="text-dark">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($employees as $employee)
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover">
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
@@ -62,7 +62,7 @@
                               <div class="card-body">
                                 <!-- only change id -->
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $employee->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
-                                 <a href="{{ $getEditRoute }}/{{ $employee->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                 <a href="{{ $getEditRoute }}/{{ $employee->ID }}" class="btn bg_lgu_green text-white"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                                 
                               </div>
                             </td>

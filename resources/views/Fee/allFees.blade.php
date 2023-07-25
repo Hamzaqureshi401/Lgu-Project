@@ -4,23 +4,22 @@
 @section('content')
 @include('Table.table_header')                   
                     <div class="table-responsive">
-                      <table class="table table-striped table-datatable" id="sortable-table">
+                      <table class="table" id="sortable-table">
                         <thead>
-                          <tr>
-                            <th class="text-center">
+                          <tr class="border border-1 rounded border-dark">
+                            <th class="text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Degree Name</th>
-                            <th>Batch Name</th>
-                            <th>Per Course Fee</th>
-                            <th>Per Semester Fee</th>
-
-                            <th>Action</th>
+                            <th class="text-dark">Degree Name</th>
+                            <th class="text-dark">Batch Name</th>
+                            <th class="text-dark">Per Course Fee</th>
+                            <th class="text-dark">Per Semester Fee</th>
+                            <th class="text-dark">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($fees as $key => $fee)
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover">
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
@@ -36,7 +35,7 @@
                               <div class="card-body">
                                 <!-- only change id -->
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $fee->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
-                                 <a href="{{ $getEditRoute }}/{{ $fee->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                 <a href="{{ $getEditRoute }}/{{ $fee->ID }}" class="btn bg_lgu_green text-white"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                                 
                               </div>
                             </td>
