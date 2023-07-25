@@ -6,6 +6,7 @@ use App\Models\Semester;
 use App\Models\SemesterDetail;
 use Illuminate\Support\Facades\DB;
 use App\Models\DegreeBatche;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 
@@ -17,8 +18,45 @@ class DataTransferController extends Controller
         DB::beginTransaction();
 
         set_time_limit(0);
-        dd(Employee::where(['Emp_FirstName' => 'Super' , 'Emp_LastName' => 'Admin'])->first());
+        
         $this->truncateDb();
+
+       // $a = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select('CourseName')->get();
+       //  $b = DB::connection('lgu_new_testing')->table('SemesterCourses')->select('Course_ID')->get();
+
+       //  $testting = [];
+       //  foreach ($a as $key => $c) {
+       //      $courseId = $b[$key]->Course_ID ?? null;
+       //      $courseName = DB::connection('lgu_new_testing')->table('Courses')->where('ID', $courseId)->value('CourseName');
+       //      $testting[] = $c->CourseName . '=>' . ($courseName ?? '');
+       //  }
+
+       //  dd($testting);
+        dd();
+
+        foreach(DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->join('Courses' , 'courses.CourseCode' , 'SemesterCoursesInfo.coursecode')->select('courses.courseName' , 'SemesterCoursesInfo.courseName as b')->get() as $a){
+
+            $testting[] = $a->CourseName . '=>' . $a->b;
+        }
+        dd($testting);
+
+        dd(array_unique(DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->pluck('CourseCode')->toArray()));
+
+
+
+         $a = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select('CourseName' , 'CourseCode')->get();
+       // $b = DB::connection('lgu_new_testing')->table('SemesterCourses')->select('Course_ID')->get();
+
+        $testting = [];
+        foreach ($a as $key => $c) {
+            
+            $courseName = DB::connection('lgu_misdb')->table('Courses')->where('CourseCode', $c->CourseCode)->value('CourseName');
+            $testting[] = $c->CourseName . '=>' . ($courseName ?? '');
+        }
+
+        dd($testting);
+
+
         //$this->DBatchFeeInfoALLToSemesterDetail();
         //$this->SemesterSessionInfoToSemesters();
         //$this->CoursesToCourses();
@@ -27,6 +65,9 @@ class DataTransferController extends Controller
         //$this->DegreeBatchInfoToDegreeBatches();
         //$this->DesignationsToDesignations();
         //$this->FacultyinfoToEmp_Designations();
+        //$this->UsersAndFacutyInfoToEmployees();
+        //$this->Exam_AcademicStandingRulesToExam_AcademicStandingRules();
+        //$this->SemesterCoursesInfoToSemesterCourses();
 
         DB::commit();
 
@@ -50,6 +91,9 @@ class DataTransferController extends Controller
         //DB::connection('lgu_new_testing')->table('DegreeBatches')->truncate();
         //DB::connection('lgu_new_testing')->table('Designations')->truncate();
         //DB::connection('lgu_new_testing')->table('Emp_Designations')->truncate();
+        //DB::connection('lgu_new_testing')->table('Employees')->truncate();
+        //DB::connection('lgu_new_testing')->table('Exam_AcademicStandingRules')->truncate();
+        //DB::connection('lgu_new_testing')->table('SemesterCourses')->truncate();
 
 
     }
@@ -361,10 +405,9 @@ protected function FacultyinfoToEmp_Designations()
 
 protected function UsersAndFacutyInfoToEmployees()
 {
+    //dd(DB::connection('lgu_misdb')->table('Users')->where('ID' , 4)->get());
     $chunkSize = 10;
-    $supperAdmin = Employee::where(['Emp_FirstName' => 'Super' , 'Emp_LastName' , 'Admin'])->first();    
     $dataToInsert = DB::connection('lgu_misdb')->table('Users')
-    ->join('FacultyInfo' , 'FacultyInfo.UID' , 'Users.ID')
     ->select(
                     'Users.ID as UserUID',
                     'Users.UserName',
@@ -380,39 +423,23 @@ protected function UsersAndFacutyInfoToEmployees()
                     'Users.Qualification',
                     'Users.DoB',
                     'Users.DoJ',
-                    'Users.Grade',
                     'Users.Status',
                     'Users.Specialization',
                     'Users.AppointmentDate',
-                    'Users.Default',
-                    
-                    'FacultyInfo.Gender',
-                    'FacultyInfo.FullName as LName',
-                    'FacultyInfo.ContactNumber',
-                    'FacultyInfo.Email',
-                    'FacultyInfo.Address',
-                    'FacultyInfo.DepartmentID',
-                    'FacultyInfo.CNIC',
-                    'FacultyInfo.EmploymentNature',
-                    'FacultyInfo.JoiningDate',
-                    'FacultyInfo.AppointmentDate',
-                    'FacultyInfo.ExpiryOfEmpContract',
-                    'FacultyInfo.Status',
-                    'FacultyInfo.UID',
-                    'FacultyInfo.DoB',
-                    'FacultyInfo.Grade',
-                    'FacultyInfo.Specialization'            
-    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+                    'Users.Default'                 
+    )->orderBy('UserUID')->chunk($chunkSize, function ($dataToInsertChunk) {
         $data = [];
         foreach ($dataToInsertChunk as $request) {
+        $FacultyInfo = $this->getFacultyData($request->UserUID);
+        
             $data[] = [
         'ID'               => $request->UserUID,
         'Emp_FirstName'    => $request->FName,
-        'Emp_LastName'     => $request->LName,
-        'DOB'              => $request->DOB,
+        'Emp_LastName'     => $FacultyInfo->FullName ?? '',
+        'DOB'              => $request->DoB,
         'CNIC'             => $request->CNIC,
-        'DateOfJoining'    => $request->DateOfJoining,
-        'DateOfAppointment'=> $request->DateOfAppointment,
+        'DateOfJoining'    => $request->DoJ,
+        'DateOfAppointment'=> $request->AppointmentDate,
         'Specialization'   => $request->Specialization,
         'Designation'      => $request->Designation,
         'Status'           => $request->Status,
@@ -421,18 +448,111 @@ protected function UsersAndFacutyInfoToEmployees()
         'Gender'           => $request->Gender,
         'Email'            => $request->Email,
         'Address'          => $request->Address,
-        'Dpt_ID'           => $request->DepartmentID,
-        'Grade'            => $request->Grade,
-        'Contact_Number'   => $request->Contact_Number,
+        'Dpt_ID'           => $FacultyInfo->DepartmentID ?? '',
+        'Grade'            => $FacultyInfo->Grade ?? '',
+        'Contact_Number'   => $request->ContactNo,
         'DefualtUrl'       => $request->Default,
 
             ];
         }
         if (!empty($data)) {
-             DB::connection('lgu_new_testing')->table('Designations')->insert($data);
+             DB::connection('lgu_new_testing')->table('Employees')->insert($data);
+        }
+    });
+     $data = [
+                "ID"            => "1069",
+                "Emp_FirstName" => "Super",
+                "Emp_LastName"  => "Admin",
+                "DOB"           => "2023-06-20",
+                "CNIC"          => "34545-3454353-4",
+                "DateOfJoining" => "2023-06-20",
+                "DateOfAppointment" => "2023-06-20",
+                "Specialization" => "bscs",
+                "Designation"   => "Vc",
+                "Status"        => "1",
+                "UserName"      => "superadmin",
+                "Password"      => "123456",
+                "Gender"        => "male",
+                "Email"         => "hamzaqureshi401@gmail.com",
+                "Address"       => "Lgu",
+                "Dpt_ID"        => "21",
+                "Grade"         => "22",
+                "Contact_Number" => "4343-5435435",
+                "DefualtUrl"    => "/empDashboard"
+             ];
+             DB::connection('lgu_new_testing')->table('Employees')->insert($data);
+}
+
+protected function getFacultyData($UID){
+   return DB::connection('lgu_misdb')->table('FacultyInfo')->where('UID'  , $UID)->select('DepartmentID' , 'FullName' , 'Grade')->first();
+}
+
+protected function Exam_AcademicStandingRulesToExam_AcademicStandingRules()
+{
+    $chunkSize = 10;    
+    $dataToInsert = DB::connection('lgu_misdb')->table('Exam_AcademicStandingRules')->select(
+                   'ID'
+                  ,'CGPA'
+                  ,'AcademicStanding'
+                  ,'CrHrsAllowed'
+                  ,'NewCourse'
+                  ,'EnrollmentAllowed'
+
+                              
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        $data = [];
+        foreach ($dataToInsertChunk as $request) {
+            $data[] = [
+                  'ID'                          => $request->ID,
+                  'CGPA'                        => $request->CGPA,
+                  'AcademicStanding'            => $request->AcademicStanding,
+                  'CrHrsAllowed'                => $request->CrHrsAllowed,
+                  'NewCourse'                   => $request->NewCourse,
+                  'EnrollmentAllowed'           => $request->EnrollmentAllowed,
+            ];
+        }
+        if (!empty($data)) {
+             DB::connection('lgu_new_testing')->table('Exam_AcademicStandingRules')->insert($data);
         }
     });
 }
+
+protected function SemesterCoursesInfoToSemesterCourses()
+{
+    $chunkSize = 10;    
+    $dataToInsert = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select(
+                   'ID'
+                  ,'SemesterSessionID'
+                  ,'CourseCode'
+                  ,'CampusLimit'              
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        $data = [];
+        foreach ($dataToInsertChunk as $request) {
+            $data[] = [
+                  'ID'                       => $request->ID,
+                  'Sem_ID'                   => $request->SemesterSessionID,
+                  'CampusLimit'              => $request->CampusLimit,
+                  'Course_ID'                => $this->getCourseID($request->CourseCode) ?? ''
+                  
+            ];
+        }
+        if (!empty($data)) {
+             DB::connection('lgu_new_testing')->table('SemesterCourses')->insert($data);
+        }
+    });
+}
+
+protected function getCourseID($CourseCode)
+{
+    $result = DB::connection('lgu_misdb')->table('Courses')
+        ->select('ID')
+        ->where('CourseCode', $CourseCode)
+        ->first();
+
+    return $result->ID ?? null;
+}
+
+
 
 
 
