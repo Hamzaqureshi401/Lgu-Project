@@ -74,7 +74,8 @@ class DataTransferController extends Controller
         //$this->SemesterCoursesInfoToSemesterCourses();
         //$this->Semestercourses_weightageToSemesterCourse_Weightage();
         //$this->SemesterCourse_WeightageDetailToSemesterCourse_WeightageDetail();
-        $this->StudentInfoToStudents();
+        //$this->StudentInfoToStudents();
+        $this->StudentRegistrationInfoToRegistrations();
 
         DB::commit();
 
@@ -103,7 +104,8 @@ class DataTransferController extends Controller
         //DB::connection('lgu_new_testing')->table('SemesterCourses')->truncate();
         //DB::connection('lgu_new_testing')->table('SemesterCourse_Weightage')->truncate();
         //DB::connection('lgu_new_testing')->table('SemesterCourse_WeightageDetail')->truncate();
-        DB::connection('lgu_new_testing')->table('Students')->truncate();
+        //DB::connection('lgu_new_testing')->table('Students')->truncate();
+        DB::connection('lgu_new_testing')->table('Registrations')->truncate();
 
 
     }
@@ -694,7 +696,7 @@ protected function StudentInfoToStudents()
                 'ParentOccupation'         => substr($request->ParentEmployer, 0, 16), // Replace 'null' with the appropriate field name if available in the request
                 'Address'                  => substr($request->ParentOfficeAddress, 0, 199) ?? null,
                 'Tehsil'                   => null, // Replace 'null' with the appropriate field name if available in the request
-                'City'                     => $request->PermanentCity ?? null,
+                'City'                     => substr($request->PermanentCity, 0, 49) ?? null,
                 'Province'                 => $request->MailingCountry ?? null,
                 'Country'                  => $request->PermanentCountry ?? null,
                 'CurrentSemester'          => $this->findSemester($request->JoiningSession)->ID ?? null, // Replace 'null' with the appropriate field name if available in the request
@@ -729,7 +731,7 @@ protected function StudentInfoToStudents()
 protected function getParentJob($rollno) {
     return DB::connection('lgu_misdb')
         ->table('ApplicantInfo')
-        ->join('ApplicantParentsVerification_NEW', 'ApplicantParentsVerification_NEW.ID', '=', 'ApplicantInfo.AssignedRollNumber')
+        ->join('ApplicantParentsVerification_NEW', 'ApplicantParentsVerification_NEW.ApplicantID', '=', 'ApplicantInfo.ID')
         ->where('AssignedRollNumber', '=', "'$rollno'") // Enclose $rollno in quotes
         ->first();
 }
@@ -740,6 +742,38 @@ protected function findSemester($session){
 protected function findDegree($d_name){
    return DB::connection('lgu_new_testing')->table('Degrees')->where('DegreeName' , $d_name)->first();
 }
+
+
+protected function StudentRegistrationInfoToRegistrations()
+{
+    $chunkSize = 10;    
+    $dataToInsert = DB::connection('lgu_misdb')->table('StudentRegistrationInfo')->select(
+                   'ID'
+                  ,'StdRollNoID'
+                  ,'SemesterSessionID'
+                  ,'AcaStdID'              
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        $data = [];
+        foreach ($dataToInsertChunk as $request) {
+            $data[] = [
+                  'ID'                       => $request->ID,
+                  'Std_ID'                   => $request->StdRollNoID,
+                  'AcaStd_ID'                => $request->AcaStdID,
+                  'Sem_ID'                   => $request->SemesterSessionID
+                  
+            ];
+        }
+        if (!empty($data)) {
+             DB::connection('lgu_new_testing')->table('Registrations')->insert($data);
+        }
+    });
+}
+
+// select * from  Student_Course_Enrollment where StdRollNo = 'Fa-2019/BSCS/310' 
+// select * from Semestercourses_weightage where SemCoursesInfoID = 8227
+// select * from SemesterCourse_WeightageDetail where SemesterCourseWeightage_ID= 9649
+// select * from Student_MarksDetails where SemCourseWDetailID=12667 and StdCoursesInfoID =145736
+// StudentCoursesInfo
 
 
 
