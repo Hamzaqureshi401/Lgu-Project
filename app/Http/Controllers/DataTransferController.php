@@ -776,7 +776,11 @@ protected function StudentRegistrationInfoToRegistrations()
 // StudentCoursesInfo
 
 
+//  $argument = 36;
 
+// $result = DB::connection('lgu_misdb')
+//     ->select(DB::raw('SELECT * from FUNCChallanInfo(?) as result_column'), [$argument]);
+//     dd($result);
 
 
 

@@ -21,12 +21,6 @@ class DeanController extends Controller
 {
     public function deanDashboard(){
 
-        $argument = 36;
-
-$result = DB::connection('lgu_misdb')
-    ->select(DB::raw('SELECT * from FUNCChallanInfo(?) as result_column'), [$argument]);
-    dd($result);
-
         $user = DB::connection('lgu_misdb')->table('Users')->first();
         //dd($user);
 
