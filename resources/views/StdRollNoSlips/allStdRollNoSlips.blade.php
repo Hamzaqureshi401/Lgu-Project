@@ -3,24 +3,24 @@
 @section('content')
 @include('Table.table_header')                   
                     <div class="table-responsive">
-                      <table class="table table-striped table-datatable" id="sortable-table">
+                      <table class="table border-1 rounded border-dark" id="sortable-table">
                         <thead>
-                          <tr>
-                            <th class="text-center">
+                          <tr class="border border-1 rounded border-dark ">
+                            <th class="text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Enrolled Student</th>
-                            <th>Building</th>
-                            <th>Room</th>
-                            <th>Seat No</th>
-                            <th>Time</th>
+                            <th class="text-dark">Enrolled Student</th>
+                            <th class="text-dark">Building</th>
+                            <th class="text-dark">Room</th>
+                            <th class="text-dark">Seat No</th>
+                            <th class="text-dark">Time</th>
                             
-                            <th>Action</th>
+                            <th class="text-dark">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($stdRollNoSlips as $stdRollNoSlip)
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover">
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
@@ -36,7 +36,7 @@
                               <div class="card-body">
                                 <!-- only change id -->
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $stdRollNoSlip->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
-                                <a href="{{ $getEditRoute }}/{{ $stdRollNoSlip->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                <a href="{{ $getEditRoute }}/{{ $stdRollNoSlip->ID }}" class="btn bg_lgu_green text-white "><i class="far fa-edit"></i>{{ $modalTitle }}</a>
 
                               
 

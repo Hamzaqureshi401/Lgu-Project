@@ -3,23 +3,23 @@
 @section('content')
 @include('Table.table_header')                   
                     <div class="table-responsive">
-                      <table class="table table-striped table-datatable" id="sortable-table">
+                      <table class="table  border-1 rounded border-dark" id="sortable-table">
                         <thead>
-                          <tr>
-                            <th class="text-center">
+                          <tr class="border border-1 rounded border-dark ">
+                            <th class="text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Student</th>
-                            <th>Semester Course</th>
-                            <th>Mid</th>
-                            <th>Final</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th class="text-dark">Student</th>
+                            <th class="text-dark">Semester Course</th>
+                            <th class="text-dark">Mid</th>
+                            <th class="text-dark">Final</th>
+                            <th class="text-dark">Status</th>
+                            <th class="text-dark">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($enrollments  as $enrollment)
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover">
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>

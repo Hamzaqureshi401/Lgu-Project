@@ -48,6 +48,7 @@ class StdRollNoSlipsController extends Controller
         $title  = 'Add Std Roll No Slip';
         $route  = '/storeStdRollNoSlips';
         $enrollments = Enrollment::get()->unique('Std_ID');
+        // dd($enrollments);
         return
         view('StdRollNoSlips.addStdRollNoSlips',
             compact(
