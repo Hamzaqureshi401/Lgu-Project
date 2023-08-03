@@ -32,29 +32,33 @@ class DataTransferController extends Controller
        //  }
 
        //  dd($testting);
-        dd();
 
-        foreach(DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->join('Courses' , 'courses.CourseCode' , 'SemesterCoursesInfo.coursecode')->select('courses.courseName' , 'SemesterCoursesInfo.courseName as b')->get() as $a){
+        //this working
+       //  dd();
 
-            $testting[] = $a->CourseName . '=>' . $a->b;
-        }
-        dd($testting);
+       //  foreach(DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->join('Courses' , 'courses.CourseCode' , 'SemesterCoursesInfo.coursecode')->select('courses.courseName' , 'SemesterCoursesInfo.courseName as b')->get() as $a){
 
-        dd(array_unique(DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->pluck('CourseCode')->toArray()));
+       //      $testting[] = $a->CourseName . '=>' . $a->b;
+       //  }
+       //  dd($testting);
+
+       //  dd(array_unique(DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->pluck('CourseCode')->toArray()));
 
 
 
-         $a = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select('CourseName' , 'CourseCode')->get();
-       // $b = DB::connection('lgu_new_testing')->table('SemesterCourses')->select('Course_ID')->get();
+       //   $a = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select('CourseName' , 'CourseCode')->get();
+       // // $b = DB::connection('lgu_new_testing')->table('SemesterCourses')->select('Course_ID')->get();
 
-        $testting = [];
-        foreach ($a as $key => $c) {
+       //  $testting = [];
+       //  foreach ($a as $key => $c) {
             
-            $courseName = DB::connection('lgu_misdb')->table('Courses')->where('CourseCode', $c->CourseCode)->value('CourseName');
-            $testting[] = $c->CourseName . '=>' . ($courseName ?? '');
-        }
+       //      $courseName = DB::connection('lgu_misdb')->table('Courses')->where('CourseCode', $c->CourseCode)->value('CourseName');
+       //      $testting[] = $c->CourseName . '=>' . ($courseName ?? '');
+       //  }
 
-        dd($testting);
+       //  dd($testting);
+
+        //this end
 
 
         //$this->DBatchFeeInfoALLToSemesterDetail();
@@ -68,6 +72,10 @@ class DataTransferController extends Controller
         //$this->UsersAndFacutyInfoToEmployees();
         //$this->Exam_AcademicStandingRulesToExam_AcademicStandingRules();
         //$this->SemesterCoursesInfoToSemesterCourses();
+        //$this->Semestercourses_weightageToSemesterCourse_Weightage();
+        //$this->SemesterCourse_WeightageDetailToSemesterCourse_WeightageDetail();
+        //$this->StudentInfoToStudents();
+        $this->StudentRegistrationInfoToRegistrations();
 
         DB::commit();
 
@@ -94,6 +102,10 @@ class DataTransferController extends Controller
         //DB::connection('lgu_new_testing')->table('Employees')->truncate();
         //DB::connection('lgu_new_testing')->table('Exam_AcademicStandingRules')->truncate();
         //DB::connection('lgu_new_testing')->table('SemesterCourses')->truncate();
+        //DB::connection('lgu_new_testing')->table('SemesterCourse_Weightage')->truncate();
+        //DB::connection('lgu_new_testing')->table('SemesterCourse_WeightageDetail')->truncate();
+        //DB::connection('lgu_new_testing')->table('Students')->truncate();
+        DB::connection('lgu_new_testing')->table('Registrations')->truncate();
 
 
     }
@@ -552,7 +564,223 @@ protected function getCourseID($CourseCode)
     return $result->ID ?? null;
 }
 
+protected function Semestercourses_weightageToSemesterCourse_Weightage()
+{
+    $chunkSize = 10;    
+    $dataToInsert = DB::connection('lgu_misdb')->table('Semestercourses_weightage')->select(
+                   'ID'
+                  ,'SemCoursesInfoID'
+                  ,'Type'
+                  ,'Weightage'
+                  ,'Lecturetype'              
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        $data = [];
+        foreach ($dataToInsertChunk as $request) {
+            $data[] = [
+                  'ID'                       => $request->ID,
+                  'SemCourse_ID'             => $request->SemCoursesInfoID,
+                  'Type'                     => $request->Type,
+                  'Weightage'                => $request->Weightage,
+                  'LectureType'              => $request->Lecturetype,
+                  
+            ];
+        }
+        if (!empty($data)) {
+             DB::connection('lgu_new_testing')->table('SemesterCourse_Weightage')->insert($data);
+        }
+    });
+}
 
+protected function SemesterCourse_WeightageDetailToSemesterCourse_WeightageDetail()
+{
+    $chunkSize = 10;    
+    $dataToInsert = DB::connection('lgu_misdb')->table('SemesterCourse_WeightageDetail')->select(
+                   'ID'
+                  ,'SemesterCourseWeightage_ID'
+                  ,'TotalMarks'              
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        $data = [];
+        foreach ($dataToInsertChunk as $request) {
+            $data[] = [
+                  'ID'                       => $request->ID,
+                  'SemCourseWeightage_ID'             => $request->SemesterCourseWeightage_ID,
+                  'TotalMarks'                     => $request->TotalMarks
+                  
+            ];
+        }
+        if (!empty($data)) {
+             DB::connection('lgu_new_testing')->table('SemesterCourse_WeightageDetail')->insert($data);
+        }
+    });
+}
+
+protected function StudentInfoToStudents()
+{
+    $chunkSize = 10;    
+    $dataToInsert = DB::connection('lgu_misdb')->table('StudentInfo')->select(
+                   'ID'
+                  ,'StdRollNo'
+                  ,'StudentType'
+                  ,'Password'
+                  ,'UETRegNo'
+                  ,'StudentName'
+                  ,'ClassSection'
+                  ,'NIC'
+                  ,'Nationality'
+                  ,'DOB'
+                  ,'FatherName'
+                  ,'Gender'
+                  ,'MailingAddress'
+                  ,'MailingCity'
+                  ,'MailingCountry'
+                  ,'PermanentAddress'
+                  ,'PermanentCity'
+                  ,'PermanentCountry'
+                  ,'Email'
+                  ,'PhoneHome'
+                  ,'PhoneMobilePrimary'
+                  ,'PhoneMobileSecondary'
+                  ,'PhoneOffice'
+                  ,'ParentName'
+                  ,'ParentRelation'
+                  ,'ParentNIC'
+                  ,'ParentEmployer'
+                  ,'Designation'
+                  ,'ParentOfficeAddress'
+                  ,'ParentEmail'
+                  ,'ParentPhoneHome'
+                  ,'ParentPhoneMobile'
+                  ,'ParentPhoneOffice'
+                  ,'ParentFax'
+                  ,'DegreeID'
+                  ,'OtherRollNo'
+                  ,'LastAllowedSemester'
+                  ,'InstitueID'
+                  ,'OldCERollNo'
+                  ,'JoiningSession'
+                  ,'ShadowRollNo'
+                  ,'PhDAdmDate'
+                  ,'PhDStartSession'
+                  ,'LastLogin'
+                  ,'_StudentName'
+                  ,'_FatherName'
+                  ,'Category'
+                  ,'Hostel'
+                  ,'Transport'
+                  ,'TransportRouteID'
+                  ,'TransportStopID'              
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        $data = [];
+        foreach ($dataToInsertChunk as $request) {
+            $getParentJob = $this->getParentJob($request->StdRollNo);
+            $data[] = [
+                'ID'                       => $request->ID,
+                'ApplicantID'              =>  $getParentJob->ApplicantID ?? null,
+                'StdRollNo'                => $request->StdRollNo,
+                'Password'                 => $request->Password,
+                'Std_FName'                => $request->StudentName ?? null,
+                'Std_LName'                => null, // Replace 'null' with the appropriate field name if available in the request
+                'ClassSection'             => $request->ClassSection,
+                'CNIC'                     => substr($request->NIC, 0, 14),
+                'Nationality'              => $request->Nationality,
+                'DOB'                      => $request->DOB,
+                'Gender'                   => $request->Gender,
+                'Email'                    => $request->Email,
+                'FatherName'               => $request->FatherName,
+                'FatherCNIC'               => null, // Replace 'null' with the appropriate field name if available in the request
+                'GuardianName'             => $request->ParentName, // Replace 'null' with the appropriate field name if available in the request
+                'GuardianCNIC'             => substr($request->ParentNIC, 0, 14), // Replace 'null' with the appropriate field name if available in the request
+                'StdPhone'                 => substr($request->PhoneMobilePrimary, 0, 11) ?? null,
+                'FatherPhone'              => substr($request->ParentPhoneMobile, 0, 11), // Replace 'null' with the appropriate field name if available in the request
+                'GuardianPhone'            => substr($request->PhoneMobileSecondary, 0, 11), // Replace 'null' with the appropriate field name if available in the request
+                'ParentOccupation'         => substr($request->ParentEmployer, 0, 16), // Replace 'null' with the appropriate field name if available in the request
+                'Address'                  => substr($request->ParentOfficeAddress, 0, 199) ?? null,
+                'Tehsil'                   => null, // Replace 'null' with the appropriate field name if available in the request
+                'City'                     => substr($request->PermanentCity, 0, 49) ?? null,
+                'Province'                 => $request->MailingCountry ?? null,
+                'Country'                  => $request->PermanentCountry ?? null,
+                'CurrentSemester'          => $this->findSemester($request->JoiningSession)->ID ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'Status'                   => null, // Replace 'null' with the appropriate field name if available in the request
+                'AdmissionSession' => $request->JoiningSession, // Replace 'null' with the appropriate field name if available in the request
+                'Files'                    => null, // Replace 'null' with the appropriate field name if available in the request
+                'BloodGroup'               => null, // Replace 'null' with the appropriate field name if available in the request
+                'Image'                    => null, // Replace 'null' with the appropriate field name if available in the request
+                'FatherEmail'              => $request->ParentEmail, // Replace 'null' with the appropriate field name if available in the request
+                'Degree_ID'                => $this->findDegree($request->DegreeID)->ID ?? null,
+                'Category'                 => $request->Category ?? null,
+                'No'                       => $getParentJob->No ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'ServingSince'             => $getParentJob->ServingSince ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'NowServingIn'             => $getParentJob->NowServingIn ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'At'                       => $getParentJob->At ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'Station'                  => $getParentJob->Station ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'TelNo'                    => $getParentJob->Phone ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'I_Mst'                    => $getParentJob->I_Mst ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'WidowOf'                  => $getParentJob->WidowOf ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'Rank'                     => $getParentJob->Rank ?? null, // Replace 'null' with the appropriate field name if available in the request
+                'ExpiredOn'                => $getParentJob->ExpiredOn ?? null, // Replace 'null' with the appropriate field name if available in the request
+                  
+            ];
+        }
+        if (!empty($data)) {
+             DB::connection('lgu_new_testing')->table('Students')->insert($data);
+        }
+    });
+}
+
+
+protected function getParentJob($rollno) {
+    return DB::connection('lgu_misdb')
+        ->table('ApplicantInfo')
+        ->join('ApplicantParentsVerification_NEW', 'ApplicantParentsVerification_NEW.ApplicantID', '=', 'ApplicantInfo.ID')
+        ->where('AssignedRollNumber', '=', "'$rollno'") // Enclose $rollno in quotes
+        ->first();
+}
+
+protected function findSemester($session){
+   return DB::connection('lgu_new_testing')->table('Semesters')->where('SemSession' , $session)->first();
+}
+protected function findDegree($d_name){
+   return DB::connection('lgu_new_testing')->table('Degrees')->where('DegreeName' , $d_name)->first();
+}
+
+
+protected function StudentRegistrationInfoToRegistrations()
+{
+    $chunkSize = 10;    
+    $dataToInsert = DB::connection('lgu_misdb')->table('StudentRegistrationInfo')->select(
+                   'ID'
+                  ,'StdRollNoID'
+                  ,'SemesterSessionID'
+                  ,'AcaStdID'              
+    )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        $data = [];
+        foreach ($dataToInsertChunk as $request) {
+            $data[] = [
+                  'ID'                       => $request->ID,
+                  'Std_ID'                   => $request->StdRollNoID,
+                  'AcaStd_ID'                => $request->AcaStdID,
+                  'Sem_ID'                   => $request->SemesterSessionID
+                  
+            ];
+        }
+        if (!empty($data)) {
+             DB::connection('lgu_new_testing')->table('Registrations')->insert($data);
+        }
+    });
+}
+
+// select * from  Student_Course_Enrollment where StdRollNo = 'Fa-2019/BSCS/310' 
+// select * from Semestercourses_weightage where SemCoursesInfoID = 8227
+// select * from SemesterCourse_WeightageDetail where SemesterCourseWeightage_ID= 9649
+// select * from Student_MarksDetails where SemCourseWDetailID=12667 and StdCoursesInfoID =145736
+// StudentCoursesInfo
+
+
+//  $argument = 36;
+
+// $result = DB::connection('lgu_misdb')
+//     ->select(DB::raw('SELECT * from FUNCChallanInfo(?) as result_column'), [$argument]);
+//     dd($result);
 
 
 
