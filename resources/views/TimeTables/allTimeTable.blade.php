@@ -6,24 +6,24 @@
                     <div class="table-responsive">
                       <table class="table table-striped" id="sortable-table">
                         <thead>
-                          <tr>
-                            <th class="text-center">
+                          <tr class="border border-1 rounded border-dark">
+                            <th class="text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Semester / Courses</th>
-                            <th>Day</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Building</th>
-                            <th>Room</th>
-                            <th>Type</th>
-                            <th>Employee</th>
-                            <th>Action</th>
+                            <th class="text-dark">Semester / Courses</th>
+                            <th class="text-dark">Day</th>
+                            <th class="text-dark">Start Time</th>
+                            <th class="text-dark">End Time</th>
+                            <th class="text-dark">Building</th>
+                            <th class="text-dark">Room</th>
+                            <th class="text-dark">Type</th>
+                            <th class="text-dark">Employee</th>
+                            <th class="text-dark">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($timeTables as $timeTable)
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover">
                             <td>
                               <div class="sort-handler">
                                 <i class="fas fa-th"></i>
@@ -40,7 +40,7 @@
                             <td><div class="card-body">
                                 <!-- only change id -->
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $timeTable->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
-                                 <a href="{{ $getEditRoute }}/{{ $timeTable->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                 <a href="{{ $getEditRoute }}/{{ $timeTable->ID }}" class="btn bg_lgu_green text-white"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                                 
                               </div></td>
                           </tr>

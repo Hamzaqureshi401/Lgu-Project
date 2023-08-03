@@ -4,58 +4,58 @@
 @include('Table.table_header')
                     <div class="table-responsive">
                       <div class="table-container">
-                      <table class="table table-striped dataTable">
+                      <table id="table1" class="table table-striped dataTable">
                         <thead>
-                          <tr>
-                            <th class="text-center">
+                          <tr class="border border-1 rounded border-dark">
+                            <th class="text-dark">
                               <i class="fas fa-th"></i>
                             </th>
-                            <th>Std First Name</th>
-                            <th>Std Last Name</th>
+                            <th class="text-dark">Std First Name</th>
+                            <th class="text-dark">Std Last Name</th>
 
-                            <th>Student RollNo</th>
+                            <th class="text-dark">Student RollNo</th>
 
-
-                            <th>Password</th>
-                            <th>Class Section</th>
-                            <th>CNIC</th>
-                            <th>Nationality</th>
-                            <th>DOB</th>
-                            <th>Gender</th>
-                            <th>Email</th>
-                            <th>Father Name</th>
-                            <th>Father CNIC</th>
-                            <th>Guardian Name</th>
-                            <th>Guardian CNIC</th>
-                            <th>Std Phone</th>
-                            <th>Father Phone</th>
-                            <th>Guardian Phone</th>
-                            <th>Parent Occupation</th>
-                            <th>Address</th>
-                            <th>Tehsil</th>
-                            <th>City</th>
-                            <th>Province</th>
-                            <th>Country</th>
-                            <th>Degree</th>
-                            <th>Current Semester</th>
-                            <th>Status</th>
-                            <th>Admission Session</th>
-                            <th>Blood Group</th>
-                            <th>Father Email</th>
-                            <th>stdfilename</th>
-                            <th>stdImagename</th>
+ 
+                            <th class="text-dark">Password</th>
+                            <th class="text-dark">Class Section</th>
+                            <th class="text-dark">CNIC</th>
+                            <th class="text-dark">Nationality</th>
+                            <th class="text-dark">DOB</th>
+                            <th class="text-dark">Gender</th>
+                            <th class="text-dark">Email</th>
+                            <th class="text-dark">Father Name</th>
+                            <th class="text-dark">Father CNIC</th>
+                            <th class="text-dark">Guardian Name</th>
+                            <th class="text-dark">Guardian CNIC</th>
+                            <th class="text-dark">Std Phone</th>
+                            <th class="text-dark">Father Phone</th>
+                            <th class="text-dark">Guardian Phone</th>
+                            <th class="text-dark">Parent Occupation</th>
+                            <th class="text-dark">Address</th>
+                            <th class="text-dark">Tehsil</th>
+                            <th class="text-dark">City</th>
+                            <th class="text-dark">Province</th>
+                            <th class="text-dark">Country</th>
+                            <th class="text-dark">Degree</th>
+                            <th class="text-dark">Current Semester</th>
+                            <th class="text-dark">Status</th>
+                            <th class="text-dark">Admission Session</th>
+                            <th class="text-dark">Blood Group</th>
+                            <th class="text-dark">Father Email</th>
+                            <th class="text-dark">stdfilename</th>
+                            <th class="text-dark">stdImagename</th>
                             
 
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($students as $student)
-                          <tr>
+                          <tr class="border border-1 rounded border-dark table-hover">
                              <td>
                               <div class="card-body">
                                 <!-- only change id -->
                                 <!-- <button type="button" class="btn btn-primary gt-data" data-toggle="modal" data-id="{{ $student->ID }}" data-target="#exampleModal"><i class="far fa-edit"></i> {{ $modalTitle }}</button> -->
-                                 <a href="{{ $getEditRoute }}/{{ $student->ID }}" class="btn btn-primary"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
+                                 <a href="{{ $getEditRoute }}/{{ $student->ID }}" class="btn btn-primary btn bg_lgu_green text-white"><i class="far fa-edit"></i>{{ $modalTitle }}</a>
                                  <a class="btn btn-info" href="{{ route('emp.Get.Student.Roll.No.Slip' , $student->ID) }}">Get Roll No Slip</a>
                                  <a class="btn btn-dark" href="{{ route('find.StudentChallan' , $student->ID) }}">Get Challans</a>
 
@@ -104,9 +104,13 @@
                         </tbody>
                       </table>
                       </div>
+                      <div class="d-flex text-center">
+                          {!! $students->links() !!}
+                      </div>
+
+      
                     </div>
-                    <div class="d-flex justify-content-center">
-                        {!! $students->links() !!}
-                    </div>
+
+                 
 @include('Table.table_footer')
 @endsection
