@@ -28,6 +28,8 @@ class DeanController extends Controller
         ->join('Courses' , 'Courses.ID' , 'SemesterCourses.Course_ID')
         ->groupBy('CourseCode')
         ->where('Emp_ID' , Session::get('ID'))->pluck('Courses.CourseCode')->count();
+
+        dd($course);
         
         // $course             = SemesterCourse::pluck('id')->count();
         // $course             = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('id')->count();

@@ -19,19 +19,19 @@ class DataTransferController extends Controller
 
         set_time_limit(0);
         
-        $this->truncateDb();
+       // $this->truncateDb();
 
-       // $a = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select('CourseName')->get();
-       //  $b = DB::connection('lgu_new_testing')->table('SemesterCourses')->select('Course_ID')->get();
+       $a = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select('CourseName')->get();
+        $b = DB::connection('lgu_new_testing')->table('SemesterCourses')->select('Course_ID')->get();
 
-       //  $testting = [];
-       //  foreach ($a as $key => $c) {
-       //      $courseId = $b[$key]->Course_ID ?? null;
-       //      $courseName = DB::connection('lgu_new_testing')->table('Courses')->where('ID', $courseId)->value('CourseName');
-       //      $testting[] = $c->CourseName . '=>' . ($courseName ?? '');
-       //  }
+        $testting = [];
+        foreach ($a as $key => $c) {
+            $courseId = $b[$key]->Course_ID ?? null;
+            $courseName = DB::connection('lgu_new_testing')->table('Courses')->where('ID', $courseId)->value('CourseName');
+            $testting[] = $c->CourseName . '=>' . ($courseName ?? '');
+        }
 
-       //  dd($testting);
+        dd($testting);
 
         //this working
        //  dd();
