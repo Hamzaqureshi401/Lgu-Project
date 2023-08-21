@@ -29,7 +29,7 @@ class DeanController extends Controller
         ->groupBy('CourseCode')
         ->where('Emp_ID' , Session::get('ID'))->pluck('Courses.CourseCode')->count();
 
-        dd($course);
+        // dd($course);
         
         // $course             = SemesterCourse::pluck('id')->count();
         // $course             = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('id')->count();
