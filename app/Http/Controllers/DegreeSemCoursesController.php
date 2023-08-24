@@ -34,7 +34,8 @@ class DegreeSemCoursesController extends Controller
         $title  = 'Add Degree Semester Courses';
         $route  = '/storeDegreeSemCourses';
         $degreeBatches = DegreeBatche::get();
-        $semesterCourses = SemesterCourse::get();
+        $semesterCourses = SemesterCourse::all();
+        // dd($semesterCourses);
         $employees = Employee::get();
         return
         view('DegreeSemCourses.addDegreeSemCourses',

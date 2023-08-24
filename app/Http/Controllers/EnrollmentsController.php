@@ -44,8 +44,10 @@ class EnrollmentsController extends Controller
         $request['Std_ID']  = $session['std_ID'];
         $student = Student::where('ID' , $session['std_ID'])->first();
 
+
         $semester = Semester::where('CurrentSemester' , 1)->first('ID');
         // dd($semester);
+
 
         if($semester->exists() != true){
             return redirect()->back()->with(['errorToaster'   => 'No Semester Is Active for Enrollment!' , 'title' => 'Plese Ask Admin to Active Semester first']);
@@ -53,6 +55,7 @@ class EnrollmentsController extends Controller
 
         $semester = $semester->first();
 
+        
         $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $student->Degree_ID , 'Batch_ID' => $semester->ID])->first();
         if(empty($DegreeBatche)){
             return redirect()->back()->with(['errorToaster'   => 'Degree Batch Not Found!' , 'title' => 'Warning']);
@@ -64,7 +67,8 @@ class EnrollmentsController extends Controller
         }
         $getTotalCreditHours= $this->getTotalCreditHours($request);
         // $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection])->get();
-        
+        dd($DegreeBatche->ID,$student->ClassSection,$semester->ID);
+
         $DegsemesterCourses = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
             ->join('Courses' , 'courses.id' , 'SemesterCourses.Course_ID')
             ->where(['DegBatches_ID' => $DegreeBatche->ID , 'Section' => $student->ClassSection , 'Sem_ID' => $semester->ID])

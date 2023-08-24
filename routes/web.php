@@ -252,6 +252,7 @@ Route::post('/updateDegreeBatch', [App\Http\Controllers\DegreeBatchsController::
 
 // Fee Route Start
 
+
 Route::get('/addFees', [App\Http\Controllers\FeeController::class, 'addFee'])->name('add.Fee');
 Route::get('/allFees', [App\Http\Controllers\FeeController::class, 'allFees'])->name('all.Fees');
 Route::post('/storeFee', [App\Http\Controllers\FeeController::class, 'storeFee'])->name('store.Fee');
