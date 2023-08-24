@@ -9,6 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
     //protected $table = 'Employee';
+     public $timestamps = false;
     public function department(){
 
           return $this->belongsTo('App\Models\Department' , 'Dpt_ID');
