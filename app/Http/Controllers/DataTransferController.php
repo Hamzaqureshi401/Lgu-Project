@@ -797,14 +797,14 @@ class DataTransferController extends Controller
         // $chunkSize = 10;
         // $dataToInsert = DB::connection('lgu_misdb')->table('Student_Course_Enrollment')->select(
         //     'STDRollNoID',
-        //     'SemesterSessionID',
+        //     'SemCourseID',
         //     'stdregid'
-        // )->orderBy('SemesterSessionID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        // )->orderBy('SemCourseID')->chunk($chunkSize, function ($dataToInsertChunk) {
         //     $data = [];
         //     foreach ($dataToInsertChunk as $request) {
         //         $data[] = [
         //             'Std_ID'                    => $request->STDRollNoID,
-        //             'SemCourses_ID'             => $request->SemesterSessionID,
+        //             'SemCourses_ID'             => $request->SemCourseID,
         //             'Is_i_mid'                  => Null,
         //             'Is_i_final'                => Null,
         //             'Reg_ID'                    => $request->stdregid,
@@ -819,7 +819,7 @@ class DataTransferController extends Controller
         INSERT INTO LguNewDbTesting.dbo.Enrollments (Std_ID, SemCourses_ID, Is_i_mid, Is_i_final, Reg_ID, Status)
         SELECT
             STDRollNoID AS Std_ID,
-            SemesterSessionID AS SemCourses_ID,
+            SemCourseID AS SemCourses_ID,
             NULL AS Is_i_mid,
             NULL AS Is_i_final,
             stdregid AS Reg_ID,
