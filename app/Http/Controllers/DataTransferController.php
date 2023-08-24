@@ -794,26 +794,38 @@ class DataTransferController extends Controller
 
     protected function Student_Course_EnrollmentToEnrollments()
     {
-        $chunkSize = 10;
-        $dataToInsert = DB::connection('lgu_misdb')->table('Student_Course_Enrollment')->select(
-            'STDRollNoID',
-            'SemesterSessionID',
-            'stdregid'
-        )->orderBy('SemesterSessionID')->chunk($chunkSize, function ($dataToInsertChunk) {
-            $data = [];
-            foreach ($dataToInsertChunk as $request) {
-                $data[] = [
-                    'Std_ID'                    => $request->STDRollNoID,
-                    'SemCourses_ID'             => $request->SemesterSessionID,
-                    'Is_i_mid'                  => Null,
-                    'Is_i_final'                => Null,
-                    'Reg_ID'                    => $request->stdregid,
-                    'Status'                    => 1
-                ];
-            }
-            if (!empty($data)) {
-                DB::connection('lgu_new_testing')->table('Enrollments')->insert($data);
-            }
-        });
+        // $chunkSize = 10;
+        // $dataToInsert = DB::connection('lgu_misdb')->table('Student_Course_Enrollment')->select(
+        //     'STDRollNoID',
+        //     'SemesterSessionID',
+        //     'stdregid'
+        // )->orderBy('SemesterSessionID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        //     $data = [];
+        //     foreach ($dataToInsertChunk as $request) {
+        //         $data[] = [
+        //             'Std_ID'                    => $request->STDRollNoID,
+        //             'SemCourses_ID'             => $request->SemesterSessionID,
+        //             'Is_i_mid'                  => Null,
+        //             'Is_i_final'                => Null,
+        //             'Reg_ID'                    => $request->stdregid,
+        //             'Status'                    => 1
+        //         ];
+        //     }
+        //     if (!empty($data)) {
+        //         DB::connection('lgu_new_testing')->table('Enrollments')->insert($data);
+        //     }
+        // });
+        DB::statement("
+        INSERT INTO LguNewDbTesting.dbo.Enrollments (Std_ID, SemCourses_ID, Is_i_mid, Is_i_final, Reg_ID, Status)
+        SELECT
+            STDRollNoID AS Std_ID,
+            SemesterSessionID AS SemCourses_ID,
+            NULL AS Is_i_mid,
+            NULL AS Is_i_final,
+            stdregid AS Reg_ID,
+            1 AS Status
+        FROM LGU_MISDB.dbo.Student_Course_Enrollment
+        ORDER BY SemesterSessionID;
+    ");
     }
 }
