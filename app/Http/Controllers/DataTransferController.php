@@ -15,12 +15,16 @@ class DataTransferController extends Controller
 {
     public function transferData()
     {
+        // $LguTestDb="LguNewDbTesting.dbo";
+        // $Lgu_MisDb="LGU_MISDB.dbo";
+
+
         try {
             DB::beginTransaction();
 
             set_time_limit(0);
 
-            $this->truncateDb();
+            // $this->truncateDb();
 
             // $a = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select('CourseName')->get();
             // $b = DB::connection('lgu_new_testing')->table('SemesterCourses')->select('Course_ID')->get();
@@ -77,8 +81,8 @@ class DataTransferController extends Controller
             //$this->SemesterCourse_WeightageDetailToSemesterCourse_WeightageDetail();
             //$this->StudentInfoToStudents();
             // $this->StudentRegistrationInfoToRegistrations();
-            $this->Student_Course_EnrollmentToEnrollments();
-
+            // $this->Student_Course_EnrollmentToEnrollments();
+            $this->SemesterCoursesInfo_Student_Course_EnrollmentToDegreeSemCourses();
             DB::commit();
 
             dd('success');
@@ -827,5 +831,24 @@ class DataTransferController extends Controller
         FROM LGU_MISDB.dbo.Student_Course_Enrollment
         ORDER BY SemesterSessionID;
     ");
+    }
+
+    protected function SemesterCoursesInfo_Student_Course_EnrollmentToDegreeSemCourses()
+    {
+
+        // Running the given query
+
+        $dataToInsert = DB::statement("
+        
+
+        INSERT INTO LguNewDbTesting.dbo.DegreeSemCourses (ID,DegBatches_ID,SemCourse_ID, Section, Emp_ID)
+        select top 100 ID,Student_Course_Enrollment.SemCourseID,DegreeBatchID,classsection,UID from LGU_MISDB.dbo.SemesterCoursesInfo
+        inner join LGU_MISDB.dbo.Student_Course_Enrollment  on SemesterCoursesInfo.semestersessionid=Student_Course_Enrollment.SemesterSessionID 
+
+
+        ");
+
+
+        dd($dataToInsert);
     }
 }
