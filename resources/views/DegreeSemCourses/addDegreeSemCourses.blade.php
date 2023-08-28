@@ -4,24 +4,21 @@
 @include('Forms.formHeader')  
               
                   <div class="card-body">
-                    <div class="form-group">
+                   <!--  <div class="form-group">
                       <label>Degree Batch</label>
                       <select class="form-control select2" name="DegBatches_ID"  required>
                         @foreach($degreeBatches as $degreeBatche)
                         <option value="{{ $degreeBatche->ID }}">{{ $degreeBatche->degree->DegreeName ?? '' }} / {{ $degreeBatche->batch->SemSession ?? '' }}</option>
                         @endforeach
                       </select>
-                    </div>
+                    </div> -->
 
-                    <div class="form-group">
-                      <label>Semester Course </label>
-                      <select class="form-control select2" name="SemCourse_ID"  required>
-                        @foreach($semesterCourses as $semesterCourse)
-                        <option value="{{ $semesterCourse->ID }}">{{ $semesterCourse->semester->SemSession ?? '--' }}/{{ $semesterCourse->course->CourseName }}</option>
-
-                        @endforeach
-                      </select>
-                    </div>
+                   <div class="form-group">
+    <label>Semester Course</label>
+    <select class="form-control select2" name="SemCourse_ID" required>
+        <option value="" disabled selected>Select Semester Course</option>
+    </select>
+</div>
                     <div class="form-group">
                       <label>Class Section </label>
                       <select class="form-control select2" name="Section"  required>
@@ -30,17 +27,66 @@
                     @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
+                   <!--  <div class="form-group">
                       <label>Employee </label>
                       <select class="form-control select2" name="Emp_ID"  required>
                         @foreach($employees as $employee)
                         <option value="{{ $employee->ID }}">{{ $employee->Emp_FirstName }} {{ $employee->Emp_LastName }}</option>
                         @endforeach
                       </select>
-                    </div>
+                    </div> -->
                     
                 <button id="button" type="submit" class="btn btn-primary btn-block submit-form">{{ $button }}</button>
               </div>
+
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Variables to track pagination
+    let currentPage = 1;
+const perPage = 1000; // Number of options per page
+
+// Function to fetch options
+function fetchOptions(page) {
+    $.ajax({
+        url: `/api/semester-courses?page=${page}&per_page=${perPage}`,
+        method: 'GET',
+        success: function(response) {
+            const options = response.data;
+
+            // Append fetched options to the select element
+            const selectElement = $('select[name="SemCourse_ID"]');
+            options.forEach(option => {
+                const optionElement = $('<option>');
+                optionElement.val(option.ID).text(`${option.semester.SemSession} / ${option.course ? option.course.CourseName : 'No Course'}`);
+
+                selectElement.append(optionElement);
+            });
+
+            // Check if more options are available
+            if (options.length === perPage) {
+                fetchOptions(page + 1); // Fetch the next page
+            }
+        },
+        error: function(error) {
+            console.error(error);
+        }
+    });
+}
+
+// Initial fetch
+fetchOptions(currentPage);
+
+
+    // Event listener for change event of select element
+    $('select[name="SemCourse_ID"]').on('change', function() {
+        const selectedOption = $(this).find(':selected');
+        if (selectedOption.text() === 'Load More Options') {
+            selectedOption.remove(); // Remove dummy option
+            fetchOptions(page); // Fetch more options
+        }
+    });
+</script>
+
                 
 @include('Forms.formFooter')                
 @endsection

@@ -20,13 +20,13 @@ class SemesterCourse extends Model
         return $this->belongsTo('App\Models\DegreeBatche', 'Sem_ID', 'Batch_ID');
     } 
     public function semester(){
-        return $this->belongsTo('App\Models\Semester', 'Sem_ID');
+        return $this->belongsTo('App\Models\Semester', 'Sem_ID' , 'ID');
     }
     public function batch(){
         return $this->belongsTo('App\Models\semester' , 'Batch_ID');
     }
     public function course(){
-        return $this->belongsTo('App\Models\Course' , 'Course_ID');
+        return $this->belongsTo('App\Models\Course' , 'Course_ID' , 'ID');
     }
     public function SemesterDetail(){
         return $this->belongsTo('App\Models\SemesterDetail' , 'Sem_ID');
