@@ -66,7 +66,7 @@
     </style>
 
     <!-- Custom style CSS -->
-
+ @stack('styles')
 
 </head>
 

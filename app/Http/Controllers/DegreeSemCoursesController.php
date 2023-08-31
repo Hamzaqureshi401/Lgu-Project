@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 class DegreeSemCoursesController extends Controller
 {
+
+    public function index(Request $request){
+        $perPage = $request->input('per_page', 10);
+        return SemesterCourse::with('semester')->with('course')->paginate($perPage);
+    }
+
      public function validation($request){
 
         $this->validate($request, [
