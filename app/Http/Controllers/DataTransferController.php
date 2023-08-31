@@ -840,11 +840,17 @@ class DataTransferController extends Controller
 
         $dataToInsert = DB::statement("
         
-
-        INSERT INTO LguNewDbTesting.dbo.DegreeSemCourses (ID,DegBatches_ID,SemCourse_ID, Section, Emp_ID)
-        select top 100 ID,Student_Course_Enrollment.SemCourseID,DegreeBatchID,classsection,UID from LGU_MISDB.dbo.SemesterCoursesInfo
-        inner join LGU_MISDB.dbo.Student_Course_Enrollment  on SemesterCoursesInfo.semestersessionid=Student_Course_Enrollment.SemesterSessionID 
-
+        INSERT INTO LguNewDbTesting.dbo.DegreeSemCourses (ID, DegBatches_ID, SemCourse_ID, Section, Emp_ID)
+        SELECT top 20
+            SemesterCoursesInfo.ID,
+            SemesterCoursesInfo.DegreeBatchID,
+            Student_Course_Enrollment.SemCourseID,
+            Student_Course_Enrollment.ClassSection,
+            Student_Course_Enrollment.UID
+        FROM SemesterCoursesInfo
+        INNER JOIN Student_Course_Enrollment ON SemesterCoursesInfo.SemesterSessionID = Student_Course_Enrollment.SemesterSessionID  ;
+        
+        
 
         ");
 
