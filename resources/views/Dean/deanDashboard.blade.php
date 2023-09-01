@@ -39,7 +39,7 @@
                         <div class="card-content">
                           <a href="{{ route('allowed.EmpStudent') }}">
                           <h5 class="font-15"> Enrolled Students</h5>
-                          <h2 class="mb-3 font-18">{{ $course }}</h2>
+                          <h2 class="mb-3 font-18">{{ $enrollment }}</h2>
                           </a>
                           
                         </div>
@@ -65,7 +65,7 @@
                         <div class="card-content">
                           <a href="{{ route('allowed.SemesterCourses') }}">
                           <h5 class="font-15">Courses Enrollment</h5>
-                          <h2 class="mb-3 font-18">{{ $course }}</h2>
+                          <h2 class="mb-3 font-18">{{ $enrollment }}</h2>
                         </a>
                           
                         </div>

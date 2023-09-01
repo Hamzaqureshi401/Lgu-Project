@@ -24,16 +24,25 @@ class DeanController extends Controller
         $user = DB::connection('lgu_misdb')->table('Users')->first();
         //dd($user);
 
-        $course = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
-        ->join('Courses' , 'Courses.ID' , 'SemesterCourses.Course_ID')
-        ->groupBy('CourseCode')
-        ->where('Emp_ID' , Session::get('ID'))->pluck('Courses.CourseCode')->count();
+        // $course = DegreeSemCourse::join('SemesterCourses' , 'SemesterCourses.ID' , 'DegreeSemCourses.SemCourse_ID')
+        // ->join('Courses' , 'Courses.ID' , 'SemesterCourses.Course_ID')
+        // ->where('Emp_ID' , Session::get('ID'))->pluck('DegreeSemCourses.SemCourse_ID')
+        // ->unique();
+    
+        // $coursecount=$course->pluck('SemCourse_ID')->count();
+        // dd($coursecount);
 
-        // dd($course);
+        $SemCourse_ID = array_unique(DegreeSemCourse::where('Emp_ID',Session::get('ID'))->pluck('SemCourse_ID')->toArray());
+       
+
         
+        
+        // dd($coursesid);
         // $course             = SemesterCourse::pluck('id')->count();
         // $course             = SemesterCourse::where('Emp_ID' , Session::get('ID'))->pluck('id')->count();
-        $enrollment         = Enrollment::where('SemCourses_ID' , $course)->pluck('id')->count();
+        $enrollment         = Enrollment::whereIn('SemCourses_ID' , $SemCourse_ID)->pluck('id')->count();
+        // dd($enrollment);
+
         $students           = Student::get();
         
         $departments        = Department::where('DeanUID' , Session::get('ID'))->orWhere('HodUID' , Session::get('ID'))->get();
@@ -42,7 +51,6 @@ class DeanController extends Controller
         $std = $students->where('Status' , '!=' , 'Completed')->whereIn('Degree_ID' , $degrees->pluck('ID')->toArray())->where('AdmissionSession' , Semester::where('CurrentSemester' , 1)->first()->SemSession);
         
         $degreeBatches      = DegreeBatche::whereIn('Degree_ID' , $degrees->pluck('ID')->toArray())->whereNotNull('Batch_ID')->get();
-           
         $semesterCourses    = SemesterCourse::pluck('ID')->count();
 
         $att['100-80']      = sizeof($this->getAttendanceByPercentage(80 , 100));
@@ -51,6 +59,9 @@ class DeanController extends Controller
         $att['70-65']       = sizeof($this->getAttendanceByPercentage(70 , 65));
         $att['65-60']       = sizeof($this->getAttendanceByPercentage(65 , 60));
         $att['Lessthen 60'] = sizeof($this->getAttendanceByPercentage(0  , 60));
+
+
+        $course = count($SemCourse_ID);
 
         return 
         view('Dean.deanDashboard' , 
