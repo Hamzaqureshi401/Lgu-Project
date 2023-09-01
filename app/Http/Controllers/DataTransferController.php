@@ -24,7 +24,7 @@ class DataTransferController extends Controller
 
             set_time_limit(0);
 
-            // $this->truncateDb();
+             $this->truncateDb();
 
             // $a = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select('CourseName')->get();
             // $b = DB::connection('lgu_new_testing')->table('SemesterCourses')->select('Course_ID')->get();
@@ -82,7 +82,9 @@ class DataTransferController extends Controller
             //$this->StudentInfoToStudents();
             // $this->StudentRegistrationInfoToRegistrations();
             // $this->Student_Course_EnrollmentToEnrollments();
+            
             $this->SemesterCoursesInfo_Student_Course_EnrollmentToDegreeSemCourses();
+            
             DB::commit();
 
             dd('success');
@@ -113,7 +115,8 @@ class DataTransferController extends Controller
         //DB::connection('lgu_new_testing')->table('SemesterCourse_WeightageDetail')->truncate();
         //DB::connection('lgu_new_testing')->table('Students')->truncate();
         // DB::connection('lgu_new_testing')->table('Registrations')->truncate();
-        DB::connection('lgu_new_testing')->table('Enrollments')->truncate();
+        //DB::connection('lgu_new_testing')->table('Enrollments')->truncate();
+        DB::connection('lgu_new_testing')->table('DegreeSemCourses')->truncate();
     }
 
     protected function DBatchFeeInfoALLToSemesterDetail()
@@ -274,26 +277,41 @@ class DataTransferController extends Controller
 
     protected function CoursesToCourses()
     {
-        $chunkSize = 10;
-        $dataToInsert = DB::connection('lgu_misdb')->table('Courses')->select(
-            'ID',
-            'CourseCode',
-            'CourseName',
-            'CreditHrs'
-        )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
-            $data = [];
-            foreach ($dataToInsertChunk as $request) {
-                $data[] = [
-                    'ID'                        => $request->ID,
-                    'CourseCode'                => $request->CourseCode,
+        // $chunkSize = 10;
+        // $dataToInsert = DB::connection('lgu_misdb')->table('Courses')->select(
+        //     'ID',
+        //     'CourseCode',
+        //     'CourseName',
+        //     'CreditHrs'
+        // )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        //     $data = [];
+        //     foreach ($dataToInsertChunk as $request) {
+        //         $data[] = [
+        //             'ID'                        => $request->ID,
+        //             'CourseCode'                => $request->CourseCode,
+        //             'CourseName'                => $request->CourseName,
+        //             'CreditHours'               => $request->CreditHrs
+        //         ];
+        //     }
+        //     if (!empty($data)) {
+        //         DB::connection('lgu_new_testing')->table('Courses')->insert($data);
+        //     }
+        // });
+
+      $CourseCodes =   array_unique(DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->pluck('CourseCode')->toArray());
+
+      foreach ($CourseCodes as $key => $CourseCode) {
+
+       $request =  DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->where('CourseCode' , $CourseCode)->first();
+                $data = [
+                    
+                    'CourseCode'                => $CourseCode,
                     'CourseName'                => $request->CourseName,
                     'CreditHours'               => $request->CreditHrs
                 ];
-            }
-            if (!empty($data)) {
                 DB::connection('lgu_new_testing')->table('Courses')->insert($data);
             }
-        });
+
     }
 
     protected function DegreeInfoToDegrees()
@@ -538,20 +556,43 @@ class DataTransferController extends Controller
 
     protected function SemesterCoursesInfoToSemesterCourses()
     {
-        $chunkSize = 10;
+        // $chunkSize = 10;
+        // $dataToInsert = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select(
+        //     'ID',
+        //     'SemesterSessionID',
+        //     'CourseCode',
+        //     'CampusLimit'
+        // )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+        //     $data = [];
+        //     foreach ($dataToInsertChunk as $request) {
+        //         $data[] = [
+        //             'ID'                       => $request->ID,
+        //             'Sem_ID'                   => $request->SemesterSessionID,
+        //             'CampusLimit'              => $request->CampusLimit,
+        //             'Course_ID'                => $this->getCourseID($request->CourseCode) ?? ''
+
+        //         ];
+        //     }
+        //     if (!empty($data)) {
+        //         DB::connection('lgu_new_testing')->table('SemesterCourses')->insert($data);
+        //     }
+        // });
+
+
+         $chunkSize = 10;
         $dataToInsert = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select(
             'ID',
             'SemesterSessionID',
-            'CourseCode',
-            'CampusLimit'
+            'CourseCode'
+           
         )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
             $data = [];
             foreach ($dataToInsertChunk as $request) {
+                $da = $this->findCourse($request->CourseCode);
                 $data[] = [
                     'ID'                       => $request->ID,
-                    'Sem_ID'                   => $request->SemesterSessionID,
-                    'CampusLimit'              => $request->CampusLimit,
-                    'Course_ID'                => $this->getCourseID($request->CourseCode) ?? ''
+                    'Sem_ID'                    => $request->SemesterSessionID,
+                    'Course_ID'                  => $da->ID
 
                 ];
             }
@@ -838,23 +879,37 @@ class DataTransferController extends Controller
 
         // Running the given query
 
-        $dataToInsert = DB::statement("
-        
-        INSERT INTO LguNewDbTesting.dbo.DegreeSemCourses (ID, DegBatches_ID, SemCourse_ID, Section, Emp_ID)
-        SELECT top 20
-            SemesterCoursesInfo.ID,
-            SemesterCoursesInfo.DegreeBatchID,
-            Student_Course_Enrollment.SemCourseID,
-            Student_Course_Enrollment.ClassSection,
-            Student_Course_Enrollment.UID
-        FROM SemesterCoursesInfo
-        INNER JOIN Student_Course_Enrollment ON SemesterCoursesInfo.SemesterSessionID = Student_Course_Enrollment.SemesterSessionID  ;
-        
-        
+       $chunkSize = 10;
+        $dataToInsert = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select(
+            'ID',
+            'DegreeBatchID',
+           
+        )->orderBy('ID')->chunk($chunkSize, function ($dataToInsertChunk) {
+            $data = [];
+            foreach ($dataToInsertChunk as $request) {
+                $da = $this->findStudentCourseEnrollment($request->ID);
+                $data[] = [
+                    'ID'                       => $request->ID,
+                    'DegBatches_ID'            => $request->DegreeBatchID,
+                    'SemCourse_ID'             => $request->ID,
+                    'Section'                  => $da->ClassSection ?? '',
+                    'Emp_ID'                   => $da->UID ?? ''
 
-        ");
+                ];
+            }
+            if (!empty($data)) {
+                DB::connection('lgu_new_testing')->table('DegreeSemCourses')->insert($data);
+            }
+        });
+    }
 
+    protected function findStudentCourseEnrollment($id){
 
-        dd($dataToInsert);
+        return DB::connection('lgu_misdb')->table('Student_Course_Enrollment')->where('SemCourseID' , $id)->first();
+    }
+
+    protected function findCourse($request){
+
+        return DB::connection('lgu_new_testing')->table('Courses')->where('CourseCode' , $request)->first();
     }
 }
