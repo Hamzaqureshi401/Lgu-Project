@@ -24,6 +24,18 @@ class DataTransferController extends Controller
 
             set_time_limit(0);
 
+            // $semCourse = array_unique(DB::connection('lgu_misdb')->table('Student_Course_Enrollment')->pluck('SemCourseID')->toArray());
+
+            // foreach($semCourse as $a){
+
+            //     $b[] = array_unique(DB::connection('lgu_misdb')->table('Student_Course_Enrollment')->where('SemCourseID' , $a)->pluck('ClassSection')->toArray());
+
+            // }
+
+            // dd($b);
+
+
+
              $this->truncateDb();
 
             // $a = DB::connection('lgu_misdb')->table('SemesterCoursesInfo')->select('CourseName')->get();
@@ -82,8 +94,9 @@ class DataTransferController extends Controller
             //$this->StudentInfoToStudents();
             // $this->StudentRegistrationInfoToRegistrations();
             // $this->Student_Course_EnrollmentToEnrollments();
-            
-            $this->SemesterCoursesInfo_Student_Course_EnrollmentToDegreeSemCourses();
+            //$this->SemesterCoursesInfo_Student_Course_EnrollmentToDegreeSemCourses();
+            //$this->SemesterCoursesTimetableToTimeTable();
+            $this->FuncChallanInfoToChallan();
             
             DB::commit();
 
@@ -116,7 +129,9 @@ class DataTransferController extends Controller
         //DB::connection('lgu_new_testing')->table('Students')->truncate();
         // DB::connection('lgu_new_testing')->table('Registrations')->truncate();
         //DB::connection('lgu_new_testing')->table('Enrollments')->truncate();
-        DB::connection('lgu_new_testing')->table('DegreeSemCourses')->truncate();
+        //DB::connection('lgu_new_testing')->table('DegreeSemCourses')->truncate();
+        //DB::connection('lgu_new_testing')->table('TimeTable')->truncate();
+        //DB::connection('lgu_new_testing')->table('TimeTableDetail')->truncate();
     }
 
     protected function DBatchFeeInfoALLToSemesterDetail()
@@ -912,4 +927,117 @@ class DataTransferController extends Controller
 
         return DB::connection('lgu_new_testing')->table('Courses')->where('CourseCode' , $request)->first();
     }
+
+  protected function SemesterCoursesTimetableToTimeTable(){
+
+    DB::connection('lgu_misdb')
+        ->table('SemesterCoursesTimeTable')
+        ->whereNotNull('InstructorID_TA_1')
+        ->select(
+            'ID',
+            'SemCourseID',
+            'LectureType',
+            'InstructorName',
+            'Day_1',
+            'Day_1_StartTime',
+            'Day_1_EndTime',
+            'Day_2',
+            'Day_2_StartTime',
+            'Day_2_EndTime',
+            'Day_3',
+            'Day_3_StartTime',
+            'Day_3_EndTime',
+            'Day_4',
+            'Day_4_StartTime',
+            'Day_4_EndTime',
+            'InstructorID_TA_1',
+            'RoomDay1',
+            'RoomDay2',
+            'RoomDay3',
+            'RoomDay4'
+        )
+        ->orderBy('ID')
+        ->chunk(10, function ($dataToInsertChunk) {
+            // Initialize arrays to hold batch insert data
+            $timeTableData = [];
+            $timeTableDetailData = [];
+
+            foreach ($dataToInsertChunk as $request) {
+                // Loop through each day
+                for ($dayNumber = 1; $dayNumber <= 4; $dayNumber++) {
+                    $dayField = 'Day_' . $dayNumber;
+                    $startTimeField = 'Day_' . $dayNumber . '_StartTime';
+                    $endTimeField = 'Day_' . $dayNumber . '_EndTime';
+                    $roomField = 'RoomDay' . $dayNumber;
+
+                    // Check if the day data is not empty
+                    
+                    if (!empty($request->$dayField)) {
+                        $roomFieldValue = $request->$roomField;
+                        if (strpos($roomFieldValue, '-') !== false) {
+                            list($building, $room) = explode('-', $roomFieldValue);
+                        } else {
+                            // Handle the case where there is no hyphen in $roomFieldValue
+                            $building = $roomFieldValue; // You can set $building to the entire value
+                            $room = ''; // Set $room to an empty string or any default value
+                        }
+                        $startTime = new \DateTime($request->$startTimeField);
+                        $s_Time = $startTime->format('H:i');
+                        $endTime = new \DateTime($request->$endTimeField);
+                        $e_Time = $endTime->format('H:i');
+
+                        // Prepare data for batch insert into 'TimeTable'
+                        $timeTableData[] = [
+                            'Day' => $request->$dayField,
+                            'StartTime' => $s_Time,
+                            'EndTime' => $e_Time,
+                            'Building' => $building,
+                            'Room' => $room,
+                            'Type' => '',
+                        ];
+
+                        // Prepare data for batch insert into 'TimeTableDetail'
+                        $timeTableDetailData[] = [
+                            'DegSemCourses_ID' => DB::connection('lgu_new_testing')
+                                ->table('DegreeSemCourses')
+                                ->where(['SemCourse_ID' => $request->SemCourseID, 'Emp_ID' => $request->InstructorID_TA_1])
+                                ->value('ID'),
+                            'TimeTable_ID' => null, // Placeholder for now, will be updated later
+                            'DegSemCoursesParentStatus' => 1,
+                        ];
+                    }
+                }
+            }
+
+            // Batch insert into 'TimeTable'
+            DB::connection('lgu_new_testing')->table('TimeTable')->insert($timeTableData);
+
+            // Update 'TimeTableDetail' with TimeTable_ID values
+            $timeTableIds = DB::connection('lgu_new_testing')->table('TimeTable')->pluck('ID')->toArray();
+            foreach ($timeTableDetailData as &$detail) {
+                $detail['TimeTable_ID'] = array_shift($timeTableIds);
+            }
+
+            // Batch insert into 'TimeTableDetail'
+            DB::connection('lgu_new_testing')->table('TimeTableDetail')->insert($timeTableDetailData);
+        });
+}
+
+
+protected function FuncChallanInfoToChallan(){
+
+    $result = DB::connection('lgu_misdb')
+    ->select(DB::raw('select * from FUNCChallanInfo(50)'));
+    if (!empty($result)) {
+         // $resultValue = $result[0]->result; 
+        echo "<pre>";
+        print_r($result);
+        dd($result);
+    } else {
+        $resultValue = null; // Set to a default value or handle accordingly
+    }
+}
+
+
+
 }
