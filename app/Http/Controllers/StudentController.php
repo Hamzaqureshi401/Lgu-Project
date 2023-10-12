@@ -29,7 +29,6 @@ public function studentDashboard()
 
     $registration = Registration::where('Std_ID', $session['std_ID'])->first();
     $attendances = new Attendance();
-    
     if (!empty($registration)) {
         $challans = Challan::where('Reg_ID', $registration->ID)->get();
     } else {
