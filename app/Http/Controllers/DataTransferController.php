@@ -836,7 +836,7 @@ class DataTransferController extends Controller
         });
     }
 
-    // select * from  Student_Course_Enrollment where StdRollNo = 'Fa-2019/BSCS/310' 
+    // select * from  Student_Course_Enrollment where StdRollNo = 'Fa-2019/BSCS/310'
     // select * from Semestercourses_weightage where SemCoursesInfoID = 8227
     // select * from SemesterCourse_WeightageDetail where SemesterCourseWeightage_ID= 9649
     // select * from Student_MarksDetails where SemCourseWDetailID=12667 and StdCoursesInfoID =145736
@@ -1037,8 +1037,6 @@ class DataTransferController extends Controller
 
         foreach ($challans as $challan) {
 
-
-
             $Student_data = DB::connection('lgu_misdb')->table('StudentInfo')->where('stdrollno','=',$challan->StdRollNo)->first();
 
             if(!empty($Student_data))
@@ -1051,9 +1049,8 @@ class DataTransferController extends Controller
                 $Registration_ID=' ';
             }
 
-            $Student_scholarship = DB::connection('lgu_misdb')->table('StudentInfo')->where('stdrollno','=',$challan->StdRollNo)->first();
-
-
+            $Student_scholarship     = DB::connection('lgu_misdb')->table('StudentInfo')->where('stdrollno','=',$challan->StdRollNo)->first();
+            $Student_semestersession = DB::connection('lgu_misdb')->table('SemesterSessionInfo')->where('SemesterSession','=',$challans->$SemesterSession)->first();
 
 
             $data[] = [
@@ -1069,8 +1066,6 @@ class DataTransferController extends Controller
                 'Scholarship'                     => $challan->LessScholarship,
                 'Sch_Type'                        => $challan->Fine,
                 'Credited'                        => $challan->Fine
-
-
 
 
             ];
