@@ -389,8 +389,10 @@ Route::get('/reportingPanel', [App\Http\Controllers\ViewController::class, 'repo
 Route::get('/sectionWIseReport', [App\Http\Controllers\ViewController::class, 'sectionWIseReport'])->name('section.WIse.Report');
 
 Route::get('/examMainDashboardView', [App\Http\Controllers\ViewController::class, 'examMainDashboardView'])->name('exam.Main.Dashboard.View');
+Route::Post('/examMainDashboardView', [App\Http\Controllers\ViewController::class, 'examMainDashboardViewdata'])->name('exam.examMainDashboardView');
 
 Route::get('/ceoDashboard', [App\Http\Controllers\ViewController::class, 'ceoDashboard'])->name('ceo.Dashboard');
+
 
 Route::get('/studentResult', [App\Http\Controllers\ViewController::class, 'studentResult'])->name('student.Result');
 

@@ -1031,59 +1031,164 @@ class DataTransferController extends Controller
     protected function FuncChallanInfoToChallan()
     {
 
+        $chunkSize = 10; // Set your desired chunk size
 
-        $challans = DB::connection('lgu_misdb')->table('ChallanInfo')->take(1)->get();
-        $challans_details = DB::connection('lgu_misdb')->table('ChallanDetails')->take(1)->get();
+        DB::connection('lgu_misdb')->table('ChallanInfo')->orderBy('id')->chunk($chunkSize, function ($challans) {
 
-        foreach ($challans as $challan) {
 
-            $Student_data = DB::connection('lgu_misdb')->table('StudentInfo')->where('stdrollno','=',$challan->StdRollNo)->first();
+            foreach ($challans as $challan) {
 
-            if(!empty($Student_data))
-            {
-                $Registration_ID = DB::connection('lgu_misdb')->table('StudentRegistrationInfo')
-                ->where('StdRollNoID',$Student_data->ID)
-                ->where('semesterSessionid',$challan->SemesterSessionID)->first();
+                $Student_data = DB::connection('lgu_misdb')->table('StudentInfo')->where('stdrollno', '=', $challan->StdRollNo)->first();
+
+                if (!empty($Student_data)) {
+
+                    $Registration_ID = DB::connection('lgu_misdb')->table('StudentRegistrationInfo')->where('StdRollNoID', $Student_data->ID)->where('SemesterSessionID', $challan->SemesterSessionID)->first();
+
+                    $scholarship_type = DB::connection('lgu_misdb')->table('Student_Scholarship')->where('StdRollNoID', '=', $Student_data->ID)->where('SemSessionID', '=', $challan->SemesterSessionID)->first();
+
+
+                    if (empty($Registration_ID)) {
+
+                        $Registration_ID = " ";
+                    } else {
+                        $Registration_ID = $Registration_ID->ID;
+                    }
+
+
+                    if (empty($scholarship_type)) {
+                        $scholarship_type = " ";
+                    } else {
+                        $scholarship_type = $scholarship_type->Category;
+                    }
+
+                    $data[] = [
+                        'IssueDate'                       => $challan->IssueDate ?? NULL,
+                        'DueDate'                         => $challan->DueDate ?? NULL,
+                        'PaidDate'                        => $challan->PaidDate ?? NULL,
+                        'Status'                          => $challan->Status ?? NULL,
+                        'Fine'                            => $challan->Fine ?? NULL,
+                        'Amount'                          => $challan->LessPaidNow ?? NULL,
+                        'Type'                            => $challan->ChallanType ?? NULL,
+                        'Sem_ID'                          => $challan->SemesterSessionID ?? NULL,
+                        'Reg_ID'                          => $Registration_ID ?? NULL,
+                        'Scholarship'                     => $challan->LessScholarship ?? NULL,
+                        'Sch_Type'                        => $scholarship_type ?? NULL,
+                        'Credited'                        => $challan->BalancePayable ?? NULL
+
+
+                    ];
+                    $this->insertChallans($data);
+
+                } else {
+
+                    $Registration_ID = ' ';
+                    $scholarship_type = ' ';
+
+                    $data[] = [
+                        'IssueDate'                       => $challan->IssueDate ?? NULL,
+                        'DueDate'                         => $challan->DueDate ?? NULL,
+                        'PaidDate'                        => $challan->PaidDate ?? NULL,
+                        'Status'                          => $challan->Status ?? NULL,
+                        'Fine'                            => $challan->Fine ?? NULL,
+                        'Amount'                          => $challan->LessPaidNow ?? NULL,
+                        'Type'                            => $challan->ChallanType ?? NULL,
+                        'Sem_ID'                          => $challan->SemesterSessionID ?? NULL,
+                        'Reg_ID'                          => $Registration_ID ?? NULL,
+                        'Scholarship'                     => $challan->LessScholarship ?? NULL,
+                        'Sch_Type'                        => $scholarship_type ?? NULL,
+                        'Credited'                        => $challan->BalancePayable ?? NULL
+
+
+                    ];
+
+                    $this->insertChallans($data);
+
+                }
             }
-            else{
-                $Registration_ID=' ';
-            }
 
-            $Student_scholarship     = DB::connection('lgu_misdb')->table('StudentInfo')->where('stdrollno','=',$challan->StdRollNo)->first();
-            $Student_semestersession = DB::connection('lgu_misdb')->table('SemesterSessionInfo')->where('SemesterSession','=',$challans->$SemesterSession)->first();
+            // Insert the chunk of data
+        });
+    }
 
-
-            $data[] = [
-                'IssueDate'                       => $challan->IssueDate,
-                'DueDate'                         => $challan->DueDate,
-                'PaidDate'                        => $challan->PaidDate,
-                'Status'                          => $challan->Status,
-                'Fine'                            => $challan->Fine,
-                'Amount'                          => $challan->LessPaidNow,
-                'Type'                            => $challan->ChallanType,
-                'Sem_ID'                          => $challan->SemesterSessionID,
-                'Reg_ID'                          => $Registration_ID,
-                'Scholarship'                     => $challan->LessScholarship,
-                'Sch_Type'                        => $challan->Fine,
-                'Credited'                        => $challan->Fine
-
-
-            ];
-        }
-
-        // $data[] = [
-        //     'ID'                       => $request->ID,
-        //     'DegBatches_ID'            => $request->DegreeBatchID,
-        //     'SemCourse_ID'             => $request->ID,
-        //     'Section'                  => $da->ClassSection ?? '',
-        //     'Emp_ID'                   => $da->UID ?? ''
-
-        // ];
-
-        // DB::connection('lgu_new_testing')->table('Challans')->insert($Challans);
-
-
-        // dd($challans,$challans_details);
-
+    protected function insertChallans($data)
+    {
+        // Insert the data into the database
+        DB::connection('lgu_new_testing')->table('Challans')->insert($data);
     }
 }
+
+
+    //     $challans = DB::connection('lgu_misdb')->table('ChallanInfo')->get();
+
+    //     foreach ($challans as $challan) {
+
+    //         // $challans_details = DB::connection('lgu_misdb')->table('ChallanDetails')->where('ChallanID','=',$challan->)->take(1)->get();
+
+    //         $Student_data = DB::connection('lgu_misdb')->table('StudentInfo')->where('stdrollno', '=', $challan->StdRollNo)->first();
+
+
+
+
+    //         if (!empty($Student_data)) {
+
+    //             $Registration_ID = DB::connection('lgu_misdb')->table('StudentRegistrationInfo')->where('StdRollNoID', $Student_data->ID)->where('SemesterSessionID', $challan->SemesterSessionID)->first();
+
+    //             $scholarship_type = DB::connection('lgu_misdb')->table('Student_Scholarship')->where('StdRollNoID', '=', $Student_data->ID)->where('SemSessionID', '=', $challan->SemesterSessionID)->first();
+
+
+    //             if (empty($Registration_ID)) {
+
+    //                 $Registration_ID = " ";
+    //             } else {
+    //                 $Registration_ID = $Registration_ID->ID;
+    //             }
+
+
+    //             if (empty($scholarship_type)) {
+    //                 $scholarship_type = " ";
+    //             } else {
+    //                 $scholarship_type = $scholarship_type->Category;
+    //             }
+
+    //             $data[] = [
+    //                 'IssueDate'                       => $challan->IssueDate ?? NULL,
+    //                 'DueDate'                         => $challan->DueDate ?? NULL,
+    //                 'PaidDate'                        => $challan->PaidDate ?? NULL,
+    //                 'Status'                          => $challan->Status ?? NULL,
+    //                 'Fine'                            => $challan->Fine ?? NULL,
+    //                 'Amount'                          => $challan->LessPaidNow ?? NULL,
+    //                 'Type'                            => $challan->ChallanType ?? NULL,
+    //                 'Sem_ID'                          => $challan->SemesterSessionID ?? NULL,
+    //                 'Reg_ID'                          => $Registration_ID ?? NULL,
+    //                 'Scholarship'                     => $challan->LessScholarship ?? NULL,
+    //                 'Sch_Type'                        => $scholarship_type ?? NULL,
+    //                 'Credited'                        => $challan->BalancePayable ?? NULL
+
+
+    //             ];
+    //         } else {
+
+    //             $Registration_ID = ' ';
+    //             $scholarship_type = ' ';
+
+    //             $data[] = [
+    //                 'IssueDate'                       => $challan->IssueDate ?? NULL,
+    //                 'DueDate'                         => $challan->DueDate ?? NULL,
+    //                 'PaidDate'                        => $challan->PaidDate ?? NULL,
+    //                 'Status'                          => $challan->Status ?? NULL,
+    //                 'Fine'                            => $challan->Fine ?? NULL,
+    //                 'Amount'                          => $challan->LessPaidNow ?? NULL,
+    //                 'Type'                            => $challan->ChallanType ?? NULL,
+    //                 'Sem_ID'                          => $challan->SemesterSessionID ?? NULL,
+    //                 'Reg_ID'                          => $Registration_ID ?? NULL,
+    //                 'Scholarship'                     => $challan->LessScholarship ?? NULL,
+    //                 'Sch_Type'                        => $scholarship_type ?? NULL,
+    //                 'Credited'                        => $challan->BalancePayable ?? NULL
+
+
+    //             ];
+    //         }
+
+    //         DB::connection('lgu_new_testing')->table('Challans')->insert($data);
+    //     }
+    // }
