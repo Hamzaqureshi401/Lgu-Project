@@ -269,6 +269,9 @@
                   <li><a class="nav-link" href="{{ route('tax.Report')}}">Tax Report</a></li>
                   <li><a class="nav-link" href="{{ route('ledger')}}">Ledger</a></li>
                   <li><a class="nav-link" href="{{ route('student.Challan') }}">Student Challan</a></li>
+
+                  <li><a class="nav-link" href="{{ route('Exam.Awards') }}">Exam Awards</a></li>
+
                   
               </ul>
               

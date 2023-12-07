@@ -637,4 +637,16 @@ class ViewController extends Controller
         $pdf->setPaper('A4', 'portrait');
         return $pdf->download('itemized_sales_report.pdf');
     }
+
+
+    public function ExamAwards()
+    {
+
+        $Exam_awards = DB::select("EXEC awards @semcourseid =2977;");
+
+        // dd($Exam_awards);
+
+        return view('View.ExamAward', compact('Exam_awards'));
+
+    }
 }
