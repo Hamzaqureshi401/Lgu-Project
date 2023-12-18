@@ -9,11 +9,34 @@
   @endpush
       <div class="">
         <section class="section">
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>{{ "Awards" }}</h4>
+
+
+          
+          <div class="row">
+            <div class="col-12">
+              <form  id="myForm" action="{{ $route ?? '' }}" method="GET" enctype="multipart/form-data">
+                {{ csrf_field() }}            
+    
+                
+                <div class="form-group col-6">
+                  <label><b>Sem Session ID </b> </label>
+                  <input type="text" name="SemSession" class="form-control border border-1 rounded border-dark">
+                </div>
+    
+
+                <div class="form-group col-6">
+
+                <button id="button" type="submit"
+                class="btn btn-primary btn-block submit-form">{{ $button }}</button>
+                </div>
+
+              </form>
+              <div class="card">
+                
+
+
+                <div class="card-header">
+                  <h4>{{ "Awards" }}</h4>
                     <div class="card-header-action">
                       <form>
                         <div class="input-group">

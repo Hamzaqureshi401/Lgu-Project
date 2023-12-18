@@ -11,8 +11,8 @@
 
 
                 <div class="form-group col-6">
-                    <label>Sem Session</label>
-                    <input type="text" name="SemSession" class="form-control border border-1 rounded border-dark">
+                    <label>Semester Course ID</label>
+                    <input type="text" name="SemSessionId" class="form-control border border-1 rounded border-dark">
                 </div>
                 <div class="form-group col-6">
                     <label>Year</label>

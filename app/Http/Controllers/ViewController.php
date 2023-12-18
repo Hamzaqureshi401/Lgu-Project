@@ -639,14 +639,21 @@ class ViewController extends Controller
     }
 
 
-    public function ExamAwards()
+
+
+
+    public function ExamAwards(Request $request, $SemSession = NULL)
     {
 
-        $Exam_awards = DB::select("EXEC awards @semcourseid =2977;");
+        // Use the provided SemSession from the form if available, or fallback to default (2977)
+        $SemSession = $request->input('SemSession', 2977);
 
-        // dd($Exam_awards);
+        $route = 'ExamAwards';
+        $button = 'Submit';
 
-        return view('View.ExamAward', compact('Exam_awards'));
+        $Exam_awards = DB::select("EXEC awards @semcourseid = $SemSession;");
 
+        return view('View.ExamAward', compact('Exam_awards', 'route', 'button'));
     }
 }
+

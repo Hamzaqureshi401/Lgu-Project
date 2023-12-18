@@ -444,7 +444,7 @@ Route::get('/feeRescheduling', [App\Http\Controllers\ViewController::class, 'fee
 Route::get('/taxReport', [App\Http\Controllers\ViewController::class, 'taxReport'])->name('tax.Report');
 Route::get('/ledger', [App\Http\Controllers\ViewController::class, 'ledger'])->name('ledger');
 
-Route::get('/ExamAwards', [App\Http\Controllers\ViewController::class, 'ExamAwards'])->name('Exam.Awards');
+Route::get('/ExamAwards/{SemSession?}', [App\Http\Controllers\ViewController::class, 'ExamAwards'])->name('Exam.Awards');
 
 
 
