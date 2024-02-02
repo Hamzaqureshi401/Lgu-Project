@@ -163,6 +163,8 @@ class AttendanceController extends Controller
         )
          ->get();
 
+        //  dd($DegreeSemCourses);
+
          //dd($DegreeSemCourses , $session['ID']);
 
         $title          = 'All Semester Courses';
@@ -200,10 +202,10 @@ class AttendanceController extends Controller
     }
 
     public function claseesShedule($id , $semesterID){
-        //dd($semesterID);
-         $session       =  $this->sessionData->getSessionData();
+        $session       =  $this->sessionData->getSessionData();
+        // dd($semesterID,$id,$session['ID']);
          $DegreeSemCourse        =  DegreeSemCourse::where(['SemCourse_ID' => $id , 'Emp_ID' => $session['ID']])->get();
-        // dd($DegreeSemCourse);
+        dd($DegreeSemCourse,$semesterID);
          $semester = Semester::where('ID' , $semesterID)->first();
          $SemStartDate  = $semester->SemStartDate;
          $SemEndDate    =   $semester->SemEndDate;

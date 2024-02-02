@@ -464,3 +464,7 @@ Route::post('/uploadStdRollNoSlipExcel', [App\Http\Controllers\StdRollNoSlipsCon
 
 Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');
 
+
+
+
+Route::get('/allChallans', [App\Http\Controllers\ChallanController::class, 'allChallans'])->name('all.Challans');

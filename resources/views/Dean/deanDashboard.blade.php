@@ -81,6 +81,33 @@
               </div>
             </div>
             
+
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                        <div class="card-content">
+                          <a href="{{ route('emp.SemesterCourses') }}">
+                          <h5 class="font-15">Courses Enrolled</h5>
+                          <h2 class="mb-3 font-18">{{ $enrollment }}</h2>
+                        </a>
+                          
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                        <!-- <div class="banner-img">
+                          <img src="assets/img/banner/1.png" alt="">
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
           </div>
 
 <!-- @include('Dean.charts') -->

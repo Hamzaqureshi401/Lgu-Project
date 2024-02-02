@@ -17,7 +17,7 @@
             <div class="form-row pt-3">
 
                 <div class="from-group col-md-6">
-                    <input type="hidden" name="id" value="{{ $studentAdmission->ID }}">
+                    <input type="hidden" name="ID" value="{{ $studentAdmission->ID }}">
                     <label>Degree</label> <br>
                     <select class="form-control custom-select" name="Degree_ID" required>
                         @foreach ($degrees as $degree)
@@ -326,7 +326,7 @@
 
                 <div class="form-group col-md-4">
                     <label style="font-size: 13px">Tel No </label>
-                    <input type="number" name="defence_tel_No" id="defence_tel_No"
+                    <input type="text" name="defence_tel_No" id="defence_tel_No"
                         value="{{ $studentAdmission->TelNo }}" class="form-control border border-1 rounded border-dark"
                         placeholder="Enter tel_No" oninput="maxLengthphone(this)" maxlength="11">
                     <br>
@@ -928,12 +928,12 @@
             </div>
         @endif
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             @foreach ($enrollments as $enrollment)
                 <span class="" style="color: red;">Enrolled In:
                     {{ $enrollment->semesterCourse->course->CourseName }}</span>
         </div>
-        @endforeach
+        @endforeach --}}
 
         <div class="form-group">
             <button id="button" type="submit"

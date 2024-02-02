@@ -185,7 +185,7 @@ class SemesterController extends Controller
         //     ]);
         // }else {
         $submit = DB::update("EXEC sp_UpdateSemesters
-            @Sem_ID                     = '$request->id',
+            @Sem_ID                 = '$request->id',
             @SemSession             = '$request->SemSession',
             @Year                   = '$request->Year',
             @SemStartDate           = '$request->SemStartDate' ,

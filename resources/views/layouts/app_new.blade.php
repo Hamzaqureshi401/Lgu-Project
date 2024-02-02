@@ -41,6 +41,9 @@
     <link rel="stylesheet"
         href="{{ asset('assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
     <!-- Set page size here: A5, A4 or A3 -->
     <!-- Set also "landscape" if you need -->
     <style>

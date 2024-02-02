@@ -72,6 +72,9 @@ class AdmissionController extends Controller
         $degree = Degree::select('ID', 'DegreeName')->distinct()->get();
 
         $admissionsession = Semester::where('Year', '=', date('Y'))->get();
+
+        // dd($admissionsession,date('Y'));
+
         $button = "Add Student Admission";
         $title  = 'Add Student Admissions';
         $route  = '/storeStudentAdmission';
@@ -158,6 +161,7 @@ class AdmissionController extends Controller
             $Rank                = $request->sports_Designation;
             $ServingSince        = $request->sport_wef;
         }
+
 
 
 
@@ -467,9 +471,9 @@ class AdmissionController extends Controller
         $admissionsession = Semester::where('Year', '=', date('Y'))->get();
 
 
-        $DegreeBatche       = DegreeBatche::where(['Degree_ID' => $studentAdmission->Degree_ID, 'Batch_ID' => $studentAdmission->batch->ID])->first();
+        $DegreeBatche = DegreeBatche::where(['Degree_ID' => $studentAdmission->Degree_ID, 'Batch_ID' => $studentAdmission->batch->ID])->first();
         if ($DegreeBatche) {
-            $DegsemesterCourses    = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID, 'Section' => $studentAdmission->ClassSection])->get();
+            $DegsemesterCourses = DegreeSemCourse::where(['DegBatches_ID' => $DegreeBatche->ID, 'Section' => $studentAdmission->ClassSection])->get();
         } else {
             $DegsemesterCourses = null;
         }
@@ -576,6 +580,8 @@ class AdmissionController extends Controller
             $ServingSince        = $request->sport_wef;
         }
 
+        // dd($TelNo);
+
         $submit = DB::update("EXEC sp_UpdateStudentDetails
         @Std_ID             ='$request->Student_ID',
         @Std_FName          ='$request->Std_FName',
@@ -603,23 +609,23 @@ class AdmissionController extends Controller
         @AddmissionSession  ='$request->AdmissionSession',
         @BloodGroup         ='$request->BloodGroup',
         @FatherEmail        ='$request->FatherEmail',
-        @Category           =      '$request->Category',
+        @Category           ='$request->Category',
         @DOB                ='$Date_of_birth',
         @Province           ='$state',
         @Country            ='$Country',  
         @Files              ='$file',
         @Image              ='$stdImage', 
 
-        @No                 =      '$No',
-        @ServingSince       =      '$ServingSince',
-        @NowServingIn       =      '$NowServingIn',
-        @At                 =      '$At',
-        @Station            =      '$Station',
-        @TelNo              =      '$TelNo',
-        @I_Mst              =      '$I_Mst',
-        @WidowOf            =      '$WidowOf',
-        @Rank               =      '$Rank',
-        @ExpiredOn          =      '$ExpiredOn'
+        @No                 ='$No',
+        @ServingSince       ='$ServingSince',
+        @NowServingIn       ='$NowServingIn',
+        @At                 ='$At',
+        @Station            ='$Station',
+        @TelNo              ='$TelNo',
+        @I_Mst              ='$I_Mst',
+        @WidowOf            ='$WidowOf',
+        @Rank               ='$Rank',
+        @ExpiredOn          ='$ExpiredOn'
         ;");
     }
 
