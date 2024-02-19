@@ -127,55 +127,55 @@
                                        <thead>
                                           <tr>
                                              <th> <span class="text-left">A</span> 
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span> 
+                                                <span class="float-right"> <input type="number" id="gradeA" oninput="graphdata()" name="A" class="form-control" style="width: 100px;"> </span> 
                                              </th>
                                              <th><span class="text-left">C</span>
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span>
+                                                <span class="float-right"> <input type="number" id="gradeC" oninput="graphdata()" name="C" class="form-control" style="width: 100px;"> </span>
                                              </th>
                                           </tr>
                                           <tr>
                                              <th> <span class="text-left"> A-</span> 
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span> 
+                                                <span class="float-right"> <input type="number" id="gradeAnegative" oninput="graphdata()" name="Anegative" class="form-control" style="width: 100px;"> </span> 
                                              </th>
                                              <th><span class="text-left">C+</span>
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span>
+                                                <span class="float-right"> <input type="number" id="gradeCpositive" oninput="graphdata()" name="Cpositive" class="form-control" style="width: 100px;"> </span>
                                              </th>
                                           </tr>
                                           <tr>
                                              <th> <span class="text-left"> B+</span> 
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span> 
+                                                <span class="float-right"> <input type="number" id="gradeBpositive" oninput="graphdata()" name="Bpostive" class="form-control" style="width: 100px;"> </span> 
                                              </th>
                                              <th><span class="text-left">C-</span>
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span>
+                                                <span class="float-right"> <input type="number" id="gradeCnegative" oninput="graphdata()" name="Cnegative" class="form-control" style="width: 100px;"> </span>
                                              </th>
                                           </tr>
                                           <tr>
                                              <th> <span class="text-left">B</span>  
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span> 
+                                                <span class="float-right"> <input type="number" id="gradeB" oninput="graphdata()" name="B" class="form-control" style="width: 100px;"> </span> 
                                              </th>
                                              <th><span class="text-left">D</span>
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span>
+                                                <span class="float-right"> <input type="number" id="gradeD" oninput="graphdata()" name="gradeD" class="form-control" style="width: 100px;"> </span>
                                              </th>
                                           </tr>
                                           <tr>
                                              <th> <span class="text-left">B-</span>  
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span> 
+                                                <span class="float-right"> <input type="number" id="gradeBnegative" oninput="graphdata()" name="gradeBnegative" class="form-control" style="width: 100px;"> </span> 
                                              </th>
                                              <th><span class="text-left">F</span>
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span>
+                                                <span class="float-right"> <input type="number" id="gradeF" oninput="graphdata()" name="gradeF" class="form-control" style="width: 100px;"> </span>
                                              </th>
                                           </tr>
                                           <tr>
                                              <th> <span class="text-left"> Min Marks</span> 
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span> 
+                                                <span class="float-right"> <input type="number" id="minmark" oninput="graphdata()" name="minmark" class="form-control" style="width: 100px;"> </span> 
                                              </th>
                                              <th><span class="text-left">Max Marks</span>
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span>
+                                                <span class="float-right"> <input type="number" id="maxmark" oninput="graphdata()" name="maxmark" class="form-control" style="width: 100px;"> </span>
                                              </th>
                                           </tr>
                                           <tr>
                                              <th> <span class="text-left"> Actual Mean</span>  
-                                                <span class="float-right"> <input type="number" name="" class="form-control" style="width: 100px;"> </span> 
+                                                <span class="float-right"> <input type="number"  id="actualmean" oninput="graphdata()" name="actualmean" class="form-control" style="width: 100px;"> </span> 
                                              </th>
                                              <th>
                                                 <span class="text-left">
@@ -532,6 +532,68 @@
 
 <script>
 
+function graphdata(){
+   var gradeA           =document.getElementById("gradeA");
+   var gradeC           =document.getElementById("gradeC");
+   var gradeAnegative   =document.getElementById("gradeAnegative");
+   var gradeCpositive   =document.getElementById("gradeCpositive");
+   var gradeBpositive   =document.getElementById("gradeBpositive");
+   var gradeCnegative   =document.getElementById("gradeCnegative");
+   var gradeB           =document.getElementById("gradeB");
+   var gradeD           =document.getElementById("gradeD");
+   var gradeBnegative   =document.getElementById("gradeBnegative");
+
+
+   var gradeF           =document.getElementById("gradeF");
+
+   var minmark           =document.getElementById("minmark");
+   var maxmark           =document.getElementById("maxmark");
+   var actualmean        =document.getElementById("actualmean");
+
+
+
+  
+
+   //Grade A
+   myChart.data.datasets[0].data[0] = gradeA.value;
+
+   //Grade C
+   myChart.data.datasets[0].data[6] = gradeC.value;
+
+   //Grade A-
+   myChart.data.datasets[0].data[1] = gradeAnegative.value;
+
+   //Grade C+
+   myChart.data.datasets[0].data[5] = gradeCpositive.value;
+
+   //Grade B+
+   myChart.data.datasets[0].data[2] = gradeBpositive.value;
+
+   //Grade C-
+   myChart.data.datasets[0].data[7] = gradeCnegative.value;
+
+   //Grade B
+   myChart.data.datasets[0].data[3] = gradeB.value;
+
+   //Grade D
+   myChart.data.datasets[0].data[8] = gradeD.value;
+
+   //Grade B-
+   myChart.data.datasets[0].data[4] = gradeBnegative.value;
+
+   //Grade F
+   myChart.data.datasets[0].data[9] = gradeF.value;
+
+
+
+
+   myChart.update(); 
+
+
+
+}
+
+
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
     type: 'bar',
@@ -539,7 +601,7 @@ const myChart = new Chart(ctx, {
         labels: ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'F'],
         datasets: [{
             label: 'Students',
-            data: [5, 10, 15, 12, 6, 2, 3, 1, 0, 0], // Example data, replace with actual data
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // Example data, replace with actual data
             backgroundColor: [
                'rgba(240, 5, 5)',
                 'rgba(54, 162, 235)',
@@ -584,28 +646,13 @@ const myChart = new Chart(ctx, {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Define a function to update the chart
-    function updateChart() {
-        // Fetch the new values from the inputs
-        const gradeA = parseInt(document.getElementById('gradeA').value) || 0;
-        const gradeB = parseInt(document.getElementById('gradeB').value) || 0;
-        // Repeat for other grades...
 
-        // Update the chart data
-        myChart.data.datasets[0].data = [gradeA, gradeB /*, ...other grades*/];
-        
-        // Refresh the chart
-        myChart.update();
-    }
 
-    // Attach event listeners to the input fields
-    document.getElementById('gradeA').addEventListener('input', updateChart);
-    document.getElementById('gradeB').addEventListener('input', updateChart);
-    // Repeat for other inputs...
 
-    // Initialize your chart here if it's not already initialized outside this script
-});
+
+
+
+
 
 
 </script>
